@@ -14,7 +14,7 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "@ramen-suite/sushi": ["./projects/sushi/src/public-api.ts"]
+      "@ramen-suite/sushi": ["./sushi/src/public-api.ts"]
     }
   },
   "angularCompilerOptions": {
@@ -25,16 +25,16 @@
   "files": [],
   "references": [
     {
-      "path": "./projects/sushi/tsconfig.lib.json"
+      "path": "./sushi/tsconfig.lib.json"
     },
     {
-      "path": "./projects/sushi/tsconfig.spec.json"
+      "path": "./sushi/tsconfig.spec.json"
     },
     {
-      "path": "./projects/playground/tsconfig.app.json"
+      "path": "./playground/tsconfig.app.json"
     },
     {
-      "path": "./projects/playground/tsconfig.spec.json"
+      "path": "./playground/tsconfig.spec.json"
     }
   ]
 }

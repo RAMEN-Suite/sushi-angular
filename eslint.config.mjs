@@ -61,7 +61,7 @@ export default defineConfig(
   },
 
   {
-    files: ['projects/sushi/**/*.ts'],
+    files: ['sushi/**/*.ts'],
     rules: {
       '@angular-eslint/directive-selector': [
         'error',
@@ -83,7 +83,7 @@ export default defineConfig(
   },
 
   {
-    files: ['projects/playground/**/*.ts'],
+    files: ['playground/**/*.ts'],
     rules: {
       '@angular-eslint/directive-selector': [
         'error',

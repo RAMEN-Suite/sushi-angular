@@ -20,18 +20,18 @@
   "projects": {
     "sushi": {
       "projectType": "library",
-      "root": "projects/sushi",
-      "sourceRoot": "projects/sushi/src",
+      "root": "sushi",
+      "sourceRoot": "sushi/src",
       "prefix": "sui",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
           "configurations": {
             "production": {
-              "tsConfig": "projects/sushi/tsconfig.lib.prod.json"
+              "tsConfig": "sushi/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/sushi/tsconfig.lib.json"
+              "tsConfig": "sushi/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -39,7 +39,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["projects/sushi/**/*.ts", "projects/sushi/**/*.html"]
+            "lintFilePatterns": ["sushi/**/*.ts", "sushi/**/*.html"]
           }
         }
       }
@@ -51,23 +51,23 @@
           "style": "scss"
         }
       },
-      "root": "projects/playground",
-      "sourceRoot": "projects/playground/src",
+      "root": "playground",
+      "sourceRoot": "playground/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "browser": "projects/playground/src/main.ts",
-            "tsConfig": "projects/playground/tsconfig.app.json",
+            "browser": "playground/src/main.ts",
+            "tsConfig": "playground/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/playground/public"
+                "input": "playground/public"
               }
             ],
-            "styles": ["projects/playground/src/styles.scss"]
+            "styles": ["playground/src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -108,7 +108,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["projects/playground/**/*.ts", "projects/playground/**/*.html"]
+            "lintFilePatterns": ["playground/**/*.ts", "playground/**/*.html"]
           }
         }
       }
