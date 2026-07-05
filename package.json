@@ -4,11 +4,12 @@
   "scripts": {
     "ng": "ng",
     "lint": "ng lint",
+    "start:playground": "ng serve playground",
     "build:sushi": "ng build sushi",
     "build:playground": "ng build playground",
     "format": "prettier --check projects",
     "format:fix": "prettier --write projects",
-    "start:playground": "ng serve playground"
+    "preview:playground": "npx serve dist/playground/browser -l 4201 -s"
   },
   "private": true,
   "packageManager": "npm@11.16.0",
@@ -19,10 +20,13 @@
     "@angular/compiler": "^22.0.0",
     "@angular/core": "^22.0.0",
     "@angular/forms": "^22.0.0",
-    "@angular/material": "^22.0.3",
     "@angular/platform-browser": "^22.0.0",
     "@angular/router": "^22.0.0",
+    "@tailwindcss/postcss": "^4.3.2",
+    "daisyui": "^5.6.10",
+    "postcss": "^8.5.16",
     "rxjs": "~7.8.0",
+    "tailwindcss": "^4.3.2",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
@@ -36,6 +40,7 @@
     "jsdom": "^28.0.0",
     "ng-packagr": "^22.0.0",
     "prettier": "^3.8.1",
+    "serve": "^14.2.6",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.62.1",
     "vitest": "^4.0.8"

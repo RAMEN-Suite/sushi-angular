@@ -48,7 +48,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "css"
         }
       },
       "root": "playground",
@@ -60,14 +60,14 @@
           "options": {
             "browser": "playground/src/main.ts",
             "tsConfig": "playground/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "inlineStyleLanguage": "css",
             "assets": [
               {
                 "glob": "**/*",
                 "input": "playground/public"
               }
             ],
-            "styles": ["playground/src/styles.scss"]
+            "styles": ["sushi/src/styles/sushi.css", "playground/src/styles/main.css"]
           },
           "configurations": {
             "production": {
