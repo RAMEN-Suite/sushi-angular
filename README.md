@@ -2,7 +2,7 @@
 
 simple replacements
 ```
-suiButton              replaces primeng/button
+(x) suiButton              replaces primeng/button
 suiIconButton          replaces primeng/button icon usage
 suiToggleButton        replaces primeng/togglebutton
 suiBadge               replaces primeng/badge
@@ -19,6 +19,7 @@ suiInputGroup          replaces primeng/inputgroup, primeng/inputgroupaddon
 suiCheckbox            replaces primeng/checkbox
 suiScrollArea          replaces primeng/scrollpanel
 suiAutoFocus           replaces primeng/autofocus
+suiJoin
 ```
 
 cdk replacements

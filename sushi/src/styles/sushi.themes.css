@@ -1,0 +1,105 @@
+@plugin "daisyui/theme" {
+  name: 'sushi';
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  /* Base */
+  --color-base-100: #ffffff;
+  --color-base-200: #f7f4ef;
+  --color-base-300: #ded7cc;
+  --color-base-content: #15120f;
+
+  /* Brand */
+  --color-primary: #7a0712;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #17130f;
+  --color-secondary-content: #ffffff;
+
+  --color-accent: #d39a2f;
+  --color-accent-content: #15120f;
+
+  --color-neutral: #405766;
+  --color-neutral-content: #ffffff;
+
+  /* Status */
+  --color-info: #2f7fa8;
+  --color-info-content: #ffffff;
+
+  --color-success: #5f8f62;
+  --color-success-content: #ffffff;
+
+  --color-warning: #d39a2f;
+  --color-warning-content: #15120f;
+
+  --color-error: #7a0712;
+  --color-error-content: #ffffff;
+
+  /* Shape */
+  --radius-selector: 0.375rem;
+  --radius-field: 0.375rem;
+  --radius-box: 0.375rem;
+
+  /* Density */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* Effects */
+  --border: 0.125em;
+  --depth: 0.5;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: 'sushi-dark';
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+
+  /* Base */
+  --color-base-100: #282a36;
+  --color-base-200: #21222c;
+  --color-base-300: #44475a;
+  --color-base-content: #f8f8f2;
+
+  /* Brand */
+  --color-primary: #e35a60;
+  --color-primary-content: #282a36;
+
+  --color-secondary: #f8f8f2;
+  --color-secondary-content: #282a36;
+
+  --color-accent: #e8a94a;
+  --color-accent-content: #282a36;
+
+  --color-neutral: #6272a4;
+  --color-neutral-content: #f8f8f2;
+
+  /* Status */
+  --color-info: #6bb6de;
+  --color-info-content: #282a36;
+
+  --color-success: #8fcf91;
+  --color-success-content: #282a36;
+
+  --color-warning: #e8a94a;
+  --color-warning-content: #282a36;
+
+  --color-error: #e35a60;
+  --color-error-content: #282a36;
+
+  /* Shape */
+  --radius-selector: 0.375rem;
+  --radius-field: 0.375rem;
+  --radius-box: 0.375rem;
+
+  /* Density */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* Effects */
+  --border: 0.125em;
+  --depth: 0.5;
+  --noise: 0;
+}

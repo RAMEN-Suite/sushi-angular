@@ -1,0 +1,246 @@
+<main class="mx-auto max-w-7xl space-y-8 px-8 py-10">
+  <section class="space-y-3">
+    <h1 class="text-4xl font-bold tracking-tight">Button</h1>
+
+    <p class="max-w-3xl text-base-content/70">
+      Use <code>suiButton</code> on native <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> elements. Buttons support severities,
+      variants, sizes, shapes, disabled state, and loading state.
+    </p>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-5">
+      <div>
+        <h2 class="card-title">Basic usage</h2>
+        <p class="text-sm text-base-content/60">The directive works on native buttons and anchors.</p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <button suiButton type="button">Button</button>
+        <button suiButton type="submit" severity="secondary">Submit</button>
+        <a suiButton href="https://example.com" target="_blank" rel="noreferrer">Anchor</a>
+        <a suiButton routerLink="/button" severity="accent" variant="outlined">Router Link</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-5">
+      <div>
+        <h2 class="card-title">Severities</h2>
+        <p class="text-sm text-base-content/60">The <code>severity</code> input controls the semantic color.</p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <button suiButton type="button" severity="primary">Primary</button>
+        <button suiButton type="button" severity="secondary">Secondary</button>
+        <button suiButton type="button" severity="accent">Accent</button>
+        <button suiButton type="button" severity="neutral">Neutral</button>
+        <button suiButton type="button" severity="success">Success</button>
+        <button suiButton type="button" severity="info">Info</button>
+        <button suiButton type="button" severity="warning">Warning</button>
+        <button suiButton type="button" severity="error">Error</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-6">
+      <div>
+        <h2 class="card-title">Variants</h2>
+        <p class="text-sm text-base-content/60">
+          The default variant is solid. Available variants are
+          <code>outlined</code>, <code>soft</code>, <code>dash</code>, <code>text</code>, and <code>link</code>.
+        </p>
+      </div>
+
+      <div class="grid gap-5">
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Solid</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button suiButton type="button" severity="primary">Primary</button>
+            <button suiButton type="button" severity="secondary">Secondary</button>
+            <button suiButton type="button" severity="accent">Accent</button>
+            <button suiButton type="button" severity="neutral">Neutral</button>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Outlined</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button suiButton type="button" severity="primary" variant="outlined">Primary</button>
+            <button suiButton type="button" severity="secondary" variant="outlined">Secondary</button>
+            <button suiButton type="button" severity="accent" variant="outlined">Accent</button>
+            <button suiButton type="button" severity="neutral" variant="outlined">Neutral</button>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Soft</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button suiButton type="button" severity="primary" variant="soft">Primary</button>
+            <button suiButton type="button" severity="secondary" variant="soft">Secondary</button>
+            <button suiButton type="button" severity="accent" variant="soft">Accent</button>
+            <button suiButton type="button" severity="neutral" variant="soft">Neutral</button>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Dash</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button suiButton type="button" severity="primary" variant="dash">Primary</button>
+            <button suiButton type="button" severity="secondary" variant="dash">Secondary</button>
+            <button suiButton type="button" severity="accent" variant="dash">Accent</button>
+            <button suiButton type="button" severity="neutral" variant="dash">Neutral</button>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Text and Link</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button suiButton type="button" severity="primary" variant="text">Text</button>
+            <button suiButton type="button" severity="secondary" variant="text">Text</button>
+            <button suiButton type="button" severity="accent" variant="link">Link</button>
+            <button suiButton type="button" severity="neutral" variant="link">Link</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-5">
+      <div>
+        <h2 class="card-title">Status severities</h2>
+        <p class="text-sm text-base-content/60">Use status severities for contextual or destructive actions.</p>
+      </div>
+
+      <div class="grid gap-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <button suiButton type="button" severity="success">Success</button>
+          <button suiButton type="button" severity="info">Info</button>
+          <button suiButton type="button" severity="warning">Warning</button>
+          <button suiButton type="button" severity="error">Error</button>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <button suiButton type="button" severity="success" variant="outlined">Success</button>
+          <button suiButton type="button" severity="info" variant="outlined">Info</button>
+          <button suiButton type="button" severity="warning" variant="outlined">Warning</button>
+          <button suiButton type="button" severity="error" variant="outlined">Error</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-5">
+      <div>
+        <h2 class="card-title">Sizes</h2>
+        <p class="text-sm text-base-content/60">
+          Available sizes are <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <button suiButton type="button" size="xs">XS</button>
+        <button suiButton type="button" size="sm">SM</button>
+        <button suiButton type="button" size="md">MD</button>
+        <button suiButton type="button" size="lg">LG</button>
+        <button suiButton type="button" size="xl">XL</button>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <button suiButton type="button" size="xs" variant="outlined">XS</button>
+        <button suiButton type="button" size="sm" variant="outlined">SM</button>
+        <button suiButton type="button" size="md" variant="outlined">MD</button>
+        <button suiButton type="button" size="lg" variant="outlined">LG</button>
+        <button suiButton type="button" size="xl" variant="outlined">XL</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-6">
+      <div>
+        <h2 class="card-title">Shapes</h2>
+        <p class="text-sm text-base-content/60">
+          Available shapes are <code>default</code>, <code>fluid</code>, <code>square</code>, and <code>circle</code>.
+        </p>
+      </div>
+
+      <div class="grid gap-5">
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Default and fluid</h3>
+
+          <div class="grid max-w-xl gap-3">
+            <button suiButton type="button">Default</button>
+            <button suiButton type="button" shape="fluid" severity="secondary">Fluid</button>
+            <button suiButton type="button" shape="fluid" variant="outlined">Fluid Outlined</button>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Square and circle</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button suiButton type="button" shape="square" size="sm" aria-label="Square button">S</button>
+            <button suiButton type="button" shape="square" aria-label="Square button" severity="secondary">S</button>
+            <button suiButton type="button" shape="circle" size="sm" aria-label="Circle button">C</button>
+            <button suiButton type="button" shape="circle" aria-label="Circle button" severity="accent">C</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-6">
+      <div>
+        <h2 class="card-title">States</h2>
+        <p class="text-sm text-base-content/60">
+          <code>disabled</code> prevents interaction. <code>loading</code> exposes busy state with <code>aria-busy</code>.
+        </p>
+      </div>
+
+      <div class="grid gap-5">
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Disabled</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button suiButton type="button" disabled>Disabled</button>
+            <button suiButton type="button" severity="secondary" disabled>Secondary</button>
+            <button suiButton type="button" variant="outlined" disabled>Outlined</button>
+            <a suiButton href="https://example.com" disabled>Disabled Anchor</a>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Loading</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button suiButton type="button" loading>
+              <span class="loading loading-spinner loading-sm" aria-hidden="true"></span>
+              Loading
+            </button>
+
+            <button suiButton type="button" severity="secondary" loading>
+              <span class="loading loading-spinner loading-sm" aria-hidden="true"></span>
+              Saving
+            </button>
+
+            <button suiButton type="button" variant="outlined" loading>
+              <span class="loading loading-spinner loading-sm" aria-hidden="true"></span>
+              Loading
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

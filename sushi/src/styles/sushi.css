@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+@import './sushi.themes.css';
+@import './sushi.core.css';
+
+@plugin "daisyui" {
+  themes:
+    sushi --default,
+    sushi-dark --prefersdark;
+}
