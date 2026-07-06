@@ -24,6 +24,10 @@ export const navigation: NavigationGroup[] = [
         label: 'Divider',
         path: '/divider',
       },
+      {
+        label: 'Card',
+        path: '/card',
+      },
     ],
   },
 ];
