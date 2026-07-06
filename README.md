@@ -5,7 +5,7 @@ simple replacements
 (x) suiButton              replaces primeng/button
 suiIconButton          replaces primeng/button icon usage
 suiToggleButton        replaces primeng/togglebutton
-suiBadge               replaces primeng/badge
+(x) suiBadge               replaces primeng/badge
 suiChip                replaces primeng/chip
 suiDivider             replaces primeng/divider
 suiSpinner             replaces primeng/progressspinner

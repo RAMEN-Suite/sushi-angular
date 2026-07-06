@@ -10,20 +10,15 @@ export interface NavigationGroup {
 
 export const navigation: NavigationGroup[] = [
   {
-    label: 'Getting started',
-    items: [
-      {
-        label: 'Overview',
-        path: '/',
-      },
-    ],
-  },
-  {
     label: 'Components',
     items: [
       {
         label: 'Button',
         path: '/button',
+      },
+      {
+        label: 'Badge',
+        path: '/badge',
       },
     ],
   },
