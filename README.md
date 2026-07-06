@@ -64,7 +64,7 @@
   Basis: native `<img>` + Tailwind/DaisyUI styling
 
 
-- `suiCard` replaces simple panel/card usage  
+- `(x) suiCard` replaces simple panel/card usage  
   Basis: DaisyUI `card`
 
 
