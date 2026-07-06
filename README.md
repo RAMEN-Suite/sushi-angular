@@ -7,7 +7,7 @@ suiIconButton          replaces primeng/button icon usage
 suiToggleButton        replaces primeng/togglebutton
 (x) suiBadge               replaces primeng/badge
 suiChip                replaces primeng/chip
-suiDivider             replaces primeng/divider
+(x) suiDivider             replaces primeng/divider
 suiSpinner             replaces primeng/progressspinner
 suiImage / suiFigure   replaces primeng/image
 suiCard / suiPanel     replaces primeng/panel, primeng/fieldset

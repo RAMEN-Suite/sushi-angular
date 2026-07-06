@@ -20,6 +20,10 @@ export const navigation: NavigationGroup[] = [
         label: 'Badge',
         path: '/badge',
       },
+      {
+        label: 'Divider',
+        path: '/divider',
+      },
     ],
   },
 ];

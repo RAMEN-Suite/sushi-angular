@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ButtonPage } from './view/pages/button/button.page';
 import { HomePage } from './view/pages/home/home.page';
 import { BadgePage } from './view/pages/badge/badge.page';
+import { DividerPage } from './view/pages/divider/divider.page';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,11 @@ export const routes: Routes = [
     path: 'badge',
     component: BadgePage,
     title: 'Badge | SUSHI Playground',
+  },
+  {
+    path: 'divider',
+    component: DividerPage,
+    title: 'Divider | SUSHI Playground',
   },
   {
     path: '**',
