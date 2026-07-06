@@ -1,0 +1,78 @@
+<main class="mx-auto max-w-7xl space-y-8 px-8 py-10">
+  <section class="space-y-3">
+    <h1 class="text-4xl font-bold tracking-tight">Code</h1>
+
+    <p class="max-w-3xl text-base-content/70">
+      Use <code>suiCode</code> for documentation examples and terminal-like code blocks. Code blocks support simple variants and line
+      prefixes.
+    </p>
+  </section>
+
+  <section suiCard>
+    <div suiCardBody class="gap-5">
+      <div>
+        <h2 suiCardTitle>Basic usage</h2>
+        <p class="text-sm text-base-content/60">
+          Use <code>suiCode</code> on a container and <code>suiCodeLine</code> on each <code>&lt;pre&gt;</code> line.
+        </p>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="$"><code>npm install &#64;ramen-suite/sushi</code></pre>
+        <pre suiCodeLine prefix=">"><code>installing...</code></pre>
+        <pre suiCodeLine prefix=">"><code>done</code></pre>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;div suiCode&gt;</code></pre>
+        <pre
+          suiCodeLine
+          prefix="2"
+        ><code>  &lt;pre suiCodeLine prefix="$"&gt;&lt;code&gt;npm install &#64;ramen-suite/sushi&lt;/code&gt;&lt;/pre&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section suiCard>
+    <div suiCardBody class="gap-5">
+      <div>
+        <h2 suiCardTitle>Line prefixes</h2>
+        <p class="text-sm text-base-content/60">Use <code>prefix</code> for line numbers, shell prompts, or output markers.</p>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>import &#123; SuiButton &#125; from '&#64;ramen-suite/sushi';</code></pre>
+        <pre suiCodeLine prefix="2"><code>import &#123; SuiBadge &#125; from '&#64;ramen-suite/sushi';</code></pre>
+        <pre suiCodeLine prefix="3"><code>import &#123; SuiCard &#125; from '&#64;ramen-suite/sushi';</code></pre>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;pre suiCodeLine prefix="1"&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;</code></pre>
+        <pre suiCodeLine prefix="$"><code>&lt;pre suiCodeLine prefix="$"&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;</code></pre>
+        <pre suiCodeLine prefix=">"><code>&lt;pre suiCodeLine prefix="&gt;"&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section suiCard>
+    <div suiCardBody class="gap-5">
+      <div>
+        <h2 suiCardTitle>Line highlighting</h2>
+        <p class="text-sm text-base-content/60">Use <code>classes</code> for highlighting.</p>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine class="bg-primary"><code>import &#123; SuiButton &#125; from '&#64;ramen-suite/sushi';</code></pre>
+        <pre suiCodeLine class="italic"><code>import &#123; SuiBadge &#125; from '&#64;ramen-suite/sushi';</code></pre>
+        <pre suiCodeLine class="text-warning"><code>import &#123; SuiCard &#125; from '&#64;ramen-suite/sushi';</code></pre>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine><code>&lt;pre suiCodeLine class="bg-primary"&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;</code></pre>
+        <pre suiCodeLine><code>&lt;pre suiCodeLine class="italic"&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;</code></pre>
+        <pre suiCodeLine><code>&lt;pre suiCodeLine class="text-warning"&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;</code></pre>
+      </div>
+    </div>
+  </section>
+</main>

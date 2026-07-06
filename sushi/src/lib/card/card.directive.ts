@@ -19,5 +19,5 @@ import { SuiCardSize, SuiCardVariant } from './card.interfaces';
 })
 export class SuiCard {
   public readonly variant: InputSignal<SuiCardVariant> = input<SuiCardVariant>('border');
-  public readonly size: InputSignal<SuiCardSize> = input<SuiCardSize>('md');
+  public readonly size: InputSignal<SuiCardSize | null> = input<SuiCardSize | null>(null);
 }

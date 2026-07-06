@@ -10,16 +10,26 @@ export interface NavigationGroup {
 
 export const navigation: NavigationGroup[] = [
   {
-    label: 'Components',
+    label: 'Actions',
     items: [
       {
         label: 'Button',
         path: '/button',
       },
+    ],
+  },
+  {
+    label: 'Data Display',
+    items: [
       {
         label: 'Badge',
         path: '/badge',
       },
+    ],
+  },
+  {
+    label: 'Layout',
+    items: [
       {
         label: 'Divider',
         path: '/divider',
@@ -27,6 +37,15 @@ export const navigation: NavigationGroup[] = [
       {
         label: 'Card',
         path: '/card',
+      },
+    ],
+  },
+  {
+    label: 'Mockup',
+    items: [
+      {
+        label: 'Code',
+        path: '/code',
       },
     ],
   },

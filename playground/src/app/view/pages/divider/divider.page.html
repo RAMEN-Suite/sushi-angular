@@ -3,75 +3,83 @@
     <h1 class="text-4xl font-bold tracking-tight">Divider</h1>
 
     <p class="max-w-3xl text-base-content/70">
-      Use <code>suiDivider</code> to separate content horizontally or vertically. Dividers support severities, placement, and orientation.
+      Use <code>suiDivider</code> to separate content horizontally or vertically. Dividers support severity, placement, and orientation.
     </p>
   </section>
 
-  <section class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body gap-5">
+  <section suiCard>
+    <div suiCardBody class="gap-5">
       <div>
-        <h2 class="card-title">Basic usage</h2>
-        <p class="text-sm text-base-content/60">The default divider is horizontal and uses the neutral base color.</p>
+        <h2 suiCardTitle>Basic usage</h2>
+        <p class="text-sm text-base-content/60">The default divider is horizontal and can be used with or without label content.</p>
       </div>
 
       <div class="grid gap-4">
         <div suiDivider></div>
-
         <div suiDivider>Section</div>
-
         <div suiDivider severity="secondary">Secondary</div>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;div suiDivider&gt;&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;div suiDivider&gt;Section&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;div suiDivider severity="secondary"&gt;Secondary&lt;/div&gt;</code></pre>
       </div>
     </div>
   </section>
 
-  <section class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body gap-5">
+  <section suiCard>
+    <div suiCardBody class="gap-5">
       <div>
-        <h2 class="card-title">Severities</h2>
+        <h2 suiCardTitle>Severities</h2>
         <p class="text-sm text-base-content/60">The <code>severity</code> input controls the semantic color.</p>
       </div>
 
       <div class="grid gap-4">
         <div suiDivider severity="primary">Primary</div>
-
         <div suiDivider severity="secondary">Secondary</div>
-
         <div suiDivider severity="accent">Accent</div>
-
         <div suiDivider severity="neutral">Neutral</div>
-
         <div suiDivider severity="success">Success</div>
-
         <div suiDivider severity="info">Info</div>
-
         <div suiDivider severity="warning">Warning</div>
-
         <div suiDivider severity="error">Error</div>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;div suiDivider severity="primary"&gt;Primary&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;div suiDivider severity="secondary"&gt;Secondary&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;div suiDivider severity="accent"&gt;Accent&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;div suiDivider severity="success"&gt;Success&lt;/div&gt;</code></pre>
       </div>
     </div>
   </section>
 
-  <section class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body gap-5">
+  <section suiCard>
+    <div suiCardBody class="gap-5">
       <div>
-        <h2 class="card-title">Placement</h2>
-        <p class="text-sm text-base-content/60">The <code>placement</code> input controls the label position.</p>
+        <h2 suiCardTitle>Horizontal placement</h2>
+        <p class="text-sm text-base-content/60">The <code>placement</code> input controls the label position on horizontal dividers.</p>
       </div>
 
       <div class="grid gap-4">
         <div suiDivider placement="start">Start</div>
-
         <div suiDivider placement="center">Center</div>
-
         <div suiDivider placement="end">End</div>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;div suiDivider placement="start"&gt;Start&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;div suiDivider placement="center"&gt;Center&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;div suiDivider placement="end"&gt;End&lt;/div&gt;</code></pre>
       </div>
     </div>
   </section>
 
-  <section class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body gap-5">
+  <section suiCard>
+    <div suiCardBody class="gap-5">
       <div>
-        <h2 class="card-title">Vertical</h2>
+        <h2 suiCardTitle>Vertical orientation</h2>
         <p class="text-sm text-base-content/60">Use <code>orientation="vertical"</code> inside horizontal layouts.</p>
       </div>
 
@@ -82,58 +90,54 @@
 
         <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">Right</div>
       </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;div class="flex h-32"&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>  &lt;div&gt;Left&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>  &lt;div suiDivider orientation="vertical"&gt;&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>  &lt;div&gt;Right&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="5"><code>&lt;/div&gt;</code></pre>
+      </div>
     </div>
   </section>
 
-  <section class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body gap-6">
+  <section suiCard>
+    <div suiCardBody class="gap-5">
       <div>
-        <h2 class="card-title">Common patterns</h2>
-        <p class="text-sm text-base-content/60">Dividers are useful between sections, metadata blocks, and compact layout areas.</p>
+        <h2 suiCardTitle>Vertical placement</h2>
+        <p class="text-sm text-base-content/60">Placement also works on vertical dividers and controls where the label sits on the line.</p>
       </div>
 
-      <div class="grid gap-6">
-        <div class="space-y-3">
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Section break</h3>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <div class="flex h-40 items-stretch rounded-field border border-base-300 bg-base-200 p-4">
+          <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">A</div>
 
-          <div class="rounded-field border border-base-300 bg-base-100 p-5">
-            <p class="text-sm text-base-content/70">Basic metadata and editorial information.</p>
+          <div suiDivider orientation="vertical" placement="start">Start</div>
 
-            <div suiDivider>Annotations</div>
-
-            <p class="text-sm text-base-content/70">Annotation-related content can continue below the divider.</p>
-          </div>
+          <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">B</div>
         </div>
 
-        <div class="space-y-3">
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Action groups</h3>
+        <div class="flex h-40 items-stretch rounded-field border border-base-300 bg-base-200 p-4">
+          <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">A</div>
 
-          <div class="rounded-field border border-base-300 bg-base-100 p-5">
-            <div class="flex flex-wrap items-center gap-3">
-              <button suiButton type="button" severity="primary">Save</button>
-              <button suiButton type="button" severity="secondary">Duplicate</button>
-            </div>
+          <div suiDivider orientation="vertical" placement="center">Center</div>
 
-            <div suiDivider severity="secondary"></div>
-
-            <div class="flex flex-wrap items-center gap-3">
-              <button suiButton type="button" severity="error">Delete</button>
-              <button suiButton type="button" variant="text">Cancel</button>
-            </div>
-          </div>
+          <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">B</div>
         </div>
 
-        <div class="space-y-3">
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Inline layout</h3>
+        <div class="flex h-40 items-stretch rounded-field border border-base-300 bg-base-200 p-4">
+          <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">A</div>
 
-          <div class="flex h-24 items-stretch rounded-field border border-base-300 bg-base-100 p-4">
-            <div class="flex flex-1 items-center justify-center text-sm text-base-content/70">Details</div>
-            <div suiDivider orientation="vertical" severity="secondary"></div>
-            <div class="flex flex-1 items-center justify-center text-sm text-base-content/70">Preview</div>
-            <div suiDivider orientation="vertical" severity="secondary"></div>
-            <div class="flex flex-1 items-center justify-center text-sm text-base-content/70">History</div>
-          </div>
+          <div suiDivider orientation="vertical" placement="end">End</div>
+
+          <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">B</div>
         </div>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;div suiDivider orientation="vertical" placement="start"&gt;Start&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;div suiDivider orientation="vertical" placement="center"&gt;Center&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;div suiDivider orientation="vertical" placement="end"&gt;End&lt;/div&gt;</code></pre>
       </div>
     </div>
   </section>

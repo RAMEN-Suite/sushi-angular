@@ -4,6 +4,7 @@ import { HomePage } from './view/pages/home/home.page';
 import { BadgePage } from './view/pages/badge/badge.page';
 import { DividerPage } from './view/pages/divider/divider.page';
 import { CardPage } from './view/pages/card/card.page';
+import { CodePage } from './view/pages/code/code.page';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,11 @@ export const routes: Routes = [
     path: 'card',
     component: CardPage,
     title: 'Card | SUSHI Playground',
+  },
+  {
+    path: 'code',
+    component: CodePage,
+    title: 'Code | SUSHI Playground',
   },
   {
     path: '**',

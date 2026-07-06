@@ -15,7 +15,16 @@
         <p class="text-sm text-base-content/60">The default card uses <code>variant="border"</code> and <code>size="md"</code>.</p>
       </div>
 
-      <p class="text-base-content/70">Cards are useful for examples, summaries, grouped metadata, forms, and contextual actions.</p>
+      <p class="text-base-content/70">Cards are useful for summaries, grouped metadata, forms, examples, and contextual actions.</p>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;section suiCard&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>  &lt;div suiCardBody&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>    &lt;h2 suiCardTitle&gt;Card title&lt;/h2&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>    &lt;p&gt;Card content&lt;/p&gt;</code></pre>
+        <pre suiCodeLine prefix="5"><code>  &lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="6"><code>&lt;/section&gt;</code></pre>
+      </div>
     </div>
   </section>
 
@@ -30,23 +39,29 @@
         <section suiCard variant="plain" class="bg-base-200">
           <div suiCardBody>
             <h3 suiCardTitle>Plain</h3>
-            <p class="text-sm text-base-content/60">A simple card without border styling.</p>
+            <p class="text-sm text-base-content/60">Simple card surface.</p>
           </div>
         </section>
 
         <section suiCard variant="border">
           <div suiCardBody>
             <h3 suiCardTitle>Border</h3>
-            <p class="text-sm text-base-content/60">The default Sushi card variant.</p>
+            <p class="text-sm text-base-content/60">Default Sushi card.</p>
           </div>
         </section>
 
         <section suiCard variant="dash">
           <div suiCardBody>
             <h3 suiCardTitle>Dash</h3>
-            <p class="text-sm text-base-content/60">A dashed card for lightweight grouping.</p>
+            <p class="text-sm text-base-content/60">Dashed visual grouping.</p>
           </div>
         </section>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;section suiCard variant="plain"&gt;...&lt;/section&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;section suiCard variant="border"&gt;...&lt;/section&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;section suiCard variant="dash"&gt;...&lt;/section&gt;</code></pre>
       </div>
     </div>
   </section>
@@ -60,41 +75,33 @@
         </p>
       </div>
 
-      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-        <section suiCard size="xs">
-          <div suiCardBody>
-            <h3 suiCardTitle>XS</h3>
-            <p class="text-sm text-base-content/60">Extra small card.</p>
-          </div>
-        </section>
-
+      <div class="grid gap-4 md:grid-cols-3">
         <section suiCard size="sm">
           <div suiCardBody>
-            <h3 suiCardTitle>SM</h3>
-            <p class="text-sm text-base-content/60">Small card.</p>
+            <h3 suiCardTitle>Small</h3>
+            <p class="text-sm text-base-content/60">Compact content.</p>
           </div>
         </section>
 
         <section suiCard size="md">
           <div suiCardBody>
-            <h3 suiCardTitle>MD</h3>
-            <p class="text-sm text-base-content/60">Medium card.</p>
+            <h3 suiCardTitle>Medium</h3>
+            <p class="text-sm text-base-content/60">Default card size.</p>
           </div>
         </section>
 
         <section suiCard size="lg">
           <div suiCardBody>
-            <h3 suiCardTitle>LG</h3>
-            <p class="text-sm text-base-content/60">Large card.</p>
+            <h3 suiCardTitle>Large</h3>
+            <p class="text-sm text-base-content/60">More spacious content.</p>
           </div>
         </section>
+      </div>
 
-        <section suiCard size="xl">
-          <div suiCardBody>
-            <h3 suiCardTitle>XL</h3>
-            <p class="text-sm text-base-content/60">Extra large card.</p>
-          </div>
-        </section>
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;section suiCard size="sm"&gt;...&lt;/section&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;section suiCard size="md"&gt;...&lt;/section&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;section suiCard size="lg"&gt;...&lt;/section&gt;</code></pre>
       </div>
     </div>
   </section>
@@ -104,126 +111,13 @@
       <div>
         <h2 suiCardTitle>Actions</h2>
         <p class="text-sm text-base-content/60">
-          Use <code>suiCardActions</code> for button rows and combine it with Tailwind utilities for alignment.
+          Use <code>suiCardActions</code> for button rows. Alignment can be adjusted with Tailwind utilities.
         </p>
       </div>
 
-      <div class="grid gap-4 md:grid-cols-2">
-        <section suiCard>
-          <div suiCardBody>
-            <h3 suiCardTitle>Default actions</h3>
-
-            <p class="text-sm text-base-content/60">A common card with primary and secondary actions.</p>
-
-            <div suiCardActions>
-              <button suiButton type="button" variant="text">Cancel</button>
-              <button suiButton type="button">Save</button>
-            </div>
-          </div>
-        </section>
-
-        <section suiCard>
-          <div suiCardBody>
-            <h3 suiCardTitle>Custom alignment</h3>
-
-            <p class="text-sm text-base-content/60">Alignment can stay in user-land through Tailwind classes.</p>
-
-            <div suiCardActions class="justify-between">
-              <button suiButton type="button" variant="text">Back</button>
-              <button suiButton type="button" severity="secondary">Continue</button>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-  </section>
-
-  <section suiCard>
-    <div suiCardBody class="gap-6">
-      <div>
-        <h2 suiCardTitle>Content examples</h2>
-        <p class="text-sm text-base-content/60">Cards can be used for summaries, metadata blocks, and compact app panels.</p>
-      </div>
-
-      <div class="grid gap-4 lg:grid-cols-3">
-        <section suiCard>
-          <div suiCardBody>
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <h3 suiCardTitle>Entities</h3>
-                <p class="text-sm text-base-content/60">Indexed knowledge objects.</p>
-              </div>
-
-              <span suiBadge severity="secondary">128</span>
-            </div>
-
-            <div suiDivider></div>
-
-            <div class="flex flex-wrap gap-2">
-              <span suiBadge severity="neutral" variant="soft">Person</span>
-              <span suiBadge severity="secondary" variant="soft">Place</span>
-              <span suiBadge severity="accent" variant="soft">Institution</span>
-            </div>
-          </div>
-        </section>
-
-        <section suiCard>
-          <div suiCardBody>
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <h3 suiCardTitle>Annotations</h3>
-                <p class="text-sm text-base-content/60">Editorial graph annotations.</p>
-              </div>
-
-              <span suiBadge severity="info">42</span>
-            </div>
-
-            <div suiDivider></div>
-
-            <div class="space-y-2 text-sm">
-              <div class="flex justify-between">
-                <span class="text-base-content/60">Open</span>
-                <span class="font-medium">18</span>
-              </div>
-
-              <div class="flex justify-between">
-                <span class="text-base-content/60">Reviewed</span>
-                <span class="font-medium">24</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section suiCard>
-          <div suiCardBody>
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <h3 suiCardTitle>Status</h3>
-                <p class="text-sm text-base-content/60">Current publication state.</p>
-              </div>
-
-              <span suiBadge severity="success">Published</span>
-            </div>
-
-            <div suiDivider></div>
-
-            <p class="text-sm text-base-content/70">The current dataset is visible and included in public search results.</p>
-          </div>
-        </section>
-      </div>
-    </div>
-  </section>
-
-  <section suiCard>
-    <div suiCardBody class="gap-6">
-      <div>
-        <h2 suiCardTitle>Invoice example</h2>
-        <p class="text-sm text-base-content/60">A simple panel-like card for structured content.</p>
-      </div>
-
-      <section suiCard class="mx-auto w-full max-w-md">
+      <section suiCard>
         <div suiCardBody>
-          <h3 suiCardTitle>Invoice #1024</h3>
+          <h3 suiCardTitle>Order Summary</h3>
 
           <div class="space-y-3 text-sm">
             <div class="flex justify-between gap-4">
@@ -245,19 +139,31 @@
           </div>
 
           <div suiCardActions>
-            <button suiButton type="button" variant="text">Download</button>
-            <button suiButton type="button">Pay invoice</button>
+            <button suiButton type="button" variant="text">Cancel</button>
+            <button suiButton type="button">Pay</button>
           </div>
         </div>
       </section>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;section suiCard&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>  &lt;div suiCardBody&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>    &lt;h3 suiCardTitle&gt;Order Summary&lt;/h3&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>    &lt;div suiDivider&gt;&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="5"><code>    &lt;div suiCardActions&gt;</code></pre>
+        <pre suiCodeLine prefix="6"><code>      &lt;button suiButton type="button"&gt;Pay&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="7"><code>    &lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="8"><code>  &lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="9"><code>&lt;/section&gt;</code></pre>
+      </div>
     </div>
   </section>
 
   <section suiCard>
     <div suiCardBody class="gap-6">
       <div>
-        <h2 suiCardTitle>Image card</h2>
-        <p class="text-sm text-base-content/60">Cards can include native media elements and regular Tailwind layout utilities.</p>
+        <h2 suiCardTitle>Media</h2>
+        <p class="text-sm text-base-content/60">Cards can include native media elements without additional template APIs.</p>
       </div>
 
       <article suiCard class="overflow-hidden">
@@ -268,7 +174,7 @@
         <div suiCardBody>
           <h3 suiCardTitle>Manuscript preview</h3>
 
-          <p class="text-sm text-base-content/60">A card can combine media, metadata, and actions without additional template APIs.</p>
+          <p class="text-sm text-base-content/60">Combine media, metadata, and actions with normal HTML and Tailwind utilities.</p>
 
           <div suiCardActions>
             <button suiButton type="button" variant="text">Details</button>
@@ -276,6 +182,13 @@
           </div>
         </div>
       </article>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;article suiCard class="overflow-hidden"&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>  &lt;figure&gt;...&lt;/figure&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>  &lt;div suiCardBody&gt;...&lt;/div&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;/article&gt;</code></pre>
+      </div>
     </div>
   </section>
 </main>

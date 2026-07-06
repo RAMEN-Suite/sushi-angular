@@ -8,10 +8,10 @@
     </p>
   </section>
 
-  <section class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body gap-5">
+  <section suiCard>
+    <div suiCardBody class="gap-5">
       <div>
-        <h2 class="card-title">Basic usage</h2>
+        <h2 suiCardTitle>Basic usage</h2>
         <p class="text-sm text-base-content/60">The directive works on native buttons and anchors.</p>
       </div>
 
@@ -21,13 +21,23 @@
         <a suiButton href="https://example.com" target="_blank" rel="noreferrer">Anchor</a>
         <a suiButton routerLink="/button" severity="accent" variant="outlined">Router Link</a>
       </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;button suiButton type="button"&gt;Button&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;button suiButton type="submit" severity="secondary"&gt;Submit&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;a suiButton href="https://example.com"&gt;Anchor&lt;/a&gt;</code></pre>
+        <pre
+          suiCodeLine
+          prefix="4"
+        ><code>&lt;a suiButton routerLink="/button" severity="accent" variant="outlined"&gt;Router Link&lt;/a&gt;</code></pre>
+      </div>
     </div>
   </section>
 
-  <section class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body gap-5">
+  <section suiCard>
+    <div suiCardBody class="gap-5">
       <div>
-        <h2 class="card-title">Severities</h2>
+        <h2 suiCardTitle>Severities</h2>
         <p class="text-sm text-base-content/60">The <code>severity</code> input controls the semantic color.</p>
       </div>
 
@@ -41,13 +51,24 @@
         <button suiButton type="button" severity="warning">Warning</button>
         <button suiButton type="button" severity="error">Error</button>
       </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;button suiButton severity="primary"&gt;Primary&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;button suiButton severity="secondary"&gt;Secondary&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;button suiButton severity="accent"&gt;Accent&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;button suiButton severity="neutral"&gt;Neutral&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="5"><code>&lt;button suiButton severity="success"&gt;Success&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="6"><code>&lt;button suiButton severity="info"&gt;Info&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="7"><code>&lt;button suiButton severity="warning"&gt;Warning&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="8"><code>&lt;button suiButton severity="error"&gt;Error&lt;/button&gt;</code></pre>
+      </div>
     </div>
   </section>
 
-  <section class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body gap-6">
+  <section suiCard>
+    <div suiCardBody class="gap-6">
       <div>
-        <h2 class="card-title">Variants</h2>
+        <h2 suiCardTitle>Variants</h2>
         <p class="text-sm text-base-content/60">
           The default variant is solid. Available variants are
           <code>outlined</code>, <code>soft</code>, <code>dash</code>, <code>text</code>, and <code>link</code>.
@@ -56,67 +77,47 @@
 
       <div class="grid gap-5">
         <div class="space-y-2">
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Solid</h3>
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Primary</h3>
 
           <div class="flex flex-wrap items-center gap-3">
-            <button suiButton type="button" severity="primary">Primary</button>
-            <button suiButton type="button" severity="secondary">Secondary</button>
-            <button suiButton type="button" severity="accent">Accent</button>
-            <button suiButton type="button" severity="neutral">Neutral</button>
-          </div>
-        </div>
-
-        <div class="space-y-2">
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Outlined</h3>
-
-          <div class="flex flex-wrap items-center gap-3">
-            <button suiButton type="button" severity="primary" variant="outlined">Primary</button>
-            <button suiButton type="button" severity="secondary" variant="outlined">Secondary</button>
-            <button suiButton type="button" severity="accent" variant="outlined">Accent</button>
-            <button suiButton type="button" severity="neutral" variant="outlined">Neutral</button>
-          </div>
-        </div>
-
-        <div class="space-y-2">
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Soft</h3>
-
-          <div class="flex flex-wrap items-center gap-3">
-            <button suiButton type="button" severity="primary" variant="soft">Primary</button>
-            <button suiButton type="button" severity="secondary" variant="soft">Secondary</button>
-            <button suiButton type="button" severity="accent" variant="soft">Accent</button>
-            <button suiButton type="button" severity="neutral" variant="soft">Neutral</button>
-          </div>
-        </div>
-
-        <div class="space-y-2">
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Dash</h3>
-
-          <div class="flex flex-wrap items-center gap-3">
-            <button suiButton type="button" severity="primary" variant="dash">Primary</button>
-            <button suiButton type="button" severity="secondary" variant="dash">Secondary</button>
-            <button suiButton type="button" severity="accent" variant="dash">Accent</button>
-            <button suiButton type="button" severity="neutral" variant="dash">Neutral</button>
-          </div>
-        </div>
-
-        <div class="space-y-2">
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Text and Link</h3>
-
-          <div class="flex flex-wrap items-center gap-3">
+            <button suiButton type="button" severity="primary">Solid</button>
+            <button suiButton type="button" severity="primary" variant="outlined">Outlined</button>
+            <button suiButton type="button" severity="primary" variant="soft">Soft</button>
+            <button suiButton type="button" severity="primary" variant="dash">Dash</button>
             <button suiButton type="button" severity="primary" variant="text">Text</button>
-            <button suiButton type="button" severity="secondary" variant="text">Text</button>
-            <button suiButton type="button" severity="accent" variant="link">Link</button>
-            <button suiButton type="button" severity="neutral" variant="link">Link</button>
+            <button suiButton type="button" severity="primary" variant="link">Link</button>
           </div>
         </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Secondary</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button suiButton type="button" severity="secondary">Solid</button>
+            <button suiButton type="button" severity="secondary" variant="outlined">Outlined</button>
+            <button suiButton type="button" severity="secondary" variant="soft">Soft</button>
+            <button suiButton type="button" severity="secondary" variant="dash">Dash</button>
+            <button suiButton type="button" severity="secondary" variant="text">Text</button>
+            <button suiButton type="button" severity="secondary" variant="link">Link</button>
+          </div>
+        </div>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;button suiButton&gt;Solid&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;button suiButton variant="outlined"&gt;Outlined&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;button suiButton variant="soft"&gt;Soft&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;button suiButton variant="dash"&gt;Dash&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="5"><code>&lt;button suiButton variant="text"&gt;Text&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="6"><code>&lt;button suiButton variant="link"&gt;Link&lt;/button&gt;</code></pre>
       </div>
     </div>
   </section>
 
-  <section class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body gap-5">
+  <section suiCard>
+    <div suiCardBody class="gap-5">
       <div>
-        <h2 class="card-title">Status severities</h2>
+        <h2 suiCardTitle>Status severities</h2>
         <p class="text-sm text-base-content/60">Use status severities for contextual or destructive actions.</p>
       </div>
 
@@ -135,13 +136,20 @@
           <button suiButton type="button" severity="error" variant="outlined">Error</button>
         </div>
       </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;button suiButton severity="success"&gt;Success&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;button suiButton severity="info"&gt;Info&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;button suiButton severity="warning"&gt;Warning&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;button suiButton severity="error"&gt;Error&lt;/button&gt;</code></pre>
+      </div>
     </div>
   </section>
 
-  <section class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body gap-5">
+  <section suiCard>
+    <div suiCardBody class="gap-5">
       <div>
-        <h2 class="card-title">Sizes</h2>
+        <h2 suiCardTitle>Sizes</h2>
         <p class="text-sm text-base-content/60">
           Available sizes are <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>.
         </p>
@@ -155,20 +163,20 @@
         <button suiButton type="button" size="xl">XL</button>
       </div>
 
-      <div class="flex flex-wrap items-center gap-3">
-        <button suiButton type="button" size="xs" variant="outlined">XS</button>
-        <button suiButton type="button" size="sm" variant="outlined">SM</button>
-        <button suiButton type="button" size="md" variant="outlined">MD</button>
-        <button suiButton type="button" size="lg" variant="outlined">LG</button>
-        <button suiButton type="button" size="xl" variant="outlined">XL</button>
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;button suiButton size="xs"&gt;XS&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;button suiButton size="sm"&gt;SM&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;button suiButton size="md"&gt;MD&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;button suiButton size="lg"&gt;LG&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="5"><code>&lt;button suiButton size="xl"&gt;XL&lt;/button&gt;</code></pre>
       </div>
     </div>
   </section>
 
-  <section class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body gap-6">
+  <section suiCard>
+    <div suiCardBody class="gap-6">
       <div>
-        <h2 class="card-title">Shapes</h2>
+        <h2 suiCardTitle>Shapes</h2>
         <p class="text-sm text-base-content/60">
           Available shapes are <code>default</code>, <code>fluid</code>, <code>square</code>, and <code>circle</code>.
         </p>
@@ -185,24 +193,33 @@
           </div>
         </div>
 
+        <div suiDivider></div>
+
         <div class="space-y-2">
           <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Square and circle</h3>
 
           <div class="flex flex-wrap items-center gap-3">
             <button suiButton type="button" shape="square" size="sm" aria-label="Square button">S</button>
-            <button suiButton type="button" shape="square" aria-label="Square button" severity="secondary">S</button>
+            <button suiButton type="button" shape="square" severity="secondary" aria-label="Square button">S</button>
             <button suiButton type="button" shape="circle" size="sm" aria-label="Circle button">C</button>
-            <button suiButton type="button" shape="circle" aria-label="Circle button" severity="accent">C</button>
+            <button suiButton type="button" shape="circle" severity="accent" aria-label="Circle button">C</button>
           </div>
         </div>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;button suiButton&gt;Default&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;button suiButton shape="fluid"&gt;Fluid&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;button suiButton shape="square" aria-label="Square button"&gt;S&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;button suiButton shape="circle" aria-label="Circle button"&gt;C&lt;/button&gt;</code></pre>
       </div>
     </div>
   </section>
 
-  <section class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body gap-6">
+  <section suiCard>
+    <div suiCardBody class="gap-6">
       <div>
-        <h2 class="card-title">States</h2>
+        <h2 suiCardTitle>States</h2>
         <p class="text-sm text-base-content/60">
           <code>disabled</code> prevents interaction. <code>loading</code> exposes busy state with <code>aria-busy</code>.
         </p>
@@ -219,6 +236,8 @@
             <a suiButton href="https://example.com" disabled>Disabled Anchor</a>
           </div>
         </div>
+
+        <div suiDivider></div>
 
         <div class="space-y-2">
           <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Loading</h3>
@@ -240,6 +259,17 @@
             </button>
           </div>
         </div>
+      </div>
+
+      <div suiCode>
+        <pre suiCodeLine prefix="1"><code>&lt;button suiButton disabled&gt;Disabled&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;button suiButton loading&gt;</code></pre>
+        <pre
+          suiCodeLine
+          prefix="3"
+        ><code>  &lt;span class="loading loading-spinner loading-sm" aria-hidden="true"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>  Loading</code></pre>
+        <pre suiCodeLine prefix="5"><code>&lt;/button&gt;</code></pre>
       </div>
     </div>
   </section>

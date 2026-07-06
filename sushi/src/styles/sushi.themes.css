@@ -20,7 +20,7 @@
   --color-accent: #d39a2f;
   --color-accent-content: #15120f;
 
-  --color-neutral: #405766;
+  --color-neutral: #21222c;
   --color-neutral-content: #ffffff;
 
   /* Status */
@@ -73,8 +73,8 @@
   --color-accent: #e8a94a;
   --color-accent-content: #282a36;
 
-  --color-neutral: #6272a4;
-  --color-neutral-content: #f8f8f2;
+  --color-neutral: #f8f8f2;
+  --color-neutral-content: #282a36;
 
   /* Status */
   --color-info: #6bb6de;

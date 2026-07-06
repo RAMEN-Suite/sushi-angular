@@ -1,21 +1,63 @@
 <main class="mx-auto max-w-7xl space-y-10 px-8 py-10">
-  <section class="space-y-3">
-    <div class="flex items-start justify-between gap-4">
-      <div class="space-y-3">
-        <p class="text-sm font-semibold uppercase tracking-wide text-base-content/60">Ramen Suite</p>
-        <h1 class="text-4xl font-bold tracking-tight">SUSHI Playground</h1>
-        <p class="max-w-2xl text-base-content/70">Internal playground for SUSHI components.</p>
+  <section class="space-y-4">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h2 class="text-2xl font-semibold">Components</h2>
+        <p class="text-sm text-base-content/60">Stable primitives currently available in the playground.</p>
       </div>
     </div>
-  </section>
-
-  <section class="space-y-4">
-    <h2 class="text-2xl font-semibold">Components</h2>
 
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <a class="rounded-box border border-base-300 bg-base-100 p-5 transition hover:bg-base-200" routerLink="/button">
-        <h3 class="font-semibold">Button</h3>
-        <p class="mt-2 text-sm text-base-content/70">Button, native button directive, anchor support and button groups.</p>
+      <a suiCard routerLink="/button" class="hover:bg-base-200">
+        <div suiCardBody class="gap-4">
+          <div class="flex items-start justify-between gap-4">
+            <h3 suiCardTitle>Button</h3>
+          </div>
+
+          <p class="text-sm text-base-content/70">
+            Native button and anchor directive with severities, variants, sizes, shapes, and states.
+          </p>
+        </div>
+      </a>
+
+      <a suiCard routerLink="/badge" class="hover:bg-base-200">
+        <div suiCardBody class="gap-4">
+          <div class="flex items-start justify-between gap-4">
+            <h3 suiCardTitle>Badge</h3>
+          </div>
+
+          <p class="text-sm text-base-content/70">Inline labels for counts, metadata, states, and compact semantic markers.</p>
+        </div>
+      </a>
+
+      <a suiCard routerLink="/divider" class="hover:bg-base-200">
+        <div suiCardBody class="gap-4">
+          <div class="flex items-start justify-between gap-4">
+            <h3 suiCardTitle>Divider</h3>
+          </div>
+
+          <p class="text-sm text-base-content/70">Horizontal and vertical separators with severity, placement, and orientation.</p>
+        </div>
+      </a>
+
+      <a suiCard routerLink="/card" class="hover:bg-base-200">
+        <div suiCardBody class="gap-4">
+          <div class="flex items-start justify-between gap-4">
+            <h3 suiCardTitle>Card</h3>
+          </div>
+
+          <p class="text-sm text-base-content/70">Content containers with body, title, actions, variants, and sizes.</p>
+        </div>
+      </a>
+
+      <a suiCard routerLink="/code" class="hover:bg-base-200">
+        <div suiCardBody class="gap-4">
+          <div class="flex items-start justify-between gap-4">
+            <h3 suiCardTitle>Code</h3>
+          </div>
+
+          <p class="text-sm text-base-content/70">Code block primitive for documentation examples and playground pages.</p>
+        </div>
       </a>
     </div>
   </section>
