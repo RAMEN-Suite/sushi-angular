@@ -1,4 +1,267 @@
-<span suiBadge>Primary</span>
-<span suiBadge severity="secondary">Secondary</span>
-<span suiBadge severity="success" variant="soft">Success</span>
-<span suiBadge severity="error" variant="outlined">Error</span>
+<main class="mx-auto max-w-7xl space-y-8 px-8 py-10">
+  <section class="space-y-3">
+    <h1 class="text-4xl font-bold tracking-tight">Badge</h1>
+
+    <p class="max-w-3xl text-base-content/70">
+      Use <code>suiBadge</code> on inline elements such as <code>&lt;span&gt;</code>. Badges support severities, variants, and sizes.
+    </p>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-5">
+      <div>
+        <h2 class="card-title">Basic usage</h2>
+        <p class="text-sm text-base-content/60">The default badge uses <code>severity="primary"</code> and <code>size="md"</code>.</p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <span suiBadge>Primary</span>
+        <span suiBadge severity="secondary">Secondary</span>
+        <span suiBadge severity="success" variant="soft">Success</span>
+        <span suiBadge severity="error" variant="outlined">Error</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-5">
+      <div>
+        <h2 class="card-title">Severities</h2>
+        <p class="text-sm text-base-content/60">The <code>severity</code> input controls the semantic color.</p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <span suiBadge severity="primary">Primary</span>
+        <span suiBadge severity="secondary">Secondary</span>
+        <span suiBadge severity="accent">Accent</span>
+        <span suiBadge severity="neutral">Neutral</span>
+        <span suiBadge severity="success">Success</span>
+        <span suiBadge severity="info">Info</span>
+        <span suiBadge severity="warning">Warning</span>
+        <span suiBadge severity="error">Error</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-6">
+      <div>
+        <h2 class="card-title">Variants</h2>
+        <p class="text-sm text-base-content/60">
+          The default variant is solid. Available variants are
+          <code>outlined</code>, <code>soft</code>, <code>dash</code>, and <code>ghost</code>.
+        </p>
+      </div>
+
+      <div class="grid gap-5">
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Solid</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <span suiBadge severity="primary">Primary</span>
+            <span suiBadge severity="secondary">Secondary</span>
+            <span suiBadge severity="accent">Accent</span>
+            <span suiBadge severity="neutral">Neutral</span>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Outlined</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <span suiBadge severity="primary" variant="outlined">Primary</span>
+            <span suiBadge severity="secondary" variant="outlined">Secondary</span>
+            <span suiBadge severity="accent" variant="outlined">Accent</span>
+            <span suiBadge severity="neutral" variant="outlined">Neutral</span>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Soft</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <span suiBadge severity="primary" variant="soft">Primary</span>
+            <span suiBadge severity="secondary" variant="soft">Secondary</span>
+            <span suiBadge severity="accent" variant="soft">Accent</span>
+            <span suiBadge severity="neutral" variant="soft">Neutral</span>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Dash</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <span suiBadge severity="primary" variant="dash">Primary</span>
+            <span suiBadge severity="secondary" variant="dash">Secondary</span>
+            <span suiBadge severity="accent" variant="dash">Accent</span>
+            <span suiBadge severity="neutral" variant="dash">Neutral</span>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Ghost</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <span suiBadge severity="primary" variant="ghost">Primary</span>
+            <span suiBadge severity="secondary" variant="ghost">Secondary</span>
+            <span suiBadge severity="accent" variant="ghost">Accent</span>
+            <span suiBadge severity="neutral" variant="ghost">Neutral</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-5">
+      <div>
+        <h2 class="card-title">Status severities</h2>
+        <p class="text-sm text-base-content/60">Use status severities for contextual labels, states, or counts.</p>
+      </div>
+
+      <div class="grid gap-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <span suiBadge severity="success">Success</span>
+          <span suiBadge severity="info">Info</span>
+          <span suiBadge severity="warning">Warning</span>
+          <span suiBadge severity="error">Error</span>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <span suiBadge severity="success" variant="soft">Success</span>
+          <span suiBadge severity="info" variant="soft">Info</span>
+          <span suiBadge severity="warning" variant="soft">Warning</span>
+          <span suiBadge severity="error" variant="soft">Error</span>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <span suiBadge severity="success" variant="outlined">Success</span>
+          <span suiBadge severity="info" variant="outlined">Info</span>
+          <span suiBadge severity="warning" variant="outlined">Warning</span>
+          <span suiBadge severity="error" variant="outlined">Error</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-5">
+      <div>
+        <h2 class="card-title">Sizes</h2>
+        <p class="text-sm text-base-content/60">
+          Available sizes are <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <span suiBadge size="xs">XS</span>
+        <span suiBadge size="sm">SM</span>
+        <span suiBadge size="md">MD</span>
+        <span suiBadge size="lg">LG</span>
+        <span suiBadge size="xl">XL</span>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <span suiBadge size="xs" variant="outlined">XS</span>
+        <span suiBadge size="sm" variant="outlined">SM</span>
+        <span suiBadge size="md" variant="outlined">MD</span>
+        <span suiBadge size="lg" variant="outlined">LG</span>
+        <span suiBadge size="xl" variant="outlined">XL</span>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <span suiBadge size="xs" variant="soft">XS</span>
+        <span suiBadge size="sm" variant="soft">SM</span>
+        <span suiBadge size="md" variant="soft">MD</span>
+        <span suiBadge size="lg" variant="soft">LG</span>
+        <span suiBadge size="xl" variant="soft">XL</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-6">
+      <div>
+        <h2 class="card-title">Common patterns</h2>
+        <p class="text-sm text-base-content/60">Badges work well for counts, metadata, publication states, and lightweight labels.</p>
+      </div>
+
+      <div class="grid gap-5">
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Counts</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <span suiBadge>12</span>
+            <span suiBadge severity="secondary">24</span>
+            <span suiBadge severity="info">99+</span>
+            <span suiBadge severity="error">3</span>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Metadata</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <span suiBadge severity="neutral" variant="soft">Person</span>
+            <span suiBadge severity="secondary" variant="soft">Place</span>
+            <span suiBadge severity="accent" variant="soft">Institution</span>
+            <span suiBadge severity="info" variant="soft">Annotation</span>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">States</h3>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <span suiBadge severity="success">Published</span>
+            <span suiBadge severity="warning">Draft</span>
+            <span suiBadge severity="info" variant="outlined">Review</span>
+            <span suiBadge severity="error" variant="soft">Deprecated</span>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Inline text</h3>
+
+          <p class="text-base-content/70">
+            Entity type
+            <span suiBadge severity="secondary" variant="soft" size="sm">Person</span>
+            was detected in
+            <span suiBadge severity="info" variant="soft" size="sm">4 annotations</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body gap-5">
+      <div>
+        <h2 class="card-title">Badges in buttons</h2>
+        <p class="text-sm text-base-content/60">Badges can be combined with <code>suiButton</code> to show counts inside actions.</p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <button suiButton type="button" severity="primary">
+          Messages
+          <span suiBadge severity="secondary" size="sm">12</span>
+        </button>
+
+        <button suiButton type="button" severity="primary">
+          Notifications
+          <span suiBadge severity="secondary" size="sm">4</span>
+        </button>
+
+        <button suiButton type="button" severity="secondary">
+          Review
+          <span suiBadge severity="primary" size="sm">3</span>
+        </button>
+
+        <button suiButton type="button" severity="secondary">
+          Issues
+          <span suiBadge severity="primary" size="sm">7</span>
+        </button>
+      </div>
+    </div>
+  </section>
+</main>
