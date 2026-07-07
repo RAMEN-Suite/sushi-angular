@@ -5,10 +5,10 @@
   color-scheme: light;
 
   /* Base */
-  --color-base-100: #ffffff;
-  --color-base-200: #f7f4ef;
-  --color-base-300: #ded7cc;
-  --color-base-content: #15120f;
+  --color-base-100: var(--color-white);
+  --color-base-200: var(--color-zinc-100);
+  --color-base-300: var(--color-zinc-200);
+  --color-base-content: var(--color-zinc-950);
 
   /* Brand */
   --color-primary: #7a0712;
@@ -73,7 +73,7 @@
   --color-accent: #e8a94a;
   --color-accent-content: #282a36;
 
-  --color-neutral: #f8f8f2;
+  --color-neutral: #d3d3d3;
   --color-neutral-content: #282a36;
 
   /* Status */
