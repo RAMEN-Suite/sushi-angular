@@ -24,10 +24,6 @@
 - [x] `suiCode` – Basis: DaisyUI markup-code 
 
 
-- [ ] `suiIcon` replaces PrimeNG button icon usage  
-  Basis: SVG/icon registry or projected icon
-
-
 - [ ] `suiToggleButton` replaces `primeng/togglebutton`  
   Basis: Angular Aria toggle/button behavior + DaisyUI `btn`
 

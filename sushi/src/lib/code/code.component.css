@@ -1,0 +1,47 @@
+@reference "tailwindcss";
+
+.sui-code-control__copy-icon,
+.sui-code-control__copy-base,
+.sui-code-control__copy-check {
+  @apply inline-flex items-center justify-center;
+}
+
+.sui-code-control__copy-icon {
+  @apply relative;
+}
+
+.sui-code-control__copy-base {
+  @apply transition-[opacity,transform] duration-200 ease-[ease-out];
+}
+
+.sui-code-control__copy-check {
+  @apply pointer-events-none absolute inset-0 scale-[0.78] opacity-0 transition-[opacity,transform] duration-200 ease-[ease-out] [stroke-dasharray:24] [stroke-dashoffset:24];
+}
+
+.sui-code-control__copy-button {
+  @apply absolute right-4 top-7 z-10 max-w-[calc(100%-4rem)] -translate-y-1/2 overflow-hidden whitespace-nowrap text-white;
+}
+
+.sui-code-control__copy-icon--copied .sui-code-control__copy-check {
+  animation: sui-code-check-draw 500ms ease-out both;
+}
+
+@keyframes sui-code-check-draw {
+  0% {
+    opacity: 0;
+    transform: scale(0.78);
+    stroke-dashoffset: 24;
+  }
+
+  55% {
+    opacity: 1;
+    transform: scale(1.14);
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    stroke-dashoffset: 0;
+  }
+}

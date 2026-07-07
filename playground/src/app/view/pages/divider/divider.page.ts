@@ -3,7 +3,7 @@ import { SuiCard, SuiCardBody, SuiCardTitle, SuiCode, SuiCodeLine, SuiDivider } 
 
 @Component({
   selector: 'app-divider-page',
-  imports: [SuiDivider, SuiCard, SuiCardBody, SuiCardTitle, SuiCode, SuiCodeLine],
+  imports: [SuiDivider, SuiCard, SuiCardBody, SuiCardTitle, SuiCode, SuiCodeLine, SuiCode],
   templateUrl: './divider.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

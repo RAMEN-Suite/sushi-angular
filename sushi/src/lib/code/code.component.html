@@ -1,0 +1,32 @@
+@if (copyable()) {
+  <button
+    suiButton
+    type="button"
+    class="sui-code-control__copy-button"
+    severity="neutral"
+    variant="text"
+    size="xs"
+    [attr.aria-label]="ariaLabel()"
+    (click)="copy()"
+  >
+    <span class="sui-code-control__copy-icon" [class.sui-code-control__copy-icon--copied]="copied()">
+      <span class="sui-code-control__copy-base" [class.opacity-0]="copied()">
+        @if (copyIcon(); as template) {
+          <ng-container [ngTemplateOutlet]="template" />
+        } @else {
+          <svg class="size-4" lucideCopy></svg>
+        }
+      </span>
+
+      <span class="sui-code-control__copy-check">
+        @if (copiedIcon(); as template) {
+          <ng-container [ngTemplateOutlet]="template" />
+        } @else {
+          <svg class="size-5" lucideCheck></svg>
+        }
+      </span>
+    </span>
+  </button>
+}
+
+<ng-content />

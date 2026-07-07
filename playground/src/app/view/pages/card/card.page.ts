@@ -12,7 +12,7 @@ import {
 
 @Component({
   selector: 'app-card-page',
-  imports: [SuiCard, SuiCardBody, SuiCardTitle, SuiCardActions, SuiButton, SuiDivider, SuiCodeLine, SuiCode],
+  imports: [SuiCard, SuiCardBody, SuiCardTitle, SuiCardActions, SuiButton, SuiDivider, SuiCodeLine, SuiCode, SuiCode],
   templateUrl: './card.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

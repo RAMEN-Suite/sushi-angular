@@ -4,7 +4,7 @@ import { SuiButton, SuiCard, SuiCardBody, SuiCardTitle, SuiCode, SuiCodeLine, Su
 
 @Component({
   selector: 'app-button-page',
-  imports: [RouterLink, SuiButton, SuiCode, SuiCodeLine, SuiDivider, SuiCardTitle, SuiCard, SuiCardBody],
+  imports: [RouterLink, SuiButton, SuiCode, SuiCodeLine, SuiDivider, SuiCardTitle, SuiCard, SuiCardBody, SuiCode],
   templateUrl: './button.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -3,7 +3,7 @@ import { SuiBadge, SuiButton, SuiCard, SuiCardBody, SuiCardTitle, SuiCode, SuiCo
 
 @Component({
   selector: 'app-badge-page',
-  imports: [SuiBadge, SuiButton, SuiCode, SuiCodeLine, SuiCard, SuiCardBody, SuiCardTitle, SuiDivider],
+  imports: [SuiBadge, SuiButton, SuiCode, SuiCodeLine, SuiCard, SuiCardBody, SuiCardTitle, SuiDivider, SuiCode],
   templateUrl: './badge.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
