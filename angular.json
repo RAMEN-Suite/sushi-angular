@@ -67,7 +67,7 @@
                 "input": "playground/public"
               }
             ],
-            "styles": ["sushi/src/styles/sushi.css", "playground/src/styles/main.css"]
+            "styles": ["sushi/src/styles/sushi.css"]
           },
           "configurations": {
             "production": {
