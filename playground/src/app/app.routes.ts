@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { ButtonPage } from './view/pages/button/button.page';
-import { HomePage } from './view/pages/home/home.page';
-import { BadgePage } from './view/pages/badge/badge.page';
-import { DividerPage } from './view/pages/divider/divider.page';
-import { CardPage } from './view/pages/card/card.page';
-import { CodePage } from './view/pages/code/code.page';
-import { IconPage } from './view/pages/icon/icon.page';
+import { OverviewPage } from './view/overview.page';
+import { ButtonPage } from './view/actions/button/button.page';
+import { IconPage } from './view/display/icon/icon.page';
+import { BadgePage } from './view/display/badge/badge.page';
+import { DividerPage } from './view/layout/divider/divider.page';
+import { CardPage } from './view/layout/card/card.page';
+import { CodePage } from './view/mockup/code/code.page';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomePage,
+    component: OverviewPage,
     title: 'SUSHI Playground',
   },
   {

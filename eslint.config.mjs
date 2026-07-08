@@ -111,7 +111,7 @@ export default defineConfig(
         'error',
         {
           type: 'attribute',
-          prefix: 'app',
+          prefix: 'pg',
           style: 'camelCase',
         },
       ],
@@ -119,7 +119,7 @@ export default defineConfig(
         'error',
         {
           type: 'element',
-          prefix: 'app',
+          prefix: 'pg',
           style: 'kebab-case',
         },
       ],

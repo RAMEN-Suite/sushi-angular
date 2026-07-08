@@ -11,7 +11,7 @@ import {
 } from '@ramen-suite/sushi';
 
 @Component({
-  selector: 'app-card-page',
+  selector: 'pg-card-page',
   imports: [SuiCard, SuiCardBody, SuiCardTitle, SuiCardActions, SuiButton, SuiDivider, SuiCodeLine, SuiCode, SuiCode],
   templateUrl: './card.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -3,9 +3,9 @@ import { RouterLink } from '@angular/router';
 import { SuiCard, SuiCardBody, SuiCardTitle } from '@ramen-suite/sushi';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'pg-home-page',
   imports: [RouterLink, SuiCard, SuiCardBody, SuiCardTitle],
-  templateUrl: './home.page.html',
+  templateUrl: './overview.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePage {}
+export class OverviewPage {}

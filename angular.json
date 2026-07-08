@@ -53,7 +53,7 @@
       },
       "root": "playground",
       "sourceRoot": "playground/src",
-      "prefix": "app",
+      "prefix": "pg",
       "architect": {
         "build": {
           "builder": "@angular/build:application",

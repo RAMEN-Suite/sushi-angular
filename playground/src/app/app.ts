@@ -7,7 +7,7 @@ import { SuiButton } from '@ramen-suite/sushi';
 type PlaygroundTheme = 'sushi' | 'sushi-dark';
 
 @Component({
-  selector: 'app-root',
+  selector: 'pg-root',
   imports: [RouterLink, RouterLinkActive, RouterOutlet, SuiButton],
   templateUrl: './app.html',
   styleUrl: './app.css',

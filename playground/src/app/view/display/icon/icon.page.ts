@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SuiButton, SuiCard, SuiCardBody, SuiCardTitle, SuiCodeLine } from '@ramen-suite/sushi';
+import { SuiButton, SuiCard, SuiCardBody, SuiCardTitle, SuiCode, SuiCodeLine } from '@ramen-suite/sushi';
 import { LucideDownload, LucidePlus, LucideSearch, LucideSettings, LucideTrash2 } from '@lucide/angular';
-import { SuiCode } from '../../../../../../sushi/src/lib/code';
 
 @Component({
-  selector: 'app-icon-page',
+  selector: 'pg-icon-page',
   imports: [
     SuiCard,
     SuiCardBody,
