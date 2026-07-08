@@ -8,10 +8,10 @@ import { Directive, ElementRef, inject, input, InputSignal } from '@angular/core
   },
 })
 export class SuiCodeLine {
-  protected readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
+  protected readonly elementRef: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
   public readonly prefix: InputSignal<string | number | null> = input<string | number | null>(null);
 
   public text(): string {
-    return this.elementRef.nativeElement.textContent?.trimEnd() ?? '';
+    return this.elementRef.nativeElement.textContent.trimEnd();
   }
 }

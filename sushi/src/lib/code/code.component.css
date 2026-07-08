@@ -1,20 +1,20 @@
 @reference "tailwindcss";
 
-.sui-code-control__copy-icon,
-.sui-code-control__copy-base,
-.sui-code-control__copy-check {
+.sui-code-control__copy,
+.sui-code-control__copy-default,
+.sui-code-control__copy-success {
   @apply inline-flex items-center justify-center;
 }
 
-.sui-code-control__copy-icon {
+.sui-code-control__copy {
   @apply relative;
 }
 
-.sui-code-control__copy-base {
+.sui-code-control__copy-default {
   @apply transition-[opacity,transform] duration-200 ease-[ease-out];
 }
 
-.sui-code-control__copy-check {
+.sui-code-control__copy-success {
   @apply pointer-events-none absolute inset-0 scale-[0.78] opacity-0 transition-[opacity,transform] duration-200 ease-[ease-out] [stroke-dasharray:24] [stroke-dashoffset:24];
 }
 
@@ -22,11 +22,11 @@
   @apply absolute right-4 top-7 z-10 max-w-[calc(100%-4rem)] -translate-y-1/2 overflow-hidden whitespace-nowrap text-white;
 }
 
-.sui-code-control__copy-icon--copied .sui-code-control__copy-check {
-  animation: sui-code-check-draw 500ms ease-out both;
+.sui-code-control__copy--active .sui-code-control__copy-success {
+  animation: sui-code-copy-success 500ms ease-out both;
 }
 
-@keyframes sui-code-check-draw {
+@keyframes sui-code-copy-success {
   0% {
     opacity: 0;
     transform: scale(0.78);

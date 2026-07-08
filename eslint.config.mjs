@@ -9,6 +9,28 @@ export default defineConfig(
     ignores: ['.angular/**', 'dist/**', 'coverage/**', 'node_modules/**', '**/*.js'],
   },
   {
+    files: ['sushi/src/lib/**/*.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: '@ramen-suite/sushi',
+              message: 'Do not import from the package barrel inside the library. Use relative imports instead.',
+            },
+          ],
+          patterns: [
+            {
+              group: ['@ramen-suite/sushi/*'],
+              message: 'Do not import from the package barrel inside the library. Use relative imports instead.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     files: ['**/*.ts'],
     extends: [
       js.configs.recommended,

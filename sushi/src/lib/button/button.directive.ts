@@ -1,5 +1,5 @@
 import { booleanAttribute, Directive, ElementRef, HostListener, inject, input, InputSignal } from '@angular/core';
-import { SuiBooleanAttribute, SuiBooleanInput } from '../sushi.types';
+import { SuiBooleanInput, SuiBooleanInputValue } from '../sushi.types';
 import { SuiButtonSeverity, SuiButtonShape, SuiButtonSize, SuiButtonVariant } from './button.interfaces';
 
 @Directive({
@@ -50,8 +50,8 @@ export class SuiButton {
   public readonly size: InputSignal<SuiButtonSize> = input<SuiButtonSize>('md');
   public readonly shape: InputSignal<SuiButtonShape> = input<SuiButtonShape>('default');
 
-  public readonly disabled: SuiBooleanInput = input<boolean, SuiBooleanAttribute>(false, { transform: booleanAttribute });
-  public readonly loading: SuiBooleanInput = input<boolean, SuiBooleanAttribute>(false, { transform: booleanAttribute });
+  public readonly disabled: SuiBooleanInput = input<boolean, SuiBooleanInputValue>(false, { transform: booleanAttribute });
+  public readonly loading: SuiBooleanInput = input<boolean, SuiBooleanInputValue>(false, { transform: booleanAttribute });
 
   @HostListener('click', ['$event'])
   protected onClick(event: Event): void {
