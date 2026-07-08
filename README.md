@@ -24,10 +24,6 @@
 - [x] `suiCode` – Basis: DaisyUI markup-code 
 
 
-- [ ] `suiToggleButton` replaces `primeng/togglebutton`  
-  Basis: Angular Aria toggle/button behavior + DaisyUI `btn`
-
-
 - [ ] `suiSpinner` replaces `primeng/progressspinner`  
   Basis: DaisyUI `loading`
 
@@ -62,6 +58,10 @@
 
 - [ ] `suiMessage` replaces `primeng/message`  
   Basis: DaisyUI `alert`
+
+
+- [ ] `suiToggleButton` replaces `primeng/togglebutton`  
+  Basis: Angular Aria toggle/button behavior + DaisyUI `btn`
 
 
 ## Phase 2: Form directives

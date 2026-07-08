@@ -5,6 +5,7 @@ import { BadgePage } from './view/pages/badge/badge.page';
 import { DividerPage } from './view/pages/divider/divider.page';
 import { CardPage } from './view/pages/card/card.page';
 import { CodePage } from './view/pages/code/code.page';
+import { IconPage } from './view/pages/icon/icon.page';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,11 @@ export const routes: Routes = [
     path: 'button',
     component: ButtonPage,
     title: 'Button | SUSHI Playground',
+  },
+  {
+    path: 'icon',
+    component: IconPage,
+    title: 'Icons | SUSHI Playground',
   },
   {
     path: 'badge',

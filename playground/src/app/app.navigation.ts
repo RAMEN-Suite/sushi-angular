@@ -22,6 +22,10 @@ export const navigation: NavigationGroup[] = [
     label: 'Data Display',
     items: [
       {
+        label: 'Icons',
+        path: '/icon',
+      },
+      {
         label: 'Badge',
         path: '/badge',
       },

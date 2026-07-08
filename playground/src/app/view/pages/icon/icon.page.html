@@ -1,0 +1,89 @@
+<main class="mx-auto max-w-7xl space-y-8 px-8 py-10">
+  <section class="space-y-3">
+    <h1 class="text-4xl font-bold tracking-tight">Icons</h1>
+
+    <p class="max-w-3xl text-base-content/70">
+      SUSHI uses <a href="https://lucide.dev/guide/angular/getting-started" target="_blank"><code>&#64;lucide/angular</code></a> for icon
+      examples and component defaults. Import only the icons you need and use them as standalone Angular components. Feel free to use any
+      library you would like to.
+    </p>
+  </section>
+
+  <section suiCard>
+    <div suiCardBody class="gap-5">
+      <div>
+        <h2 suiCardTitle>Standalone icons</h2>
+        <p class="text-sm text-base-content/60">
+          Import Lucide icons directly into the component and use them as SVG directives in the template.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-4">
+        <svg class="size-5" lucideSearch></svg>
+        <svg class="size-5" lucideSettings></svg>
+        <svg class="size-5" lucideDownload></svg>
+        <svg class="size-5" lucideTrash2></svg>
+      </div>
+
+      <sui-code>
+        <pre
+          suiCodeLine
+          prefix="1"
+        ><code>import &#123; LucideDownload, LucideSearch, LucideSettings, LucideTrash2 &#125; from '&#64;lucide/angular';</code></pre>
+        <pre suiCodeLine prefix="2"><code></code></pre>
+        <pre suiCodeLine prefix="3"><code>&#64;Component(&#123;</code></pre>
+        <pre suiCodeLine prefix="4"><code>  imports: [LucideSearch, LucideSettings, LucideDownload, LucideTrash2],</code></pre>
+        <pre suiCodeLine prefix="5"><code>&#125;)</code></pre>
+        <pre suiCodeLine prefix="6"><code>export class IconPage &#123;&#125;</code></pre>
+        <pre suiCodeLine prefix="7"><code></code></pre>
+        <pre suiCodeLine prefix="8"><code>&lt;svg class="size-5" lucideSearch&gt;&lt;/svg&gt;</code></pre>
+        <pre suiCodeLine prefix="9"><code>&lt;svg class="size-5" lucideSettings&gt;&lt;/svg&gt;</code></pre>
+        <pre suiCodeLine prefix="10"><code>&lt;svg class="size-5" lucideDownload&gt;&lt;/svg&gt;</code></pre>
+        <pre suiCodeLine prefix="11"><code>&lt;svg class="size-5" lucideTrash2&gt;&lt;/svg&gt;</code></pre>
+      </sui-code>
+    </div>
+  </section>
+
+  <section suiCard>
+    <div suiCardBody class="gap-5">
+      <div>
+        <h2 suiCardTitle>Icons in buttons</h2>
+        <p class="text-sm text-base-content/60">
+          Combine Lucide icons with <code>suiButton</code>. Use normal Tailwind utilities for size, spacing, and alignment.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <button suiButton type="button">
+          <svg class="size-4" lucidePlus></svg>
+          Add item
+        </button>
+
+        <button suiButton type="button" severity="secondary" variant="outlined">
+          <svg class="size-4" lucideDownload></svg>
+          Export
+        </button>
+
+        <button suiButton type="button" severity="error" variant="text">
+          <svg class="size-4" lucideTrash2></svg>
+          Delete
+        </button>
+
+        <button suiButton type="button" shape="square" aria-label="Open settings">
+          <svg class="size-4" lucideSettings></svg>
+        </button>
+      </div>
+
+      <sui-code>
+        <pre suiCodeLine prefix="1"><code>&lt;button suiButton type="button"&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>  &lt;svg class="size-4" lucidePlus&gt;&lt;/svg&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>  Add item</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="5"><code></code></pre>
+        <pre suiCodeLine prefix="6"><code>&lt;button suiButton type="button" shape="square" aria-label="Open settings"&gt;</code></pre>
+        <pre suiCodeLine prefix="7"><code>  &lt;svg class="size-4" lucideSettings&gt;&lt;/svg&gt;</code></pre>
+        <pre suiCodeLine prefix="8"><code>&lt;/button&gt;</code></pre>
+      </sui-code>
+    </div>
+  </section>
+</main>
