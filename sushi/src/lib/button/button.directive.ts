@@ -42,7 +42,7 @@ import { SuiButtonSeverity, SuiButtonShape, SuiButtonSize, SuiButtonVariant } fr
   },
 })
 export class SuiButton {
-  protected readonly elementRef: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef<HTMLElement>);
+  protected readonly elementRef: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
   protected readonly isNativeButton: boolean = this.elementRef.nativeElement.tagName.toLowerCase() === 'button';
 
   public readonly severity: InputSignal<SuiButtonSeverity> = input<SuiButtonSeverity>('primary');
