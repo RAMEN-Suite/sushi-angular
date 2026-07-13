@@ -35,16 +35,13 @@ import { SuiButtonSeverity, SuiButtonShape, SuiButtonSize, SuiButtonVariant } fr
 
     '[class.sui-button-control--disabled]': 'disabled()',
 
-    '[attr.aria-busy]': 'loading() ? "true": null',
+    '[attr.aria-busy]': 'loading() ? "true" : null',
     '[attr.aria-disabled]': 'disabled() ? "true" : null',
     '[attr.disabled]': 'disabled() && isNativeButton ? "" : null',
     '[attr.tabindex]': 'disabled() && !isNativeButton ? -1 : null',
   },
 })
 export class SuiButton {
-  protected readonly elementRef: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
-  protected readonly isNativeButton: boolean = this.elementRef.nativeElement.tagName.toLowerCase() === 'button';
-
   public readonly severity: InputSignal<SuiButtonSeverity> = input<SuiButtonSeverity>('primary');
   public readonly variant: InputSignal<SuiButtonVariant | null> = input<SuiButtonVariant | null>(null);
   public readonly size: InputSignal<SuiButtonSize> = input<SuiButtonSize>('md');
@@ -53,8 +50,11 @@ export class SuiButton {
   public readonly disabled: SuiBooleanInput = input<boolean, SuiBooleanInputValue>(false, { transform: booleanAttribute });
   public readonly loading: SuiBooleanInput = input<boolean, SuiBooleanInputValue>(false, { transform: booleanAttribute });
 
+  protected readonly elementRef: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
+  protected readonly isNativeButton: boolean = this.elementRef.nativeElement.tagName.toLowerCase() === 'button';
+
   @HostListener('click', ['$event'])
-  protected onClick(event: Event): void {
+  protected handleClick(event: Event): void {
     if (!this.disabled()) return;
     event.preventDefault();
     event.stopImmediatePropagation();
