@@ -6,6 +6,7 @@ import { BadgePage } from './view/display/badge/badge.page';
 import { DividerPage } from './view/layout/divider/divider.page';
 import { CardPage } from './view/layout/card/card.page';
 import { CodePage } from './view/mockup/code/code.page';
+import { ToggleButtonPage } from './view/form/toggle-button/toggle-button.page';
 
 export const routes: Routes = [
   {
@@ -14,24 +15,14 @@ export const routes: Routes = [
     title: 'SUSHI Playground',
   },
   {
-    path: 'button',
-    component: ButtonPage,
-    title: 'Button | SUSHI Playground',
-  },
-  {
-    path: 'icon',
-    component: IconPage,
-    title: 'Icons | SUSHI Playground',
-  },
-  {
     path: 'badge',
     component: BadgePage,
     title: 'Badge | SUSHI Playground',
   },
   {
-    path: 'divider',
-    component: DividerPage,
-    title: 'Divider | SUSHI Playground',
+    path: 'button',
+    component: ButtonPage,
+    title: 'Button | SUSHI Playground',
   },
   {
     path: 'card',
@@ -42,6 +33,21 @@ export const routes: Routes = [
     path: 'code',
     component: CodePage,
     title: 'Code | SUSHI Playground',
+  },
+  {
+    path: 'divider',
+    component: DividerPage,
+    title: 'Divider | SUSHI Playground',
+  },
+  {
+    path: 'icon',
+    component: IconPage,
+    title: 'Icons | SUSHI Playground',
+  },
+  {
+    path: 'toggle-button',
+    component: ToggleButtonPage,
+    title: 'Toggle Button | SUSHI Playground',
   },
   {
     path: '**',

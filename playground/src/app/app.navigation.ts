@@ -19,6 +19,15 @@ export const navigation: NavigationGroup[] = [
     ],
   },
   {
+    label: 'Form',
+    items: [
+      {
+        label: 'Toggle Button',
+        path: '/toggle-button',
+      },
+    ],
+  },
+  {
     label: 'Data Display',
     items: [
       {
