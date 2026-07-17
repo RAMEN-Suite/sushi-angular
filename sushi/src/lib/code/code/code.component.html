@@ -9,6 +9,7 @@
       size="sm"
       ariaLabel="Copy code"
       [(checked)]="isCopied"
+      [shape]="copyIconRef() && copiedIconRef() ? 'default' : 'square'"
       [class.pointer-events-none]="isCopied()"
       [attr.aria-disabled]="isCopied()"
       (checkedChange)="handleCheckedChange($event)"
