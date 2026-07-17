@@ -1,15 +1,6 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[suiCardTitle]',
-  standalone: true,
-  host: {
-    class: 'card-title sui-card-title-control',
-  },
-})
-export class SuiCardTitle {}
-
-@Directive({
   selector: '[suiCardBody]',
   standalone: true,
   host: {
@@ -17,6 +8,15 @@ export class SuiCardTitle {}
   },
 })
 export class SuiCardBody {}
+
+@Directive({
+  selector: '[suiCardTitle]',
+  standalone: true,
+  host: {
+    class: 'card-title sui-card-title-control',
+  },
+})
+export class SuiCardTitle {}
 
 @Directive({
   selector: '[suiCardActions]',
