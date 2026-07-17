@@ -1,11 +1,11 @@
 import { Directive, input, InputSignal } from '@angular/core';
-import { SuiBadgeSeverity, SuiBadgeSize, SuiBadgeVariant } from './badge.interfaces';
+import { BadgeSeverity, BadgeSize, BadgeVariant } from './badge.interfaces';
 
 @Directive({
   selector: '[suiBadge]',
   standalone: true,
   host: {
-    class: 'badge sui-badge-control',
+    class: 'badge sui-badge',
 
     '[class.badge-primary]': 'severity() === "primary"',
     '[class.badge-secondary]': 'severity() === "secondary"',
@@ -28,8 +28,8 @@ import { SuiBadgeSeverity, SuiBadgeSize, SuiBadgeVariant } from './badge.interfa
     '[class.badge-xl]': 'size() === "xl"',
   },
 })
-export class SuiBadge {
-  public readonly severity: InputSignal<SuiBadgeSeverity> = input<SuiBadgeSeverity>('primary');
-  public readonly variant: InputSignal<SuiBadgeVariant | null> = input<SuiBadgeVariant | null>(null);
-  public readonly size: InputSignal<SuiBadgeSize> = input<SuiBadgeSize>('md');
+export class Badge {
+  public readonly severity: InputSignal<BadgeSeverity> = input<BadgeSeverity>('primary');
+  public readonly variant: InputSignal<BadgeVariant | null> = input<BadgeVariant | null>(null);
+  public readonly size: InputSignal<BadgeSize> = input<BadgeSize>('md');
 }

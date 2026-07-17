@@ -1,19 +1,19 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: 'ng-template[suiCodeCopyButton]',
+  selector: 'ng-template[suiCodeButton]',
   standalone: true,
 })
-export class SuiCodeCopyButton {}
+export class CodeButtonTemplate {}
 
 @Directive({
-  selector: 'ng-template[suiCodeCopyIcon]',
+  selector: 'ng-template[suiCodeButtonOff]',
   standalone: true,
 })
-export class SuiCodeCopyIcon {}
+export class CodeButtonOffTemplate {}
 
 @Directive({
-  selector: 'ng-template[suiCodeCopiedIcon]',
+  selector: 'ng-template[suiCodeButtonOn]',
   standalone: true,
 })
-export class SuiCodeCopiedIcon {}
+export class CodeButtonOnTemplate {}

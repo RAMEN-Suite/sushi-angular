@@ -94,6 +94,9 @@
   Basis: Angular Aria switch + DaisyUI `toggle`
 
 
+- [x] `suiToggleButton`
+
+
 - [ ] `suiRange` wraps DaisyUI `range`  
   Basis: native range input + DaisyUI `range`
 

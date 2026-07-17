@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, inject, signal, WritableSignal } fr
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { navigation, NavigationGroup } from './app.navigation';
 import { DOCUMENT } from '@angular/common';
-import { SuiButton } from '@ramen-suite/sushi';
+import { Button } from '@ramen-suite/sushi';
 
 type PlaygroundTheme = 'sushi' | 'sushi-dark';
 
 @Component({
   selector: 'pg-root',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet, SuiButton],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, Button],
   templateUrl: './app.html',
   styleUrl: './app.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

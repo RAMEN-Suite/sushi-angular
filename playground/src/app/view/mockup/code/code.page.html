@@ -84,12 +84,12 @@
         </p>
       </div>
 
-      <sui-code [cooldown]="2000">
-        <ng-template suiCodeCopyIcon>
+      <sui-code [cooldown]="2000" [buttonShape]="null">
+        <ng-template suiCodeButtonOff>
           <span class="text-xs font-semibold">Copy</span>
         </ng-template>
 
-        <ng-template suiCodeCopiedIcon>
+        <ng-template suiCodeButtonOn>
           <span class="inline-flex items-center gap-1 text-xs font-semibold">
             <svg class="size-4" lucideCheck></svg>
             Copied
@@ -121,7 +121,7 @@
       </div>
 
       <sui-code [cooldown]="2000">
-        <ng-template suiCodeCopyButton let-copy let-copied="copied">
+        <ng-template suiCodeButton let-copy let-copied="copied">
           <button
             suiButton
             type="button"

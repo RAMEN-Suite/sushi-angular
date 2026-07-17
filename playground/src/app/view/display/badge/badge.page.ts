@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SuiBadge, SuiButton, SuiCard, SuiCardBody, SuiCardTitle, SuiCode, SuiCodeLine, SuiDivider } from '@ramen-suite/sushi';
+import { Badge, Button, Card, CardBody, CardTitle, Code, CodeLine, Divider } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-badge-page',
-  imports: [SuiBadge, SuiButton, SuiCode, SuiCodeLine, SuiCard, SuiCardBody, SuiCardTitle, SuiDivider, SuiCode],
+  imports: [Badge, Button, Code, CodeLine, Card, CardBody, CardTitle, Divider, Code],
   templateUrl: './badge.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

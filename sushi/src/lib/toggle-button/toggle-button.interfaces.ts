@@ -1,13 +1,13 @@
-import { SuiButtonSeverity, SuiButtonShape, SuiButtonSize, SuiButtonVariant } from '../button';
+import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from '../button';
 
-export type SuiToggleButtonSeverity = SuiButtonSeverity;
-export type SuiToggleButtonVariant = SuiButtonVariant;
-export type SuiToggleButtonSize = SuiButtonSize;
-export type SuiToggleButtonShape = SuiButtonShape;
+export type ToggleButtonSeverity = ButtonSeverity;
+export type ToggleButtonVariant = ButtonVariant;
+export type ToggleButtonSize = ButtonSize;
+export type ToggleButtonShape = ButtonShape;
 
-export type SuiToggleButtonAnimation = 'none' | 'jump' | 'rotate' | 'flip';
+export type ToggleButtonAnimation = 'none' | 'jump' | 'rotate' | 'flip';
 
-export interface SuiToggleButtonContext {
+export interface ToggleButtonContext {
   $implicit: boolean;
   checked: boolean;
   disabled: boolean;

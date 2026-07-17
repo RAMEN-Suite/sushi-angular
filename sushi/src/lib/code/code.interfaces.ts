@@ -1,6 +1,6 @@
 import { WritableSignal } from '@angular/core';
 
-export interface SuiCodeButtonContext {
+export interface CodeButtonContext {
   $implicit: () => void;
   copy: () => void;
   copied: WritableSignal<boolean>;

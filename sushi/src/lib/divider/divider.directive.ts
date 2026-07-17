@@ -1,5 +1,5 @@
 import { Directive, input, InputSignal } from '@angular/core';
-import { SuiDividerOrientation, SuiDividerPlacement, SuiDividerSeverity } from './divider.interfaces';
+import { DividerOrientation, DividerPlacement, DividerSeverity } from './divider.interfaces';
 
 @Directive({
   selector: '[suiDivider]',
@@ -22,8 +22,8 @@ import { SuiDividerOrientation, SuiDividerPlacement, SuiDividerSeverity } from '
     '[class.divider-end]': 'placement() === "end"',
   },
 })
-export class SuiDivider {
-  public readonly severity: InputSignal<SuiDividerSeverity | null> = input<SuiDividerSeverity | null>(null);
-  public readonly orientation: InputSignal<SuiDividerOrientation> = input<SuiDividerOrientation>('horizontal');
-  public readonly placement: InputSignal<SuiDividerPlacement> = input<SuiDividerPlacement>('center');
+export class Divider {
+  public readonly severity: InputSignal<DividerSeverity | null> = input<DividerSeverity | null>(null);
+  public readonly orientation: InputSignal<DividerOrientation> = input<DividerOrientation>('horizontal');
+  public readonly placement: InputSignal<DividerPlacement> = input<DividerPlacement>('center');
 }

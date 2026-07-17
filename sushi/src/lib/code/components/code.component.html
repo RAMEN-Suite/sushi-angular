@@ -1,21 +1,21 @@
 @if (copyable()) {
-  @if (copyButtonRef(); as template) {
+  @if (buttonRef(); as template) {
     <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="buttonContext" />
   } @else {
     <sui-toggle-button
-      class="sui-code-control__copy-button"
+      class="sui-code__copy-button"
       severity="neutral"
-      animation="jump"
       size="sm"
-      ariaLabel="Copy code"
+      [animation]="buttonAnimation()"
+      [shape]="buttonShape()"
+      [ariaLabel]="buttonAriaLabel()"
       [(checked)]="isCopied"
-      [shape]="copyIconRef() && copiedIconRef() ? 'default' : 'square'"
       [class.pointer-events-none]="isCopied()"
       [attr.aria-disabled]="isCopied()"
       (checkedChange)="handleCheckedChange($event)"
     >
       <ng-template suiToggleButtonOff>
-        @if (copyIconRef(); as template) {
+        @if (buttonOffRef(); as template) {
           <ng-container [ngTemplateOutlet]="template" />
         } @else {
           <svg class="size-4" lucideCopy></svg>
@@ -23,7 +23,7 @@
       </ng-template>
 
       <ng-template suiToggleButtonOn>
-        @if (copiedIconRef(); as template) {
+        @if (buttonOnRef(); as template) {
           <ng-container [ngTemplateOutlet]="template" />
         } @else {
           <svg class="size-4" lucideCheck></svg>

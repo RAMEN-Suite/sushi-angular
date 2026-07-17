@@ -1,0 +1,49 @@
+@if (buttonRef(); as template) {
+  <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="context()" />
+} @else {
+  <button
+    suiButton
+    type="button"
+    class="sui-toggle-button"
+    [severity]="severity()"
+    [variant]="variant()"
+    [size]="size()"
+    [shape]="shape()"
+    [disabled]="isDisabled()"
+    [loading]="loading()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-pressed]="checked()"
+    (blur)="handleBlur()"
+    (click)="handleToggle()"
+  >
+    @if (checked()) {
+      <span
+        class="sui-toggle-button__content"
+        [class.sui-toggle-button__content--jump]="hasInteracted() && animation() === 'jump'"
+        [class.sui-toggle-button__content--rotate]="hasInteracted() && animation() === 'rotate'"
+        [class.sui-toggle-button__content--flip]="hasInteracted() && animation() === 'flip'"
+        aria-hidden="true"
+      >
+        @if (buttonOnRef(); as template) {
+          <ng-container [ngTemplateOutlet]="template" />
+        } @else {
+          {{ onLabel() }}
+        }
+      </span>
+    } @else {
+      <span
+        class="sui-toggle-button__content"
+        [class.sui-toggle-button__content--jump]="hasInteracted() && animation() === 'jump'"
+        [class.sui-toggle-button__content--rotate]="hasInteracted() && animation() === 'rotate'"
+        [class.sui-toggle-button__content--flip]="hasInteracted() && animation() === 'flip'"
+        aria-hidden="true"
+      >
+        @if (buttonOffRef(); as template) {
+          <ng-container [ngTemplateOutlet]="template" />
+        } @else {
+          {{ offLabel() }}
+        }
+      </span>
+    }
+  </button>
+}

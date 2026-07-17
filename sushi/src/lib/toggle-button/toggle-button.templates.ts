@@ -4,16 +4,16 @@ import { Directive } from '@angular/core';
   selector: 'ng-template[suiToggleButton]',
   standalone: true,
 })
-export class SuiToggleButtonTemplate {}
+export class ToggleButtonTemplate {}
 
 @Directive({
   selector: 'ng-template[suiToggleButtonOff]',
   standalone: true,
 })
-export class SuiToggleButtonOffTemplate {}
+export class ToggleButtonOffTemplate {}
 
 @Directive({
   selector: 'ng-template[suiToggleButtonOn]',
   standalone: true,
 })
-export class SuiToggleButtonOnTemplate {}
+export class ToggleButtonOnTemplate {}

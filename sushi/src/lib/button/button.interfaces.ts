@@ -1,4 +1,4 @@
-export type SuiButtonSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'success' | 'info' | 'warning' | 'error';
-export type SuiButtonVariant = 'link' | 'outlined' | 'soft' | 'dash' | 'text';
-export type SuiButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type SuiButtonShape = 'default' | 'fluid' | 'circle' | 'square';
+export type ButtonSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'success' | 'info' | 'warning' | 'error';
+export type ButtonVariant = 'link' | 'outlined' | 'soft' | 'dash' | 'text';
+export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type ButtonShape = 'default' | 'fluid' | 'circle' | 'square';

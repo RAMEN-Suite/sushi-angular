@@ -1,2 +1,2 @@
-export type SuiCardVariant = 'plain' | 'border' | 'dash';
-export type SuiCardSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type CardVariant = 'plain' | 'border' | 'dash';
+export type CardSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';

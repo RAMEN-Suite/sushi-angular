@@ -1,11 +1,11 @@
 import { Directive, input, InputSignal } from '@angular/core';
-import { SuiCardSize, SuiCardVariant } from './card.interfaces';
+import { CardSize, CardVariant } from './card.interfaces';
 
 @Directive({
   selector: '[suiCard]',
   standalone: true,
   host: {
-    class: 'card sui-card-control',
+    class: 'card sui-card',
 
     '[class.card-border]': 'variant() === "border"',
     '[class.card-dash]': 'variant() === "dash"',
@@ -17,7 +17,7 @@ import { SuiCardSize, SuiCardVariant } from './card.interfaces';
     '[class.card-xl]': 'size() === "xl"',
   },
 })
-export class SuiCard {
-  public readonly variant: InputSignal<SuiCardVariant> = input<SuiCardVariant>('border');
-  public readonly size: InputSignal<SuiCardSize | null> = input<SuiCardSize | null>(null);
+export class Card {
+  public readonly variant: InputSignal<CardVariant> = input<CardVariant>('border');
+  public readonly size: InputSignal<CardSize | null> = input<CardSize | null>(null);
 }

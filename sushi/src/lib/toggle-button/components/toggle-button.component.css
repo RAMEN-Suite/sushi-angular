@@ -1,34 +1,30 @@
 @reference "tailwindcss";
 
 :host {
-  @apply inline-flex;
-}
-
-.sui-toggle-button-control {
-  @apply opacity-75;
+  @apply inline-flex opacity-75 transition-opacity duration-150 ease-out;
   perspective: 28rem;
 }
 
-.sui-toggle-button-control--checked {
+:host(.sui-toggle-button--checked) {
   @apply opacity-100;
 }
 
-.sui-toggle-button-content {
+.sui-toggle-button__content {
   @apply inline-flex items-center justify-center gap-2 whitespace-nowrap;
   transform-origin: center;
   backface-visibility: hidden;
   will-change: transform, opacity;
 }
 
-.sui-toggle-button-content--jump {
+.sui-toggle-button__content--jump {
   animation: sui-toggle-button-jump 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.sui-toggle-button-content--rotate {
+.sui-toggle-button__content--rotate {
   animation: sui-toggle-button-rotate 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.sui-toggle-button-content--flip {
+.sui-toggle-button__content--flip {
   animation: sui-toggle-button-flip 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 

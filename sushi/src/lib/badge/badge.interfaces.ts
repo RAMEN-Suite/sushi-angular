@@ -1,3 +1,3 @@
-export type SuiBadgeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'success' | 'info' | 'warning' | 'error';
-export type SuiBadgeVariant = 'outlined' | 'soft' | 'dash' | 'ghost';
-export type SuiBadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type BadgeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'success' | 'info' | 'warning' | 'error';
+export type BadgeVariant = 'outlined' | 'soft' | 'dash' | 'ghost';
+export type BadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
