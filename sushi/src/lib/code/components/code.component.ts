@@ -15,7 +15,7 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { LucideCheck, LucideCopy } from '@lucide/angular';
-import { ToggleButton, ToggleButtonAnimation, ToggleButtonOffTemplate, ToggleButtonOnTemplate, ToggleButtonShape } from '../../toggle-button';
+import { Button, ButtonShape } from '../../button';
 import { BooleanInput, BooleanInputValue, Template } from '../../sushi.types';
 import { CodeButtonContext } from '../code.interfaces';
 import { CodeLine } from '../code-line.directive';
@@ -24,7 +24,7 @@ import { CodeButtonOffTemplate, CodeButtonOnTemplate, CodeButtonTemplate } from 
 @Component({
   selector: 'sui-code',
   standalone: true,
-  imports: [NgTemplateOutlet, LucideCheck, LucideCopy, ToggleButton, ToggleButtonOffTemplate, ToggleButtonOnTemplate],
+  imports: [NgTemplateOutlet, LucideCheck, LucideCopy, Button],
   templateUrl: './code.component.html',
   styleUrl: './code.component.css',
   host: {
@@ -35,9 +35,8 @@ export class Code {
   public readonly copyable: BooleanInput = input<boolean, BooleanInputValue>(true, { transform: booleanAttribute });
   public readonly cooldown: InputSignal<number> = input<number>(1200);
 
-  public readonly buttonAnimation: InputSignal<ToggleButtonAnimation | null> = input<ToggleButtonAnimation | null>('rotate');
-  public readonly buttonShape: InputSignal<ToggleButtonShape | null> = input<ToggleButtonShape | null>('square');
-  public readonly buttonAriaLabel: InputSignal<string | null> = input<string | null>(null);
+  public readonly buttonShape: InputSignal<ButtonShape | null> = input<ButtonShape | null>('square');
+  public readonly buttonAriaLabel: InputSignal<string | null> = input<string | null>('Copy code');
 
   protected readonly codeLines: Signal<readonly CodeLine[]> = contentChildren(CodeLine, { descendants: true });
   protected readonly buttonOnRef: Template<void> = contentChild(CodeButtonOnTemplate, { read: TemplateRef });
@@ -61,12 +60,7 @@ export class Code {
     });
   }
 
-  protected handleCheckedChange(checked: boolean): void {
-    if (!checked) return;
-    this.copyCodeLines();
-  }
-
-  private copyCodeLines(): void {
+  protected copyCodeLines(): void {
     const text: string = this.getCodeLines();
     if (!text) {
       this.isCopied.set(false);
