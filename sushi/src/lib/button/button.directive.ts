@@ -1,4 +1,4 @@
-import { booleanAttribute, Directive, ElementRef, HostListener, inject, input, InputSignal } from '@angular/core';
+import { booleanAttribute, computed, Directive, ElementRef, HostListener, inject, input, InputSignal, Signal } from '@angular/core';
 import { BooleanInput, BooleanInputValue } from '../sushi.types';
 import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button.interfaces';
 
@@ -33,12 +33,12 @@ import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button
     '[class.btn-circle]': 'shape() === "circle"',
     '[class.btn-square]': 'shape() === "square"',
 
-    '[class.sui-button-control--disabled]': 'disabled()',
+    '[class.sui-button--disabled]': 'isDisabled()',
 
     '[attr.aria-busy]': 'loading() ? "true" : null',
-    '[attr.aria-disabled]': 'disabled() ? "true" : null',
-    '[attr.disabled]': 'disabled() && isNativeButton ? "" : null',
-    '[attr.tabindex]': 'disabled() && !isNativeButton ? -1 : null',
+    '[attr.aria-disabled]': 'isDisabled() ? "true" : null',
+    '[attr.disabled]': 'isDisabled() && isNativeButton ? "" : null',
+    '[attr.tabindex]': 'isDisabled() && !isNativeButton ? -1 : null',
   },
 })
 export class Button {
@@ -52,10 +52,11 @@ export class Button {
 
   protected readonly elementRef: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
   protected readonly isNativeButton: boolean = this.elementRef.nativeElement.tagName.toLowerCase() === 'button';
+  protected readonly isDisabled: Signal<boolean> = computed<boolean>((): boolean => this.disabled() || this.loading());
 
   @HostListener('click', ['$event'])
   protected handleClick(event: Event): void {
-    if (!this.disabled()) return;
+    if (!this.isDisabled()) return;
     event.preventDefault();
     event.stopImmediatePropagation();
   }

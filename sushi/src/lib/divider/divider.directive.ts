@@ -5,7 +5,7 @@ import { DividerOrientation, DividerPlacement, DividerSeverity } from './divider
   selector: '[suiDivider]',
   standalone: true,
   host: {
-    class: 'divider sui-divider-control',
+    class: 'divider sui-divider',
 
     '[class.divider-primary]': 'severity() === "primary"',
     '[class.divider-secondary]': 'severity() === "secondary"',

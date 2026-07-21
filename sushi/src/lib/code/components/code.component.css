@@ -1,5 +1,6 @@
 @reference "tailwindcss";
 
 .sui-code__copy-button {
-  @apply absolute right-4 top-7 z-10 max-w-[calc(100%-4rem)] -translate-y-1/2 overflow-hidden whitespace-nowrap;
+  @apply absolute right-4 top-7 z-10 -translate-y-1/2 overflow-hidden whitespace-nowrap;
+  max-width: calc(100% - 4rem);
 }

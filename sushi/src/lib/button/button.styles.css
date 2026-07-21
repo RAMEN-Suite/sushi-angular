@@ -1,7 +1,0 @@
-.sui-button.btn {
-  @apply transition-opacity;
-}
-
-.sui-button.btn:is(:hover, :focus-visible, :active) {
-  @apply transition-[opacity,background-color,border-color,color,box-shadow,transform];
-}

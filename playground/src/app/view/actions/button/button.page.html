@@ -244,32 +244,32 @@
 
           <div class="flex flex-wrap items-center gap-3">
             <button suiButton type="button" loading>
-              <span class="loading loading-spinner loading-sm" aria-hidden="true"></span>
+              <span suiSpinner size="sm"></span>
               Loading
             </button>
 
             <button suiButton type="button" severity="secondary" loading>
-              <span class="loading loading-spinner loading-sm" aria-hidden="true"></span>
+              <span suiSpinner type="dots" size="sm"></span>
               Saving
             </button>
 
             <button suiButton type="button" variant="outlined" loading>
-              <span class="loading loading-spinner loading-sm" aria-hidden="true"></span>
-              Loading
+              <span suiSpinner type="ring" size="sm"></span>
+              Processing
+            </button>
+
+            <button suiButton type="button" shape="square" loading aria-label="Loading">
+              <span suiSpinner size="sm"></span>
             </button>
           </div>
         </div>
       </div>
 
       <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;button suiButton disabled&gt;Disabled&lt;/button&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>&lt;button suiButton loading&gt;</code></pre>
-        <pre
-          suiCodeLine
-          prefix="3"
-        ><code>  &lt;span class="loading loading-spinner loading-sm" aria-hidden="true"&gt;&lt;/span&gt;</code></pre>
-        <pre suiCodeLine prefix="4"><code>  Loading</code></pre>
-        <pre suiCodeLine prefix="5"><code>&lt;/button&gt;</code></pre>
+        <pre suiCodeLine prefix="1"><code>&lt;button suiButton type="button" loading&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>  &lt;span suiSpinner size="sm"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>  Loading</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;/button&gt;</code></pre>
       </sui-code>
     </div>
   </section>
