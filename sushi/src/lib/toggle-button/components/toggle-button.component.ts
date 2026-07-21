@@ -18,7 +18,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Button } from '../../button';
 import { BooleanInput, BooleanInputValue, Template } from '../../sushi.types';
 import {
-  ToggleButtonAnimation,
   ToggleButtonContext,
   ToggleButtonSeverity,
   ToggleButtonShape,
@@ -57,8 +56,6 @@ export class ToggleButton implements ControlValueAccessor {
   public readonly size: InputSignal<ToggleButtonSize> = input<ToggleButtonSize>('md');
   public readonly variant: InputSignal<ToggleButtonVariant | null> = input<ToggleButtonVariant | null>(null);
   public readonly shape: InputSignal<ToggleButtonShape | null> = input<ToggleButtonShape | null>(null);
-  public readonly animation: InputSignal<ToggleButtonAnimation | null> = input<ToggleButtonAnimation | null>(null);
-
   public readonly disabled: BooleanInput = input<boolean, BooleanInputValue>(false, { transform: booleanAttribute });
   public readonly loading: BooleanInput = input<boolean, BooleanInputValue>(false, { transform: booleanAttribute });
 
@@ -66,7 +63,6 @@ export class ToggleButton implements ControlValueAccessor {
   protected readonly buttonOffRef: Template<void> = contentChild(ToggleButtonOffTemplate, { read: TemplateRef });
   protected readonly buttonRef: Template<ToggleButtonContext> = contentChild(ToggleButtonTemplate, { read: TemplateRef });
 
-  protected readonly hasInteracted: WritableSignal<boolean> = signal<boolean>(false);
   protected readonly isDisabled: Signal<boolean> = computed<boolean>((): boolean => this.disabled() || this.isFormDisabled());
   protected readonly context: Signal<ToggleButtonContext> = computed<ToggleButtonContext>((): ToggleButtonContext => ({
     $implicit: this.checked(),
@@ -103,8 +99,6 @@ export class ToggleButton implements ControlValueAccessor {
   protected handleToggle(): void {
     if (this.isDisabled() || this.loading()) return;
     const checked: boolean = !this.checked();
-    this.hasInteracted.set(true);
-
     this.checked.set(checked);
     this.onChange(checked);
   }

@@ -5,8 +5,6 @@ export type ToggleButtonVariant = ButtonVariant;
 export type ToggleButtonSize = ButtonSize;
 export type ToggleButtonShape = ButtonShape;
 
-export type ToggleButtonAnimation = 'none' | 'jump' | 'rotate' | 'flip';
-
 export interface ToggleButtonContext {
   $implicit: boolean;
   checked: boolean;
