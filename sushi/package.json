@@ -1,15 +1,20 @@
 {
   "name": "@ramen-suite/sushi",
   "version": "0.0.1",
+  "exports": {
+    "./sushi.css": "./sushi.css"
+  },
   "peerDependencies": {
     "@angular/aria": "^22.0.0",
     "@angular/cdk": "^22.0.0",
     "@angular/common": "^22.0.0",
     "@angular/core": "^22.0.0",
-    "@angular/forms": "^22.0.0"
+    "@angular/forms": "^22.0.0",
+    "@lucide/angular": "^1.23.0",
+    "daisyui": "^5.6.13",
+    "tailwindcss": "^4.3.2"
   },
   "dependencies": {
-    "@lucide/angular": "^1.23.0",
     "tslib": "^2.3.0"
   }
 }
