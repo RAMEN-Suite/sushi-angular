@@ -18,7 +18,7 @@ export class AutoFocus {
       if (!this.enabled()) return;
 
       const element: HTMLElement = this.elementRef.nativeElement;
-      if (element.matches(':disabled')) return;
+      if (element.matches(':disabled, [aria-disabled="true"]')) return;
       element.focus({ preventScroll: true });
     });
   }
