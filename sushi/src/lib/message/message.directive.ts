@@ -24,3 +24,12 @@ export class Message {
   public readonly variant: InputSignal<MessageVariant | null> = input<MessageVariant | null>(null);
   public readonly orientation: InputSignal<MessageOrientation | null> = input<MessageOrientation | null>(null);
 }
+
+@Directive({
+  selector: '[suiMessageActions]',
+  standalone: true,
+  host: {
+    class: 'sui-message-actions flex justify-self-end gap-2',
+  },
+})
+export class MessageActions {}
