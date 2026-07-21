@@ -79,12 +79,12 @@
         <h2 suiCardTitle>Copy feedback</h2>
 
         <p class="text-sm text-base-content/60">
-          The <code>cooldown</code> input controls how long the copied state remains visible. Use <code>suiCodeCopyIcon</code> and
-          <code>suiCodeCopiedIcon</code> to replace the default state content.
+          The <code>cooldown</code> input controls how long the copied state remains visible. Use <code>buttonShape</code> to change the
+          control shape, <code>buttonAriaLabel</code> to provide an accessible name, and the state templates to replace its content.
         </p>
       </div>
 
-      <sui-code [cooldown]="2000" [buttonShape]="null">
+      <sui-code [cooldown]="2000" [buttonShape]="null" buttonAriaLabel="Copy command">
         <ng-template suiCodeButtonOff>
           <span class="text-xs font-semibold">Copy</span>
         </ng-template>
@@ -100,9 +100,12 @@
       </sui-code>
 
       <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;sui-code [cooldown]="2000"&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>  &lt;ng-template suiCodeCopyIcon&gt;Copy&lt;/ng-template&gt;</code></pre>
-        <pre suiCodeLine prefix="3"><code>  &lt;ng-template suiCodeCopiedIcon&gt;Copied&lt;/ng-template&gt;</code></pre>
+        <pre
+          suiCodeLine
+          prefix="1"
+        ><code>&lt;sui-code [cooldown]="2000" [buttonShape]="null" buttonAriaLabel="Copy command"&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>  &lt;ng-template suiCodeButtonOff&gt;Copy&lt;/ng-template&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>  &lt;ng-template suiCodeButtonOn&gt;Copied&lt;/ng-template&gt;</code></pre>
         <pre suiCodeLine prefix="4"><code>  ...</code></pre>
         <pre suiCodeLine prefix="5"><code>&lt;/sui-code&gt;</code></pre>
       </sui-code>

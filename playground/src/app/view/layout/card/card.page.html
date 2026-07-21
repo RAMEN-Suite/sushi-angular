@@ -35,7 +35,14 @@
         <p class="text-sm text-base-content/60">Available variants are <code>plain</code>, <code>border</code>, and <code>dash</code>.</p>
       </div>
 
-      <div class="grid gap-4 md:grid-cols-3">
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+        <section suiCard size="xs">
+          <div suiCardBody>
+            <h3 suiCardTitle>Extra small</h3>
+            <p class="text-sm text-base-content/60">Dense content.</p>
+          </div>
+        </section>
+
         <section suiCard variant="plain" class="bg-base-200">
           <div suiCardBody>
             <h3 suiCardTitle>Plain</h3>
@@ -96,12 +103,21 @@
             <p class="text-sm text-base-content/60">More spacious content.</p>
           </div>
         </section>
+
+        <section suiCard size="xl">
+          <div suiCardBody>
+            <h3 suiCardTitle>Extra large</h3>
+            <p class="text-sm text-base-content/60">Maximum spacing.</p>
+          </div>
+        </section>
       </div>
 
       <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;section suiCard size="sm"&gt;...&lt;/section&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>&lt;section suiCard size="md"&gt;...&lt;/section&gt;</code></pre>
-        <pre suiCodeLine prefix="3"><code>&lt;section suiCard size="lg"&gt;...&lt;/section&gt;</code></pre>
+        <pre suiCodeLine prefix="1"><code>&lt;section suiCard size="xs"&gt;...&lt;/section&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;section suiCard size="sm"&gt;...&lt;/section&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;section suiCard size="md"&gt;...&lt;/section&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;section suiCard size="lg"&gt;...&lt;/section&gt;</code></pre>
+        <pre suiCodeLine prefix="5"><code>&lt;section suiCard size="xl"&gt;...&lt;/section&gt;</code></pre>
       </sui-code>
     </div>
   </section>

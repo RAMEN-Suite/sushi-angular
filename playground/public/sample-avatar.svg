@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title">
+  <title id="title">Abstract profile portrait</title>
+  <rect width="200" height="200" fill="#d39a2f"/>
+  <circle cx="100" cy="76" r="38" fill="#7a0712"/>
+  <path d="M35 200c5-48 30-73 65-73s60 25 65 73" fill="#17130f"/>
+</svg>

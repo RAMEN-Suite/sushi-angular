@@ -8,12 +8,28 @@ import { CardPage } from './view/layout/card/card.page';
 import { CodePage } from './view/mockup/code/code.page';
 import { ToggleButtonPage } from './view/form/toggle-button/toggle-button.page';
 import { SpinnerPage } from './view/display/spinner/spinner.page';
+import { StatusPage } from './view/display/status/status.page';
+import { KbdPage } from './view/display/kbd/kbd.page';
+import { AvatarPage } from './view/display/avatar/avatar.page';
+import { IndicatorPage } from './view/display/indicator/indicator.page';
+import { AutoFocusPage } from './view/form/auto-focus/auto-focus.page';
+import { MessagePage } from './view/display/message/message.page';
 
 export const routes: Routes = [
   {
     path: '',
     component: OverviewPage,
     title: 'SUSHI Playground',
+  },
+  {
+    path: 'auto-focus',
+    component: AutoFocusPage,
+    title: 'Auto Focus | SUSHI Playground',
+  },
+  {
+    path: 'avatar',
+    component: AvatarPage,
+    title: 'Avatar | SUSHI Playground',
   },
   {
     path: 'badge',
@@ -46,9 +62,29 @@ export const routes: Routes = [
     title: 'Icons | SUSHI Playground',
   },
   {
+    path: 'indicator',
+    component: IndicatorPage,
+    title: 'Indicator | SUSHI Playground',
+  },
+  {
+    path: 'kbd',
+    component: KbdPage,
+    title: 'Keyboard Key | SUSHI Playground',
+  },
+  {
+    path: 'message',
+    component: MessagePage,
+    title: 'Message | SUSHI Playground',
+  },
+  {
     path: 'spinner',
     component: SpinnerPage,
     title: 'Spinner | SUSHI Playground',
+  },
+  {
+    path: 'status',
+    component: StatusPage,
+    title: 'Status | SUSHI Playground',
   },
   {
     path: 'toggle-button',

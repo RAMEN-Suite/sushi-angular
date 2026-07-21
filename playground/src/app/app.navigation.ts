@@ -22,6 +22,10 @@ export const navigation: NavigationGroup[] = [
     label: 'Form',
     items: [
       {
+        label: 'Auto Focus',
+        path: '/auto-focus',
+      },
+      {
         label: 'Toggle Button',
         path: '/toggle-button',
       },
@@ -31,6 +35,10 @@ export const navigation: NavigationGroup[] = [
     label: 'Data Display',
     items: [
       {
+        label: 'Avatar',
+        path: '/avatar',
+      },
+      {
         label: 'Badge',
         path: '/badge',
       },
@@ -39,8 +47,24 @@ export const navigation: NavigationGroup[] = [
         path: '/icon',
       },
       {
+        label: 'Indicator',
+        path: '/indicator',
+      },
+      {
+        label: 'Keyboard Key',
+        path: '/kbd',
+      },
+      {
+        label: 'Message',
+        path: '/message',
+      },
+      {
         label: 'Spinner',
         path: '/spinner',
+      },
+      {
+        label: 'Status',
+        path: '/status',
       },
     ],
   },

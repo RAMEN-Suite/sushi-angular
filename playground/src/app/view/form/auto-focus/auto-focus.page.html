@@ -1,0 +1,35 @@
+<main class="mx-auto max-w-7xl space-y-8 px-8 py-10">
+  <section class="space-y-3">
+    <h1 class="text-4xl font-bold tracking-tight">Auto focus</h1>
+    <p class="max-w-3xl text-base-content/70">
+      <code>suiAutoFocus</code> focuses an element after it is rendered, without moving the page.
+    </p>
+  </section>
+  <section suiCard>
+    <div suiCardBody class="gap-5">
+      <div>
+        <h2 suiCardTitle>Dynamic content</h2>
+        <p class="text-sm text-base-content/60">Create the field on demand to see focus move after Angular finishes rendering it.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <button suiButton type="button" (click)="showFocusedField()">Show focused field</button>
+        @if (showField()) {
+          <input suiAutoFocus class="input" aria-label="Focused example" placeholder="I receive focus" />
+        }
+      </div>
+      <sui-code>
+        <pre suiCodeLine prefix="1"><code>&lt;input suiAutoFocus aria-label="Search" /&gt;</code></pre>
+      </sui-code>
+      <div>
+        <input [suiAutoFocus]="false" class="input" aria-label="Non-focused example" placeholder="Auto focus disabled" />
+      </div>
+      <sui-code>
+        <pre suiCodeLine prefix="1"><code>&lt;input [suiAutoFocus]="false" aria-label="Search" /&gt;</code></pre>
+      </sui-code>
+      <p class="text-sm text-base-content/60">Use autofocus sparingly; unexpected focus changes can be disruptive.</p>
+    </div>
+  </section>
+  <section class="flex justify-end">
+    <button suiButton type="button" severity="neutral" variant="outlined" (click)="handleReset()">Reset examples</button>
+  </section>
+</main>
