@@ -21,3 +21,30 @@ export class Card {
   public readonly variant: InputSignal<CardVariant> = input<CardVariant>('border');
   public readonly size: InputSignal<CardSize | null> = input<CardSize | null>(null);
 }
+
+@Directive({
+  selector: '[suiCardBody]',
+  standalone: true,
+  host: {
+    class: 'card-body sui-card-body',
+  },
+})
+export class CardBody {}
+
+@Directive({
+  selector: '[suiCardTitle]',
+  standalone: true,
+  host: {
+    class: 'card-title sui-card-title',
+  },
+})
+export class CardTitle {}
+
+@Directive({
+  selector: '[suiCardActions]',
+  standalone: true,
+  host: {
+    class: 'card-actions sui-card-actions',
+  },
+})
+export class CardActions {}
