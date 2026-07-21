@@ -18,38 +18,10 @@
 }
 
 .sui-status--ping {
-  animation: sui-status-ping 1.5s ease-out infinite;
+  @apply relative;
 }
 
-.sui-status--bounce {
-  animation: sui-status-bounce 1s ease-in-out infinite;
-}
-
-@keyframes sui-status-ping {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 currentColor;
-  }
-
-  60% {
-    box-shadow: 0 0 0 0.35rem transparent;
-  }
-}
-
-@keyframes sui-status-bounce {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-
-  50% {
-    translate: 0 -35%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sui-status--ping,
-  .sui-status--bounce {
-    animation: none;
-  }
+.sui-status--ping::after {
+  @apply absolute inset-0 animate-ping rounded-full bg-current opacity-75;
+  content: '';
 }
