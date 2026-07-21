@@ -1,0 +1,224 @@
+<main class="mx-auto max-w-7xl space-y-8 px-8 py-10">
+  <section class="space-y-3">
+    <h1 class="text-4xl font-bold tracking-tight">Spinner</h1>
+
+    <p class="max-w-3xl text-base-content/70">
+      Use <code>suiSpinner</code> to indicate an ongoing operation. Spinners support multiple animation types and sizes and inherit their
+      color from the surrounding text.
+    </p>
+  </section>
+
+  <section suiCard>
+    <div suiCardBody class="gap-5">
+      <div>
+        <h2 suiCardTitle>Basic usage</h2>
+
+        <p class="text-sm text-base-content/60">
+          Apply <code>suiSpinner</code> to a <code>&lt;span&gt;</code>. The default type is <code>spinner</code> and the default size is
+          <code>md</code>.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-4">
+        <span suiSpinner></span>
+
+        <span class="inline-flex items-center gap-2">
+          <span suiSpinner size="sm"></span>
+          Loading
+        </span>
+      </div>
+
+      <sui-code>
+        <pre suiCodeLine prefix="1"><code>&lt;span suiSpinner&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code></code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;span class="inline-flex items-center gap-2"&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>  &lt;span suiSpinner size="sm"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="5"><code>  Loading</code></pre>
+        <pre suiCodeLine prefix="6"><code>&lt;/span&gt;</code></pre>
+      </sui-code>
+    </div>
+  </section>
+
+  <section suiCard>
+    <div suiCardBody class="gap-5">
+      <div>
+        <h2 suiCardTitle>Types</h2>
+
+        <p class="text-sm text-base-content/60">
+          Available types are <code>spinner</code>, <code>dots</code>, <code>ring</code>, <code>ball</code>, <code>bars</code>, and
+          <code>infinity</code>.
+        </p>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="flex items-center gap-3">
+          <span suiSpinner type="spinner"></span>
+          <span>Spinner</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span suiSpinner type="dots"></span>
+          <span>Dots</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span suiSpinner type="ring"></span>
+          <span>Ring</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span suiSpinner type="ball"></span>
+          <span>Ball</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span suiSpinner type="bars"></span>
+          <span>Bars</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span suiSpinner type="infinity"></span>
+          <span>Infinity</span>
+        </div>
+      </div>
+
+      <sui-code>
+        <pre suiCodeLine prefix="1"><code>&lt;span suiSpinner type="spinner"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;span suiSpinner type="dots"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;span suiSpinner type="ring"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;span suiSpinner type="ball"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="5"><code>&lt;span suiSpinner type="bars"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="6"><code>&lt;span suiSpinner type="infinity"&gt;&lt;/span&gt;</code></pre>
+      </sui-code>
+    </div>
+  </section>
+
+  <section suiCard>
+    <div suiCardBody class="gap-5">
+      <div>
+        <h2 suiCardTitle>Sizes</h2>
+
+        <p class="text-sm text-base-content/60">
+          Available sizes are <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-5">
+        <span suiSpinner size="xs"></span>
+        <span suiSpinner size="sm"></span>
+        <span suiSpinner size="md"></span>
+        <span suiSpinner size="lg"></span>
+        <span suiSpinner size="xl"></span>
+      </div>
+
+      <sui-code>
+        <pre suiCodeLine prefix="1"><code>&lt;span suiSpinner size="xs"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;span suiSpinner size="sm"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;span suiSpinner size="md"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;span suiSpinner size="lg"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="5"><code>&lt;span suiSpinner size="xl"&gt;&lt;/span&gt;</code></pre>
+      </sui-code>
+    </div>
+  </section>
+
+  <section suiCard>
+    <div suiCardBody class="gap-5">
+      <div>
+        <h2 suiCardTitle>Colors</h2>
+
+        <p class="text-sm text-base-content/60">
+          Spinners use <code>currentColor</code>. Apply normal text-color utilities to the spinner or a surrounding element.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-5">
+        <span suiSpinner class="text-primary"></span>
+        <span suiSpinner class="text-secondary"></span>
+        <span suiSpinner class="text-accent"></span>
+        <span suiSpinner class="text-info"></span>
+        <span suiSpinner class="text-success"></span>
+        <span suiSpinner class="text-warning"></span>
+        <span suiSpinner class="text-error"></span>
+      </div>
+
+      <sui-code>
+        <pre suiCodeLine prefix="1"><code>&lt;span suiSpinner class="text-primary"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>&lt;span suiSpinner class="text-success"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>&lt;span suiSpinner class="text-error"&gt;&lt;/span&gt;</code></pre>
+      </sui-code>
+    </div>
+  </section>
+
+  <section suiCard>
+    <div suiCardBody class="gap-6">
+      <div>
+        <h2 suiCardTitle>Buttons</h2>
+
+        <p class="text-sm text-base-content/60">
+          Combine <code>suiSpinner</code> with <code>suiButton</code>. The button’s <code>loading</code> input exposes
+          <code>aria-busy</code>; the spinner remains decorative.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <button suiButton type="button" loading>
+          <span suiSpinner size="sm"></span>
+          Loading
+        </button>
+
+        <button suiButton type="button" severity="secondary" loading>
+          <span suiSpinner type="dots" size="sm"></span>
+          Saving
+        </button>
+
+        <button suiButton type="button" variant="outlined" loading>
+          <span suiSpinner type="ring" size="sm"></span>
+          Processing
+        </button>
+
+        <button suiButton type="button" shape="square" loading aria-label="Loading">
+          <span suiSpinner size="sm"></span>
+        </button>
+      </div>
+
+      <sui-code>
+        <pre suiCodeLine prefix="1"><code>&lt;button suiButton type="button" loading&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>  &lt;span suiSpinner size="sm"&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>  Loading</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;/button&gt;</code></pre>
+      </sui-code>
+    </div>
+  </section>
+
+  <section suiCard>
+    <div suiCardBody class="gap-5">
+      <div>
+        <h2 suiCardTitle>Accessibility</h2>
+
+        <p class="text-sm text-base-content/60">
+          The spinner itself is decorative. Provide a visible or visually hidden status message on a surrounding element when no other text
+          describes the operation.
+        </p>
+      </div>
+
+      <div role="status" class="inline-flex items-center gap-3" aria-live="polite">
+        <span suiSpinner type="ring"></span>
+        <span>Loading results</span>
+      </div>
+
+      <div suiDivider></div>
+
+      <div role="status" class="inline-flex items-center" aria-live="polite">
+        <span suiSpinner type="dots"></span>
+        <span class="sr-only">Loading results</span>
+      </div>
+
+      <sui-code>
+        <pre suiCodeLine prefix="1"><code>&lt;div role="status" aria-live="polite"&gt;</code></pre>
+        <pre suiCodeLine prefix="2"><code>  &lt;span suiSpinner&gt;&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="3"><code>  &lt;span&gt;Loading results&lt;/span&gt;</code></pre>
+        <pre suiCodeLine prefix="4"><code>&lt;/div&gt;</code></pre>
+      </sui-code>
+    </div>
+  </section>
+</main>

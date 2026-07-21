@@ -31,12 +31,16 @@ export const navigation: NavigationGroup[] = [
     label: 'Data Display',
     items: [
       {
+        label: 'Badge',
+        path: '/badge',
+      },
+      {
         label: 'Icons',
         path: '/icon',
       },
       {
-        label: 'Badge',
-        path: '/badge',
+        label: 'Spinner',
+        path: '/spinner',
       },
     ],
   },
@@ -44,12 +48,12 @@ export const navigation: NavigationGroup[] = [
     label: 'Layout',
     items: [
       {
-        label: 'Divider',
-        path: '/divider',
-      },
-      {
         label: 'Card',
         path: '/card',
+      },
+      {
+        label: 'Divider',
+        path: '/divider',
       },
     ],
   },

@@ -24,7 +24,7 @@
 - [x] `suiCode` – Basis: DaisyUI markup-code 
 
 
-- [ ] `suiSpinner` replaces `primeng/progressspinner`  
+- [x] `suiSpinner` replaces `primeng/progressspinner`  
   Basis: DaisyUI `loading`
 
 

@@ -7,6 +7,7 @@ import { DividerPage } from './view/layout/divider/divider.page';
 import { CardPage } from './view/layout/card/card.page';
 import { CodePage } from './view/mockup/code/code.page';
 import { ToggleButtonPage } from './view/form/toggle-button/toggle-button.page';
+import { SpinnerPage } from './view/display/spinner/spinner.page';
 
 export const routes: Routes = [
   {
@@ -43,6 +44,11 @@ export const routes: Routes = [
     path: 'icon',
     component: IconPage,
     title: 'Icons | SUSHI Playground',
+  },
+  {
+    path: 'spinner',
+    component: SpinnerPage,
+    title: 'Spinner | SUSHI Playground',
   },
   {
     path: 'toggle-button',
