@@ -23,7 +23,7 @@ import { StatusAnimation, StatusSeverity, StatusSize } from './status.interfaces
     '[class.status-xl]': 'size() === "xl"',
 
     '[class.sui-status--ping]': 'animation() === "ping"',
-    '[class.animate-bounce]': 'animation() === "bounce"',
+    '[class.sui-status--bounce]': 'animation() === "bounce"',
   },
 })
 export class Status {
