@@ -5,6 +5,10 @@ dist
 tmp
 out-tsc
 bazel-out
+/playground/src/**/*.js
+/playground/src/**/*.js.map
+/sushi/src/**/*.js
+/sushi/src/**/*.js.map
 
 # Node
 node_modules
