@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, InputSignal, Signal } from '@angular/core';
-import { BooleanInputValue, BooleanSignal } from '../../sushi.types';
-import { AvatarMaskHalf, AvatarShape, AvatarSize, AvatarStatus } from '../avatar.interfaces';
+import { BooleanInputValue, BooleanSignal } from '../sushi.types';
+import { AvatarMaskHalf, AvatarShape, AvatarSize, AvatarStatus } from './avatar.interfaces';
 
 @Component({
   selector: 'sui-avatar',
