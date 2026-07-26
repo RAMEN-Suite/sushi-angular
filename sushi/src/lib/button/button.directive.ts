@@ -1,10 +1,9 @@
-import { booleanAttribute, computed, Directive, ElementRef, HostListener, inject, input, InputSignal, Signal } from '@angular/core';
+import { booleanAttribute, computed, Directive, ElementRef, inject, input, InputSignal, Signal } from '@angular/core';
 import { BooleanInput, BooleanInputValue } from '../sushi.types';
 import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button.interfaces';
 
 @Directive({
   selector: 'button[suiButton], a[suiButton]',
-  standalone: true,
   host: {
     class: 'btn sui-button',
 
@@ -39,6 +38,8 @@ import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button
     '[attr.aria-disabled]': 'isDisabled() ? "true" : null',
     '[attr.disabled]': 'isDisabled() && isNativeButton ? "" : null',
     '[attr.tabindex]': 'isDisabled() && !isNativeButton ? -1 : null',
+
+    '(click)': 'handleClick($event)',
   },
 })
 export class Button {
@@ -54,7 +55,6 @@ export class Button {
   protected readonly isNativeButton: boolean = this.elementRef.nativeElement.tagName.toLowerCase() === 'button';
   protected readonly isDisabled: Signal<boolean> = computed<boolean>((): boolean => this.disabled() || this.loading());
 
-  @HostListener('click', ['$event'])
   protected handleClick(event: Event): void {
     if (!this.isDisabled()) return;
     event.preventDefault();
