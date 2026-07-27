@@ -1,3 +1,5 @@
-export type DividerSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'success' | 'info' | 'warning' | 'error';
-export type DividerOrientation = 'horizontal' | 'vertical';
+import { Orientation, ThemeSeverity } from '../sushi.types';
+
+export type DividerSeverity = ThemeSeverity;
+export type DividerOrientation = Orientation;
 export type DividerPlacement = 'start' | 'center' | 'end';

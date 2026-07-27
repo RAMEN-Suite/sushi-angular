@@ -3,7 +3,6 @@ import { DividerOrientation, DividerPlacement, DividerSeverity } from './divider
 
 @Directive({
   selector: '[suiDivider]',
-  standalone: true,
   host: {
     class: 'divider sui-divider',
 
