@@ -1,5 +1,7 @@
+import { ComponentSize } from '../sushi.types';
+
 export type AvatarStatus = 'online' | 'offline';
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type AvatarSize = ComponentSize;
 export type AvatarMaskHalf = 'first' | 'second';
 
 export type AvatarShape =
