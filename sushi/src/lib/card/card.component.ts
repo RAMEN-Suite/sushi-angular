@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, InputSignal, ViewEncapsulation } from '@angular/core';
 import { CardSize, CardVariant } from './card.interfaces';
 
 @Component({
   selector: 'sui-card',
   templateUrl: './card.component.html',
+  styleUrl: './card.component.css',
   host: {
     class: 'card sui-card',
     '[class.card-border]': 'variant() === "border"',
@@ -15,8 +16,9 @@ import { CardSize, CardVariant } from './card.interfaces';
     '[class.card-xl]': 'size() === "xl"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class Card {
   public readonly variant: InputSignal<CardVariant> = input<CardVariant>('border');
-  public readonly size: InputSignal<CardSize | null> = input<CardSize | null>(null);
+  public readonly size: InputSignal<CardSize> = input<CardSize>('md');
 }

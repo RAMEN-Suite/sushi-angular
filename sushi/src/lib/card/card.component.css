@@ -1,0 +1,54 @@
+@scope (.sui-card.card-xs) to (.sui-card) {
+  .sui-card__body {
+    --card-p: 0.5rem;
+    --card-fs: 0.6875rem;
+  }
+
+  .sui-card-title {
+    --cardtitle-fs: 0.875rem;
+  }
+}
+
+@scope (.sui-card.card-sm) to (.sui-card) {
+  .sui-card__body {
+    --card-p: 1rem;
+    --card-fs: 0.75rem;
+  }
+
+  .sui-card-title {
+    --cardtitle-fs: 1rem;
+  }
+}
+
+@scope (.sui-card.card-md) to (.sui-card) {
+  .sui-card__body {
+    --card-p: 1.5rem;
+    --card-fs: 0.875rem;
+  }
+
+  .sui-card-title {
+    --cardtitle-fs: 1.125rem;
+  }
+}
+
+@scope (.sui-card.card-lg) to (.sui-card) {
+  .sui-card__body {
+    --card-p: 2rem;
+    --card-fs: 1rem;
+  }
+
+  .sui-card-title {
+    --cardtitle-fs: 1.25rem;
+  }
+}
+
+@scope (.sui-card.card-xl) to (.sui-card) {
+  .sui-card__body {
+    --card-p: 2.5rem;
+    --card-fs: 1.125rem;
+  }
+
+  .sui-card-title {
+    --cardtitle-fs: 1.375rem;
+  }
+}
