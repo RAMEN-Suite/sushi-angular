@@ -1,5 +1,4 @@
-import { booleanAttribute, computed, Directive, ElementRef, inject, input, InputSignal, Signal } from '@angular/core';
-import { BooleanInput, BooleanInputValue } from '../sushi.types';
+import { booleanAttribute, computed, Directive, ElementRef, inject, input, InputSignal, InputSignalWithTransform, Signal } from '@angular/core';
 import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button.interfaces';
 
 @Directive({
@@ -48,8 +47,8 @@ export class Button {
   public readonly variant: InputSignal<ButtonVariant | null> = input<ButtonVariant | null>(null);
   public readonly shape: InputSignal<ButtonShape | null> = input<ButtonShape | null>(null);
 
-  public readonly disabled: BooleanInput = input<boolean, BooleanInputValue>(false, { transform: booleanAttribute });
-  public readonly loading: BooleanInput = input<boolean, BooleanInputValue>(false, { transform: booleanAttribute });
+  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, { transform: booleanAttribute });
+  public readonly loading: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, { transform: booleanAttribute });
 
   protected readonly elementRef: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
   protected readonly isNativeButton: boolean = this.elementRef.nativeElement.tagName.toLowerCase() === 'button';
