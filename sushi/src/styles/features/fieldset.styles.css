@@ -1,0 +1,54 @@
+.sui-fieldset__legend {
+  @apply px-2 py-2 text-base;
+  min-height: 2.75rem;
+}
+
+.sui-fieldset {
+  @apply gap-1;
+}
+
+.sui-fieldset__toggle {
+  @apply flex w-full cursor-pointer items-center gap-2 px-1.5 py-0.5 text-left select-none;
+  border-radius: calc(var(--radius-field) / 2);
+  outline: none;
+}
+
+.sui-fieldset__toggle:focus-visible {
+  outline: var(--sui-focus-ring-width) solid currentColor;
+  outline-offset: var(--sui-focus-ring-offset);
+}
+
+.sui-fieldset__toggle::before {
+  @apply w-4 shrink-0 text-center leading-none;
+  content: '−';
+}
+
+.sui-fieldset__toggle:has(> .sui-fieldset__icon)::before {
+  display: none;
+}
+
+.sui-fieldset--collapsed > .sui-fieldset__legend .sui-fieldset__toggle::before {
+  content: '+';
+}
+
+.sui-fieldset__content {
+  height: auto;
+  overflow: clip;
+  overflow-clip-margin: 0.25rem;
+  interpolate-size: allow-keywords;
+  transition: height 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sui-fieldset--collapsed > .sui-fieldset__content {
+  height: 0;
+}
+
+.sui-fieldset--collapsed > :not(legend, .sui-fieldset__content) {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sui-fieldset__content {
+    transition: none;
+  }
+}
