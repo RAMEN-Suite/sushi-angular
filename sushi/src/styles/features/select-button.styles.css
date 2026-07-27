@@ -1,0 +1,17 @@
+.sui-select-button > button[aria-checked='true'] {
+  @apply relative;
+  border-color: color-mix(in oklab, var(--btn-color, currentColor) 70%, var(--color-base-content));
+}
+
+.sui-select-button > button[aria-checked='true']::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: color-mix(in oklab, currentColor 22%, transparent);
+  content: '';
+  pointer-events: none;
+}
+
+.sui-select-button > button[aria-checked='true']:not(:disabled):hover::after {
+  background: color-mix(in oklab, currentColor 30%, transparent);
+}

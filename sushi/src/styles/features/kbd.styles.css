@@ -1,0 +1,10 @@
+.sui-kbd {
+  transition:
+    translate 80ms ease-out,
+    border-bottom-width 80ms ease-out;
+}
+
+.sui-kbd:active {
+  translate: 0 1px;
+  border-bottom-width: var(--border);
+}

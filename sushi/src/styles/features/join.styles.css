@@ -1,0 +1,14 @@
+.join > .join-item.btn {
+  position: relative;
+  z-index: 1;
+}
+
+.join > .join-item:is(:focus, :focus-within) {
+  position: relative;
+  z-index: 2;
+}
+
+.join > .join-item:active {
+  position: relative;
+  z-index: 3;
+}

@@ -1,0 +1,7 @@
+@media (width >= 48rem) {
+  .sui-input-group--responsive {
+    --join-v: 0;
+    --join-h: 1;
+    flex-direction: row;
+  }
+}

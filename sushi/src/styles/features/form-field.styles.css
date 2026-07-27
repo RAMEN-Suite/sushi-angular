@@ -1,0 +1,76 @@
+.sui-form-field {
+  @apply grid content-start gap-1.5;
+}
+
+.sui-form-field__label {
+  @apply w-fit;
+}
+
+.sui-form-field__hint,
+.sui-form-field__error {
+  @apply text-xs;
+}
+
+.sui-form-field__hint {
+  @apply text-base-content/60;
+}
+
+.sui-form-field__error {
+  @apply text-error;
+  animation: sui-form-field-error-enter 160ms ease-out;
+}
+
+.sui-form-field > .sui-form-control {
+  @apply w-full;
+}
+
+.sui-form-field--floating {
+  --sui-form-control-height: calc(var(--size-field, 0.25rem) * 10);
+  @apply relative pt-2;
+}
+
+.sui-form-field--floating > .sui-form-field__label {
+  @apply bg-base-100 pointer-events-none absolute top-2 left-3 z-1 -translate-y-1/2 px-1 text-xs leading-none font-medium;
+  transform-origin: left center;
+}
+
+.sui-form-field--floating.sui-form-field--animated > .sui-form-field__label {
+  top: calc(0.5rem + var(--sui-form-control-height) / 2);
+  @apply text-base font-normal;
+  transition:
+    top 150ms ease,
+    font-size 150ms ease;
+}
+
+.sui-form-field--floating.sui-form-field--animated:has(.sui-form-control:focus, .sui-form-control:not(:placeholder-shown)) > .sui-form-field__label {
+  @apply top-2 text-xs font-medium;
+}
+
+.sui-form-field--floating:has(.input-xs, .textarea-xs) {
+  --sui-form-control-height: calc(var(--size-field, 0.25rem) * 6);
+}
+
+.sui-form-field--floating:has(.input-sm, .textarea-sm) {
+  --sui-form-control-height: calc(var(--size-field, 0.25rem) * 8);
+}
+
+.sui-form-field--floating:has(.input-lg, .textarea-lg) {
+  --sui-form-control-height: calc(var(--size-field, 0.25rem) * 12);
+}
+
+.sui-form-field--floating:has(.input-xl, .textarea-xl) {
+  --sui-form-control-height: calc(var(--size-field, 0.25rem) * 14);
+}
+
+@keyframes sui-form-field-error-enter {
+  from {
+    opacity: 0;
+    translate: 0 -0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sui-form-field__error {
+    animation: none;
+  }
+}
