@@ -1,12 +1,10 @@
-import { afterNextRender, booleanAttribute, Directive, ElementRef, inject, input } from '@angular/core';
-import { BooleanInput, BooleanInputValue } from '../sushi.types';
+import { afterNextRender, booleanAttribute, Directive, ElementRef, inject, input, InputSignalWithTransform } from '@angular/core';
 
 @Directive({
   selector: '[suiAutoFocus]',
-  standalone: true,
 })
 export class AutoFocus {
-  public readonly enabled: BooleanInput = input<boolean, BooleanInputValue>(true, {
+  public readonly enabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, {
     alias: 'suiAutoFocus',
     transform: booleanAttribute,
   });
