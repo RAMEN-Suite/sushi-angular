@@ -2,7 +2,6 @@ import { Directive, ElementRef, inject, input, InputSignal } from '@angular/core
 
 @Directive({
   selector: '[suiCodeLine]',
-  standalone: true,
   host: {
     '[attr.data-prefix]': 'prefix()',
   },

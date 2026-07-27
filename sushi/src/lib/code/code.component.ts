@@ -15,15 +15,14 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { LucideCheck, LucideCopy } from '@lucide/angular';
-import { Button, ButtonShape } from '../../button';
-import { BooleanInput, BooleanInputValue, Template } from '../../sushi.types';
-import { CodeButtonContext } from '../code.interfaces';
-import { CodeLine } from '../code-line.directive';
-import { CodeButtonOffTemplate, CodeButtonOnTemplate, CodeButtonTemplate } from '../code.templates';
+import { Button, ButtonShape } from '../button';
+import { BooleanInputValue, BooleanSignal, Template } from '../sushi.types';
+import { CodeButtonContext } from './code.interfaces';
+import { CodeLine } from './code-line.directive';
+import { CodeButtonOffTemplate, CodeButtonOnTemplate, CodeButtonTemplate } from './code.templates';
 
 @Component({
   selector: 'sui-code',
-  standalone: true,
   imports: [NgTemplateOutlet, LucideCheck, LucideCopy, Button],
   templateUrl: './code.component.html',
   styleUrl: './code.component.css',
@@ -32,7 +31,7 @@ import { CodeButtonOffTemplate, CodeButtonOnTemplate, CodeButtonTemplate } from 
   },
 })
 export class Code {
-  public readonly copyable: BooleanInput = input<boolean, BooleanInputValue>(true, { transform: booleanAttribute });
+  public readonly copyable: BooleanSignal = input<boolean, BooleanInputValue>(true, { transform: booleanAttribute });
   public readonly cooldown: InputSignal<number> = input<number>(1200);
 
   public readonly buttonShape: InputSignal<ButtonShape | null> = input<ButtonShape | null>('square');
