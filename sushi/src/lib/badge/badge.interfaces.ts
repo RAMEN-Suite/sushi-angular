@@ -1,3 +1,5 @@
-export type BadgeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'success' | 'info' | 'warning' | 'error';
+import { ComponentSize, ThemeSeverity } from '../sushi.types';
+
+export type BadgeSeverity = ThemeSeverity;
 export type BadgeVariant = 'outlined' | 'soft' | 'dash' | 'ghost';
-export type BadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type BadgeSize = ComponentSize;

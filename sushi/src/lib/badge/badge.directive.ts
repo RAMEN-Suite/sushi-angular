@@ -3,7 +3,6 @@ import { BadgeSeverity, BadgeSize, BadgeVariant } from './badge.interfaces';
 
 @Directive({
   selector: '[suiBadge]',
-  standalone: true,
   host: {
     class: 'badge sui-badge',
 
