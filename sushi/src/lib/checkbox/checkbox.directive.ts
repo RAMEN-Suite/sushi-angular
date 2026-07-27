@@ -1,10 +1,8 @@
-import { booleanAttribute, Directive, input } from '@angular/core';
-import { SelectionControl } from '../selection-control/selection-control';
-import { BooleanInput, BooleanInputValue } from '../sushi.types';
+import { booleanAttribute, Directive, input, InputSignalWithTransform } from '@angular/core';
+import { SelectionControlState } from '../form-control';
 
 @Directive({
   selector: 'input[type="checkbox"][suiCheckbox]',
-  standalone: true,
   host: {
     class: 'checkbox sui-checkbox',
     '[class.checkbox-primary]': 'severity() === "primary"',
@@ -27,6 +25,6 @@ import { BooleanInput, BooleanInputValue } from '../sushi.types';
     '[attr.aria-invalid]': 'isInvalid() ? "true" : null',
   },
 })
-export class Checkbox extends SelectionControl {
-  public readonly indeterminate: BooleanInput = input<boolean, BooleanInputValue>(false, { transform: booleanAttribute });
+export class Checkbox extends SelectionControlState {
+  public readonly indeterminate: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, { transform: booleanAttribute });
 }
