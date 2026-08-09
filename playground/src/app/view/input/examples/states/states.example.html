@@ -1,0 +1,18 @@
+<div class="grid w-fit max-w-full items-start gap-4">
+  <label class="grid w-80 max-w-full gap-2">
+    <span class="font-medium">Readonly</span>
+    <input suiInput type="email" value="reader@example.com" readonly />
+  </label>
+
+  <label class="grid w-80 max-w-full gap-2">
+    <span class="font-medium">Disabled</span>
+    <input suiInput value="Unavailable" disabled />
+  </label>
+
+  <label class="grid w-80 max-w-full gap-2">
+    <span class="font-medium">Invalid</span>
+    <input suiInput invalid touched value="Invalid value" aria-describedby="explicit-error" />
+  </label>
+
+  <p id="explicit-error" class="text-error">This value cannot be used.</p>
+</div>

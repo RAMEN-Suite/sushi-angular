@@ -1,0 +1,12 @@
+<div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+  @for (item of types; track item.type) {
+    <label class="grid gap-2 rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="flex items-center justify-between gap-3 font-medium">
+        {{ item.label }}
+        <code suiBadge severity="neutral" variant="soft" size="xs" class="font-mono">{{ item.type }}</code>
+      </span>
+
+      <input suiInput class="w-full" [type]="item.type" [placeholder]="item.placeholder" />
+    </label>
+  }
+</div>

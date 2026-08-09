@@ -1,0 +1,108 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Input</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Add consistent sizing, semantic colors, and form state to native text controls without replacing browser behavior.
+      </p>
+    </div>
+
+    <div class="flex flex-wrap gap-2" aria-label="Input capabilities">
+      <span suiBadge variant="soft" size="sm">Native control</span>
+      <span suiBadge variant="soft" size="sm">Signal Forms</span>
+      <span suiBadge variant="soft" size="sm">Accessible states</span>
+    </div>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>Basic usage and forms</h2>
+    <p class="text-base-content/60">
+      Use a native label and input type. Invalid controls receive <code>aria-invalid</code> after interaction.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-input-basic-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" />
+    </div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Sizes and semantic colors</h2>
+    <p class="text-base-content/60">
+      Choose one of five control sizes and apply a semantic color only when the surrounding workflow benefits from that meaning.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-input-appearance-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript" />
+    </div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Search and account fields</h2>
+    <p class="text-base-content/60">
+      Compose a native input with existing field surfaces instead of adding icon and shortcut APIs to <code>suiInput</code>.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-input-composition-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.composition.html" [typescript]="examples.composition.typescript" />
+    </div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Native states</h2>
+    <p class="text-base-content/60">
+      Continue to use native attributes such as <code>type</code>, <code>disabled</code>, <code>readonly</code>, <code>required</code>,
+      <code>autocomplete</code>, and ARIA references. Set <code>invalid</code> for an explicit invalid presentation.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-input-states-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" />
+    </div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Native input types</h2>
+    <p class="text-base-content/60">
+      The directive styles every text-field-like native type without changing its browser behavior. Checkbox, radio, file, and range use
+      their dedicated controls.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-input-native-types-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.types.html" [typescript]="examples.types.typescript" />
+    </div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Data list suggestions</h2>
+    <p class="text-base-content/60">
+      Connect a native <code>datalist</code> through the input’s <code>list</code> attribute for browser-provided suggestions.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-input-datalist-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.datalist.html" [typescript]="examples.datalist.typescript" />
+    </div>
+  </sui-card>
+</main>
