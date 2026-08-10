@@ -1,0 +1,48 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Multi-Select</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Choose several values from a fixed list while keeping every selection visible and removable.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span suiBadge variant="soft" size="sm">Angular Aria</span><span suiBadge variant="soft" size="sm">Signal Forms</span
+      ><span suiBadge variant="soft" size="sm">Custom values</span>
+    </div>
+  </section>
+  <sui-card
+    ><h2 suiCardTitle>Basic usage and forms</h2>
+    <p class="text-base-content/60">
+      Up to three selected labels are shown as a comma-separated list by default. Larger selections are summarized as the first label plus
+      the remaining count; <code>maxSelectedLabels</code> adjusts the threshold.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-multi-select-basic-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div
+  ></sui-card>
+  <sui-card
+    ><h2 suiCardTitle>Selected value and option templates</h2>
+    <p class="text-base-content/60">
+      Use the selected-items template for a custom compact summary and the item template for richer option content.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-multi-select-selected-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.selected.html" [typescript]="examples.selected.typescript" /></div
+  ></sui-card>
+  <sui-card
+    ><h2 suiCardTitle>Grouped options</h2>
+    <p class="text-base-content/60">
+      Group adjacent options into readable categories while keyboard navigation continues through selectable rows only.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-multi-select-groups-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.groups.html" [typescript]="examples.groups.typescript" /></div
+  ></sui-card>
+  <sui-card
+    ><h2 suiCardTitle>Select all, templates, and states</h2>
+    <p class="text-base-content/60">
+      Select-all remains opt-in. Header context, footer, icons, loading, empty, disabled, invalid, filled, size, and clear behavior remain
+      configurable.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-multi-select-states-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" /></div
+  ></sui-card>
+</main>

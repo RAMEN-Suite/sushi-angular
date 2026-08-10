@@ -50,6 +50,15 @@ sushi/src/lib/<feature>/
 - Put directive and shared composition CSS in `styles/features/<feature>.styles.css`.
 - `sushi.core.css` contains imports only.
 
+## Package size
+
+- Keep the published library tree-shakable; declarations must not register global runtime behavior.
+- Never export playground, documentation, generator, or demo code from `public-api.ts`.
+- Prefer platform and existing Angular APIs over new runtime dependencies.
+- Import only the Angular, CDK, Aria, and icon symbols a feature actually uses.
+- Keep optional behavior lazy or consumer-provided; do not bundle syntax highlighting, sample data, or documentation utilities.
+- Review `dist/sushi` when adding a dependency or a substantial feature.
+
 ## Angular
 
 - Prefer `input`, `model`, `output`, `signal`, `computed`, `contentChild`, and `viewChild`.
@@ -135,6 +144,8 @@ Prefer in order:
 - Never duplicate source as strings or handwritten `suiCodeLine` blocks.
 - Pages own only descriptions, layout, examples, and raw-source references.
 - Lazy-load every playground page through `loadComponent`.
+- Keep routed documentation in `playground/src/app/pages/<component>`; navigation groups do not create filesystem layers.
+- Use `pg-example-code` for HTML and TypeScript examples; do not add separate code-rendering wrappers.
 - Use the shared HTML/TypeScript code tabs.
 - Group by behavior; keep examples short, complete, copyable, and mobile-first.
 - Document every public input, output, state, template, native attribute, and useful composition.

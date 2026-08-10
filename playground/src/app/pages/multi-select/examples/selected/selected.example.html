@@ -1,0 +1,11 @@
+<sui-multi-select fluid class="max-w-xl" [options]="teams" [compareWith]="compareTeams" [(value)]="value" ariaLabel="Project teams">
+  <ng-template suiMultiSelectSelectedItems let-options>
+    <span class="truncate">{{ options.length ? options.length + ' project teams selected' : 'Select project teams' }}</span>
+  </ng-template>
+  <ng-template suiMultiSelectItem let-option let-selected="selected">
+    <span class="flex w-full items-center justify-between gap-4"
+      ><span>{{ option.label }}</span
+      ><span suiBadge size="sm" variant="soft">{{ selected ? 'Included' : 'Available' }}</span></span
+    >
+  </ng-template>
+</sui-multi-select>

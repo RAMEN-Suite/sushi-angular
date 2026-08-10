@@ -1,0 +1,284 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="space-y-3">
+    <h1 class="text-4xl font-bold tracking-tight">Fieldset</h1>
+    <p class="max-w-3xl text-base-content/70">
+      Group controls that answer one shared question. The native fieldset and legend communicate that relationship to assistive technology.
+    </p>
+  </section>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Related choices</h2>
+      <p class="text-sm text-base-content/60">
+        Use a fieldset when several controls belong to the same question. Each checkbox keeps its own label while the legend names the
+        complete group.
+      </p>
+    </div>
+
+    <fieldset suiFieldset class="border-base-300 rounded-box w-full max-w-md border px-4 pt-2 pb-4">
+      <legend suiFieldsetLegend>Notification channels</legend>
+      <label class="label cursor-pointer justify-start gap-3"><input suiCheckbox type="checkbox" checked /> Email</label>
+      <label class="label cursor-pointer justify-start gap-3"><input suiCheckbox type="checkbox" /> Push notification</label>
+      <label class="label cursor-pointer justify-start gap-3"><input suiCheckbox type="checkbox" /> Text message</label>
+    </fieldset>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;fieldset suiFieldset class="border-base-300 rounded-box border px-4 pt-2 pb-4"&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;legend suiFieldsetLegend&gt;Notification channels&lt;/legend&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>  &lt;label class="label"&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>    &lt;input suiCheckbox type="checkbox" checked /&gt; Email</code></pre>
+      <pre suiCodeLine prefix="5"><code>  &lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="6"><code>  &lt;label class="label"&gt;</code></pre>
+      <pre suiCodeLine prefix="7"><code>    &lt;input suiCheckbox type="checkbox" /&gt; Push notification</code></pre>
+      <pre suiCodeLine prefix="8"><code>  &lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="9"><code>  &lt;label class="label"&gt;</code></pre>
+      <pre suiCodeLine prefix="10"><code>    &lt;input suiCheckbox type="checkbox" /&gt; Text message</code></pre>
+      <pre suiCodeLine prefix="11"><code>  &lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="12"><code>&lt;/fieldset&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Collapsible fieldset</h2>
+      <p class="text-sm text-base-content/60">
+        Add <code>collapsible</code>, a toggle inside the legend, and <code>suiFieldsetContent</code>. Plus and minus are supplied by
+        default, while <code>[(expanded)]</code> can synchronize the state with a signal.
+      </p>
+    </div>
+
+    <fieldset
+      suiFieldset
+      collapsible
+      [(expanded)]="detailsExpanded"
+      class="border-base-300 rounded-box w-full max-w-xl border px-4 pt-2 pb-4"
+    >
+      <legend suiFieldsetLegend><button suiFieldsetToggle>Profile details</button></legend>
+      <div suiFieldsetContent class="grid gap-1 sm:grid-cols-2 sm:gap-x-4">
+        <label class="label" for="fieldset-first-name">First name</label>
+        <label class="label max-sm:hidden" for="fieldset-last-name">Last name</label>
+        <input suiInput class="w-full" id="fieldset-first-name" placeholder="Ada" />
+        <label class="label sm:hidden" for="fieldset-last-name">Last name</label>
+        <input suiInput class="w-full" id="fieldset-last-name" placeholder="Lovelace" />
+      </div>
+    </fieldset>
+
+    <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="detailsExpanded.set(true)">
+      Reset example
+    </button>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>expanded = signal(true);</code></pre>
+      <pre suiCodeLine prefix="2"><code>&nbsp;</code></pre>
+      <pre suiCodeLine prefix="3"><code>&lt;fieldset suiFieldset collapsible [(expanded)]="expanded"&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>  &lt;legend suiFieldsetLegend&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>    &lt;button suiFieldsetToggle&gt;Profile details&lt;/button&gt;</code></pre>
+      <pre suiCodeLine prefix="6"><code>  &lt;/legend&gt;</code></pre>
+      <pre suiCodeLine prefix="7"><code>  &lt;div suiFieldsetContent&gt;</code></pre>
+      <pre suiCodeLine prefix="8"><code>    &lt;label for="first-name"&gt;First name&lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="9"><code>    &lt;input suiInput class="w-full" id="first-name" /&gt;</code></pre>
+      <pre suiCodeLine prefix="10"><code>    &lt;label for="last-name"&gt;Last name&lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="11"><code>    &lt;input suiInput class="w-full" id="last-name" /&gt;</code></pre>
+      <pre suiCodeLine prefix="12"><code>  &lt;/div&gt;</code></pre>
+      <pre suiCodeLine prefix="13"><code>&lt;/fieldset&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Custom collapse indicator</h2>
+      <p class="text-sm text-base-content/60">
+        Place an element with <code>sui-fieldset__icon</code> before the title to replace the default indicator. This example rotates a
+        Lucide chevron from the bound expanded state.
+      </p>
+    </div>
+
+    <fieldset
+      suiFieldset
+      collapsible
+      [(expanded)]="advancedExpanded"
+      class="border-base-300 rounded-box w-full max-w-xl border px-4 pt-2 pb-4"
+    >
+      <legend suiFieldsetLegend>
+        <button suiFieldsetToggle>
+          <svg
+            lucideChevronRight
+            class="sui-fieldset__icon size-4 transition-transform"
+            [class.rotate-90]="advancedExpanded()"
+            aria-hidden="true"
+          ></svg>
+          Advanced settings
+        </button>
+      </legend>
+      <div suiFieldsetContent class="grid gap-1">
+        <label class="label" for="fieldset-timeout">Session timeout</label>
+        <input suiInput class="w-full" id="fieldset-timeout" type="number" value="30" />
+        <p class="label">Time in minutes.</p>
+      </div>
+    </fieldset>
+
+    <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="advancedExpanded.set(false)">
+      Reset example
+    </button>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>expanded = signal(false);</code></pre>
+      <pre suiCodeLine prefix="2"><code>&nbsp;</code></pre>
+      <pre suiCodeLine prefix="3"><code>&lt;fieldset suiFieldset collapsible [(expanded)]="expanded"&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>  &lt;legend suiFieldsetLegend&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>    &lt;button suiFieldsetToggle&gt;</code></pre>
+      <pre suiCodeLine prefix="6"><code>      &lt;svg lucideChevronRight</code></pre>
+      <pre suiCodeLine prefix="7"><code>        class="sui-fieldset__icon size-4 transition-transform"</code></pre>
+      <pre suiCodeLine prefix="8"><code>        [class.rotate-90]="expanded()" /&gt;</code></pre>
+      <pre suiCodeLine prefix="9"><code>      Advanced settings</code></pre>
+      <pre suiCodeLine prefix="10"><code>    &lt;/button&gt;</code></pre>
+      <pre suiCodeLine prefix="11"><code>  &lt;/legend&gt;</code></pre>
+      <pre suiCodeLine prefix="12"><code>  &lt;div suiFieldsetContent&gt;</code></pre>
+      <pre suiCodeLine prefix="13"><code>    &lt;label for="timeout"&gt;Session timeout&lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="14"><code>    &lt;input suiInput class="w-full" id="timeout" type="number" /&gt;</code></pre>
+      <pre suiCodeLine prefix="15"><code>  &lt;/div&gt;</code></pre>
+      <pre suiCodeLine prefix="16"><code>&lt;/fieldset&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Form section and disabled group</h2>
+      <p class="text-sm text-base-content/60">
+        A bordered fieldset can define a form section. The native <code>disabled</code> attribute disables all controls in the group.
+      </p>
+    </div>
+
+    <div class="grid items-start gap-6 md:grid-cols-2">
+      <fieldset suiFieldset class="border-base-300 rounded-box w-full border px-4 pt-2 pb-4">
+        <legend suiFieldsetLegend>Account credentials</legend>
+        <label class="label" for="account-email">Email</label>
+        <input suiInput class="w-full" id="account-email" type="email" placeholder="name@example.com" />
+        <label class="label" for="account-password">Password</label>
+        <input suiInput class="w-full" id="account-password" type="password" />
+      </fieldset>
+
+      <fieldset suiFieldset disabled class="border-base-300 rounded-box w-full border px-4 pt-2 pb-4">
+        <legend suiFieldsetLegend>Managed preferences</legend>
+        <label class="label cursor-pointer justify-start gap-3"><input suiCheckbox type="checkbox" checked /> Automatic updates</label>
+        <label class="label cursor-pointer justify-start gap-3"><input suiCheckbox type="checkbox" /> Preview releases</label>
+      </fieldset>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;fieldset suiFieldset&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;legend suiFieldsetLegend&gt;Account credentials&lt;/legend&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>  &lt;label for="email"&gt;Email&lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>  &lt;input suiInput class="w-full" id="email" type="email" /&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>  &lt;label for="password"&gt;Password&lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="6"><code>  &lt;input suiInput class="w-full" id="password" type="password" /&gt;</code></pre>
+      <pre suiCodeLine prefix="7"><code>&lt;/fieldset&gt;</code></pre>
+      <pre suiCodeLine prefix="8"><code>&nbsp;</code></pre>
+      <pre suiCodeLine prefix="9"><code>&lt;fieldset suiFieldset disabled&gt;</code></pre>
+      <pre suiCodeLine prefix="10"><code>  &lt;legend suiFieldsetLegend&gt;Managed preferences&lt;/legend&gt;</code></pre>
+      <pre
+        suiCodeLine
+        prefix="11"
+      ><code>  &lt;label&gt;&lt;input suiCheckbox type="checkbox" /&gt; Automatic updates&lt;/label&gt;</code></pre>
+      <pre
+        suiCodeLine
+        prefix="12"
+      ><code>  &lt;label&gt;&lt;input suiCheckbox type="checkbox" /&gt; Preview releases&lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="13"><code>&lt;/fieldset&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Buttons and external collapse controls</h2>
+      <p class="text-sm text-base-content/60">
+        Actions can remain inside the group they belong to. Collapse controls may live outside and manage the fieldset through its bound
+        <code>expanded</code> state.
+      </p>
+    </div>
+
+    <div class="grid items-start gap-6 lg:grid-cols-2">
+      <form class="grid gap-3" (submit)="$event.preventDefault()">
+        <fieldset suiFieldset class="border-base-300 rounded-box w-full border px-4 pt-2 pb-4">
+          <legend suiFieldsetLegend>Contact details</legend>
+          <label class="label" for="contact-name">Name</label>
+          <input suiInput class="w-full" id="contact-name" autocomplete="name" placeholder="Ada Lovelace" />
+          <label class="label" for="contact-email">Email</label>
+          <input suiInput class="w-full" id="contact-email" type="email" autocomplete="email" placeholder="ada@example.com" />
+          <div class="mt-2 flex flex-wrap justify-end gap-2">
+            <button suiButton type="reset" variant="text">Cancel</button>
+            <button suiButton type="submit">Save contact</button>
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="grid gap-3">
+        <fieldset suiFieldset collapsible [(expanded)]="billingExpanded" class="border-base-300 rounded-box w-full border px-4 pt-2 pb-4">
+          <legend suiFieldsetLegend><button suiFieldsetToggle>Billing address</button></legend>
+          <div suiFieldsetContent class="grid gap-1">
+            <label class="label" for="billing-street">Street</label>
+            <input suiInput class="w-full" id="billing-street" autocomplete="billing street-address" placeholder="42 Analytical Way" />
+            <div class="grid gap-1 sm:grid-cols-2 sm:gap-x-3">
+              <div>
+                <label class="label" for="billing-city">City</label>
+                <input suiInput class="w-full" id="billing-city" autocomplete="billing address-level2" placeholder="London" />
+              </div>
+              <div>
+                <label class="label" for="billing-postal-code">Postal code</label>
+                <input suiInput class="w-full" id="billing-postal-code" autocomplete="billing postal-code" placeholder="SW1A 1AA" />
+              </div>
+            </div>
+            <button suiButton type="button" class="mt-2 w-full sm:w-fit">Validate address</button>
+          </div>
+        </fieldset>
+        <div class="flex flex-wrap justify-end gap-2">
+          <button suiButton type="button" variant="outlined" [disabled]="!billingExpanded()" (click)="billingExpanded.set(false)">
+            Collapse
+          </button>
+          <button suiButton type="button" [disabled]="billingExpanded()" (click)="billingExpanded.set(true)">Expand</button>
+        </div>
+      </div>
+    </div>
+
+    <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="billingExpanded.set(true)">
+      Reset example
+    </button>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;form (submit)="$event.preventDefault()"&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;fieldset suiFieldset&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>    &lt;legend suiFieldsetLegend&gt;Contact details&lt;/legend&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>    &lt;label for="name"&gt;Name&lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>    &lt;input suiInput class="w-full" id="name" /&gt;</code></pre>
+      <pre suiCodeLine prefix="6"><code>    &lt;label for="email"&gt;Email&lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="7"><code>    &lt;input suiInput class="w-full" id="email" type="email" /&gt;</code></pre>
+      <pre suiCodeLine prefix="8"><code>    &lt;div&gt;</code></pre>
+      <pre suiCodeLine prefix="9"><code>      &lt;button suiButton type="reset" variant="text"&gt;Cancel&lt;/button&gt;</code></pre>
+      <pre suiCodeLine prefix="10"><code>      &lt;button suiButton type="submit"&gt;Save contact&lt;/button&gt;</code></pre>
+      <pre suiCodeLine prefix="11"><code>    &lt;/div&gt;</code></pre>
+      <pre suiCodeLine prefix="12"><code>  &lt;/fieldset&gt;</code></pre>
+      <pre suiCodeLine prefix="13"><code>&lt;/form&gt;</code></pre>
+      <pre suiCodeLine prefix="14"><code>&nbsp;</code></pre>
+      <pre suiCodeLine prefix="15"><code>expanded = signal(true);</code></pre>
+      <pre suiCodeLine prefix="16"><code>&nbsp;</code></pre>
+      <pre suiCodeLine prefix="17"><code>&lt;fieldset suiFieldset collapsible [(expanded)]="expanded"&gt;</code></pre>
+      <pre suiCodeLine prefix="18"><code>  &lt;legend suiFieldsetLegend&gt;</code></pre>
+      <pre suiCodeLine prefix="19"><code>    &lt;button suiFieldsetToggle&gt;Billing address&lt;/button&gt;</code></pre>
+      <pre suiCodeLine prefix="20"><code>  &lt;/legend&gt;</code></pre>
+      <pre suiCodeLine prefix="21"><code>  &lt;div suiFieldsetContent&gt;</code></pre>
+      <pre suiCodeLine prefix="22"><code>    &lt;label for="street"&gt;Street&lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="23"><code>    &lt;input suiInput class="w-full" id="street" /&gt;</code></pre>
+      <pre suiCodeLine prefix="24"><code>    &lt;label for="city"&gt;City&lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="25"><code>    &lt;input suiInput class="w-full" id="city" /&gt;</code></pre>
+      <pre suiCodeLine prefix="26"><code>    &lt;label for="postal-code"&gt;Postal code&lt;/label&gt;</code></pre>
+      <pre suiCodeLine prefix="27"><code>    &lt;input suiInput class="w-full" id="postal-code" /&gt;</code></pre>
+      <pre suiCodeLine prefix="28"><code>    &lt;button suiButton type="button"&gt;Validate address&lt;/button&gt;</code></pre>
+      <pre suiCodeLine prefix="29"><code>  &lt;/div&gt;</code></pre>
+      <pre suiCodeLine prefix="30"><code>&lt;/fieldset&gt;</code></pre>
+      <pre suiCodeLine prefix="31"><code>&lt;button suiButton type="button" [disabled]="!expanded()"</code></pre>
+      <pre suiCodeLine prefix="32"><code>  (click)="expanded.set(false)"&gt;Collapse&lt;/button&gt;</code></pre>
+      <pre suiCodeLine prefix="33"><code>&lt;button suiButton type="button" [disabled]="expanded()"</code></pre>
+      <pre suiCodeLine prefix="34"><code>  (click)="expanded.set(true)"&gt;Expand&lt;/button&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+</main>

@@ -1,0 +1,15 @@
+<div class="grid w-full max-w-lg gap-2">
+  <span id="labels-label" class="font-medium">Message labels</span>
+  <div suiJoin class="w-full">
+    <sui-multi-select
+      suiJoinItem
+      fluid
+      class="min-w-0 flex-1"
+      [options]="labels"
+      [formField]="labelForm.labels"
+      ariaLabelledby="labels-label"
+    />
+    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
+  </div>
+  <p class="text-sm text-base-content/60">{{ labelForm.labels().value().length }} labels selected</p>
+</div>

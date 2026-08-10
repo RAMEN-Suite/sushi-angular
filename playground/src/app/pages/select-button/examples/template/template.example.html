@@ -1,0 +1,24 @@
+<div class="grid gap-5">
+  <sui-select-button [options]="options" [(value)]="value" ariaLabel="Layout with icons">
+    <ng-template suiSelectButtonOption let-option let-selected="selected">
+      <span class="flex items-center gap-2">
+        @switch (option.value) {
+          @case ('list') {
+            <svg lucideList class="size-4" aria-hidden="true"></svg>
+          }
+          @case ('grid') {
+            <svg lucideGrid3x3 class="size-4" aria-hidden="true"></svg>
+          }
+          @default {
+            <svg lucideRows3 class="size-4" aria-hidden="true"></svg>
+          }
+        }
+        {{ option.label }}
+        @if (selected) {
+          <span class="sr-only">selected</span>
+        }
+      </span>
+    </ng-template>
+  </sui-select-button>
+  <sui-select-button disabled size="sm" [options]="options" [value]="'list'" ariaLabel="Disabled layout" />
+</div>

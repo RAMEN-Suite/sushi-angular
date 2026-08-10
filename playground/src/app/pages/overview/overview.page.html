@@ -1,0 +1,67 @@
+<main class="mx-auto max-w-7xl space-y-12 px-4 py-8 sm:px-8 sm:py-12">
+  <section class="overflow-hidden rounded-box border border-base-300 bg-base-200/40 p-6 sm:p-10">
+    <div class="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_auto]">
+      <div class="max-w-3xl space-y-5">
+        <div class="flex flex-wrap gap-2">
+          <span suiBadge size="sm" variant="soft">Angular 22+</span>
+          <span suiBadge size="sm" variant="soft">Signal Forms</span>
+          <span suiBadge size="sm" variant="soft">Accessible</span>
+        </div>
+
+        <div class="space-y-3">
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">SUSHI component library</p>
+          <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">Composable Angular UI, documented by example.</h1>
+          <p class="max-w-2xl text-lg leading-relaxed text-base-content/70">
+            Browse the public API, copy complete examples, and combine consistent primitives without rebuilding common behavior.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a suiButton routerLink="/input">Start with Input</a>
+          <a suiButton routerLink="/select" variant="outlined">Explore Select</a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 sm:min-w-72">
+        <div class="rounded-field border border-base-300 bg-base-100 p-4">
+          <div class="text-3xl font-bold">{{ componentCount }}</div>
+          <div class="mt-1 text-sm text-base-content/60">documented pages</div>
+        </div>
+        <div class="rounded-field border border-base-300 bg-base-100 p-4">
+          <div class="text-3xl font-bold">{{ groups.length }}</div>
+          <div class="mt-1 text-sm text-base-content/60">clear categories</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="space-y-6">
+    <div class="max-w-3xl space-y-2">
+      <h2 class="text-3xl font-bold tracking-tight">Components</h2>
+      <p class="text-base-content/65">Pages are grouped here for discovery while their source folders remain flat and predictable.</p>
+    </div>
+
+    <div class="grid items-start gap-5 md:grid-cols-2 xl:grid-cols-3">
+      @for (group of groups; track group.label) {
+        <sui-card size="sm" class="h-full border border-base-300 shadow-none">
+          <div class="flex items-center justify-between gap-4">
+            <h3 suiCardTitle>{{ group.label }}</h3>
+            <span suiBadge size="sm" variant="soft">{{ group.items.length }}</span>
+          </div>
+
+          <nav class="mt-4 grid gap-1" [attr.aria-label]="group.label">
+            @for (item of group.items; track item.path) {
+              <a
+                [routerLink]="item.path"
+                class="flex items-center justify-between rounded-field px-3 py-2.5 text-sm font-medium transition-colors hover:bg-base-200"
+              >
+                <span>{{ item.label }}</span>
+                <span aria-hidden="true" class="text-base-content/40">→</span>
+              </a>
+            }
+          </nav>
+        </sui-card>
+      }
+    </div>
+  </section>
+</main>

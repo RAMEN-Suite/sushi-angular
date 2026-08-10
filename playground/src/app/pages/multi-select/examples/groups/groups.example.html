@@ -1,0 +1,17 @@
+<div class="grid w-full max-w-sm gap-2">
+  <span id="departments-label" class="font-medium">Departments</span>
+  <sui-multi-select
+    fluid
+    [options]="departments"
+    [scrollHeight]="220"
+    [optionHeight]="48"
+    [(value)]="value"
+    ariaLabelledby="departments-label"
+  >
+    <ng-template suiMultiSelectGroup let-group
+      ><span class="flex items-center gap-2 font-semibold"
+        ><svg lucideGlobe class="size-4" aria-hidden="true"></svg>{{ group }}</span
+      ></ng-template
+    >
+  </sui-multi-select>
+</div>
