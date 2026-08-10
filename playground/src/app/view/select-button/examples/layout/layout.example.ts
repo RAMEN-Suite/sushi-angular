@@ -1,0 +1,17 @@
+import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { SelectButton, SelectButtonOption, SelectButtonValue } from '@ramen-suite/sushi';
+
+@Component({
+  selector: 'pg-select-button-layout-example',
+  imports: [SelectButton],
+  templateUrl: './layout.example.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class SelectButtonLayoutExample {
+  protected readonly options: readonly SelectButtonOption[] = [
+    { label: 'List', value: 'list' },
+    { label: 'Grid', value: 'grid' },
+    { label: 'Board', value: 'board', disabled: true },
+  ];
+  protected readonly value: WritableSignal<SelectButtonValue | null> = signal<SelectButtonValue | null>('list');
+}

@@ -1,232 +1,156 @@
-<main class="mx-auto max-w-7xl space-y-8 px-8 py-10">
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
   <section class="space-y-3">
     <h1 class="text-4xl font-bold tracking-tight">Avatar</h1>
-    <p class="max-w-3xl text-base-content/70">Use <code>suiAvatar</code> for profile images, initials, and presence.</p>
+    <p class="max-w-3xl text-base-content/70">Use <code>sui-avatar</code> for profile images, initials, and presence.</p>
   </section>
 
-  <section suiCard>
-    <div suiCardBody class="gap-5">
-      <div>
-        <h2 suiCardTitle>Basic usage</h2>
-        <p class="text-sm text-base-content/60">
-          Place an image inside <code>suiAvatarContent</code>. Size and shape remain part of the SUSHI API.
-        </p>
-      </div>
-      <div suiAvatar>
-        <div suiAvatarContent size="xl"><img src="/sample-avatar.svg" alt="Profile of Ada" /></div>
-      </div>
-      <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;div suiAvatar&gt;</code></pre>
-        <pre
-          suiCodeLine
-          prefix="2"
-        ><code>  &lt;div suiAvatarContent size="xl"&gt;&lt;img src="avatar.jpg" alt="Ada" /&gt;&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="3"><code>&lt;/div&gt;</code></pre>
-      </sui-code>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Basic usage</h2>
+      <p class="text-sm text-base-content/60">
+        Project an image or fallback into the avatar. Size, shape, masks, and presence remain part of one API.
+      </p>
     </div>
-  </section>
+    <sui-avatar size="xl"><img src="/sample-avatar.svg" alt="Profile of Ada" /></sui-avatar>
 
-  <section suiCard>
-    <div suiCardBody class="gap-5">
-      <div>
-        <h2 suiCardTitle>Custom sizes</h2>
-        <p class="text-sm text-base-content/60">Choose a preset from extra small through extra large.</p>
-      </div>
-      <div class="flex items-end gap-4">
-        <div suiAvatar>
-          <div suiAvatarContent size="xs"><img src="/sample-avatar.svg" alt="Extra-small profile" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent size="sm"><img src="/sample-avatar.svg" alt="Small profile" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent size="md"><img src="/sample-avatar.svg" alt="Medium profile" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent size="lg"><img src="/sample-avatar.svg" alt="Large profile" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent size="xl"><img src="/sample-avatar.svg" alt="Extra-large profile" /></div>
-        </div>
-      </div>
-      <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;div suiAvatarContent size="xs"&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>&lt;div suiAvatarContent size="xl"&gt;...&lt;/div&gt;</code></pre>
-      </sui-code>
-    </div>
-  </section>
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-avatar size="xl"&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;img src="avatar.jpg" alt="Ada" /&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>&lt;/sui-avatar&gt;</code></pre>
+    </sui-code>
+  </sui-card>
 
-  <section suiCard>
-    <div suiCardBody class="gap-5">
-      <div>
-        <h2 suiCardTitle>Shapes and masks</h2>
-        <p class="text-sm text-base-content/60">Use square and rounded frames or crop the image to a circle, squircle, or hexagon.</p>
-      </div>
-      <div class="flex flex-wrap items-center gap-5">
-        <div suiAvatar>
-          <div suiAvatarContent shape="square" size="xl"><img src="/sample-avatar.svg" alt="Square profile" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="rounded" size="xl"><img src="/sample-avatar.svg" alt="Rounded profile" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="circle" size="xl"><img src="/sample-avatar.svg" alt="Circular profile" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="squircle" size="xl"><img src="/sample-avatar.svg" alt="Squircle profile" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="hexagon" size="xl"><img src="/sample-avatar.svg" alt="Hexagonal profile" /></div>
-        </div>
-      </div>
-      <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;div suiAvatarContent shape="square"&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>&lt;div suiAvatarContent shape="circle"&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="3"><code>&lt;div suiAvatarContent shape="squircle"&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="4"><code>&lt;div suiAvatarContent shape="hexagon"&gt;...&lt;/div&gt;</code></pre>
-      </sui-code>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Custom sizes</h2>
+      <p class="text-sm text-base-content/60">Choose a preset from extra small through extra large.</p>
     </div>
-  </section>
+    <div class="flex flex-wrap items-end gap-4">
+      <sui-avatar size="xs"><img src="/sample-avatar.svg" alt="Extra-small profile" /></sui-avatar>
+      <sui-avatar size="sm"><img src="/sample-avatar.svg" alt="Small profile" /></sui-avatar>
+      <sui-avatar size="md"><img src="/sample-avatar.svg" alt="Medium profile" /></sui-avatar>
+      <sui-avatar size="lg"><img src="/sample-avatar.svg" alt="Large profile" /></sui-avatar>
+      <sui-avatar size="xl"><img src="/sample-avatar.svg" alt="Extra-large profile" /></sui-avatar>
+    </div>
 
-  <section suiCard>
-    <div suiCardBody class="gap-5">
-      <div>
-        <h2 suiCardTitle>All masks</h2>
-        <p class="text-sm text-base-content/60">
-          Masks provide decorative crops while the source image and accessible text remain unchanged.
-        </p>
-      </div>
-      <div class="grid grid-cols-3 gap-5 sm:grid-cols-5 lg:grid-cols-8">
-        <div suiAvatar>
-          <div suiAvatarContent shape="heart"><img src="/sample-avatar.svg" alt="Heart avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="hexagon"><img src="/sample-avatar.svg" alt="Vertical hexagon avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="hexagon-2"><img src="/sample-avatar.svg" alt="Horizontal hexagon avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="decagon"><img src="/sample-avatar.svg" alt="Decagon avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="pentagon"><img src="/sample-avatar.svg" alt="Pentagon avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="diamond"><img src="/sample-avatar.svg" alt="Diamond avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="mask-square"><img src="/sample-avatar.svg" alt="Masked square avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="mask-circle"><img src="/sample-avatar.svg" alt="Masked circle avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="star"><img src="/sample-avatar.svg" alt="Star avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="star-2"><img src="/sample-avatar.svg" alt="Bold star avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="triangle"><img src="/sample-avatar.svg" alt="Upward triangle avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="triangle-2"><img src="/sample-avatar.svg" alt="Downward triangle avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="triangle-3"><img src="/sample-avatar.svg" alt="Left triangle avatar" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="triangle-4"><img src="/sample-avatar.svg" alt="Right triangle avatar" /></div>
-        </div>
-      </div>
-      <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;div suiAvatarContent shape="heart"&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>&lt;div suiAvatarContent shape="hexagon"&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="3"><code>&lt;div suiAvatarContent shape="decagon"&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="4"><code>&lt;div suiAvatarContent shape="pentagon"&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="5"><code>&lt;div suiAvatarContent shape="diamond"&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="6"><code>&lt;div suiAvatarContent shape="star"&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="7"><code>&lt;div suiAvatarContent shape="triangle"&gt;...&lt;/div&gt;</code></pre>
-      </sui-code>
-    </div>
-  </section>
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-avatar size="xs"&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;sui-avatar size="xl"&gt;...&lt;/sui-avatar&gt;</code></pre>
+    </sui-code>
+  </sui-card>
 
-  <section suiCard>
-    <div suiCardBody class="gap-5">
-      <div>
-        <h2 suiCardTitle>Partial masks</h2>
-        <p class="text-sm text-base-content/60">
-          Use <code>maskHalf</code> to render either half of a mask, for example in ratings or comparisons.
-        </p>
-      </div>
-      <div class="flex gap-4">
-        <div suiAvatar>
-          <div suiAvatarContent shape="star" maskHalf="first" size="xl">
-            <img src="/sample-avatar.svg" alt="First half of star avatar" />
-          </div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="star" maskHalf="second" size="xl">
-            <img src="/sample-avatar.svg" alt="Second half of star avatar" />
-          </div>
-        </div>
-      </div>
-      <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;div suiAvatarContent shape="star" maskHalf="first"&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>&lt;div suiAvatarContent shape="star" maskHalf="second"&gt;...&lt;/div&gt;</code></pre>
-      </sui-code>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Shapes and masks</h2>
+      <p class="text-sm text-base-content/60">Use square and rounded frames or crop the image to a circle, squircle, or hexagon.</p>
     </div>
-  </section>
+    <div class="flex flex-wrap items-center gap-5">
+      <sui-avatar shape="square" size="xl"><img src="/sample-avatar.svg" alt="Square profile" /></sui-avatar>
+      <sui-avatar shape="rounded" size="xl"><img src="/sample-avatar.svg" alt="Rounded profile" /></sui-avatar>
+      <sui-avatar shape="circle" size="xl"><img src="/sample-avatar.svg" alt="Circular profile" /></sui-avatar>
+      <sui-avatar shape="squircle" size="xl"><img src="/sample-avatar.svg" alt="Squircle profile" /></sui-avatar>
+      <sui-avatar shape="hexagon" size="xl"><img src="/sample-avatar.svg" alt="Hexagonal profile" /></sui-avatar>
+    </div>
 
-  <section suiCard>
-    <div suiCardBody class="gap-5">
-      <div>
-        <h2 suiCardTitle>Presence and placeholder</h2>
-        <p class="text-sm text-base-content/60">
-          Presence communicates availability. Initials provide a fallback when an image is unavailable.
-        </p>
-      </div>
-      <div class="flex items-center gap-5">
-        <div suiAvatar status="online">
-          <div suiAvatarContent shape="circle" size="xl"><img src="/sample-avatar.svg" alt="Ada, online" /></div>
-        </div>
-        <div suiAvatar status="offline">
-          <div suiAvatarContent shape="circle" size="xl"><img src="/sample-avatar.svg" alt="Ada, offline" /></div>
-        </div>
-        <div suiAvatar placeholder>
-          <div suiAvatarContent shape="circle" size="xl" class="bg-neutral text-neutral-content"><span>SU</span></div>
-        </div>
-      </div>
-      <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;div suiAvatar status="online"&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>&lt;div suiAvatar placeholder&gt;...&lt;/div&gt;</code></pre>
-      </sui-code>
-    </div>
-  </section>
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-avatar shape="square"&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;sui-avatar shape="circle"&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>&lt;sui-avatar shape="squircle"&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>&lt;sui-avatar shape="hexagon"&gt;...&lt;/sui-avatar&gt;</code></pre>
+    </sui-code>
+  </sui-card>
 
-  <section suiCard>
-    <div suiCardBody class="gap-5">
-      <div>
-        <h2 suiCardTitle>Avatar group</h2>
-        <p class="text-sm text-base-content/60">Group overlapping avatars and end with a placeholder for additional people.</p>
-      </div>
-      <div suiAvatarGroup class="-space-x-6">
-        <div suiAvatar>
-          <div suiAvatarContent shape="circle"><img src="/sample-avatar.svg" alt="Ada" /></div>
-        </div>
-        <div suiAvatar>
-          <div suiAvatarContent shape="circle"><img src="/sample-avatar.svg" alt="Grace" /></div>
-        </div>
-        <div suiAvatar placeholder>
-          <div suiAvatarContent shape="circle" class="bg-neutral text-neutral-content"><span>+99</span></div>
-        </div>
-      </div>
-      <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;div suiAvatarGroup class="-space-x-6"&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>  &lt;div suiAvatar&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="3"><code>&lt;/div&gt;</code></pre>
-      </sui-code>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>All masks</h2>
+      <p class="text-sm text-base-content/60">
+        Masks provide decorative crops while the source image and accessible text remain unchanged.
+      </p>
     </div>
-  </section>
+    <div class="grid grid-cols-3 gap-5 sm:grid-cols-5 lg:grid-cols-8">
+      <sui-avatar shape="heart"><img src="/sample-avatar.svg" alt="Heart avatar" /></sui-avatar>
+      <sui-avatar shape="hexagon"><img src="/sample-avatar.svg" alt="Vertical hexagon avatar" /></sui-avatar>
+      <sui-avatar shape="hexagon-2"><img src="/sample-avatar.svg" alt="Horizontal hexagon avatar" /></sui-avatar>
+      <sui-avatar shape="decagon"><img src="/sample-avatar.svg" alt="Decagon avatar" /></sui-avatar>
+      <sui-avatar shape="pentagon"><img src="/sample-avatar.svg" alt="Pentagon avatar" /></sui-avatar>
+      <sui-avatar shape="diamond"><img src="/sample-avatar.svg" alt="Diamond avatar" /></sui-avatar>
+      <sui-avatar shape="mask-square"><img src="/sample-avatar.svg" alt="Masked square avatar" /></sui-avatar>
+      <sui-avatar shape="mask-circle"><img src="/sample-avatar.svg" alt="Masked circle avatar" /></sui-avatar>
+      <sui-avatar shape="star"><img src="/sample-avatar.svg" alt="Star avatar" /></sui-avatar>
+      <sui-avatar shape="star-2"><img src="/sample-avatar.svg" alt="Bold star avatar" /></sui-avatar>
+      <sui-avatar shape="triangle"><img src="/sample-avatar.svg" alt="Upward triangle avatar" /></sui-avatar>
+      <sui-avatar shape="triangle-2"><img src="/sample-avatar.svg" alt="Downward triangle avatar" /></sui-avatar>
+      <sui-avatar shape="triangle-3"><img src="/sample-avatar.svg" alt="Left triangle avatar" /></sui-avatar>
+      <sui-avatar shape="triangle-4"><img src="/sample-avatar.svg" alt="Right triangle avatar" /></sui-avatar>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-avatar shape="heart"&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;sui-avatar shape="hexagon"&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>&lt;sui-avatar shape="decagon"&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>&lt;sui-avatar shape="pentagon"&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>&lt;sui-avatar shape="diamond"&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="6"><code>&lt;sui-avatar shape="star"&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="7"><code>&lt;sui-avatar shape="triangle"&gt;...&lt;/sui-avatar&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Partial masks</h2>
+      <p class="text-sm text-base-content/60">
+        Use <code>maskHalf</code> to render either half of a mask, for example in ratings or comparisons.
+      </p>
+    </div>
+    <div class="flex gap-4">
+      <sui-avatar shape="star" maskHalf="first" size="xl">
+        <img src="/sample-avatar.svg" alt="First half of star avatar" />
+      </sui-avatar>
+      <sui-avatar shape="star" maskHalf="second" size="xl">
+        <img src="/sample-avatar.svg" alt="Second half of star avatar" />
+      </sui-avatar>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-avatar shape="star" maskHalf="first"&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;sui-avatar shape="star" maskHalf="second"&gt;...&lt;/sui-avatar&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Presence and placeholder</h2>
+      <p class="text-sm text-base-content/60">
+        Presence communicates availability. Initials provide a fallback when an image is unavailable.
+      </p>
+    </div>
+    <div class="flex items-center gap-5">
+      <sui-avatar status="online" shape="circle" size="xl"><img src="/sample-avatar.svg" alt="Ada, online" /></sui-avatar>
+      <sui-avatar status="offline" shape="circle" size="xl"><img src="/sample-avatar.svg" alt="Ada, offline" /></sui-avatar>
+      <sui-avatar placeholder shape="circle" size="xl" class="bg-neutral text-neutral-content"><span>SU</span></sui-avatar>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-avatar status="online"&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;sui-avatar placeholder&gt;...&lt;/sui-avatar&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Avatar group</h2>
+      <p class="text-sm text-base-content/60">Group overlapping avatars and end with a placeholder for additional people.</p>
+    </div>
+    <div suiAvatarGroup class="-space-x-6">
+      <sui-avatar shape="circle"><img src="/sample-avatar.svg" alt="Ada" /></sui-avatar>
+      <sui-avatar shape="circle"><img src="/sample-avatar.svg" alt="Grace" /></sui-avatar>
+      <sui-avatar placeholder shape="circle" class="bg-neutral text-neutral-content"><span>+99</span></sui-avatar>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;div suiAvatarGroup class="-space-x-6"&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;sui-avatar&gt;...&lt;/sui-avatar&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>&lt;/div&gt;</code></pre>
+    </sui-code>
+  </sui-card>
 </main>

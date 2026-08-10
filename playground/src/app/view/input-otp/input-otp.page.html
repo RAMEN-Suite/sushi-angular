@@ -1,0 +1,89 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Input OTP</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Enter short verification codes with native selection, deletion, paste support, and Signal Forms.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2" aria-label="Input OTP capabilities">
+      <span suiBadge variant="soft" size="sm">Native input</span>
+      <span suiBadge variant="soft" size="sm">Paste support</span>
+      <span suiBadge variant="soft" size="sm">Signal Forms</span>
+    </div>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>API reference</h2>
+    <p class="text-base-content/60">Generated from the public Angular API. Descriptions come from source-level JSDoc.</p>
+    <div class="mt-5"><pg-api-reference [api]="api" /></div>
+  </sui-card>
+
+  <section class="space-y-2 pt-2">
+    <h2 class="text-3xl font-bold tracking-tight">Examples</h2>
+    <p class="text-base-content/60">Verification-code patterns with copy-ready HTML and TypeScript.</p>
+  </section>
+
+  @for (
+    section of [
+      {
+        key: 'basic',
+        title: 'Verification code',
+        description: 'One native input preserves selection, paste, and deletion while visual slots keep the code scannable.',
+      },
+      {
+        key: 'formats',
+        title: 'PIN and account code',
+        description: 'Mask sensitive numeric PINs or allow letters for short recovery and account codes.',
+      },
+      {
+        key: 'sizes',
+        title: 'Sizes and length',
+        description: 'Match the slots to the surrounding density and choose a length that reflects the expected code.',
+      },
+      {
+        key: 'states',
+        title: 'Validation and disabled states',
+        description: 'Invalid and disabled states apply to the complete group without changing its dimensions.',
+      },
+    ];
+    track section.key
+  ) {
+    <sui-card>
+      <h2 suiCardTitle>{{ section.title }}</h2>
+      <p class="text-base-content/60">{{ section.description }}</p>
+      <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+        @switch (section.key) {
+          @case ('basic') {
+            <pg-input-otp-basic-example class="block" />
+          }
+          @case ('formats') {
+            <pg-input-otp-formats-example class="block" />
+          }
+          @case ('sizes') {
+            <pg-input-otp-sizes-example class="block" />
+          }
+          @case ('states') {
+            <pg-input-otp-states-example class="block" />
+          }
+        }
+      </sui-card>
+      <div class="mt-6">
+        @switch (section.key) {
+          @case ('basic') {
+            <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" />
+          }
+          @case ('formats') {
+            <pg-example-code [html]="examples.formats.html" [typescript]="examples.formats.typescript" />
+          }
+          @case ('sizes') {
+            <pg-example-code [html]="examples.sizes.html" [typescript]="examples.sizes.typescript" />
+          }
+          @case ('states') {
+            <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" />
+          }
+        }
+      </div>
+    </sui-card>
+  }
+</main>

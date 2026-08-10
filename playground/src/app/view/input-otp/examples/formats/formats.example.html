@@ -1,0 +1,13 @@
+<div class="grid min-w-0 gap-6">
+  <div class="min-w-0 space-y-2">
+    <p class="font-medium">Masked PIN</p>
+    <sui-input-otp [length]="4" masked joined ariaLabel="Masked PIN" />
+    <p class="text-sm text-base-content/60">Numeric characters only.</p>
+  </div>
+
+  <div class="min-w-0 space-y-2">
+    <p class="font-medium">Alphanumeric code</p>
+    <sui-input-otp [length]="4" [numeric]="false" [value]="'AB12'" ariaLabel="Alphanumeric account code" />
+    <p class="text-sm text-base-content/60">Letters and numbers are accepted.</p>
+  </div>
+</div>

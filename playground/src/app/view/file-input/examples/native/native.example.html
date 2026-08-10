@@ -1,0 +1,9 @@
+<div class="grid gap-6">
+  <fieldset suiFieldset class="w-full max-w-xl">
+    <legend suiFieldsetLegend>Documents</legend>
+    <input #input suiFileInput type="file" accept=".pdf,.doc,.docx" multiple aria-describedby="file-hint" (change)="handleFiles($event)" />
+    <p id="file-hint" class="label">PDF or Word documents.</p>
+  </fieldset>
+  <p class="text-sm text-base-content/60">Selected: {{ selected().join(', ') || 'None' }}</p>
+  <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">Reset example</button>
+</div>

@@ -1,0 +1,118 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="space-y-3">
+    <h1 class="text-4xl font-bold tracking-tight">Input Group</h1>
+    <p class="max-w-3xl text-base-content/70">
+      Join controls, actions, and non-interactive add-ons into one visually connected composition.
+    </p>
+  </section>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Prefix, suffix, and actions</h2>
+      <p class="text-sm text-base-content/60">
+        <code>suiInputGroupAddon</code> represents text or decoration; <code>suiJoinItem</code> connects interactive children.
+      </p>
+    </div>
+    <div class="grid gap-4">
+      <div suiInputGroup>
+        <span suiInputGroupAddon>https://</span><input suiInput suiJoinItem aria-label="Domain" placeholder="example.com" /><button
+          suiButton
+          suiJoinItem
+          type="button"
+        >
+          Open
+        </button>
+      </div>
+      <div suiInputGroup>
+        <button suiButton suiJoinItem type="button" variant="outlined">Search</button
+        ><input suiInput suiJoinItem aria-label="Search query" placeholder="Query" /><span suiInputGroupAddon>.com</span>
+      </div>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;div suiInputGroup&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;span suiInputGroupAddon&gt;https://&lt;/span&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>  &lt;input suiInput suiJoinItem aria-label="Domain" /&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>  &lt;button suiButton suiJoinItem&gt;Open&lt;/button&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>&lt;/div&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Multiple and nested items</h2>
+      <p class="text-sm text-base-content/60">
+        Groups may contain several controls and actions. Add an accessible name to each control; the visual connection does not replace
+        labels.
+      </p>
+    </div>
+    <div suiInputGroup class="max-w-2xl">
+      <span suiInputGroupAddon>Budget</span><input suiInput suiJoinItem type="number" aria-label="Budget amount" placeholder="0.00" /><span
+        suiInputGroupAddon
+        >EUR</span
+      ><select class="select join-item" aria-label="Period">
+        <option>Monthly</option>
+        <option>Yearly</option></select
+      ><button suiButton suiJoinItem type="button">Apply</button>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;div suiInputGroup&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;span suiInputGroupAddon&gt;Budget&lt;/span&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>  &lt;input suiInput suiJoinItem type="number" aria-label="Amount" /&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>  &lt;select class="select join-item" aria-label="Period"&gt;...&lt;/select&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>  &lt;button suiButton suiJoinItem&gt;Apply&lt;/button&gt;</code></pre>
+      <pre suiCodeLine prefix="6"><code>&lt;/div&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Vertical and responsive</h2>
+      <p class="text-sm text-base-content/60">
+        <code>orientation</code> accepts horizontal, vertical, or responsive. Responsive groups stack on narrow screens and switch to a
+        horizontal join from the medium breakpoint.
+      </p>
+    </div>
+    <div class="grid gap-4">
+      <div suiInputGroup orientation="vertical" class="max-w-md">
+        <input suiInput suiJoinItem aria-label="Street" placeholder="Street" /><input
+          suiInput
+          suiJoinItem
+          aria-label="City"
+          placeholder="City"
+        /><input suiInput suiJoinItem aria-label="Postal code" placeholder="Postal code" />
+      </div>
+      <div suiInputGroup orientation="responsive" class="w-full max-w-xl">
+        <input suiInput suiJoinItem aria-label="Newsletter email" placeholder="Email" /><button suiButton suiJoinItem type="button">
+          Subscribe
+        </button>
+      </div>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;div suiInputGroup orientation="vertical"&gt;...&lt;/div&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;div suiInputGroup orientation="responsive"&gt;...&lt;/div&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Custom outer corners</h2>
+      <p class="text-sm text-base-content/60">
+        Override only the first and last item radius when a composition needs a different silhouette.
+      </p>
+    </div>
+    <div suiInputGroup>
+      <input suiInput suiJoinItem class="rounded-l-full" aria-label="Message" placeholder="Write a message" /><button
+        suiButton
+        suiJoinItem
+        class="rounded-r-full"
+        type="button"
+      >
+        Send
+      </button>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;input suiInput suiJoinItem class="rounded-l-full" /&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;button suiButton suiJoinItem class="rounded-r-full"&gt;Send&lt;/button&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+</main>

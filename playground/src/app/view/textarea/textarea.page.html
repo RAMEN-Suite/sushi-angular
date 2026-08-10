@@ -1,0 +1,87 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Textarea</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Collect multiline content with native behavior, controlled resizing, semantic colors, and Signal Forms state.
+      </p>
+    </div>
+
+    <div class="flex flex-wrap gap-2" aria-label="Textarea capabilities">
+      <span suiBadge variant="soft" size="sm">Native control</span>
+      <span suiBadge variant="soft" size="sm">Signal Forms</span>
+      <span suiBadge variant="soft" size="sm">Configurable resize</span>
+    </div>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>API reference</h2>
+    <p class="text-base-content/60">Generated from the public Angular API. Descriptions come from source-level JSDoc.</p>
+    <div class="mt-5"><pg-api-reference [api]="api" /></div>
+  </sui-card>
+
+  <section class="space-y-2 pt-2">
+    <h2 class="text-3xl font-bold tracking-tight">Examples</h2>
+    <p class="text-base-content/60">Multiline input patterns with copy-ready HTML and TypeScript.</p>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>Basic usage and forms</h2>
+    <p class="text-base-content/60">
+      Keep labels, rows, character limits, and validation native while Signal Forms owns the value and reset behavior.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-textarea-basic-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" />
+    </div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Resize behavior</h2>
+    <p class="text-base-content/60">
+      Vertical resizing is the default. Restrict or expand it only when the surrounding layout and content make that behavior useful.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-textarea-resize-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.resize.html" [typescript]="examples.resize.typescript" />
+    </div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Sizes and semantic colors</h2>
+    <p class="text-base-content/60">
+      Match the control size to its context and reserve semantic colors for states with an established meaning.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-textarea-appearance-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript" />
+    </div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Native states</h2>
+    <p class="text-base-content/60">
+      Readonly, disabled, and invalid behavior remains native. Connect validation details with a stable ARIA description.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-textarea-states-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" />
+    </div>
+  </sui-card>
+</main>

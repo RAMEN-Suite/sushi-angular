@@ -1,0 +1,50 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="space-y-3">
+    <h1 class="text-4xl font-bold tracking-tight">Join</h1>
+    <p class="max-w-3xl text-base-content/70">Visually connect related elements while keeping each child’s own behavior and semantics.</p>
+  </section>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Horizontal composition</h2>
+      <p class="text-sm text-base-content/60">Apply <code>suiJoin</code> to the container and <code>suiJoinItem</code> to every child.</p>
+    </div>
+    <div suiJoin>
+      <button suiButton suiJoinItem type="button" variant="outlined">Previous</button
+      ><button suiButton suiJoinItem type="button" variant="outlined">Current</button
+      ><button suiButton suiJoinItem type="button" variant="outlined">Next</button>
+    </div>
+    <div suiJoin class="max-w-xl">
+      <input suiInput suiJoinItem aria-label="Search query" placeholder="Search" /><button suiButton suiJoinItem type="button">
+        Search
+      </button>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;div suiJoin&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;button suiButton suiJoinItem&gt;Previous&lt;/button&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>  &lt;button suiButton suiJoinItem&gt;Next&lt;/button&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>&lt;/div&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Vertical composition</h2>
+      <p class="text-sm text-base-content/60">
+        <code>orientation</code> accepts horizontal or vertical. Join is visual only, so add an appropriate group role and accessible name
+        when the children form one logical control.
+      </p>
+    </div>
+    <div suiJoin orientation="vertical" role="group" aria-label="View options" class="w-48">
+      <button suiButton suiJoinItem type="button" variant="outlined">List</button
+      ><button suiButton suiJoinItem type="button" variant="outlined">Grid</button
+      ><button suiButton suiJoinItem type="button" variant="outlined">Board</button>
+    </div>
+
+    <sui-code>
+      <pre
+        suiCodeLine
+        prefix="1"
+      ><code>&lt;div suiJoin orientation="vertical" role="group" aria-label="View options"&gt;...&lt;/div&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+</main>

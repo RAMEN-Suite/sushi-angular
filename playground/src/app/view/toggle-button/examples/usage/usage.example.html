@@ -1,0 +1,6 @@
+<div class="grid gap-5">
+  <div class="flex flex-wrap gap-3"><sui-toggle-button [formField]="notificationForm.notifications" offLabel="Muted" onLabel="Enabled" /><sui-toggle-button severity="secondary" [checked]="favorite()" (checkedChange)="favorite.set($event)"><ng-template suiToggleButtonOff><svg lucideX class="size-4" aria-hidden="true"></svg>Favorite</ng-template><ng-template suiToggleButtonOn><svg lucideCheck class="size-4" aria-hidden="true"></svg>Favorite</ng-template></sui-toggle-button></div>
+  <sui-toggle-button [checked]="custom()" (checkedChange)="custom.set($event)"><ng-template suiToggleButton let-checked="checked" let-toggle="toggle" let-disabled="disabled"><button suiButton type="button" severity="neutral" [variant]="checked ? null : 'outlined'" [disabled]="disabled" [attr.aria-pressed]="checked" (click)="toggle()">Custom: {{ checked ? 'On' : 'Off' }}</button></ng-template></sui-toggle-button>
+  <div class="flex flex-wrap gap-3"><sui-toggle-button size="sm" variant="soft" shape="square" offLabel="S" onLabel="S" ariaLabel="Small square toggle" /><sui-toggle-button disabled offLabel="Disabled" onLabel="Disabled" /><sui-toggle-button loading offLabel="Loading" onLabel="Loading" /></div>
+  <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">Reset</button>
+</div>

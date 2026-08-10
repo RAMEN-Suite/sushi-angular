@@ -1,0 +1,19 @@
+<sui-file-drop
+  class="w-full max-w-xl"
+  accept=".pdf,image/*,text/plain"
+  multiple
+  label="Drop project files here"
+  description="PDF, image, or plain-text files"
+  chooseLabel="Browse files"
+  replaceLabel="Choose different files"
+  clearLabel="Remove all"
+  rejectionLabel="Unsupported file"
+  [formField]="form.files"
+  (filesDropped)="handleDrop($event)"
+  (filesRejected)="handleRejection($event)"
+/>
+
+<div class="mt-3 grid gap-1 text-sm text-base-content/60">
+  <p>Last drop: {{ lastDrop() }}</p>
+  <p>Rejected: {{ rejected() }}</p>
+</div>

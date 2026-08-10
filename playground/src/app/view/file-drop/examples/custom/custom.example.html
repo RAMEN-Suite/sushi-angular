@@ -1,0 +1,26 @@
+<sui-file-drop
+  class="w-full max-w-xl"
+  accept="image/png,image/jpeg"
+  multiple
+  label="Drop campaign images"
+  description="PNG or JPEG files"
+  [formField]="form.files"
+>
+  <ng-template suiFileDropContent let-files let-active="active" let-disabled="disabled">
+    <svg lucideUpload class="size-8 text-base-content/50" aria-hidden="true"></svg>
+    <strong>{{
+      disabled ? 'Upload unavailable' : active ? 'Release images to add them' : files.length ? 'Images ready' : 'Drop campaign images'
+    }}</strong>
+    <span class="text-base-content/60">PNG or JPEG files.</span>
+  </ng-template>
+
+  <ng-template suiFileDropItem let-file let-size="size">
+    <div class="flex min-w-0 items-center gap-3">
+      <svg lucideFileText class="size-5 shrink-0 text-base-content/50" aria-hidden="true"></svg>
+      <div class="min-w-0">
+        <p class="truncate font-medium">{{ file.name }}</p>
+        <p class="text-sm text-base-content/60">{{ size }} · Ready</p>
+      </div>
+    </div>
+  </ng-template>
+</sui-file-drop>

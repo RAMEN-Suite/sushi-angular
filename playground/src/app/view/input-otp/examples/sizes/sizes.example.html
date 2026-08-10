@@ -1,0 +1,22 @@
+<fieldset suiFieldset class="max-w-xl">
+  <legend suiFieldsetLegend>Sizes</legend>
+  <div class="grid min-w-0 gap-4">
+    @for (size of sizes; track size) {
+      <div class="grid min-w-0 gap-1.5">
+        <span class="flex items-center justify-between gap-3 text-sm font-medium">
+          {{ size.toUpperCase() }}
+          <code suiBadge severity="neutral" variant="soft" size="xs" class="font-mono">size="{{ size }}"</code>
+        </span>
+        <sui-input-otp [size]="size" [length]="4" [attr.aria-label]="size + ' verification code'" />
+      </div>
+    }
+
+    <div class="grid min-w-0 gap-1.5">
+      <span class="flex items-center justify-between gap-3 text-sm font-medium">
+        Eight-digit code
+        <code suiBadge severity="neutral" variant="soft" size="xs" class="font-mono">length="8"</code>
+      </span>
+      <sui-input-otp size="sm" [length]="8" ariaLabel="Eight-digit security code" />
+    </div>
+  </div>
+</fieldset>

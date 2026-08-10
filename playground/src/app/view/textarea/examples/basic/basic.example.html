@@ -1,0 +1,20 @@
+<div class="grid w-96 max-w-full gap-2">
+  <label for="message" class="font-medium">Message</label>
+
+  <div suiJoin orientation="vertical">
+    <textarea
+      id="message"
+      suiTextarea
+      suiJoinItem
+      class="w-full"
+      rows="4"
+      placeholder="Write a message"
+      aria-describedby="message-count"
+      [formField]="form.message"
+    ></textarea>
+
+    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset example</button>
+  </div>
+
+  <span id="message-count" class="text-sm text-base-content/60">{{ form.message().value().length }}/240 characters</span>
+</div>

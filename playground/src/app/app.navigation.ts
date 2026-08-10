@@ -10,6 +10,109 @@ export interface NavigationGroup {
 
 export const navigation: NavigationGroup[] = [
   {
+    label: 'Input',
+    items: [
+      {
+        label: 'Input',
+        path: '/input',
+      },
+      {
+        label: 'Textarea',
+        path: '/textarea',
+      },
+      {
+        label: 'Input Number',
+        path: '/input-number',
+      },
+      {
+        label: 'Input OTP',
+        path: '/input-otp',
+      },
+      {
+        label: 'File Input',
+        path: '/file-input',
+      },
+      {
+        label: 'File Drop',
+        path: '/file-drop',
+      },
+      {
+        label: 'Color Picker',
+        path: '/color-picker',
+      },
+      {
+        label: 'Range',
+        path: '/range',
+      },
+    ],
+  },
+  {
+    label: 'Selection',
+    items: [
+      {
+        label: 'Autocomplete',
+        path: '/autocomplete',
+      },
+      {
+        label: 'Select',
+        path: '/select',
+      },
+      {
+        label: 'Multi-Select',
+        path: '/multi-select',
+      },
+      {
+        label: 'Select Button',
+        path: '/select-button',
+      },
+      {
+        label: 'Checkbox',
+        path: '/checkbox',
+      },
+      {
+        label: 'Radio',
+        path: '/radio',
+      },
+      {
+        label: 'Toggle',
+        path: '/toggle',
+      },
+      {
+        label: 'Toggle Button',
+        path: '/toggle-button',
+      },
+    ],
+  },
+  {
+    label: 'Form Layout',
+    items: [
+      {
+        label: 'Form Field',
+        path: '/form-field',
+      },
+      {
+        label: 'Fieldset',
+        path: '/fieldset',
+      },
+      {
+        label: 'Input Wrapper',
+        path: '/input-wrapper',
+      },
+      {
+        label: 'Input Group',
+        path: '/input-group',
+      },
+      {
+        label: 'Join',
+        path: '/join',
+      },
+      {
+        label: 'Auto Focus',
+        path: '/auto-focus',
+      },
+    ],
+  },
+  {
     label: 'Actions',
     items: [
       {
@@ -19,15 +122,23 @@ export const navigation: NavigationGroup[] = [
     ],
   },
   {
-    label: 'Form',
+    label: 'Feedback',
     items: [
       {
-        label: 'Auto Focus',
-        path: '/auto-focus',
+        label: 'Message',
+        path: '/message',
       },
       {
-        label: 'Toggle Button',
-        path: '/toggle-button',
+        label: 'Status',
+        path: '/status',
+      },
+      {
+        label: 'Spinner',
+        path: '/spinner',
+      },
+      {
+        label: 'Indicator',
+        path: '/indicator',
       },
     ],
   },
@@ -43,28 +154,12 @@ export const navigation: NavigationGroup[] = [
         path: '/badge',
       },
       {
-        label: 'Icons',
-        path: '/icon',
-      },
-      {
-        label: 'Indicator',
-        path: '/indicator',
-      },
-      {
         label: 'Keyboard Key',
         path: '/kbd',
       },
       {
-        label: 'Message',
-        path: '/message',
-      },
-      {
-        label: 'Spinner',
-        path: '/spinner',
-      },
-      {
-        label: 'Status',
-        path: '/status',
+        label: 'Icons',
+        path: '/icon',
       },
     ],
   },
@@ -79,10 +174,14 @@ export const navigation: NavigationGroup[] = [
         label: 'Divider',
         path: '/divider',
       },
+      {
+        label: 'Tabs',
+        path: '/tabs',
+      },
     ],
   },
   {
-    label: 'Mockup',
+    label: 'Developer',
     items: [
       {
         label: 'Code',

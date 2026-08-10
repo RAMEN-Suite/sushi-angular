@@ -1,0 +1,31 @@
+<div class="w-full max-w-md" suiLabel>
+  <span suiFormFieldLabel id="team-label">Workspace team</span>
+  <div suiJoin class="w-full">
+    <sui-select
+      suiJoinItem
+      fluid
+      showClear
+      checkmark
+      class="min-w-0 flex-1"
+      [options]="options"
+      [loading]="loading()"
+      [(value)]="value"
+      ariaLabelledby="team-label"
+    >
+      <ng-template suiSelectHeader><strong>Available teams</strong></ng-template>
+      <ng-template suiSelectFooter><span class="text-sm text-base-content/60">Managed by your workspace</span></ng-template>
+      <ng-template suiSelectEmpty>No teams are available.</ng-template>
+      <ng-template suiSelectLoading let-message>
+        <span class="flex items-center gap-2"><span suiSpinner size="sm"></span>{{ message }}</span>
+      </ng-template>
+      <ng-template suiSelectLoadingIcon><span suiSpinner size="xs"></span></ng-template>
+      <ng-template suiSelectDropdownIcon><svg lucideChevronsUpDown class="size-4" aria-hidden="true"></svg></ng-template>
+      <ng-template suiSelectClearIcon><svg lucideCircleX class="size-4" aria-hidden="true"></svg></ng-template>
+      <ng-template suiSelectCheckmarkIcon><svg lucideBadgeCheck class="size-4" aria-hidden="true"></svg></ng-template>
+    </sui-select>
+    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="toggleLoading()">
+      {{ loading() ? 'Stop' : 'Preview loading' }}
+    </button>
+  </div>
+  <span suiFormFieldHint>Header, footer, state, and icon templates can be replaced independently.</span>
+</div>

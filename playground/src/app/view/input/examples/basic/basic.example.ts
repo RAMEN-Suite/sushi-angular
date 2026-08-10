@@ -2,6 +2,10 @@ import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@ang
 import { FieldTree, form, FormField, required, SchemaPathTree } from '@angular/forms/signals';
 import { Button, Input, Join, JoinItem } from '@ramen-suite/sushi';
 
+interface InputModel {
+  name: string;
+}
+
 @Component({
   selector: 'pg-input-basic-example',
   imports: [FormField, Button, Input, Join, JoinItem],
@@ -9,8 +13,8 @@ import { Button, Input, Join, JoinItem } from '@ramen-suite/sushi';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputBasicExample {
-  protected readonly model: WritableSignal<{ name: string }> = signal({ name: '' });
-  protected readonly form: FieldTree<{ name: string }> = form(this.model, (schema: SchemaPathTree<{ name: string }>): void =>
+  protected readonly model: WritableSignal<InputModel> = signal({ name: '' });
+  protected readonly form: FieldTree<InputModel> = form(this.model, (schema: SchemaPathTree<InputModel>): void =>
     required(schema.name),
   );
 

@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge, Input } from '@ramen-suite/sushi';
 
+interface NativeType {
+  label: string;
+  type: string;
+  placeholder: string;
+}
+
 @Component({
   selector: 'pg-input-native-types-example',
   imports: [Badge, Input],
@@ -8,7 +14,7 @@ import { Badge, Input } from '@ramen-suite/sushi';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputNativeTypesExample {
-  protected readonly types: readonly { label: string; type: string; placeholder: string }[] = [
+  protected readonly types: readonly NativeType[] = [
     { label: 'Text', type: 'text', placeholder: 'Plain text' },
     { label: 'Password', type: 'password', placeholder: 'Secret value' },
     { label: 'Email', type: 'email', placeholder: 'name@example.com' },

@@ -1,0 +1,28 @@
+<div class="grid items-start gap-6 lg:grid-cols-2">
+  <fieldset suiFieldset>
+    <legend suiFieldsetLegend>Sizes</legend>
+    <div class="grid gap-3">
+      @for (size of sizes; track size) {
+        <label class="grid gap-1.5">
+          <span class="flex items-center justify-between gap-3 text-sm font-medium">
+            {{ size.toUpperCase() }}
+            <code suiBadge severity="neutral" variant="soft" size="xs" class="font-mono">size="{{ size }}"</code>
+          </span>
+          <input suiRange type="range" class="w-full" [size]="size" value="45" />
+        </label>
+      }
+    </div>
+  </fieldset>
+
+  <fieldset suiFieldset>
+    <legend suiFieldsetLegend>Semantic colors</legend>
+    <div class="grid gap-3">
+      @for (color of colors; track color) {
+        <label class="grid gap-1.5">
+          <span class="text-sm font-medium">{{ color }}</span>
+          <input suiRange type="range" class="w-full" [severity]="color" value="65" />
+        </label>
+      }
+    </div>
+  </fieldset>
+</div>

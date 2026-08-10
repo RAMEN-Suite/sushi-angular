@@ -1,0 +1,5 @@
+<sui-code>
+  @for (line of renderedLines(); track $index) {
+    <pre suiCodeLine [prefix]="$index + 1"><code>{{ line }}</code></pre>
+  }
+</sui-code>

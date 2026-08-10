@@ -1,0 +1,21 @@
+<div class="grid w-80 max-w-full gap-5">
+  <div suiLabel>
+    <span suiFormFieldLabel>Invoice amount</span>
+    <sui-input-number fluid prefix="$" suffix=" USD" [minFractionDigits]="2" [maxFractionDigits]="2" />
+  </div>
+
+  <div suiLabel>
+    <span suiFormFieldLabel>Distance</span>
+    <sui-input-number fluid prefix="≈ " suffix=" km" [value]="42" />
+  </div>
+
+  <div suiLabel>
+    <span suiFormFieldLabel>Invalid quantity</span>
+    <sui-input-number fluid invalid ariaLabel="Invalid quantity" [value]="120" />
+  </div>
+
+  <div suiLabel>
+    <span suiFormFieldLabel>Disabled quantity</span>
+    <sui-input-number fluid disabled ariaLabel="Disabled quantity" [value]="42" />
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Select</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Choose one value from a short, fixed, familiar list without turning the field into a text input.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2" aria-label="Select capabilities">
+      <span suiBadge variant="soft" size="sm">Angular Aria</span><span suiBadge variant="soft" size="sm">Signal Forms</span
+      ><span suiBadge variant="soft" size="sm">Templates</span>
+    </div>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>Basic usage and forms</h2>
+    <p class="text-base-content/60">Bind a Signal Forms field and compose actions through the shared join primitives.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-select-basic-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Options, groups, and object values</h2>
+    <p class="text-base-content/60">
+      Use <code>compareWith</code> for object identity and templates for richer rows, selected content, and clearly separated categories.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-select-options-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.options.html" [typescript]="examples.options.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Popup and icon templates</h2>
+    <p class="text-base-content/60">Replace structural popup content and icons without duplicating selection behavior.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-select-templates-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Sizes and states</h2>
+    <p class="text-base-content/60">
+      Keep disabled, loading, required, invalid, fluid, and label composition consistent with other form controls.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-select-states-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" /></div>
+  </sui-card>
+</main>

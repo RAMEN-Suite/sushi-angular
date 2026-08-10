@@ -1,0 +1,16 @@
+<fieldset suiFieldset class="min-w-0">
+  <legend suiFieldsetLegend>Resize behavior</legend>
+
+  <div class="grid items-start gap-4 sm:grid-cols-2">
+    @for (mode of modes; track mode) {
+      <label class="grid min-w-0 gap-2">
+        <span class="flex items-center justify-between gap-3 font-medium">
+          {{ mode }}
+          <code suiBadge severity="neutral" variant="soft" size="xs" class="font-mono">resize="{{ mode }}"</code>
+        </span>
+
+        <textarea suiTextarea class="w-full" [resize]="mode" rows="3" [placeholder]="mode + ' resizing'"></textarea>
+      </label>
+    }
+  </div>
+</fieldset>

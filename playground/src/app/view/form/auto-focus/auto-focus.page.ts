@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { AutoFocus, Button, Card, CardBody, CardTitle, Code, CodeLine } from '@ramen-suite/sushi';
+import { AutoFocus, Button, Card, CardTitle, Code, CodeLine } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-auto-focus-page',
-  imports: [AutoFocus, Button, Card, CardBody, CardTitle, Code, CodeLine],
+  imports: [AutoFocus, Button, Card, CardTitle, Code, CodeLine],
   templateUrl: './auto-focus.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

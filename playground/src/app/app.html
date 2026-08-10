@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-base-100 text-base-content">
-  <div class="grid min-h-screen grid-cols-[18rem_1fr]">
-    <aside class="sticky top-0 h-screen border-r border-base-300 bg-base-100">
-      <div class="flex h-full flex-col">
+  <div class="grid min-h-screen lg:grid-cols-[18rem_1fr]">
+    <aside class="border-b border-base-300 bg-base-100 lg:sticky lg:top-0 lg:h-screen lg:border-b-0 lg:border-r">
+      <div class="flex flex-col lg:h-full">
         <div class="border-b border-base-300 px-6 py-5">
           <a routerLink="/" class="block">
             <div class="text-xl font-bold tracking-tight">SUSHI</div>
@@ -9,9 +9,36 @@
           </a>
         </div>
 
-        <nav class="flex-1 overflow-y-auto px-4 py-5">
+        <details class="border-base-300 border-b px-4 py-3 lg:hidden">
+          <summary class="btn btn-ghost w-full justify-between">Browse components</summary>
+          <nav class="grid grid-cols-2 items-start gap-4 py-4 sm:grid-cols-3">
+            @for (group of sidebar; track group.label) {
+              <section>
+                <h2 class="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-base-content/50">
+                  {{ group.label }}
+                </h2>
+
+                <div class="space-y-1">
+                  @for (item of group.items; track item.path) {
+                    <a
+                      class="flex rounded-field px-3 py-2 text-sm transition hover:bg-base-200"
+                      [routerLink]="item.path"
+                      routerLinkActive="bg-base-200 font-semibold text-base-content"
+                      [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+                    >
+                      {{ item.label }}
+                    </a>
+                  }
+                </div>
+              </section>
+            }
+          </nav>
+          <button suiButton shape="fluid" (click)="toggleTheme()">{{ theme() === 'sushi' ? 'Dark Mode' : 'Light Mode' }}</button>
+        </details>
+
+        <nav class="hidden px-4 py-5 lg:block lg:flex-1 lg:overflow-y-auto">
           @for (group of sidebar; track group.label) {
-            <section class="mb-6 last:mb-0">
+            <section class="mb-0 lg:mb-6 lg:last:mb-0">
               <h2 class="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-base-content/50">
                 {{ group.label }}
               </h2>
@@ -32,7 +59,7 @@
           }
         </nav>
 
-        <div class="border-b border-t border-base-300 px-6 py-5">
+        <div class="border-b border-t border-base-300 hidden px-6 py-5 lg:block">
           <button suiButton shape="fluid" (click)="toggleTheme()">{{ theme() === 'sushi' ? 'Dark Mode' : 'Light Mode' }}</button>
         </div>
       </div>

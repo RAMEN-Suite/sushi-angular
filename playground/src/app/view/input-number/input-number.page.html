@@ -1,0 +1,72 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Input Number</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Edit numeric values with localization, currency formatting, bounds, precision, and Signal Forms state.
+      </p>
+    </div>
+
+    <div class="flex flex-wrap gap-2" aria-label="Input Number capabilities">
+      <span suiBadge variant="soft" size="sm">Localized values</span>
+      <span suiBadge variant="soft" size="sm">Signal Forms</span>
+      <span suiBadge variant="soft" size="sm">Bounds and precision</span>
+    </div>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>API reference</h2>
+    <p class="text-base-content/60">Generated from the public Angular API. Descriptions come from source-level JSDoc.</p>
+    <div class="mt-5"><pg-api-reference [api]="api" /></div>
+  </sui-card>
+
+  <section class="space-y-2 pt-2">
+    <h2 class="text-3xl font-bold tracking-tight">Examples</h2>
+    <p class="text-base-content/60">Numeric input patterns with copy-ready HTML and TypeScript.</p>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>Basic usage and forms</h2>
+    <p class="text-base-content/60">
+      Keep the model numeric while the visible value follows its locale and currency. The reset action restores the initial form value.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-input-number-basic-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" />
+    </div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Limits, steps, and precision</h2>
+    <p class="text-base-content/60">
+      Combine bounds, step sizes, and fraction digits to match the domain without changing the numeric model type.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-input-number-limits-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.limits.html" [typescript]="examples.limits.typescript" />
+    </div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Affixes and states</h2>
+    <p class="text-base-content/60">
+      Prefixes and suffixes remain visual. Invalid and disabled controls retain the same dimensions and native interaction semantics.
+    </p>
+
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-input-number-states-example />
+    </sui-card>
+
+    <div class="mt-6">
+      <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" />
+    </div>
+  </sui-card>
+</main>

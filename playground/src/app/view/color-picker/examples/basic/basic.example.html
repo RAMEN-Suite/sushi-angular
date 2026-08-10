@@ -1,0 +1,14 @@
+<div class="grid w-96 max-w-full gap-4">
+  <label id="brand-color-label" for="brand-color" class="font-medium">Brand color</label>
+  <sui-color-picker id="brand-color" ariaLabelledby="brand-color-label" defaultValue="#0369a1" [formField]="form.color">
+    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
+  </sui-color-picker>
+
+  <div class="flex w-fit items-center gap-3 rounded-box border border-base-300 bg-base-100 p-3 shadow-sm">
+    <span class="size-10 rounded-field border border-base-300 shadow-inner" [style.background-color]="form.color().value()"></span>
+    <span>
+      <span class="block text-xs text-base-content/60">Selected color</span>
+      <code class="font-mono uppercase">{{ form.color().value() }}</code>
+    </span>
+  </div>
+</div>

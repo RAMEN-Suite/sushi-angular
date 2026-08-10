@@ -1,0 +1,23 @@
+<div suiLabel class="w-full max-w-sm">
+  <span suiFormFieldLabel id="destination-label">Destination</span>
+  <sui-autocomplete
+    fluid
+    [options]="cities"
+    [compareWith]="compareDestinations"
+    [filterWith]="startsWith"
+    [optionHeight]="48"
+    [scrollHeight]="192"
+    [(value)]="value"
+    placeholder="Search destinations"
+    ariaLabelledby="destination-label"
+  >
+    <ng-template suiAutocompletePrefix><svg lucideMapPin class="size-4" aria-hidden="true"></svg></ng-template>
+    <ng-template suiAutocompleteItem let-option let-index="index">
+      <span class="flex w-full items-center gap-2"
+        ><svg lucideMapPin class="size-4" aria-hidden="true"></svg><span class="grow">{{ option.label }}</span
+        ><small>{{ index + 1 }}</small></span
+      >
+    </ng-template>
+    <ng-template suiAutocompleteEmpty let-query="query">No destinations match “{{ query }}”.</ng-template>
+  </sui-autocomplete>
+</div>

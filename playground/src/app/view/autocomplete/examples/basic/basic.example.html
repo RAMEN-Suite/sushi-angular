@@ -1,0 +1,17 @@
+<div class="grid w-full max-w-md gap-2">
+  <label for="city" class="font-medium">City</label>
+  <div suiJoin class="w-full">
+    <sui-autocomplete
+      suiJoinItem
+      fluid
+      forceSelection
+      id="city"
+      class="min-w-0 flex-1"
+      [options]="cities"
+      [formField]="cityForm.city"
+      placeholder="Search cities"
+    />
+    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
+  </div>
+  <p class="text-sm text-base-content/60">Selected: {{ cityForm.city().value() ?? 'None' }}</p>
+</div>

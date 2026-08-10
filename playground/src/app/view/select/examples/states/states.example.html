@@ -1,0 +1,50 @@
+<div class="grid max-w-3xl items-start gap-6 lg:grid-cols-2">
+  <fieldset suiFieldset>
+    <legend suiFieldsetLegend>Sizes</legend>
+    <div class="grid gap-4">
+      <div suiLabel>
+        <span suiFormFieldLabel>Compact</span>
+        <sui-select fluid size="sm" [options]="options" [(value)]="value" ariaLabel="Compact delivery" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Default</span>
+        <sui-select fluid [options]="options" [(value)]="value" ariaLabel="Default delivery" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Large</span>
+        <sui-select fluid size="lg" [options]="options" [(value)]="value" ariaLabel="Large delivery" />
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset suiFieldset>
+    <legend suiFieldsetLegend>States</legend>
+    <div class="grid gap-4">
+      <div suiLabel>
+        <span suiFormFieldLabel>Filled and clearable</span>
+        <sui-select fluid showClear variant="filled" [options]="options" [(value)]="value" ariaLabel="Filled delivery" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Loading</span>
+        <sui-select fluid loading [options]="options" value="priority" ariaLabel="Loading delivery" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Disabled</span>
+        <sui-select fluid disabled [options]="options" value="standard" ariaLabel="Disabled delivery" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Invalid selection</span>
+        <sui-select
+          fluid
+          invalid
+          required
+          [options]="options"
+          [(value)]="invalidValue"
+          ariaLabel="Invalid delivery"
+          ariaDescribedby="delivery-error"
+        />
+        <span suiFormFieldHint id="delivery-error" class="text-error">Choose a delivery method.</span>
+      </div>
+    </div>
+  </fieldset>
+</div>

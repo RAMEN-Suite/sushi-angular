@@ -1,0 +1,19 @@
+<div class="grid gap-6">
+  <div class="grid gap-2">
+    <span id="preset-color-label" class="font-medium">Quick palette</span>
+    <sui-color-picker ariaLabelledby="preset-color-label" [presets]="colors" [value]="'#0369a1'" class="w-fit" />
+  </div>
+
+  <div class="grid gap-2">
+    <span id="palette-color-label" class="font-medium">Custom preset content</span>
+    <sui-color-picker ariaLabelledby="palette-color-label" [presets]="presets" [value]="'#334155'" class="w-fit">
+      <ng-template suiColorPickerPreset let-color let-label="label" let-selected="selected">
+        <span class="size-4 rounded-field border border-current/20" [style.background-color]="color"></span>
+        {{ label }}
+        @if (selected) {
+          <svg lucideCheck class="size-4" aria-hidden="true"></svg>
+        }
+      </ng-template>
+    </sui-color-picker>
+  </div>
+</div>

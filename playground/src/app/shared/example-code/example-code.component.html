@@ -1,0 +1,9 @@
+<sui-tabs ariaLabel="Example source" variant="lift" [(value)]="activeTab">
+  <ng-template suiTab value="html" label="HTML">
+    <pg-code-example [source]="html()" />
+  </ng-template>
+
+  <ng-template suiTab value="typescript" label="TypeScript">
+    <pg-code-example [source]="typescript()" />
+  </ng-template>
+</sui-tabs>

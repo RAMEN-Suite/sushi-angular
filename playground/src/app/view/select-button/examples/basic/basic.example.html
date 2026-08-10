@@ -1,0 +1,5 @@
+<div class="grid gap-3">
+  <sui-select-button [options]="options" [formField]="alignmentForm.alignment" ariaLabel="Text alignment" />
+  <p class="text-sm text-base-content/60">Selected: {{ alignmentForm.alignment().value() }}</p>
+  <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">Reset</button>
+</div>

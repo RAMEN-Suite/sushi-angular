@@ -1,0 +1,13 @@
+<div class="grid max-w-2xl gap-5 sm:grid-cols-2">
+  <sui-multi-select fluid showSelectAll size="sm" severity="info" [maxSelectedLabels]="2" [options]="options" [(value)]="value" ariaLabel="Compact labels">
+    <ng-template suiMultiSelectHeader let-selectedCount="selectedCount"><p class="mt-2 text-xs text-base-content/60">{{ selectedCount }} selected</p></ng-template><ng-template suiMultiSelectFooter><small>Choose all that apply.</small></ng-template>
+    <ng-template suiMultiSelectDropdownIcon><svg lucideChevronsUpDown class="size-4" aria-hidden="true"></svg></ng-template>
+    <ng-template suiMultiSelectClearIcon><svg lucideCircleX class="size-4" aria-hidden="true"></svg></ng-template>
+    <ng-template suiMultiSelectCheckmarkIcon><svg lucideBadgeCheck class="size-4" aria-hidden="true"></svg></ng-template>
+  </sui-multi-select>
+  <sui-multi-select fluid [showClear]="false" variant="filled" [options]="options" [value]="['work']" ariaLabel="Filled labels" />
+  <sui-multi-select fluid disabled [options]="options" [value]="['work']" ariaLabel="Disabled labels" />
+  <sui-multi-select fluid loading [options]="options" ariaLabel="Loading labels"><ng-template suiMultiSelectLoadingIcon><span suiSpinner size="xs"></span></ng-template><ng-template suiMultiSelectLoading let-message>{{ message }}</ng-template></sui-multi-select>
+  <sui-multi-select fluid invalid required [options]="options" ariaLabel="Invalid labels" />
+  <sui-multi-select fluid [options]="[]" ariaLabel="Empty labels"><ng-template suiMultiSelectEmpty>No labels are available.</ng-template></sui-multi-select>
+</div>

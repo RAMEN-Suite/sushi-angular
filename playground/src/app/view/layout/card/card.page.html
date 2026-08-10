@@ -1,210 +1,254 @@
-<main class="mx-auto max-w-7xl space-y-8 px-8 py-10">
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
   <section class="space-y-3">
     <h1 class="text-4xl font-bold tracking-tight">Card</h1>
 
     <p class="max-w-3xl text-base-content/70">
-      Use <code>suiCard</code> to group related content in a visual container. Cards support variants, sizes, body content, titles, and
-      action areas.
+      Use <code>sui-card</code> to group related content in a visual container. Cards support variants, sizes, media, titles, and action
+      areas.
     </p>
   </section>
 
-  <section suiCard>
-    <div suiCardBody class="gap-5">
-      <div>
-        <h2 suiCardTitle>Basic usage</h2>
-        <p class="text-sm text-base-content/60">The default card uses <code>variant="border"</code> and <code>size="md"</code>.</p>
-      </div>
-
-      <p class="text-base-content/70">Cards are useful for summaries, grouped metadata, forms, examples, and contextual actions.</p>
-
-      <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;section suiCard&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>  &lt;div suiCardBody&gt;</code></pre>
-        <pre suiCodeLine prefix="3"><code>    &lt;h2 suiCardTitle&gt;Card title&lt;/h2&gt;</code></pre>
-        <pre suiCodeLine prefix="4"><code>    &lt;p&gt;Card content&lt;/p&gt;</code></pre>
-        <pre suiCodeLine prefix="5"><code>  &lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="6"><code>&lt;/section&gt;</code></pre>
-      </sui-code>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Basic usage</h2>
+      <p class="text-sm text-base-content/60">
+        The default card uses <code>variant="border"</code> and <code>size="md"</code>. Width remains a layout decision; this card is
+        deliberately constrained.
+      </p>
     </div>
-  </section>
 
-  <section suiCard>
-    <div suiCardBody class="gap-6">
-      <div>
-        <h2 suiCardTitle>Variants</h2>
-        <p class="text-sm text-base-content/60">Available variants are <code>plain</code>, <code>border</code>, and <code>dash</code>.</p>
-      </div>
+    <sui-card class="w-80 max-w-full">
+      <h3 suiCardTitle>Card title</h3>
+      <p class="text-base-content/70">Cards group a focused piece of content and its related actions.</p>
+    </sui-card>
 
-      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-        <section suiCard size="xs">
-          <div suiCardBody>
-            <h3 suiCardTitle>Extra small</h3>
-            <p class="text-sm text-base-content/60">Dense content.</p>
-          </div>
-        </section>
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-card class="w-80 max-w-full"&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;h2 suiCardTitle&gt;Card title&lt;/h2&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>  &lt;p&gt;Card content&lt;/p&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>&lt;/sui-card&gt;</code></pre>
+    </sui-code>
+  </sui-card>
 
-        <section suiCard variant="plain" class="bg-base-200">
-          <div suiCardBody>
-            <h3 suiCardTitle>Plain</h3>
-            <p class="text-sm text-base-content/60">Simple card surface.</p>
-          </div>
-        </section>
-
-        <section suiCard variant="border">
-          <div suiCardBody>
-            <h3 suiCardTitle>Border</h3>
-            <p class="text-sm text-base-content/60">Default Sushi card.</p>
-          </div>
-        </section>
-
-        <section suiCard variant="dash">
-          <div suiCardBody>
-            <h3 suiCardTitle>Dash</h3>
-            <p class="text-sm text-base-content/60">Dashed visual grouping.</p>
-          </div>
-        </section>
-      </div>
-
-      <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;section suiCard variant="plain"&gt;...&lt;/section&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>&lt;section suiCard variant="border"&gt;...&lt;/section&gt;</code></pre>
-        <pre suiCodeLine prefix="3"><code>&lt;section suiCard variant="dash"&gt;...&lt;/section&gt;</code></pre>
-      </sui-code>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Variants</h2>
+      <p class="text-sm text-base-content/60">Available variants are <code>plain</code>, <code>border</code>, and <code>dash</code>.</p>
     </div>
-  </section>
 
-  <section suiCard>
-    <div suiCardBody class="gap-6">
-      <div>
-        <h2 suiCardTitle>Sizes</h2>
-        <p class="text-sm text-base-content/60">
-          Available sizes are <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>.
-        </p>
-      </div>
+    <div class="grid gap-4 md:grid-cols-3">
+      <sui-card variant="plain" class="bg-base-200">
+        <h3 suiCardTitle>Plain</h3>
+        <p class="text-sm text-base-content/60">A surface without a visible border.</p>
+      </sui-card>
 
-      <div class="grid gap-4 md:grid-cols-3">
-        <section suiCard size="sm">
-          <div suiCardBody>
-            <h3 suiCardTitle>Small</h3>
-            <p class="text-sm text-base-content/60">Compact content.</p>
-          </div>
-        </section>
+      <sui-card variant="border">
+        <h3 suiCardTitle>Border</h3>
+        <p class="text-sm text-base-content/60">The default solid border.</p>
+      </sui-card>
 
-        <section suiCard size="md">
-          <div suiCardBody>
-            <h3 suiCardTitle>Medium</h3>
-            <p class="text-sm text-base-content/60">Default card size.</p>
-          </div>
-        </section>
-
-        <section suiCard size="lg">
-          <div suiCardBody>
-            <h3 suiCardTitle>Large</h3>
-            <p class="text-sm text-base-content/60">More spacious content.</p>
-          </div>
-        </section>
-
-        <section suiCard size="xl">
-          <div suiCardBody>
-            <h3 suiCardTitle>Extra large</h3>
-            <p class="text-sm text-base-content/60">Maximum spacing.</p>
-          </div>
-        </section>
-      </div>
-
-      <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;section suiCard size="xs"&gt;...&lt;/section&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>&lt;section suiCard size="sm"&gt;...&lt;/section&gt;</code></pre>
-        <pre suiCodeLine prefix="3"><code>&lt;section suiCard size="md"&gt;...&lt;/section&gt;</code></pre>
-        <pre suiCodeLine prefix="4"><code>&lt;section suiCard size="lg"&gt;...&lt;/section&gt;</code></pre>
-        <pre suiCodeLine prefix="5"><code>&lt;section suiCard size="xl"&gt;...&lt;/section&gt;</code></pre>
-      </sui-code>
+      <sui-card variant="dash">
+        <h3 suiCardTitle>Dash</h3>
+        <p class="text-sm text-base-content/60">A dashed border for secondary grouping.</p>
+      </sui-card>
     </div>
-  </section>
 
-  <section suiCard>
-    <div suiCardBody class="gap-6">
-      <div>
-        <h2 suiCardTitle>Actions</h2>
-        <p class="text-sm text-base-content/60">
-          Use <code>suiCardActions</code> for button rows. Alignment can be adjusted with Tailwind utilities.
-        </p>
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-card variant="plain"&gt;...&lt;/sui-card&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;sui-card variant="border"&gt;...&lt;/sui-card&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>&lt;sui-card variant="dash"&gt;...&lt;/sui-card&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Sizes</h2>
+      <p class="text-sm text-base-content/60">
+        Sizes scale the card-owned padding, regular inherited text, and <code>suiCardTitle</code>. Explicit typography utilities still take
+        precedence, and nested controls keep their own independent size API.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <sui-card size="xs">
+        <h3 suiCardTitle>Extra small</h3>
+        <p class="text-base-content/60">Compact title, text, and spacing.</p>
+      </sui-card>
+
+      <sui-card size="sm">
+        <h3 suiCardTitle>Small</h3>
+        <p class="text-base-content/60">Small title, text, and spacing.</p>
+      </sui-card>
+
+      <sui-card size="md">
+        <h3 suiCardTitle>Medium</h3>
+        <p class="text-base-content/60">The default scale.</p>
+      </sui-card>
+
+      <sui-card size="lg">
+        <h3 suiCardTitle>Large</h3>
+        <p class="text-base-content/60">Large title, text, and spacing.</p>
+      </sui-card>
+
+      <sui-card size="xl">
+        <h3 suiCardTitle>Extra large</h3>
+        <p class="text-base-content/60">The most generous scale.</p>
+      </sui-card>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-card size="xs"&gt;...&lt;/sui-card&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;sui-card size="sm"&gt;...&lt;/sui-card&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>&lt;sui-card size="md"&gt;...&lt;/sui-card&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>&lt;sui-card size="lg"&gt;...&lt;/sui-card&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>&lt;sui-card size="xl"&gt;...&lt;/sui-card&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Constrained widths</h2>
+      <p class="text-sm text-base-content/60">
+        Cards do not force fluid width. Use layout utilities to choose an exact or maximum width while retaining <code>max-w-full</code> for
+        small screens.
+      </p>
+    </div>
+
+    <div class="flex flex-wrap items-start gap-4">
+      <sui-card class="w-64 max-w-full" size="sm">
+        <h3 suiCardTitle>Compact profile</h3>
+        <p class="text-base-content/60">A narrow card for short supporting content.</p>
+      </sui-card>
+
+      <sui-card class="w-96 max-w-full" size="lg">
+        <h3 suiCardTitle>Detailed summary</h3>
+        <p class="text-base-content/60">A wider card provides room for longer descriptions without occupying the entire parent.</p>
+      </sui-card>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-card class="w-64 max-w-full" size="sm"&gt;...&lt;/sui-card&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;sui-card class="w-96 max-w-full" size="lg"&gt;...&lt;/sui-card&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Fluid layouts</h2>
+      <p class="text-sm text-base-content/60">
+        Use <code>w-full</code> when cards should fill their grid track or parent. The grid remains one column on mobile and expands when
+        space is available.
+      </p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-3">
+      <sui-card class="w-full" size="sm">
+        <h3 suiCardTitle>12 projects</h3>
+        <p class="text-base-content/60">Four updated today.</p>
+      </sui-card>
+      <sui-card class="w-full" size="sm">
+        <h3 suiCardTitle>8 reviews</h3>
+        <p class="text-base-content/60">Two require attention.</p>
+      </sui-card>
+      <sui-card class="w-full" size="sm">
+        <h3 suiCardTitle>99.9% uptime</h3>
+        <p class="text-base-content/60">Across the last 30 days.</p>
+      </sui-card>
+    </div>
+
+    <sui-card class="bg-base-200 w-full" variant="plain" size="lg">
+      <h3 suiCardTitle>Workspace ready</h3>
+      <p class="text-base-content/70">A full-width card works well for prominent summaries and responsive callouts.</p>
+      <div suiCardActions>
+        <button suiButton type="button" size="lg">Open workspace</button>
       </div>
+    </sui-card>
 
-      <section suiCard>
-        <div suiCardBody>
-          <h3 suiCardTitle>Order Summary</h3>
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;div class="grid gap-4 md:grid-cols-3"&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;sui-card class="w-full" size="sm"&gt;...&lt;/sui-card&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>  &lt;sui-card class="w-full" size="sm"&gt;...&lt;/sui-card&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>&lt;/div&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>&lt;sui-card class="w-full" size="lg"&gt;...&lt;/sui-card&gt;</code></pre>
+    </sui-code>
+  </sui-card>
 
-          <div class="space-y-3 text-sm">
-            <div class="flex justify-between gap-4">
-              <span class="text-base-content/60">Design Service</span>
-              <span class="font-medium">$120.00</span>
-            </div>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Actions</h2>
+      <p class="text-sm text-base-content/60">
+        Use <code>suiCardActions</code> on a native container. The directive adds the component's action alignment and spacing.
+      </p>
+    </div>
 
-            <div class="flex justify-between gap-4">
-              <span class="text-base-content/60">Hosting</span>
-              <span class="font-medium">$30.00</span>
-            </div>
+    <sui-card class="w-full max-w-md">
+      <h3 suiCardTitle>Order Summary</h3>
 
-            <div suiDivider></div>
-
-            <div class="flex justify-between gap-4 text-base font-semibold">
-              <span>Total</span>
-              <span>$150.00</span>
-            </div>
-          </div>
-
-          <div suiCardActions>
-            <button suiButton type="button" variant="text">Cancel</button>
-            <button suiButton type="button">Pay</button>
-          </div>
+      <div class="space-y-3 text-sm">
+        <div class="flex justify-between gap-4">
+          <span class="text-base-content/60">Design Service</span>
+          <span class="font-medium">$120.00</span>
         </div>
-      </section>
 
-      <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;section suiCard&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>  &lt;div suiCardBody&gt;</code></pre>
-        <pre suiCodeLine prefix="3"><code>    &lt;h3 suiCardTitle&gt;Order Summary&lt;/h3&gt;</code></pre>
-        <pre suiCodeLine prefix="4"><code>    &lt;div suiDivider&gt;&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="5"><code>    &lt;div suiCardActions&gt;</code></pre>
-        <pre suiCodeLine prefix="6"><code>      &lt;button suiButton type="button"&gt;Pay&lt;/button&gt;</code></pre>
-        <pre suiCodeLine prefix="7"><code>    &lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="8"><code>  &lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="9"><code>&lt;/section&gt;</code></pre>
-      </sui-code>
-    </div>
-  </section>
+        <div class="flex justify-between gap-4">
+          <span class="text-base-content/60">Hosting</span>
+          <span class="font-medium">$30.00</span>
+        </div>
 
-  <section suiCard>
-    <div suiCardBody class="gap-6">
-      <div>
-        <h2 suiCardTitle>Media</h2>
-        <p class="text-sm text-base-content/60">Cards can include native media elements without additional template APIs.</p>
+        <div suiDivider></div>
+
+        <div class="flex justify-between gap-4 text-base font-semibold">
+          <span>Total</span>
+          <span>$150.00</span>
+        </div>
       </div>
 
-      <article suiCard class="overflow-hidden">
-        <figure class="bg-base-200">
-          <div class="flex h-48 items-center justify-center text-base-content/40">Image</div>
-        </figure>
+      <div suiCardActions>
+        <button suiButton type="button" variant="text">Cancel</button>
+        <button suiButton type="button">Pay</button>
+      </div>
+    </sui-card>
 
-        <div suiCardBody>
-          <h3 suiCardTitle>Manuscript preview</h3>
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-card class="w-full max-w-md"&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;h3 suiCardTitle&gt;Order Summary&lt;/h3&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>  &lt;div suiDivider&gt;&lt;/div&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>  &lt;div suiCardActions&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>    &lt;button suiButton type="button"&gt;Pay&lt;/button&gt;</code></pre>
+      <pre suiCodeLine prefix="6"><code>  &lt;/div&gt;</code></pre>
+      <pre suiCodeLine prefix="7"><code>&lt;/sui-card&gt;</code></pre>
+    </sui-code>
+  </sui-card>
 
-          <p class="text-sm text-base-content/60">Combine media, metadata, and actions with normal HTML and Tailwind utilities.</p>
-
-          <div suiCardActions>
-            <button suiButton type="button" variant="text">Details</button>
-            <button suiButton type="button" severity="secondary">Open</button>
-          </div>
-        </div>
-      </article>
-
-      <sui-code>
-        <pre suiCodeLine prefix="1"><code>&lt;article suiCard class="overflow-hidden"&gt;</code></pre>
-        <pre suiCodeLine prefix="2"><code>  &lt;figure&gt;...&lt;/figure&gt;</code></pre>
-        <pre suiCodeLine prefix="3"><code>  &lt;div suiCardBody&gt;...&lt;/div&gt;</code></pre>
-        <pre suiCodeLine prefix="4"><code>&lt;/article&gt;</code></pre>
-      </sui-code>
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Media</h2>
+      <p class="text-sm text-base-content/60">
+        Use <code>suiCardMedia</code> on a native media container to project it outside the component-owned body.
+      </p>
     </div>
-  </section>
+
+    <sui-card class="w-full max-w-sm overflow-hidden">
+      <figure suiCardMedia class="bg-base-200">
+        <div class="flex h-48 items-center justify-center text-base-content/40">Image</div>
+      </figure>
+
+      <h3 suiCardTitle>Manuscript preview</h3>
+
+      <p class="text-base-content/60">Combine media, metadata, and actions with normal HTML and layout utilities.</p>
+
+      <div suiCardActions>
+        <button suiButton type="button" variant="text">Details</button>
+        <button suiButton type="button" severity="secondary">Open</button>
+      </div>
+    </sui-card>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-card class="w-full max-w-sm overflow-hidden"&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;figure suiCardMedia&gt;...&lt;/figure&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>  &lt;h3 suiCardTitle&gt;Preview&lt;/h3&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>  &lt;div suiCardActions&gt;...&lt;/div&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>&lt;/sui-card&gt;</code></pre>
+    </sui-code>
+  </sui-card>
 </main>

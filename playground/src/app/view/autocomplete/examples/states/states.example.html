@@ -1,0 +1,59 @@
+<div class="grid items-start gap-6 lg:grid-cols-2">
+  <fieldset suiFieldset>
+    <legend suiFieldsetLegend>Sizes</legend>
+
+    <div class="grid gap-3">
+      @for (size of sizes; track size) {
+        <div class="grid gap-1.5">
+          <span class="flex items-center justify-between gap-3 text-sm font-medium">
+            {{ size.toUpperCase() }}
+            <code suiBadge severity="neutral" variant="soft" size="xs" class="font-mono">size="{{ size }}"</code>
+          </span>
+          <sui-autocomplete
+            fluid
+            [size]="size"
+            [options]="options"
+            [placeholder]="size.toUpperCase() + ' destination'"
+            [ariaLabel]="size.toUpperCase() + ' destination'"
+          />
+        </div>
+      }
+    </div>
+  </fieldset>
+
+  <fieldset suiFieldset>
+    <legend suiFieldsetLegend>Interaction states</legend>
+
+    <div class="grid gap-4">
+      <div class="grid gap-1.5">
+        <span class="text-sm font-medium">Selected value</span>
+        <sui-autocomplete fluid [options]="options" value="berlin" ariaLabel="Selected destination" />
+      </div>
+
+      <div class="grid gap-1.5">
+        <span class="text-sm font-medium">Loading suggestions</span>
+        <sui-autocomplete fluid loading [options]="options" placeholder="Finding destinations" ariaLabel="Loading suggestions" />
+      </div>
+
+      <div class="grid gap-1.5">
+        <span class="text-sm font-medium">Disabled</span>
+        <sui-autocomplete fluid disabled [options]="options" placeholder="Unavailable" ariaLabel="Disabled destination" />
+      </div>
+
+      <div class="grid gap-1.5">
+        <span class="text-sm font-medium">Invalid destination</span>
+        <sui-autocomplete
+          fluid
+          required
+          invalid
+          touched
+          [options]="options"
+          placeholder="Choose a destination"
+          ariaLabel="Invalid destination"
+          ariaDescribedby="destination-error"
+        />
+        <span id="destination-error" class="text-sm text-error">Choose one of the available destinations.</span>
+      </div>
+    </div>
+  </fieldset>
+</div>

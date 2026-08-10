@@ -1,0 +1,21 @@
+<div class="grid w-80 max-w-full gap-5">
+  <div suiLabel>
+    <span suiFormFieldLabel>Completion</span>
+    <sui-input-number fluid showButtons size="sm" suffix=" %" [min]="0" [max]="100" [step]="5" [value]="65" />
+  </div>
+
+  <div suiLabel>
+    <span suiFormFieldLabel>Weight</span>
+    <sui-input-number
+      fluid
+      size="sm"
+      suffix=" kg"
+      placeholder="0.00"
+      [min]="0"
+      [step]="0.25"
+      [minFractionDigits]="2"
+      [maxFractionDigits]="2"
+      [value]="12.5"
+    />
+  </div>
+</div>

@@ -1,0 +1,166 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="space-y-3">
+    <h1 class="text-4xl font-bold tracking-tight">Tabs</h1>
+    <p class="max-w-3xl text-base-content/70">
+      Switch between related views with accessible keyboard navigation, configurable activation, lazy panels, and responsive layouts.
+    </p>
+  </section>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Basic usage</h2>
+      <p class="text-sm text-base-content/60">
+        Each <code>suiTab</code> template defines its value, visible label, and panel content. Bind <code>value</code> to control the active
+        panel.
+      </p>
+    </div>
+
+    <sui-tabs [(value)]="accountTab" ariaLabel="Account sections">
+      <ng-template suiTab value="profile" label="Profile">
+        <div class="rounded-box bg-base-200 p-5">
+          <h3 class="font-semibold">Profile</h3>
+          <p class="mt-1 text-sm text-base-content/70">Update your public name and biography.</p>
+        </div>
+      </ng-template>
+      <ng-template suiTab value="security" label="Security">
+        <div class="rounded-box bg-base-200 p-5">
+          <h3 class="font-semibold">Security</h3>
+          <p class="mt-1 text-sm text-base-content/70">Review passwords and active sessions.</p>
+        </div>
+      </ng-template>
+      <ng-template suiTab value="billing" label="Billing" disabled>Billing is unavailable.</ng-template>
+    </sui-tabs>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-tabs [(value)]="activeTab" ariaLabel="Account sections"&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>  &lt;ng-template suiTab value="profile" label="Profile"&gt;...&lt;/ng-template&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>  &lt;ng-template suiTab value="security" label="Security"&gt;...&lt;/ng-template&gt;</code></pre>
+      <pre
+        suiCodeLine
+        prefix="4"
+      ><code>  &lt;ng-template suiTab value="billing" label="Billing" disabled&gt;...&lt;/ng-template&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>&lt;/sui-tabs&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Styles</h2>
+      <p class="text-sm text-base-content/60"><code>variant</code> supports plain, border, lift, and box presentations.</p>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-2">
+      @for (variant of variants; track variant) {
+        <div class="grid gap-2">
+          <span class="text-xs font-semibold uppercase tracking-wide text-base-content/50">{{ variant }}</span>
+          <sui-tabs value="first" [variant]="variant" [ariaLabel]="variant + ' tabs'">
+            <ng-template suiTab value="first" label="Overview">Overview content.</ng-template>
+            <ng-template suiTab value="second" label="Activity">Recent activity.</ng-template>
+          </sui-tabs>
+        </div>
+      }
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-tabs value="overview" variant="plain"&gt;...&lt;/sui-tabs&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;sui-tabs value="overview" variant="border"&gt;...&lt;/sui-tabs&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>&lt;sui-tabs value="overview" variant="lift"&gt;...&lt;/sui-tabs&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>&lt;sui-tabs value="overview" variant="box"&gt;...&lt;/sui-tabs&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Sizes</h2>
+      <p class="text-sm text-base-content/60"><code>size</code> changes the tab controls without affecting panel content.</p>
+    </div>
+
+    <div class="grid gap-5">
+      @for (size of sizes; track size) {
+        <sui-tabs value="one" [size]="size" [ariaLabel]="size + ' tabs'">
+          <ng-template suiTab value="one" [label]="size.toUpperCase()">Selected {{ size }} tab.</ng-template>
+          <ng-template suiTab value="two" label="Second">Second tab.</ng-template>
+        </sui-tabs>
+      }
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-tabs value="one" size="xs"&gt;...&lt;/sui-tabs&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;sui-tabs value="one" size="sm"&gt;...&lt;/sui-tabs&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>&lt;sui-tabs value="one" size="md"&gt;...&lt;/sui-tabs&gt;</code></pre>
+      <pre suiCodeLine prefix="4"><code>&lt;sui-tabs value="one" size="lg"&gt;...&lt;/sui-tabs&gt;</code></pre>
+      <pre suiCodeLine prefix="5"><code>&lt;sui-tabs value="one" size="xl"&gt;...&lt;/sui-tabs&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Activation and focus</h2>
+      <p class="text-sm text-base-content/60">
+        Follow mode selects as focus moves. Explicit mode waits for Enter or Space. Wrapping and disabled-tab focus remain configurable.
+      </p>
+    </div>
+
+    <sui-tabs
+      [(value)]="previewTab"
+      selectionMode="explicit"
+      focusMode="roving"
+      [wrap]="false"
+      [softDisabled]="false"
+      ariaLabel="Project views"
+    >
+      <ng-template suiTab value="preview" label="Preview">Preview the current project.</ng-template>
+      <ng-template suiTab value="history" label="History">Review recent changes.</ng-template>
+      <ng-template suiTab value="publish" label="Publish" disabled>Publishing is unavailable.</ng-template>
+    </sui-tabs>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-tabs</code></pre>
+      <pre suiCodeLine prefix="2"><code>  value="preview"</code></pre>
+      <pre suiCodeLine prefix="3"><code>  selectionMode="explicit"</code></pre>
+      <pre suiCodeLine prefix="4"><code>  focusMode="roving"</code></pre>
+      <pre suiCodeLine prefix="5"><code>  [wrap]="false"</code></pre>
+      <pre suiCodeLine prefix="6"><code>  [softDisabled]="false"</code></pre>
+      <pre suiCodeLine prefix="7"><code>&gt;...&lt;/sui-tabs&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+
+  <sui-card>
+    <div>
+      <h2 suiCardTitle>Orientation, placement, and panel lifetime</h2>
+      <p class="text-sm text-base-content/60">
+        Vertical tabs use Up and Down arrows. The list may sit below its panels, while <code>preserveContent</code> controls whether an
+        inactive panel remains instantiated.
+      </p>
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-2">
+      <sui-tabs [(value)]="verticalTab" orientation="vertical" ariaLabel="Settings sections">
+        <ng-template suiTab value="general" label="General">General settings.</ng-template>
+        <ng-template suiTab value="team" label="Team">Team settings.</ng-template>
+        <ng-template suiTab value="advanced" label="Advanced" [preserveContent]="false"> Lazily recreated advanced settings. </ng-template>
+      </sui-tabs>
+
+      <div class="grid gap-6">
+        <sui-tabs value="summary" variant="lift" placement="bottom" ariaLabel="Bottom lift tabs">
+          <ng-template suiTab value="summary" label="Summary">The tab list appears below this panel.</ng-template>
+          <ng-template suiTab value="details" label="Details">Additional details.</ng-template>
+        </sui-tabs>
+        <sui-tabs value="one" disabled ariaLabel="Disabled tabs">
+          <ng-template suiTab value="one" label="One">Disabled group.</ng-template>
+          <ng-template suiTab value="two" label="Two">Second panel.</ng-template>
+        </sui-tabs>
+      </div>
+    </div>
+
+    <sui-code>
+      <pre suiCodeLine prefix="1"><code>&lt;sui-tabs value="general" orientation="vertical"&gt;...&lt;/sui-tabs&gt;</code></pre>
+      <pre suiCodeLine prefix="2"><code>&lt;sui-tabs value="summary" variant="lift" placement="bottom"&gt;...&lt;/sui-tabs&gt;</code></pre>
+      <pre suiCodeLine prefix="3"><code>&lt;sui-tabs value="one" disabled&gt;...&lt;/sui-tabs&gt;</code></pre>
+      <pre
+        suiCodeLine
+        prefix="4"
+      ><code>&lt;ng-template suiTab value="advanced" label="Advanced" [preserveContent]="false"&gt;...&lt;/ng-template&gt;</code></pre>
+    </sui-code>
+  </sui-card>
+</main>

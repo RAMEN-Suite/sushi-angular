@@ -1,0 +1,19 @@
+<div suiLabel class="w-80 max-w-full">
+  <span suiFormFieldLabel>Project budget</span>
+
+  <div suiJoin>
+    <sui-input-number
+      suiJoinItem
+      fluid
+      showButtons
+      locale="de-DE"
+      currency="EUR"
+      [step]="50"
+      [formField]="form.amount"
+      ariaLabel="Project budget"
+    />
+    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
+  </div>
+
+  <span class="text-sm text-base-content/60">Current value: {{ form.amount().value() }}</span>
+</div>

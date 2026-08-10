@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { apiReference } from '../../generated/api-reference.generated';
+import { ApiReference } from '../../shared/api-reference/api-reference.component';
+import type { ApiReferenceData } from '../../shared/api-reference/api-reference.types';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import appearanceHtml from './examples/appearance/appearance.example.html';
@@ -27,6 +30,7 @@ import { InputStatesExample } from './examples/states/states.example';
     Badge,
     Card,
     CardTitle,
+    ApiReference,
     ExampleCode,
     InputAppearanceExample,
     InputBasicExample,
@@ -39,7 +43,11 @@ import { InputStatesExample } from './examples/states/states.example';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputPage {
-  protected readonly examples: Readonly<Record<'appearance' | 'basic' | 'composition' | 'datalist' | 'states' | 'types', ExampleSource>> = {
+  protected readonly api: ApiReferenceData = apiReference.Input;
+
+  protected readonly examples: Readonly<
+    Record<'appearance' | 'basic' | 'composition' | 'datalist' | 'states' | 'types', ExampleSource>
+  > = {
     appearance: { html: appearanceHtml, typescript: textSource(appearanceTs) },
     basic: { html: basicHtml, typescript: textSource(basicTs) },
     composition: { html: compositionHtml, typescript: textSource(compositionTs) },

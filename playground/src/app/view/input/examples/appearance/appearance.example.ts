@@ -9,5 +9,14 @@ import { Badge, Fieldset, FieldsetLegend, Input, InputSeverity, InputSize } from
 })
 export class InputAppearanceExample {
   protected readonly sizes: readonly InputSize[] = ['xs', 'sm', 'md', 'lg', 'xl'];
-  protected readonly colors: readonly InputSeverity[] = ['primary', 'secondary', 'accent', 'neutral', 'info', 'success', 'warning', 'error'];
+  protected readonly colors: readonly InputSeverity[] = [
+    'primary',
+    'secondary',
+    'accent',
+    'neutral',
+    'info',
+    'success',
+    'warning',
+    'error',
+  ];
 }

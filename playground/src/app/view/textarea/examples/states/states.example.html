@@ -1,0 +1,21 @@
+<fieldset suiFieldset>
+  <legend suiFieldsetLegend>Review states</legend>
+
+  <div class="grid items-start gap-4 lg:grid-cols-3">
+    <label class="grid gap-2">
+      <span class="font-medium">Readonly</span>
+      <textarea suiTextarea resize="none" rows="4" readonly>Approved content cannot be edited.</textarea>
+    </label>
+
+    <label class="grid gap-2">
+      <span class="font-medium">Disabled</span>
+      <textarea suiTextarea resize="none" rows="4" disabled>Comments are unavailable.</textarea>
+    </label>
+
+    <label class="grid gap-2">
+      <span class="font-medium">Invalid</span>
+      <textarea suiTextarea resize="none" rows="4" invalid touched aria-describedby="review-error">Missing required evidence.</textarea>
+      <span id="review-error" class="text-error text-sm">Explain what needs to change.</span>
+    </label>
+  </div>
+</fieldset>
