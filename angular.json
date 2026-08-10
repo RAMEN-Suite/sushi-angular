@@ -61,13 +61,16 @@
             "browser": "playground/src/main.ts",
             "tsConfig": "playground/tsconfig.app.json",
             "inlineStyleLanguage": "css",
+            "loader": {
+              ".example.html": "text"
+            },
             "assets": [
               {
                 "glob": "**/*",
                 "input": "playground/public"
               }
             ],
-            "styles": ["sushi/src/styles/sushi.css"]
+            "styles": ["sushi/src/styles/sushi.css", "playground/src/styles.css"]
           },
           "configurations": {
             "production": {

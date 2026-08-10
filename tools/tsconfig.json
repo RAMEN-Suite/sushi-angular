@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "strict": true,
+    "tsBuildInfoFile": "../.angular/cache/tools.tsbuildinfo",
+    "types": ["node"]
+  },
+  "include": ["*.ts"]
+}

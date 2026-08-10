@@ -5,6 +5,7 @@ dist
 tmp
 out-tsc
 bazel-out
+*.tsbuildinfo
 /playground/src/**/*.js
 /playground/src/**/*.js.map
 /sushi/src/**/*.js

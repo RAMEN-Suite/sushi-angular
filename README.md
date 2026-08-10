@@ -12,7 +12,7 @@
 
 - [ ] `suiDialog`
 - [ ] `suiAccordion`
-- [ ] `suiTabs`
+- [x] `suiTabs`
 
 ## Navigation
 
@@ -23,7 +23,7 @@
 
 ## Selection
 
-- [ ] `suiAutocomplete`
+- [x] `suiAutocomplete`
 - [ ] `suiListbox`
 
 ## Data

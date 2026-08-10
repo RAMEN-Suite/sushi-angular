@@ -33,6 +33,9 @@
     },
     {
       "path": "./playground/tsconfig.spec.json"
+    },
+    {
+      "path": "./tools/tsconfig.json"
     }
   ]
 }

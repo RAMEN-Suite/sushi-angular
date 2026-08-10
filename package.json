@@ -4,11 +4,14 @@
   "scripts": {
     "ng": "ng",
     "lint": "ng lint",
+    "generate:api": "tsx tools/generate-api-reference.ts",
+    "prestart:playground": "npm run generate:api",
     "start:playground": "ng serve playground",
     "build:sushi": "ng build sushi",
+    "prebuild:playground": "npm run generate:api",
     "build:playground": "ng build playground",
-    "format": "prettier --check projects",
-    "format:fix": "prettier --write projects",
+    "format": "prettier --check playground sushi",
+    "format:fix": "prettier --write playground sushi",
     "preview:playground": "npx serve dist/playground/browser -l 4201 -s"
   },
   "private": true,
@@ -35,6 +38,7 @@
     "@angular/cli": "^22.0.5",
     "@angular/compiler-cli": "^22.0.0",
     "@eslint/js": "^10.0.1",
+    "@types/node": "^26.2.0",
     "angular-eslint": "^22.0.0",
     "eslint": "^10.6.0",
     "eslint-config-prettier": "^10.1.8",
@@ -42,6 +46,7 @@
     "ng-packagr": "^22.0.0",
     "prettier": "^3.8.1",
     "serve": "^14.2.6",
+    "tsx": "^4.23.12",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.62.1",
     "vitest": "^4.0.8"
