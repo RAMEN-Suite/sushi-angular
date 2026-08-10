@@ -1,59 +1,15 @@
-.sui-button.btn {
-  transition-property: opacity;
-}
-
-.sui-button.btn:is(:hover, :focus-visible, :active) {
-  transition-property: opacity, background-color, border-color, color, box-shadow, transform;
-}
-
-.sui-kbd {
-  transition:
-    translate 80ms ease-out,
-    border-bottom-width 80ms ease-out;
-}
-
-.sui-kbd:active {
-  translate: 0 1px;
-  border-bottom-width: var(--border);
-}
-
-.sui-status--ping {
-  animation: sui-status-ping 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-}
-
-.sui-status--bounce {
-  animation: sui-status-bounce 1.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-}
-
-.sui-message.alert-vertical .sui-message-actions {
-  justify-self: center;
-}
-
-@keyframes sui-status-ping {
-  0% {
-    box-shadow: 0 0 0 0 currentColor;
-  }
-
-  70%,
-  100% {
-    box-shadow: 0 0 0 0.4rem transparent;
-  }
-}
-
-@keyframes sui-status-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  45% {
-    transform: translateY(-30%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sui-status--ping,
-  .sui-status--bounce {
-    animation: none;
-  }
-}
+@import './features/button.styles.css';
+@import './features/fieldset.styles.css';
+@import './features/focus.styles.css';
+@import './features/form-control.styles.css';
+@import './features/form-field.styles.css';
+@import './features/input-group.styles.css';
+@import './features/input.styles.css';
+@import './features/join.styles.css';
+@import './features/kbd.styles.css';
+@import './features/range.styles.css';
+@import './features/selection.styles.css';
+@import './features/select-button.styles.css';
+@import './features/status.styles.css';
+@import './features/tabs.styles.css';
+@import './features/textarea.styles.css';

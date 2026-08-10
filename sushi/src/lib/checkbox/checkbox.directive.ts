@@ -26,5 +26,7 @@ import { SelectionControlState } from '../form-control';
   },
 })
 export class Checkbox extends SelectionControlState {
-  public readonly indeterminate: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, { transform: booleanAttribute });
+  public readonly indeterminate: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 }

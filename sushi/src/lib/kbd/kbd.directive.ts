@@ -3,7 +3,6 @@ import { KbdSize } from './kbd.interfaces';
 
 @Directive({
   selector: 'kbd[suiKbd]',
-  standalone: true,
   host: {
     class: 'kbd sui-kbd cursor-pointer select-none',
 
@@ -12,6 +11,8 @@ import { KbdSize } from './kbd.interfaces';
     '[class.kbd-md]': 'size() === "md"',
     '[class.kbd-lg]': 'size() === "lg"',
     '[class.kbd-xl]': 'size() === "xl"',
+
+    '(mousedown)': '$event.preventDefault()',
   },
 })
 export class Kbd {

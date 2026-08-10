@@ -31,16 +31,24 @@ import { CodeButtonOffTemplate, CodeButtonOnTemplate, CodeButtonTemplate } from 
   },
 })
 export class Code {
-  public readonly copyable: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, { transform: booleanAttribute });
+  public readonly copyable: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, {
+    transform: booleanAttribute,
+  });
   public readonly cooldown: InputSignal<number> = input<number>(1200);
 
   public readonly buttonShape: InputSignal<ButtonShape | null> = input<ButtonShape | null>('square');
   public readonly buttonAriaLabel: InputSignal<string | null> = input<string | null>('Copy code');
 
   protected readonly codeLines: Signal<readonly CodeLine[]> = contentChildren(CodeLine, { descendants: true });
-  protected readonly buttonOnRef: Signal<TemplateRef<void> | undefined> = contentChild(CodeButtonOnTemplate, { read: TemplateRef });
-  protected readonly buttonOffRef: Signal<TemplateRef<void> | undefined> = contentChild(CodeButtonOffTemplate, { read: TemplateRef });
-  protected readonly buttonRef: Signal<TemplateRef<CodeButtonContext> | undefined> = contentChild(CodeButtonTemplate, { read: TemplateRef });
+  protected readonly buttonOnRef: Signal<TemplateRef<void> | undefined> = contentChild(CodeButtonOnTemplate, {
+    read: TemplateRef,
+  });
+  protected readonly buttonOffRef: Signal<TemplateRef<void> | undefined> = contentChild(CodeButtonOffTemplate, {
+    read: TemplateRef,
+  });
+  protected readonly buttonRef: Signal<TemplateRef<CodeButtonContext> | undefined> = contentChild(CodeButtonTemplate, {
+    read: TemplateRef,
+  });
 
   protected readonly isCopied: WritableSignal<boolean> = signal<boolean>(false);
   protected readonly buttonContext: CodeButtonContext = {

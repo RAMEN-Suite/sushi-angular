@@ -28,8 +28,12 @@ import { InputSeverity, InputSize } from './input.interfaces';
   },
 })
 export class Input extends FormControlState {
+  /** Applies a semantic border color to the native input. */
   public readonly severity: InputSignal<InputSeverity | null> = input<InputSeverity | null>(null);
+
+  /** Sets the control height and text size. */
   public readonly size: InputSignal<InputSize> = input<InputSize>('md');
 
+  /** Keeps the browser-provided clear affordance visible for supported input types. */
   public readonly showClear: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
 }

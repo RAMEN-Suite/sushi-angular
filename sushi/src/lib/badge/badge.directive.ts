@@ -18,7 +18,6 @@ import { BadgeSeverity, BadgeSize, BadgeVariant } from './badge.interfaces';
     '[class.badge-outline]': 'variant() === "outlined"',
     '[class.badge-soft]': 'variant() === "soft"',
     '[class.badge-dash]': 'variant() === "dash"',
-    '[class.badge-ghost]': 'variant() === "ghost"',
 
     '[class.badge-xs]': 'size() === "xs"',
     '[class.badge-sm]': 'size() === "sm"',

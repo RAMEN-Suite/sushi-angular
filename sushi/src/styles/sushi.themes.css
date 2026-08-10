@@ -18,7 +18,7 @@
   --color-secondary-content: #ffffff;
 
   --color-accent: #d39a2f;
-  --color-accent-content: #15120f;
+  --color-accent-content: #ffffff;
 
   --color-neutral: #21222c;
   --color-neutral-content: #ffffff;
@@ -31,7 +31,7 @@
   --color-success-content: #ffffff;
 
   --color-warning: #d39a2f;
-  --color-warning-content: #15120f;
+  --color-warning-content: #ffffff;
 
   --color-error: #7a0712;
   --color-error-content: #ffffff;
@@ -46,7 +46,7 @@
   --size-field: 0.25rem;
 
   /* Effects */
-  --border: 0.125em;
+  --border: 1px;
   --depth: 0.5;
   --noise: 0;
 }
@@ -99,7 +99,7 @@
   --size-field: 0.25rem;
 
   /* Effects */
-  --border: 0.125em;
+  --border: 1px;
   --depth: 0.5;
   --noise: 0;
 }

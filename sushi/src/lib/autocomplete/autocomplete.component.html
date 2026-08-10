@@ -1,0 +1,137 @@
+<div
+  cdkOverlayOrigin
+  #origin="cdkOverlayOrigin"
+  class="input sui-form-control flex max-w-full items-center gap-2"
+  [class.w-full]="fluid()"
+  [class.bg-base-200]="disabled()"
+  [class.cursor-not-allowed]="disabled()"
+  [class.sui-form-control--disabled]="disabled()"
+  [class.input-xs]="size() === 'xs'"
+  [class.input-sm]="size() === 'sm'"
+  [class.input-lg]="size() === 'lg'"
+  [class.input-xl]="size() === 'xl'"
+  [class.input-primary]="severity() === 'primary'"
+  [class.input-secondary]="severity() === 'secondary'"
+  [class.input-accent]="severity() === 'accent'"
+  [class.input-neutral]="severity() === 'neutral'"
+  [class.input-info]="severity() === 'info'"
+  [class.input-success]="severity() === 'success'"
+  [class.input-warning]="severity() === 'warning'"
+  [class.input-error]="severity() === 'error' || isInvalid()"
+>
+  @if (prefixTemplate(); as template) {
+    <span class="text-base-content/60 shrink-0"><ng-container [ngTemplateOutlet]="template" /></span>
+  }
+  <input
+    ngCombobox
+    #combobox="ngCombobox"
+    type="search"
+    class="sui-input min-w-0 grow outline-none"
+    [class.cursor-not-allowed]="disabled()"
+    autocomplete="off"
+    [value]="inputValue()"
+    [expanded]="expanded() && !disabled()"
+    [disabled]="disabled()"
+    [required]="required()"
+    [softDisabled]="false"
+    [attr.id]="id()"
+    [attr.disabled]="disabled() ? 'disabled' : null"
+    [placeholder]="placeholder()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledby()"
+    [attr.aria-describedby]="ariaDescribedby()"
+    [attr.aria-required]="required() || null"
+    [attr.aria-invalid]="isInvalid() || null"
+    [attr.aria-busy]="loading() || null"
+    (input)="handleInput($event)"
+    (blur)="handleBlur()"
+    (expandedChange)="handleExpanded($event)"
+    (keydown.escape)="handleEscape($event)"
+  />
+  @if (loading()) {
+    <span suiSpinner size="sm" class="shrink-0"></span>
+  }
+</div>
+@if (expanded() && !loading() && !errorMessage() && filteredOptions().length > 0) {
+  <span class="sr-only" role="status" aria-live="polite">{{ filteredOptions().length }} suggestions available.</span>
+}
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="expanded() && !disabled()"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  [cdkConnectedOverlayMatchWidth]="true"
+  [cdkConnectedOverlayFlexibleDimensions]="false"
+  [cdkConnectedOverlayViewportMargin]="8"
+  [cdkConnectedOverlayPositions]="positions"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  (backdropClick)="handleExpanded(false)"
+  (detach)="handleExpanded(false)"
+>
+  <ng-template ngComboboxPopup [combobox]="combobox">
+    <div class="bg-base-100 border-base-300 w-full overflow-hidden rounded-box border shadow-lg">
+      @if (loading()) {
+        <div ngComboboxWidget class="flex items-center justify-center gap-2 p-5 text-sm opacity-60" role="status" aria-live="polite">
+          @if (loadingTemplate(); as template) {
+            <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="loadingContext()" />
+          } @else {
+            <span suiSpinner size="sm"></span>
+            {{ loadingMessage() }}
+          }
+        </div>
+      } @else if (errorMessage()) {
+        <div ngComboboxWidget class="text-error p-4 text-center text-sm" role="status" aria-live="polite">
+          @if (errorTemplate(); as template) {
+            <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="errorContext()" />
+          } @else {
+            {{ errorMessage() }}
+          }
+        </div>
+      } @else if (filteredOptions().length === 0) {
+        <div ngComboboxWidget class="p-4 text-center text-sm opacity-60" role="status" aria-live="polite">
+          @if (emptyTemplate(); as template) {
+            <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="emptyContext()" />
+          } @else {
+            {{ emptyMessage() }}
+          }
+        </div>
+      } @else {
+        <div
+          #listbox="ngListbox"
+          ngListbox
+          ngComboboxWidget
+          class="w-full overflow-y-auto p-1 outline-none"
+          tabindex="-1"
+          focusMode="activedescendant"
+          selectionMode="explicit"
+          [style.max-height.px]="scrollHeight()"
+          [value]="listboxValue()"
+          [activeDescendant]="listbox.activeDescendant()"
+          (valueChange)="handleSelection($event)"
+        >
+          @for (option of filteredOptions(); track option.value; let index = $index) {
+            @let context = itemContext(option, index);
+            <div
+              ngOption
+              class="sui-selection-option flex w-full items-center rounded-field px-3 py-2 outline-none"
+              [style.min-height.px]="optionHeight()"
+              [class.hover:bg-base-200]="!context.selected && !option.disabled"
+              [class.cursor-pointer]="!option.disabled"
+              [class.opacity-40]="option.disabled"
+              [value]="option.value"
+              [label]="option.label"
+              [disabled]="option.disabled ?? false"
+            >
+              @if (itemTemplate(); as template) {
+                <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="context" />
+              } @else {
+                {{ option.label }}
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </ng-template>
+</ng-template>

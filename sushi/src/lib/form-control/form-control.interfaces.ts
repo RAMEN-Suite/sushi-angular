@@ -1,2 +1,4 @@
-export type FormControlSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type FormControlSeverity = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+import { ComponentSize, ThemeSeverity } from '../sushi.types';
+
+export type FormControlSize = ComponentSize;
+export type FormControlSeverity = ThemeSeverity;

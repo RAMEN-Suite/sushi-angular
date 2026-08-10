@@ -1,0 +1,7 @@
+.sui-form-control--disabled {
+  @apply text-base-content/40;
+}
+
+.sui-form-control--placeholder {
+  @apply text-base-content/50;
+}

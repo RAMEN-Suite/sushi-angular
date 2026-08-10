@@ -1,5 +1,4 @@
-import { InputSignalWithTransform, Signal, TemplateRef } from '@angular/core';
-
-export type BooleanInputValue = string | boolean;
-export type BooleanSignal = InputSignalWithTransform<boolean, BooleanInputValue>;
-export type Template<T> = Signal<TemplateRef<T> | undefined>;
+export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type Orientation = 'horizontal' | 'vertical';
+export type SelectionValue = string | number | boolean | object;
+export type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';

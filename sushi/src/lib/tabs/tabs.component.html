@@ -1,0 +1,78 @@
+<div
+  ngTabs
+  class="sui-tabs__root flex min-w-0 flex-col"
+  [class.flex-row]="orientation() === 'vertical'"
+  [class.gap-4]="orientation() === 'vertical'"
+>
+  <div
+    ngTabList
+    class="tabs sui-tabs__list max-w-full"
+    [(selectedTab)]="value"
+    [orientation]="orientation()"
+    [selectionMode]="selectionMode()"
+    [focusMode]="focusMode()"
+    [wrap]="wrap()"
+    [softDisabled]="softDisabled()"
+    [disabled]="disabled()"
+    [attr.aria-label]="ariaLabel()"
+    [class.tabs-box]="variant() === 'box'"
+    [class.tabs-border]="variant() === 'border'"
+    [class.tabs-lift]="variant() === 'lift'"
+    [class.tabs-xs]="size() === 'xs'"
+    [class.tabs-sm]="size() === 'sm'"
+    [class.tabs-md]="size() === 'md'"
+    [class.tabs-lg]="size() === 'lg'"
+    [class.tabs-xl]="size() === 'xl'"
+    [class.overflow-x-auto]="orientation() === 'horizontal'"
+    [class.overflow-y-auto]="orientation() === 'vertical'"
+    [class.border-b]="variant() === 'plain' && orientation() === 'horizontal'"
+    [class.border-r]="variant() === 'plain' && orientation() === 'vertical' && placement() === 'top'"
+    [class.border-l]="variant() === 'plain' && orientation() === 'vertical' && placement() === 'bottom'"
+    [class.border-base-300]="variant() === 'plain'"
+    [class.tabs-bottom]="placement() === 'bottom'"
+    [class.order-2]="placement() === 'bottom'"
+    [class.relative]="variant() === 'lift'"
+    [class.z-10]="variant() === 'lift'"
+    [class.flex-col]="orientation() === 'vertical'"
+    [class.shrink-0]="orientation() === 'vertical'"
+  >
+    @for (tab of tabs(); track tab.value()) {
+      <button
+        ngTab
+        type="button"
+        class="tab sui-tab"
+        [value]="tab.value()"
+        [disabled]="tab.disabled()"
+        [class.tab-active]="value() === tab.value()"
+        [class.tab-disabled]="tab.disabled()"
+      >
+        {{ tab.label() }}
+      </button>
+    }
+  </div>
+
+  @for (tab of tabs(); track tab.value()) {
+    <div
+      ngTabPanel
+      class="sui-tab-panel min-w-0 flex-1 p-4"
+      [class.border]="variant() === 'lift'"
+      [class.border-base-300]="variant() === 'lift'"
+      [class.bg-base-100]="variant() === 'lift'"
+      [class.rounded-box]="variant() === 'lift'"
+      [class.rounded-tl-none]="variant() === 'lift' && orientation() === 'horizontal' && placement() === 'top'"
+      [class.rounded-bl-none]="variant() === 'lift' && orientation() === 'horizontal' && placement() === 'bottom'"
+      [class.-mt-px]="variant() === 'lift' && orientation() === 'horizontal' && placement() === 'top'"
+      [class.-mb-px]="variant() === 'lift' && orientation() === 'horizontal' && placement() === 'bottom'"
+      [class.rounded-l-none]="variant() === 'lift' && orientation() === 'vertical' && placement() === 'top'"
+      [class.-ml-px]="variant() === 'lift' && orientation() === 'vertical' && placement() === 'top'"
+      [class.rounded-r-none]="variant() === 'lift' && orientation() === 'vertical' && placement() === 'bottom'"
+      [class.-mr-px]="variant() === 'lift' && orientation() === 'vertical' && placement() === 'bottom'"
+      [value]="tab.value()"
+      [preserveContent]="tab.preserveContent()"
+    >
+      <ng-template ngTabContent>
+        <ng-container [ngTemplateOutlet]="tab.template" />
+      </ng-template>
+    </div>
+  }
+</div>

@@ -1,1 +1,3 @@
-export type KbdSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+import { ComponentSize } from '../sushi.types';
+
+export type KbdSize = ComponentSize;

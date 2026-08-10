@@ -26,7 +26,9 @@ export class Avatar {
   public readonly size: InputSignal<AvatarSize> = input<AvatarSize>('md');
   public readonly shape: InputSignal<AvatarShape> = input<AvatarShape>('rounded');
   public readonly maskHalf: InputSignal<AvatarMaskHalf | null> = input<AvatarMaskHalf | null>(null);
-  public readonly placeholder: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, { transform: booleanAttribute });
+  public readonly placeholder: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 
   protected readonly isMask: Signal<boolean> = computed((): boolean => !['square', 'rounded', 'circle'].includes(this.shape()));
 }

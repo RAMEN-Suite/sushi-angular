@@ -1,0 +1,77 @@
+<div suiJoin class="max-w-full">
+  <input
+    #pickerElement
+    suiInput
+    suiJoinItem
+    type="color"
+    class="sui-color-picker__native size-10 shrink-0 cursor-pointer p-1 disabled:cursor-not-allowed"
+    [id]="showInput() ? controlId() + '-native' : controlId()"
+    [invalid]="invalid() || localInvalid()"
+    [touched]="invalid() || localInvalid()"
+    [value]="value()"
+    [disabled]="disabled()"
+    [attr.aria-label]="ariaLabelledby() ? null : ariaLabel() + '. Current color ' + value()"
+    [attr.aria-labelledby]="ariaLabelledby()"
+    [attr.aria-describedby]="describedBy()"
+    (input)="handleColorInput($event)"
+  />
+  @if (showInput()) {
+    <input
+      suiInput
+      suiJoinItem
+      type="text"
+      class="min-w-0 grow font-mono uppercase"
+      maxlength="7"
+      autocomplete="off"
+      spellcheck="false"
+      [id]="controlId()"
+      [invalid]="invalid() || localInvalid()"
+      [touched]="invalid() || localInvalid()"
+      [value]="inputValue()"
+      [disabled]="disabled()"
+      [attr.aria-label]="id() || ariaLabelledby() ? null : 'Hex color value'"
+      [attr.aria-labelledby]="ariaLabelledby()"
+      [attr.aria-describedby]="describedBy()"
+      [attr.aria-invalid]="invalid() || localInvalid() || null"
+      (input)="handleTextInput($event)"
+      (blur)="validateInput()"
+    />
+  }
+  <ng-content select="[suiJoinItem]" />
+</div>
+@if (localInvalid()) {
+  <p class="text-error text-sm" [id]="errorId()" role="alert">{{ invalidMessage() }}</p>
+}
+<span class="sr-only" aria-live="polite">Selected color {{ value() }}</span>
+@if (presets().length > 0) {
+  <div
+    class="flex flex-wrap gap-2"
+    role="radiogroup"
+    [attr.aria-label]="ariaLabelledby() ? null : 'Preset colors'"
+    [attr.aria-labelledby]="ariaLabelledby()"
+  >
+    @for (option of options(); track option.custom ? 'custom' : option.color; let index = $index) {
+      <button
+        suiButton
+        type="button"
+        role="radio"
+        size="sm"
+        [shape]="presetTemplate() ? null : 'square'"
+        severity="neutral"
+        [variant]="option.selected ? null : 'soft'"
+        [disabled]="disabled() || option.disabled"
+        [attr.aria-label]="option.label + ' (' + option.color + ')'"
+        [attr.aria-checked]="option.selected"
+        [attr.tabindex]="isTabStop(option, index) ? 0 : -1"
+        (click)="selectOption(option)"
+        (keydown)="handlePresetKeydown($event, index)"
+      >
+        @if (presetTemplate(); as preset) {
+          <ng-container [ngTemplateOutlet]="preset" [ngTemplateOutletContext]="presetContext(option)" />
+        } @else {
+          <span class="size-5 rounded-field border border-current/20" [style.background-color]="option.color"></span>
+        }
+      </button>
+    }
+  </div>
+}

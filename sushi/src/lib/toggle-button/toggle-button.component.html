@@ -1,4 +1,4 @@
-@if (buttonRef(); as template) {
+@if (contentTemplate(); as template) {
   <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="context()" />
 } @else {
   <button
@@ -9,7 +9,7 @@
     [variant]="variant()"
     [size]="size()"
     [shape]="shape()"
-    [disabled]="isDisabled()"
+    [disabled]="disabled()"
     [loading]="loading()"
     [attr.aria-label]="ariaLabel()"
     [attr.aria-pressed]="checked()"
@@ -17,16 +17,16 @@
     (click)="handleToggle()"
   >
     @if (checked()) {
-      <span class="sui-toggle-button__content" aria-hidden="true">
-        @if (buttonOnRef(); as template) {
+      <span class="sui-toggle-button__content">
+        @if (onTemplate(); as template) {
           <ng-container [ngTemplateOutlet]="template" />
         } @else {
           {{ onLabel() }}
         }
       </span>
     } @else {
-      <span class="sui-toggle-button__content" aria-hidden="true">
-        @if (buttonOffRef(); as template) {
+      <span class="sui-toggle-button__content">
+        @if (offTemplate(); as template) {
           <ng-container [ngTemplateOutlet]="template" />
         } @else {
           {{ offLabel() }}

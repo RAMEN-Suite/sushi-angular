@@ -1,5 +1,4 @@
-import { FormControlSeverity, FormControlSize } from '../form-control/form-control.interfaces';
+import { FormControlSeverity, FormControlSize } from '../form-control';
 
 export type FileInputSize = FormControlSize;
 export type FileInputSeverity = FormControlSeverity;
-export type FileInputVariant = 'ghost';

@@ -1,0 +1,9 @@
+:root {
+  --sui-focus-ring-width: 0.125em;
+  --sui-focus-ring-offset: 3px;
+}
+
+:is(.btn, .input, .file-input, .select, .textarea, .checkbox, .radio, .toggle, .range, .tab, .kbd):is(:focus, :focus-visible, :focus-within) {
+  outline-width: var(--sui-focus-ring-width);
+  outline-offset: var(--sui-focus-ring-offset);
+}

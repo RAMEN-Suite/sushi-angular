@@ -1,14 +1,31 @@
-.join > .join-item.btn {
+.join > .join-item {
   position: relative;
+  z-index: 0;
+}
+
+.join > .join-item:has(> .sui-form-control) {
+  border: 0;
+}
+
+.join > .join-item > .sui-form-control {
+  border-radius: inherit;
+}
+
+.join > .join-item > .sui-form-control .btn {
+  --join-ss: var(--radius-field);
+  --join-se: var(--radius-field);
+  --join-es: var(--radius-field);
+  --join-ee: var(--radius-field);
+}
+
+.join > .join-item:is(.btn, .sui-input-group-addon) {
   z-index: 1;
 }
 
-.join > .join-item:is(:focus, :focus-within) {
-  position: relative;
+.join > .join-item:active {
   z-index: 2;
 }
 
-.join > .join-item:active {
-  position: relative;
+.join > .join-item:is(:focus, :focus-within) {
   z-index: 3;
 }

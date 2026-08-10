@@ -1,0 +1,24 @@
+@for (option of options(); track option.value; let index = $index) {
+  <button
+    suiButton
+    suiJoinItem
+    type="button"
+    role="radio"
+    [severity]="isSelected(option) ? severity() : 'neutral'"
+    [variant]="isSelected(option) ? null : 'outlined'"
+    [size]="size()"
+    [disabled]="isDisabled(option)"
+    [attr.aria-checked]="isSelected(option)"
+    [attr.tabindex]="isTabStop(option, index) ? 0 : -1"
+    (click)="select(option)"
+    (keydown)="handleKeydown($event, index)"
+  >
+    <span class="sui-select-button__label relative z-1">
+      @if (optionTemplate(); as template) {
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="optionContext(option, index)" />
+      } @else {
+        {{ option.label }}
+      }
+    </span>
+  </button>
+}

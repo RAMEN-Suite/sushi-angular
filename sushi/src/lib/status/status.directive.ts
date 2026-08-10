@@ -3,7 +3,6 @@ import { StatusAnimation, StatusSeverity, StatusSize } from './status.interfaces
 
 @Directive({
   selector: 'span[suiStatus]',
-  standalone: true,
   host: {
     class: 'status sui-status rounded-full',
 

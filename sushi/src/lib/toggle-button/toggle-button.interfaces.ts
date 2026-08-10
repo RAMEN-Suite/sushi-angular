@@ -1,7 +1,7 @@
 import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from '../button';
 
 export type ToggleButtonSeverity = ButtonSeverity;
-export type ToggleButtonVariant = ButtonVariant;
+export type ToggleButtonVariant = Exclude<ButtonVariant, 'text'>;
 export type ToggleButtonSize = ButtonSize;
 export type ToggleButtonShape = ButtonShape;
 
@@ -11,4 +11,5 @@ export interface ToggleButtonContext {
   disabled: boolean;
   loading: boolean;
   toggle: () => void;
+  touch: () => void;
 }

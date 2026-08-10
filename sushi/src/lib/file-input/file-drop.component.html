@@ -1,0 +1,100 @@
+<div
+  class="sui-file-drop__zone grid place-items-center gap-3 rounded-box border border-dashed border-base-300 bg-base-100 p-6 text-center transition-colors"
+  [class.border-primary]="active()"
+  [class.border-error]="isInvalid()"
+  [class.bg-base-200]="active()"
+  [class.opacity-50]="disabled()"
+  [attr.aria-disabled]="disabled() || null"
+  [attr.aria-invalid]="isInvalid() || null"
+  (dragenter)="handleDrag($event)"
+  (dragover)="handleDrag($event)"
+  (dragleave)="handleDragLeave($event)"
+  (drop)="handleDrop($event)"
+>
+  <input
+    #inputElement
+    class="sr-only"
+    type="file"
+    [accept]="accept()"
+    [multiple]="multiple()"
+    [disabled]="disabled()"
+    tabindex="-1"
+    aria-hidden="true"
+    (change)="handleSelection($event)"
+  />
+
+  @if (contentTemplate(); as content) {
+    <span class="sr-only" [id]="labelId">{{ label() }}</span>
+    <span class="sr-only" [id]="descriptionId">{{ description() }}</span>
+    <ng-container [ngTemplateOutlet]="content" [ngTemplateOutletContext]="contentContext()" />
+  } @else {
+    <strong [id]="labelId">{{ label() }}</strong>
+    <span class="text-base-content/60" [id]="descriptionId">{{ description() }}</span>
+    @if (value().length) {
+      <span>{{ value().length }} {{ value().length === 1 ? 'file selected' : 'files selected' }}</span>
+    }
+  }
+
+  <button
+    #chooseButton
+    suiButton
+    [id]="buttonId"
+    type="button"
+    size="sm"
+    variant="outlined"
+    [disabled]="disabled()"
+    [attr.aria-labelledby]="buttonId + ' ' + labelId"
+    [attr.aria-describedby]="descriptionId"
+    (click)="openPicker()"
+    (blur)="touch.emit()"
+  >
+    {{ value().length ? replaceLabel() : chooseLabel() }}
+  </button>
+</div>
+
+<p class="sr-only" aria-live="polite">{{ announcement() }}</p>
+
+<div class="mt-3">
+  @if (rejectionMessage(); as message) {
+    <p class="mb-2 text-sm text-error" aria-live="polite">{{ message }}</p>
+  }
+
+  @if (itemContexts().length) {
+    <div class="mb-2 flex items-center justify-between gap-3">
+      <strong>Selected files</strong>
+      <button suiButton type="button" size="xs" variant="text" [disabled]="disabled()" (click)="handleClear()">
+        {{ clearLabel() }}
+      </button>
+    </div>
+
+    <ul class="grid gap-2" aria-label="Selected files">
+      @for (context of itemContexts(); track context.file; let index = $index) {
+        <li class="flex min-w-0 items-center gap-3 rounded-field border border-base-300 bg-base-100 px-3 py-2">
+          <div class="min-w-0 flex-1">
+            @if (itemTemplate(); as item) {
+              <ng-container [ngTemplateOutlet]="item" [ngTemplateOutletContext]="context" />
+            } @else {
+              <p class="truncate font-medium" [title]="context.file.name">{{ context.file.name }}</p>
+              <p class="text-sm text-base-content/60">{{ context.size }}</p>
+            }
+          </div>
+
+          <button
+            suiButton
+            type="button"
+            size="xs"
+            shape="square"
+            variant="text"
+            [disabled]="disabled()"
+            [attr.aria-label]="'Remove ' + context.file.name"
+            (click)="handleRemove(index)"
+          >
+            <svg lucideX class="size-4" aria-hidden="true"></svg>
+          </button>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="text-base-content/60">No files selected</p>
+  }
+</div>

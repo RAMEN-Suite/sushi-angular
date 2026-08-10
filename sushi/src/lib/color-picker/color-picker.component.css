@@ -1,0 +1,18 @@
+.sui-color-picker__native::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.sui-color-picker__native::-webkit-color-swatch {
+  border: 0;
+  border-radius: var(--radius-field);
+}
+
+.sui-color-picker__native::-moz-color-swatch {
+  border: 0;
+  border-radius: var(--radius-field);
+}
+
+.sui-color-picker__native:disabled::-webkit-color-swatch,
+.sui-color-picker__native:disabled::-moz-color-swatch {
+  opacity: 0.4;
+}

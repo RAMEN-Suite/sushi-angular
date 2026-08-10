@@ -1,3 +1,5 @@
-export type StatusSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'success' | 'info' | 'warning' | 'error';
-export type StatusSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+import { ComponentSize, ThemeSeverity } from '../sushi.types';
+
+export type StatusSeverity = ThemeSeverity;
+export type StatusSize = ComponentSize;
 export type StatusAnimation = 'ping' | 'bounce';

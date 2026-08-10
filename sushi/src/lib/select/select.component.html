@@ -1,0 +1,193 @@
+<div
+  ngCombobox
+  #combobox="ngCombobox"
+  cdkOverlayOrigin
+  #origin="cdkOverlayOrigin"
+  class="input sui-select sui-form-control relative flex max-w-full items-center gap-3"
+  [class.w-full]="fluid()"
+  [class.input-xs]="size() === 'xs'"
+  [class.input-sm]="size() === 'sm'"
+  [class.input-lg]="size() === 'lg'"
+  [class.input-xl]="size() === 'xl'"
+  [class.input-neutral]="severity() === 'neutral'"
+  [class.input-primary]="severity() === 'primary'"
+  [class.input-secondary]="severity() === 'secondary'"
+  [class.input-accent]="severity() === 'accent'"
+  [class.input-info]="severity() === 'info'"
+  [class.input-success]="severity() === 'success'"
+  [class.input-warning]="severity() === 'warning'"
+  [class.input-error]="severity() === 'error' || isInvalid()"
+  [class.bg-base-200]="variant() === 'filled' || disabled()"
+  [class.cursor-pointer]="!disabled()"
+  [class.cursor-not-allowed]="disabled()"
+  [class.sui-form-control--disabled]="disabled()"
+  [preserveContent]="true"
+  [expanded]="expanded() && !disabled()"
+  [disabled]="disabled()"
+  [softDisabled]="false"
+  [attr.id]="id()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-labelledby]="ariaLabelledby()"
+  [attr.aria-describedby]="ariaDescribedby()"
+  [attr.aria-required]="required() || null"
+  [attr.aria-invalid]="isInvalid() || null"
+  (expandedChange)="handleExpanded($event)"
+>
+  @if (selectedItemTemplate(); as template) {
+    @if (selectedContext(); as context) {
+      <span class="min-w-0 grow overflow-hidden py-0.5">
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="context" />
+      </span>
+    } @else {
+      <span class="min-w-0 grow truncate text-base-content/50">{{ placeholder() }}</span>
+    }
+  } @else {
+    <span class="min-w-0 grow truncate" [class.sui-form-control--placeholder]="!selectedOption()">
+      {{ selectedOption()?.label ?? placeholder() }}
+    </span>
+  }
+
+  @if (loading()) {
+    <span class="inline-flex size-6 shrink-0 items-center justify-center">
+      @if (loadingIconTemplate(); as template) {
+        <ng-container [ngTemplateOutlet]="template" />
+      } @else {
+        <span suiSpinner size="sm"></span>
+      }
+    </span>
+  } @else if (!disabled() && showClear() && selectedOption()) {
+    <span
+      class="inline-flex size-4 shrink-0 cursor-pointer items-center justify-center"
+      role="button"
+      tabindex="0"
+      aria-label="Clear selection"
+      (click)="clear($event)"
+      (keydown.enter)="clear($event)"
+      (keydown.space)="clear($event)"
+    >
+      @if (clearIconTemplate(); as template) {
+        <ng-container [ngTemplateOutlet]="template" />
+      } @else {
+        <svg lucideX class="size-4" aria-hidden="true"></svg>
+      }
+    </span>
+  }
+
+  <span class="pointer-events-none inline-flex size-4 shrink-0 items-center justify-center" aria-hidden="true">
+    @if (dropdownIconTemplate(); as template) {
+      <ng-container [ngTemplateOutlet]="template" />
+    } @else {
+      <svg lucideChevronDown class="size-4" aria-hidden="true"></svg>
+    }
+  </span>
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="expanded() && !disabled()"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  [cdkConnectedOverlayMatchWidth]="true"
+  [cdkConnectedOverlayFlexibleDimensions]="false"
+  [cdkConnectedOverlayViewportMargin]="8"
+  [cdkConnectedOverlayPositions]="positions"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  (backdropClick)="handleExpanded(false)"
+  (detach)="handleExpanded(false)"
+>
+  <ng-template ngComboboxPopup [combobox]="combobox">
+    <div class="bg-base-100 border-base-300 w-full overflow-hidden rounded-box border shadow-lg">
+      @if (headerTemplate(); as template) {
+        <div class="border-base-300 border-b p-3" (pointerdown)="$event.preventDefault()">
+          <ng-container [ngTemplateOutlet]="template" />
+        </div>
+      }
+      @if (loading()) {
+        <div ngComboboxWidget class="w-full" role="status">
+          @if (loadingTemplate(); as template) {
+            <ng-container
+              [ngTemplateOutlet]="template"
+              [ngTemplateOutletContext]="{ $implicit: loadingMessage(), message: loadingMessage() }"
+            />
+          } @else {
+            <div class="flex items-center justify-center gap-2 p-6 text-sm opacity-60">
+              <span suiSpinner size="sm"></span>{{ loadingMessage() }}
+            </div>
+          }
+        </div>
+      } @else if (options().length === 0) {
+        <div ngComboboxWidget class="p-4 text-center text-sm opacity-60">
+          @if (emptyTemplate(); as template) {
+            <ng-container [ngTemplateOutlet]="template" />
+          } @else {
+            {{ emptyMessage() }}
+          }
+        </div>
+      } @else {
+        <div
+          #listbox="ngListbox"
+          ngListbox
+          ngComboboxWidget
+          class="w-full overflow-y-auto p-1 outline-none"
+          [style.max-height.px]="scrollHeight()"
+          tabindex="-1"
+          focusMode="activedescendant"
+          selectionMode="explicit"
+          [value]="listboxValue()"
+          [activeDescendant]="listbox.activeDescendant()"
+          [attr.aria-label]="ariaLabel() ?? placeholder()"
+          (valueChange)="select($event)"
+        >
+          @for (option of options(); track option.value; let index = $index) {
+            @if (option.group && option.group !== options()[index - 1]?.group) {
+              <div class="border-base-200 px-3 pb-2 pt-4" [class.mt-2]="index > 0" [class.border-t]="index > 0" role="presentation">
+                @if (groupTemplate(); as template) {
+                  <ng-container
+                    [ngTemplateOutlet]="template"
+                    [ngTemplateOutletContext]="{ $implicit: option.group, group: option.group, option: option, index: index }"
+                  />
+                } @else {
+                  <span class="text-xs font-semibold uppercase tracking-wider text-base-content/60">{{ option.group }}</span>
+                }
+              </div>
+            }
+            <div
+              ngOption
+              class="sui-selection-option flex w-full items-center gap-2 rounded-field px-3 py-2 outline-none"
+              [style.min-height.px]="optionHeight()"
+              [class.hover:bg-base-200]="!isSelected(option) && !option.disabled"
+              [class.cursor-pointer]="!option.disabled"
+              [class.cursor-not-allowed]="option.disabled"
+              [class.opacity-40]="option.disabled"
+              [value]="option.value"
+              [label]="option.label"
+              [disabled]="option.disabled ?? false"
+            >
+              <span class="min-w-0 grow overflow-hidden">
+                @if (itemTemplate(); as template) {
+                  <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="itemContext(option, index)" />
+                } @else {
+                  {{ option.label }}
+                }
+              </span>
+              @if (checkmark() && isSelected(option)) {
+                <span class="inline-flex size-4 shrink-0 items-center justify-center" aria-hidden="true">
+                  @if (checkmarkIconTemplate(); as template) {
+                    <ng-container [ngTemplateOutlet]="template" />
+                  } @else {
+                    <svg lucideCheck class="size-4" aria-hidden="true"></svg>
+                  }
+                </span>
+              }
+            </div>
+          }
+        </div>
+      }
+      @if (footerTemplate(); as template) {
+        <div class="border-base-300 border-t p-3" (pointerdown)="$event.preventDefault()">
+          <ng-container [ngTemplateOutlet]="template" />
+        </div>
+      }
+    </div>
+  </ng-template>
+</ng-template>

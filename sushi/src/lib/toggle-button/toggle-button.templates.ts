@@ -1,19 +1,21 @@
 import { Directive } from '@angular/core';
+import { ToggleButtonContext } from './toggle-button.interfaces';
 
 @Directive({
   selector: 'ng-template[suiToggleButton]',
-  standalone: true,
 })
-export class ToggleButtonTemplate {}
+export class ToggleButtonTemplate {
+  public static ngTemplateContextGuard(_directive: ToggleButtonTemplate, _context: unknown): _context is ToggleButtonContext {
+    return true;
+  }
+}
 
 @Directive({
   selector: 'ng-template[suiToggleButtonOff]',
-  standalone: true,
 })
 export class ToggleButtonOffTemplate {}
 
 @Directive({
   selector: 'ng-template[suiToggleButtonOn]',
-  standalone: true,
 })
 export class ToggleButtonOnTemplate {}

@@ -9,6 +9,15 @@ button.sui-toggle-button {
   transition: none;
 }
 
+.sui-toggle-button__content {
+  @apply relative inline-flex items-center justify-center gap-2 whitespace-nowrap;
+  z-index: 1;
+}
+
+:host(.sui-toggle-button--checked) > button.sui-toggle-button {
+  @apply relative;
+}
+
 :host(.sui-toggle-button--checked) > button.sui-toggle-button::after {
   position: absolute;
   inset: calc(var(--border, 1px) * -1);
@@ -20,9 +29,4 @@ button.sui-toggle-button {
 
 :host(.sui-toggle-button--checked) > button.sui-toggle-button:not(:disabled):hover::after {
   background: color-mix(in oklab, currentColor 30%, transparent);
-}
-
-.sui-toggle-button__content {
-  @apply relative inline-flex items-center justify-center gap-2 whitespace-nowrap;
-  z-index: 1;
 }

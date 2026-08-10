@@ -10,7 +10,9 @@ import { booleanAttribute, Directive, input, InputSignalWithTransform, model, Mo
 })
 export class Fieldset {
   public readonly expanded: ModelSignal<boolean> = model<boolean>(true);
-  public readonly collapsible: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, { transform: booleanAttribute });
+  public readonly collapsible: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 
   public toggle(): void {
     if (!this.collapsible()) return;

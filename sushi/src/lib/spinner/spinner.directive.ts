@@ -3,7 +3,6 @@ import { SpinnerSize, SpinnerType } from './spinner.interfaces';
 
 @Directive({
   selector: 'span[suiSpinner]',
-  standalone: true,
   host: {
     class: 'loading sui-spinner',
 
