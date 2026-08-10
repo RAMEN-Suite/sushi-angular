@@ -1,6 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { FormControlState } from '../form-control';
-import { FileInputSeverity, FileInputSize } from './file-input.interfaces';
+import { Directive } from '@angular/core';
+import { FluidControlState } from '../form-control';
 
 @Directive({
   selector: 'input[type="file"][suiFileInput]',
@@ -21,13 +20,9 @@ import { FileInputSeverity, FileInputSize } from './file-input.interfaces';
     '[class.file-input-md]': 'size() === "md"',
     '[class.file-input-lg]': 'size() === "lg"',
     '[class.file-input-xl]': 'size() === "xl"',
+    '[class.w-full]': 'fluid()',
 
     '[attr.aria-invalid]': 'isInvalid() ? "true" : null',
   },
 })
-export class FileInput extends FormControlState {
-  /** Applies a semantic border color to the native file input. */
-  public readonly severity: InputSignal<FileInputSeverity | null> = input<FileInputSeverity | null>(null);
-  /** Sets the control height and text size. */
-  public readonly size: InputSignal<FileInputSize> = input<FileInputSize>('md');
-}
+export class FileInput extends FluidControlState {}

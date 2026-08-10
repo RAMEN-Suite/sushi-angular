@@ -9,7 +9,7 @@
             {{ size.toUpperCase() }}
             <code suiBadge severity="neutral" variant="soft" size="xs" class="font-mono">size="{{ size }}"</code>
           </span>
-          <input suiInput class="w-full" [size]="size" [placeholder]="size.toUpperCase() + ' input'" />
+          <input suiInput fluid [size]="size" [placeholder]="size.toUpperCase() + ' input'" />
         </label>
       }
     </div>
@@ -22,7 +22,7 @@
       @for (color of colors; track color) {
         <label class="grid gap-1.5">
           <span class="text-sm font-medium">{{ color }}</span>
-          <input suiInput class="w-full" [severity]="color" [placeholder]="color" />
+          <input suiInput fluid [severity]="color" [placeholder]="color" />
         </label>
       }
     </div>

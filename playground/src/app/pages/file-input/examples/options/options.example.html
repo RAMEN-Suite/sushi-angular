@@ -14,7 +14,7 @@
               {{ size.toUpperCase() }}
               <code suiBadge severity="neutral" variant="soft" size="xs" class="font-mono">size="{{ size }}"</code>
             </span>
-            <input suiFileInput type="file" class="w-full" [size]="size" />
+            <input suiFileInput type="file" fluid [size]="size" />
           </label>
         }
       </div>
@@ -26,7 +26,7 @@
         @for (color of colors; track color) {
           <label class="grid gap-1.5">
             <span class="text-sm font-medium">{{ color }}</span>
-            <input suiFileInput type="file" class="w-full" size="sm" [severity]="color" />
+            <input suiFileInput type="file" fluid size="sm" [severity]="color" />
           </label>
         }
       </div>

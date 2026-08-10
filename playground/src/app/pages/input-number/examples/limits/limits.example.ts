@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormFieldLabel, InputNumber, Label } from '@ramen-suite/sushi';
+import { LucideMinus, LucidePlus } from '@lucide/angular';
+import { Button, FormFieldLabel, InputNumber, InputNumberButtonsTemplate, JoinItem, Label } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-input-number-limits-example',
-  imports: [FormFieldLabel, InputNumber, Label],
+  imports: [LucideMinus, LucidePlus, Button, FormFieldLabel, InputNumber, InputNumberButtonsTemplate, JoinItem, Label],
   templateUrl: './limits.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

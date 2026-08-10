@@ -1,8 +1,10 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
+  contentChild,
   ElementRef,
   input,
   InputSignal,
@@ -14,20 +16,24 @@ import {
   OutputEmitterRef,
   signal,
   Signal,
+  TemplateRef,
   viewChild,
   WritableSignal,
 } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
-import { LucideMinus, LucidePlus } from '@lucide/angular';
+import { LucideChevronDown, LucideChevronUp } from '@lucide/angular';
 import { Button } from '../button';
 import { FormControlSize } from '../form-control';
+import { Join, JoinItem } from '../join';
+import { InputNumberButtonsContext } from './input-number.interfaces';
+import { InputNumberButtonsTemplate } from './input-number.templates';
 
 const optionalNumber: (value: unknown) => number | undefined = (value: unknown): number | undefined =>
   value === null || value === undefined || value === '' ? undefined : numberAttribute(value);
 
 @Component({
   selector: 'sui-input-number',
-  imports: [LucideMinus, LucidePlus, Button],
+  imports: [NgTemplateOutlet, LucideChevronDown, LucideChevronUp, Button, Join, JoinItem],
   templateUrl: './input-number.component.html',
   host: { class: 'inline-block max-w-full', '[class.w-full]': 'fluid()' },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -80,6 +86,10 @@ export class InputNumber implements FormValueControl<number | null> {
   /** Emits when the user completes an interaction. */
   public readonly touch: OutputEmitterRef<void> = output();
 
+  protected readonly buttonsTemplate: Signal<TemplateRef<InputNumberButtonsContext> | undefined> = contentChild(
+    InputNumberButtonsTemplate,
+    { read: TemplateRef },
+  );
   private readonly inputElement: Signal<ElementRef<HTMLInputElement>> = viewChild.required('inputElement');
 
   protected readonly formatter: Signal<Intl.NumberFormat> = computed(
@@ -96,8 +106,18 @@ export class InputNumber implements FormValueControl<number | null> {
     if (value === null) return '';
     return this.editing() ? String(value) : this.formatter().format(value);
   });
+  protected readonly buttonsContext: Signal<InputNumberButtonsContext> = computed((): InputNumberButtonsContext => ({
+    $implicit: this.value(),
+    value: this.value(),
+    disabled: this.disabled(),
+    size: this.size(),
+    decrement: this.decrement,
+    increment: this.increment,
+  }));
 
   private readonly editing: WritableSignal<boolean> = signal(false);
+  private readonly decrement: () => void = (): void => this.handleStep(-1);
+  private readonly increment: () => void = (): void => this.handleStep(1);
 
   /** Moves focus to the internal spinbutton. */
   public focus(): void {

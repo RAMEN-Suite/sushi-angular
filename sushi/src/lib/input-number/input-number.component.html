@@ -1,68 +1,83 @@
-<div
-  class="input sui-form-control flex max-w-full items-center gap-2"
-  [class.w-full]="fluid()"
-  [class.input-xs]="size() === 'xs'"
-  [class.input-sm]="size() === 'sm'"
-  [class.input-lg]="size() === 'lg'"
-  [class.input-xl]="size() === 'xl'"
-  [class.input-error]="invalid()"
-  [class.cursor-not-allowed]="disabled()"
-  [class.opacity-50]="disabled()"
->
-  @if (prefix()) {
-    <span class="shrink-0 text-base-content/60">{{ prefix() }}</span>
-  }
-  <input
-    #inputElement
-    class="min-w-0 grow text-right outline-none"
-    type="text"
-    inputmode="decimal"
-    [value]="displayValue()"
-    [placeholder]="placeholder()"
-    [disabled]="disabled()"
-    [attr.aria-label]="ariaLabel()"
-    [attr.aria-valuemin]="min()"
-    [attr.aria-valuemax]="max()"
-    [attr.aria-valuenow]="value()"
-    [attr.aria-invalid]="invalid() || null"
-    role="spinbutton"
-    (focus)="handleFocus()"
-    (input)="handleInput($event)"
-    (blur)="handleBlur()"
-    (keydown.arrowup)="adjust(1); $event.preventDefault()"
-    (keydown.arrowdown)="adjust(-1); $event.preventDefault()"
-  />
-  @if (suffix()) {
-    <span class="shrink-0 text-base-content/60">{{ suffix() }}</span>
-  }
-  @if (showButtons()) {
-    <span class="flex shrink-0 gap-1">
-      <button
-        suiButton
-        type="button"
-        severity="neutral"
-        variant="soft"
-        size="xs"
-        shape="square"
-        [disabled]="disabled()"
-        aria-label="Decrease"
-        (click)="handleStep(-1)"
+<div suiJoin class="max-w-full" [class.w-full]="fluid()">
+  <div
+    suiJoinItem
+    class="input sui-form-control flex min-w-0 items-center gap-2"
+    [class.flex-1]="fluid()"
+    [class.input-xs]="size() === 'xs'"
+    [class.input-sm]="size() === 'sm'"
+    [class.input-lg]="size() === 'lg'"
+    [class.input-xl]="size() === 'xl'"
+    [class.input-error]="invalid()"
+    [class.cursor-not-allowed]="disabled()"
+    [class.opacity-50]="disabled()"
+  >
+    @if (prefix()) {
+      <span class="shrink-0 text-base-content/60">{{ prefix() }}</span>
+    }
+    <input
+      #inputElement
+      class="min-w-0 grow text-right outline-none"
+      type="text"
+      inputmode="decimal"
+      [value]="displayValue()"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      [attr.aria-label]="ariaLabel()"
+      [attr.aria-valuemin]="min()"
+      [attr.aria-valuemax]="max()"
+      [attr.aria-valuenow]="value()"
+      [attr.aria-invalid]="invalid() || null"
+      role="spinbutton"
+      (focus)="handleFocus()"
+      (input)="handleInput($event)"
+      (blur)="handleBlur()"
+      (keydown.arrowup)="adjust(1); $event.preventDefault()"
+      (keydown.arrowdown)="adjust(-1); $event.preventDefault()"
+    />
+    @if (suffix()) {
+      <span class="-ml-1 shrink-0 text-base-content/60">{{ suffix() }}</span>
+    }
+  </div>
+
+  @if (showButtons() || buttonsTemplate()) {
+    @if (buttonsTemplate(); as buttons) {
+      <ng-container [ngTemplateOutlet]="buttons" [ngTemplateOutletContext]="buttonsContext()" />
+    } @else {
+      <span
+        suiJoin
+        suiJoinItem
+        orientation="vertical"
+        class="shrink-0 self-stretch"
       >
-        <svg lucideMinus class="size-3" aria-hidden="true"></svg>
-      </button>
-      <button
-        suiButton
-        type="button"
-        severity="neutral"
-        variant="soft"
-        size="xs"
-        shape="square"
-        [disabled]="disabled()"
-        aria-label="Increase"
-        (click)="handleStep(1)"
-      >
-        <svg lucidePlus class="size-3" aria-hidden="true"></svg>
-      </button>
-    </span>
+        <button
+          suiButton
+          suiJoinItem
+          type="button"
+          size="xs"
+          severity="neutral"
+          variant="soft"
+          class="h-auto min-h-0 w-8 flex-1 px-0"
+          [disabled]="disabled()"
+          aria-label="Increase"
+          (click)="handleStep(1)"
+        >
+          <svg lucideChevronUp class="size-3" aria-hidden="true"></svg>
+        </button>
+        <button
+          suiButton
+          suiJoinItem
+          type="button"
+          size="xs"
+          severity="neutral"
+          variant="soft"
+          class="h-auto min-h-0 w-8 flex-1 px-0"
+          [disabled]="disabled()"
+          aria-label="Decrease"
+          (click)="handleStep(-1)"
+        >
+          <svg lucideChevronDown class="size-3" aria-hidden="true"></svg>
+        </button>
+      </span>
+    }
   }
 </div>

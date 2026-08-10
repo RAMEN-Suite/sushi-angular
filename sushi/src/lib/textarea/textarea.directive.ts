@@ -1,6 +1,6 @@
 import { afterNextRender, DestroyRef, Directive, ElementRef, inject, input, InputSignal } from '@angular/core';
-import { FormControlState } from '../form-control';
-import { TextareaResize, TextareaSeverity, TextareaSize } from './textarea.interfaces';
+import { FluidControlState } from '../form-control';
+import { TextareaResize } from './textarea.interfaces';
 
 @Directive({
   selector: 'textarea[suiTextarea]',
@@ -21,6 +21,7 @@ import { TextareaResize, TextareaSeverity, TextareaSize } from './textarea.inter
     '[class.textarea-md]': 'size() === "md"',
     '[class.textarea-lg]': 'size() === "lg"',
     '[class.textarea-xl]': 'size() === "xl"',
+    '[class.w-full]': 'fluid()',
 
     '[class.resize-none]': 'resize() === "none"',
     '[class.resize-y]': 'resize() === "vertical"',
@@ -30,13 +31,7 @@ import { TextareaResize, TextareaSeverity, TextareaSize } from './textarea.inter
     '[attr.aria-invalid]': 'isInvalid() ? "true" : null',
   },
 })
-export class Textarea extends FormControlState {
-  /** Applies a semantic border color to the textarea. */
-  public readonly severity: InputSignal<TextareaSeverity | null> = input<TextareaSeverity | null>(null);
-
-  /** Sets the control height and text size. */
-  public readonly size: InputSignal<TextareaSize> = input<TextareaSize>('md');
-
+export class Textarea extends FluidControlState {
   /** Controls which directions the user may resize the textarea. */
   public readonly resize: InputSignal<TextareaResize> = input<TextareaResize>('vertical');
 

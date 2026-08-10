@@ -1,6 +1,5 @@
-import { booleanAttribute, Directive, input, InputSignal, InputSignalWithTransform } from '@angular/core';
-import { FormControlState } from '../form-control';
-import { InputSeverity, InputSize } from './input.interfaces';
+import { booleanAttribute, Directive, input, InputSignalWithTransform } from '@angular/core';
+import { FluidControlState } from '../form-control';
 
 @Directive({
   selector: 'input[suiInput]',
@@ -21,19 +20,14 @@ import { InputSeverity, InputSize } from './input.interfaces';
     '[class.input-md]': 'size() === "md"',
     '[class.input-lg]': 'size() === "lg"',
     '[class.input-xl]': 'size() === "xl"',
+    '[class.w-full]': 'fluid()',
 
     '[class.sui-input--clear-hidden]': '!showClear()',
 
     '[attr.aria-invalid]': 'isInvalid() ? "true" : null',
   },
 })
-export class Input extends FormControlState {
-  /** Applies a semantic border color to the native input. */
-  public readonly severity: InputSignal<InputSeverity | null> = input<InputSeverity | null>(null);
-
-  /** Sets the control height and text size. */
-  public readonly size: InputSignal<InputSize> = input<InputSize>('md');
-
+export class Input extends FluidControlState {
   /** Keeps the browser-provided clear affordance visible for supported input types. */
   public readonly showClear: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
 }

@@ -1,15 +1,47 @@
-<div class="grid w-80 max-w-full gap-5">
-  <div suiLabel>
+<div class="grid w-80 max-w-full gap-6">
+  <div suiLabel class="gap-2">
     <span suiFormFieldLabel>Completion</span>
-    <sui-input-number fluid showButtons size="sm" suffix=" %" [min]="0" [max]="100" [step]="5" [value]="65" />
+    <sui-input-number fluid size="sm" suffix="%" [min]="0" [max]="100" [step]="5" [value]="65">
+      <ng-template suiInputNumberButtons let-decrement="decrement" let-increment="increment" let-disabled="disabled" let-size="size">
+        <button
+          suiButton
+          suiJoinItem
+          type="button"
+          [size]="size"
+          shape="square"
+          severity="neutral"
+          variant="soft"
+          [disabled]="disabled"
+          aria-label="Decrease completion"
+          (click)="decrement()"
+        >
+          <svg lucideMinus class="size-3.5" aria-hidden="true"></svg>
+        </button>
+        <button
+          suiButton
+          suiJoinItem
+          type="button"
+          [size]="size"
+          shape="square"
+          severity="neutral"
+          variant="soft"
+          [disabled]="disabled"
+          aria-label="Increase completion"
+          (click)="increment()"
+        >
+          <svg lucidePlus class="size-3.5" aria-hidden="true"></svg>
+        </button>
+      </ng-template>
+    </sui-input-number>
+    <span class="text-sm text-base-content/60">Adjusts in five-percent steps.</span>
   </div>
 
-  <div suiLabel>
+  <div suiLabel class="gap-2">
     <span suiFormFieldLabel>Weight</span>
     <sui-input-number
       fluid
       size="sm"
-      suffix=" kg"
+      suffix="kg"
       placeholder="0.00"
       [min]="0"
       [step]="0.25"
@@ -17,5 +49,6 @@
       [maxFractionDigits]="2"
       [value]="12.5"
     />
+    <span class="text-sm text-base-content/60">Accepts quarter-kilogram increments.</span>
   </div>
 </div>

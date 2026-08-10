@@ -45,6 +45,7 @@ let nextColorPickerId: number = 0;
   styleUrl: './color-picker.component.css',
   host: {
     class: 'sui-color-picker inline-grid max-w-full gap-2',
+    '[class.w-full]': 'fluid()',
     '[attr.id]': 'null',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.inert]': 'disabled() ? "" : null',
@@ -75,6 +76,8 @@ export class ColorPicker implements FormValueControl<string> {
 
   /** Prevents color entry and preset selection. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+  /** Expands the editable picker to the available width. */
+  public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Shows the editable hex value beside the native color picker. */
   public readonly showInput: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Applies invalid semantics and styling. */

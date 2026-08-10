@@ -612,6 +612,13 @@ export const apiReference = {
         description: 'Prevents color entry and preset selection.',
       },
       {
+        name: 'fluid',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Expands the editable picker to the available width.',
+      },
+      {
         name: 'showInput',
         kind: 'input',
         type: 'boolean',
@@ -878,18 +885,25 @@ export const apiReference = {
     selector: 'input[type="file"][suiFileInput]',
     members: [
       {
+        name: 'fluid',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Expands the control to the available width.',
+      },
+      {
         name: 'severity',
         kind: 'input',
-        type: 'FileInputSeverity | null',
+        type: 'FormControlSeverity | null',
         defaultValue: 'null',
-        description: 'Applies a semantic border color to the native file input.',
+        description: 'Applies a semantic color to the control.',
       },
       {
         name: 'size',
         kind: 'input',
-        type: 'FileInputSize',
+        type: 'FormControlSize',
         defaultValue: "'md'",
-        description: 'Sets the control height and text size.',
+        description: 'Sets the control dimensions.',
       },
       {
         name: 'invalid',
@@ -971,25 +985,32 @@ export const apiReference = {
     selector: 'input[suiInput]',
     members: [
       {
-        name: 'severity',
-        kind: 'input',
-        type: 'InputSeverity | null',
-        defaultValue: 'null',
-        description: 'Applies a semantic border color to the native input.',
-      },
-      {
-        name: 'size',
-        kind: 'input',
-        type: 'InputSize',
-        defaultValue: "'md'",
-        description: 'Sets the control height and text size.',
-      },
-      {
         name: 'showClear',
         kind: 'input',
         type: 'boolean',
         defaultValue: 'true',
         description: 'Keeps the browser-provided clear affordance visible for supported input types.',
+      },
+      {
+        name: 'fluid',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Expands the control to the available width.',
+      },
+      {
+        name: 'severity',
+        kind: 'input',
+        type: 'FormControlSeverity | null',
+        defaultValue: 'null',
+        description: 'Applies a semantic color to the control.',
+      },
+      {
+        name: 'size',
+        kind: 'input',
+        type: 'FormControlSize',
+        defaultValue: "'md'",
+        description: 'Sets the control dimensions.',
       },
       {
         name: 'invalid',
@@ -1180,7 +1201,13 @@ export const apiReference = {
         description: 'Leaves editing mode so the current value is formatted again.',
       },
     ],
-    templates: [],
+    templates: [
+      {
+        name: 'suiInputNumberButtons',
+        context: 'InputNumberButtonsContext',
+        description: 'Replaces the complete increment and decrement control group.',
+      },
+    ],
   },
   InputOtp: {
     className: 'InputOtp',
@@ -2248,25 +2275,32 @@ export const apiReference = {
     selector: 'textarea[suiTextarea]',
     members: [
       {
-        name: 'severity',
-        kind: 'input',
-        type: 'TextareaSeverity | null',
-        defaultValue: 'null',
-        description: 'Applies a semantic border color to the textarea.',
-      },
-      {
-        name: 'size',
-        kind: 'input',
-        type: 'TextareaSize',
-        defaultValue: "'md'",
-        description: 'Sets the control height and text size.',
-      },
-      {
         name: 'resize',
         kind: 'input',
         type: 'TextareaResize',
         defaultValue: "'vertical'",
         description: 'Controls which directions the user may resize the textarea.',
+      },
+      {
+        name: 'fluid',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Expands the control to the available width.',
+      },
+      {
+        name: 'severity',
+        kind: 'input',
+        type: 'FormControlSeverity | null',
+        defaultValue: 'null',
+        description: 'Applies a semantic color to the control.',
+      },
+      {
+        name: 'size',
+        kind: 'input',
+        type: 'FormControlSize',
+        defaultValue: "'md'",
+        description: 'Sets the control dimensions.',
       },
       {
         name: 'invalid',
