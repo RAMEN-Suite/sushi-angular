@@ -62,7 +62,7 @@
         [disabled]="disabled() || option.disabled"
         [attr.aria-label]="option.label + ' (' + option.color + ')'"
         [attr.aria-checked]="option.selected"
-        [attr.tabindex]="isTabStop(option, index) ? 0 : -1"
+        [tabIndex]="isTabStop(option, index) ? 0 : -1"
         (click)="selectOption(option)"
         (keydown)="handlePresetKeydown($event, index)"
       >

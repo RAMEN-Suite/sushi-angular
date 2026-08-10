@@ -7,6 +7,7 @@ import {
   input,
   InputSignal,
   InputSignalWithTransform,
+  numberAttribute,
   Signal,
 } from '@angular/core';
 import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button.interfaces';
@@ -46,7 +47,7 @@ import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button
     '[attr.aria-busy]': 'loading() ? "true" : null',
     '[attr.aria-disabled]': 'isDisabled() ? "true" : null',
     '[attr.disabled]': 'isDisabled() && isNativeButton ? "" : null',
-    '[attr.tabindex]': 'isDisabled() && !isNativeButton ? -1 : null',
+    '[attr.tabindex]': 'isDisabled() && !isNativeButton ? -1 : tabIndex()',
 
     '(click)': 'handleClick($event)',
   },
@@ -56,6 +57,10 @@ export class Button {
   public readonly size: InputSignal<ButtonSize> = input<ButtonSize>('md');
   public readonly variant: InputSignal<ButtonVariant | null> = input<ButtonVariant | null>(null);
   public readonly shape: InputSignal<ButtonShape | null> = input<ButtonShape | null>(null);
+  /** Controls keyboard order when the button participates in a composite widget. */
+  public readonly tabIndex: InputSignalWithTransform<number | null, unknown> = input<number | null, unknown>(null, {
+    transform: (value: unknown): number | null => (value === null || value === undefined ? null : numberAttribute(value)),
+  });
 
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
