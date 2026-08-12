@@ -10,11 +10,14 @@
       rows="4"
       placeholder="Write a message"
       aria-describedby="message-count"
-      [formField]="form.message"
-    ></textarea>
+      [formField]="form.message"></textarea>
 
-    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset example</button>
+    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">
+      Reset example
+    </button>
   </div>
 
-  <span id="message-count" class="text-sm text-base-content/60">{{ form.message().value().length }}/240 characters</span>
+  <span id="message-count" class="text-sm text-base-content/60">
+    {{ form.message().value().length }}/240 characters
+  </span>
 </div>

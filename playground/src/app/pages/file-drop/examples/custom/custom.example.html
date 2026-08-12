@@ -4,13 +4,20 @@
   multiple
   label="Drop campaign images"
   description="PNG or JPEG files"
-  [formField]="form.files"
->
+  [formField]="form.files">
   <ng-template suiFileDropContent let-files let-active="active" let-disabled="disabled">
     <svg lucideUpload class="size-8 text-base-content/50" aria-hidden="true"></svg>
-    <strong>{{
-      disabled ? 'Upload unavailable' : active ? 'Release images to add them' : files.length ? 'Images ready' : 'Drop campaign images'
-    }}</strong>
+    <strong>
+      {{
+        disabled
+          ? 'Upload unavailable'
+          : active
+            ? 'Release images to add them'
+            : files.length
+              ? 'Images ready'
+              : 'Drop campaign images'
+      }}
+    </strong>
     <span class="text-base-content/60">PNG or JPEG files.</span>
   </ng-template>
 

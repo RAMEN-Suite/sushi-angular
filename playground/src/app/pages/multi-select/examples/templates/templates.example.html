@@ -10,8 +10,7 @@
       [options]="options"
       [loading]="loading()"
       [(value)]="value"
-      ariaLabelledby="multi-team-label"
-    >
+      ariaLabelledby="multi-team-label">
       <ng-template suiMultiSelectHeader let-count="selectedCount">
         <span class="flex items-center justify-between gap-3">
           <strong>Available teams</strong>
@@ -23,14 +22,28 @@
       </ng-template>
       <ng-template suiMultiSelectEmpty>No teams are available.</ng-template>
       <ng-template suiMultiSelectLoading let-message>
-        <span class="flex items-center gap-2"><span suiSpinner size="sm"></span>{{ message }}</span>
+        <span class="flex items-center gap-2">
+          <span suiSpinner size="sm"></span>
+          {{ message }}
+        </span>
       </ng-template>
       <ng-template suiMultiSelectLoadingIcon><span suiSpinner size="xs"></span></ng-template>
-      <ng-template suiMultiSelectDropdownIcon><svg lucideChevronsUpDown class="size-4" aria-hidden="true"></svg></ng-template>
+      <ng-template suiMultiSelectDropdownIcon>
+        <svg lucideChevronsUpDown class="size-4" aria-hidden="true"></svg>
+      </ng-template>
       <ng-template suiMultiSelectClearIcon><svg lucideCircleX class="size-4" aria-hidden="true"></svg></ng-template>
-      <ng-template suiMultiSelectCheckmarkIcon><svg lucideBadgeCheck class="size-4" aria-hidden="true"></svg></ng-template>
+      <ng-template suiMultiSelectCheckmarkIcon>
+        <svg lucideBadgeCheck class="size-4" aria-hidden="true"></svg>
+      </ng-template>
     </sui-multi-select>
-    <button suiButton suiJoinItem type="button" class="w-36" severity="neutral" variant="soft" (click)="toggleLoading()">
+    <button
+      suiButton
+      suiJoinItem
+      type="button"
+      class="w-36"
+      severity="neutral"
+      variant="soft"
+      (click)="toggleLoading()">
       {{ loading() ? 'Stop' : 'Preview loading' }}
     </button>
   </div>

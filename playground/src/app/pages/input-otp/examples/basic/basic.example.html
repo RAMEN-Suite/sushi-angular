@@ -1,5 +1,7 @@
 <div class="grid gap-3">
   <sui-input-otp [formField]="form.code" />
   <p class="text-sm text-base-content/60">Current value: {{ form.code().value() || 'Empty' }}</p>
-  <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">Reset example</button>
+  <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">
+    Reset example
+  </button>
 </div>

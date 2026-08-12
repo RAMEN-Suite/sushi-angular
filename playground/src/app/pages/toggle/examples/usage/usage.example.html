@@ -1,50 +1,65 @@
 <div class="grid max-w-2xl gap-5">
   <div class="grid divide-y divide-base-300 rounded-box border border-base-300 bg-base-100">
     <label class="flex cursor-pointer items-center justify-between gap-4 p-4">
-      <span
-        ><strong class="block">Account notifications</strong
-        ><small class="text-base-content/60">Receive important workspace updates.</small></span
-      >
+      <span>
+        <strong class="block">Account notifications</strong>
+        <small class="text-base-content/60">Receive important workspace updates.</small>
+      </span>
       <input suiToggle type="checkbox" [formField]="notificationForm.notifications" />
     </label>
     <label class="flex cursor-pointer items-center justify-between gap-4 p-4">
-      <span
-        ><strong class="block">Product announcements</strong
-        ><small class="text-base-content/60">Learn about major feature releases.</small></span
-      >
+      <span>
+        <strong class="block">Product announcements</strong>
+        <small class="text-base-content/60">Learn about major feature releases.</small>
+      </span>
       <input suiToggle type="checkbox" checked />
     </label>
     <label class="flex cursor-not-allowed items-center justify-between gap-4 p-4 opacity-60">
-      <span><strong class="block">Organization policy</strong><small>Controlled by an administrator.</small></span>
+      <span>
+        <strong class="block">Organization policy</strong>
+        <small>Controlled by an administrator.</small>
+      </span>
       <input suiToggle type="checkbox" checked disabled />
     </label>
   </div>
   <div class="flex flex-wrap items-center gap-5 rounded-box bg-base-200/50 p-4">
-    <label class="flex items-center gap-2"><input suiToggle type="checkbox" size="sm" checked />Compact</label>
-    <label class="flex items-center gap-2"><input suiToggle type="checkbox" invalid touched />Needs attention</label>
+    <label class="flex items-center gap-2">
+      <input suiToggle type="checkbox" size="sm" checked />
+      Compact
+    </label>
+    <label class="flex items-center gap-2">
+      <input suiToggle type="checkbox" invalid touched />
+      Needs attention
+    </label>
   </div>
 
   <div class="grid gap-3">
     <h3 class="font-semibold">Semantic colors</h3>
     <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      <label class="flex items-center justify-between gap-4"
-        ><span>Primary</span><input suiToggle type="checkbox" severity="primary" checked
-      /></label>
-      <label class="flex items-center justify-between gap-4"
-        ><span>Secondary</span><input suiToggle type="checkbox" severity="secondary" checked
-      /></label>
-      <label class="flex items-center justify-between gap-4"
-        ><span>Accent</span><input suiToggle type="checkbox" severity="accent" checked
-      /></label>
-      <label class="flex items-center justify-between gap-4"
-        ><span>Success</span><input suiToggle type="checkbox" severity="success" checked
-      /></label>
-      <label class="flex items-center justify-between gap-4"
-        ><span>Warning</span><input suiToggle type="checkbox" severity="warning" checked
-      /></label>
-      <label class="flex items-center justify-between gap-4"
-        ><span>Error</span><input suiToggle type="checkbox" severity="error" checked
-      /></label>
+      <label class="flex items-center justify-between gap-4">
+        <span>Primary</span>
+        <input suiToggle type="checkbox" severity="primary" checked />
+      </label>
+      <label class="flex items-center justify-between gap-4">
+        <span>Secondary</span>
+        <input suiToggle type="checkbox" severity="secondary" checked />
+      </label>
+      <label class="flex items-center justify-between gap-4">
+        <span>Accent</span>
+        <input suiToggle type="checkbox" severity="accent" checked />
+      </label>
+      <label class="flex items-center justify-between gap-4">
+        <span>Success</span>
+        <input suiToggle type="checkbox" severity="success" checked />
+      </label>
+      <label class="flex items-center justify-between gap-4">
+        <span>Warning</span>
+        <input suiToggle type="checkbox" severity="warning" checked />
+      </label>
+      <label class="flex items-center justify-between gap-4">
+        <span>Error</span>
+        <input suiToggle type="checkbox" severity="error" checked />
+      </label>
     </div>
   </div>
   <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">Reset</button>

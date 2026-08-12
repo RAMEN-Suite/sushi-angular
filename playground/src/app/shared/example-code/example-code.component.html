@@ -1,16 +1,16 @@
 <sui-tabs ariaLabel="Example source" variant="lift" [(value)]="activeTab">
   <ng-template suiTab value="html" label="HTML">
     <sui-code>
-      @for (line of lines(html()); track $index) {
-        <pre suiCodeLine [prefix]="$index + 1"><code>{{ line }}</code></pre>
+      @for (line of htmlLines(); track $index) {
+        <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
       }
     </sui-code>
   </ng-template>
 
   <ng-template suiTab value="typescript" label="TypeScript">
     <sui-code>
-      @for (line of lines(typescript()); track $index) {
-        <pre suiCodeLine [prefix]="$index + 1"><code>{{ line }}</code></pre>
+      @for (line of typescriptLines(); track $index) {
+        <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
       }
     </sui-code>
   </ng-template>

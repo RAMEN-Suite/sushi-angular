@@ -9,11 +9,13 @@
     [loading]="loading()"
     [errorMessage]="error()"
     placeholder="Type at least two letters"
-    (queryChange)="search($event)"
-  >
-    <ng-template suiAutocompleteLoading let-message
-      ><span class="flex gap-2"><span suiSpinner size="sm"></span>{{ message }}</span></ng-template
-    >
+    (queryChange)="search($event)">
+    <ng-template suiAutocompleteLoading let-message>
+      <span class="flex gap-2">
+        <span suiSpinner size="sm"></span>
+        {{ message }}
+      </span>
+    </ng-template>
     <ng-template suiAutocompleteEmpty let-query="query">No city matches “{{ query }}”.</ng-template>
     <ng-template suiAutocompleteError let-message>{{ message }}</ng-template>
   </sui-autocomplete>

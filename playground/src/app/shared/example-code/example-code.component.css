@@ -1,0 +1,82 @@
+pg-example-code {
+  --pg-code-comment: #9399b2;
+  --pg-code-keyword: #cba6f7;
+  --pg-code-tag: #ff7a85;
+  --pg-code-punctuation: #a6adc8;
+  --pg-code-attribute: #89b4fa;
+  --pg-code-string: #a6e3a1;
+  --pg-code-number: #f9e2af;
+  --pg-code-type: #94e2d5;
+  --pg-code-expression: #fab387;
+}
+
+[data-theme='sushi-dark'] pg-example-code {
+  --pg-code-comment: #59636e;
+  --pg-code-keyword: #6b21a8;
+  --pg-code-tag: #9f1239;
+  --pg-code-punctuation: #57606a;
+  --pg-code-attribute: #075985;
+  --pg-code-string: #166534;
+  --pg-code-number: #92400e;
+  --pg-code-type: #0f766e;
+  --pg-code-expression: #9a3412;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) pg-example-code {
+    --pg-code-comment: #59636e;
+    --pg-code-keyword: #6b21a8;
+    --pg-code-tag: #9f1239;
+    --pg-code-punctuation: #57606a;
+    --pg-code-attribute: #075985;
+    --pg-code-string: #166534;
+    --pg-code-number: #92400e;
+    --pg-code-type: #0f766e;
+    --pg-code-expression: #9a3412;
+  }
+}
+
+pg-example-code .hljs-comment,
+pg-example-code .hljs-quote {
+  color: var(--pg-code-comment);
+  font-style: italic;
+}
+
+pg-example-code .hljs-keyword {
+  color: var(--pg-code-keyword);
+}
+
+pg-example-code .hljs-selector-tag,
+pg-example-code .hljs-name {
+  color: var(--pg-code-tag);
+}
+
+pg-example-code .hljs-tag {
+  color: var(--pg-code-punctuation);
+}
+
+pg-example-code .hljs-attr,
+pg-example-code .hljs-property {
+  color: var(--pg-code-attribute);
+}
+
+pg-example-code .hljs-string,
+pg-example-code .hljs-regexp {
+  color: var(--pg-code-string);
+}
+
+pg-example-code .hljs-number,
+pg-example-code .hljs-literal {
+  color: var(--pg-code-number);
+}
+
+pg-example-code .hljs-title,
+pg-example-code .hljs-type,
+pg-example-code .hljs-built_in {
+  color: var(--pg-code-type);
+}
+
+pg-example-code .hljs-variable,
+pg-example-code .hljs-template-variable {
+  color: var(--pg-code-expression);
+}

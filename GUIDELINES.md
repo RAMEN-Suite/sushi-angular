@@ -147,6 +147,8 @@ Prefer in order:
 - Keep routed documentation in `playground/src/app/pages/<component>`; navigation groups do not create filesystem layers.
 - Use `pg-example-code` for HTML and TypeScript examples; do not add separate code-rendering wrappers.
 - Use the shared HTML/TypeScript code tabs.
+- Format `*.example.html` through the shared Prettier override; never hand-wrap displayed source.
+- Keep syntax highlighting and its dependencies inside the playground.
 - Group by behavior; keep examples short, complete, copyable, and mobile-first.
 - Document every public input, output, state, template, native attribute, and useful composition.
 - Use existing SUSHI components in examples.

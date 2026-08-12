@@ -13,8 +13,7 @@
       [(value)]="value"
       ariaLabelledby="workflow-label"
       ariaDescribedby="workflow-hint"
-      (touch)="closed()"
-    />
+      (touch)="closed()" />
     <span suiFormFieldHint id="workflow-hint">Four compact rows remain visible. Closed {{ closeCount() }} times.</span>
   </div>
 
@@ -25,7 +24,12 @@
     </div>
     <div suiLabel>
       <span suiFormFieldLabel>Loading result</span>
-      <sui-select fluid loading loadingMessage="Fetching workflows" [options]="empty" ariaLabel="Loading workflow list" />
+      <sui-select
+        fluid
+        loading
+        loadingMessage="Fetching workflows"
+        [options]="empty"
+        ariaLabel="Loading workflow list" />
     </div>
   </div>
 </div>

@@ -2,10 +2,19 @@
   <div class="grid gap-3">
     <h3 class="font-semibold">Pressed actions</h3>
     <div class="flex flex-wrap gap-3">
-      <sui-toggle-button [formField]="notificationForm.notifications" offLabel="Notifications off" onLabel="Notifications on" />
+      <sui-toggle-button
+        [formField]="notificationForm.notifications"
+        offLabel="Notifications off"
+        onLabel="Notifications on" />
       <sui-toggle-button [checked]="favorite()" (checkedChange)="favorite.set($event)">
-        <ng-template suiToggleButtonOff><svg lucideX class="size-4" aria-hidden="true"></svg>Favorite</ng-template>
-        <ng-template suiToggleButtonOn><svg lucideCheck class="size-4" aria-hidden="true"></svg>Favorite</ng-template>
+        <ng-template suiToggleButtonOff>
+          <svg lucideX class="size-4" aria-hidden="true"></svg>
+          Favorite
+        </ng-template>
+        <ng-template suiToggleButtonOn>
+          <svg lucideCheck class="size-4" aria-hidden="true"></svg>
+          Favorite
+        </ng-template>
       </sui-toggle-button>
     </div>
   </div>
@@ -21,12 +30,11 @@
           [variant]="checked ? null : 'soft'"
           [disabled]="disabled"
           [attr.aria-pressed]="checked"
-          (click)="toggle()"
-        >
+          (click)="toggle()">
           {{ checked ? 'Pinned to dashboard' : 'Pin to dashboard' }}
-        </button></ng-template
-      ></sui-toggle-button
-    >
+        </button>
+      </ng-template>
+    </sui-toggle-button>
   </div>
 
   <div class="grid gap-3">

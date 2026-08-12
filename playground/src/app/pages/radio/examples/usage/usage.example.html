@@ -4,32 +4,65 @@
     <div suiFieldsetContent class="grid gap-3 sm:grid-cols-3">
       <label class="grid cursor-pointer gap-2 rounded-box border border-base-300 p-4">
         <input suiRadio type="radio" value="starter" [formField]="planForm.plan" />
-        <span><strong class="block">Starter</strong><small class="text-base-content/60">For personal projects.</small></span>
+        <span>
+          <strong class="block">Starter</strong>
+          <small class="text-base-content/60">For personal projects.</small>
+        </span>
       </label>
       <label class="grid cursor-pointer gap-2 rounded-box border border-base-300 p-4">
         <input suiRadio type="radio" value="team" [formField]="planForm.plan" />
-        <span><strong class="block">Team</strong><small class="text-base-content/60">Shared tools and roles.</small></span>
+        <span>
+          <strong class="block">Team</strong>
+          <small class="text-base-content/60">Shared tools and roles.</small>
+        </span>
       </label>
       <label class="grid cursor-not-allowed gap-2 rounded-box border border-base-300 p-4 opacity-60">
         <input suiRadio type="radio" value="enterprise" disabled />
-        <span><strong class="block">Enterprise</strong><small>Contact sales to enable.</small></span>
+        <span>
+          <strong class="block">Enterprise</strong>
+          <small>Contact sales to enable.</small>
+        </span>
       </label>
     </div>
   </fieldset>
   <div class="flex flex-wrap items-center gap-5 rounded-box bg-base-200/50 p-4">
-    <label class="flex items-center gap-2"><input suiRadio type="radio" invalid touched />Needs selection</label>
-    <label class="flex items-center gap-2"><input suiRadio type="radio" size="sm" checked />Compact</label>
+    <label class="flex items-center gap-2">
+      <input suiRadio type="radio" invalid touched />
+      Needs selection
+    </label>
+    <label class="flex items-center gap-2">
+      <input suiRadio type="radio" size="sm" checked />
+      Compact
+    </label>
   </div>
 
   <fieldset suiFieldset>
     <legend suiFieldsetLegend>Semantic colors</legend>
     <div suiFieldsetContent class="flex flex-wrap gap-x-5 gap-y-3">
-      <label class="flex items-center gap-2"><input suiRadio type="radio" name="color" severity="primary" checked />Primary</label>
-      <label class="flex items-center gap-2"><input suiRadio type="radio" name="color" severity="secondary" />Secondary</label>
-      <label class="flex items-center gap-2"><input suiRadio type="radio" name="color" severity="accent" />Accent</label>
-      <label class="flex items-center gap-2"><input suiRadio type="radio" name="color" severity="success" />Success</label>
-      <label class="flex items-center gap-2"><input suiRadio type="radio" name="color" severity="warning" />Warning</label>
-      <label class="flex items-center gap-2"><input suiRadio type="radio" name="color" severity="error" />Error</label>
+      <label class="flex items-center gap-2">
+        <input suiRadio type="radio" name="color" severity="primary" checked />
+        Primary
+      </label>
+      <label class="flex items-center gap-2">
+        <input suiRadio type="radio" name="color" severity="secondary" />
+        Secondary
+      </label>
+      <label class="flex items-center gap-2">
+        <input suiRadio type="radio" name="color" severity="accent" />
+        Accent
+      </label>
+      <label class="flex items-center gap-2">
+        <input suiRadio type="radio" name="color" severity="success" />
+        Success
+      </label>
+      <label class="flex items-center gap-2">
+        <input suiRadio type="radio" name="color" severity="warning" />
+        Warning
+      </label>
+      <label class="flex items-center gap-2">
+        <input suiRadio type="radio" name="color" severity="error" />
+        Error
+      </label>
     </div>
   </fieldset>
   <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">Reset</button>

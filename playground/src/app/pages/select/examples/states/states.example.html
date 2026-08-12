@@ -52,7 +52,13 @@
     <div class="grid gap-4">
       <div suiLabel>
         <span suiFormFieldLabel>Filled and clearable</span>
-        <sui-select fluid showClear variant="filled" [options]="options" [(value)]="value" ariaLabel="Filled delivery" />
+        <sui-select
+          fluid
+          showClear
+          variant="filled"
+          [options]="options"
+          [(value)]="value"
+          ariaLabel="Filled delivery" />
       </div>
       <div suiLabel>
         <span suiFormFieldLabel>Loading</span>
@@ -72,8 +78,7 @@
           [options]="options"
           [(value)]="invalidValue"
           ariaLabel="Invalid delivery"
-          ariaDescribedby="delivery-error"
-        />
+          ariaDescribedby="delivery-error" />
         <span suiFormFieldHint id="delivery-error" class="text-error">Choose a delivery method.</span>
       </div>
     </div>

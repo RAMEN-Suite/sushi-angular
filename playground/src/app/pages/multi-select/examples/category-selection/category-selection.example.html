@@ -10,10 +10,11 @@
       [scrollHeight]="320"
       [(value)]="value"
       ariaLabelledby="permission-label"
-      ariaDescribedby="permission-hint"
-    >
+      ariaDescribedby="permission-hint">
       <ng-template suiMultiSelectGroup let-group>
-        <label class="flex w-full cursor-pointer items-center justify-between gap-4" (pointerdown)="$event.stopPropagation()">
+        <label
+          class="flex w-full cursor-pointer items-center justify-between gap-4"
+          (pointerdown)="$event.stopPropagation()">
           <span class="flex min-w-0 items-center gap-3">
             <input
               suiCheckbox
@@ -21,8 +22,7 @@
               [checked]="groupSelected(group)"
               [indeterminate]="groupPartial(group)"
               [attr.aria-label]="'Select all ' + group + ' permissions'"
-              (change)="toggleGroup(group)"
-            />
+              (change)="toggleGroup(group)" />
             <span class="flex items-center gap-2">
               @switch (group) {
                 @case ('Members') {
@@ -38,7 +38,9 @@
               <strong>{{ group }}</strong>
             </span>
           </span>
-          <span suiBadge severity="neutral" variant="soft" size="xs">{{ selectedCount(group) }}/{{ groupSize(group) }}</span>
+          <span suiBadge severity="neutral" variant="soft" size="xs">
+            {{ selectedCount(group) }}/{{ groupSize(group) }}
+          </span>
         </label>
       </ng-template>
 
@@ -65,7 +67,12 @@
             <span>{{ group }}</span>
             <span class="tabular-nums text-base-content/60">{{ selectedCount(group) }}/{{ groupSize(group) }}</span>
           </div>
-          <progress suiProgress severity="neutral" class="h-1.5" [value]="selectedCount(group)" [max]="groupSize(group)"></progress>
+          <progress
+            suiProgress
+            severity="neutral"
+            class="h-1.5"
+            [value]="selectedCount(group)"
+            [max]="groupSize(group)"></progress>
         </div>
       }
     </div>

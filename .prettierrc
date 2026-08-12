@@ -25,6 +25,15 @@
       }
     },
     {
+      "files": "*.example.html",
+      "options": {
+        "printWidth": 120,
+        "parser": "angular",
+        "bracketSameLine": true,
+        "htmlWhitespaceSensitivity": "ignore"
+      }
+    },
+    {
       "files": ["*.scss", "*.css"],
       "options": {
         "printWidth": 200,

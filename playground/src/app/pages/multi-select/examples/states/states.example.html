@@ -34,11 +34,21 @@
       </div>
       <div suiLabel>
         <span suiFormFieldLabel>Secondary</span>
-        <sui-multi-select fluid severity="secondary" [options]="options" [(value)]="value" ariaLabel="Secondary labels" />
+        <sui-multi-select
+          fluid
+          severity="secondary"
+          [options]="options"
+          [(value)]="value"
+          ariaLabel="Secondary labels" />
       </div>
       <div suiLabel>
         <span suiFormFieldLabel>Success</span>
-        <sui-multi-select fluid severity="success" [options]="options" [(value)]="value" ariaLabel="Successful labels" />
+        <sui-multi-select
+          fluid
+          severity="success"
+          [options]="options"
+          [(value)]="value"
+          ariaLabel="Successful labels" />
       </div>
       <div suiLabel>
         <span suiFormFieldLabel>Warning</span>
@@ -52,7 +62,14 @@
     <div class="grid gap-4">
       <div suiLabel>
         <span suiFormFieldLabel>Filled, clearable, and select all</span>
-        <sui-multi-select fluid showClear showSelectAll variant="filled" [options]="options" [(value)]="value" ariaLabel="Filled labels" />
+        <sui-multi-select
+          fluid
+          showClear
+          showSelectAll
+          variant="filled"
+          [options]="options"
+          [(value)]="value"
+          ariaLabel="Filled labels" />
       </div>
       <div suiLabel>
         <span suiFormFieldLabel>Loading</span>
@@ -72,8 +89,7 @@
           [options]="options"
           [(value)]="invalidValue"
           ariaLabel="Invalid labels"
-          ariaDescribedby="labels-error"
-        />
+          ariaDescribedby="labels-error" />
         <span suiFormFieldHint id="labels-error" class="text-error">Choose at least one label.</span>
       </div>
     </div>

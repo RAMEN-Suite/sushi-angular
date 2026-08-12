@@ -14,19 +14,29 @@
       [(value)]="value"
       ariaLabelledby="permissions-label"
       ariaDescribedby="permissions-hint"
-      (touch)="closed()"
-    />
-    <span suiFormFieldHint id="permissions-hint">Four compact rows remain visible. Closed {{ closeCount() }} times.</span>
+      (touch)="closed()" />
+    <span suiFormFieldHint id="permissions-hint">
+      Four compact rows remain visible. Closed {{ closeCount() }} times.
+    </span>
   </div>
 
   <div class="grid gap-4">
     <div suiLabel>
       <span suiFormFieldLabel>Empty result</span>
-      <sui-multi-select fluid emptyMessage="No permissions are available." [options]="empty" ariaLabel="Empty permission list" />
+      <sui-multi-select
+        fluid
+        emptyMessage="No permissions are available."
+        [options]="empty"
+        ariaLabel="Empty permission list" />
     </div>
     <div suiLabel>
       <span suiFormFieldLabel>Loading result</span>
-      <sui-multi-select fluid loading loadingMessage="Fetching permissions" [options]="empty" ariaLabel="Loading permission list" />
+      <sui-multi-select
+        fluid
+        loading
+        loadingMessage="Fetching permissions"
+        [options]="empty"
+        ariaLabel="Loading permission list" />
     </div>
   </div>
 </div>

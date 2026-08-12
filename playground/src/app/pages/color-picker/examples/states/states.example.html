@@ -1,7 +1,12 @@
 <div class="grid w-96 max-w-full gap-5">
   <div class="grid gap-2">
     <label id="toolbar-color-label" for="toolbar-color" class="font-medium">Compact toolbar color</label>
-    <sui-color-picker id="toolbar-color" class="w-fit" ariaLabelledby="toolbar-color-label" [showInput]="false" [value]="'#15803d'" />
+    <sui-color-picker
+      id="toolbar-color"
+      class="w-fit"
+      ariaLabelledby="toolbar-color-label"
+      [showInput]="false"
+      [value]="'#15803d'" />
   </div>
 
   <div class="grid gap-2">
@@ -15,8 +20,7 @@
       id="validated-color"
       ariaLabelledby="validated-color-label"
       invalidMessage="Use a six-digit hex value such as #991b1b."
-      [value]="'#991b1b'"
-    />
+      [value]="'#991b1b'" />
     <p class="text-sm text-base-content/60">Enter an incomplete value and leave the field to see validation.</p>
   </div>
 
@@ -27,8 +31,7 @@
       ariaLabelledby="server-color-label"
       invalid
       ariaDescribedby="server-color-error"
-      [value]="'#c2410c'"
-    />
+      [value]="'#c2410c'" />
     <p id="server-color-error" class="text-error text-sm">This color is not available for the selected theme.</p>
   </div>
 </div>

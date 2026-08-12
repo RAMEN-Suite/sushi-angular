@@ -2,7 +2,14 @@
   <span suiFormFieldLabel>Project budget</span>
 
   <div class="flex w-full items-stretch gap-2">
-    <sui-input-number fluid showButtons locale="de-DE" currency="EUR" [step]="50" [formField]="form.amount" ariaLabel="Project budget" />
+    <sui-input-number
+      fluid
+      showButtons
+      locale="de-DE"
+      currency="EUR"
+      [step]="50"
+      [formField]="form.amount"
+      ariaLabel="Project budget" />
     <button suiButton type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
   </div>
 

@@ -1,15 +1,17 @@
 <div class="grid w-96 max-w-full gap-5">
   <label class="grid gap-2">
-    <span class="flex items-baseline gap-2"
-      ><strong>Music</strong><span class="text-sm text-base-content/60">{{ form.music().value() }}%</span></span
-    >
+    <span class="flex items-baseline gap-2">
+      <strong>Music</strong>
+      <span class="text-sm text-base-content/60">{{ form.music().value() }}%</span>
+    </span>
     <input suiRange type="range" size="sm" severity="primary" [formField]="form.music" />
   </label>
 
   <label class="grid gap-2">
-    <span class="flex items-baseline gap-2"
-      ><strong>Voice</strong><span class="text-sm text-base-content/60">{{ form.voice().value() }}%</span></span
-    >
+    <span class="flex items-baseline gap-2">
+      <strong>Voice</strong>
+      <span class="text-sm text-base-content/60">{{ form.voice().value() }}%</span>
+    </span>
     <input suiRange type="range" size="sm" severity="success" [formField]="form.voice" />
   </label>
 

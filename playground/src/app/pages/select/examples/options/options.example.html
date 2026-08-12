@@ -9,8 +9,7 @@
       [optionHeight]="56"
       [scrollHeight]="220"
       [(value)]="value"
-      ariaLabelledby="country-label"
-    >
+      ariaLabelledby="country-label">
       <ng-template suiSelectGroup let-group>
         <span class="flex w-full items-center justify-between gap-3">
           <span class="flex items-center gap-2 font-semibold">
@@ -32,10 +31,10 @@
       </ng-template>
       <ng-template suiSelectSelectedItem let-item>
         @let country = asCountry(item);
-        <span class="flex items-center gap-2"
-          ><span aria-hidden="true">{{ country.flag }}</span
-          >{{ country.label }}</span
-        >
+        <span class="flex items-center gap-2">
+          <span aria-hidden="true">{{ country.flag }}</span>
+          {{ country.label }}
+        </span>
       </ng-template>
     </sui-select>
     <span suiFormFieldHint>The selected country remains visible when the list opens again.</span>
