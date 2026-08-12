@@ -1,0 +1,54 @@
+@reference "tailwindcss";
+
+:host {
+  @apply inline-flex h-8 max-w-full items-center gap-2 px-3 text-sm font-medium;
+  border-radius: calc(var(--radius-field) * 2);
+}
+
+:host(:not([class*='badge-'])) {
+  background-color: var(--color-base-200);
+  color: var(--color-base-content);
+}
+
+:host(.sui-chip--disabled) {
+  @apply cursor-not-allowed opacity-50;
+}
+
+:host(.sui-chip--xs) {
+  @apply h-5 gap-1 px-1.5 text-xs;
+}
+
+:host(.sui-chip--sm) {
+  @apply h-6 gap-1.5 px-2 text-xs;
+}
+
+:host(.sui-chip--lg) {
+  @apply h-10 gap-2.5 px-4 text-base;
+}
+
+:host(.sui-chip--xl) {
+  @apply h-12 gap-3 px-5 text-lg;
+}
+
+:host(:focus-visible) {
+  outline: none;
+}
+
+:host(:focus-visible) .sui-chip__remove {
+  border-radius: var(--radius-field);
+  outline: var(--sui-focus-ring-width) solid currentColor;
+  outline-offset: 2px;
+}
+
+.sui-chip__label {
+  @apply min-w-0 truncate;
+}
+
+.sui-chip__remove {
+  @apply -mr-1 inline-flex size-4 cursor-pointer items-center justify-center;
+}
+
+:host(.sui-chip--xs) .sui-chip__remove,
+:host(.sui-chip--sm) .sui-chip__remove {
+  @apply mr-0 size-3.5;
+}

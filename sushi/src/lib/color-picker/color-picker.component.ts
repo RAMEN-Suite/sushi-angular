@@ -80,7 +80,7 @@ export class ColorPicker implements FormValueControl<string> {
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Shows the editable hex value beside the native color picker. */
   public readonly showInput: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
-  /** Applies invalid semantics and styling. */
+  /** Applies external form or business-validation semantics and styling in addition to local hex validation. */
   public readonly invalid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   /** Emits when focus leaves the complete picker. */

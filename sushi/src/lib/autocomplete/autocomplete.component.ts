@@ -63,36 +63,61 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Autocomplete extends FormControlState implements FormValueControl<AutocompleteValue> {
+  /** Selected option value, free-text value, or `null` when empty. */
   public readonly value: ModelSignal<AutocompleteValue> = model<AutocompleteValue>(null);
 
+  /** Suggestions available to filtering and keyboard selection. */
   public readonly options: InputSignal<readonly AutocompleteOption[]> = input.required<readonly AutocompleteOption[]>();
+  /** Compares option values when reference identity is not sufficient. */
   public readonly compareWith: InputSignal<AutocompleteCompareWith> = input<AutocompleteCompareWith>(compareSelectionValues);
+  /** Filters suggestions for the current query. */
   public readonly filterWith: InputSignal<AutocompleteFilter> = input<AutocompleteFilter>(filterSelectionOption);
 
+  /** Text shown while the input is empty. */
   public readonly placeholder: InputSignal<string> = input<string>('Search');
+  /** Message shown when no suggestion matches. */
   public readonly emptyMessage: InputSignal<string> = input<string>('No suggestions found');
+  /** Message shown while suggestions are loading. */
   public readonly loadingMessage: InputSignal<string> = input<string>('Loading suggestions');
+  /** Message shown instead of suggestions when loading failed. */
   public readonly errorMessage: InputSignal<string | null> = input<string | null>(null);
 
+  /** Sets the control dimensions. */
   public readonly size: InputSignal<FormControlSize> = input<FormControlSize>('md');
+  /** Applies one semantic color to the control. */
   public readonly severity: InputSignal<FormControlSeverity | null> = input<FormControlSeverity | null>(null);
+  /** Limits the popup height in pixels before it scrolls. */
   public readonly scrollHeight: InputSignalWithTransform<number, unknown> = input(240, { transform: numberAttribute });
+  /** Sets the minimum height of each suggestion in pixels. */
   public readonly optionHeight: InputSignalWithTransform<number, unknown> = input(44, { transform: numberAttribute });
+  /** Minimum query length required before suggestions open. */
   public readonly minQueryLength: InputSignalWithTransform<number, unknown> = input(1, { transform: numberAttribute });
+  /** Delay in milliseconds before `queryChange` emits and the popup opens. */
   public readonly delay: InputSignalWithTransform<number, unknown> = input(300, { transform: numberAttribute });
 
+  /** ID assigned to the native search input. */
   public readonly id: InputSignal<string | null> = input<string | null>(null);
+  /** Accessible label used when no visible label is available. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  /** ID of the element that labels the input. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
+  /** IDs of elements that describe the input. */
   public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
 
+  /** Prevents focus and interaction. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+  /** Shows the loading state and prevents suggestion selection. */
   public readonly loading: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+  /** Marks the input as required for accessibility and forms. */
   public readonly required: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+  /** Restricts the model to values from `options`. */
   public readonly forceSelection: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+  /** Expands the control to the available width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
+  /** Emits the debounced query used to fetch or replace suggestions. */
   public readonly queryChange: OutputEmitterRef<string> = output<string>();
+  /** Emits when the user completes an interaction. */
   public readonly touch: OutputEmitterRef<void> = output();
 
   protected readonly itemTemplate: Signal<TemplateRef<AutocompleteItemContext> | undefined> = contentChild(
@@ -141,6 +166,11 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
   protected readonly filteredOptions: Signal<readonly AutocompleteOption[]> = computed(() =>
     this.options().filter((option: AutocompleteOption): boolean => this.filterWith()(option, this.inputValue())),
   );
+  protected readonly matchedOption: Signal<AutocompleteOption | undefined> = computed(() => {
+    const query: string = this.inputValue().trim().toLocaleLowerCase();
+    if (!query) return undefined;
+    return this.options().find((option: AutocompleteOption): boolean => option.label.trim().toLocaleLowerCase() === query);
+  });
   protected readonly listboxValue: Signal<AutocompleteValue[]> = computed(() => {
     const option: AutocompleteOption | undefined = this.selectedOption();
     return option ? [option.value] : [];
@@ -180,10 +210,12 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
     });
   }
 
+  /** Moves focus to the search input unless disabled. */
   public focus(): void {
     if (!this.disabled()) this.combobox().element.focus();
   }
 
+  /** Clears the value, query, pending delay, and popup. */
   public reset(): void {
     clearTimeout(this.queryTimer);
     this.value.set(null);
@@ -222,7 +254,9 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
       return;
     }
     this.value.set(value);
-    this.query.set(this.options().find((option) => this.compareWith()(option.value, value))?.label ?? '');
+    this.query.set(
+      this.options().find((option: AutocompleteOption): boolean => this.compareWith()(option.value, value))?.label ?? '',
+    );
     this.handleExpanded(false);
   }
 
@@ -248,6 +282,7 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
       $implicit: option,
       option,
       selected: value !== null && this.compareWith()(option.value, value),
+      matched: this.matchedOption() === option,
       disabled: Boolean(option.disabled),
       index,
     };

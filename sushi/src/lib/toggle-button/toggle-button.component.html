@@ -1,4 +1,4 @@
-@if (contentTemplate(); as template) {
+@if (controlTemplate(); as template) {
   <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="context()" />
 } @else {
   <button
@@ -6,7 +6,7 @@
     type="button"
     class="sui-toggle-button"
     [severity]="severity()"
-    [variant]="variant()"
+    [variant]="checked() ? null : (variant() ?? 'outlined')"
     [size]="size()"
     [shape]="shape()"
     [disabled]="disabled()"
@@ -17,7 +17,7 @@
     (click)="handleToggle()"
   >
     @if (checked()) {
-      <span class="sui-toggle-button__content">
+      <span class="inline-flex items-center justify-center gap-2 whitespace-nowrap">
         @if (onTemplate(); as template) {
           <ng-container [ngTemplateOutlet]="template" />
         } @else {
@@ -25,7 +25,7 @@
         }
       </span>
     } @else {
-      <span class="sui-toggle-button__content">
+      <span class="inline-flex items-center justify-center gap-2 whitespace-nowrap">
         @if (offTemplate(); as template) {
           <ng-container [ngTemplateOutlet]="template" />
         } @else {

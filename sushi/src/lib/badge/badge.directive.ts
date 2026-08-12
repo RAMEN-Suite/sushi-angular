@@ -27,7 +27,10 @@ import { BadgeSeverity, BadgeSize, BadgeVariant } from './badge.interfaces';
   },
 })
 export class Badge {
+  /** Controls the semantic color of the static badge. */
   public readonly severity: InputSignal<BadgeSeverity> = input<BadgeSeverity>('primary');
+  /** Controls the visual treatment without adding interaction. */
   public readonly variant: InputSignal<BadgeVariant | null> = input<BadgeVariant | null>(null);
+  /** Controls the badge height, spacing, and text size. */
   public readonly size: InputSignal<BadgeSize> = input<BadgeSize>('md');
 }

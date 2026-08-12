@@ -1,0 +1,17 @@
+@if (contentTemplate(); as template) {
+  <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="contentContext()" />
+} @else {
+  <ng-content />
+  @if (label(); as text) {
+    <span class="sui-chip__label">{{ text }}</span>
+  }
+}
+@if (removable()) {
+  <span class="sui-chip__remove" aria-hidden="true" (click)="handleRemove($event)">
+    @if (removeIconTemplate(); as template) {
+      <ng-container [ngTemplateOutlet]="template" />
+    } @else {
+      <svg lucideX class="size-3.5" aria-hidden="true"></svg>
+    }
+  </span>
+}

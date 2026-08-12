@@ -1,21 +1,21 @@
-import { SelectionCompareWith, SelectionOption } from '../selection';
-import { SelectionValue } from '../sushi.types';
+import {
+  SelectCompareWith,
+  SelectGroupContext,
+  SelectItemContext,
+  SelectLoadingContext,
+  SelectOption,
+  SelectValue,
+  SelectVariant,
+} from '../select';
 
-export type MultiSelectValue = SelectionValue;
+export type MultiSelectValue = SelectValue;
 export type MultiSelectModelValue = MultiSelectValue[];
-export interface MultiSelectOption extends SelectionOption {
-  readonly group?: string;
-}
-export type MultiSelectCompareWith = SelectionCompareWith;
-export type MultiSelectVariant = 'filled';
-
-export interface MultiSelectItemContext {
-  readonly $implicit: MultiSelectOption;
-  readonly option: MultiSelectOption;
-  readonly selected: boolean;
-  readonly disabled: boolean;
-  readonly index: number;
-}
+export type MultiSelectOption = SelectOption;
+export type MultiSelectCompareWith = SelectCompareWith;
+export type MultiSelectVariant = SelectVariant;
+export type MultiSelectItemContext = SelectItemContext;
+export type MultiSelectGroupContext = SelectGroupContext;
+export type MultiSelectLoadingContext = SelectLoadingContext;
 
 export interface MultiSelectSelectedItemsContext {
   readonly $implicit: readonly MultiSelectOption[];
@@ -31,16 +31,4 @@ export interface MultiSelectHeaderContext {
   readonly allSelected: boolean;
   readonly disabled: boolean;
   readonly toggleAll: () => void;
-}
-
-export interface MultiSelectGroupContext {
-  readonly $implicit: string;
-  readonly group: string;
-  readonly option: MultiSelectOption;
-  readonly index: number;
-}
-
-export interface MultiSelectLoadingContext {
-  readonly $implicit: string;
-  readonly message: string;
 }

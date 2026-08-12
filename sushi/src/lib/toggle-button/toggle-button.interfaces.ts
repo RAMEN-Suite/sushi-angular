@@ -6,10 +6,10 @@ export type ToggleButtonSize = ButtonSize;
 export type ToggleButtonShape = ButtonShape;
 
 export interface ToggleButtonContext {
-  $implicit: boolean;
-  checked: boolean;
-  disabled: boolean;
-  loading: boolean;
-  toggle: () => void;
-  touch: () => void;
+  readonly $implicit: boolean;
+  readonly checked: boolean;
+  readonly disabled: boolean;
+  readonly loading: boolean;
+  readonly toggle: () => void;
+  readonly touch: () => void;
 }

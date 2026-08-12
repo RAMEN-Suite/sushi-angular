@@ -1,7 +1,7 @@
 <div
   cdkOverlayOrigin
   #origin="cdkOverlayOrigin"
-  class="input sui-form-control flex max-w-full items-center gap-2"
+  class="input sui-autocomplete sui-form-control flex max-w-full items-center gap-2"
   [class.w-full]="fluid()"
   [class.bg-base-200]="disabled()"
   [class.cursor-not-allowed]="disabled()"
@@ -20,7 +20,7 @@
   [class.input-error]="severity() === 'error' || isInvalid()"
 >
   @if (prefixTemplate(); as template) {
-    <span class="text-base-content/60 shrink-0"><ng-container [ngTemplateOutlet]="template" /></span>
+    <span class="shrink-0 text-base-content/60"><ng-container [ngTemplateOutlet]="template" /></span>
   }
   <input
     ngCombobox
@@ -70,7 +70,7 @@
   (detach)="handleExpanded(false)"
 >
   <ng-template ngComboboxPopup [combobox]="combobox">
-    <div class="bg-base-100 border-base-300 w-full overflow-hidden rounded-box border shadow-lg">
+    <div class="w-full overflow-hidden rounded-box border border-base-300 bg-base-100 shadow-lg">
       @if (loading()) {
         <div ngComboboxWidget class="flex items-center justify-center gap-2 p-5 text-sm opacity-60" role="status" aria-live="polite">
           @if (loadingTemplate(); as template) {
@@ -116,9 +116,11 @@
               ngOption
               class="sui-selection-option flex w-full items-center rounded-field px-3 py-2 outline-none"
               [style.min-height.px]="optionHeight()"
-              [class.hover:bg-base-200]="!context.selected && !option.disabled"
+              [class.hover:bg-base-200]="!context.selected && !context.matched && !option.disabled"
               [class.cursor-pointer]="!option.disabled"
+              [class.cursor-not-allowed]="option.disabled"
               [class.opacity-40]="option.disabled"
+              [attr.data-matched]="context.matched || null"
               [value]="option.value"
               [label]="option.label"
               [disabled]="option.disabled ?? false"

@@ -10,6 +10,7 @@ export interface AutocompleteItemContext {
   readonly $implicit: AutocompleteOption;
   readonly option: AutocompleteOption;
   readonly selected: boolean;
+  readonly matched: boolean;
   readonly disabled: boolean;
   readonly index: number;
 }

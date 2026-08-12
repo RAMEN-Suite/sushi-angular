@@ -43,24 +43,34 @@ import { SelectButtonOptionTemplate } from './select-button.templates';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectButton implements FormValueControl<SelectButtonValue | null> {
+  /** Selected option value or `null` when empty selection is allowed. */
   public readonly value: ModelSignal<SelectButtonValue | null> = model<SelectButtonValue | null>(null);
 
+  /** Visible options rendered as a single radio group. */
   public readonly options: InputSignal<readonly SelectButtonOption[]> = input.required<readonly SelectButtonOption[]>();
 
+  /** Applies one semantic color to every option in the group. */
   public readonly severity: InputSignal<SelectButtonSeverity> = input<SelectButtonSeverity>('neutral');
+  /** Sets every option to the same dimensions. */
   public readonly size: InputSignal<SelectButtonSize> = input<SelectButtonSize>('md');
+  /** Controls layout and arrow-key direction. */
   public readonly orientation: InputSignal<SelectButtonOrientation> = input<SelectButtonOrientation>('horizontal');
 
+  /** Accessible label used when no visible group label is available. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  /** ID of the element that labels the radio group. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
 
+  /** Allows the active option to clear itself when selected again. */
   public readonly allowEmpty: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
+  /** Prevents focus and selection for the complete group. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
 
+  /** Emits after a pointer or keyboard selection completes. */
   public readonly touch: OutputEmitterRef<void> = output();
 
   protected readonly optionTemplate: Signal<TemplateRef<SelectButtonOptionContext> | undefined> = contentChild(
@@ -91,10 +101,13 @@ export class SelectButton implements FormValueControl<SelectButtonValue | null> 
   protected isTabStop(option: SelectButtonOption, index: number): boolean {
     if (this.isDisabled(option)) return false;
     if (this.isSelected(option)) return true;
-    return this.value() === null && this.options().findIndex((candidate): boolean => !this.isDisabled(candidate)) === index;
+    return (
+      this.value() === null &&
+      this.options().findIndex((candidate: SelectButtonOption): boolean => !this.isDisabled(candidate)) === index
+    );
   }
 
-  protected select(option: SelectButtonOption): void {
+  protected handleSelection(option: SelectButtonOption): void {
     if (this.isDisabled(option)) return;
     const nextValue: SelectButtonValue | null = this.allowEmpty() && this.isSelected(option) ? null : option.value;
     this.value.set(nextValue);
@@ -118,10 +131,13 @@ export class SelectButton implements FormValueControl<SelectButtonValue | null> 
     event.preventDefault();
 
     const options: readonly SelectButtonOption[] = this.options();
-    const enabled: number[] = options.reduce<number[]>((indices, option, optionIndex): number[] => {
-      if (!this.isDisabled(option)) indices.push(optionIndex);
-      return indices;
-    }, []);
+    const enabled: number[] = options.reduce<number[]>(
+      (indices: number[], option: SelectButtonOption, optionIndex: number): number[] => {
+        if (!this.isDisabled(option)) indices.push(optionIndex);
+        return indices;
+      },
+      [],
+    );
     if (enabled.length === 0) return;
 
     const position: number = enabled.indexOf(index);
@@ -139,6 +155,6 @@ export class SelectButton implements FormValueControl<SelectButtonValue | null> 
     if (!parent) return;
     const buttons: NodeListOf<HTMLButtonElement> = parent.querySelectorAll('button[role="radio"]');
     buttons.item(nextIndex).focus();
-    this.select(options[nextIndex]);
+    this.handleSelection(options[nextIndex]);
   }
 }

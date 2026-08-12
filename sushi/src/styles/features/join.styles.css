@@ -63,7 +63,7 @@
 }
 
 .join > .join.join-item > .join-item:focus-visible {
-  z-index: 4;
+  z-index: 5;
   outline: none;
   box-shadow: inset 0 0 0 var(--sui-focus-ring-width) currentColor;
 }
@@ -87,10 +87,15 @@
   z-index: 1;
 }
 
-.join > .join-item:active {
+.join > .join-item:is(.input-error, .select-error, .textarea-error, .file-input-error, [aria-invalid='true']),
+.join > .join-item:has(.input-error, .select-error, .textarea-error, .file-input-error, [aria-invalid='true']) {
   z-index: 2;
 }
 
-.join > .join-item:is(:focus, :focus-within) {
+.join > .join-item:active {
   z-index: 3;
+}
+
+.join > .join-item:is(:focus, :focus-within) {
+  z-index: 4;
 }

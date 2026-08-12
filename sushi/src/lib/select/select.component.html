@@ -61,9 +61,9 @@
       role="button"
       tabindex="0"
       aria-label="Clear selection"
-      (click)="clear($event)"
-      (keydown.enter)="clear($event)"
-      (keydown.space)="clear($event)"
+      (click)="handleClear($event)"
+      (keydown.enter)="handleClear($event)"
+      (keydown.space)="handleClear($event)"
     >
       @if (clearIconTemplate(); as template) {
         <ng-container [ngTemplateOutlet]="template" />
@@ -84,19 +84,21 @@
 
 <ng-template
   cdkConnectedOverlay
+  #overlay="cdkConnectedOverlay"
   [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayPositions]="positions()"
   [cdkConnectedOverlayOpen]="expanded() && !disabled()"
   [cdkConnectedOverlayHasBackdrop]="true"
   [cdkConnectedOverlayMatchWidth]="true"
   [cdkConnectedOverlayFlexibleDimensions]="false"
   [cdkConnectedOverlayViewportMargin]="8"
-  [cdkConnectedOverlayPositions]="positions"
   cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  (attach)="overlay.overlayRef?.updatePosition()"
   (backdropClick)="handleExpanded(false)"
   (detach)="handleExpanded(false)"
 >
   <ng-template ngComboboxPopup [combobox]="combobox">
-    <div class="bg-base-100 border-base-300 w-full overflow-hidden rounded-box border shadow-lg">
+    <div class="w-full overflow-hidden rounded-box border border-base-300 bg-base-100 shadow-lg">
       @if (headerTemplate(); as template) {
         <div class="border-base-300 border-b p-3" (pointerdown)="$event.preventDefault()">
           <ng-container [ngTemplateOutlet]="template" />
@@ -136,11 +138,11 @@
           [value]="listboxValue()"
           [activeDescendant]="listbox.activeDescendant()"
           [attr.aria-label]="ariaLabel() ?? placeholder()"
-          (valueChange)="select($event)"
+          (valueChange)="handleSelection($event)"
         >
           @for (option of options(); track option.value; let index = $index) {
             @if (option.group && option.group !== options()[index - 1]?.group) {
-              <div class="border-base-200 px-3 pb-2 pt-4" [class.mt-2]="index > 0" [class.border-t]="index > 0" role="presentation">
+              <div class="px-3 pb-2 pt-4 border-base-200" [class.mt-2]="index > 0" [class.border-t]="index > 0" role="presentation">
                 @if (groupTemplate(); as template) {
                   <ng-container
                     [ngTemplateOutlet]="template"

@@ -3,7 +3,7 @@
   #combobox="ngCombobox"
   cdkOverlayOrigin
   #origin="cdkOverlayOrigin"
-  class="input sui-form-control flex max-w-full items-center gap-3"
+  class="input sui-multi-select sui-form-control relative flex max-w-full items-center gap-3"
   [class.w-full]="fluid()"
   [class.input-xs]="size() === 'xs'"
   [class.input-sm]="size() === 'sm'"
@@ -21,28 +21,28 @@
   [class.cursor-pointer]="!disabled()"
   [class.cursor-not-allowed]="disabled()"
   [class.sui-form-control--disabled]="disabled()"
-  [expanded]="expanded() && !disabled()"
   [preserveContent]="true"
+  [expanded]="expanded() && !disabled()"
   [disabled]="disabled()"
   [softDisabled]="false"
   [attr.id]="id()"
   [attr.aria-label]="ariaLabel()"
   [attr.aria-labelledby]="ariaLabelledby()"
   [attr.aria-describedby]="ariaDescribedby()"
-  [attr.aria-required]="required()"
+  [attr.aria-required]="required() || null"
   [attr.aria-invalid]="isInvalid() || null"
   (expandedChange)="handleExpanded($event)"
-  (click)="handleTriggerClick($event)"
-  (keydown)="handleKeydown($event)"
-  (pointerdown)="handlePointerInteraction()"
 >
-  <span class="min-w-0 grow truncate" [class.sui-form-control--placeholder]="!value().length">
-    @if (selectedItemsTemplate(); as template) {
+  @if (selectedItemsTemplate(); as template) {
+    <span class="min-w-0 grow overflow-hidden py-0.5">
       <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="selectedContext()" />
-    } @else {
+    </span>
+  } @else {
+    <span class="min-w-0 grow truncate" [class.sui-form-control--placeholder]="!value().length">
       {{ displayValue() }}
-    }
-  </span>
+    </span>
+  }
+
   @if (loading()) {
     <span class="inline-flex size-6 shrink-0 items-center justify-center">
       @if (loadingIconTemplate(); as template) {
@@ -52,24 +52,23 @@
       }
     </span>
   } @else if (!disabled() && showClear() && value().length) {
-    <button
-      suiButton
-      type="button"
-      class="shrink-0"
-      severity="neutral"
-      variant="text"
-      size="xs"
-      shape="square"
+    <span
+      class="inline-flex size-4 shrink-0 cursor-pointer items-center justify-center"
+      role="button"
+      tabindex="0"
       aria-label="Clear selection"
-      (click)="clear($event)"
+      (click)="handleClear($event)"
+      (keydown.enter)="handleClear($event)"
+      (keydown.space)="handleClear($event)"
     >
       @if (clearIconTemplate(); as template) {
         <ng-container [ngTemplateOutlet]="template" />
       } @else {
         <svg lucideX class="size-4" aria-hidden="true"></svg>
       }
-    </button>
+    </span>
   }
+
   <span class="pointer-events-none inline-flex size-4 shrink-0 items-center justify-center" aria-hidden="true">
     @if (dropdownIconTemplate(); as template) {
       <ng-container [ngTemplateOutlet]="template" />
@@ -84,41 +83,34 @@
   cdkConnectedOverlay
   #overlay="cdkConnectedOverlay"
   [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayPositions]="positions()"
   [cdkConnectedOverlayOpen]="expanded() && !disabled()"
-  cdkConnectedOverlayUsePopover="inline"
   [cdkConnectedOverlayHasBackdrop]="true"
   [cdkConnectedOverlayMatchWidth]="true"
   [cdkConnectedOverlayFlexibleDimensions]="false"
   [cdkConnectedOverlayViewportMargin]="8"
-  [cdkConnectedOverlayPositions]="positions"
   cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
-  (attach)="position(overlay)"
+  (attach)="overlay.overlayRef?.updatePosition()"
   (backdropClick)="handleExpanded(false)"
   (detach)="handleExpanded(false)"
 >
   <ng-template ngComboboxPopup [combobox]="combobox">
-    <div class="bg-base-100 border-base-300 w-full overflow-hidden rounded-box border shadow-lg" [class.invisible]="!positioned()">
+    <div class="w-full overflow-hidden rounded-box border border-base-300 bg-base-100 shadow-lg">
       @if (showSelectAll() || headerTemplate()) {
-        <div class="border-base-300 border-b p-3" (pointerdown)="$event.preventDefault()">
+        <div class="border-b border-base-300 p-3" (pointerdown)="$event.preventDefault()">
           @if (showSelectAll()) {
-            <button
-              suiButton
-              type="button"
-              shape="fluid"
-              severity="neutral"
-              variant="text"
-              size="sm"
-              [disabled]="disabled() || !enabledOptions().length"
-              [attr.aria-pressed]="allSelected()"
-              (click)="toggleAll()"
-            >
-              <span class="inline-flex size-4 items-center justify-center rounded-field border border-base-content/30" aria-hidden="true">
-                @if (allSelected()) {
-                  <svg lucideCheck class="size-3" aria-hidden="true"></svg>
-                }
-              </span>
-              {{ allSelected() ? clearAllLabel() : selectAllLabel() }}
-            </button>
+            <label class="flex cursor-pointer items-center gap-2 text-sm font-medium">
+              <input
+                suiCheckbox
+                type="checkbox"
+                size="sm"
+                [checked]="allSelected()"
+                [indeterminate]="partiallySelected()"
+                [disabled]="disabled() || !enabledOptions().length"
+                (change)="handleToggleAll()"
+              />
+              {{ selectAllLabel() }}
+            </label>
           }
           @if (headerTemplate(); as template) {
             <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="headerContext()" />
@@ -138,7 +130,7 @@
             </div>
           }
         </div>
-      } @else if (!options().length) {
+      } @else if (options().length === 0) {
         <div ngComboboxWidget class="p-4 text-center text-sm opacity-60">
           @if (emptyTemplate(); as template) {
             <ng-container [ngTemplateOutlet]="template" />
@@ -148,41 +140,39 @@
         </div>
       } @else {
         <div
-          #listboxRef="ngListbox"
+          #listbox="ngListbox"
           ngListbox
           ngComboboxWidget
           multi
-          class="sui-multi-select-listbox w-full overflow-y-auto p-1 outline-none"
-          [class.sui-keyboard-navigation]="keyboardMode()"
+          class="w-full overflow-y-auto p-1 outline-none"
           [style.max-height.px]="scrollHeight()"
           tabindex="-1"
           focusMode="activedescendant"
           selectionMode="explicit"
           [value]="listboxValue()"
-          [activeDescendant]="listboxRef.activeDescendant()"
-          [attr.aria-label]="ariaLabel()"
-          (pointermove)="handlePointerInteraction()"
-          (valueChange)="select($event)"
+          [activeDescendant]="listbox.activeDescendant()"
+          [attr.aria-label]="ariaLabel() ?? placeholder()"
+          (valueChange)="handleSelection($event)"
         >
           @for (option of options(); track option.value; let index = $index) {
             @if (option.group && option.group !== options()[index - 1]?.group) {
-              <div class="border-base-200 px-3 pb-1.5 pt-3" [class.mt-1]="index > 0" [class.border-t]="index > 0" role="presentation">
+              <div class="px-3 pb-2 pt-4 border-base-200" [class.mt-2]="index > 0" [class.border-t]="index > 0" role="presentation">
                 @if (groupTemplate(); as template) {
                   <ng-container
                     [ngTemplateOutlet]="template"
                     [ngTemplateOutletContext]="{ $implicit: option.group, group: option.group, option: option, index: index }"
                   />
                 } @else {
-                  <span class="text-xs font-bold uppercase tracking-wider text-base-content/55">{{ option.group }}</span>
+                  <span class="text-xs font-semibold uppercase tracking-wider text-base-content/60">{{ option.group }}</span>
                 }
               </div>
             }
             <div
               ngOption
-              class="sui-selection-option sui-multi-select-option flex w-full items-center gap-2 rounded-field px-3 py-2 outline-none"
+              class="sui-selection-option flex w-full items-center gap-2 rounded-field px-3 py-2 outline-none"
               [style.min-height.px]="optionHeight()"
-              [class.cursor-pointer]="!option.disabled"
               [class.hover:bg-base-200]="!isSelected(option) && !option.disabled"
+              [class.cursor-pointer]="!option.disabled"
               [class.cursor-not-allowed]="option.disabled"
               [class.opacity-40]="option.disabled"
               [value]="option.value"
@@ -210,7 +200,7 @@
         </div>
       }
       @if (footerTemplate(); as template) {
-        <div class="border-base-300 border-t p-3" (pointerdown)="$event.preventDefault()">
+        <div class="border-t border-base-300 p-3" (pointerdown)="$event.preventDefault()">
           <ng-container [ngTemplateOutlet]="template" />
         </div>
       }

@@ -1,6 +1,7 @@
 import { Directive } from '@angular/core';
 import { SelectButtonOptionContext } from './select-button.interfaces';
 
+/** Replaces every option label and exposes option, index, selected, and disabled state. */
 @Directive({
   selector: 'ng-template[suiSelectButtonOption]',
 })

@@ -30,31 +30,41 @@ import { ToggleButtonOffTemplate, ToggleButtonOnTemplate, ToggleButtonTemplate }
   selector: 'sui-toggle-button',
   imports: [NgTemplateOutlet, Button],
   templateUrl: './toggle-button.component.html',
-  styleUrl: './toggle-button.component.css',
   host: {
-    class: 'sui-toggle-button',
+    class: 'inline-flex sui-toggle-button',
     '[class.sui-toggle-button--checked]': 'checked()',
     '[class.sui-toggle-button--disabled]': 'disabled()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleButton implements FormCheckboxControl {
+  /** Current pressed state. */
   public readonly checked: ModelSignal<boolean> = model<boolean>(false);
 
+  /** Label displayed while the button is not pressed. */
   public readonly offLabel: InputSignal<string> = input<string>('Off');
+  /** Label displayed while the button is pressed. */
   public readonly onLabel: InputSignal<string> = input<string>('On');
+  /** Accessible label used when the visible content does not name the action. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
+  /** Applies one semantic color to both pressed states. */
   public readonly severity: InputSignal<ToggleButtonSeverity> = input<ToggleButtonSeverity>('primary');
+  /** Sets the button dimensions. */
   public readonly size: InputSignal<ToggleButtonSize> = input<ToggleButtonSize>('md');
+  /** Overrides the unpressed appearance; the pressed state remains filled. */
   public readonly variant: InputSignal<ToggleButtonVariant | null> = input<ToggleButtonVariant | null>(null);
+  /** Sets a standard, fluid, square, or circular shape. */
   public readonly shape: InputSignal<ToggleButtonShape | null> = input<ToggleButtonShape | null>(null);
+  /** Prevents focus and interaction. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
+  /** Shows the button loading state and prevents activation. */
   public readonly loading: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
+  /** Emits when the button loses focus after interaction. */
   public readonly touch: OutputEmitterRef<void> = output();
 
   protected readonly onTemplate: Signal<TemplateRef<void> | undefined> = contentChild(ToggleButtonOnTemplate, {
@@ -63,7 +73,7 @@ export class ToggleButton implements FormCheckboxControl {
   protected readonly offTemplate: Signal<TemplateRef<void> | undefined> = contentChild(ToggleButtonOffTemplate, {
     read: TemplateRef,
   });
-  protected readonly contentTemplate: Signal<TemplateRef<ToggleButtonContext> | undefined> = contentChild(ToggleButtonTemplate, {
+  protected readonly controlTemplate: Signal<TemplateRef<ToggleButtonContext> | undefined> = contentChild(ToggleButtonTemplate, {
     read: TemplateRef,
   });
 
