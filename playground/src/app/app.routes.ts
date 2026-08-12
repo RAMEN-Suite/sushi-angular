@@ -27,6 +27,11 @@ export const routes: Routes = [
     title: 'Checkbox | SUSHI Playground',
   },
   {
+    path: 'chip',
+    loadComponent: () => import('./pages/chip/chip.page').then(({ ChipPage }) => ChipPage),
+    title: 'Chip | SUSHI Playground',
+  },
+  {
     path: 'fieldset',
     loadComponent: () => import('./pages/fieldset/fieldset.page').then(({ FieldsetPage }) => FieldsetPage),
     title: 'Fieldset | SUSHI Playground',
@@ -85,6 +90,11 @@ export const routes: Routes = [
     path: 'radio',
     loadComponent: () => import('./pages/radio/radio.page').then(({ RadioPage }) => RadioPage),
     title: 'Radio | SUSHI Playground',
+  },
+  {
+    path: 'progress',
+    loadComponent: () => import('./pages/progress/progress.page').then(({ ProgressPage }) => ProgressPage),
+    title: 'Progress | SUSHI Playground',
   },
   {
     path: 'range',

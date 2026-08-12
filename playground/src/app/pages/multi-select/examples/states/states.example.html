@@ -1,29 +1,81 @@
-<div class="grid max-w-2xl gap-5 sm:grid-cols-2">
-  <sui-multi-select
-    fluid
-    showSelectAll
-    size="sm"
-    severity="info"
-    [maxSelectedLabels]="2"
-    [options]="options"
-    [(value)]="value"
-    ariaLabel="Compact labels"
-  >
-    <ng-template suiMultiSelectHeader let-selectedCount="selectedCount"
-      ><p class="mt-2 text-xs text-base-content/60">{{ selectedCount }} selected</p></ng-template
-    ><ng-template suiMultiSelectFooter><small>Choose all that apply.</small></ng-template>
-    <ng-template suiMultiSelectDropdownIcon><svg lucideChevronsUpDown class="size-4" aria-hidden="true"></svg></ng-template>
-    <ng-template suiMultiSelectClearIcon><svg lucideCircleX class="size-4" aria-hidden="true"></svg></ng-template>
-    <ng-template suiMultiSelectCheckmarkIcon><svg lucideBadgeCheck class="size-4" aria-hidden="true"></svg></ng-template>
-  </sui-multi-select>
-  <sui-multi-select fluid [showClear]="false" variant="filled" [options]="options" [value]="['work']" ariaLabel="Filled labels" />
-  <sui-multi-select fluid disabled [options]="options" [value]="['work']" ariaLabel="Disabled labels" />
-  <sui-multi-select fluid loading [options]="options" ariaLabel="Loading labels"
-    ><ng-template suiMultiSelectLoadingIcon><span suiSpinner size="xs"></span></ng-template
-    ><ng-template suiMultiSelectLoading let-message>{{ message }}</ng-template></sui-multi-select
-  >
-  <sui-multi-select fluid invalid required [options]="options" ariaLabel="Invalid labels" />
-  <sui-multi-select fluid [options]="[]" ariaLabel="Empty labels"
-    ><ng-template suiMultiSelectEmpty>No labels are available.</ng-template></sui-multi-select
-  >
+<div class="grid max-w-5xl items-start gap-6 lg:grid-cols-3">
+  <fieldset suiFieldset>
+    <legend suiFieldsetLegend>Sizes</legend>
+    <div class="grid gap-4">
+      <div suiLabel>
+        <span suiFormFieldLabel>Extra compact</span>
+        <sui-multi-select fluid size="xs" [options]="options" [(value)]="value" ariaLabel="Extra compact labels" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Compact</span>
+        <sui-multi-select fluid size="sm" [options]="options" [(value)]="value" ariaLabel="Compact labels" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Default</span>
+        <sui-multi-select fluid [options]="options" [(value)]="value" ariaLabel="Default labels" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Large</span>
+        <sui-multi-select fluid size="lg" [options]="options" [(value)]="value" ariaLabel="Large labels" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Extra large</span>
+        <sui-multi-select fluid size="xl" [options]="options" [(value)]="value" ariaLabel="Extra large labels" />
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset suiFieldset>
+    <legend suiFieldsetLegend>Semantic colors</legend>
+    <div class="grid gap-4">
+      <div suiLabel>
+        <span suiFormFieldLabel>Primary</span>
+        <sui-multi-select fluid severity="primary" [options]="options" [(value)]="value" ariaLabel="Primary labels" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Secondary</span>
+        <sui-multi-select fluid severity="secondary" [options]="options" [(value)]="value" ariaLabel="Secondary labels" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Success</span>
+        <sui-multi-select fluid severity="success" [options]="options" [(value)]="value" ariaLabel="Successful labels" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Warning</span>
+        <sui-multi-select fluid severity="warning" [options]="options" [(value)]="value" ariaLabel="Warning labels" />
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset suiFieldset>
+    <legend suiFieldsetLegend>States</legend>
+    <div class="grid gap-4">
+      <div suiLabel>
+        <span suiFormFieldLabel>Filled, clearable, and select all</span>
+        <sui-multi-select fluid showClear showSelectAll variant="filled" [options]="options" [(value)]="value" ariaLabel="Filled labels" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Loading</span>
+        <sui-multi-select fluid loading [options]="options" [value]="['important']" ariaLabel="Loading labels" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Disabled</span>
+        <sui-multi-select fluid disabled [options]="options" [value]="['work']" ariaLabel="Disabled labels" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Invalid selection</span>
+        <sui-multi-select
+          fluid
+          invalid
+          touched
+          required
+          [options]="options"
+          [(value)]="invalidValue"
+          ariaLabel="Invalid labels"
+          ariaDescribedby="labels-error"
+        />
+        <span suiFormFieldHint id="labels-error" class="text-error">Choose at least one label.</span>
+      </div>
+    </div>
+  </fieldset>
 </div>

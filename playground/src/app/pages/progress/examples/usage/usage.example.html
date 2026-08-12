@@ -1,0 +1,25 @@
+<div class="grid max-w-2xl gap-6">
+  <div class="grid gap-2">
+    <div class="flex items-center justify-between gap-4">
+      <span class="font-medium">Workspace setup</span>
+      <span class="text-sm tabular-nums text-base-content/60">{{ value() }}%</span>
+    </div>
+    <progress suiProgress severity="primary" class="w-full" [value]="value()" max="100">{{ value() }}%</progress>
+  </div>
+
+  <div class="grid gap-3 sm:grid-cols-2">
+    <label class="grid gap-2">
+      <span class="text-sm font-medium">Completed import</span>
+      <progress suiProgress severity="success" class="w-full" value="100" max="100">100%</progress>
+    </label>
+    <label class="grid gap-2">
+      <span class="text-sm font-medium">Waiting for progress</span>
+      <progress suiProgress severity="neutral" class="w-full">Loading</progress>
+    </label>
+  </div>
+
+  <div class="flex flex-wrap gap-3">
+    <button suiButton type="button" severity="primary" (click)="advance()">Advance</button>
+    <button suiButton type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
+  </div>
+</div>

@@ -1,10 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { apiReference } from '../../generated/api-reference.generated';
+import { ApiReference } from '../../shared/api-reference/api-reference.component';
+import type { ApiReferenceData } from '../../shared/api-reference/api-reference.types';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import basicHtml from './examples/basic/basic.example.html';
 import * as basicTs from './examples/basic/basic.example.ts' with { loader: 'text' };
 import { SelectBasicExample } from './examples/basic/basic.example';
+import behaviorHtml from './examples/behavior/behavior.example.html';
+import * as behaviorTs from './examples/behavior/behavior.example.ts' with { loader: 'text' };
+import { SelectBehaviorExample } from './examples/behavior/behavior.example';
 import optionsHtml from './examples/options/options.example.html';
 import * as optionsTs from './examples/options/options.example.ts' with { loader: 'text' };
 import { SelectOptionsExample } from './examples/options/options.example';
@@ -21,8 +27,10 @@ import { SelectTemplatesExample } from './examples/templates/templates.example';
     Badge,
     Card,
     CardTitle,
+    ApiReference,
     ExampleCode,
     SelectBasicExample,
+    SelectBehaviorExample,
     SelectOptionsExample,
     SelectStatesExample,
     SelectTemplatesExample,
@@ -31,8 +39,11 @@ import { SelectTemplatesExample } from './examples/templates/templates.example';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectPage {
-  protected readonly examples: Readonly<Record<'basic' | 'options' | 'states' | 'templates', ExampleSource>> = {
+  protected readonly api: ApiReferenceData = apiReference.Select;
+
+  protected readonly examples: Readonly<Record<'basic' | 'behavior' | 'options' | 'states' | 'templates', ExampleSource>> = {
     basic: { html: basicHtml, typescript: textSource(basicTs) },
+    behavior: { html: behaviorHtml, typescript: textSource(behaviorTs) },
     options: { html: optionsHtml, typescript: textSource(optionsTs) },
     states: { html: statesHtml, typescript: textSource(statesTs) },
     templates: { html: templatesHtml, typescript: textSource(templatesTs) },

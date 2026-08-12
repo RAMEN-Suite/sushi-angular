@@ -23,7 +23,7 @@
       <ng-template suiSelectClearIcon><svg lucideCircleX class="size-4" aria-hidden="true"></svg></ng-template>
       <ng-template suiSelectCheckmarkIcon><svg lucideBadgeCheck class="size-4" aria-hidden="true"></svg></ng-template>
     </sui-select>
-    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="toggleLoading()">
+    <button suiButton suiJoinItem type="button" class="w-36" severity="neutral" variant="soft" (click)="toggleLoading()">
       {{ loading() ? 'Stop' : 'Preview loading' }}
     </button>
   </div>

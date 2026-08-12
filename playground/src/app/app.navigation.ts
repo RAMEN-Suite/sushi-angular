@@ -13,12 +13,20 @@ export const navigation: NavigationGroup[] = [
     label: 'Input',
     items: [
       {
-        label: 'Input',
-        path: '/input',
+        label: 'Color Picker',
+        path: '/color-picker',
       },
       {
-        label: 'Textarea',
-        path: '/textarea',
+        label: 'File Drop',
+        path: '/file-drop',
+      },
+      {
+        label: 'File Input',
+        path: '/file-input',
+      },
+      {
+        label: 'Input',
+        path: '/input',
       },
       {
         label: 'Input Number',
@@ -29,20 +37,12 @@ export const navigation: NavigationGroup[] = [
         path: '/input-otp',
       },
       {
-        label: 'File Input',
-        path: '/file-input',
-      },
-      {
-        label: 'File Drop',
-        path: '/file-drop',
-      },
-      {
-        label: 'Color Picker',
-        path: '/color-picker',
-      },
-      {
         label: 'Range',
         path: '/range',
+      },
+      {
+        label: 'Textarea',
+        path: '/textarea',
       },
     ],
   },
@@ -54,24 +54,24 @@ export const navigation: NavigationGroup[] = [
         path: '/autocomplete',
       },
       {
-        label: 'Select',
-        path: '/select',
+        label: 'Checkbox',
+        path: '/checkbox',
       },
       {
         label: 'Multi-Select',
         path: '/multi-select',
       },
       {
-        label: 'Select Button',
-        path: '/select-button',
-      },
-      {
-        label: 'Checkbox',
-        path: '/checkbox',
-      },
-      {
         label: 'Radio',
         path: '/radio',
+      },
+      {
+        label: 'Select',
+        path: '/select',
+      },
+      {
+        label: 'Select Button',
+        path: '/select-button',
       },
       {
         label: 'Toggle',
@@ -129,6 +129,10 @@ export const navigation: NavigationGroup[] = [
         path: '/message',
       },
       {
+        label: 'Progress',
+        path: '/progress',
+      },
+      {
         label: 'Status',
         path: '/status',
       },
@@ -152,6 +156,10 @@ export const navigation: NavigationGroup[] = [
       {
         label: 'Badge',
         path: '/badge',
+      },
+      {
+        label: 'Chip',
+        path: '/chip',
       },
       {
         label: 'Keyboard Key',

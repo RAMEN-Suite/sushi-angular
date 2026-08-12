@@ -18,10 +18,16 @@ export class SelectButtonBasicExample {
     { label: 'Center', value: 'center' },
     { label: 'Right', value: 'right' },
   ];
+  protected readonly billingOptions: readonly SelectButtonOption[] = [
+    { label: 'Monthly', value: 'monthly' },
+    { label: 'Yearly', value: 'yearly' },
+  ];
+  protected readonly billing: WritableSignal<SelectButtonValue | null> = signal<SelectButtonValue | null>('yearly');
   protected readonly model: WritableSignal<AlignmentForm> = signal<AlignmentForm>({ alignment: 'left' });
   protected readonly alignmentForm: FieldTree<AlignmentForm> = form(this.model);
 
   protected reset(): void {
     this.alignmentForm().reset({ alignment: 'left' });
+    this.billing.set('yearly');
   }
 }

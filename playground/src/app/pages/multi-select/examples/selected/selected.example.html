@@ -1,11 +1,21 @@
-<sui-multi-select fluid class="max-w-xl" [options]="teams" [compareWith]="compareTeams" [(value)]="value" ariaLabel="Project teams">
-  <ng-template suiMultiSelectSelectedItems let-options>
-    <span class="truncate">{{ options.length ? options.length + ' project teams selected' : 'Select project teams' }}</span>
-  </ng-template>
-  <ng-template suiMultiSelectItem let-option let-selected="selected">
-    <span class="flex w-full items-center justify-between gap-4"
-      ><span>{{ option.label }}</span
-      ><span suiBadge size="sm" variant="soft">{{ selected ? 'Included' : 'Available' }}</span></span
-    >
-  </ng-template>
-</sui-multi-select>
+<div class="w-full max-w-md" suiLabel>
+  <span suiFormFieldLabel id="teams-label">Project teams</span>
+  <sui-multi-select fluid class="max-w-md" [options]="teams" [compareWith]="compareTeams" [(value)]="value" ariaLabelledby="teams-label">
+    <ng-template suiMultiSelectSelectedItems let-options let-remove="remove">
+      <span class="flex min-w-0 gap-1 overflow-hidden">
+        @for (option of options; track option.value) {
+          <sui-chip [label]="option.label" size="sm" removable (remove)="remove(option)" />
+        } @empty {
+          <span class="truncate text-base-content/50">Select project teams</span>
+        }
+      </span>
+    </ng-template>
+    <ng-template suiMultiSelectItem let-option let-selected="selected">
+      <span class="flex w-full items-center justify-between gap-4">
+        <span>{{ option.label }}</span>
+        <span suiBadge severity="neutral" size="xs" variant="soft">{{ selected ? 'Included' : 'Available' }}</span>
+      </span>
+    </ng-template>
+  </sui-multi-select>
+  <span suiFormFieldHint>Selected content can use reusable components without changing selection behavior.</span>
+</div>

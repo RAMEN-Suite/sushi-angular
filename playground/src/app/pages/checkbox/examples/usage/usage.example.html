@@ -1,10 +1,41 @@
-<div class="grid gap-5">
-  <label class="flex items-center gap-3"><input suiCheckbox type="checkbox" [formField]="preferencesForm.accepted" />Accept terms</label>
-  <div class="flex flex-wrap items-center gap-5">
-    <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" checked severity="success" size="sm" />Complete</label>
-    <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" [indeterminate]="true" />Partially selected</label>
-    <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" invalid />Invalid</label>
-    <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" disabled />Disabled</label>
+<div class="grid max-w-2xl gap-6">
+  <div class="grid divide-y divide-base-300 rounded-box border border-base-300 bg-base-100">
+    <label class="flex cursor-pointer items-start gap-3 p-4">
+      <input suiCheckbox type="checkbox" class="mt-0.5" [formField]="preferencesForm.accepted" />
+      <span
+        ><strong class="block">Accept workspace terms</strong
+        ><small class="text-base-content/60">Required before collaborators can be invited.</small></span
+      >
+    </label>
+    <label class="flex cursor-pointer items-start gap-3 p-4">
+      <input suiCheckbox type="checkbox" class="mt-0.5" checked severity="success" />
+      <span
+        ><strong class="block">Weekly summary</strong
+        ><small class="text-base-content/60">Receive one concise activity email every Monday.</small></span
+      >
+    </label>
+    <label class="flex cursor-pointer items-start gap-3 p-4">
+      <input suiCheckbox type="checkbox" class="mt-0.5" disabled />
+      <span><strong class="block">Security reports</strong><small class="text-base-content/60">Managed by your organization.</small></span>
+    </label>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-5 rounded-box bg-base-200/50 p-4">
+    <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" [indeterminate]="true" />Some items</label>
+    <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" invalid touched />Needs attention</label>
+    <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" size="sm" checked />Compact</label>
+  </div>
+
+  <div class="grid gap-3">
+    <h3 class="font-semibold">Semantic colors</h3>
+    <div class="flex flex-wrap gap-x-5 gap-y-3">
+      <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" severity="primary" checked />Primary</label>
+      <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" severity="secondary" checked />Secondary</label>
+      <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" severity="accent" checked />Accent</label>
+      <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" severity="success" checked />Success</label>
+      <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" severity="warning" checked />Warning</label>
+      <label class="flex items-center gap-2"><input suiCheckbox type="checkbox" severity="error" checked />Error</label>
+    </div>
   </div>
   <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">Reset</button>
 </div>

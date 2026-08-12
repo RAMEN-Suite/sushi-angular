@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { apiReference } from '../../generated/api-reference.generated';
+import { ApiReference } from '../../shared/api-reference/api-reference.component';
+import type { ApiReferenceData } from '../../shared/api-reference/api-reference.types';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import basicHtml from './examples/basic/basic.example.html';
@@ -18,6 +21,7 @@ import { SelectButtonTemplateExample } from './examples/template/template.exampl
     Badge,
     Card,
     CardTitle,
+    ApiReference,
     ExampleCode,
     SelectButtonBasicExample,
     SelectButtonLayoutExample,
@@ -27,6 +31,8 @@ import { SelectButtonTemplateExample } from './examples/template/template.exampl
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectButtonPage {
+  protected readonly api: ApiReferenceData = apiReference.SelectButton;
+
   protected readonly examples: Readonly<Record<'basic' | 'layout' | 'template', ExampleSource>> = {
     basic: { html: basicHtml, typescript: textSource(basicTs) },
     layout: { html: layoutHtml, typescript: textSource(layoutTs) },

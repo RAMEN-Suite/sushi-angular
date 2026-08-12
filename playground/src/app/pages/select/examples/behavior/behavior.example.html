@@ -1,0 +1,31 @@
+<div class="grid max-w-3xl items-start gap-6 lg:grid-cols-2">
+  <div suiLabel>
+    <span suiFormFieldLabel id="workflow-label">Workflow</span>
+    <sui-select
+      fluid
+      showClear
+      checkmark
+      id="workflow"
+      placeholder="Choose a workflow"
+      [options]="workflows"
+      [optionHeight]="36"
+      [scrollHeight]="144"
+      [(value)]="value"
+      ariaLabelledby="workflow-label"
+      ariaDescribedby="workflow-hint"
+      (touch)="closed()"
+    />
+    <span suiFormFieldHint id="workflow-hint">Four compact rows remain visible. Closed {{ closeCount() }} times.</span>
+  </div>
+
+  <div class="grid gap-4">
+    <div suiLabel>
+      <span suiFormFieldLabel>Empty result</span>
+      <sui-select fluid emptyMessage="No workflows are available." [options]="empty" ariaLabel="Empty workflow list" />
+    </div>
+    <div suiLabel>
+      <span suiFormFieldLabel>Loading result</span>
+      <sui-select fluid loading loadingMessage="Fetching workflows" [options]="empty" ariaLabel="Loading workflow list" />
+    </div>
+  </div>
+</div>

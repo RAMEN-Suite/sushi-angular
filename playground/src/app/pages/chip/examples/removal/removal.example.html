@@ -1,0 +1,13 @@
+<div class="grid gap-6">
+  <div class="grid gap-3">
+    <div class="flex min-h-8 flex-wrap items-center gap-2">
+      @for (label of labels(); track label) {
+        <sui-chip [label]="label" removable (remove)="remove(label)" />
+      } @empty {
+        <span class="text-sm text-base-content/60">No active filters.</span>
+      }
+    </div>
+    <button suiButton type="button" severity="neutral" variant="soft" class="w-fit" (click)="reset()">Reset</button>
+  </div>
+  <sui-chip label="Removal disabled" removable disabled />
+</div>

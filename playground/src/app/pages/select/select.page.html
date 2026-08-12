@@ -13,6 +13,17 @@
   </section>
 
   <sui-card>
+    <h2 suiCardTitle>API reference</h2>
+    <p class="text-base-content/60">Generated from the public Angular API. Descriptions come from source-level JSDoc.</p>
+    <div class="mt-5"><pg-api-reference [api]="api" /></div>
+  </sui-card>
+
+  <section class="space-y-2 pt-2">
+    <h2 class="text-3xl font-bold tracking-tight">Examples</h2>
+    <p class="text-base-content/60">Practical selection patterns with copy-ready HTML and TypeScript.</p>
+  </section>
+
+  <sui-card>
     <h2 suiCardTitle>Basic usage and forms</h2>
     <p class="text-base-content/60">Bind a Signal Forms field and compose actions through the shared join primitives.</p>
     <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-select-basic-example /></sui-card>
@@ -26,6 +37,15 @@
     </p>
     <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-select-options-example /></sui-card>
     <div class="mt-6"><pg-example-code [html]="examples.options.html" [typescript]="examples.options.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Messages and popup behavior</h2>
+    <p class="text-base-content/60">
+      Customize placeholder, empty and loading messages, row density, visible popup height, clear behavior, and touch handling.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-select-behavior-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.behavior.html" [typescript]="examples.behavior.typescript" /></div>
   </sui-card>
 
   <sui-card>

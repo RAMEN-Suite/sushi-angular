@@ -1,34 +1,56 @@
-<div class="grid gap-5">
-  <div class="flex flex-wrap gap-3">
-    <sui-toggle-button [formField]="notificationForm.notifications" offLabel="Muted" onLabel="Enabled" /><sui-toggle-button
-      severity="secondary"
-      [checked]="favorite()"
-      (checkedChange)="favorite.set($event)"
-      ><ng-template suiToggleButtonOff><svg lucideX class="size-4" aria-hidden="true"></svg>Favorite</ng-template
-      ><ng-template suiToggleButtonOn><svg lucideCheck class="size-4" aria-hidden="true"></svg>Favorite</ng-template></sui-toggle-button
+<div class="grid max-w-2xl gap-6">
+  <div class="grid gap-3">
+    <h3 class="font-semibold">Pressed actions</h3>
+    <div class="flex flex-wrap gap-3">
+      <sui-toggle-button [formField]="notificationForm.notifications" offLabel="Notifications off" onLabel="Notifications on" />
+      <sui-toggle-button [checked]="favorite()" (checkedChange)="favorite.set($event)">
+        <ng-template suiToggleButtonOff><svg lucideX class="size-4" aria-hidden="true"></svg>Favorite</ng-template>
+        <ng-template suiToggleButtonOn><svg lucideCheck class="size-4" aria-hidden="true"></svg>Favorite</ng-template>
+      </sui-toggle-button>
+    </div>
+  </div>
+
+  <div class="grid gap-3">
+    <h3 class="font-semibold">Complete template</h3>
+    <sui-toggle-button [checked]="custom()" (checkedChange)="custom.set($event)">
+      <ng-template suiToggleButton let-checked="checked" let-toggle="toggle" let-disabled="disabled">
+        <button
+          suiButton
+          type="button"
+          severity="primary"
+          [variant]="checked ? null : 'soft'"
+          [disabled]="disabled"
+          [attr.aria-pressed]="checked"
+          (click)="toggle()"
+        >
+          {{ checked ? 'Pinned to dashboard' : 'Pin to dashboard' }}
+        </button></ng-template
+      ></sui-toggle-button
     >
   </div>
-  <sui-toggle-button [checked]="custom()" (checkedChange)="custom.set($event)"
-    ><ng-template suiToggleButton let-checked="checked" let-toggle="toggle" let-disabled="disabled"
-      ><button
-        suiButton
-        type="button"
-        severity="neutral"
-        [variant]="checked ? null : 'outlined'"
-        [disabled]="disabled"
-        [attr.aria-pressed]="checked"
-        (click)="toggle()"
-      >
-        Custom: {{ checked ? 'On' : 'Off' }}
-      </button></ng-template
-    ></sui-toggle-button
-  >
-  <div class="flex flex-wrap gap-3">
-    <sui-toggle-button size="sm" variant="soft" shape="square" offLabel="S" onLabel="S" ariaLabel="Small square toggle" /><sui-toggle-button
-      disabled
-      offLabel="Disabled"
-      onLabel="Disabled"
-    /><sui-toggle-button loading offLabel="Loading" onLabel="Loading" />
+
+  <div class="grid gap-3">
+    <h3 class="font-semibold">States</h3>
+    <div class="flex flex-wrap gap-3">
+      <sui-toggle-button size="sm" shape="square" offLabel="S" onLabel="S" ariaLabel="Small square toggle" />
+      <sui-toggle-button disabled offLabel="Disabled" onLabel="Disabled" />
+      <sui-toggle-button loading offLabel="Loading" onLabel="Loading" />
+    </div>
+  </div>
+
+  <div class="grid gap-3">
+    <div>
+      <h3 class="font-semibold">Semantic colors</h3>
+      <p class="text-sm text-base-content/60">Every button remains outlined until its action is pressed.</p>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <sui-toggle-button severity="primary" offLabel="Primary" onLabel="Primary" />
+      <sui-toggle-button severity="secondary" offLabel="Secondary" onLabel="Secondary" />
+      <sui-toggle-button severity="accent" offLabel="Accent" onLabel="Accent" />
+      <sui-toggle-button severity="success" offLabel="Approved" onLabel="Approved" />
+      <sui-toggle-button severity="warning" offLabel="Caution" onLabel="Caution" />
+      <sui-toggle-button severity="error" offLabel="Blocked" onLabel="Blocked" />
+    </div>
   </div>
   <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">Reset</button>
 </div>

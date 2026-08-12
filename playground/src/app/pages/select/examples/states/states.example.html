@@ -1,7 +1,11 @@
-<div class="grid max-w-3xl items-start gap-6 lg:grid-cols-2">
+<div class="grid max-w-5xl items-start gap-6 lg:grid-cols-3">
   <fieldset suiFieldset>
     <legend suiFieldsetLegend>Sizes</legend>
     <div class="grid gap-4">
+      <div suiLabel>
+        <span suiFormFieldLabel>Extra compact</span>
+        <sui-select fluid size="xs" [options]="options" [(value)]="value" ariaLabel="Extra compact delivery" />
+      </div>
       <div suiLabel>
         <span suiFormFieldLabel>Compact</span>
         <sui-select fluid size="sm" [options]="options" [(value)]="value" ariaLabel="Compact delivery" />
@@ -13,6 +17,32 @@
       <div suiLabel>
         <span suiFormFieldLabel>Large</span>
         <sui-select fluid size="lg" [options]="options" [(value)]="value" ariaLabel="Large delivery" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Extra large</span>
+        <sui-select fluid size="xl" [options]="options" [(value)]="value" ariaLabel="Extra large delivery" />
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset suiFieldset>
+    <legend suiFieldsetLegend>Semantic colors</legend>
+    <div class="grid gap-4">
+      <div suiLabel>
+        <span suiFormFieldLabel>Primary</span>
+        <sui-select fluid severity="primary" [options]="options" [(value)]="value" ariaLabel="Primary delivery" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Secondary</span>
+        <sui-select fluid severity="secondary" [options]="options" [(value)]="value" ariaLabel="Secondary delivery" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Success</span>
+        <sui-select fluid severity="success" [options]="options" [(value)]="value" ariaLabel="Successful delivery" />
+      </div>
+      <div suiLabel>
+        <span suiFormFieldLabel>Warning</span>
+        <sui-select fluid severity="warning" [options]="options" [(value)]="value" ariaLabel="Warning delivery" />
       </div>
     </div>
   </fieldset>
@@ -37,6 +67,7 @@
         <sui-select
           fluid
           invalid
+          touched
           required
           [options]="options"
           [(value)]="invalidValue"

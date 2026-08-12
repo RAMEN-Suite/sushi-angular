@@ -3,46 +3,90 @@
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Multi-Select</h1>
       <p class="max-w-3xl text-lg text-base-content/70">
-        Choose several values from a fixed list while keeping every selection visible and removable.
+        Choose several values from the same fixed-list pattern as Select while keeping the closed field compact.
       </p>
     </div>
-    <div class="flex flex-wrap gap-2">
+    <div class="flex flex-wrap gap-2" aria-label="Multi-Select capabilities">
       <span suiBadge variant="soft" size="sm">Angular Aria</span><span suiBadge variant="soft" size="sm">Signal Forms</span
-      ><span suiBadge variant="soft" size="sm">Custom values</span>
+      ><span suiBadge variant="soft" size="sm">Templates</span>
     </div>
   </section>
-  <sui-card
-    ><h2 suiCardTitle>Basic usage and forms</h2>
+
+  <sui-card>
+    <h2 suiCardTitle>API reference</h2>
+    <p class="text-base-content/60">Generated from the public Angular API. Descriptions come from source-level JSDoc.</p>
+    <div class="mt-5"><pg-api-reference [api]="api" /></div>
+  </sui-card>
+
+  <section class="space-y-2 pt-2">
+    <h2 class="text-3xl font-bold tracking-tight">Examples</h2>
+    <p class="text-base-content/60">Practical multiple-selection patterns with copy-ready HTML and TypeScript.</p>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>Basic usage and forms</h2>
     <p class="text-base-content/60">
-      Up to three selected labels are shown as a comma-separated list by default. Larger selections are summarized as the first label plus
-      the remaining count; <code>maxSelectedLabels</code> adjusts the threshold.
+      One selected label is shown directly. Additional values are summarized as the first label plus the remaining count.
     </p>
     <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-multi-select-basic-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Selected value and option templates</h2>
+    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Options, groups, and object values</h2>
     <p class="text-base-content/60">
-      Use the selected-items template for a custom compact summary and the item template for richer option content.
-    </p>
-    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-multi-select-selected-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.selected.html" [typescript]="examples.selected.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Grouped options</h2>
-    <p class="text-base-content/60">
-      Group adjacent options into readable categories while keyboard navigation continues through selectable rows only.
+      Use <code>compareWith</code> for object identity and templates for richer rows, selected content, and clearly separated categories.
     </p>
     <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-multi-select-groups-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.groups.html" [typescript]="examples.groups.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Select all, templates, and states</h2>
+    <div class="mt-6"><pg-example-code [html]="examples.groups.html" [typescript]="examples.groups.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Messages and popup behavior</h2>
     <p class="text-base-content/60">
-      Select-all remains opt-in. Header context, footer, icons, loading, empty, disabled, invalid, filled, size, and clear behavior remain
-      configurable.
+      Customize placeholder, empty and loading messages, row density, popup height, select-all wording, clear behavior, and touch handling.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-multi-select-behavior-example />
+    </sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.behavior.html" [typescript]="examples.behavior.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Selection by category</h2>
+    <p class="text-base-content/60">
+      Select complete permission categories or fine-tune individual entries while keeping the current access distribution visible.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-multi-select-category-selection-example />
+    </sui-card>
+    <div class="mt-6">
+      <pg-example-code [html]="examples.categorySelection.html" [typescript]="examples.categorySelection.typescript" />
+    </div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Selected content and option templates</h2>
+    <p class="text-base-content/60">Replace selected content and option rows without duplicating multiple-selection behavior.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-multi-select-selected-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.selected.html" [typescript]="examples.selected.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Popup and icon templates</h2>
+    <p class="text-base-content/60">Replace structural popup content and icons while preserving multiple-selection behavior.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none">
+      <pg-multi-select-templates-example />
+    </sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Sizes and states</h2>
+    <p class="text-base-content/60">
+      Keep disabled, loading, required, invalid, fluid, and label composition consistent with Select and other form controls.
     </p>
     <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-multi-select-states-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" /></div
-  ></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" /></div>
+  </sui-card>
 </main>

@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import {
   Badge,
+  Chip,
+  FormFieldHint,
+  FormFieldLabel,
+  Label,
   MultiSelect,
   MultiSelectCompareWith,
   MultiSelectItemTemplate,
@@ -12,7 +16,16 @@ import {
 
 @Component({
   selector: 'pg-multi-select-selected-example',
-  imports: [Badge, MultiSelect, MultiSelectItemTemplate, MultiSelectSelectedItemsTemplate],
+  imports: [
+    Badge,
+    Chip,
+    FormFieldHint,
+    FormFieldLabel,
+    Label,
+    MultiSelect,
+    MultiSelectItemTemplate,
+    MultiSelectSelectedItemsTemplate,
+  ],
   templateUrl: './selected.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

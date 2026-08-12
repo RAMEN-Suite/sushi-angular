@@ -1,6 +1,16 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField, minLength } from '@angular/forms/signals';
-import { Button, Join, JoinItem, MultiSelect, MultiSelectModelValue, MultiSelectOption } from '@ramen-suite/sushi';
+import {
+  Button,
+  FormFieldHint,
+  FormFieldLabel,
+  Join,
+  JoinItem,
+  Label,
+  MultiSelect,
+  MultiSelectModelValue,
+  MultiSelectOption,
+} from '@ramen-suite/sushi';
 
 interface LabelForm {
   labels: MultiSelectModelValue;
@@ -8,7 +18,7 @@ interface LabelForm {
 
 @Component({
   selector: 'pg-multi-select-basic-example',
-  imports: [FormField, Button, Join, JoinItem, MultiSelect],
+  imports: [FormField, Button, FormFieldHint, FormFieldLabel, Join, JoinItem, Label, MultiSelect],
   templateUrl: './basic.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
