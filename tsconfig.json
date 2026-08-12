@@ -26,13 +26,7 @@
       "path": "./sushi/tsconfig.lib.json"
     },
     {
-      "path": "./sushi/tsconfig.spec.json"
-    },
-    {
       "path": "./playground/tsconfig.app.json"
-    },
-    {
-      "path": "./playground/tsconfig.spec.json"
     },
     {
       "path": "./tools/tsconfig.json"
