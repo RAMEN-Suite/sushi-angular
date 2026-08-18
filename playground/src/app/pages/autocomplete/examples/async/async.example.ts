@@ -5,12 +5,13 @@ import {
   AutocompleteErrorTemplate,
   AutocompleteLoadingTemplate,
   AutocompleteOption,
+  Label,
   Spinner,
 } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-autocomplete-async-example',
-  imports: [Autocomplete, AutocompleteEmptyTemplate, AutocompleteErrorTemplate, AutocompleteLoadingTemplate, Spinner],
+  imports: [Autocomplete, AutocompleteEmptyTemplate, AutocompleteErrorTemplate, AutocompleteLoadingTemplate, Label, Spinner],
   templateUrl: './async.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

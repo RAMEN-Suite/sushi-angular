@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Fieldset, FieldsetLegend, InputOtp } from '@ramen-suite/sushi';
+import { Badge, Fieldset, FieldsetLegend, InputOtp, Label } from '@ramen-suite/sushi';
 
 type ControlSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 @Component({
   selector: 'pg-input-otp-sizes-example',
-  imports: [Badge, Fieldset, FieldsetLegend, InputOtp],
+  imports: [Badge, Fieldset, FieldsetLegend, InputOtp, Label],
   templateUrl: './sizes.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

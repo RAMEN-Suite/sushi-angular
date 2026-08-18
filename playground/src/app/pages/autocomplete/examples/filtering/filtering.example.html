@@ -1,15 +1,15 @@
-<div suiLabel class="w-full max-w-sm">
-  <span suiFormFieldLabel id="destination-label">Destination</span>
+<div class="grid gap-2 w-full max-w-sm">
+  <label suiLabel for="autocomplete-destination">Destination</label>
   <sui-autocomplete
     fluid
+    id="autocomplete-destination"
     [options]="cities"
     [compareWith]="compareDestinations"
     [filterWith]="startsWith"
     [optionHeight]="48"
     [scrollHeight]="192"
     [(value)]="value"
-    placeholder="Search destinations"
-    ariaLabelledby="destination-label">
+    placeholder="Search destinations">
     <ng-template suiAutocompletePrefix><svg lucideMapPin class="size-4" aria-hidden="true"></svg></ng-template>
     <ng-template suiAutocompleteItem let-option let-index="index">
       <span class="flex w-full items-center gap-2">

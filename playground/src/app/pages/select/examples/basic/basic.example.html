@@ -1,18 +1,15 @@
 <div class="grid w-full max-w-md gap-2">
-  <div suiLabel>
-    <span suiFormFieldLabel id="color-label">Favorite color</span>
-    <div suiJoin class="w-full">
-      <sui-select
-        suiJoinItem
-        fluid
-        checkmark
-        class="min-w-0 flex-1"
-        [options]="colors"
-        [formField]="colorForm.color"
-        ariaLabelledby="color-label" />
-      <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
-    </div>
-    <span suiFormFieldHint>Choose one color for the interface accent.</span>
+  <span suiLabel class="font-medium" id="select-color-label">Favorite color</span>
+  <div suiJoin class="w-full">
+    <sui-select
+      suiJoinItem
+      fluid
+      checkmark
+      class="min-w-0 flex-1"
+      ariaLabelledby="select-color-label"
+      [options]="colors"
+      [formField]="colorForm.color" />
+    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
   </div>
   <p class="text-sm text-base-content/60">Selected: {{ colorForm.color().value() }}</p>
 </div>

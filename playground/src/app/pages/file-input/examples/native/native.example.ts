@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, ElementRef, signal, Signal, viewChild, WritableSignal } from '@angular/core';
-import { Button, Fieldset, FieldsetLegend, FileInput } from '@ramen-suite/sushi';
+import { Button, Fieldset, FieldsetLegend, FileInput, Label } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-file-input-native-example',
-  imports: [Button, Fieldset, FieldsetLegend, FileInput],
+  imports: [Button, Fieldset, FieldsetLegend, FileInput, Label],
   templateUrl: './native.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,13 +1,21 @@
 <div class="grid gap-8">
   <div class="grid items-start gap-6 sm:grid-cols-2">
     <div class="grid gap-2">
-      <span class="font-medium">Optional view</span>
-      <sui-select-button allowEmpty [options]="options" [(value)]="value" ariaLabel="Optional view" />
+      <span suiLabel id="select-button-optional-label" class="font-medium">Optional view</span>
+      <sui-select-button
+        allowEmpty
+        ariaLabelledby="select-button-optional-label"
+        [options]="options"
+        [(value)]="value" />
       <small class="text-base-content/60">Select the active view again to clear it.</small>
     </div>
     <div class="grid gap-2">
-      <span class="font-medium">Vertical navigation</span>
-      <sui-select-button orientation="vertical" [options]="options" value="grid" ariaLabel="Vertical view" />
+      <span suiLabel id="select-button-vertical-label" class="font-medium">Vertical navigation</span>
+      <sui-select-button
+        orientation="vertical"
+        ariaLabelledby="select-button-vertical-label"
+        [options]="options"
+        value="grid" />
     </div>
   </div>
 

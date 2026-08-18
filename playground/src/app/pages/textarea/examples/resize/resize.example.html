@@ -3,7 +3,7 @@
 
   <div class="grid items-start gap-4 sm:grid-cols-2">
     @for (mode of modes; track mode) {
-      <label class="grid min-w-0 gap-2">
+      <label suiLabel class="grid min-w-0 gap-2">
         <span class="flex items-center justify-between gap-3 font-medium">
           {{ mode }}
           <code suiBadge severity="neutral" variant="soft" size="xs" class="font-mono">resize="{{ mode }}"</code>

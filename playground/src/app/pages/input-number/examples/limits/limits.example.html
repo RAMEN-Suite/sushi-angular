@@ -1,7 +1,15 @@
 <div class="grid w-80 max-w-full gap-6">
-  <div suiLabel class="gap-2">
-    <span suiFormFieldLabel>Completion</span>
-    <sui-input-number fluid size="sm" suffix="%" [min]="0" [max]="100" [step]="5" [value]="65">
+  <div class="grid gap-2 gap-2">
+    <label suiLabel for="input-number-completion">Completion</label>
+    <sui-input-number
+      id="input-number-completion"
+      fluid
+      size="sm"
+      suffix="%"
+      [min]="0"
+      [max]="100"
+      [step]="5"
+      [value]="65">
       <ng-template
         suiInputNumberButtons
         let-decrement="decrement"
@@ -39,10 +47,11 @@
     <span class="text-sm text-base-content/60">Adjusts in five-percent steps.</span>
   </div>
 
-  <div suiLabel class="gap-2">
-    <span suiFormFieldLabel>Weight</span>
+  <div class="grid gap-2 gap-2">
+    <label suiLabel for="input-number-weight">Weight</label>
     <sui-input-number
       fluid
+      id="input-number-weight"
       size="sm"
       suffix="kg"
       placeholder="0.00"

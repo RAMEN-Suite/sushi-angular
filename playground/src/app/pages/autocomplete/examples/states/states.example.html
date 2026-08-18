@@ -4,17 +4,19 @@
 
     <div class="grid gap-3">
       @for (size of sizes; track size) {
-        <div class="grid gap-1.5">
-          <span class="flex items-center justify-between gap-3 text-sm font-medium">
-            {{ size.toUpperCase() }}
-            <code suiBadge severity="neutral" variant="soft" size="xs" class="font-mono">size="{{ size }}"</code>
-          </span>
+        <div class="grid gap-2">
+          <label suiLabel [attr.for]="'autocomplete-size-' + size">
+            <span class="flex w-full items-center justify-between gap-3">
+              {{ size.toUpperCase() }}
+              <code suiBadge severity="neutral" variant="soft" size="xs" class="font-mono">size="{{ size }}"</code>
+            </span>
+          </label>
           <sui-autocomplete
             fluid
+            [id]="'autocomplete-size-' + size"
             [size]="size"
             [options]="options"
-            [placeholder]="size.toUpperCase() + ' destination'"
-            [ariaLabel]="size.toUpperCase() + ' destination'" />
+            [placeholder]="size.toUpperCase() + ' destination'" />
         </div>
       }
     </div>
@@ -24,43 +26,36 @@
     <legend suiFieldsetLegend>Interaction states</legend>
 
     <div class="grid gap-4">
-      <div class="grid gap-1.5">
-        <span class="text-sm font-medium">Selected value</span>
-        <sui-autocomplete fluid [options]="options" value="berlin" ariaLabel="Selected destination" />
+      <div class="grid gap-2">
+        <label suiLabel for="autocomplete-selected">Selected value</label>
+        <sui-autocomplete fluid id="autocomplete-selected" [options]="options" value="berlin" />
       </div>
 
-      <div class="grid gap-1.5">
-        <span class="text-sm font-medium">Loading suggestions</span>
+      <div class="grid gap-2">
+        <label suiLabel for="autocomplete-loading">Loading suggestions</label>
         <sui-autocomplete
           fluid
+          id="autocomplete-loading"
           loading
           [options]="options"
-          placeholder="Finding destinations"
-          ariaLabel="Loading suggestions" />
+          placeholder="Finding destinations" />
       </div>
 
-      <div class="grid gap-1.5">
-        <span class="text-sm font-medium">Disabled</span>
-        <sui-autocomplete
-          fluid
-          disabled
-          [options]="options"
-          placeholder="Unavailable"
-          ariaLabel="Disabled destination" />
+      <div class="grid gap-2">
+        <label suiLabel for="autocomplete-disabled">Disabled</label>
+        <sui-autocomplete fluid id="autocomplete-disabled" disabled [options]="options" placeholder="Unavailable" />
       </div>
 
-      <div class="grid gap-1.5">
-        <span class="text-sm font-medium">Invalid destination</span>
+      <div class="grid gap-2">
+        <label suiLabel for="autocomplete-invalid">Invalid destination</label>
         <sui-autocomplete
           fluid
           required
           invalid
           touched
+          id="autocomplete-invalid"
           [options]="options"
-          placeholder="Choose a destination"
-          ariaLabel="Invalid destination"
-          ariaDescribedby="destination-error" />
-        <span id="destination-error" class="text-sm text-error">Choose one of the available destinations.</span>
+          placeholder="Choose a destination" />
       </div>
     </div>
   </fieldset>

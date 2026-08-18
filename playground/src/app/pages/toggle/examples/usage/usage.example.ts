@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, Toggle } from '@ramen-suite/sushi';
+import { Button, Label, Toggle } from '@ramen-suite/sushi';
 
 interface NotificationForm {
   notifications: boolean;
@@ -8,7 +8,7 @@ interface NotificationForm {
 
 @Component({
   selector: 'pg-toggle-usage-example',
-  imports: [FormField, Button, Toggle],
+  imports: [FormField, Button, Label, Toggle],
   templateUrl: './usage.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

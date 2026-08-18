@@ -1,18 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import {
-  Fieldset,
-  FieldsetLegend,
-  FormFieldHint,
-  FormFieldLabel,
-  Label,
-  Select,
-  SelectModelValue,
-  SelectOption,
-} from '@ramen-suite/sushi';
+import { Fieldset, FieldsetLegend, Label, Select, SelectModelValue, SelectOption } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-select-states-example',
-  imports: [Fieldset, FieldsetLegend, FormFieldHint, FormFieldLabel, Label, Select],
+  imports: [Fieldset, FieldsetLegend, Label, Select],
   templateUrl: './states.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

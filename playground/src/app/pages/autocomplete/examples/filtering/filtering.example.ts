@@ -9,7 +9,6 @@ import {
   AutocompleteOption,
   AutocompletePrefixTemplate,
   AutocompleteValue,
-  FormFieldLabel,
   Label,
 } from '@ramen-suite/sushi';
 
@@ -19,15 +18,7 @@ interface DestinationValue {
 
 @Component({
   selector: 'pg-autocomplete-filtering-example',
-  imports: [
-    Autocomplete,
-    AutocompleteEmptyTemplate,
-    AutocompleteItemTemplate,
-    AutocompletePrefixTemplate,
-    FormFieldLabel,
-    Label,
-    LucideMapPin,
-  ],
+  imports: [Autocomplete, AutocompleteEmptyTemplate, AutocompleteItemTemplate, AutocompletePrefixTemplate, Label, LucideMapPin],
   templateUrl: './filtering.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

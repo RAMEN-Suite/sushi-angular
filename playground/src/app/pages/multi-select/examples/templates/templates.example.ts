@@ -3,8 +3,6 @@ import { LucideBadgeCheck, LucideChevronsUpDown, LucideCircleX } from '@lucide/a
 import {
   Badge,
   Button,
-  FormFieldHint,
-  FormFieldLabel,
   Join,
   JoinItem,
   Label,
@@ -27,8 +25,6 @@ import {
   imports: [
     Badge,
     Button,
-    FormFieldHint,
-    FormFieldLabel,
     Join,
     JoinItem,
     Label,

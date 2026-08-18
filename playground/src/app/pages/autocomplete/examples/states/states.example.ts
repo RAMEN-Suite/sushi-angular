@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Autocomplete, AutocompleteOption, Badge, ComponentSize, Fieldset, FieldsetLegend } from '@ramen-suite/sushi';
+import { Autocomplete, AutocompleteOption, Badge, ComponentSize, Fieldset, FieldsetLegend, Label } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-autocomplete-states-example',
-  imports: [Autocomplete, Badge, Fieldset, FieldsetLegend],
+  imports: [Autocomplete, Badge, Fieldset, FieldsetLegend, Label],
   templateUrl: './states.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

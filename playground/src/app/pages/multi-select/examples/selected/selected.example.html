@@ -1,12 +1,12 @@
-<div class="w-full max-w-md" suiLabel>
-  <span suiFormFieldLabel id="teams-label">Project teams</span>
+<div class="grid gap-2 w-full max-w-md">
+  <span suiLabel id="multi-select-teams-label" class="font-medium">Project teams</span>
   <sui-multi-select
     fluid
     class="max-w-md"
+    ariaLabelledby="multi-select-teams-label"
     [options]="teams"
     [compareWith]="compareTeams"
-    [(value)]="value"
-    ariaLabelledby="teams-label">
+    [(value)]="value">
     <ng-template suiMultiSelectSelectedItems let-options let-remove="remove">
       <span class="flex min-w-0 gap-1 overflow-hidden">
         @for (option of options; track option.value) {
@@ -23,5 +23,7 @@
       </span>
     </ng-template>
   </sui-multi-select>
-  <span suiFormFieldHint>Selected content can use reusable components without changing selection behavior.</span>
+  <span class="text-xs text-base-content/60">
+    Selected content can use reusable components without changing selection behavior.
+  </span>
 </div>

@@ -1,15 +1,15 @@
 <div class="grid w-full max-w-md gap-2">
-  <div suiLabel>
-    <span suiFormFieldLabel id="country-label">Deployment country</span>
+  <div class="grid gap-2">
+    <span suiLabel id="select-country-label" class="font-medium">Deployment country</span>
     <sui-select
       fluid
       checkmark
+      ariaLabelledby="select-country-label"
       [options]="countries"
       [compareWith]="compareCountries"
       [optionHeight]="56"
       [scrollHeight]="220"
-      [(value)]="value"
-      ariaLabelledby="country-label">
+      [(value)]="value">
       <ng-template suiSelectGroup let-group>
         <span class="flex w-full items-center justify-between gap-3">
           <span class="flex items-center gap-2 font-semibold">
@@ -37,6 +37,6 @@
         </span>
       </ng-template>
     </sui-select>
-    <span suiFormFieldHint>The selected country remains visible when the list opens again.</span>
+    <span class="text-xs text-base-content/60">The selected country remains visible when the list opens again.</span>
   </div>
 </div>

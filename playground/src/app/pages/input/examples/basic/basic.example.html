@@ -1,6 +1,5 @@
 <div class="grid w-fit max-w-full gap-2">
-  <label for="input-name" class="font-medium">Name</label>
-
+  <label suiLabel for="input-name">Name</label>
   <div suiJoin class="w-full max-w-full sm:w-fit">
     <input
       id="input-name"
@@ -8,15 +7,11 @@
       suiJoinItem
       class="w-0 min-w-0 flex-1 sm:w-72 sm:flex-none"
       placeholder="Ada Lovelace"
-      aria-describedby="input-name-hint"
       [formField]="form.name" />
 
     <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">
       Reset example
     </button>
   </div>
+  <p class="text-sm text-base-content/60">Current value: {{ form.name().value() || 'Empty' }}</p>
 </div>
-
-<p id="input-name-hint" class="mt-3 text-sm text-base-content/60">
-  Current value: {{ form.name().value() || 'Empty' }}
-</p>

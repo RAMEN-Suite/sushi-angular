@@ -1,13 +1,16 @@
 <div class="grid w-96 max-w-full gap-4">
-  <label id="brand-color-label" for="brand-color" class="font-medium">Brand color</label>
-  <sui-color-picker
-    fluid
-    id="brand-color"
-    ariaLabelledby="brand-color-label"
-    defaultValue="#0369a1"
-    [formField]="form.color">
-    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
-  </sui-color-picker>
+  <div class="grid gap-2">
+    <label suiLabel id="brand-color-label" for="brand-color">Brand color</label>
+    <sui-color-picker
+      id="brand-color"
+      fluid
+      defaultValue="#0369a1"
+      ariaLabelledby="brand-color-label"
+      [formField]="form.color">
+      <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
+    </sui-color-picker>
+    <p class="text-sm text-base-content/60">Enter a hex value or use the native color picker.</p>
+  </div>
 
   <div class="flex w-fit items-center gap-3 rounded-box border border-base-300 bg-base-100 p-3 shadow-sm">
     <span

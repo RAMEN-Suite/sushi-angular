@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Fieldset, FieldsetLegend, Textarea, TextareaSeverity, TextareaSize } from '@ramen-suite/sushi';
+import { Badge, Fieldset, FieldsetLegend, Label, Textarea, TextareaSeverity, TextareaSize } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-textarea-appearance-example',
-  imports: [Badge, Fieldset, FieldsetLegend, Textarea],
+  imports: [Badge, Fieldset, FieldsetLegend, Label, Textarea],
   templateUrl: './appearance.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { FormFieldHint, FormFieldLabel, Label, Select, SelectModelValue, SelectOption } from '@ramen-suite/sushi';
+import { Label, Select, SelectModelValue, SelectOption } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-select-behavior-example',
-  imports: [FormFieldHint, FormFieldLabel, Label, Select],
+  imports: [Label, Select],
   templateUrl: './behavior.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

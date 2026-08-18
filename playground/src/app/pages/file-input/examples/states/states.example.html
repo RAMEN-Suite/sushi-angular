@@ -1,6 +1,18 @@
-<div class="grid w-96 max-w-full gap-3">
-  <input suiFileInput type="file" aria-label="Default file input" />
-  <input suiFileInput type="file" invalid touched aria-label="Touched invalid file input" />
-  <input suiFileInput type="file" invalid dirty aria-label="Dirty invalid file input" />
-  <input suiFileInput type="file" disabled aria-label="Disabled file input" />
+<div class="grid w-96 max-w-full gap-4">
+  <label suiLabel class="grid gap-2">
+    Default
+    <input suiFileInput type="file" />
+  </label>
+  <label suiLabel class="grid gap-2">
+    Touched and invalid
+    <input suiFileInput type="file" invalid touched />
+  </label>
+  <label suiLabel class="grid gap-2">
+    Dirty and invalid
+    <input suiFileInput type="file" invalid dirty />
+  </label>
+  <label suiLabel class="grid gap-2">
+    Disabled
+    <input suiFileInput type="file" disabled />
+  </label>
 </div>

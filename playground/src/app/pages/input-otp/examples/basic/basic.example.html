@@ -1,7 +1,8 @@
-<div class="grid gap-3">
-  <sui-input-otp [formField]="form.code" />
-  <p class="text-sm text-base-content/60">Current value: {{ form.code().value() || 'Empty' }}</p>
+<div class="grid gap-2">
+  <label suiLabel id="input-otp-verification-label" for="input-otp-verification">Verification code</label>
+  <sui-input-otp id="input-otp-verification" ariaLabelledby="input-otp-verification-label" [formField]="form.code" />
   <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">
     Reset example
   </button>
+  <p class="text-sm text-base-content/60">Current value: {{ form.code().value() || 'Empty' }}</p>
 </div>

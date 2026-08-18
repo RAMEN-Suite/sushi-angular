@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Range } from '@ramen-suite/sushi';
+import { Label, Range } from '@ramen-suite/sushi';
 
 interface MixerModel {
   music: number;
@@ -9,7 +9,7 @@ interface MixerModel {
 
 @Component({
   selector: 'pg-range-mixer-example',
-  imports: [FormField, Range],
+  imports: [FormField, Label, Range],
   templateUrl: './mixer.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

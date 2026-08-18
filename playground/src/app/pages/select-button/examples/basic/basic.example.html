@@ -1,15 +1,22 @@
 <div class="grid max-w-2xl gap-6">
   <div class="grid gap-2">
-    <span class="font-medium">Text alignment</span>
-    <sui-select-button [options]="options" [formField]="alignmentForm.alignment" ariaLabel="Text alignment" />
+    <span suiLabel id="select-button-alignment-label" class="font-medium">Text alignment</span>
+    <sui-select-button
+      ariaLabelledby="select-button-alignment-label"
+      [options]="options"
+      [formField]="alignmentForm.alignment" />
     <small class="text-base-content/60">Selected: {{ alignmentForm.alignment().value() }}</small>
   </div>
   <div class="flex flex-wrap items-end justify-between gap-4 rounded-box border border-base-300 bg-base-100 p-4">
-    <span>
+    <span suiLabel id="select-button-billing-label" class="block">
       <strong class="block">Billing interval</strong>
       <small class="text-base-content/60">Save 20% with yearly billing.</small>
     </span>
-    <sui-select-button severity="success" [options]="billingOptions" [(value)]="billing" ariaLabel="Billing interval" />
+    <sui-select-button
+      severity="success"
+      ariaLabelledby="select-button-billing-label"
+      [options]="billingOptions"
+      [(value)]="billing" />
   </div>
   <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">Reset</button>
 </div>

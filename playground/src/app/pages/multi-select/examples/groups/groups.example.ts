@@ -2,8 +2,6 @@ import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@ang
 import { LucideGlobe } from '@lucide/angular';
 import {
   Badge,
-  FormFieldHint,
-  FormFieldLabel,
   Label,
   MultiSelect,
   MultiSelectCompareWith,
@@ -22,16 +20,7 @@ interface Country extends MultiSelectOption {
 
 @Component({
   selector: 'pg-multi-select-groups-example',
-  imports: [
-    Badge,
-    FormFieldHint,
-    FormFieldLabel,
-    Label,
-    MultiSelect,
-    MultiSelectGroupTemplate,
-    MultiSelectItemTemplate,
-    LucideGlobe,
-  ],
+  imports: [Badge, Label, MultiSelect, MultiSelectGroupTemplate, MultiSelectItemTemplate, LucideGlobe],
   templateUrl: './groups.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

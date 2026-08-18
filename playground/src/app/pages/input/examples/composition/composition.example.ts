@@ -5,16 +5,17 @@ import {
   Fieldset,
   FieldsetLegend,
   Input,
-  InputWrapper,
-  InputWrapperControl,
+  InputSurface,
+  InputSurfaceControl,
   Join,
   JoinItem,
   Kbd,
+  Label,
 } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-input-composition-example',
-  imports: [LucideSearch, Button, Fieldset, FieldsetLegend, Input, InputWrapper, InputWrapperControl, Join, JoinItem, Kbd],
+  imports: [LucideSearch, Button, Fieldset, FieldsetLegend, Input, InputSurface, InputSurfaceControl, Join, JoinItem, Kbd, Label],
   templateUrl: './composition.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

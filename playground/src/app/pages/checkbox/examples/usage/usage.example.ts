@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, Checkbox } from '@ramen-suite/sushi';
+import { Button, Checkbox, Label } from '@ramen-suite/sushi';
 
 interface Preferences {
   accepted: boolean;
@@ -8,7 +8,7 @@ interface Preferences {
 
 @Component({
   selector: 'pg-checkbox-usage-example',
-  imports: [FormField, Button, Checkbox],
+  imports: [FormField, Button, Checkbox, Label],
   templateUrl: './usage.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

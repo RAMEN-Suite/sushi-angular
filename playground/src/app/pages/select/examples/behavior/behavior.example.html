@@ -1,35 +1,36 @@
 <div class="grid max-w-3xl items-start gap-6 lg:grid-cols-2">
-  <div suiLabel>
-    <span suiFormFieldLabel id="workflow-label">Workflow</span>
+  <div class="grid gap-2">
+    <span suiLabel id="select-workflow-label" class="font-medium">Workflow</span>
     <sui-select
       fluid
       showClear
       checkmark
-      id="workflow"
+      ariaLabelledby="select-workflow-label"
       placeholder="Choose a workflow"
       [options]="workflows"
       [optionHeight]="36"
       [scrollHeight]="144"
       [(value)]="value"
-      ariaLabelledby="workflow-label"
-      ariaDescribedby="workflow-hint"
       (touch)="closed()" />
-    <span suiFormFieldHint id="workflow-hint">Four compact rows remain visible. Closed {{ closeCount() }} times.</span>
   </div>
 
   <div class="grid gap-4">
-    <div suiLabel>
-      <span suiFormFieldLabel>Empty result</span>
-      <sui-select fluid emptyMessage="No workflows are available." [options]="empty" ariaLabel="Empty workflow list" />
+    <div class="grid gap-2">
+      <span suiLabel id="select-empty-label" class="font-medium">Empty result</span>
+      <sui-select
+        fluid
+        emptyMessage="No workflows are available."
+        ariaLabelledby="select-empty-label"
+        [options]="empty" />
     </div>
-    <div suiLabel>
-      <span suiFormFieldLabel>Loading result</span>
+    <div class="grid gap-2">
+      <span suiLabel id="select-loading-label" class="font-medium">Loading result</span>
       <sui-select
         fluid
         loading
         loadingMessage="Fetching workflows"
         [options]="empty"
-        ariaLabel="Loading workflow list" />
+        ariaLabelledby="select-loading-label" />
     </div>
   </div>
 </div>

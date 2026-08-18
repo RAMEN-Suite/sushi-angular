@@ -1,16 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField, required } from '@angular/forms/signals';
-import {
-  Button,
-  FormFieldHint,
-  FormFieldLabel,
-  Join,
-  JoinItem,
-  Label,
-  Select,
-  SelectModelValue,
-  SelectOption,
-} from '@ramen-suite/sushi';
+import { Button, Join, JoinItem, Label, Select, SelectModelValue, SelectOption } from '@ramen-suite/sushi';
 
 interface ColorForm {
   color: SelectModelValue;
@@ -18,7 +8,7 @@ interface ColorForm {
 
 @Component({
   selector: 'pg-select-basic-example',
-  imports: [FormField, Button, FormFieldHint, FormFieldLabel, Join, JoinItem, Label, Select],
+  imports: [FormField, Button, Join, JoinItem, Label, Select],
   templateUrl: './basic.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

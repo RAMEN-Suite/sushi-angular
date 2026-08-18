@@ -1,17 +1,14 @@
 <div class="grid w-full max-w-md gap-2">
-  <div suiLabel>
-    <span suiFormFieldLabel id="labels-label">Message labels</span>
-    <div suiJoin class="w-full">
-      <sui-multi-select
-        suiJoinItem
-        fluid
-        class="min-w-0 flex-1"
-        [options]="labels"
-        [formField]="labelForm.labels"
-        ariaLabelledby="labels-label" />
-      <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
-    </div>
-    <span suiFormFieldHint>Choose at least two labels for this message.</span>
+  <span suiLabel class="font-medium" id="multi-select-label">Message labels</span>
+  <div suiJoin class="w-full">
+    <sui-multi-select
+      suiJoinItem
+      fluid
+      class="min-w-0 flex-1"
+      ariaLabelledby="multi-select-label"
+      [options]="labels"
+      [formField]="labelForm.labels" />
+    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
   </div>
   <p class="text-sm text-base-content/60">Selected: {{ labelForm.labels().value().length }} labels</p>
 </div>

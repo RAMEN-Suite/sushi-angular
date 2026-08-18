@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { FormFieldHint, FormFieldLabel, Label, MultiSelect, MultiSelectModelValue, MultiSelectOption } from '@ramen-suite/sushi';
+import { Label, MultiSelect, MultiSelectModelValue, MultiSelectOption } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-multi-select-behavior-example',
-  imports: [FormFieldHint, FormFieldLabel, Label, MultiSelect],
+  imports: [Label, MultiSelect],
   templateUrl: './behavior.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

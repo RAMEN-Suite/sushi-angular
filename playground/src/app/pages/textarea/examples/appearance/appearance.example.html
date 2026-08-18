@@ -4,7 +4,7 @@
 
     <div class="grid gap-3">
       @for (size of sizes; track size) {
-        <label class="grid gap-1.5">
+        <label suiLabel class="grid gap-1.5">
           <span class="flex items-center justify-between gap-3 text-sm font-medium">
             {{ size.toUpperCase() }}
             <code suiBadge severity="neutral" variant="soft" size="xs" class="font-mono">size="{{ size }}"</code>
@@ -26,7 +26,7 @@
 
     <div class="grid gap-3 sm:grid-cols-2">
       @for (color of colors; track color) {
-        <label class="grid gap-1.5">
+        <label suiLabel class="grid gap-1.5">
           <span class="text-sm font-medium">{{ color }}</span>
           <textarea suiTextarea fluid resize="none" rows="2" [severity]="color" [placeholder]="color"></textarea>
         </label>

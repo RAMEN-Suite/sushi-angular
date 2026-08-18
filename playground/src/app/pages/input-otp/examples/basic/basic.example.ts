@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, InputOtp } from '@ramen-suite/sushi';
+import { Button, InputOtp, Label } from '@ramen-suite/sushi';
 
 interface OtpModel {
   code: string;
@@ -8,7 +8,7 @@ interface OtpModel {
 
 @Component({
   selector: 'pg-input-otp-basic-example',
-  imports: [FormField, Button, InputOtp],
+  imports: [FormField, Button, InputOtp, Label],
   templateUrl: './basic.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

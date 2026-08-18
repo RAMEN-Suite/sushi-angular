@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Autocomplete, AutocompleteOption, AutocompleteValue, Button, Join, JoinItem } from '@ramen-suite/sushi';
+import { Autocomplete, AutocompleteOption, AutocompleteValue, Button, Join, JoinItem, Label } from '@ramen-suite/sushi';
 
 interface CityForm {
   city: AutocompleteValue;
@@ -8,7 +8,7 @@ interface CityForm {
 
 @Component({
   selector: 'pg-autocomplete-basic-example',
-  imports: [FormField, Autocomplete, Button, Join, JoinItem],
+  imports: [FormField, Autocomplete, Button, Join, JoinItem, Label],
   templateUrl: './basic.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

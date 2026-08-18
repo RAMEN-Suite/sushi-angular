@@ -1,11 +1,11 @@
 <div class="grid w-full max-w-md gap-2">
-  <label for="city" class="font-medium">City</label>
+  <label suiLabel for="autocomplete-city">City</label>
   <div suiJoin class="w-full">
     <sui-autocomplete
       suiJoinItem
       fluid
       forceSelection
-      id="city"
+      id="autocomplete-city"
       class="min-w-0 flex-1"
       [options]="cities"
       [formField]="cityForm.city"

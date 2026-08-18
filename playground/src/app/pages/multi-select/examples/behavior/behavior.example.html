@@ -1,42 +1,37 @@
 <div class="grid max-w-3xl items-start gap-6 lg:grid-cols-2">
-  <div suiLabel>
-    <span suiFormFieldLabel id="permissions-label">Permissions</span>
+  <div class="grid gap-2">
+    <span suiLabel id="multi-select-permissions-label" class="font-medium">Permissions</span>
     <sui-multi-select
       fluid
       showClear
       showSelectAll
-      id="permissions"
+      ariaLabelledby="multi-select-permissions-label"
       placeholder="Choose permissions"
       selectAllLabel="Include every permission"
       [options]="permissions"
       [optionHeight]="36"
       [scrollHeight]="144"
       [(value)]="value"
-      ariaLabelledby="permissions-label"
-      ariaDescribedby="permissions-hint"
       (touch)="closed()" />
-    <span suiFormFieldHint id="permissions-hint">
-      Four compact rows remain visible. Closed {{ closeCount() }} times.
-    </span>
   </div>
 
   <div class="grid gap-4">
-    <div suiLabel>
-      <span suiFormFieldLabel>Empty result</span>
+    <div class="grid gap-2">
+      <span suiLabel id="multi-select-empty-label" class="font-medium">Empty result</span>
       <sui-multi-select
         fluid
         emptyMessage="No permissions are available."
         [options]="empty"
-        ariaLabel="Empty permission list" />
+        ariaLabelledby="multi-select-empty-label" />
     </div>
-    <div suiLabel>
-      <span suiFormFieldLabel>Loading result</span>
+    <div class="grid gap-2">
+      <span suiLabel id="multi-select-loading-label" class="font-medium">Loading result</span>
       <sui-multi-select
         fluid
         loading
         loadingMessage="Fetching permissions"
         [options]="empty"
-        ariaLabel="Loading permission list" />
+        ariaLabelledby="multi-select-loading-label" />
     </div>
   </div>
 </div>

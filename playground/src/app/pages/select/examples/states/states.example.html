@@ -2,25 +2,25 @@
   <fieldset suiFieldset>
     <legend suiFieldsetLegend>Sizes</legend>
     <div class="grid gap-4">
-      <div suiLabel>
-        <span suiFormFieldLabel>Extra compact</span>
-        <sui-select fluid size="xs" [options]="options" [(value)]="value" ariaLabel="Extra compact delivery" />
+      <div class="grid gap-2">
+        <span suiLabel id="select-xs-label" class="font-medium">Extra compact</span>
+        <sui-select fluid size="xs" ariaLabelledby="select-xs-label" [options]="options" [(value)]="value" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Compact</span>
-        <sui-select fluid size="sm" [options]="options" [(value)]="value" ariaLabel="Compact delivery" />
+      <div class="grid gap-2">
+        <span suiLabel id="select-sm-label" class="font-medium">Compact</span>
+        <sui-select fluid size="sm" ariaLabelledby="select-sm-label" [options]="options" [(value)]="value" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Default</span>
-        <sui-select fluid [options]="options" [(value)]="value" ariaLabel="Default delivery" />
+      <div class="grid gap-2">
+        <span suiLabel id="select-md-label" class="font-medium">Default</span>
+        <sui-select fluid ariaLabelledby="select-md-label" [options]="options" [(value)]="value" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Large</span>
-        <sui-select fluid size="lg" [options]="options" [(value)]="value" ariaLabel="Large delivery" />
+      <div class="grid gap-2">
+        <span suiLabel id="select-lg-label" class="font-medium">Large</span>
+        <sui-select fluid size="lg" ariaLabelledby="select-lg-label" [options]="options" [(value)]="value" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Extra large</span>
-        <sui-select fluid size="xl" [options]="options" [(value)]="value" ariaLabel="Extra large delivery" />
+      <div class="grid gap-2">
+        <span suiLabel id="select-xl-label" class="font-medium">Extra large</span>
+        <sui-select fluid size="xl" ariaLabelledby="select-xl-label" [options]="options" [(value)]="value" />
       </div>
     </div>
   </fieldset>
@@ -28,21 +28,41 @@
   <fieldset suiFieldset>
     <legend suiFieldsetLegend>Semantic colors</legend>
     <div class="grid gap-4">
-      <div suiLabel>
-        <span suiFormFieldLabel>Primary</span>
-        <sui-select fluid severity="primary" [options]="options" [(value)]="value" ariaLabel="Primary delivery" />
+      <div class="grid gap-2">
+        <span suiLabel id="select-primary-label" class="font-medium">Primary</span>
+        <sui-select
+          fluid
+          severity="primary"
+          ariaLabelledby="select-primary-label"
+          [options]="options"
+          [(value)]="value" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Secondary</span>
-        <sui-select fluid severity="secondary" [options]="options" [(value)]="value" ariaLabel="Secondary delivery" />
+      <div class="grid gap-2">
+        <span suiLabel id="select-secondary-label" class="font-medium">Secondary</span>
+        <sui-select
+          fluid
+          severity="secondary"
+          ariaLabelledby="select-secondary-label"
+          [options]="options"
+          [(value)]="value" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Success</span>
-        <sui-select fluid severity="success" [options]="options" [(value)]="value" ariaLabel="Successful delivery" />
+      <div class="grid gap-2">
+        <span suiLabel id="select-success-label" class="font-medium">Success</span>
+        <sui-select
+          fluid
+          severity="success"
+          ariaLabelledby="select-success-label"
+          [options]="options"
+          [(value)]="value" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Warning</span>
-        <sui-select fluid severity="warning" [options]="options" [(value)]="value" ariaLabel="Warning delivery" />
+      <div class="grid gap-2">
+        <span suiLabel id="select-warning-label" class="font-medium">Warning</span>
+        <sui-select
+          fluid
+          severity="warning"
+          ariaLabelledby="select-warning-label"
+          [options]="options"
+          [(value)]="value" />
       </div>
     </div>
   </fieldset>
@@ -50,26 +70,26 @@
   <fieldset suiFieldset>
     <legend suiFieldsetLegend>States</legend>
     <div class="grid gap-4">
-      <div suiLabel>
-        <span suiFormFieldLabel>Filled and clearable</span>
+      <div class="grid gap-2">
+        <span suiLabel id="select-filled-label" class="font-medium">Filled and clearable</span>
         <sui-select
           fluid
           showClear
           variant="filled"
           [options]="options"
           [(value)]="value"
-          ariaLabel="Filled delivery" />
+          ariaLabelledby="select-filled-label" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Loading</span>
-        <sui-select fluid loading [options]="options" value="priority" ariaLabel="Loading delivery" />
+      <div class="grid gap-2">
+        <span suiLabel id="select-loading-state-label" class="font-medium">Loading</span>
+        <sui-select fluid loading ariaLabelledby="select-loading-state-label" [options]="options" value="priority" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Disabled</span>
-        <sui-select fluid disabled [options]="options" value="standard" ariaLabel="Disabled delivery" />
+      <div class="grid gap-2">
+        <span suiLabel id="select-disabled-label" class="font-medium">Disabled</span>
+        <sui-select fluid disabled ariaLabelledby="select-disabled-label" [options]="options" value="standard" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Invalid selection</span>
+      <div class="grid gap-2">
+        <span suiLabel id="select-invalid-label" class="font-medium">Invalid selection</span>
         <sui-select
           fluid
           invalid
@@ -77,9 +97,9 @@
           required
           [options]="options"
           [(value)]="invalidValue"
-          ariaLabel="Invalid delivery"
+          ariaLabelledby="select-invalid-label"
           ariaDescribedby="delivery-error" />
-        <span suiFormFieldHint id="delivery-error" class="text-error">Choose a delivery method.</span>
+        <span class="text-xs text-base-content/60 text-error" id="delivery-error">Choose a delivery method.</span>
       </div>
     </div>
   </fieldset>

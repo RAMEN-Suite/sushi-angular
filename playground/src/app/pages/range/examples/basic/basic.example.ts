@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField, max, min, SchemaPathTree } from '@angular/forms/signals';
-import { Button, Range } from '@ramen-suite/sushi';
+import { Button, Label, Range } from '@ramen-suite/sushi';
 
 interface VolumeModel {
   volume: number;
@@ -8,7 +8,7 @@ interface VolumeModel {
 
 @Component({
   selector: 'pg-range-basic-example',
-  imports: [FormField, Button, Range],
+  imports: [FormField, Button, Label, Range],
   templateUrl: './basic.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

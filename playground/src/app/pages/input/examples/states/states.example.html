@@ -1,18 +1,16 @@
 <div class="grid w-fit max-w-full items-start gap-4">
-  <label class="grid w-80 max-w-full gap-2">
-    <span class="font-medium">Readonly</span>
-    <input suiInput type="email" value="reader@example.com" readonly />
-  </label>
+  <div class="grid gap-2 w-80 max-w-full">
+    <label suiLabel for="input-readonly">Readonly</label>
+    <input suiInput id="input-readonly" type="email" value="reader@example.com" readonly />
+  </div>
 
-  <label class="grid w-80 max-w-full gap-2">
-    <span class="font-medium">Disabled</span>
-    <input suiInput value="Unavailable" disabled />
-  </label>
+  <div class="grid gap-2 w-80 max-w-full">
+    <label suiLabel for="input-disabled">Disabled</label>
+    <input suiInput id="input-disabled" value="Unavailable" disabled />
+  </div>
 
-  <label class="grid w-80 max-w-full gap-2">
-    <span class="font-medium">Invalid</span>
-    <input suiInput invalid touched value="Invalid value" aria-describedby="explicit-error" />
-  </label>
-
-  <p id="explicit-error" class="text-error">This value cannot be used.</p>
+  <div class="grid gap-2 w-80 max-w-full">
+    <label suiLabel for="input-invalid">Invalid</label>
+    <input suiInput id="input-invalid" invalid touched value="Invalid value" />
+  </div>
 </div>

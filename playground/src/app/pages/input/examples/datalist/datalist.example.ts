@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Input } from '@ramen-suite/sushi';
+import { Input, Label } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-input-datalist-example',
-  imports: [Input],
+  imports: [Input, Label],
   templateUrl: './datalist.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

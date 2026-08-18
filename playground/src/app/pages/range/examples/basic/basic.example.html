@@ -1,11 +1,9 @@
 <div class="grid w-96 max-w-full gap-4">
-  <label class="grid gap-3" for="range-volume">
-    <span class="flex items-baseline gap-2">
-      <span class="font-medium">Volume</span>
-      <output class="text-sm text-base-content/60">{{ form.volume().value() }}%</output>
-    </span>
+  <div class="grid gap-2">
+    <label suiLabel for="range-volume">Volume</label>
     <input suiRange id="range-volume" type="range" step="5" [formField]="form.volume" />
-  </label>
+    <p class="text-sm text-base-content/60">Current value: {{ form.volume().value() }}%</p>
+  </div>
   <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">
     Reset example
   </button>

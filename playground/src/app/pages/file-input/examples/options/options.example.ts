@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Fieldset, FieldsetLegend, FileInput, FileInputSeverity, FileInputSize } from '@ramen-suite/sushi';
+import { Badge, Fieldset, FieldsetLegend, FileInput, FileInputSeverity, FileInputSize, Label } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-file-input-options-example',
-  imports: [Badge, Fieldset, FieldsetLegend, FileInput],
+  imports: [Badge, Fieldset, FieldsetLegend, FileInput, Label],
   templateUrl: './options.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

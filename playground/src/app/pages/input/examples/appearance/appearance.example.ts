@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Fieldset, FieldsetLegend, Input, InputSeverity, InputSize } from '@ramen-suite/sushi';
+import { Badge, Fieldset, FieldsetLegend, Input, InputSeverity, InputSize, Label } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-input-appearance-example',
-  imports: [Badge, Fieldset, FieldsetLegend, Input],
+  imports: [Badge, Fieldset, FieldsetLegend, Input, Label],
   templateUrl: './appearance.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

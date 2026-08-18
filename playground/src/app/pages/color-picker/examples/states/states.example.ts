@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ColorPicker } from '@ramen-suite/sushi';
+import { ColorPicker, Label } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-color-picker-states-example',
-  imports: [ColorPicker],
+  imports: [ColorPicker, Label],
   templateUrl: './states.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

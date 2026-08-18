@@ -2,8 +2,6 @@ import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@ang
 import {
   Badge,
   Chip,
-  FormFieldHint,
-  FormFieldLabel,
   Label,
   MultiSelect,
   MultiSelectCompareWith,
@@ -16,16 +14,7 @@ import {
 
 @Component({
   selector: 'pg-multi-select-selected-example',
-  imports: [
-    Badge,
-    Chip,
-    FormFieldHint,
-    FormFieldLabel,
-    Label,
-    MultiSelect,
-    MultiSelectItemTemplate,
-    MultiSelectSelectedItemsTemplate,
-  ],
+  imports: [Badge, Chip, Label, MultiSelect, MultiSelectItemTemplate, MultiSelectSelectedItemsTemplate],
   templateUrl: './selected.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Fieldset, FieldsetLegend, Textarea, TextareaResize } from '@ramen-suite/sushi';
+import { Badge, Fieldset, FieldsetLegend, Label, Textarea, TextareaResize } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-textarea-resize-example',
-  imports: [Badge, Fieldset, FieldsetLegend, Textarea],
+  imports: [Badge, Fieldset, FieldsetLegend, Label, Textarea],
   templateUrl: './resize.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

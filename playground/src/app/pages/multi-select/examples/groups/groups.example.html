@@ -1,14 +1,14 @@
 <div class="grid w-full max-w-md gap-2">
-  <div suiLabel>
-    <span suiFormFieldLabel id="countries-label">Deployment countries</span>
+  <div class="grid gap-2">
+    <span suiLabel id="multi-select-countries-label" class="font-medium">Deployment countries</span>
     <sui-multi-select
       fluid
+      ariaLabelledby="multi-select-countries-label"
       [options]="countries"
       [compareWith]="compareCountries"
       [optionHeight]="56"
       [scrollHeight]="220"
-      [(value)]="value"
-      ariaLabelledby="countries-label">
+      [(value)]="value">
       <ng-template suiMultiSelectGroup let-group>
         <span class="flex w-full items-center justify-between gap-3">
           <span class="flex items-center gap-2 font-semibold">
@@ -29,6 +29,6 @@
         </span>
       </ng-template>
     </sui-multi-select>
-    <span suiFormFieldHint>Choose every country that should receive this deployment.</span>
+    <span class="text-xs text-base-content/60">Choose every country that should receive this deployment.</span>
   </div>
 </div>

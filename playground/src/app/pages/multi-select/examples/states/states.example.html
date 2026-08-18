@@ -2,25 +2,45 @@
   <fieldset suiFieldset>
     <legend suiFieldsetLegend>Sizes</legend>
     <div class="grid gap-4">
-      <div suiLabel>
-        <span suiFormFieldLabel>Extra compact</span>
-        <sui-multi-select fluid size="xs" [options]="options" [(value)]="value" ariaLabel="Extra compact labels" />
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-xs-label" class="font-medium">Extra compact</span>
+        <sui-multi-select
+          fluid
+          size="xs"
+          ariaLabelledby="multi-select-xs-label"
+          [options]="options"
+          [(value)]="value" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Compact</span>
-        <sui-multi-select fluid size="sm" [options]="options" [(value)]="value" ariaLabel="Compact labels" />
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-sm-label" class="font-medium">Compact</span>
+        <sui-multi-select
+          fluid
+          size="sm"
+          ariaLabelledby="multi-select-sm-label"
+          [options]="options"
+          [(value)]="value" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Default</span>
-        <sui-multi-select fluid [options]="options" [(value)]="value" ariaLabel="Default labels" />
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-md-label" class="font-medium">Default</span>
+        <sui-multi-select fluid ariaLabelledby="multi-select-md-label" [options]="options" [(value)]="value" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Large</span>
-        <sui-multi-select fluid size="lg" [options]="options" [(value)]="value" ariaLabel="Large labels" />
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-lg-label" class="font-medium">Large</span>
+        <sui-multi-select
+          fluid
+          size="lg"
+          ariaLabelledby="multi-select-lg-label"
+          [options]="options"
+          [(value)]="value" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Extra large</span>
-        <sui-multi-select fluid size="xl" [options]="options" [(value)]="value" ariaLabel="Extra large labels" />
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-xl-label" class="font-medium">Extra large</span>
+        <sui-multi-select
+          fluid
+          size="xl"
+          ariaLabelledby="multi-select-xl-label"
+          [options]="options"
+          [(value)]="value" />
       </div>
     </div>
   </fieldset>
@@ -28,31 +48,41 @@
   <fieldset suiFieldset>
     <legend suiFieldsetLegend>Semantic colors</legend>
     <div class="grid gap-4">
-      <div suiLabel>
-        <span suiFormFieldLabel>Primary</span>
-        <sui-multi-select fluid severity="primary" [options]="options" [(value)]="value" ariaLabel="Primary labels" />
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-primary-label" class="font-medium">Primary</span>
+        <sui-multi-select
+          fluid
+          severity="primary"
+          ariaLabelledby="multi-select-primary-label"
+          [options]="options"
+          [(value)]="value" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Secondary</span>
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-secondary-label" class="font-medium">Secondary</span>
         <sui-multi-select
           fluid
           severity="secondary"
           [options]="options"
           [(value)]="value"
-          ariaLabel="Secondary labels" />
+          ariaLabelledby="multi-select-secondary-label" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Success</span>
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-success-label" class="font-medium">Success</span>
         <sui-multi-select
           fluid
           severity="success"
           [options]="options"
           [(value)]="value"
-          ariaLabel="Successful labels" />
+          ariaLabelledby="multi-select-success-label" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Warning</span>
-        <sui-multi-select fluid severity="warning" [options]="options" [(value)]="value" ariaLabel="Warning labels" />
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-warning-label" class="font-medium">Warning</span>
+        <sui-multi-select
+          fluid
+          severity="warning"
+          ariaLabelledby="multi-select-warning-label"
+          [options]="options"
+          [(value)]="value" />
       </div>
     </div>
   </fieldset>
@@ -60,8 +90,8 @@
   <fieldset suiFieldset>
     <legend suiFieldsetLegend>States</legend>
     <div class="grid gap-4">
-      <div suiLabel>
-        <span suiFormFieldLabel>Filled, clearable, and select all</span>
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-filled-label" class="font-medium">Filled, clearable, and select all</span>
         <sui-multi-select
           fluid
           showClear
@@ -69,18 +99,28 @@
           variant="filled"
           [options]="options"
           [(value)]="value"
-          ariaLabel="Filled labels" />
+          ariaLabelledby="multi-select-filled-label" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Loading</span>
-        <sui-multi-select fluid loading [options]="options" [value]="['important']" ariaLabel="Loading labels" />
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-loading-state-label" class="font-medium">Loading</span>
+        <sui-multi-select
+          fluid
+          loading
+          ariaLabelledby="multi-select-loading-state-label"
+          [options]="options"
+          [value]="['important']" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Disabled</span>
-        <sui-multi-select fluid disabled [options]="options" [value]="['work']" ariaLabel="Disabled labels" />
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-disabled-label" class="font-medium">Disabled</span>
+        <sui-multi-select
+          fluid
+          disabled
+          ariaLabelledby="multi-select-disabled-label"
+          [options]="options"
+          [value]="['work']" />
       </div>
-      <div suiLabel>
-        <span suiFormFieldLabel>Invalid selection</span>
+      <div class="grid gap-2">
+        <span suiLabel id="multi-select-invalid-label" class="font-medium">Invalid selection</span>
         <sui-multi-select
           fluid
           invalid
@@ -88,9 +128,9 @@
           required
           [options]="options"
           [(value)]="invalidValue"
-          ariaLabel="Invalid labels"
+          ariaLabelledby="multi-select-invalid-label"
           ariaDescribedby="labels-error" />
-        <span suiFormFieldHint id="labels-error" class="text-error">Choose at least one label.</span>
+        <span class="text-xs text-base-content/60 text-error" id="labels-error">Choose at least one label.</span>
       </div>
     </div>
   </fieldset>

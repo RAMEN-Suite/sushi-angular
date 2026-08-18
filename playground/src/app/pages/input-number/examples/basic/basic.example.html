@@ -1,17 +1,15 @@
-<div suiLabel class="w-80 max-w-full gap-2">
-  <span suiFormFieldLabel>Project budget</span>
-
+<div class="grid w-80 max-w-full gap-2">
+  <label suiLabel for="input-number-budget">Project budget</label>
   <div class="flex w-full items-stretch gap-2">
     <sui-input-number
       fluid
       showButtons
+      id="input-number-budget"
       locale="de-DE"
       currency="EUR"
       [step]="50"
-      [formField]="form.amount"
-      ariaLabel="Project budget" />
+      [formField]="form.amount" />
     <button suiButton type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
   </div>
-
-  <span class="text-sm text-base-content/60">Current model value: {{ form.amount().value() }}</span>
+  <p class="text-sm text-base-content/60">Current model value: {{ form.amount().value() }}</p>
 </div>

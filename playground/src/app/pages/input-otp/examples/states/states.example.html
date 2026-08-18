@@ -1,11 +1,21 @@
 <div class="grid min-w-0 gap-6">
   <div class="grid min-w-0 gap-2">
-    <span class="font-medium">Invalid code</span>
-    <sui-input-otp [length]="4" invalid [value]="'1234'" ariaLabel="Invalid code" />
+    <label suiLabel id="input-otp-invalid-label" for="input-otp-invalid">Invalid code</label>
+    <sui-input-otp
+      id="input-otp-invalid"
+      ariaLabelledby="input-otp-invalid-label"
+      [length]="4"
+      invalid
+      [value]="'1234'" />
   </div>
 
   <div class="grid min-w-0 gap-2">
-    <span class="font-medium">Disabled code</span>
-    <sui-input-otp [length]="4" disabled [value]="'2468'" ariaLabel="Disabled code" />
+    <label suiLabel id="input-otp-disabled-label" for="input-otp-disabled">Disabled code</label>
+    <sui-input-otp
+      id="input-otp-disabled"
+      ariaLabelledby="input-otp-disabled-label"
+      [length]="4"
+      disabled
+      [value]="'2468'" />
   </div>
 </div>

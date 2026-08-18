@@ -2,8 +2,6 @@ import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@ang
 import { LucideGlobe } from '@lucide/angular';
 import {
   Badge,
-  FormFieldHint,
-  FormFieldLabel,
   Label,
   Select,
   SelectCompareWith,
@@ -23,17 +21,7 @@ interface Country extends SelectOption {
 
 @Component({
   selector: 'pg-select-options-example',
-  imports: [
-    Badge,
-    FormFieldHint,
-    FormFieldLabel,
-    Label,
-    Select,
-    SelectGroupTemplate,
-    SelectItemTemplate,
-    SelectSelectedItemTemplate,
-    LucideGlobe,
-  ],
+  imports: [Badge, Label, Select, SelectGroupTemplate, SelectItemTemplate, SelectSelectedItemTemplate, LucideGlobe],
   templateUrl: './options.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

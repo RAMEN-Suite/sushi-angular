@@ -2,8 +2,6 @@ import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@ang
 import { LucideBadgeCheck, LucideChevronsUpDown, LucideCircleX } from '@lucide/angular';
 import {
   Button,
-  FormFieldHint,
-  FormFieldLabel,
   Join,
   JoinItem,
   Label,
@@ -25,8 +23,6 @@ import {
   selector: 'pg-select-templates-example',
   imports: [
     Button,
-    FormFieldHint,
-    FormFieldLabel,
     Join,
     JoinItem,
     Label,

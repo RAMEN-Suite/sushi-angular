@@ -1,5 +1,5 @@
-<div class="w-full max-w-md" suiLabel>
-  <span suiFormFieldLabel id="team-label">Workspace team</span>
+<div class="grid gap-2 w-full max-w-md">
+  <span suiLabel id="select-team-label" class="font-medium">Workspace team</span>
   <div suiJoin class="w-full">
     <sui-select
       suiJoinItem
@@ -7,10 +7,10 @@
       showClear
       checkmark
       class="min-w-0 flex-1"
+      ariaLabelledby="select-team-label"
       [options]="options"
       [loading]="loading()"
-      [(value)]="value"
-      ariaLabelledby="team-label">
+      [(value)]="value">
       <ng-template suiSelectHeader><strong>Available teams</strong></ng-template>
       <ng-template suiSelectFooter>
         <span class="text-sm text-base-content/60">Managed by your workspace</span>
@@ -40,5 +40,4 @@
       {{ loading() ? 'Stop' : 'Preview loading' }}
     </button>
   </div>
-  <span suiFormFieldHint>Header, footer, state, and icon templates can be replaced independently.</span>
 </div>

@@ -3,8 +3,6 @@ import { LucideCreditCard, LucideFolderKanban, LucideUsers } from '@lucide/angul
 import {
   Badge,
   Checkbox,
-  FormFieldHint,
-  FormFieldLabel,
   Label,
   MultiSelect,
   MultiSelectGroupTemplate,
@@ -24,8 +22,6 @@ interface Permission extends MultiSelectOption {
   imports: [
     Badge,
     Checkbox,
-    FormFieldHint,
-    FormFieldLabel,
     Label,
     MultiSelect,
     MultiSelectGroupTemplate,

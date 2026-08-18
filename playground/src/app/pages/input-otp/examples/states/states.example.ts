@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { InputOtp } from '@ramen-suite/sushi';
+import { InputOtp, Label } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-input-otp-states-example',
-  imports: [InputOtp],
+  imports: [InputOtp, Label],
   templateUrl: './states.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

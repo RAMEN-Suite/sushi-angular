@@ -1,13 +1,25 @@
-<div class="grid min-w-0 gap-6">
-  <div class="min-w-0 space-y-2">
-    <p class="font-medium">Masked PIN</p>
-    <sui-input-otp [length]="4" masked joined ariaLabel="Masked PIN" />
-    <p class="text-sm text-base-content/60">Numeric characters only.</p>
-  </div>
+<div class="grid min-w-0 gap-4 sm:grid-cols-2">
+  <sui-card size="sm" class="min-w-0 border border-base-300 bg-base-100 shadow-none">
+    <label suiLabel id="input-otp-pin-label" for="input-otp-pin">Masked PIN</label>
+    <sui-input-otp
+      id="input-otp-pin"
+      class="mt-2 block"
+      ariaLabelledby="input-otp-pin-label"
+      [length]="4"
+      masked
+      joined />
+    <p class="mt-2 text-sm text-base-content/60">Numeric characters only.</p>
+  </sui-card>
 
-  <div class="min-w-0 space-y-2">
-    <p class="font-medium">Alphanumeric code</p>
-    <sui-input-otp [length]="4" [numeric]="false" [value]="'AB12'" ariaLabel="Alphanumeric account code" />
-    <p class="text-sm text-base-content/60">Letters and numbers are accepted.</p>
-  </div>
+  <sui-card size="sm" class="min-w-0 border border-base-300 bg-base-100 shadow-none">
+    <label suiLabel id="input-otp-account-label" for="input-otp-account">Alphanumeric code</label>
+    <sui-input-otp
+      id="input-otp-account"
+      class="mt-2 block"
+      ariaLabelledby="input-otp-account-label"
+      [length]="4"
+      [numeric]="false"
+      [value]="'AB12'" />
+    <p class="mt-2 text-sm text-base-content/60">Letters and numbers are accepted.</p>
+  </sui-card>
 </div>

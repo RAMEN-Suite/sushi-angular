@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, Fieldset, FieldsetContent, FieldsetLegend, Radio } from '@ramen-suite/sushi';
+import { Button, Fieldset, FieldsetContent, FieldsetLegend, Label, Radio } from '@ramen-suite/sushi';
 
 interface PlanForm {
   plan: string;
@@ -8,7 +8,7 @@ interface PlanForm {
 
 @Component({
   selector: 'pg-radio-usage-example',
-  imports: [FormField, Button, Fieldset, FieldsetContent, FieldsetLegend, Radio],
+  imports: [FormField, Button, Fieldset, FieldsetContent, FieldsetLegend, Label, Radio],
   templateUrl: './usage.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
