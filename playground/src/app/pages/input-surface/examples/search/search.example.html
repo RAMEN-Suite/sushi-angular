@@ -1,0 +1,16 @@
+<div class="grid w-full max-w-md gap-2">
+  <label suiLabel for="component-search">Component search</label>
+  <div suiJoin class="w-full">
+    <div suiInputSurface suiJoinItem fluid class="min-w-0 flex-1">
+      <svg lucideSearch class="size-4 opacity-50" aria-hidden="true"></svg>
+      <input
+        suiInputSurfaceControl
+        id="component-search"
+        type="search"
+        placeholder="Search components"
+        [formField]="form.query" />
+      <kbd suiKbd size="sm">⌘ K</kbd>
+    </div>
+    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
+  </div>
+</div>

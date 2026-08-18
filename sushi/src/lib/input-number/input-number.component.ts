@@ -70,8 +70,12 @@ export class InputNumber implements FormValueControl<number | null> {
   /** Amount added or subtracted by the step controls and arrow keys. */
   public readonly step: InputSignalWithTransform<number, unknown> = input(1, { transform: numberAttribute });
 
+  /** ID forwarded to the internal spin-button for native label association. */
+  public readonly id: InputSignal<string | null> = input<string | null>(null);
   /** Accessible name for the internal spin-button. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  /** IDs of elements that label the internal spin-button. */
+  public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
   /** Sets the control height and text size. */
   public readonly size: InputSignal<FormControlSize> = input<FormControlSize>('md');
   /** Shows increment and decrement controls. */

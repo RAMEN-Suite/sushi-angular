@@ -87,28 +87,28 @@ export const navigation: NavigationGroup[] = [
     label: 'Form Layout',
     items: [
       {
-        label: 'Form Field',
-        path: '/form-field',
+        label: 'Auto Focus',
+        path: '/auto-focus',
       },
       {
         label: 'Fieldset',
         path: '/fieldset',
       },
       {
-        label: 'Input Wrapper',
-        path: '/input-wrapper',
-      },
-      {
         label: 'Input Group',
         path: '/input-group',
+      },
+      {
+        label: 'Input Surface',
+        path: '/input-surface',
       },
       {
         label: 'Join',
         path: '/join',
       },
       {
-        label: 'Auto Focus',
-        path: '/auto-focus',
+        label: 'Label',
+        path: '/label',
       },
     ],
   },
@@ -125,6 +125,10 @@ export const navigation: NavigationGroup[] = [
     label: 'Feedback',
     items: [
       {
+        label: 'Indicator',
+        path: '/indicator',
+      },
+      {
         label: 'Message',
         path: '/message',
       },
@@ -133,16 +137,12 @@ export const navigation: NavigationGroup[] = [
         path: '/progress',
       },
       {
-        label: 'Status',
-        path: '/status',
-      },
-      {
         label: 'Spinner',
         path: '/spinner',
       },
       {
-        label: 'Indicator',
-        path: '/indicator',
+        label: 'Status',
+        path: '/status',
       },
     ],
   },
@@ -162,12 +162,12 @@ export const navigation: NavigationGroup[] = [
         path: '/chip',
       },
       {
-        label: 'Keyboard Key',
-        path: '/kbd',
-      },
-      {
         label: 'Icons',
         path: '/icon',
+      },
+      {
+        label: 'Keyboard Key',
+        path: '/kbd',
       },
     ],
   },

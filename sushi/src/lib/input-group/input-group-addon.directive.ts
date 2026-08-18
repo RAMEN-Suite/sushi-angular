@@ -4,7 +4,8 @@ import { Directive } from '@angular/core';
   selector: '[suiInputGroupAddon]',
   host: {
     class:
-      'join-item border-base-300 bg-base-200 pointer-events-none inline-flex min-h-10 items-center border px-3.5 sui-input-group-addon',
+      'join-item sui-input-group-addon inline-flex min-h-10 items-center px-3.5 bg-base-200 border border-base-300 pointer-events-none',
   },
 })
+/** Marks non-interactive prefix or suffix content inside an input group. */
 export class InputGroupAddon {}

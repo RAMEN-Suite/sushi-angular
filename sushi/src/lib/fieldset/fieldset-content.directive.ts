@@ -9,6 +9,7 @@ import { Fieldset } from './fieldset.directive';
     '[attr.inert]': 'fieldset.collapsible() && !fieldset.expanded() ? "" : null',
   },
 })
+/** Marks the animated and inert-aware content of a collapsible fieldset. */
 export class FieldsetContent {
   protected readonly fieldset: Fieldset = inject(Fieldset);
 }

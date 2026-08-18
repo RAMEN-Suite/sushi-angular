@@ -1,0 +1,32 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Label</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Style visible control labels without prescribing the surrounding form layout, validation, or message structure. Use a native label
+        for native controls and <code>ariaLabelledby</code> for composite controls.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2" aria-label="Label capabilities">
+      <span suiBadge variant="soft" size="sm">Native semantics</span>
+      <span suiBadge variant="soft" size="sm">Optional floating</span>
+      <span suiBadge variant="soft" size="sm">Composable</span>
+    </div>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>API reference</h2>
+    <div class="mt-5"><pg-api-reference [api]="api" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Native, floating, and composite labels</h2>
+    <p class="text-base-content/60">
+      Use an explicit <code>for</code> and <code>id</code> for a separate label. A floating label wraps its native control and leaves
+      supporting or validation messages to the surrounding form. Composite controls reference the visible label with
+      <code>ariaLabelledby</code>.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-label-basic-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="example.html" [typescript]="example.typescript" /></div>
+  </sui-card>
+</main>

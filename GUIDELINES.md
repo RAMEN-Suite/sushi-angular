@@ -72,6 +72,8 @@ sushi/src/lib/<feature>/
 - Type public and protected APIs explicitly; do not rely on accidental inference.
 - Keep templates declarative and handlers short.
 - Use early returns.
+- Add comments only for non-obvious constraints, compatibility workarounds, or architectural decisions.
+- Do not comment code that is already clear from its names and structure.
 - Do not write `standalone: true`.
 
 Class order:
@@ -97,6 +99,11 @@ Class order:
 - Implement `focus()` and `reset()` when native behavior is insufficient.
 - Emit `touch` when an interaction completes, not on focus.
 - Every template marker needs a typed context and a working example.
+- Use `<label suiLabel for>` for native labelable controls.
+- Use `<span suiLabel id>` with `ariaLabelledby` for non-native ARIA composites such as Select.
+- Add `floating` only to a native label that wraps its control.
+- Developers own explicit `for`, `id`, `aria-labelledby`, and `aria-describedby` associations.
+- Keep hints, errors, and validation behavior independent from labels.
 
 ## Naming
 
@@ -106,6 +113,8 @@ Class order:
 - Handlers describe actions: `handleSelection`, `handleReset`.
 - CSS hooks use `.sui-feature` and `.sui-feature__element`.
 - Names stay short but must remain unambiguous.
+- Prefer complete, familiar words over unexplained abbreviations.
+- Break dense expressions and markup into readable semantic steps; do not compress examples into clever one-liners.
 
 ## CSS
 
@@ -126,6 +135,8 @@ Prefer in order:
 ## Accessibility and overlays
 
 - Every control needs an accessible name and visible focus.
+- Visual wrappers such as Input Surface, Input Group, and Join do not name their controls.
+- Add `role="group"` and a group label only when the complete composition represents one named interaction.
 - Disabled covers pointer, keyboard, and forms behavior.
 - Loading controls use `aria-busy` and cannot activate.
 - Invalid controls use `aria-invalid`; messages use `aria-describedby`.

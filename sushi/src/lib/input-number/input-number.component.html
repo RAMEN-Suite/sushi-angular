@@ -19,10 +19,12 @@
       class="min-w-0 grow text-right outline-none"
       type="text"
       inputmode="decimal"
+      [id]="id()"
       [value]="displayValue()"
       [placeholder]="placeholder()"
       [disabled]="disabled()"
       [attr.aria-label]="ariaLabel()"
+      [attr.aria-labelledby]="ariaLabelledby()"
       [attr.aria-valuemin]="min()"
       [attr.aria-valuemax]="max()"
       [attr.aria-valuenow]="value()"
@@ -43,12 +45,7 @@
     @if (buttonsTemplate(); as buttons) {
       <ng-container [ngTemplateOutlet]="buttons" [ngTemplateOutletContext]="buttonsContext()" />
     } @else {
-      <span
-        suiJoin
-        suiJoinItem
-        orientation="vertical"
-        class="shrink-0 self-stretch"
-      >
+      <span suiJoin suiJoinItem orientation="vertical" class="shrink-0 self-stretch">
         <button
           suiButton
           suiJoinItem

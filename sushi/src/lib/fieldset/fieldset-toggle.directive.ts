@@ -11,6 +11,7 @@ import { Fieldset } from './fieldset.directive';
     '(click)': 'fieldset.toggle()',
   },
 })
+/** Turns a legend button into the controller for its collapsible fieldset. */
 export class FieldsetToggle {
   protected readonly fieldset: Fieldset = inject(Fieldset);
 }

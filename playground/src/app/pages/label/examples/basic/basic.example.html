@@ -1,0 +1,22 @@
+<div class="grid max-w-md gap-6">
+  <div class="grid gap-2">
+    <label suiLabel for="profile-name">Display name</label>
+    <input suiInput id="profile-name" autocomplete="name" placeholder="Ada Lovelace" />
+    <p class="text-sm text-base-content/60">Used on your public profile.</p>
+  </div>
+
+  <label suiLabel floating>
+    <span>Email address</span>
+    <input suiInput type="email" autocomplete="email" placeholder="name@example.com" />
+  </label>
+
+  <label suiLabel floating>
+    <span>Short biography</span>
+    <textarea suiTextarea rows="3" placeholder="Tell us about yourself"></textarea>
+  </label>
+
+  <div class="grid gap-2">
+    <span suiLabel id="priority-label">Priority</span>
+    <sui-select fluid ariaLabelledby="priority-label" [options]="priorities" />
+  </div>
+</div>

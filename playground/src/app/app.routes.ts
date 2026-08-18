@@ -47,14 +47,14 @@ export const routes: Routes = [
     title: 'File Drop | SUSHI Playground',
   },
   {
-    path: 'form-field',
-    loadComponent: () => import('./pages/form-field/form-field.page').then(({ FormFieldPage }) => FormFieldPage),
-    title: 'Form Field | SUSHI Playground',
-  },
-  {
     path: 'input',
     loadComponent: () => import('./pages/input/input.page').then(({ InputPage }) => InputPage),
     title: 'Input | SUSHI Playground',
+  },
+  {
+    path: 'label',
+    loadComponent: () => import('./pages/label/label.page').then(({ LabelPage }) => LabelPage),
+    title: 'Label | SUSHI Playground',
   },
   {
     path: 'input-number',
@@ -67,9 +67,9 @@ export const routes: Routes = [
     title: 'Input OTP | SUSHI Playground',
   },
   {
-    path: 'input-wrapper',
-    loadComponent: () => import('./pages/input-wrapper/input-wrapper.page').then(({ InputWrapperPage }) => InputWrapperPage),
-    title: 'Input Wrapper | SUSHI Playground',
+    path: 'input-surface',
+    loadComponent: () => import('./pages/input-surface/input-surface.page').then(({ InputSurfacePage }) => InputSurfacePage),
+    title: 'Input Surface | SUSHI Playground',
   },
   {
     path: 'input-group',

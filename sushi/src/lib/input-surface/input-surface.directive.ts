@@ -1,10 +1,10 @@
 import { booleanAttribute, Directive, input, InputSignal, InputSignalWithTransform } from '@angular/core';
-import { InputSeverity, InputSize } from '../input';
+import { FormControlSeverity, FormControlSize } from '../form-control';
 
 @Directive({
-  selector: 'label[suiInputWrapper]',
+  selector: 'div[suiInputSurface]',
   host: {
-    class: 'input sui-input-wrapper',
+    class: 'input sui-input-surface',
     '[class.input-primary]': 'severity() === "primary"',
     '[class.input-secondary]': 'severity() === "secondary"',
     '[class.input-accent]': 'severity() === "accent"',
@@ -18,11 +18,18 @@ import { InputSeverity, InputSize } from '../input';
     '[class.input-md]': 'size() === "md"',
     '[class.input-lg]': 'size() === "lg"',
     '[class.input-xl]': 'size() === "xl"',
+    '[class.w-full]': 'fluid()',
   },
 })
-export class InputWrapper {
-  public readonly severity: InputSignal<InputSeverity | null> = input<InputSeverity | null>(null);
-  public readonly size: InputSignal<InputSize> = input<InputSize>('md');
+/** Creates one input surface for a native control and inline prefixes or suffixes. */
+export class InputSurface {
+  /** Applies a semantic border color. */
+  public readonly severity: InputSignal<FormControlSeverity | null> = input<FormControlSeverity | null>(null);
+  /** Sets the surface dimensions. */
+  public readonly size: InputSignal<FormControlSize> = input<FormControlSize>('md');
+  /** Expands the surface to the available width. */
+  public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+  /** Applies the invalid appearance to the complete field surface. */
   public readonly invalid: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });

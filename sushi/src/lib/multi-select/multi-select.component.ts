@@ -1,7 +1,4 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Combobox, ComboboxPopup, ComboboxWidget } from '@angular/aria/combobox';
-import { Listbox, Option } from '@angular/aria/listbox';
-import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import {
   afterRenderEffect,
   booleanAttribute,
@@ -24,6 +21,9 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
+import { Combobox, ComboboxPopup, ComboboxWidget } from '@angular/aria/combobox';
+import { Listbox, Option } from '@angular/aria/listbox';
+import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { LucideCheck, LucideChevronDown, LucideX } from '@lucide/angular';
 import { Checkbox } from '../checkbox';
 import { FormControlSeverity, FormControlSize, FormControlState } from '../form-control';

@@ -1,0 +1,34 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Input Surface</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Keep a native input, icon, prefix, suffix, or shortcut inside one consistent field surface.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span suiBadge variant="soft" size="sm">Native input</span>
+      <span suiBadge variant="soft" size="sm">Prefix and suffix</span>
+      <span suiBadge variant="soft" size="sm">Shared state</span>
+    </div>
+  </section>
+  <sui-card
+    ><h2 suiCardTitle>API reference</h2>
+    @for (item of api; track item.className) {
+      <div class="mt-5"><pg-api-reference [api]="item" /></div>
+    }
+  </sui-card>
+  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+  <sui-card
+    ><h2 suiCardTitle>Search with an action</h2>
+    <p class="text-base-content/60">Combine the surface with Join when an adjacent action belongs to the same task.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-input-surface-search-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.search.html" [typescript]="examples.search.typescript" /></div
+  ></sui-card>
+  <sui-card
+    ><h2 suiCardTitle>Prefixes, suffixes, and state</h2>
+    <p class="text-base-content/60">Projected content stays visual; the nested native input continues to own value and accessibility.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-input-surface-content-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.content.html" [typescript]="examples.content.typescript" /></div
+  ></sui-card>
+</main>

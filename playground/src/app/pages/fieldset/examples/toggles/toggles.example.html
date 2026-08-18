@@ -1,0 +1,47 @@
+<form class="grid w-full max-w-2xl gap-5">
+  <fieldset
+    suiFieldset
+    collapsible
+    [(expanded)]="detailsExpanded"
+    class="rounded-box border border-base-300 bg-base-100 px-5 pb-5 shadow-sm">
+    <legend suiFieldsetLegend><button suiFieldsetToggle>Profile details</button></legend>
+    <div suiFieldsetContent class="grid gap-4 pt-1 sm:grid-cols-2">
+      <label suiLabel class="grid gap-1.5">
+        <span class="text-sm">First name</span>
+        <input suiInput fluid value="Ada" />
+      </label>
+      <label suiLabel class="grid gap-1.5">
+        <span class="text-sm">Last name</span>
+        <input suiInput fluid value="Lovelace" />
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset
+    suiFieldset
+    collapsible
+    [(expanded)]="advancedExpanded"
+    class="rounded-box border border-base-300 bg-base-100 px-5 pb-5 shadow-sm">
+    <legend suiFieldsetLegend>
+      <button suiFieldsetToggle>
+        <svg
+          lucideChevronRight
+          class="sui-fieldset__icon size-4 transition-transform"
+          [class.rotate-90]="advancedExpanded()"
+          aria-hidden="true"></svg>
+        Advanced settings
+      </button>
+    </legend>
+    <div suiFieldsetContent class="grid gap-4 pt-1 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+      <label suiLabel class="grid gap-1.5">
+        <span class="text-sm">Session timeout</span>
+        <input suiInput fluid type="number" value="30" />
+      </label>
+      <span class="pb-3 text-sm text-base-content/60">Minutes before an inactive session ends.</span>
+    </div>
+  </fieldset>
+
+  <button suiButton type="reset" class="w-fit justify-self-end" severity="neutral" variant="soft" (click)="reset()">
+    Reset example
+  </button>
+</form>

@@ -33,8 +33,12 @@ export class InputOtp implements FormValueControl<string> {
   /** Sets the slot height and text size. */
   public readonly size: InputSignal<FormControlSize> = input<FormControlSize>('md');
 
+  /** ID forwarded to the native input for label association. */
+  public readonly id: InputSignal<string | null> = input<string | null>(null);
   /** Accessible name for the native input. */
   public readonly ariaLabel: InputSignal<string> = input<string>('One-time password');
+  /** IDs of elements that label the native input. */
+  public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
 
   /** Prevents code entry and focus. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });

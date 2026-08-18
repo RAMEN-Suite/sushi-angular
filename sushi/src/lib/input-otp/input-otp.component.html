@@ -12,6 +12,7 @@
   }
   <input
     #inputElement
+    [id]="id()"
     [type]="masked() ? 'password' : 'text'"
     [inputMode]="numeric() ? 'numeric' : 'text'"
     [value]="value()"
@@ -19,7 +20,8 @@
     [maxLength]="length()"
     [pattern]="numeric() ? '[0-9]{' + length() + '}' : '.{' + length() + '}'"
     autocomplete="one-time-code"
-    [attr.aria-label]="ariaLabel()"
+    [attr.aria-label]="ariaLabelledby() ? null : ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledby()"
     [attr.aria-invalid]="invalid() || null"
     (input)="handleInput($event)"
     (blur)="touch.emit()"

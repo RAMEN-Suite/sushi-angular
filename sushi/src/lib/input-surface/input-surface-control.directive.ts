@@ -2,13 +2,15 @@ import { booleanAttribute, Directive, input, InputSignalWithTransform } from '@a
 import { FormControlState } from '../form-control';
 
 @Directive({
-  selector: 'input[suiInputWrapperControl]',
+  selector: 'input[suiInputSurfaceControl]',
   host: {
-    class: 'grow sui-input-wrapper__control',
+    class: 'grow sui-input-surface__control',
     '[class.sui-input--clear-hidden]': '!showClear()',
     '[attr.aria-invalid]': 'isInvalid() ? "true" : null',
   },
 })
-export class InputWrapperControl extends FormControlState {
+/** Marks the native input that owns the value inside an input surface. */
+export class InputSurfaceControl extends FormControlState {
+  /** Shows the browser clear affordance for supported native input types. */
   public readonly showClear: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
 }

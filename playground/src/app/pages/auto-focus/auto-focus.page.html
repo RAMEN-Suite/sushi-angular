@@ -1,34 +1,30 @@
 <main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="space-y-3">
-    <h1 class="text-4xl font-bold tracking-tight">Auto focus</h1>
-    <p class="max-w-3xl text-base-content/70">
-      <code>suiAutoFocus</code> focuses an element after it is rendered, without moving the page.
-    </p>
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Auto Focus</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Request focus after an element is rendered while disabled controls and explicit opt-outs remain untouched.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span suiBadge variant="soft" size="sm">After render</span><span suiBadge variant="soft" size="sm">Disabled-safe</span>
+    </div>
   </section>
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Dynamic content</h2>
-      <p class="text-sm text-base-content/60">Create the field on demand to see focus move after Angular finishes rendering it.</p>
-    </div>
-    <div class="flex flex-wrap items-center gap-3">
-      <button suiButton type="button" (click)="showFocusedField()">Show focused field</button>
-      @if (showField()) {
-        <input suiAutoFocus class="input" aria-label="Focused example" placeholder="I receive focus" />
-      }
-    </div>
-    <div>
-      <input [suiAutoFocus]="false" class="input" aria-label="Non-focused example" placeholder="Auto focus disabled" />
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;input suiAutoFocus aria-label="Search" /&gt;</code></pre>
-    </sui-code>
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;input [suiAutoFocus]="false" aria-label="Search" /&gt;</code></pre>
-    </sui-code>
-    <p class="text-sm text-base-content/60">Use autofocus sparingly; unexpected focus changes can be disruptive.</p>
-  </sui-card>
-  <section class="flex justify-end">
-    <button suiButton type="button" severity="neutral" variant="soft" (click)="handleReset()">Reset examples</button>
-  </section>
+  <sui-card
+    ><h2 suiCardTitle>API reference</h2>
+    <div class="mt-5"><pg-api-reference [api]="api" /></div
+  ></sui-card>
+  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+  <sui-card
+    ><h2 suiCardTitle>Dynamic content</h2>
+    <p class="text-base-content/60">Focus a newly created field after Angular completes rendering it.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-auto-focus-dynamic-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.dynamic.html" [typescript]="examples.dynamic.typescript" /></div
+  ></sui-card>
+  <sui-card
+    ><h2 suiCardTitle>Opt-out and disabled controls</h2>
+    <p class="text-base-content/60">A false input suppresses the request; disabled elements are skipped automatically.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-auto-focus-disabled-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.disabled.html" [typescript]="examples.disabled.typescript" /></div
+  ></sui-card>
 </main>

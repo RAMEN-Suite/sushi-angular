@@ -1,0 +1,47 @@
+<div class="grid w-full max-w-md gap-3">
+  <div>
+    <strong class="block">Team licenses</strong>
+    <span class="text-sm text-base-content/60">€18 per member and month</span>
+  </div>
+
+  <div class="flex flex-wrap items-stretch gap-3">
+    <div suiJoin>
+      <input
+        suiInput
+        suiJoinItem
+        class="w-24 text-center"
+        [value]="quantity()"
+        readonly
+        aria-label="License quantity" />
+      <span suiJoin suiJoinItem orientation="vertical" class="shrink-0 self-stretch">
+        <button
+          suiButton
+          suiJoinItem
+          type="button"
+          size="xs"
+          severity="neutral"
+          variant="soft"
+          class="h-auto min-h-0 w-8 flex-1 px-0"
+          aria-label="Increase quantity"
+          (click)="adjust(1)">
+          <svg lucideChevronUp class="size-3" aria-hidden="true"></svg>
+        </button>
+        <button
+          suiButton
+          suiJoinItem
+          type="button"
+          size="xs"
+          severity="neutral"
+          variant="soft"
+          class="h-auto min-h-0 w-8 flex-1 px-0"
+          aria-label="Decrease quantity"
+          (click)="adjust(-1)">
+          <svg lucideChevronDown class="size-3" aria-hidden="true"></svg>
+        </button>
+      </span>
+    </div>
+    <button suiButton type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
+  </div>
+
+  <span class="text-sm text-base-content/60">Monthly total: €{{ quantity() * 18 }}</span>
+</div>

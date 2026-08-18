@@ -19,8 +19,6 @@ const root: string = resolve(process.cwd());
 const sourceRoot: string = join(root, 'sushi/src/lib');
 const outputFile: string = join(root, 'playground/src/app/generated/api-reference.generated.ts');
 
-// Source discovery
-
 function findSourceFiles(folder: string): string[] {
   return readdirSync(folder, { withFileTypes: true }).flatMap((entry: Dirent): string[] => {
     const file: string = join(folder, entry.name);
@@ -38,8 +36,6 @@ const compilerOptions: ts.CompilerOptions = {
 };
 const program: ts.Program = ts.createProgram(sourceFiles, compilerOptions);
 const checker: ts.TypeChecker = program.getTypeChecker();
-
-// Angular metadata
 
 function findSelector(node: ts.ClassDeclaration): string | null {
   const decorators: readonly ts.Decorator[] = ts.canHaveDecorators(node) ? (ts.getDecorators(node) ?? []) : [];
@@ -70,8 +66,6 @@ function readJSDoc(node: ts.Node): string {
     .replaceAll(/\s+/g, ' ')
     .trim();
 }
-
-// Public API members
 
 function isPublic(node: ts.Node & { readonly modifiers?: ts.NodeArray<ts.ModifierLike> }): boolean {
   return !node.modifiers?.some(
@@ -175,8 +169,6 @@ function readMembers(node: ts.ClassDeclaration): ApiMember[] {
   return members;
 }
 
-// Template markers and references
-
 function readTemplateContext(node: ts.ClassDeclaration): string {
   const guard: ts.ClassElement | undefined = node.members.find(
     (member: ts.ClassElement): boolean => ts.isMethodDeclaration(member) && member.name.getText() === 'ngTemplateContextGuard',
@@ -242,8 +234,6 @@ function buildReferenceData(): Readonly<Record<string, ApiReferenceData>> {
     });
   return Object.fromEntries(entries) as Readonly<Record<string, ApiReferenceData>>;
 }
-
-// Output
 
 async function writeReferenceFile(): Promise<void> {
   const data: Readonly<Record<string, ApiReferenceData>> = buildReferenceData();

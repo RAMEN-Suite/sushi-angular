@@ -1,0 +1,26 @@
+<div class="grid max-w-md gap-4">
+  <div class="grid gap-2">
+    <label suiLabel for="website-domain">Website</label>
+    <div suiInputSurface fluid>
+      <span class="text-base-content/60">https://</span>
+      <input suiInputSurfaceControl id="website-domain" placeholder="example.com" />
+    </div>
+  </div>
+
+  <div class="grid gap-2">
+    <label suiLabel for="repository-path">Repository path</label>
+    <div suiInputSurface fluid size="sm" severity="info">
+      <span class="text-base-content/60">Path</span>
+      <input suiInputSurfaceControl id="repository-path" placeholder="src/app" />
+      <span suiBadge size="xs" severity="neutral">Optional</span>
+    </div>
+  </div>
+
+  <div class="grid gap-2">
+    <label suiLabel for="release-branch">Release branch</label>
+    <div suiInputSurface fluid invalid>
+      <span class="text-base-content/60">Branch</span>
+      <input suiInputSurfaceControl id="release-branch" invalid touched placeholder="Required" />
+    </div>
+  </div>
+</div>
