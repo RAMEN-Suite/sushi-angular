@@ -1,0 +1,15 @@
+<sui-tabs [(value)]="tab" variant="lift" ariaLabel="Account sections">
+  <ng-template suiTab value="profile" label="Profile">
+    <div class="p-4">
+      <h3 class="font-semibold">Profile</h3>
+      <p class="mt-1 text-base-content/60">Update your public account details.</p>
+    </div>
+  </ng-template>
+  <ng-template suiTab value="security" label="Security">
+    <div class="p-4">
+      <h3 class="font-semibold">Security</h3>
+      <p class="mt-1 text-base-content/60">Review passwords and active sessions.</p>
+    </div>
+  </ng-template>
+  <ng-template suiTab value="billing" label="Billing" disabled>Billing is unavailable.</ng-template>
+</sui-tabs>

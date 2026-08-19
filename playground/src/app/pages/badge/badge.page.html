@@ -1,205 +1,30 @@
 <main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="space-y-3">
-    <h1 class="text-4xl font-bold tracking-tight">Badge</h1>
-
-    <p class="max-w-3xl text-base-content/70">
-      Use <code>suiBadge</code> on inline elements such as <code>&lt;span&gt;</code>. Badges support severities, variants, and sizes.
-    </p>
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Badge</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">Display compact static metadata, counts, and publication states.</p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span suiBadge variant="soft" size="sm">Static content</span><span suiBadge variant="soft" size="sm">Semantic colors</span>
+    </div>
   </section>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Basic usage</h2>
-      <p class="text-sm text-base-content/60">The default badge uses <code>severity="primary"</code> and <code>size="md"</code>.</p>
-    </div>
-
-    <div class="flex flex-wrap items-center gap-3">
-      <span suiBadge>Primary</span>
-      <span suiBadge severity="secondary">Secondary</span>
-      <span suiBadge severity="success" variant="soft">Success</span>
-      <span suiBadge severity="error" variant="outlined">Error</span>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;span suiBadge&gt;Primary&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;span suiBadge severity="secondary"&gt;Secondary&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;span suiBadge severity="success" variant="soft"&gt;Success&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;span suiBadge severity="error" variant="outlined"&gt;Error&lt;/span&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Severities</h2>
-      <p class="text-sm text-base-content/60">The <code>severity</code> input controls the semantic color.</p>
-    </div>
-
-    <div class="flex flex-wrap items-center gap-3">
-      <span suiBadge severity="primary">Primary</span>
-      <span suiBadge severity="secondary">Secondary</span>
-      <span suiBadge severity="accent">Accent</span>
-      <span suiBadge severity="neutral">Neutral</span>
-      <span suiBadge severity="success">Success</span>
-      <span suiBadge severity="info">Info</span>
-      <span suiBadge severity="warning">Warning</span>
-      <span suiBadge severity="error">Error</span>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;span suiBadge severity="primary"&gt;Primary&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;span suiBadge severity="secondary"&gt;Secondary&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;span suiBadge severity="accent"&gt;Accent&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;span suiBadge severity="neutral"&gt;Neutral&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code>&lt;span suiBadge severity="success"&gt;Success&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="6"><code>&lt;span suiBadge severity="info"&gt;Info&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="7"><code>&lt;span suiBadge severity="warning"&gt;Warning&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="8"><code>&lt;span suiBadge severity="error"&gt;Error&lt;/span&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Variants</h2>
-      <p class="text-sm text-base-content/60">
-        The default variant is solid. Available variants are
-        <code>outlined</code>, <code>soft</code>, and <code>dash</code>.
-      </p>
-    </div>
-
-    <div class="grid gap-4">
-      <div class="flex flex-wrap items-center gap-3">
-        <span suiBadge severity="primary">Solid</span>
-        <span suiBadge severity="primary" variant="outlined">Outlined</span>
-        <span suiBadge severity="primary" variant="soft">Soft</span>
-        <span suiBadge severity="primary" variant="dash">Dash</span>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-3">
-        <span suiBadge severity="secondary">Solid</span>
-        <span suiBadge severity="secondary" variant="outlined">Outlined</span>
-        <span suiBadge severity="secondary" variant="soft">Soft</span>
-        <span suiBadge severity="secondary" variant="dash">Dash</span>
-      </div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;span suiBadge&gt;Solid&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;span suiBadge variant="outlined"&gt;Outlined&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;span suiBadge variant="soft"&gt;Soft&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;span suiBadge variant="dash"&gt;Dash&lt;/span&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Sizes</h2>
-      <p class="text-sm text-base-content/60">
-        Available sizes are <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>.
-      </p>
-    </div>
-
-    <div class="flex flex-wrap items-center gap-3">
-      <span suiBadge size="xs">XS</span>
-      <span suiBadge size="sm">SM</span>
-      <span suiBadge size="md">MD</span>
-      <span suiBadge size="lg">LG</span>
-      <span suiBadge size="xl">XL</span>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;span suiBadge size="xs"&gt;XS&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;span suiBadge size="sm"&gt;SM&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;span suiBadge size="md"&gt;MD&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;span suiBadge size="lg"&gt;LG&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code>&lt;span suiBadge size="xl"&gt;XL&lt;/span&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Common patterns</h2>
-      <p class="text-sm text-base-content/60">Badges work well for counts, metadata, publication states, and lightweight labels.</p>
-    </div>
-
-    <div class="grid gap-5">
-      <div class="space-y-2">
-        <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Counts</h3>
-
-        <div class="flex flex-wrap items-center gap-3">
-          <span suiBadge>12</span>
-          <span suiBadge severity="secondary">24</span>
-          <span suiBadge severity="info">99+</span>
-          <span suiBadge severity="error">3</span>
-        </div>
-      </div>
-
-      <div suiDivider></div>
-
-      <div class="space-y-2">
-        <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Metadata</h3>
-
-        <div class="flex flex-wrap items-center gap-3">
-          <span suiBadge severity="neutral" variant="soft">Person</span>
-          <span suiBadge severity="secondary" variant="soft">Place</span>
-          <span suiBadge severity="accent" variant="soft">Institution</span>
-          <span suiBadge severity="info" variant="soft">Annotation</span>
-        </div>
-      </div>
-
-      <div suiDivider></div>
-
-      <div class="space-y-2">
-        <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">States</h3>
-
-        <div class="flex flex-wrap items-center gap-3">
-          <span suiBadge severity="success">Published</span>
-          <span suiBadge severity="warning">Draft</span>
-          <span suiBadge severity="info" variant="outlined">Review</span>
-          <span suiBadge severity="error" variant="soft">Deprecated</span>
-        </div>
-      </div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;span suiBadge&gt;12&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;span suiBadge severity="neutral" variant="soft"&gt;Person&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;span suiBadge severity="success"&gt;Published&lt;/span&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Badges in buttons</h2>
-      <p class="text-sm text-base-content/60">Badges can be combined with <code>suiButton</code> to show counts inside actions.</p>
-    </div>
-
-    <div class="flex flex-wrap items-center gap-3">
-      <button suiButton type="button" severity="primary">
-        Messages
-        <span suiBadge severity="secondary" size="sm">12</span>
-      </button>
-
-      <button suiButton type="button" severity="primary">
-        Notifications
-        <span suiBadge severity="secondary" size="sm">4</span>
-      </button>
-
-      <button suiButton type="button" severity="secondary">
-        Review
-        <span suiBadge severity="primary" size="sm">3</span>
-      </button>
-
-      <button suiButton type="button" severity="secondary">
-        Issues
-        <span suiBadge severity="primary" size="sm">7</span>
-      </button>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;button suiButton type="button" severity="primary"&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>  Messages</code></pre>
-      <pre suiCodeLine prefix="3"><code>  &lt;span suiBadge severity="secondary" size="sm"&gt;12&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;/button&gt;</code></pre>
-    </sui-code>
-  </sui-card>
+  <sui-card
+    ><h2 suiCardTitle>API reference</h2>
+    <div class="mt-5"><pg-api-reference [api]="api" /></div
+  ></sui-card>
+  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+  <sui-card
+    ><h2 suiCardTitle>Colors, variants, and sizes</h2>
+    <p class="text-base-content/60">Choose one compact visual treatment that matches the meaning and density of its context.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-badge-usage-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div
+  ></sui-card>
+  <sui-card
+    ><h2 suiCardTitle>Counts and states</h2>
+    <p class="text-base-content/60">
+      Badges can support controls or summarize static application state without becoming interactive themselves.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-badge-context-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.context.html" [typescript]="examples.context.typescript" /></div
+  ></sui-card>
 </main>

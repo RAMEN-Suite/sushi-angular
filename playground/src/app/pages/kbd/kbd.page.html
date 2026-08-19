@@ -1,88 +1,28 @@
 <main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="space-y-3">
-    <h1 class="text-4xl font-bold tracking-tight">Keyboard key</h1>
-    <p class="max-w-3xl text-base-content/70">Use <code>suiKbd</code> to display keyboard shortcuts and individual keys.</p>
-  </section>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Basic usage</h2>
-      <p class="text-sm text-base-content/60">Render a single key with the semantic <code>&lt;kbd&gt;</code> element.</p>
-    </div>
-    <div><kbd suiKbd>K</kbd></div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;kbd suiKbd&gt;K&lt;/kbd&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Sizes</h2>
-      <p class="text-sm text-base-content/60">Use five size steps from extra small through extra large.</p>
-    </div>
-    <div class="flex flex-wrap items-center gap-3">
-      <kbd suiKbd size="xs">Xsmall</kbd><kbd suiKbd size="sm">Small</kbd><kbd suiKbd>Medium</kbd><kbd suiKbd size="lg">Large</kbd
-      ><kbd suiKbd size="xl">Xlarge</kbd>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;kbd suiKbd size="xs"&gt;Xsmall&lt;/kbd&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;kbd suiKbd size="sm"&gt;Small&lt;/kbd&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;kbd suiKbd size="md"&gt;Medium&lt;/kbd&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;kbd suiKbd size="lg"&gt;Large&lt;/kbd&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code>&lt;kbd suiKbd size="xl"&gt;Xlarge&lt;/kbd&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>In text and key combinations</h2>
-      <p class="text-sm text-base-content/60">Keys remain inline with prose and can be combined into shortcuts.</p>
-    </div>
-    <p>Press <kbd suiKbd size="sm">F</kbd> to pay respects.</p>
-    <div class="flex items-center gap-2"><kbd suiKbd>ctrl</kbd> + <kbd suiKbd>shift</kbd> + <kbd suiKbd>del</kbd></div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>Press &lt;kbd suiKbd size="sm"&gt;F&lt;/kbd&gt; to pay respects.</code></pre>
-      <pre
-        suiCodeLine
-        prefix="2"
-      ><code>&lt;kbd suiKbd&gt;ctrl&lt;/kbd&gt; + &lt;kbd suiKbd&gt;shift&lt;/kbd&gt; + &lt;kbd suiKbd&gt;del&lt;/kbd&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Function and arrow keys</h2>
-      <p class="text-sm text-base-content/60">Arrange function and directional keys in the same layout users recognize from a keyboard.</p>
-    </div>
-    <div class="flex justify-center gap-2"><kbd suiKbd>⌘</kbd><kbd suiKbd>⌥</kbd><kbd suiKbd>⇧</kbd><kbd suiKbd>⌃</kbd></div>
-    <div class="mx-auto grid w-40 grid-cols-3 gap-1 text-center">
-      <span></span><kbd suiKbd>▲</kbd><span></span><kbd suiKbd>◀︎</kbd><span></span><kbd suiKbd>▶︎</kbd><span></span><kbd suiKbd>▼</kbd>
-    </div>
-
-    <sui-code>
-      <pre
-        suiCodeLine
-        prefix="1"
-      ><code>&lt;kbd suiKbd&gt;⌘&lt;/kbd&gt; &lt;kbd suiKbd&gt;⌥&lt;/kbd&gt; &lt;kbd suiKbd&gt;⇧&lt;/kbd&gt; &lt;kbd suiKbd&gt;⌃&lt;/kbd&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Press interaction</h2>
-      <p class="text-sm text-base-content/60">
-        Keys include a pointer cursor and a small physical press response. Press and hold any key to try it.
-      </p>
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Keyboard Key</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">Display individual keys and keyboard shortcuts with native semantics.</p>
     </div>
     <div class="flex flex-wrap gap-2">
-      <kbd suiKbd>W</kbd><kbd suiKbd>A</kbd><kbd suiKbd>S</kbd><kbd suiKbd>D</kbd><kbd suiKbd>Space</kbd>
+      <span suiBadge variant="soft" size="sm">Native kbd</span><span suiBadge variant="soft" size="sm">Five sizes</span>
     </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;kbd suiKbd&gt;W&lt;/kbd&gt;</code></pre>
-    </sui-code>
-  </sui-card>
+  </section>
+  <sui-card
+    ><h2 suiCardTitle>API reference</h2>
+    <div class="mt-5"><pg-api-reference [api]="api" /></div
+  ></sui-card>
+  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+  <sui-card
+    ><h2 suiCardTitle>Keys and sizing</h2>
+    <p class="text-base-content/60">Compose shortcuts from semantic key elements and match their density to the surrounding text.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-kbd-usage-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div
+  ></sui-card>
+  <sui-card
+    ><h2 suiCardTitle>Shortcut reference</h2>
+    <p class="text-base-content/60">A compact help window keeps command names and their corresponding keys easy to scan.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-kbd-hotkeys-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.hotkeys.html" [typescript]="examples.hotkeys.typescript" /></div
+  ></sui-card>
 </main>

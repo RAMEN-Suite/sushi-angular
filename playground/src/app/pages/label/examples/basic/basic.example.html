@@ -1,22 +1,29 @@
-<div class="grid max-w-md gap-6">
-  <div class="grid gap-2">
-    <label suiLabel for="profile-name">Display name</label>
-    <input suiInput id="profile-name" autocomplete="name" placeholder="Ada Lovelace" />
-    <p class="text-sm text-base-content/60">Used on your public profile.</p>
+<div class="grid w-full max-w-lg gap-5">
+  <div class="grid gap-1.5">
+    <label suiLabel for="profile-name" class="font-medium">Display name</label>
+    <input suiInput fluid id="profile-name" autocomplete="name" placeholder="Ada Lovelace" />
+    <p class="text-xs leading-5 text-base-content/60">Used on your public profile.</p>
   </div>
 
-  <label suiLabel floating>
-    <span>Email address</span>
-    <input suiInput type="email" autocomplete="email" placeholder="name@example.com" />
-  </label>
+  <div class="grid gap-1.5">
+    <label suiLabel floating class="w-full">
+      <span>Email address</span>
+      <input suiInput fluid type="email" autocomplete="email" placeholder="name@example.com" />
+    </label>
+    <p class="text-xs leading-5 text-base-content/60">Floating labels work best with a useful placeholder.</p>
+  </div>
 
-  <label suiLabel floating>
-    <span>Short biography</span>
-    <textarea suiTextarea rows="3" placeholder="Tell us about yourself"></textarea>
-  </label>
+  <div class="grid gap-1.5">
+    <label suiLabel floating class="w-full">
+      <span>Short biography</span>
+      <textarea suiTextarea fluid rows="3" placeholder="Tell us about yourself"></textarea>
+    </label>
+    <p class="text-xs leading-5 text-base-content/60">Keep supporting text outside the floating label.</p>
+  </div>
 
-  <div class="grid gap-2">
-    <span suiLabel id="priority-label">Priority</span>
+  <div class="grid gap-1.5">
+    <span suiLabel id="priority-label" class="font-medium">Priority</span>
     <sui-select fluid ariaLabelledby="priority-label" [options]="priorities" />
+    <p class="text-xs leading-5 text-base-content/60">Composite controls reference their visible label through ARIA.</p>
   </div>
 </div>

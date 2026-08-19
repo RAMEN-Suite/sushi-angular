@@ -1,0 +1,41 @@
+<div class="grid gap-10 py-5 sm:grid-cols-2 lg:grid-cols-3">
+  <div class="grid place-items-center gap-3">
+    <div suiIndicator>
+      <span suiIndicatorItem suiStatus severity="success" size="lg"></span>
+      <div class="grid size-24 place-items-center rounded-box bg-base-200 font-medium">Status</div>
+    </div>
+    <span class="text-sm text-base-content/60">Presence</span>
+  </div>
+
+  <div class="grid place-items-center gap-3">
+    <div suiIndicator>
+      <span suiIndicatorItem suiBadge severity="primary" size="sm">New</span>
+      <div class="grid size-24 place-items-center rounded-box bg-base-200 font-medium">Content</div>
+    </div>
+    <span class="text-sm text-base-content/60">Badge</span>
+  </div>
+
+  <div class="grid place-items-center gap-3">
+    <div suiIndicator>
+      <span suiIndicatorItem suiBadge severity="error" size="sm">12</span>
+      <button suiButton type="button" severity="neutral" variant="outlined">Inbox</button>
+    </div>
+    <span class="text-sm text-base-content/60">Button count</span>
+  </div>
+
+  <div class="grid place-items-center gap-3">
+    <div suiIndicator>
+      <span suiIndicatorItem horizontal="start" vertical="bottom" suiStatus severity="success" size="lg"></span>
+      <sui-avatar shape="circle"><img src="/sample-avatar.svg" alt="Ada Lovelace" /></sui-avatar>
+    </div>
+    <span class="text-sm text-base-content/60">Avatar status</span>
+  </div>
+
+  <div class="grid place-items-center gap-3 sm:col-span-2 lg:col-span-1">
+    <div suiIndicator class="w-64 max-w-full">
+      <span suiIndicatorItem suiBadge size="sm" variant="soft">Required</span>
+      <input suiInput fluid required type="email" placeholder="Email address" aria-label="Email address" />
+    </div>
+    <span class="text-sm text-base-content/60">Input requirement</span>
+  </div>
+</div>

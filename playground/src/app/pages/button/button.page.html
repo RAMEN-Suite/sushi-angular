@@ -1,262 +1,44 @@
 <main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="space-y-3">
-    <h1 class="text-4xl font-bold tracking-tight">Button</h1>
-
-    <p class="max-w-3xl text-base-content/70">
-      Use <code>suiButton</code> on native <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> elements. Buttons support severities,
-      variants, sizes, shapes, disabled state, and loading state.
-    </p>
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Button</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">Trigger actions with native button and link semantics.</p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span suiBadge variant="soft" size="sm">Native elements</span>
+      <span suiBadge variant="soft" size="sm">Busy state</span>
+      <span suiBadge variant="soft" size="sm">Semantic colors</span>
+    </div>
   </section>
 
   <sui-card>
-    <div>
-      <h2 suiCardTitle>Basic usage</h2>
-      <p class="text-sm text-base-content/60">The directive works on native buttons and anchors.</p>
-    </div>
+    <h2 suiCardTitle>API reference</h2>
+    <div class="mt-5"><pg-api-reference [api]="api" /></div>
+  </sui-card>
 
-    <div class="flex flex-wrap items-center gap-3">
-      <button suiButton type="button">Button</button>
-      <button suiButton type="submit" severity="secondary">Submit</button>
-      <a suiButton href="https://example.com" target="_blank" rel="noreferrer">Anchor</a>
-      <a suiButton routerLink="/button" severity="accent" variant="outlined">Router Link</a>
-    </div>
+  <section class="space-y-2 pt-2">
+    <h2 class="text-3xl font-bold tracking-tight">Examples</h2>
+    <p class="text-base-content/60">Start with native actions, then choose appearance and interaction states.</p>
+  </section>
 
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;button suiButton type="button"&gt;Button&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;button suiButton type="submit" severity="secondary"&gt;Submit&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;a suiButton href="https://example.com"&gt;Anchor&lt;/a&gt;</code></pre>
-      <pre
-        suiCodeLine
-        prefix="4"
-      ><code>&lt;a suiButton routerLink="/button" severity="accent" variant="outlined"&gt;Router Link&lt;/a&gt;</code></pre>
-    </sui-code>
+  <sui-card>
+    <h2 suiCardTitle>Native actions</h2>
+    <p class="text-base-content/60">Use the directive on buttons, external links, and router links.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-button-basic-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
   </sui-card>
 
   <sui-card>
-    <div>
-      <h2 suiCardTitle>Severities</h2>
-      <p class="text-sm text-base-content/60">The <code>severity</code> input controls the semantic color.</p>
-    </div>
-
-    <div class="flex flex-wrap items-center gap-3">
-      <button suiButton type="button" severity="primary">Primary</button>
-      <button suiButton type="button" severity="secondary">Secondary</button>
-      <button suiButton type="button" severity="accent">Accent</button>
-      <button suiButton type="button" severity="neutral">Neutral</button>
-      <button suiButton type="button" severity="success">Success</button>
-      <button suiButton type="button" severity="info">Info</button>
-      <button suiButton type="button" severity="warning">Warning</button>
-      <button suiButton type="button" severity="error">Error</button>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;button suiButton severity="primary"&gt;Primary&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;button suiButton severity="secondary"&gt;Secondary&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;button suiButton severity="accent"&gt;Accent&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;button suiButton severity="neutral"&gt;Neutral&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code>&lt;button suiButton severity="success"&gt;Success&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="6"><code>&lt;button suiButton severity="info"&gt;Info&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="7"><code>&lt;button suiButton severity="warning"&gt;Warning&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="8"><code>&lt;button suiButton severity="error"&gt;Error&lt;/button&gt;</code></pre>
-    </sui-code>
+    <h2 suiCardTitle>Appearance</h2>
+    <p class="text-base-content/60">Severity, variant, size, and shape compose without changing behavior.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-button-appearance-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript" /></div>
   </sui-card>
 
   <sui-card>
-    <div>
-      <h2 suiCardTitle>Variants</h2>
-      <p class="text-sm text-base-content/60">
-        The default variant is solid. Available variants are
-        <code>outlined</code>, <code>soft</code>, <code>dash</code>, <code>text</code>, and <code>link</code>.
-      </p>
-    </div>
-
-    <div class="grid gap-5">
-      <div class="space-y-2">
-        <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Primary</h3>
-
-        <div class="flex flex-wrap items-center gap-3">
-          <button suiButton type="button" severity="primary">Solid</button>
-          <button suiButton type="button" severity="primary" variant="outlined">Outlined</button>
-          <button suiButton type="button" severity="primary" variant="soft">Soft</button>
-          <button suiButton type="button" severity="primary" variant="dash">Dash</button>
-          <button suiButton type="button" severity="primary" variant="text">Text</button>
-          <button suiButton type="button" severity="primary" variant="link">Link</button>
-        </div>
-      </div>
-
-      <div class="space-y-2">
-        <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Secondary</h3>
-
-        <div class="flex flex-wrap items-center gap-3">
-          <button suiButton type="button" severity="secondary">Solid</button>
-          <button suiButton type="button" severity="secondary" variant="outlined">Outlined</button>
-          <button suiButton type="button" severity="secondary" variant="soft">Soft</button>
-          <button suiButton type="button" severity="secondary" variant="dash">Dash</button>
-          <button suiButton type="button" severity="secondary" variant="text">Text</button>
-          <button suiButton type="button" severity="secondary" variant="link">Link</button>
-        </div>
-      </div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;button suiButton&gt;Solid&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;button suiButton variant="outlined"&gt;Outlined&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;button suiButton variant="soft"&gt;Soft&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;button suiButton variant="dash"&gt;Dash&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code>&lt;button suiButton variant="text"&gt;Text&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="6"><code>&lt;button suiButton variant="link"&gt;Link&lt;/button&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Status severities</h2>
-      <p class="text-sm text-base-content/60">Use status severities for contextual or destructive actions.</p>
-    </div>
-
-    <div class="grid gap-4">
-      <div class="flex flex-wrap items-center gap-3">
-        <button suiButton type="button" severity="success">Success</button>
-        <button suiButton type="button" severity="info">Info</button>
-        <button suiButton type="button" severity="warning">Warning</button>
-        <button suiButton type="button" severity="error">Error</button>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-3">
-        <button suiButton type="button" severity="success" variant="outlined">Success</button>
-        <button suiButton type="button" severity="info" variant="outlined">Info</button>
-        <button suiButton type="button" severity="warning" variant="outlined">Warning</button>
-        <button suiButton type="button" severity="error" variant="outlined">Error</button>
-      </div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;button suiButton severity="success"&gt;Success&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;button suiButton severity="info"&gt;Info&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;button suiButton severity="warning"&gt;Warning&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;button suiButton severity="error"&gt;Error&lt;/button&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Sizes</h2>
-      <p class="text-sm text-base-content/60">
-        Available sizes are <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>.
-      </p>
-    </div>
-
-    <div class="flex flex-wrap items-center gap-3">
-      <button suiButton type="button" size="xs">XS</button>
-      <button suiButton type="button" size="sm">SM</button>
-      <button suiButton type="button" size="md">MD</button>
-      <button suiButton type="button" size="lg">LG</button>
-      <button suiButton type="button" size="xl">XL</button>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;button suiButton size="xs"&gt;XS&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;button suiButton size="sm"&gt;SM&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;button suiButton size="md"&gt;MD&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;button suiButton size="lg"&gt;LG&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code>&lt;button suiButton size="xl"&gt;XL&lt;/button&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Shapes</h2>
-      <p class="text-sm text-base-content/60">
-        Available shapes are <code>default</code>, <code>fluid</code>, <code>square</code>, and <code>circle</code>.
-      </p>
-    </div>
-
-    <div class="grid gap-5">
-      <div class="space-y-2">
-        <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Default and fluid</h3>
-
-        <div class="flex max-w-xl flex-col items-start gap-3">
-          <button suiButton type="button">Default</button>
-          <button suiButton type="button" shape="fluid" severity="secondary">Fluid</button>
-          <button suiButton type="button" shape="fluid" variant="outlined">Fluid Outlined</button>
-        </div>
-      </div>
-
-      <div suiDivider></div>
-
-      <div class="space-y-2">
-        <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Square and circle</h3>
-
-        <div class="flex flex-wrap items-center gap-3">
-          <button suiButton type="button" shape="square" size="sm" aria-label="Square button">S</button>
-          <button suiButton type="button" shape="square" severity="secondary" aria-label="Square button">S</button>
-          <button suiButton type="button" shape="circle" size="sm" aria-label="Circle button">C</button>
-          <button suiButton type="button" shape="circle" severity="accent" aria-label="Circle button">C</button>
-        </div>
-      </div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;button suiButton&gt;Default&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;button suiButton shape="fluid"&gt;Fluid&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;button suiButton shape="square" aria-label="Square button"&gt;S&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;button suiButton shape="circle" aria-label="Circle button"&gt;C&lt;/button&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>States</h2>
-      <p class="text-sm text-base-content/60">
-        <code>disabled</code> prevents interaction. <code>loading</code> exposes busy state with <code>aria-busy</code>.
-      </p>
-    </div>
-
-    <div class="grid gap-5">
-      <div class="space-y-2">
-        <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Disabled</h3>
-
-        <div class="flex flex-wrap items-center gap-3">
-          <button suiButton type="button" disabled>Disabled</button>
-          <button suiButton type="button" severity="secondary" disabled>Secondary</button>
-          <button suiButton type="button" variant="outlined" disabled>Outlined</button>
-          <a suiButton href="https://example.com" disabled>Disabled Anchor</a>
-        </div>
-      </div>
-
-      <div suiDivider></div>
-
-      <div class="space-y-2">
-        <h3 class="text-xs font-semibold uppercase tracking-wide text-base-content/50">Loading</h3>
-
-        <div class="flex flex-wrap items-center gap-3">
-          <button suiButton type="button" loading>
-            <span suiSpinner size="sm"></span>
-            Loading
-          </button>
-
-          <button suiButton type="button" severity="secondary" loading>
-            <span suiSpinner type="dots" size="sm"></span>
-            Saving
-          </button>
-
-          <button suiButton type="button" variant="outlined" loading>
-            <span suiSpinner type="ring" size="sm"></span>
-            Processing
-          </button>
-
-          <button suiButton type="button" shape="square" loading aria-label="Loading">
-            <span suiSpinner size="sm"></span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;button suiButton type="button" loading&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>  &lt;span suiSpinner size="sm"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>  Loading</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;/button&gt;</code></pre>
-    </sui-code>
+    <h2 suiCardTitle>Disabled and loading</h2>
+    <p class="text-base-content/60">Both states prevent activation; loading additionally exposes the busy state.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-button-states-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" /></div>
   </sui-card>
 </main>

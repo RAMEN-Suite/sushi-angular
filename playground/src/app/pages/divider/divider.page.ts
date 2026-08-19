@@ -1,10 +1,27 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Card, CardTitle, Code, CodeLine, Divider } from '@ramen-suite/sushi';
+import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { apiReference } from '../../generated/api-reference.generated';
+import { ApiReference } from '../../shared/api-reference/api-reference.component';
+import type { ApiReferenceData } from '../../shared/api-reference/api-reference.types';
+import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExampleSource, textSource } from '../../shared/example-code/example-source';
+import layoutHtml from './examples/layout/layout.example.html';
+import * as layoutTs from './examples/layout/layout.example.ts' with { loader: 'text' };
+import { DividerLayoutExample } from './examples/layout/layout.example';
+import usageHtml from './examples/usage/usage.example.html';
+import * as usageTs from './examples/usage/usage.example.ts' with { loader: 'text' };
+import { DividerUsageExample } from './examples/usage/usage.example';
 
 @Component({
   selector: 'pg-divider-page',
-  imports: [Divider, Card, CardTitle, Code, CodeLine, Code],
+  imports: [ApiReference, Badge, Card, CardTitle, DividerLayoutExample, DividerUsageExample, ExampleCode],
   templateUrl: './divider.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DividerPage {}
+export class DividerPage {
+  protected readonly api: ApiReferenceData = apiReference.Divider;
+  protected readonly examples: Readonly<Record<'layout' | 'usage', ExampleSource>> = {
+    layout: { html: layoutHtml, typescript: textSource(layoutTs) },
+    usage: { html: usageHtml, typescript: textSource(usageTs) },
+  };
+}

@@ -1,134 +1,28 @@
 <main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="space-y-3">
-    <h1 class="text-4xl font-bold tracking-tight">Divider</h1>
-
-    <p class="max-w-3xl text-base-content/70">
-      Use <code>suiDivider</code> to separate content horizontally or vertically. Dividers support severity, placement, and orientation.
-    </p>
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Divider</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">Separate related content horizontally or vertically with an optional label.</p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span suiBadge variant="soft" size="sm">Two orientations</span><span suiBadge variant="soft" size="sm">Label placement</span>
+    </div>
   </section>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Basic usage</h2>
-      <p class="text-sm text-base-content/60">The default divider is horizontal and can be used with or without label content.</p>
-    </div>
-
-    <div class="grid gap-4">
-      <div suiDivider></div>
-      <div suiDivider>Section</div>
-      <div suiDivider severity="secondary">Secondary</div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;div suiDivider&gt;&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;div suiDivider&gt;Section&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;div suiDivider severity="secondary"&gt;Secondary&lt;/div&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Severities</h2>
-      <p class="text-sm text-base-content/60">The <code>severity</code> input controls the semantic color.</p>
-    </div>
-
-    <div class="grid gap-4">
-      <div suiDivider severity="primary">Primary</div>
-      <div suiDivider severity="secondary">Secondary</div>
-      <div suiDivider severity="accent">Accent</div>
-      <div suiDivider severity="neutral">Neutral</div>
-      <div suiDivider severity="success">Success</div>
-      <div suiDivider severity="info">Info</div>
-      <div suiDivider severity="warning">Warning</div>
-      <div suiDivider severity="error">Error</div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;div suiDivider severity="primary"&gt;Primary&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;div suiDivider severity="secondary"&gt;Secondary&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;div suiDivider severity="accent"&gt;Accent&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;div suiDivider severity="success"&gt;Success&lt;/div&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Horizontal placement</h2>
-      <p class="text-sm text-base-content/60">The <code>placement</code> input controls the label position on horizontal dividers.</p>
-    </div>
-
-    <div class="grid gap-4">
-      <div suiDivider placement="start">Start</div>
-      <div suiDivider placement="center">Center</div>
-      <div suiDivider placement="end">End</div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;div suiDivider placement="start"&gt;Start&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;div suiDivider placement="center"&gt;Center&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;div suiDivider placement="end"&gt;End&lt;/div&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Vertical orientation</h2>
-      <p class="text-sm text-base-content/60">Use <code>orientation="vertical"</code> inside horizontal layouts.</p>
-    </div>
-
-    <div class="flex h-32 items-stretch rounded-field border border-base-300 bg-base-200 p-4">
-      <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">Left</div>
-
-      <div suiDivider orientation="vertical"></div>
-
-      <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">Right</div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;div class="flex h-32"&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>  &lt;div&gt;Left&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>  &lt;div suiDivider orientation="vertical"&gt;&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>  &lt;div&gt;Right&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code>&lt;/div&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Vertical placement</h2>
-      <p class="text-sm text-base-content/60">Placement also works on vertical dividers and controls where the label sits on the line.</p>
-    </div>
-
-    <div class="grid gap-4 lg:grid-cols-3">
-      <div class="flex h-40 items-stretch rounded-field border border-base-300 bg-base-200 p-4">
-        <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">A</div>
-
-        <div suiDivider orientation="vertical" placement="start">Start</div>
-
-        <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">B</div>
-      </div>
-
-      <div class="flex h-40 items-stretch rounded-field border border-base-300 bg-base-200 p-4">
-        <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">A</div>
-
-        <div suiDivider orientation="vertical" placement="center">Center</div>
-
-        <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">B</div>
-      </div>
-
-      <div class="flex h-40 items-stretch rounded-field border border-base-300 bg-base-200 p-4">
-        <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">A</div>
-
-        <div suiDivider orientation="vertical" placement="end">End</div>
-
-        <div class="flex flex-1 items-center justify-center rounded-field bg-base-100 text-sm text-base-content/70">B</div>
-      </div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;div suiDivider orientation="vertical" placement="start"&gt;Start&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;div suiDivider orientation="vertical" placement="center"&gt;Center&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;div suiDivider orientation="vertical" placement="end"&gt;End&lt;/div&gt;</code></pre>
-    </sui-code>
-  </sui-card>
+  <sui-card
+    ><h2 suiCardTitle>API reference</h2>
+    <div class="mt-5"><pg-api-reference [api]="api" /></div
+  ></sui-card>
+  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+  <sui-card
+    ><h2 suiCardTitle>Sections and alternatives</h2>
+    <p class="text-base-content/60">Separate neighboring sections or label a meaningful choice between two paths.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-divider-usage-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div
+  ></sui-card>
+  <sui-card
+    ><h2 suiCardTitle>Placement and orientation</h2>
+    <p class="text-base-content/60">Align a label along the line or divide two side-by-side regions vertically.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-divider-layout-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.layout.html" [typescript]="examples.layout.typescript" /></div
+  ></sui-card>
 </main>

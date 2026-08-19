@@ -1,0 +1,36 @@
+<div class="grid max-w-xl gap-5">
+  <div class="flex items-center justify-between gap-4 rounded-box border border-base-300 bg-base-100 p-4">
+    <div>
+      <p class="font-medium">System status</p>
+      <p class="text-sm text-base-content/60">All core services are operational.</p>
+    </div>
+    <span suiBadge severity="success" variant="soft">
+      <span suiStatus severity="success" size="sm"></span>
+      Operational
+    </span>
+  </div>
+
+  <ul class="divide-y divide-base-300 rounded-box border border-base-300 bg-base-100">
+    <li class="flex items-center justify-between gap-4 p-3">
+      <span>API</span>
+      <span class="inline-flex items-center gap-2 text-sm">
+        <span suiStatus severity="success"></span>
+        Healthy
+      </span>
+    </li>
+    <li class="flex items-center justify-between gap-4 p-3">
+      <span>Search index</span>
+      <span class="inline-flex items-center gap-2 text-sm">
+        <span suiStatus severity="info" animation="ping"></span>
+        Syncing
+      </span>
+    </li>
+    <li class="flex items-center justify-between gap-4 p-3">
+      <span>Background jobs</span>
+      <span class="inline-flex items-center gap-2 text-sm">
+        <span suiStatus severity="warning" animation="bounce"></span>
+        Delayed
+      </span>
+    </li>
+  </ul>
+</div>

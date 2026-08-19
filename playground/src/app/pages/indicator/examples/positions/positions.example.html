@@ -1,0 +1,19 @@
+<div class="grid grid-cols-2 gap-x-6 gap-y-10 py-5 sm:grid-cols-3">
+  @for (position of positions; track position.label) {
+    <div class="grid place-items-center gap-3">
+      <div suiIndicator>
+        <span
+          suiIndicatorItem
+          suiBadge
+          size="xs"
+          severity="primary"
+          [horizontal]="position.horizontal"
+          [vertical]="position.vertical">
+          {{ position.index }}
+        </span>
+        <div class="grid size-20 place-items-center rounded-box bg-base-200 text-sm">Target</div>
+      </div>
+      <span class="text-xs text-base-content/60">{{ position.label }}</span>
+    </div>
+  }
+</div>

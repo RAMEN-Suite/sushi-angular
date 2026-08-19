@@ -1,75 +1,28 @@
 <main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="space-y-3">
-    <h1 class="text-4xl font-bold tracking-tight">Status</h1>
-    <p class="max-w-3xl text-base-content/70">Use <code>suiStatus</code> as a compact visual state marker beside descriptive text.</p>
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Status</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">Pair a compact state marker with visible or assistive text.</p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span suiBadge variant="soft" size="sm">Semantic state</span><span suiBadge variant="soft" size="sm">Reduced motion</span>
+    </div>
   </section>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Colors</h2>
-      <p class="text-sm text-base-content/60">Apply a semantic color when the status has a known meaning.</p>
-    </div>
-    <div class="flex flex-wrap gap-6">
-      <span class="inline-flex items-center gap-2"><span suiStatus></span>Unknown</span>
-      <span class="inline-flex items-center gap-2"><span suiStatus severity="primary"></span>Primary</span>
-      <span class="inline-flex items-center gap-2"><span suiStatus severity="secondary"></span>Secondary</span>
-      <span class="inline-flex items-center gap-2"><span suiStatus severity="accent"></span>Accent</span>
-      <span class="inline-flex items-center gap-2"><span suiStatus severity="neutral"></span>Neutral</span>
-      <span class="inline-flex items-center gap-2"><span suiStatus severity="info"></span>Connecting</span>
-      <span class="inline-flex items-center gap-2"><span suiStatus severity="success"></span>Online</span>
-      <span class="inline-flex items-center gap-2"><span suiStatus severity="warning"></span>Away</span>
-      <span class="inline-flex items-center gap-2"><span suiStatus severity="error"></span>Offline</span>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;span suiStatus severity="primary"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;span suiStatus severity="secondary"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;span suiStatus severity="accent"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;span suiStatus severity="neutral"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code>&lt;span suiStatus severity="info"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="6"><code>&lt;span suiStatus severity="success"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="7"><code>&lt;span suiStatus severity="warning"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="8"><code>&lt;span suiStatus severity="error"&gt;&lt;/span&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Sizes</h2>
-      <p class="text-sm text-base-content/60">Five sizes cover compact metadata through prominent state displays; medium is the default.</p>
-    </div>
-    <div class="flex items-center gap-5">
-      <span suiStatus severity="success" size="xs"></span><span suiStatus severity="success" size="sm"></span>
-      <span suiStatus severity="success" size="md"></span><span suiStatus severity="success" size="lg"></span>
-      <span suiStatus severity="success" size="xl"></span>
-    </div>
-    <p class="text-sm text-base-content/60">The marker is decorative; always pair it with visible or assistive text.</p>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;span suiStatus size="xs" aria-label="Status"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;span suiStatus size="sm" aria-label="Status"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>&lt;span suiStatus size="md" aria-label="Status"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;span suiStatus size="lg" aria-label="Status"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code>&lt;span suiStatus size="xl" aria-label="Status"&gt;&lt;/span&gt;</code></pre>
-    </sui-code>
-  </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Animations</h2>
-      <p class="text-sm text-base-content/60">Use ping for ongoing activity and bounce when a status briefly needs stronger attention.</p>
-    </div>
-    <div class="flex flex-wrap items-center gap-8 py-3">
-      <span class="inline-flex items-center gap-3"><span suiStatus severity="info" size="lg" animation="ping"></span>Synchronizing</span>
-      <span class="inline-flex items-center gap-3"
-        ><span suiStatus severity="warning" size="lg" animation="bounce"></span>Needs attention</span
-      >
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;span suiStatus severity="info" animation="ping"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;span suiStatus severity="warning" animation="bounce"&gt;&lt;/span&gt;</code></pre>
-    </sui-code>
-    <p class="text-sm text-base-content/60">Animations automatically stop when the user prefers reduced motion.</p>
-  </sui-card>
+  <sui-card
+    ><h2 suiCardTitle>API reference</h2>
+    <div class="mt-5"><pg-api-reference [api]="api" /></div
+  ></sui-card>
+  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+  <sui-card
+    ><h2 suiCardTitle>States and sizes</h2>
+    <p class="text-base-content/60">Always pair the visual marker with text when the meaning is not already available elsewhere.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-status-usage-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div
+  ></sui-card>
+  <sui-card
+    ><h2 suiCardTitle>Service health</h2>
+    <p class="text-base-content/60">Use motion sparingly for ongoing work or a state that briefly needs attention.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-status-services-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.services.html" [typescript]="examples.services.typescript" /></div
+  ></sui-card>
 </main>

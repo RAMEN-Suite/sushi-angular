@@ -1,85 +1,47 @@
 <main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="space-y-3">
-    <h1 class="text-4xl font-bold tracking-tight">Icons</h1>
-
-    <p class="max-w-3xl text-base-content/70">
-      SUSHI uses <a href="https://lucide.dev/guide/angular/getting-started" target="_blank"><code>&#64;lucide/angular</code></a> for icon
-      examples and component defaults. Import only the icons you need and use them as standalone Angular components. Feel free to use any
-      library you would like to.
-    </p>
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Icons</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Bring the icon system that fits your product. Lucide is the recommended integration used by SUSHI's defaults and examples.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span suiBadge variant="soft" size="sm">Icon-library agnostic</span><span suiBadge variant="soft" size="sm">Lucide recommended</span>
+    </div>
   </section>
-
   <sui-card>
-    <div>
-      <h2 suiCardTitle>Standalone icons</h2>
-      <p class="text-sm text-base-content/60">
-        Import Lucide icons directly into the component and use them as SVG directives in the template.
-      </p>
-    </div>
+    <h2 suiCardTitle>Recommended: Lucide</h2>
+    <p class="text-base-content/60">
+      SUSHI uses Lucide for built-in icons where a component needs a default. Consumers can project or template another SVG icon system
+      wherever the component exposes customization. Install Lucide only when you want to use these defaults or follow the examples below.
+    </p>
 
-    <div class="flex flex-wrap items-center gap-4">
-      <svg class="size-5" lucideSearch></svg>
-      <svg class="size-5" lucideSettings></svg>
-      <svg class="size-5" lucideDownload></svg>
-      <svg class="size-5" lucideTrash2></svg>
-    </div>
-
-    <sui-code>
-      <pre
-        suiCodeLine
-        prefix="1"
-      ><code>import &#123; LucideDownload, LucideSearch, LucideSettings, LucideTrash2 &#125; from '&#64;lucide/angular';</code></pre>
-      <pre suiCodeLine prefix="2"><code></code></pre>
-      <pre suiCodeLine prefix="3"><code>&#64;Component(&#123;</code></pre>
-      <pre suiCodeLine prefix="4"><code>  imports: [LucideSearch, LucideSettings, LucideDownload, LucideTrash2],</code></pre>
-      <pre suiCodeLine prefix="5"><code>&#125;)</code></pre>
-      <pre suiCodeLine prefix="6"><code>export class IconPage &#123;&#125;</code></pre>
-      <pre suiCodeLine prefix="7"><code></code></pre>
-      <pre suiCodeLine prefix="8"><code>&lt;svg class="size-5" lucideSearch&gt;&lt;/svg&gt;</code></pre>
-      <pre suiCodeLine prefix="9"><code>&lt;svg class="size-5" lucideSettings&gt;&lt;/svg&gt;</code></pre>
-      <pre suiCodeLine prefix="10"><code>&lt;svg class="size-5" lucideDownload&gt;&lt;/svg&gt;</code></pre>
-      <pre suiCodeLine prefix="11"><code>&lt;svg class="size-5" lucideTrash2&gt;&lt;/svg&gt;</code></pre>
-    </sui-code>
+    <ol class="mt-5 grid gap-4 md:grid-cols-3">
+      <li class="rounded-box border border-base-300 p-4">
+        <span suiBadge size="sm" variant="soft">1</span>
+        <h3 class="mt-3 font-semibold">Install when needed</h3>
+        <code class="mt-2 block overflow-x-auto rounded-field bg-base-200 px-3 py-2 text-sm">npm install &#64;lucide/angular</code>
+      </li>
+      <li class="rounded-box border border-base-300 p-4">
+        <span suiBadge size="sm" variant="soft">2</span>
+        <h3 class="mt-3 font-semibold">Import selectively</h3>
+        <p class="mt-2 text-sm text-base-content/60">Add individual directives such as <code>LucideSearch</code> to component imports.</p>
+      </li>
+      <li class="rounded-box border border-base-300 p-4">
+        <span suiBadge size="sm" variant="soft">3</span>
+        <h3 class="mt-3 font-semibold">Keep semantics native</h3>
+        <p class="mt-2 text-sm text-base-content/60">Hide decorative SVGs and label the surrounding control instead.</p>
+      </li>
+    </ol>
   </sui-card>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Icons in buttons</h2>
-      <p class="text-sm text-base-content/60">
-        Combine Lucide icons with <code>suiButton</code>. Use normal Tailwind utilities for size, spacing, and alignment.
-      </p>
-    </div>
-
-    <div class="flex flex-wrap items-center gap-3">
-      <button suiButton type="button">
-        <svg class="size-4" lucidePlus></svg>
-        Add item
-      </button>
-
-      <button suiButton type="button" severity="secondary" variant="outlined">
-        <svg class="size-4" lucideDownload></svg>
-        Export
-      </button>
-
-      <button suiButton type="button" severity="error" variant="text">
-        <svg class="size-4" lucideTrash2></svg>
-        Delete
-      </button>
-
-      <button suiButton type="button" shape="square" aria-label="Open settings">
-        <svg class="size-4" lucideSettings></svg>
-      </button>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;button suiButton type="button"&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>  &lt;svg class="size-4" lucidePlus&gt;&lt;/svg&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>  Add item</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code></code></pre>
-      <pre suiCodeLine prefix="6"><code>&lt;button suiButton type="button" shape="square" aria-label="Open settings"&gt;</code></pre>
-      <pre suiCodeLine prefix="7"><code>  &lt;svg class="size-4" lucideSettings&gt;&lt;/svg&gt;</code></pre>
-      <pre suiCodeLine prefix="8"><code>&lt;/button&gt;</code></pre>
-    </sui-code>
-  </sui-card>
+  <section class="space-y-2 pt-2">
+    <h2 class="text-3xl font-bold tracking-tight">Examples</h2>
+  </section>
+  <sui-card
+    ><h2 suiCardTitle>Standalone and actionable icons</h2>
+    <p class="text-base-content/60">Icons inherit the current text color and size; icon-only controls still require an accessible name.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-icon-usage-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="example.html" [typescript]="example.typescript" /></div
+  ></sui-card>
 </main>

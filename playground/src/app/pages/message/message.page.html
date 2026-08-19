@@ -1,76 +1,36 @@
 <main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="space-y-3">
-    <h1 class="text-4xl font-bold tracking-tight">Message</h1>
-    <p class="max-w-3xl text-base-content/70">Use <code>suiMessage</code> for contextual feedback and important information.</p>
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Message</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">Communicate contextual information, outcomes, and recoverable problems.</p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span suiBadge variant="soft" size="sm">Semantic feedback</span><span suiBadge variant="soft" size="sm">Related actions</span>
+    </div>
   </section>
+  <sui-card
+    ><h2 suiCardTitle>API reference</h2>
+    @for (item of api; track item.className) {
+      <div class="mt-5"><pg-api-reference [api]="item" /></div>
+    }
+  </sui-card>
+  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
   <sui-card>
-    <div>
-      <h2 suiCardTitle>Severities</h2>
-      <p class="text-sm text-base-content/60">
-        Use informational, success, warning, and error colors to communicate the message’s meaning.
-      </p>
-    </div>
-    <div class="grid gap-3">
-      <div suiMessage role="status"><span>There is a new update available.</span></div>
-      <div suiMessage severity="info" role="alert"><span>12 unread messages. Tap to see.</span></div>
-      <div suiMessage severity="success" role="alert"><span>Your purchase has been confirmed!</span></div>
-      <div suiMessage severity="warning" role="alert"><span>Warning: Invalid email address!</span></div>
-      <div suiMessage severity="error" role="alert"><span>Error! Task failed successfully.</span></div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;div suiMessage&gt;There is a new update available.&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;div suiMessage severity="success"&gt;Your changes were saved.&lt;/div&gt;</code></pre>
-    </sui-code>
+    <h2 suiCardTitle>Basic feedback</h2>
+    <p class="text-base-content/60">Pair a concise message with an icon and the semantic severity that matches its meaning.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-message-usage-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div>
   </sui-card>
   <sui-card>
-    <div>
-      <h2 suiCardTitle>Variants and actions</h2>
-      <p class="text-sm text-base-content/60">
-        Messages support soft, outline, and dash styles. <code>suiMessageActions</code> groups related controls and aligns them at the end
-        of a horizontal message.
-      </p>
-    </div>
-    <div suiMessage severity="warning" variant="soft">
-      <span>Unsaved changes will be lost.</span>
-      <div suiMessageActions>
-        <button suiButton type="button" size="sm" variant="text">Dismiss</button
-        ><button suiButton type="button" size="sm" severity="warning">Save</button>
-      </div>
-    </div>
-    <div suiMessage severity="info" variant="outlined"><span>Outlined informational message.</span></div>
-    <div suiMessage severity="error" variant="dash"><span>Dashed error message.</span></div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;div suiMessage severity="warning" variant="soft" role="alert"&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>  &lt;span&gt;Unsaved changes will be lost.&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>  &lt;div suiMessageActions&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>    &lt;button suiButton size="sm"&gt;Save&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code>  &lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="6"><code>&lt;/div&gt;</code></pre>
-    </sui-code>
+    <h2 suiCardTitle>Updates and recovery</h2>
+    <p class="text-base-content/60">Keep supporting copy and related actions inside one responsive feedback surface.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-message-actions-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.actions.html" [typescript]="examples.actions.typescript" /></div>
   </sui-card>
   <sui-card>
-    <div>
-      <h2 suiCardTitle>Orientation</h2>
-      <p class="text-sm text-base-content/60">
-        Choose a horizontal layout for wide areas or a centered vertical layout for narrow surfaces.
-      </p>
-    </div>
-    <div class="grid gap-4 lg:grid-cols-2">
-      <div suiMessage severity="info" orientation="horizontal" role="status">
-        <span>Horizontal message</span>
-        <div suiMessageActions><button suiButton type="button" size="sm">Open</button></div>
-      </div>
-      <div suiMessage severity="success" orientation="vertical" role="status">
-        <span>Vertical message</span>
-        <div suiMessageActions><button suiButton type="button" size="sm" severity="success">Continue</button></div>
-      </div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;div suiMessage orientation="horizontal"&gt;...&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>&lt;div suiMessage orientation="vertical"&gt;...&lt;/div&gt;</code></pre>
-    </sui-code>
+    <h2 suiCardTitle>Vertical message</h2>
+    <p class="text-base-content/60">Stack the icon, supporting copy, and actions when a compact horizontal row would feel crowded.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-message-vertical-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.vertical.html" [typescript]="examples.vertical.typescript" /></div>
   </sui-card>
 </main>

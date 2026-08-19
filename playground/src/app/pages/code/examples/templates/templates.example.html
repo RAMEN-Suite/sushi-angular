@@ -1,0 +1,31 @@
+<div class="grid gap-4">
+  <sui-code [cooldown]="2000" [buttonShape]="null" buttonAriaLabel="Copy command">
+    <ng-template suiCodeButtonOff>
+      <span class="inline-flex items-center gap-1">
+        <svg lucideCopy class="size-4" aria-hidden="true"></svg>
+        Copy
+      </span>
+    </ng-template>
+    <ng-template suiCodeButtonOn>
+      <span class="inline-flex items-center gap-1">
+        <svg lucideCheck class="size-4" aria-hidden="true"></svg>
+        Copied
+      </span>
+    </ng-template>
+    <pre suiCodeLine prefix="$"><code>npm run build:sushi</code></pre>
+  </sui-code>
+
+  <sui-code>
+    <ng-template suiCodeButton let-copy let-copied="copied">
+      <button suiButton type="button" size="sm" severity="neutral" variant="soft" (click)="copy()">
+        @if (copied()) {
+          <svg lucideCheck class="size-4" aria-hidden="true"></svg>
+        } @else {
+          <svg lucideCopy class="size-4" aria-hidden="true"></svg>
+        }
+        {{ copied() ? 'Copied' : 'Copy command' }}
+      </button>
+    </ng-template>
+    <pre suiCodeLine prefix="$"><code>npm run lint</code></pre>
+  </sui-code>
+</div>

@@ -1,0 +1,28 @@
+<div class="grid max-w-3xl gap-4">
+  <div suiMessage role="status">
+    <svg lucideSparkles class="size-5" aria-hidden="true"></svg>
+    <div class="flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="font-medium">SUSHI 2.4 is available</p>
+        <p class="mt-1 text-sm text-base-content/60">Review the release notes when you are ready to update.</p>
+      </div>
+      <div suiMessageActions class="shrink-0">
+        <button suiButton type="button" size="sm" severity="neutral" variant="text">Later</button>
+        <button suiButton type="button" size="sm" severity="neutral" variant="outlined">View release</button>
+      </div>
+    </div>
+  </div>
+
+  <div suiMessage severity="warning" variant="soft" role="alert">
+    <svg lucideCloudOff class="size-5" aria-hidden="true"></svg>
+    <div class="flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="font-medium">Connection interrupted</p>
+        <p class="mt-1 text-sm opacity-75">Your work is safe locally. Reconnect before publishing.</p>
+      </div>
+      <div suiMessageActions class="shrink-0">
+        <button suiButton type="button" size="sm" severity="neutral" variant="outlined">Try again</button>
+      </div>
+    </div>
+  </div>
+</div>

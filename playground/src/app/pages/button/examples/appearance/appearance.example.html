@@ -1,0 +1,28 @@
+<div class="grid gap-6">
+  <div class="flex flex-wrap items-center gap-3">
+    @for (severity of severities; track severity) {
+      <button suiButton type="button" [severity]="severity">{{ severity }}</button>
+    }
+  </div>
+
+  <div class="flex flex-wrap items-center gap-3">
+    <button suiButton type="button">Solid</button>
+    @for (variant of variants; track variant) {
+      <button suiButton type="button" [variant]="variant">{{ variant }}</button>
+    }
+  </div>
+
+  <div class="flex flex-wrap items-center gap-3">
+    @for (size of sizes; track size) {
+      <button suiButton type="button" severity="neutral" variant="soft" [size]="size">{{ size }}</button>
+    }
+    <button suiButton type="button" shape="square" aria-label="Add item">
+      <svg lucidePlus class="size-4" aria-hidden="true"></svg>
+    </button>
+    <button suiButton type="button" shape="circle" aria-label="More options">
+      <svg lucideEllipsis class="size-4" aria-hidden="true"></svg>
+    </button>
+  </div>
+
+  <button suiButton type="button" shape="fluid" severity="neutral" variant="outlined">Fluid action</button>
+</div>

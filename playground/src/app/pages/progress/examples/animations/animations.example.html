@@ -1,0 +1,30 @@
+<div class="grid max-w-2xl gap-8 py-2">
+  <section>
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <p class="font-medium">Waiting for progress</p>
+        <p class="text-sm text-base-content/60">Omit the value while the amount of work is unknown.</p>
+      </div>
+      <span suiBadge size="sm" severity="info" variant="soft">Waiting</span>
+    </div>
+    <progress suiProgress class="mt-4 w-full" severity="info" animation="pulse">Waiting for progress</progress>
+  </section>
+
+  <section>
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <p class="font-medium">Visible progress</p>
+        <p class="text-sm text-base-content/60">Advance the value to preview a determinate task.</p>
+      </div>
+      <span suiBadge size="sm" severity="success" variant="soft">{{ value() }}%</span>
+    </div>
+    <progress suiProgress class="mt-4 w-full" severity="success" animation="glow" [value]="value()" max="100">
+      {{ value() }}%
+    </progress>
+    <div class="mt-4 flex justify-end">
+      <button suiButton type="button" size="sm" severity="neutral" variant="outlined" (click)="advance()">
+        {{ value() === 100 ? 'Restart' : 'Advance' }}
+      </button>
+    </div>
+  </section>
+</div>

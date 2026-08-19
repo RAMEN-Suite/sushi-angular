@@ -1,32 +1,27 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LucideCheck, LucideCopy } from '@lucide/angular';
-import {
-  Button,
-  Card,
-  CardTitle,
-  Code,
-  CodeButtonOffTemplate,
-  CodeButtonOnTemplate,
-  CodeButtonTemplate,
-  CodeLine,
-} from '@ramen-suite/sushi';
+import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { apiReference } from '../../generated/api-reference.generated';
+import { ApiReference } from '../../shared/api-reference/api-reference.component';
+import type { ApiReferenceData } from '../../shared/api-reference/api-reference.types';
+import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExampleSource, textSource } from '../../shared/example-code/example-source';
+import basicHtml from './examples/basic/basic.example.html';
+import * as basicTs from './examples/basic/basic.example.ts' with { loader: 'text' };
+import { CodeBasicExample } from './examples/basic/basic.example';
+import templatesHtml from './examples/templates/templates.example.html';
+import * as templatesTs from './examples/templates/templates.example.ts' with { loader: 'text' };
+import { CodeTemplatesExample } from './examples/templates/templates.example';
 
 @Component({
   selector: 'pg-code-page',
-  imports: [
-    Card,
-    CardTitle,
-    CodeLine,
-    Code,
-    Code,
-    CodeButtonOffTemplate,
-    CodeButtonOnTemplate,
-    CodeButtonTemplate,
-    Button,
-    LucideCheck,
-    LucideCopy,
-  ],
+  imports: [ApiReference, Badge, Card, CardTitle, CodeBasicExample, CodeTemplatesExample, ExampleCode],
   templateUrl: './code.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CodePage {}
+export class CodePage {
+  protected readonly api: readonly ApiReferenceData[] = [apiReference.Code, apiReference.CodeLine];
+  protected readonly examples: Readonly<Record<'basic' | 'templates', ExampleSource>> = {
+    basic: { html: basicHtml, typescript: textSource(basicTs) },
+    templates: { html: templatesHtml, typescript: textSource(templatesTs) },
+  };
+}

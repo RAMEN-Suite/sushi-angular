@@ -1,0 +1,48 @@
+<div class="flex justify-center">
+  <sui-card class="w-full max-w-lg overflow-hidden">
+    <figure suiCardMedia class="grid h-40 place-items-center bg-info/10 text-info">
+      <svg lucidePanelsTopLeft class="size-10" aria-hidden="true"></svg>
+    </figure>
+
+    <div class="grid gap-5">
+      <div class="flex items-center justify-between gap-3">
+        <span suiBadge size="sm" severity="info" variant="soft">In review</span>
+        <span suiBadge size="sm" severity="neutral" variant="soft">Design systems</span>
+      </div>
+
+      <div class="grid gap-3">
+        <h3 suiCardTitle>Design system audit</h3>
+        <p class="max-w-prose leading-relaxed text-base-content/60">Review shared patterns before the next release.</p>
+        <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-base-content/60">
+          <span class="flex items-center gap-1.5">
+            <svg lucideUsers class="size-4" aria-hidden="true"></svg>
+            4 reviewers
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg lucideCalendarDays class="size-4" aria-hidden="true"></svg>
+            Due Friday
+          </span>
+        </div>
+      </div>
+
+      <div class="grid gap-2.5">
+        <div class="flex justify-between text-xs text-base-content/60">
+          <span>Progress</span>
+          <span>72%</span>
+        </div>
+        <progress
+          suiProgress
+          severity="info"
+          class="w-full"
+          value="72"
+          max="100"
+          aria-label="Audit progress"></progress>
+      </div>
+
+      <div suiCardActions>
+        <button suiButton type="button" severity="neutral" variant="text">Dismiss</button>
+        <button suiButton type="button" severity="neutral">Open project</button>
+      </div>
+    </div>
+  </sui-card>
+</div>

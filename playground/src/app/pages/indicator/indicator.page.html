@@ -1,101 +1,38 @@
 <main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="space-y-3">
-    <h1 class="text-4xl font-bold tracking-tight">Indicator</h1>
-    <p class="max-w-3xl text-base-content/70">Position badges, statuses, and actions relative to another element.</p>
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Indicator</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">Position state, count, and action markers around another element.</p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span suiBadge variant="soft" size="sm">Nine positions</span><span suiBadge variant="soft" size="sm">Use sparingly</span>
+    </div>
   </section>
-
-  <sui-card>
-    <div>
-      <h2 suiCardTitle>Common combinations</h2>
-      <p class="text-sm text-base-content/60">Use an indicator for unread counts, availability, or a short contextual label.</p>
-    </div>
-    <div class="flex flex-wrap items-center gap-12 py-4">
-      <div suiIndicator>
-        <span suiIndicatorItem suiStatus severity="success" size="lg"></span>
-        <div class="grid h-28 w-28 place-items-center bg-base-200">Content</div>
-      </div>
-      <div suiIndicator>
-        <span suiIndicatorItem suiBadge severity="primary">New</span>
-        <div class="grid h-28 w-28 place-items-center bg-base-200">Content</div>
-      </div>
-      <div suiIndicator><span suiIndicatorItem suiBadge severity="secondary">12</span><button suiButton type="button">Inbox</button></div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;div suiIndicator&gt;</code></pre>
-      <pre suiCodeLine prefix="2"><code>  &lt;span suiIndicatorItem suiBadge severity="secondary"&gt;12&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>  &lt;button suiButton&gt;Inbox&lt;/button&gt;</code></pre>
-      <pre suiCodeLine prefix="4"><code>&lt;/div&gt;</code></pre>
-    </sui-code>
+  <sui-card
+    ><h2 suiCardTitle>API reference</h2>
+    @for (item of api; track item.className) {
+      <div class="mt-5"><pg-api-reference [api]="item" /></div>
+    }
   </sui-card>
-
+  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
   <sui-card>
-    <div>
-      <h2 suiCardTitle>Positions</h2>
-      <p class="text-sm text-base-content/60">Combine start, center, and end with top, middle, and bottom to address all nine positions.</p>
-    </div>
-    <div suiIndicator class="my-5">
-      <span suiIndicatorItem horizontal="start" vertical="top" suiBadge>↖</span
-      ><span suiIndicatorItem horizontal="center" vertical="top" suiBadge>↑</span
-      ><span suiIndicatorItem horizontal="end" vertical="top" suiBadge>↗</span>
-      <span suiIndicatorItem horizontal="start" vertical="middle" suiBadge>←</span
-      ><span suiIndicatorItem horizontal="center" vertical="middle" suiBadge>●</span
-      ><span suiIndicatorItem horizontal="end" vertical="middle" suiBadge>→</span>
-      <span suiIndicatorItem horizontal="start" vertical="bottom" suiBadge>↙</span
-      ><span suiIndicatorItem horizontal="center" vertical="bottom" suiBadge>↓</span
-      ><span suiIndicatorItem horizontal="end" vertical="bottom" suiBadge>↘</span>
-      <div class="grid h-32 w-60 place-items-center bg-base-200">All positions</div>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;div suiIndicator&gt;</code></pre>
-      <pre
-        suiCodeLine
-        prefix="2"
-      ><code>  &lt;span suiIndicatorItem horizontal="start" vertical="top" suiBadge&gt;↖&lt;/span&gt;</code></pre>
-      <pre
-        suiCodeLine
-        prefix="3"
-      ><code>  &lt;span suiIndicatorItem horizontal="center" vertical="middle" suiBadge&gt;●&lt;/span&gt;</code></pre>
-      <pre
-        suiCodeLine
-        prefix="4"
-      ><code>  &lt;span suiIndicatorItem horizontal="end" vertical="bottom" suiBadge&gt;↘&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code>  &lt;div&gt;All positions&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="6"><code>&lt;/div&gt;</code></pre>
-    </sui-code>
+    <h2 suiCardTitle>Basic indicators</h2>
+    <p class="text-base-content/60">Use one concise marker for status, counts, or requirements without obscuring its target.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-indicator-basic-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
   </sui-card>
-
   <sui-card>
-    <div>
-      <h2 suiCardTitle>Multiple indicators</h2>
-      <p class="text-sm text-base-content/60">
-        A single target can carry several independent indicators, for example a state, count, and action.
-      </p>
-    </div>
-    <div suiIndicator class="my-5">
-      <span suiIndicatorItem horizontal="start" vertical="top" suiStatus severity="warning" animation="ping" size="lg"></span>
-      <span suiIndicatorItem horizontal="end" vertical="top" suiBadge severity="error">4</span>
-      <div suiIndicatorItem horizontal="center" vertical="bottom"><button suiButton type="button" size="sm">Open</button></div>
-      <sui-card class="w-72">
-        <h3 suiCardTitle>Project Sushi</h3>
-        <p class="text-sm text-base-content/60">Online with four pending notifications.</p>
-      </sui-card>
-    </div>
-
-    <sui-code>
-      <pre suiCodeLine prefix="1"><code>&lt;div suiIndicator&gt;</code></pre>
-      <pre
-        suiCodeLine
-        prefix="2"
-      ><code>  &lt;span suiIndicatorItem horizontal="start" suiStatus severity="success"&gt;&lt;/span&gt;</code></pre>
-      <pre suiCodeLine prefix="3"><code>  &lt;span suiIndicatorItem suiBadge severity="error"&gt;4&lt;/span&gt;</code></pre>
-      <pre
-        suiCodeLine
-        prefix="4"
-      ><code>  &lt;div suiIndicatorItem horizontal="center" vertical="bottom"&gt;&lt;button suiButton&gt;Open&lt;/button&gt;&lt;/div&gt;</code></pre>
-      <pre suiCodeLine prefix="5"><code>  &lt;section suiCard&gt;...&lt;/section&gt;</code></pre>
-      <pre suiCodeLine prefix="6"><code>&lt;/div&gt;</code></pre>
-    </sui-code>
+    <h2 suiCardTitle>Placement</h2>
+    <p class="text-base-content/60">
+      Choose one of nine anchor points. The numbered markers document placement rather than a recommended combined UI.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-indicator-positions-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.positions.html" [typescript]="examples.positions.typescript" /></div>
+  </sui-card>
+  <sui-card>
+    <h2 suiCardTitle>Card action</h2>
+    <p class="text-base-content/60">An overlapping action can connect directly to a surface when that relationship remains unambiguous.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-indicator-usage-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div>
   </sui-card>
 </main>

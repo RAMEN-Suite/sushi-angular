@@ -1,0 +1,22 @@
+<div class="grid gap-6">
+  <section class="grid gap-3">
+    <h3 class="text-sm font-medium">Animation types</h3>
+    <div class="flex flex-wrap items-center gap-6">
+      @for (type of types; track type) {
+        <span class="inline-flex items-center gap-2">
+          <span suiSpinner [type]="type"></span>
+          {{ type }}
+        </span>
+      }
+    </div>
+  </section>
+
+  <section class="grid gap-3">
+    <h3 class="text-sm font-medium">Sizes</h3>
+    <div class="flex flex-wrap items-center gap-5">
+      @for (size of sizes; track size) {
+        <span suiSpinner type="ring" [size]="size"></span>
+      }
+    </div>
+  </section>
+</div>

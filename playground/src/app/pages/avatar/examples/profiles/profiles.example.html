@@ -1,0 +1,39 @@
+<div class="grid max-w-xl gap-6">
+  <div class="flex flex-wrap items-center gap-5">
+    <div class="flex items-center gap-3">
+      <sui-avatar status="online" shape="circle" size="lg">
+        <img src="/sample-avatar.svg" alt="Ada Lovelace" />
+      </sui-avatar>
+      <div>
+        <p class="font-medium">Ada Lovelace</p>
+        <p class="text-sm text-base-content/60">Online</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <sui-avatar placeholder shape="circle" size="lg" class="bg-neutral text-neutral-content">
+        <span>GH</span>
+      </sui-avatar>
+      <div>
+        <p class="font-medium">Grace Hopper</p>
+        <p class="text-sm text-base-content/60">Fallback initials</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between gap-4 rounded-box border border-base-300 bg-base-100 p-4">
+    <div>
+      <p class="font-medium">Design review</p>
+      <p class="text-sm text-base-content/60">6 collaborators</p>
+    </div>
+    <div suiAvatarGroup class="-space-x-5">
+      <sui-avatar shape="circle" size="sm"><img src="/sample-avatar.svg" alt="Ada" /></sui-avatar>
+      <sui-avatar placeholder shape="circle" size="sm" class="bg-secondary text-secondary-content">
+        <span>GH</span>
+      </sui-avatar>
+      <sui-avatar placeholder shape="circle" size="sm" class="bg-neutral text-neutral-content">
+        <span>+4</span>
+      </sui-avatar>
+    </div>
+  </div>
+</div>

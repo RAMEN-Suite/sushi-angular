@@ -1,11 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Button, Card, CardTitle, Code, CodeLine } from '@ramen-suite/sushi';
-import { LucideDownload, LucidePlus, LucideSearch, LucideSettings, LucideTrash2 } from '@lucide/angular';
+import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExampleSource, textSource } from '../../shared/example-code/example-source';
+import usageHtml from './examples/usage/usage.example.html';
+import * as usageTs from './examples/usage/usage.example.ts' with { loader: 'text' };
+import { IconUsageExample } from './examples/usage/usage.example';
 
 @Component({
   selector: 'pg-icon-page',
-  imports: [Card, CardTitle, CodeLine, LucideSearch, LucideTrash2, LucideSettings, LucideDownload, LucidePlus, Button, Code],
+  imports: [Badge, Card, CardTitle, ExampleCode, IconUsageExample],
   templateUrl: './icon.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IconPage {}
+export class IconPage {
+  protected readonly example: ExampleSource = { html: usageHtml, typescript: textSource(usageTs) };
+}

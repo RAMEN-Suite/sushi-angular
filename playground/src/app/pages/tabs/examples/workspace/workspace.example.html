@@ -1,0 +1,45 @@
+<sui-tabs class="block max-w-3xl" [(value)]="tab" variant="lift" ariaLabel="Release workspace">
+  <ng-template suiTab value="overview" label="Overview">
+    <div class="grid gap-5 p-2 sm:grid-cols-[1fr_auto]">
+      <div>
+        <div class="flex flex-wrap items-center gap-2">
+          <h3 class="text-lg font-semibold">Version 2.4.0</h3>
+          <span suiBadge size="sm" severity="warning" variant="soft">In review</span>
+        </div>
+        <p class="mt-1 text-sm text-base-content/60">12 of 16 release checks are complete.</p>
+        <progress suiProgress class="mt-4 w-full" severity="success" value="75" max="100">75%</progress>
+      </div>
+      <button suiButton type="button" size="sm" class="self-start">Open release</button>
+    </div>
+  </ng-template>
+
+  <ng-template suiTab value="activity" label="Activity">
+    <ul class="grid gap-3 p-2">
+      <li class="flex items-center gap-3">
+        <span suiStatus severity="success"></span>
+        <span>Build completed successfully</span>
+      </li>
+      <li class="flex items-center gap-3">
+        <span suiStatus severity="info"></span>
+        <span>Documentation preview published</span>
+      </li>
+      <li class="flex items-center gap-3">
+        <span suiStatus severity="warning"></span>
+        <span>Two approvals still required</span>
+      </li>
+    </ul>
+  </ng-template>
+
+  <ng-template suiTab value="checks" label="Checks">
+    <div class="grid gap-3 p-2 sm:grid-cols-2">
+      <div class="rounded-field border border-base-300 p-3">
+        <p class="font-medium">Accessibility</p>
+        <p class="text-sm text-success">Passed</p>
+      </div>
+      <div class="rounded-field border border-base-300 p-3">
+        <p class="font-medium">Bundle budget</p>
+        <p class="text-sm text-warning">Review</p>
+      </div>
+    </div>
+  </ng-template>
+</sui-tabs>
