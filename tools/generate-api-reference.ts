@@ -221,9 +221,14 @@ function buildReferenceData(): Readonly<Record<string, ApiReferenceData>> {
     .sort((first: SourceReference, second: SourceReference): number => first.className.localeCompare(second.className))
     .map((reference: SourceReference): [string, ApiReferenceData] => {
       const prefix: string = `sui${reference.className}`;
-      const templates: readonly ApiTemplate[] = (collected.templates.get(reference.folder) ?? []).filter(
-        (template: ApiTemplate): boolean => template.name.startsWith(prefix),
+      const folderReferences: readonly SourceReference[] = collected.references.filter(
+        (item: SourceReference): boolean => item.folder === reference.folder,
       );
+      const folderTemplates: readonly ApiTemplate[] = collected.templates.get(reference.folder) ?? [];
+      const templates: readonly ApiTemplate[] =
+        folderReferences.length === 1
+          ? folderTemplates
+          : folderTemplates.filter((template: ApiTemplate): boolean => template.name.startsWith(prefix));
       const data: ApiReferenceData = {
         className: reference.className,
         selector: reference.selector,

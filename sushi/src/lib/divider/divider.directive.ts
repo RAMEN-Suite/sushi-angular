@@ -21,8 +21,12 @@ import { DividerOrientation, DividerPlacement, DividerSeverity } from './divider
     '[class.divider-end]': 'placement() === "end"',
   },
 })
+/** Separates related content horizontally or vertically with an optional label. */
 export class Divider {
+  /** Applies a semantic line and label color. */
   public readonly severity: InputSignal<DividerSeverity | null> = input<DividerSeverity | null>(null);
+  /** Controls the divider axis. */
   public readonly orientation: InputSignal<DividerOrientation> = input<DividerOrientation>('horizontal');
+  /** Positions the optional label along the divider. */
   public readonly placement: InputSignal<DividerPlacement> = input<DividerPlacement>('center');
 }

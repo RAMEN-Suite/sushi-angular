@@ -25,8 +25,12 @@ import { StatusAnimation, StatusSeverity, StatusSize } from './status.interfaces
     '[class.sui-status--bounce]': 'animation() === "bounce"',
   },
 })
+/** Renders a compact visual state marker beside descriptive content. */
 export class Status {
+  /** Applies a semantic theme color. */
   public readonly severity: InputSignal<StatusSeverity | null> = input<StatusSeverity | null>(null);
+  /** Controls the marker dimensions. */
   public readonly size: InputSignal<StatusSize> = input<StatusSize>('md');
+  /** Adds motion for ongoing or attention-sensitive states. */
   public readonly animation: InputSignal<StatusAnimation | null> = input<StatusAnimation | null>(null);
 }

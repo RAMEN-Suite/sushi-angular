@@ -15,6 +15,8 @@ import { KbdSize } from './kbd.interfaces';
     '(mousedown)': '$event.preventDefault()',
   },
 })
+/** Styles a semantic keyboard key without introducing button behavior. */
 export class Kbd {
+  /** Controls the key dimensions and text size. */
   public readonly size: InputSignal<KbdSize> = input<KbdSize>('md');
 }

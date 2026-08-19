@@ -1,5 +1,5 @@
 import { ComponentSize } from '../sushi.types';
-import { BadgeSeverity, BadgeVariant } from '../badge/badge.interfaces';
+import { BadgeSeverity, BadgeVariant } from '../badge';
 
 export type ChipSize = ComponentSize;
 export type ChipSeverity = BadgeSeverity;

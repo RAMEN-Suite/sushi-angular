@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
@@ -14,7 +15,6 @@ import {
   TemplateRef,
   WritableSignal,
 } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
 import { LucideX } from '@lucide/angular';
 import { ChipContentContext, ChipSeverity, ChipSize, ChipVariant } from './chip.interfaces';
 import { ChipContentTemplate, ChipRemoveIconTemplate } from './chip.templates';

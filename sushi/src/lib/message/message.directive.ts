@@ -18,8 +18,12 @@ import { MessageOrientation, MessageSeverity, MessageVariant } from './message.i
     '[class.alert-vertical]': 'orientation() === "vertical"',
   },
 })
+/** Presents contextual feedback with optional semantic color and layout. */
 export class Message {
+  /** Applies a semantic feedback color. */
   public readonly severity: InputSignal<MessageSeverity | null> = input<MessageSeverity | null>(null);
+  /** Changes the visual treatment of the message. */
   public readonly variant: InputSignal<MessageVariant | null> = input<MessageVariant | null>(null);
+  /** Arranges content and actions horizontally or vertically. */
   public readonly orientation: InputSignal<MessageOrientation | null> = input<MessageOrientation | null>(null);
 }

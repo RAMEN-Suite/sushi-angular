@@ -1,8 +1,11 @@
 <div
   ngTabs
   class="sui-tabs__root flex min-w-0 flex-col"
-  [class.flex-row]="orientation() === 'vertical'"
-  [class.gap-4]="orientation() === 'vertical'"
+  [class.sui-tabs__root--vertical]="orientation() === 'vertical'"
+  [class.sui-tabs__root--vertical-plain]="orientation() === 'vertical' && variant() === 'plain'"
+  [class.sui-tabs__root--vertical-box]="orientation() === 'vertical' && variant() === 'box'"
+  [class.sui-tabs__root--vertical-border]="orientation() === 'vertical' && variant() === 'border'"
+  [class.sui-tabs__root--vertical-lift]="orientation() === 'vertical' && variant() === 'lift'"
 >
   <div
     ngTabList
@@ -16,7 +19,7 @@
     [disabled]="disabled()"
     [attr.aria-label]="ariaLabel()"
     [class.tabs-box]="variant() === 'box'"
-    [class.tabs-border]="variant() === 'border'"
+    [class.tabs-border]="variant() === 'border' && orientation() === 'horizontal'"
     [class.tabs-lift]="variant() === 'lift'"
     [class.tabs-xs]="size() === 'xs'"
     [class.tabs-sm]="size() === 'sm'"
@@ -26,8 +29,6 @@
     [class.overflow-x-auto]="orientation() === 'horizontal'"
     [class.overflow-y-auto]="orientation() === 'vertical'"
     [class.border-b]="variant() === 'plain' && orientation() === 'horizontal'"
-    [class.border-r]="variant() === 'plain' && orientation() === 'vertical' && placement() === 'top'"
-    [class.border-l]="variant() === 'plain' && orientation() === 'vertical' && placement() === 'bottom'"
     [class.border-base-300]="variant() === 'plain'"
     [class.tabs-bottom]="placement() === 'bottom'"
     [class.order-2]="placement() === 'bottom'"
@@ -35,6 +36,7 @@
     [class.z-10]="variant() === 'lift'"
     [class.flex-col]="orientation() === 'vertical'"
     [class.shrink-0]="orientation() === 'vertical'"
+    [class.sui-tabs__list--vertical]="orientation() === 'vertical'"
   >
     @for (tab of tabs(); track tab.value()) {
       <button
@@ -45,6 +47,7 @@
         [disabled]="tab.disabled()"
         [class.tab-active]="value() === tab.value()"
         [class.tab-disabled]="tab.disabled()"
+        [class.sui-tab--vertical]="orientation() === 'vertical'"
       >
         {{ tab.label() }}
       </button>
@@ -63,10 +66,6 @@
       [class.rounded-bl-none]="variant() === 'lift' && orientation() === 'horizontal' && placement() === 'bottom'"
       [class.-mt-px]="variant() === 'lift' && orientation() === 'horizontal' && placement() === 'top'"
       [class.-mb-px]="variant() === 'lift' && orientation() === 'horizontal' && placement() === 'bottom'"
-      [class.rounded-l-none]="variant() === 'lift' && orientation() === 'vertical' && placement() === 'top'"
-      [class.-ml-px]="variant() === 'lift' && orientation() === 'vertical' && placement() === 'top'"
-      [class.rounded-r-none]="variant() === 'lift' && orientation() === 'vertical' && placement() === 'bottom'"
-      [class.-mr-px]="variant() === 'lift' && orientation() === 'vertical' && placement() === 'bottom'"
       [value]="tab.value()"
       [preserveContent]="tab.preserveContent()"
     >

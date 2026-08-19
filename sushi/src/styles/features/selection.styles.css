@@ -1,19 +1,19 @@
 .sui-selection-option {
-  @apply text-base font-medium;
+  @apply select-none text-base font-medium transition-colors duration-150;
+}
+
+.sui-selection-option:not([aria-disabled='true']):not([aria-selected='true'], [data-matched='true']):is(:hover, [data-active='true']) {
+  @apply bg-base-200 text-base-content;
+}
+
+.sui-selection-option:not([aria-disabled='true']):not([aria-selected='true'], [data-matched='true']):active {
+  @apply bg-primary/20 text-primary;
 }
 
 .sui-selection-option:is([aria-selected='true'], [data-matched='true']) {
   @apply bg-primary/15 text-primary;
 }
 
-.sui-selection-option:is([aria-selected='true'], [data-matched='true']):not([aria-disabled='true']):hover {
-  @apply bg-primary/20;
-}
-
-.sui-selection-option[data-active='true'] {
-  @apply bg-base-200;
-}
-
-.sui-selection-option[data-active='true']:is([aria-selected='true'], [data-matched='true']) {
+.sui-selection-option:not([aria-disabled='true']):is([aria-selected='true'], [data-matched='true']):is(:hover, :active, [data-active='true']) {
   @apply bg-primary/20;
 }

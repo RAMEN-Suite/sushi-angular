@@ -30,13 +30,18 @@ import { CodeButtonOffTemplate, CodeButtonOnTemplate, CodeButtonTemplate } from 
     class: 'mockup-code sui-code relative block',
   },
 })
+/** Presents terminal-like code and copies all projected code lines. */
 export class Code {
+  /** Shows or hides the copy control. */
   public readonly copyable: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, {
     transform: booleanAttribute,
   });
+  /** Sets how long copied feedback remains visible in milliseconds. */
   public readonly cooldown: InputSignal<number> = input<number>(1200);
 
+  /** Controls the default copy button geometry. */
   public readonly buttonShape: InputSignal<ButtonShape | null> = input<ButtonShape | null>('square');
+  /** Provides the accessible name of the default copy button. */
   public readonly buttonAriaLabel: InputSignal<string | null> = input<string | null>('Copy code');
 
   protected readonly codeLines: Signal<readonly CodeLine[]> = contentChildren(CodeLine, { descendants: true });

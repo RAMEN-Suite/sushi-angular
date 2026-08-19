@@ -52,25 +52,31 @@ import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button
     '(click)': 'handleClick($event)',
   },
 })
+/** Styles native buttons and links while preserving their platform semantics. */
 export class Button {
+  /** Applies a semantic theme color. */
   public readonly severity: InputSignal<ButtonSeverity> = input<ButtonSeverity>('primary');
+  /** Controls the button dimensions. */
   public readonly size: InputSignal<ButtonSize> = input<ButtonSize>('md');
+  /** Changes the visual treatment of the button. */
   public readonly variant: InputSignal<ButtonVariant | null> = input<ButtonVariant | null>(null);
+  /** Changes the button width or geometry. */
   public readonly shape: InputSignal<ButtonShape | null> = input<ButtonShape | null>(null);
   /** Controls keyboard order when the button participates in a composite widget. */
   public readonly tabIndex: InputSignalWithTransform<number | null, unknown> = input<number | null, unknown>(null, {
     transform: (value: unknown): number | null => (value === null || value === undefined ? null : numberAttribute(value)),
   });
 
+  /** Prevents pointer and keyboard activation. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
+  /** Marks the action as busy and prevents activation. */
   public readonly loading: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
 
-  protected readonly elementRef: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
-  protected readonly isNativeButton: boolean = this.elementRef.nativeElement.tagName.toLowerCase() === 'button';
+  protected readonly isNativeButton: boolean = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.tagName === 'BUTTON';
   protected readonly isDisabled: Signal<boolean> = computed<boolean>((): boolean => this.disabled() || this.loading());
 
   protected handleClick(event: Event): void {

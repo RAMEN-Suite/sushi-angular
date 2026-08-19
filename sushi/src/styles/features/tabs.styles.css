@@ -15,3 +15,45 @@
 .sui-tab-panel[inert] {
   display: none;
 }
+
+.sui-tabs__root--vertical {
+  @apply flex-col gap-3 sm:flex-row;
+}
+
+.sui-tabs__list--vertical {
+  @apply w-full self-stretch gap-1 p-1 sm:w-44;
+}
+
+.sui-tab--vertical {
+  @apply w-full justify-start rounded-field px-3;
+}
+
+.sui-tab--vertical.tab-active {
+  @apply font-medium;
+}
+
+.sui-tabs__root--vertical-plain .sui-tabs__list--vertical {
+  @apply border-b border-base-300 sm:border-r sm:border-b-0;
+}
+
+.sui-tabs__root--vertical-plain .sui-tab--vertical.tab-active,
+.sui-tabs__root--vertical-box .sui-tab--vertical.tab-active,
+.sui-tabs__root--vertical-lift .sui-tab--vertical.tab-active {
+  @apply bg-base-100;
+}
+
+.sui-tabs__root--vertical-lift .sui-tabs__list--vertical {
+  @apply rounded-box bg-base-200;
+}
+
+.sui-tabs__root--vertical-border {
+  @apply gap-0 overflow-hidden rounded-box border border-base-300 bg-base-100;
+}
+
+.sui-tabs__root--vertical-border .sui-tabs__list--vertical {
+  @apply border-b border-base-300 bg-base-200 p-2 sm:border-r sm:border-b-0;
+}
+
+.sui-tabs__root--vertical-border .sui-tab--vertical.tab-active {
+  @apply bg-base-100 font-medium;
+}

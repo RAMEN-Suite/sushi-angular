@@ -22,7 +22,10 @@ import { SpinnerSize, SpinnerType } from './spinner.interfaces';
     '[attr.aria-hidden]': '"true"',
   },
 })
+/** Renders a decorative loading animation that inherits the current text color. */
 export class Spinner {
+  /** Selects the loading animation. */
   public readonly type: InputSignal<SpinnerType> = input<SpinnerType>('spinner');
+  /** Controls the spinner dimensions. */
   public readonly size: InputSignal<SpinnerSize> = input<SpinnerSize>('md');
 }

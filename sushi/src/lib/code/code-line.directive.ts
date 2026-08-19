@@ -6,11 +6,15 @@ import { Directive, ElementRef, inject, input, InputSignal } from '@angular/core
     '[attr.data-prefix]': 'prefix()',
   },
 })
+/** Marks one copyable line and optionally displays a prefix. */
 export class CodeLine {
+  /** Displays a line number, prompt, or output marker. */
   public readonly prefix: InputSignal<string | number | null> = input<string | number | null>(null);
-  protected readonly elementRef: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
 
+  private readonly element: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  /** Returns the rendered line text used by the parent copy action. */
   public text(): string {
-    return this.elementRef.nativeElement.textContent.trimEnd();
+    return this.element.nativeElement.textContent.trimEnd();
   }
 }

@@ -13,7 +13,10 @@ import { IndicatorHorizontalPosition, IndicatorVerticalPosition } from './indica
     '[class.indicator-bottom]': 'vertical() === "bottom"',
   },
 })
+/** Positions projected content relative to its indicator target. */
 export class IndicatorItem {
+  /** Aligns the item along the horizontal axis. */
   public readonly horizontal: InputSignal<IndicatorHorizontalPosition> = input<IndicatorHorizontalPosition>('end');
+  /** Aligns the item along the vertical axis. */
   public readonly vertical: InputSignal<IndicatorVerticalPosition> = input<IndicatorVerticalPosition>('top');
 }

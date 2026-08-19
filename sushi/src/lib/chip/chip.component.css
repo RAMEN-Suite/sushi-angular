@@ -1,8 +1,7 @@
 @reference "tailwindcss";
 
 :host {
-  @apply inline-flex h-8 max-w-full items-center gap-2 px-3 text-sm font-medium;
-  border-radius: calc(var(--radius-field) * 2);
+  @apply inline-flex h-8 max-w-full items-center gap-2 rounded-full px-3 text-sm font-medium;
 }
 
 :host(:not([class*='badge-'])) {
