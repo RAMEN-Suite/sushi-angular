@@ -27,6 +27,7 @@ import {
 } from './select-button.interfaces';
 import { SelectButtonOptionTemplate } from './select-button.templates';
 
+/** Selects one value from a visible group of joined buttons. */
 @Component({
   selector: 'sui-select-button',
   imports: [NgTemplateOutlet, Button, JoinItem],

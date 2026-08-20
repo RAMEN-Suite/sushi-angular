@@ -45,6 +45,7 @@ import {
   AutocompletePrefixTemplate,
 } from './autocomplete.templates';
 
+/** Suggests and filters values while preserving native text input behavior. */
 @Component({
   selector: 'sui-autocomplete',
   imports: [

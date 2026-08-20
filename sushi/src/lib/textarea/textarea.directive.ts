@@ -2,6 +2,7 @@ import { afterNextRender, DestroyRef, Directive, ElementRef, inject, input, Inpu
 import { FluidControlState } from '../form-control';
 import { TextareaResize } from './textarea.interfaces';
 
+/** Styles a native multiline text control and configures its resize behavior. */
 @Directive({
   selector: 'textarea[suiTextarea]',
   host: {

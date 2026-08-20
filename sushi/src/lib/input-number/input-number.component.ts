@@ -31,6 +31,7 @@ import { InputNumberButtonsTemplate } from './input-number.templates';
 const optionalNumber: (value: unknown) => number | undefined = (value: unknown): number | undefined =>
   value === null || value === undefined || value === '' ? undefined : numberAttribute(value);
 
+/** Edits numeric values with locale formatting and optional step controls. */
 @Component({
   selector: 'sui-input-number',
   imports: [NgTemplateOutlet, LucideChevronDown, LucideChevronUp, Button, Join, JoinItem],

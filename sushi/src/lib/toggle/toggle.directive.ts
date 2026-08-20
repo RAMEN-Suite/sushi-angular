@@ -1,6 +1,7 @@
 import { Directive } from '@angular/core';
 import { SelectionControlState } from '../form-control';
 
+/** Styles a native checkbox as an on-or-off switch. */
 @Directive({
   selector: 'input[type="checkbox"][suiToggle]',
   host: {

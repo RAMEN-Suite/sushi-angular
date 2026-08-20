@@ -55,6 +55,7 @@ import {
   MultiSelectSelectedItemsTemplate,
 } from './multi-select.templates';
 
+/** Selects multiple values from a fixed list with keyboard-accessible popup behavior. */
 @Component({
   selector: 'sui-multi-select',
   imports: [

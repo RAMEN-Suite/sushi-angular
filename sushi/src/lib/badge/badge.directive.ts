@@ -1,6 +1,7 @@
 import { Directive, input, InputSignal } from '@angular/core';
 import { BadgeSeverity, BadgeSize, BadgeVariant } from './badge.interfaces';
 
+/** Styles compact, non-interactive labels for status or metadata. */
 @Directive({
   selector: '[suiBadge]',
   host: {

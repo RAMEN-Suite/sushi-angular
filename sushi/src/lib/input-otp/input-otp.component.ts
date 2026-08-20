@@ -18,6 +18,7 @@ import {
 import { FormValueControl } from '@angular/forms/signals';
 import { FormControlSize } from '../form-control';
 
+/** Edits a fixed-length one-time code through one accessible native input. */
 @Component({
   selector: 'sui-input-otp',
   templateUrl: './input-otp.component.html',

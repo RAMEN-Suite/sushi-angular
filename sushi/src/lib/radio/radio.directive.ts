@@ -1,6 +1,7 @@
 import { Directive } from '@angular/core';
 import { SelectionControlState } from '../form-control';
 
+/** Styles a native radio control and exposes consistent form state. */
 @Directive({
   selector: 'input[type="radio"][suiRadio]',
   host: {

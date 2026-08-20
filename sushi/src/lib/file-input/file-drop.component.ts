@@ -28,6 +28,7 @@ import { FileDropContentTemplate, FileDropItemTemplate } from './file-drop.templ
 
 let nextFileDropId: number = 0;
 
+/** Selects files through a drop zone or the native file dialog. */
 @Component({
   selector: 'sui-file-drop',
   imports: [NgTemplateOutlet, LucideX, Button],

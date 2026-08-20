@@ -2,6 +2,7 @@ import { afterRenderEffect, Directive, ElementRef, inject } from '@angular/core'
 import { FORM_FIELD, FormField } from '@angular/forms/signals';
 import { SelectionControlState } from '../form-control';
 
+/** Styles a native range control and reflects its current progress. */
 @Directive({
   selector: 'input[type="range"][suiRange]',
   host: {

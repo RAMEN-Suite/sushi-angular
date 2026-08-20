@@ -38,6 +38,7 @@ interface ColorPickerOption {
 const HEX_COLOR_PATTERN: RegExp = /^#[\da-f]{6}$/i;
 let nextColorPickerId: number = 0;
 
+/** Selects a color through a native picker, text value, or preset palette. */
 @Component({
   selector: 'sui-color-picker',
   imports: [NgTemplateOutlet, Button, Input, Join, JoinItem],

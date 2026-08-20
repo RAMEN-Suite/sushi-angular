@@ -26,6 +26,7 @@ import {
 } from './toggle-button.interfaces';
 import { ToggleButtonOffTemplate, ToggleButtonOnTemplate, ToggleButtonTemplate } from './toggle-button.templates';
 
+/** Toggles one pressed state while retaining button semantics. */
 @Component({
   selector: 'sui-toggle-button',
   imports: [NgTemplateOutlet, Button],

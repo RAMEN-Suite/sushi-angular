@@ -53,6 +53,7 @@ import {
   SelectSelectedItemTemplate,
 } from './select.templates';
 
+/** Selects one value from a fixed list with keyboard-accessible popup behavior. */
 @Component({
   selector: 'sui-select',
   imports: [

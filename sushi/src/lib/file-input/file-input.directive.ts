@@ -1,6 +1,7 @@
 import { Directive } from '@angular/core';
 import { FluidControlState } from '../form-control';
 
+/** Styles a native file input and exposes consistent form state. */
 @Directive({
   selector: 'input[type="file"][suiFileInput]',
   host: {

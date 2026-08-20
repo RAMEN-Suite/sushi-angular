@@ -19,6 +19,7 @@ import { LucideX } from '@lucide/angular';
 import { ChipContentContext, ChipSeverity, ChipSize, ChipVariant } from './chip.interfaces';
 import { ChipContentTemplate, ChipRemoveIconTemplate } from './chip.templates';
 
+/** Displays a compact value that can optionally be removed. */
 @Component({
   selector: 'sui-chip',
   imports: [NgTemplateOutlet, LucideX],
