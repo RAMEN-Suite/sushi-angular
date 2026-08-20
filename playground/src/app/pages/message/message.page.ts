@@ -1,8 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
-import { apiReference } from '../../generated/api-reference.generated';
-import { ApiReference } from '../../shared/api-reference/api-reference.component';
-import type { ApiReferenceData } from '../../shared/api-reference/api-reference.types';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import actionsHtml from './examples/actions/actions.example.html';
@@ -17,21 +14,11 @@ import { MessageVerticalExample } from './examples/vertical/vertical.example';
 
 @Component({
   selector: 'pg-message-page',
-  imports: [
-    ApiReference,
-    Badge,
-    Card,
-    CardTitle,
-    ExampleCode,
-    MessageActionsExample,
-    MessageUsageExample,
-    MessageVerticalExample,
-  ],
+  imports: [Badge, Card, CardTitle, ExampleCode, MessageActionsExample, MessageUsageExample, MessageVerticalExample],
   templateUrl: './message.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessagePage {
-  protected readonly api: readonly ApiReferenceData[] = [apiReference.Message, apiReference.MessageActions];
   protected readonly examples: Readonly<Record<'actions' | 'usage' | 'vertical', ExampleSource>> = {
     actions: { html: actionsHtml, typescript: textSource(actionsTs) },
     usage: { html: usageHtml, typescript: textSource(usageTs) },

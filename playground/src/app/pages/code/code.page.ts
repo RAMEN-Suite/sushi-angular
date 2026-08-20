@@ -1,8 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
-import { apiReference } from '../../generated/api-reference.generated';
-import { ApiReference } from '../../shared/api-reference/api-reference.component';
-import type { ApiReferenceData } from '../../shared/api-reference/api-reference.types';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import basicHtml from './examples/basic/basic.example.html';
@@ -14,12 +11,11 @@ import { CodeTemplatesExample } from './examples/templates/templates.example';
 
 @Component({
   selector: 'pg-code-page',
-  imports: [ApiReference, Badge, Card, CardTitle, CodeBasicExample, CodeTemplatesExample, ExampleCode],
+  imports: [Badge, Card, CardTitle, CodeBasicExample, CodeTemplatesExample, ExampleCode],
   templateUrl: './code.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodePage {
-  protected readonly api: readonly ApiReferenceData[] = [apiReference.Code, apiReference.CodeLine];
   protected readonly examples: Readonly<Record<'basic' | 'templates', ExampleSource>> = {
     basic: { html: basicHtml, typescript: textSource(basicTs) },
     templates: { html: templatesHtml, typescript: textSource(templatesTs) },

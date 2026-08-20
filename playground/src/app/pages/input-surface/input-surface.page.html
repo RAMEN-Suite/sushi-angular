@@ -6,19 +6,11 @@
         Keep a native input, icon, prefix, suffix, or shortcut inside one consistent field surface.
       </p>
     </div>
-    <div class="flex flex-wrap gap-2">
-      <span suiBadge variant="soft" size="sm">Native input</span>
-      <span suiBadge variant="soft" size="sm">Prefix and suffix</span>
-      <span suiBadge variant="soft" size="sm">Shared state</span>
+    <div class="flex flex-wrap gap-2" aria-label="Input Surface architecture">
+      <span suiBadge variant="soft" size="sm">Directive</span>
     </div>
   </section>
-  <sui-card
-    ><h2 suiCardTitle>API reference</h2>
-    @for (item of api; track item.className) {
-      <div class="mt-5"><pg-api-reference [api]="item" /></div>
-    }
-  </sui-card>
-  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+
   <sui-card
     ><h2 suiCardTitle>Search with an action</h2>
     <p class="text-base-content/60">Combine the surface with Join when an adjacent action belongs to the same task.</p>

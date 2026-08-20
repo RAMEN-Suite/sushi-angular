@@ -6,17 +6,14 @@
         Present terminal-like snippets with prefixes, copy behavior, and replaceable feedback.
       </p>
     </div>
-    <div class="flex flex-wrap gap-2">
-      <span suiBadge variant="soft" size="sm">Clipboard</span><span suiBadge variant="soft" size="sm">Copy templates</span>
+    <div class="flex flex-wrap gap-2" aria-label="Code architecture">
+      <span suiBadge variant="soft" size="sm">Component</span>
+      <span suiBadge variant="soft" size="sm">Angular CDK</span>
+      <span suiBadge variant="soft" size="sm">Templates</span>
+      <span suiBadge variant="soft" size="sm">Projected content</span>
     </div>
   </section>
-  <sui-card
-    ><h2 suiCardTitle>API reference</h2>
-    @for (item of api; track item.className) {
-      <div class="mt-5"><pg-api-reference [api]="item" /></div>
-    }
-  </sui-card>
-  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+
   <sui-card
     ><h2 suiCardTitle>Lines and prefixes</h2>
     <p class="text-base-content/60">Only marked code lines participate in the copied value.</p>

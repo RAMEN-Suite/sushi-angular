@@ -1,8 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
-import { apiReference } from '../../generated/api-reference.generated';
-import { ApiReference } from '../../shared/api-reference/api-reference.component';
-import type { ApiReferenceData } from '../../shared/api-reference/api-reference.types';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import basicHtml from './examples/basic/basic.example.html';
@@ -30,7 +27,6 @@ import { ChipTemplateExample } from './examples/template/template.example';
 @Component({
   selector: 'pg-chip-page',
   imports: [
-    ApiReference,
     Badge,
     Card,
     CardTitle,
@@ -47,7 +43,6 @@ import { ChipTemplateExample } from './examples/template/template.example';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipPage {
-  protected readonly api: ApiReferenceData = apiReference.Chip;
   protected readonly examples: Readonly<
     Record<'appearance' | 'basic' | 'colors' | 'icon' | 'image' | 'removal' | 'template', ExampleSource>
   > = {

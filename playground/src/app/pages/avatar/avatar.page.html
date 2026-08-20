@@ -4,18 +4,12 @@
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Avatar</h1>
       <p class="max-w-3xl text-lg text-base-content/70">Represent people and identities with images, fallbacks, presence, and groups.</p>
     </div>
-    <div class="flex flex-wrap gap-2">
-      <span suiBadge variant="soft" size="sm">Image or fallback</span><span suiBadge variant="soft" size="sm">Presence</span
-      ><span suiBadge variant="soft" size="sm">Masks</span>
+    <div class="flex flex-wrap gap-2" aria-label="Avatar architecture">
+      <span suiBadge variant="soft" size="sm">Component</span>
+      <span suiBadge variant="soft" size="sm">Projected content</span>
     </div>
   </section>
-  <sui-card
-    ><h2 suiCardTitle>API reference</h2>
-    @for (item of api; track item.className) {
-      <div class="mt-5"><pg-api-reference [api]="item" /></div>
-    }
-  </sui-card>
-  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+
   <sui-card
     ><h2 suiCardTitle>Sizes and shapes</h2>
     <p class="text-base-content/60">Choose a consistent size for each context and reserve decorative masks for expressive surfaces.</p>

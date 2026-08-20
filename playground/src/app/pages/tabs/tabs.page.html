@@ -4,18 +4,13 @@
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Tabs</h1>
       <p class="max-w-3xl text-lg text-base-content/70">Switch between related views with Angular Aria keyboard and focus behavior.</p>
     </div>
-    <div class="flex flex-wrap gap-2">
-      <span suiBadge variant="soft" size="sm">Angular Aria</span><span suiBadge variant="soft" size="sm">Templated panels</span
-      ><span suiBadge variant="soft" size="sm">Two orientations</span>
+    <div class="flex flex-wrap gap-2" aria-label="Tabs architecture">
+      <span suiBadge variant="soft" size="sm">Component</span>
+      <span suiBadge variant="soft" size="sm">Angular Aria</span>
+      <span suiBadge variant="soft" size="sm">Templates</span>
     </div>
   </section>
-  <sui-card
-    ><h2 suiCardTitle>API reference</h2>
-    @for (item of api; track item.className) {
-      <div class="mt-5"><pg-api-reference [api]="item" /></div>
-    }
-  </sui-card>
-  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+
   <sui-card
     ><h2 suiCardTitle>Account sections</h2>
     <p class="text-base-content/60">Bind the active value and define each label and panel in one template.</p>

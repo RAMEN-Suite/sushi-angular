@@ -4,15 +4,12 @@
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Spinner</h1>
       <p class="max-w-3xl text-lg text-base-content/70">Show ongoing work with a decorative animation and an accessible status message.</p>
     </div>
-    <div class="flex flex-wrap gap-2">
-      <span suiBadge variant="soft" size="sm">Six animations</span><span suiBadge variant="soft" size="sm">Current color</span>
+    <div class="flex flex-wrap gap-2" aria-label="Spinner architecture">
+      <span suiBadge variant="soft" size="sm">Directive</span>
+      <span suiBadge variant="soft" size="sm">Native element</span>
     </div>
   </section>
-  <sui-card
-    ><h2 suiCardTitle>API reference</h2>
-    <div class="mt-5"><pg-api-reference [api]="api" /></div
-  ></sui-card>
-  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+
   <sui-card
     ><h2 suiCardTitle>Animations and sizes</h2>
     <p class="text-base-content/60">Choose a simple motion and match its density to the surrounding content.</p>

@@ -1,0 +1,16 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  @if (api(); as references) {
+    <section class="space-y-3 py-2">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">{{ name() }} API reference</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Generated from the public Angular API. Descriptions and type information come directly from the source.
+      </p>
+    </section>
+
+    @for (reference of references; track reference.className) {
+      <sui-card>
+        <pg-api-reference [api]="reference" />
+      </sui-card>
+    }
+  }
+</main>

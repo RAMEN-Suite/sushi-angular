@@ -4,15 +4,12 @@
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Status</h1>
       <p class="max-w-3xl text-lg text-base-content/70">Pair a compact state marker with visible or assistive text.</p>
     </div>
-    <div class="flex flex-wrap gap-2">
-      <span suiBadge variant="soft" size="sm">Semantic state</span><span suiBadge variant="soft" size="sm">Reduced motion</span>
+    <div class="flex flex-wrap gap-2" aria-label="Status architecture">
+      <span suiBadge variant="soft" size="sm">Directive</span>
+      <span suiBadge variant="soft" size="sm">Native element</span>
     </div>
   </section>
-  <sui-card
-    ><h2 suiCardTitle>API reference</h2>
-    <div class="mt-5"><pg-api-reference [api]="api" /></div
-  ></sui-card>
-  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+
   <sui-card
     ><h2 suiCardTitle>States and sizes</h2>
     <p class="text-base-content/60">Always pair the visual marker with text when the meaning is not already available elsewhere.</p>

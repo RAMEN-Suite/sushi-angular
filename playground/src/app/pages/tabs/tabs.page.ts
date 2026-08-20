@@ -1,8 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
-import { apiReference } from '../../generated/api-reference.generated';
-import { ApiReference } from '../../shared/api-reference/api-reference.component';
-import type { ApiReferenceData } from '../../shared/api-reference/api-reference.types';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import basicHtml from './examples/basic/basic.example.html';
@@ -17,12 +14,11 @@ import { TabsWorkspaceExample } from './examples/workspace/workspace.example';
 
 @Component({
   selector: 'pg-tabs-page',
-  imports: [ApiReference, Badge, Card, CardTitle, ExampleCode, TabsBasicExample, TabsBehaviorExample, TabsWorkspaceExample],
+  imports: [Badge, Card, CardTitle, ExampleCode, TabsBasicExample, TabsBehaviorExample, TabsWorkspaceExample],
   templateUrl: './tabs.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsPage {
-  protected readonly api: readonly ApiReferenceData[] = [apiReference.Tabs];
   protected readonly examples: Readonly<Record<'basic' | 'behavior' | 'workspace', ExampleSource>> = {
     basic: { html: basicHtml, typescript: textSource(basicTs) },
     behavior: { html: behaviorHtml, typescript: textSource(behaviorTs) },

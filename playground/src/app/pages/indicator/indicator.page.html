@@ -4,17 +4,11 @@
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Indicator</h1>
       <p class="max-w-3xl text-lg text-base-content/70">Position state, count, and action markers around another element.</p>
     </div>
-    <div class="flex flex-wrap gap-2">
-      <span suiBadge variant="soft" size="sm">Nine positions</span><span suiBadge variant="soft" size="sm">Use sparingly</span>
+    <div class="flex flex-wrap gap-2" aria-label="Indicator architecture">
+      <span suiBadge variant="soft" size="sm">Directive</span>
     </div>
   </section>
-  <sui-card
-    ><h2 suiCardTitle>API reference</h2>
-    @for (item of api; track item.className) {
-      <div class="mt-5"><pg-api-reference [api]="item" /></div>
-    }
-  </sui-card>
-  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+
   <sui-card>
     <h2 suiCardTitle>Basic indicators</h2>
     <p class="text-base-content/60">Use one concise marker for status, counts, or requirements without obscuring its target.</p>

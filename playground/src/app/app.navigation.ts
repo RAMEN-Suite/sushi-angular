@@ -198,3 +198,7 @@ export const navigation: NavigationGroup[] = [
     ],
   },
 ];
+
+export const apiNavigation: readonly NavigationItem[] = navigation
+  .flatMap((group: NavigationGroup): readonly NavigationItem[] => group.items)
+  .filter((item: NavigationItem): boolean => item.path !== '/icon');

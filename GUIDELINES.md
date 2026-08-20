@@ -154,6 +154,7 @@ Prefer in order:
 - Compile those files for the preview and import the same files through text loaders.
 - Never duplicate source as strings or handwritten `suiCodeLine` blocks.
 - Pages own only descriptions, layout, examples, and raw-source references.
+- Keep generated API references on the component's `/api` subpage; example pages contain no API data or API section heading.
 - Lazy-load every playground page through `loadComponent`.
 - Keep routed documentation in `playground/src/app/pages/<component>`; navigation groups do not create filesystem layers.
 - Use `pg-example-code` for HTML and TypeScript examples; do not add separate code-rendering wrappers.
@@ -165,6 +166,18 @@ Prefer in order:
 - Use existing SUSHI components in examples.
 - Do not mention DaisyUI in user-facing documentation.
 - Reset buttons use `severity="neutral"` and `variant="soft"`.
+
+Component page tags:
+
+- Start with exactly one Angular declaration tag: `Directive` or `Component`.
+- Use `Integration` instead only for guidance pages that do not document a SUSHI export.
+- Add `Native element` when the public selector enhances a specific native element and preserves its semantics.
+- Then include every applicable architecture tag in this order: `Signal Forms`, `Angular Aria`, `Angular CDK`, `Templates`, `Projected content`.
+- Use only these fixed labels; do not invent feature, state, size, style, count, or marketing tags.
+- Keep this order: declaration, `Native element`, Angular integrations, extension mechanisms.
+- Describe the consumer-facing API: a component that only contains a native input remains `Component` without `Native element`.
+- Add `Templates` only for public typed `ng-template` markers and `Projected content` only for a deliberate `ng-content` API.
+- Add Angular technology tags only when the feature directly uses that API.
 
 ## Before handoff
 

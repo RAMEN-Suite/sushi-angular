@@ -4,18 +4,11 @@
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Join</h1>
       <p class="max-w-3xl text-lg text-base-content/70">Connect related surfaces while every child keeps its own behavior and semantics.</p>
     </div>
-    <div class="flex flex-wrap gap-2">
-      <span suiBadge variant="soft" size="sm">Horizontal</span><span suiBadge variant="soft" size="sm">Vertical</span
-      ><span suiBadge variant="soft" size="sm">Nested</span>
+    <div class="flex flex-wrap gap-2" aria-label="Join architecture">
+      <span suiBadge variant="soft" size="sm">Directive</span>
     </div>
   </section>
-  <sui-card
-    ><h2 suiCardTitle>API reference</h2>
-    @for (item of api; track item.className) {
-      <div class="mt-5"><pg-api-reference [api]="item" /></div>
-    }
-  </sui-card>
-  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+
   <sui-card
     ><h2 suiCardTitle>Search and period controls</h2>
     <p class="text-base-content/60">Use separate joins for distinct tasks and add a group name when several actions form one control.</p>

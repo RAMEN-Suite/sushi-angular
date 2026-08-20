@@ -1,4 +1,13 @@
-import { Routes } from '@angular/router';
+import type { Route, Routes } from '@angular/router';
+import { apiNavigation } from './app.navigation';
+import type { NavigationItem } from './app.navigation';
+
+const apiRoutes: Routes = apiNavigation.map((item: NavigationItem): Route => ({
+  path: `${item.path.slice(1)}/api`,
+  loadComponent: () => import('./pages/api/api.page').then(({ ApiPage }) => ApiPage),
+  title: `${item.label} API | SUSHI Playground`,
+  data: { component: item.path.slice(1), name: item.label },
+}));
 
 export const routes: Routes = [
   {
@@ -191,6 +200,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/toggle-button/toggle-button.page').then(({ ToggleButtonPage }) => ToggleButtonPage),
     title: 'Toggle Button | SUSHI Playground',
   },
+  ...apiRoutes,
   {
     path: '**',
     redirectTo: '',

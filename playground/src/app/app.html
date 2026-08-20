@@ -66,6 +66,27 @@
     </aside>
 
     <main class="min-w-0">
+      @if (pagePath(); as path) {
+        <nav class="border-b border-base-300" aria-label="Component documentation">
+          <div class="mx-auto flex max-w-7xl gap-6 px-4 sm:px-8">
+            <a
+              class="border-b-2 border-transparent py-3 text-sm font-medium text-base-content/60 hover:text-base-content"
+              [routerLink]="path"
+              routerLinkActive="border-base-content text-base-content"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              Examples
+            </a>
+            <a
+              class="border-b-2 border-transparent py-3 text-sm font-medium text-base-content/60 hover:text-base-content"
+              [routerLink]="path + '/api'"
+              routerLinkActive="border-base-content text-base-content"
+            >
+              API reference
+            </a>
+          </div>
+        </nav>
+      }
       <router-outlet />
     </main>
   </div>

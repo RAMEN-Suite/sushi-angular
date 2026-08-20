@@ -6,15 +6,11 @@
         Request focus after an element is rendered while disabled controls and explicit opt-outs remain untouched.
       </p>
     </div>
-    <div class="flex flex-wrap gap-2">
-      <span suiBadge variant="soft" size="sm">After render</span><span suiBadge variant="soft" size="sm">Disabled-safe</span>
+    <div class="flex flex-wrap gap-2" aria-label="Auto Focus architecture">
+      <span suiBadge variant="soft" size="sm">Directive</span>
     </div>
   </section>
-  <sui-card
-    ><h2 suiCardTitle>API reference</h2>
-    <div class="mt-5"><pg-api-reference [api]="api" /></div
-  ></sui-card>
-  <section class="space-y-2 pt-2"><h2 class="text-3xl font-bold tracking-tight">Examples</h2></section>
+
   <sui-card
     ><h2 suiCardTitle>Dynamic content</h2>
     <p class="text-base-content/60">Focus a newly created field after Angular completes rendering it.</p>
