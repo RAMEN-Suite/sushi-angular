@@ -4,6 +4,10 @@
     <span class="text-sm text-base-content/60">Generated from {{ api().className }}</span>
   </div>
 
+  <p class="max-w-3xl text-base-content/70">
+    {{ api().description || 'Public API exposed by ' + api().selector + '.' }}
+  </p>
+
   @for (group of groups(); track group.kind) {
     <section class="grid gap-3" [attr.aria-labelledby]="'api-' + api().className + '-' + group.kind">
       <h3 class="text-lg font-semibold" [id]="'api-' + api().className + '-' + group.kind">{{ group.label }}</h3>
@@ -24,7 +28,15 @@
                   <code class="font-semibold">{{ member.name }}</code>
                 </td>
                 <td>
-                  <code class="whitespace-nowrap text-sm">{{ member.type }}</code>
+                  <code class="whitespace-nowrap text-sm">
+                    @for (part of typeParts().get(member.type); track $index) {
+                      @if (part.reference) {
+                        <a class="link link-hover font-semibold" [routerLink]="[]" [fragment]="typeId(part.reference)">{{ part.text }}</a>
+                      } @else {
+                        {{ part.text }}
+                      }
+                    }
+                  </code>
                 </td>
                 <td>
                   <code class="text-sm">{{ member.defaultValue ?? '—' }}</code>
@@ -57,7 +69,15 @@
                   <code class="font-semibold">{{ template.name }}</code>
                 </td>
                 <td>
-                  <code class="text-sm">{{ template.context }}</code>
+                  <code class="text-sm">
+                    @for (part of typeParts().get(template.context); track $index) {
+                      @if (part.reference) {
+                        <a class="link link-hover font-semibold" [routerLink]="[]" [fragment]="typeId(part.reference)">{{ part.text }}</a>
+                      } @else {
+                        {{ part.text }}
+                      }
+                    }
+                  </code>
                 </td>
                 <td class="min-w-64 text-base-content/70">{{ template.description || '—' }}</td>
               </tr>
@@ -69,4 +89,24 @@
       <p class="text-sm text-base-content/60">No component templates. Native element content and attributes remain available.</p>
     }
   </section>
+
+  @if (api().types.length > 0) {
+    <section class="grid gap-3" [attr.aria-labelledby]="'api-' + api().className + '-types'">
+      <h3 class="text-lg font-semibold" [id]="'api-' + api().className + '-types'">Types</h3>
+      <div class="grid gap-4">
+        @for (type of api().types; track type.name) {
+          <article class="grid scroll-mt-4 gap-3 rounded-box border border-base-300 p-4" [id]="typeId(type.name)">
+            <div class="flex flex-wrap items-center gap-2">
+              <code class="font-semibold">{{ type.name }}</code>
+              <span suiBadge severity="neutral" variant="soft" size="xs">{{ type.kind }}</span>
+            </div>
+            @if (type.description) {
+              <p class="text-sm text-base-content/70">{{ type.description }}</p>
+            }
+            <pre class="overflow-x-auto rounded-field bg-base-200 p-3 text-sm"><code>{{ type.declaration }}</code></pre>
+          </article>
+        }
+      </div>
+    </section>
+  }
 </div>

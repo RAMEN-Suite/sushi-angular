@@ -14,9 +14,20 @@ export interface ApiTemplate {
   readonly description: string;
 }
 
+export type ApiTypeKind = 'interface' | 'type' | 'enum';
+
+export interface ApiTypeDefinition {
+  readonly name: string;
+  readonly kind: ApiTypeKind;
+  readonly declaration: string;
+  readonly description: string;
+}
+
 export interface ApiReferenceData {
   readonly className: string;
   readonly selector: string;
+  readonly description: string;
   readonly members: readonly ApiMember[];
   readonly templates: readonly ApiTemplate[];
+  readonly types: readonly ApiTypeDefinition[];
 }

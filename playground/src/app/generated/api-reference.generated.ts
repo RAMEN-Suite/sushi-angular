@@ -5,6 +5,7 @@ export const apiReference = {
   Autocomplete: {
     className: 'Autocomplete',
     selector: 'sui-autocomplete',
+    description: 'Suggests and filters values while preserving native text input behavior.',
     members: [
       {
         name: 'value',
@@ -244,10 +245,101 @@ export const apiReference = {
         description: 'Replaces the error message and exposes the current query.',
       },
     ],
+    types: [
+      {
+        name: 'AutocompleteCompareWith',
+        kind: 'type',
+        declaration: 'type AutocompleteCompareWith = SelectionCompareWith;',
+        description: 'Compares autocomplete values for identity.',
+      },
+      {
+        name: 'AutocompleteFilter',
+        kind: 'type',
+        declaration: 'type AutocompleteFilter = SelectionFilter;',
+        description: 'Filters autocomplete suggestions for a query.',
+      },
+      {
+        name: 'AutocompleteItemContext',
+        kind: 'interface',
+        declaration:
+          'interface AutocompleteItemContext {\n  readonly $implicit: AutocompleteOption;\n  readonly option: AutocompleteOption;\n  readonly selected: boolean;\n  readonly matched: boolean;\n  readonly disabled: boolean;\n  readonly index: number;\n}',
+        description: 'Context exposed to an autocomplete item template.',
+      },
+      {
+        name: 'AutocompleteOption',
+        kind: 'type',
+        declaration: 'type AutocompleteOption = SelectionOption;',
+        description: 'One suggestion available to an autocomplete control.',
+      },
+      {
+        name: 'AutocompleteStatusContext',
+        kind: 'interface',
+        declaration:
+          'interface AutocompleteStatusContext {\n  readonly $implicit: string;\n  readonly message: string;\n  readonly query: string;\n}',
+        description: 'Context exposed to autocomplete status templates.',
+      },
+      {
+        name: 'AutocompleteValue',
+        kind: 'type',
+        declaration: 'type AutocompleteValue = SelectionValue | null;',
+        description: 'Value held by an autocomplete control.',
+      },
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSeverity',
+        kind: 'type',
+        declaration: 'type FormControlSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to form controls.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'SelectionCompareWith',
+        kind: 'type',
+        declaration: 'type SelectionCompareWith = (first: SelectionValue, second: SelectionValue) => boolean;',
+        description: 'Compares two selection values for identity.',
+      },
+      {
+        name: 'SelectionFilter',
+        kind: 'type',
+        declaration: 'type SelectionFilter = (option: SelectionOption, query: string) => boolean;',
+        description: 'Determines whether an option matches a text query.',
+      },
+      {
+        name: 'SelectionOption',
+        kind: 'interface',
+        declaration:
+          'interface SelectionOption {\n  readonly label: string;\n  readonly value: SelectionValue;\n  readonly disabled?: boolean;\n}',
+        description: 'One selectable label and value with optional disabled state.',
+      },
+      {
+        name: 'SelectionValue',
+        kind: 'type',
+        declaration: 'type SelectionValue = string | number | boolean | object;',
+        description: 'Primitive or object value accepted by selection controls.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   AutoFocus: {
     className: 'AutoFocus',
     selector: '[suiAutoFocus]',
+    description: 'Moves focus to an enabled element after its first render.',
     members: [
       {
         name: 'enabled',
@@ -258,10 +350,12 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [],
   },
   Avatar: {
     className: 'Avatar',
     selector: 'sui-avatar',
+    description: 'Displays an image or fallback identity with optional presence state and masking.',
     members: [
       {
         name: 'status',
@@ -300,16 +394,52 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'AvatarMaskHalf',
+        kind: 'type',
+        declaration: "type AvatarMaskHalf = 'first' | 'second';",
+        description: 'Half retained by half-mask avatar shapes.',
+      },
+      {
+        name: 'AvatarShape',
+        kind: 'type',
+        declaration:
+          "type AvatarShape = | 'square'\n  | 'rounded'\n  | 'circle'\n  | 'squircle'\n  | 'heart'\n  | 'hexagon'\n  | 'hexagon-2'\n  | 'decagon'\n  | 'pentagon'\n  | 'diamond'\n  | 'mask-square'\n  | 'mask-circle'\n  | 'star'\n  | 'star-2'\n  | 'triangle'\n  | 'triangle-2'\n  | 'triangle-3'\n  | 'triangle-4';",
+        description: 'Built-in shapes and masks available to avatars.',
+      },
+      {
+        name: 'AvatarSize',
+        kind: 'type',
+        declaration: 'type AvatarSize = ComponentSize;',
+        description: 'Size scale available to avatars.',
+      },
+      {
+        name: 'AvatarStatus',
+        kind: 'type',
+        declaration: "type AvatarStatus = 'online' | 'offline';",
+        description: 'Presence states displayed by an avatar.',
+      },
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+    ],
   },
   AvatarGroup: {
     className: 'AvatarGroup',
     selector: '[suiAvatarGroup]',
+    description: 'Groups multiple avatars into an overlapping visual stack.',
     members: [],
     templates: [],
+    types: [],
   },
   Badge: {
     className: 'Badge',
     selector: '[suiBadge]',
+    description: 'Styles compact, non-interactive labels for status or metadata.',
     members: [
       {
         name: 'severity',
@@ -334,10 +464,44 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'BadgeSeverity',
+        kind: 'type',
+        declaration: 'type BadgeSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to badges.',
+      },
+      {
+        name: 'BadgeSize',
+        kind: 'type',
+        declaration: 'type BadgeSize = ComponentSize;',
+        description: 'Size scale available to badges.',
+      },
+      {
+        name: 'BadgeVariant',
+        kind: 'type',
+        declaration: "type BadgeVariant = 'outlined' | 'soft' | 'dash';",
+        description: 'Visual treatments available to badges.',
+      },
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Button: {
     className: 'Button',
     selector: 'button[suiButton], a[suiButton]',
+    description: 'Styles native buttons and links while preserving their platform semantics.',
     members: [
       {
         name: 'severity',
@@ -390,10 +554,50 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ButtonSeverity',
+        kind: 'type',
+        declaration: 'type ButtonSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to buttons.',
+      },
+      {
+        name: 'ButtonShape',
+        kind: 'type',
+        declaration: "type ButtonShape = 'default' | 'fluid' | 'circle' | 'square';",
+        description: 'Width and geometry options available to buttons.',
+      },
+      {
+        name: 'ButtonSize',
+        kind: 'type',
+        declaration: 'type ButtonSize = ComponentSize;',
+        description: 'Size scale available to buttons.',
+      },
+      {
+        name: 'ButtonVariant',
+        kind: 'type',
+        declaration: "type ButtonVariant = 'link' | 'outlined' | 'soft' | 'dash' | 'text';",
+        description: 'Visual treatments available to buttons.',
+      },
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Card: {
     className: 'Card',
     selector: 'sui-card',
+    description: 'Groups related content, media, and actions in one visual surface.',
     members: [
       {
         name: 'variant',
@@ -411,28 +615,55 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'CardSize',
+        kind: 'type',
+        declaration: 'type CardSize = ComponentSize;',
+        description: 'Size scale controlling card content density.',
+      },
+      {
+        name: 'CardVariant',
+        kind: 'type',
+        declaration: "type CardVariant = 'plain' | 'border' | 'dash';",
+        description: 'Surface treatments available to cards.',
+      },
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+    ],
   },
   CardActions: {
     className: 'CardActions',
     selector: '[suiCardActions]',
+    description: 'Aligns related actions inside a card.',
     members: [],
     templates: [],
+    types: [],
   },
   CardMedia: {
     className: 'CardMedia',
     selector: '[suiCardMedia]',
+    description: 'Marks media that participates in a card layout.',
     members: [],
     templates: [],
+    types: [],
   },
   CardTitle: {
     className: 'CardTitle',
     selector: '[suiCardTitle]',
+    description: 'Applies card title typography to a semantic heading.',
     members: [],
     templates: [],
+    types: [],
   },
   Checkbox: {
     className: 'Checkbox',
     selector: 'input[type="checkbox"][suiCheckbox]',
+    description: 'Styles a native checkbox and exposes consistent form state.',
     members: [
       {
         name: 'indeterminate',
@@ -478,10 +709,38 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSeverity',
+        kind: 'type',
+        declaration: 'type FormControlSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to form controls.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Chip: {
     className: 'Chip',
     selector: 'sui-chip',
+    description: 'Displays a compact value that can optionally be removed.',
     members: [
       {
         name: 'label',
@@ -559,10 +818,63 @@ export const apiReference = {
         description: 'Replaces the remove icon of a removable chip.',
       },
     ],
+    types: [
+      {
+        name: 'BadgeSeverity',
+        kind: 'type',
+        declaration: 'type BadgeSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to badges.',
+      },
+      {
+        name: 'BadgeVariant',
+        kind: 'type',
+        declaration: "type BadgeVariant = 'outlined' | 'soft' | 'dash';",
+        description: 'Visual treatments available to badges.',
+      },
+      {
+        name: 'ChipContentContext',
+        kind: 'interface',
+        declaration:
+          'interface ChipContentContext {\n  readonly $implicit: string | null;\n  readonly label: string | null;\n  readonly removable: boolean;\n  readonly disabled: boolean;\n}',
+        description: 'Context exposed to a chip content template.',
+      },
+      {
+        name: 'ChipSeverity',
+        kind: 'type',
+        declaration: 'type ChipSeverity = BadgeSeverity;',
+        description: 'Semantic colors available to chips.',
+      },
+      {
+        name: 'ChipSize',
+        kind: 'type',
+        declaration: 'type ChipSize = ComponentSize;',
+        description: 'Size scale available to chips.',
+      },
+      {
+        name: 'ChipVariant',
+        kind: 'type',
+        declaration: 'type ChipVariant = BadgeVariant;',
+        description: 'Visual treatments available to chips.',
+      },
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Code: {
     className: 'Code',
     selector: 'sui-code',
+    description: 'Presents terminal-like code and copies all projected code lines.',
     members: [
       {
         name: 'copyable',
@@ -610,10 +922,26 @@ export const apiReference = {
         description: 'Replaces the default copy control content after copying.',
       },
     ],
+    types: [
+      {
+        name: 'ButtonShape',
+        kind: 'type',
+        declaration: "type ButtonShape = 'default' | 'fluid' | 'circle' | 'square';",
+        description: 'Width and geometry options available to buttons.',
+      },
+      {
+        name: 'CodeButtonContext',
+        kind: 'interface',
+        declaration:
+          'interface CodeButtonContext {\n  $implicit: () => void;\n  copy: () => void;\n  copied: Signal<boolean>;\n}',
+        description: 'Context exposed to the complete code copy-button template.',
+      },
+    ],
   },
   CodeLine: {
     className: 'CodeLine',
     selector: '[suiCodeLine]',
+    description: 'Marks one copyable line and optionally displays a prefix.',
     members: [
       {
         name: 'prefix',
@@ -631,10 +959,12 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [],
   },
   ColorPicker: {
     className: 'ColorPicker',
     selector: 'sui-color-picker',
+    description: 'Selects a color through a native picker, text value, or preset palette.',
     members: [
       {
         name: 'value',
@@ -749,10 +1079,33 @@ export const apiReference = {
         description: 'Replaces the content of each preset color action.',
       },
     ],
+    types: [
+      {
+        name: 'ColorPickerPreset',
+        kind: 'interface',
+        declaration:
+          'interface ColorPickerPreset {\n  readonly value: string;\n  readonly label: string;\n  readonly disabled?: boolean;\n}',
+        description: 'Named color offered by a color-picker preset palette.',
+      },
+      {
+        name: 'ColorPickerPresetContext',
+        kind: 'interface',
+        declaration:
+          'interface ColorPickerPresetContext {\n  $implicit: string;\n  color: string;\n  label: string;\n  custom: boolean;\n  selected: boolean;\n  disabled: boolean;\n}',
+        description: 'Context exposed to a color-picker preset template.',
+      },
+      {
+        name: 'ColorPickerPresetValue',
+        kind: 'type',
+        declaration: 'type ColorPickerPresetValue = string | ColorPickerPreset;',
+        description: 'Shorthand or configured entry accepted by a preset palette.',
+      },
+    ],
   },
   Divider: {
     className: 'Divider',
     selector: '[suiDivider]',
+    description: 'Separates related content horizontally or vertically with an optional label.',
     members: [
       {
         name: 'severity',
@@ -777,10 +1130,44 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'DividerOrientation',
+        kind: 'type',
+        declaration: 'type DividerOrientation = Orientation;',
+        description: 'Direction in which a divider separates content.',
+      },
+      {
+        name: 'DividerPlacement',
+        kind: 'type',
+        declaration: "type DividerPlacement = 'start' | 'center' | 'end';",
+        description: 'Position of divider content along its line.',
+      },
+      {
+        name: 'DividerSeverity',
+        kind: 'type',
+        declaration: 'type DividerSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to dividers.',
+      },
+      {
+        name: 'Orientation',
+        kind: 'type',
+        declaration: "type Orientation = 'horizontal' | 'vertical';",
+        description: 'Supported layout directions.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Fieldset: {
     className: 'Fieldset',
     selector: 'fieldset[suiFieldset]',
+    description: 'Styles a native fieldset and optionally controls collapsible content.',
     members: [
       {
         name: 'expanded',
@@ -805,28 +1192,36 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [],
   },
   FieldsetContent: {
     className: 'FieldsetContent',
     selector: '[suiFieldsetContent]',
+    description: 'Marks the animated and inert-aware content of a collapsible fieldset.',
     members: [],
     templates: [],
+    types: [],
   },
   FieldsetLegend: {
     className: 'FieldsetLegend',
     selector: 'legend[suiFieldsetLegend]',
+    description: 'Styles the native legend that names a fieldset.',
     members: [],
     templates: [],
+    types: [],
   },
   FieldsetToggle: {
     className: 'FieldsetToggle',
     selector: 'button[suiFieldsetToggle]',
+    description: 'Turns a legend button into the controller for its collapsible fieldset.',
     members: [],
     templates: [],
+    types: [],
   },
   FileDrop: {
     className: 'FileDrop',
     selector: 'sui-file-drop',
+    description: 'Selects files through a drop zone or the native file dialog.',
     members: [
       {
         name: 'value',
@@ -967,10 +1362,32 @@ export const apiReference = {
         description: 'Replaces each selected file row while preserving its actions.',
       },
     ],
+    types: [
+      {
+        name: 'FileDropContentContext',
+        kind: 'interface',
+        declaration:
+          'interface FileDropContentContext {\n  $implicit: readonly File[];\n  files: readonly File[];\n  active: boolean;\n  disabled: boolean;\n}',
+        description: 'Context exposed to the file-drop instruction template.',
+      },
+      {
+        name: 'FileDropItemContext',
+        kind: 'interface',
+        declaration: 'interface FileDropItemContext {\n  $implicit: File;\n  file: File;\n  index: number;\n  size: string;\n}',
+        description: 'Context exposed to each selected file template.',
+      },
+      {
+        name: 'FileDropRejection',
+        kind: 'interface',
+        declaration: "interface FileDropRejection {\n  readonly file: File;\n  readonly reason: 'accept';\n}",
+        description: 'File rejected by the drop zone and its rejection reason.',
+      },
+    ],
   },
   FileInput: {
     className: 'FileInput',
     selector: 'input[type="file"][suiFileInput]',
+    description: 'Styles a native file input and exposes consistent form state.',
     members: [
       {
         name: 'fluid',
@@ -1016,16 +1433,46 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSeverity',
+        kind: 'type',
+        declaration: 'type FormControlSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to form controls.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Indicator: {
     className: 'Indicator',
     selector: '[suiIndicator]',
+    description: 'Establishes the positioning context for one or more indicator items.',
     members: [],
     templates: [],
+    types: [],
   },
   IndicatorItem: {
     className: 'IndicatorItem',
     selector: '[suiIndicatorItem]',
+    description: 'Positions projected content relative to its indicator target.',
     members: [
       {
         name: 'horizontal',
@@ -1043,10 +1490,25 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'IndicatorHorizontalPosition',
+        kind: 'type',
+        declaration: "type IndicatorHorizontalPosition = 'start' | 'center' | 'end';",
+        description: 'Horizontal attachment point of an indicator item.',
+      },
+      {
+        name: 'IndicatorVerticalPosition',
+        kind: 'type',
+        declaration: "type IndicatorVerticalPosition = 'top' | 'middle' | 'bottom';",
+        description: 'Vertical attachment point of an indicator item.',
+      },
+    ],
   },
   Input: {
     className: 'Input',
     selector: 'input[suiInput]',
+    description: 'Styles a native input without replacing its browser behavior.',
     members: [
       {
         name: 'showClear',
@@ -1099,10 +1561,38 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSeverity',
+        kind: 'type',
+        declaration: 'type FormControlSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to form controls.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   InputGroup: {
     className: 'InputGroup',
     selector: '[suiInputGroup]',
+    description: 'Connects inputs, add-ons, and actions as one visual field group.',
     members: [
       {
         name: 'orientation',
@@ -1113,16 +1603,39 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'InputGroupOrientation',
+        kind: 'type',
+        declaration: "type InputGroupOrientation = JoinOrientation | 'responsive';",
+        description: 'Layout directions supported by an input group.',
+      },
+      {
+        name: 'JoinOrientation',
+        kind: 'type',
+        declaration: 'type JoinOrientation = Orientation;',
+        description: 'Direction in which joined items are connected.',
+      },
+      {
+        name: 'Orientation',
+        kind: 'type',
+        declaration: "type Orientation = 'horizontal' | 'vertical';",
+        description: 'Supported layout directions.',
+      },
+    ],
   },
   InputGroupAddon: {
     className: 'InputGroupAddon',
     selector: '[suiInputGroupAddon]',
+    description: 'Marks non-interactive prefix or suffix content inside an input group.',
     members: [],
     templates: [],
+    types: [],
   },
   InputNumber: {
     className: 'InputNumber',
     selector: 'sui-input-number',
+    description: 'Edits numeric values with locale formatting and optional step controls.',
     members: [
       {
         name: 'value',
@@ -1286,10 +1799,32 @@ export const apiReference = {
         description: 'Replaces the complete increment and decrement control group.',
       },
     ],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'InputNumberButtonsContext',
+        kind: 'interface',
+        declaration:
+          'interface InputNumberButtonsContext {\n  readonly $implicit: number | null;\n  readonly value: number | null;\n  readonly disabled: boolean;\n  readonly size: FormControlSize;\n  readonly decrement: () => void;\n  readonly increment: () => void;\n}',
+        description: 'Context exposed to the complete input-number step-control template.',
+      },
+    ],
   },
   InputOtp: {
     className: 'InputOtp',
     selector: 'sui-input-otp',
+    description: 'Edits a fixed-length one-time code through one accessible native input.',
     members: [
       {
         name: 'value',
@@ -1391,10 +1926,25 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+    ],
   },
   InputSurface: {
     className: 'InputSurface',
     selector: 'div[suiInputSurface]',
+    description: 'Creates one input surface for a native control and inline prefixes or suffixes.',
     members: [
       {
         name: 'severity',
@@ -1426,10 +1976,38 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSeverity',
+        kind: 'type',
+        declaration: 'type FormControlSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to form controls.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   InputSurfaceControl: {
     className: 'InputSurfaceControl',
     selector: 'input[suiInputSurfaceControl]',
+    description: 'Marks the native input that owns the value inside an input surface.',
     members: [
       {
         name: 'showClear',
@@ -1461,10 +2039,12 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [],
   },
   Join: {
     className: 'Join',
     selector: '[suiJoin]',
+    description: 'Visually connects related controls without changing their semantics.',
     members: [
       {
         name: 'orientation',
@@ -1475,16 +2055,33 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'JoinOrientation',
+        kind: 'type',
+        declaration: 'type JoinOrientation = Orientation;',
+        description: 'Direction in which joined items are connected.',
+      },
+      {
+        name: 'Orientation',
+        kind: 'type',
+        declaration: "type Orientation = 'horizontal' | 'vertical';",
+        description: 'Supported layout directions.',
+      },
+    ],
   },
   JoinItem: {
     className: 'JoinItem',
     selector: '[suiJoinItem]',
+    description: 'Marks a direct child as part of a join.',
     members: [],
     templates: [],
+    types: [],
   },
   Kbd: {
     className: 'Kbd',
     selector: 'kbd[suiKbd]',
+    description: 'Styles a semantic keyboard key without introducing button behavior.',
     members: [
       {
         name: 'size',
@@ -1495,10 +2092,25 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'KbdSize',
+        kind: 'type',
+        declaration: 'type KbdSize = ComponentSize;',
+        description: 'Size scale available to keyboard-key labels.',
+      },
+    ],
   },
   Label: {
     className: 'Label',
     selector: '[suiLabel]',
+    description: 'Styles a visible control label without prescribing its native or ARIA association.',
     members: [
       {
         name: 'floating',
@@ -1509,10 +2121,12 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [],
   },
   Message: {
     className: 'Message',
     selector: '[suiMessage]',
+    description: 'Presents contextual feedback with optional semantic color and layout.',
     members: [
       {
         name: 'severity',
@@ -1537,16 +2151,45 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'MessageOrientation',
+        kind: 'type',
+        declaration: 'type MessageOrientation = Orientation;',
+        description: 'Direction used to arrange message content and actions.',
+      },
+      {
+        name: 'MessageSeverity',
+        kind: 'type',
+        declaration: "type MessageSeverity = 'info' | 'success' | 'warning' | 'error';",
+        description: 'Semantic feedback colors available to messages.',
+      },
+      {
+        name: 'MessageVariant',
+        kind: 'type',
+        declaration: "type MessageVariant = 'soft' | 'outlined' | 'dash';",
+        description: 'Visual treatments available to messages.',
+      },
+      {
+        name: 'Orientation',
+        kind: 'type',
+        declaration: "type Orientation = 'horizontal' | 'vertical';",
+        description: 'Supported layout directions.',
+      },
+    ],
   },
   MessageActions: {
     className: 'MessageActions',
     selector: '[suiMessageActions]',
+    description: 'Aligns related actions within a message.',
     members: [],
     templates: [],
+    types: [],
   },
   MultiSelect: {
     className: 'MultiSelect',
     selector: 'sui-multi-select',
+    description: 'Selects multiple values from a fixed list with keyboard-accessible popup behavior.',
     members: [
       {
         name: 'value',
@@ -1803,10 +2446,163 @@ export const apiReference = {
         description: 'Replaces the empty-options message.',
       },
     ],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSeverity',
+        kind: 'type',
+        declaration: 'type FormControlSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to form controls.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'MultiSelectCompareWith',
+        kind: 'type',
+        declaration: 'type MultiSelectCompareWith = SelectCompareWith;',
+        description: 'Compares multi-select values for identity.',
+      },
+      {
+        name: 'MultiSelectGroupContext',
+        kind: 'type',
+        declaration: 'type MultiSelectGroupContext = SelectGroupContext;',
+        description: 'Context exposed to a multi-select group-heading template.',
+      },
+      {
+        name: 'MultiSelectHeaderContext',
+        kind: 'interface',
+        declaration:
+          'interface MultiSelectHeaderContext {\n  readonly $implicit: readonly MultiSelectOption[];\n  readonly options: readonly MultiSelectOption[];\n  readonly selectedCount: number;\n  readonly allSelected: boolean;\n  readonly disabled: boolean;\n  readonly toggleAll: () => void;\n}',
+        description: 'Context exposed to a multi-select header template.',
+      },
+      {
+        name: 'MultiSelectItemContext',
+        kind: 'type',
+        declaration: 'type MultiSelectItemContext = SelectItemContext;',
+        description: 'Context exposed to a multi-select option template.',
+      },
+      {
+        name: 'MultiSelectLoadingContext',
+        kind: 'type',
+        declaration: 'type MultiSelectLoadingContext = SelectLoadingContext;',
+        description: 'Context exposed to the multi-select loading template.',
+      },
+      {
+        name: 'MultiSelectModelValue',
+        kind: 'type',
+        declaration: 'type MultiSelectModelValue = MultiSelectValue[];',
+        description: 'Array held by a multi-select model.',
+      },
+      {
+        name: 'MultiSelectOption',
+        kind: 'type',
+        declaration: 'type MultiSelectOption = SelectOption;',
+        description: 'One option available to a multi-select.',
+      },
+      {
+        name: 'MultiSelectSelectedItemsContext',
+        kind: 'interface',
+        declaration:
+          'interface MultiSelectSelectedItemsContext {\n  readonly $implicit: readonly MultiSelectOption[];\n  readonly options: readonly MultiSelectOption[];\n  readonly remove: (option: MultiSelectOption) => void;\n  readonly disabled: boolean;\n}',
+        description: 'Context exposed to the selected-values summary template.',
+      },
+      {
+        name: 'MultiSelectValue',
+        kind: 'type',
+        declaration: 'type MultiSelectValue = SelectValue;',
+        description: 'Value accepted by a multi-select option.',
+      },
+      {
+        name: 'MultiSelectVariant',
+        kind: 'type',
+        declaration: 'type MultiSelectVariant = SelectVariant;',
+        description: 'Additional visual treatment available to a multi-select.',
+      },
+      {
+        name: 'SelectCompareWith',
+        kind: 'type',
+        declaration: 'type SelectCompareWith = SelectionCompareWith;',
+        description: 'Compares select values for identity.',
+      },
+      {
+        name: 'SelectGroupContext',
+        kind: 'interface',
+        declaration:
+          'interface SelectGroupContext {\n  readonly $implicit: string;\n  readonly group: string;\n  readonly option: SelectOption;\n  readonly index: number;\n}',
+        description: 'Context exposed to a select group-heading template.',
+      },
+      {
+        name: 'SelectionCompareWith',
+        kind: 'type',
+        declaration: 'type SelectionCompareWith = (first: SelectionValue, second: SelectionValue) => boolean;',
+        description: 'Compares two selection values for identity.',
+      },
+      {
+        name: 'SelectionOption',
+        kind: 'interface',
+        declaration:
+          'interface SelectionOption {\n  readonly label: string;\n  readonly value: SelectionValue;\n  readonly disabled?: boolean;\n}',
+        description: 'One selectable label and value with optional disabled state.',
+      },
+      {
+        name: 'SelectionValue',
+        kind: 'type',
+        declaration: 'type SelectionValue = string | number | boolean | object;',
+        description: 'Primitive or object value accepted by selection controls.',
+      },
+      {
+        name: 'SelectItemContext',
+        kind: 'interface',
+        declaration:
+          'interface SelectItemContext {\n  readonly $implicit: SelectOption;\n  readonly option: SelectOption;\n  readonly selected: boolean;\n  readonly disabled: boolean;\n  readonly index: number;\n}',
+        description: 'Context exposed to a select option template.',
+      },
+      {
+        name: 'SelectLoadingContext',
+        kind: 'interface',
+        declaration: 'interface SelectLoadingContext {\n  readonly $implicit: string;\n  readonly message: string;\n}',
+        description: 'Context exposed to the select loading template.',
+      },
+      {
+        name: 'SelectOption',
+        kind: 'interface',
+        declaration: 'interface SelectOption extends SelectionOption {\n  readonly group?: string;\n}',
+        description: 'Selectable option with optional group membership.',
+      },
+      {
+        name: 'SelectValue',
+        kind: 'type',
+        declaration: 'type SelectValue = SelectionValue;',
+        description: 'Value accepted by a select option.',
+      },
+      {
+        name: 'SelectVariant',
+        kind: 'type',
+        declaration: "type SelectVariant = 'filled';",
+        description: 'Additional visual treatment available to a select.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Progress: {
     className: 'Progress',
     selector: 'progress[suiProgress]',
+    description: 'Styles a native progress element without replacing its value, maximum, or accessibility semantics.',
     members: [
       {
         name: 'severity',
@@ -1824,10 +2620,32 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ProgressAnimation',
+        kind: 'type',
+        declaration: "type ProgressAnimation = 'glow' | 'pulse';",
+        description: 'Optional motion treatments for active progress.',
+      },
+      {
+        name: 'ProgressSeverity',
+        kind: 'type',
+        declaration: 'type ProgressSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to progress indicators.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Radio: {
     className: 'Radio',
     selector: 'input[type="radio"][suiRadio]',
+    description: 'Styles a native radio control and exposes consistent form state.',
     members: [
       {
         name: 'severity',
@@ -1866,10 +2684,38 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSeverity',
+        kind: 'type',
+        declaration: 'type FormControlSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to form controls.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Range: {
     className: 'Range',
     selector: 'input[type="range"][suiRange]',
+    description: 'Styles a native range control and reflects its current progress.',
     members: [
       {
         name: 'severity',
@@ -1908,10 +2754,38 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSeverity',
+        kind: 'type',
+        declaration: 'type FormControlSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to form controls.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Select: {
     className: 'Select',
     selector: 'sui-select',
+    description: 'Selects one value from a fixed list with keyboard-accessible popup behavior.',
     members: [
       {
         name: 'value',
@@ -2161,10 +3035,114 @@ export const apiReference = {
         description: 'Replaces the empty-options message.',
       },
     ],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSeverity',
+        kind: 'type',
+        declaration: 'type FormControlSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to form controls.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'SelectCompareWith',
+        kind: 'type',
+        declaration: 'type SelectCompareWith = SelectionCompareWith;',
+        description: 'Compares select values for identity.',
+      },
+      {
+        name: 'SelectGroupContext',
+        kind: 'interface',
+        declaration:
+          'interface SelectGroupContext {\n  readonly $implicit: string;\n  readonly group: string;\n  readonly option: SelectOption;\n  readonly index: number;\n}',
+        description: 'Context exposed to a select group-heading template.',
+      },
+      {
+        name: 'SelectionCompareWith',
+        kind: 'type',
+        declaration: 'type SelectionCompareWith = (first: SelectionValue, second: SelectionValue) => boolean;',
+        description: 'Compares two selection values for identity.',
+      },
+      {
+        name: 'SelectionOption',
+        kind: 'interface',
+        declaration:
+          'interface SelectionOption {\n  readonly label: string;\n  readonly value: SelectionValue;\n  readonly disabled?: boolean;\n}',
+        description: 'One selectable label and value with optional disabled state.',
+      },
+      {
+        name: 'SelectionValue',
+        kind: 'type',
+        declaration: 'type SelectionValue = string | number | boolean | object;',
+        description: 'Primitive or object value accepted by selection controls.',
+      },
+      {
+        name: 'SelectItemContext',
+        kind: 'interface',
+        declaration:
+          'interface SelectItemContext {\n  readonly $implicit: SelectOption;\n  readonly option: SelectOption;\n  readonly selected: boolean;\n  readonly disabled: boolean;\n  readonly index: number;\n}',
+        description: 'Context exposed to a select option template.',
+      },
+      {
+        name: 'SelectLoadingContext',
+        kind: 'interface',
+        declaration: 'interface SelectLoadingContext {\n  readonly $implicit: string;\n  readonly message: string;\n}',
+        description: 'Context exposed to the select loading template.',
+      },
+      {
+        name: 'SelectModelValue',
+        kind: 'type',
+        declaration: 'type SelectModelValue = SelectValue | null;',
+        description: 'Current single-select value, including its empty state.',
+      },
+      {
+        name: 'SelectOption',
+        kind: 'interface',
+        declaration: 'interface SelectOption extends SelectionOption {\n  readonly group?: string;\n}',
+        description: 'Selectable option with optional group membership.',
+      },
+      {
+        name: 'SelectSelectedItemContext',
+        kind: 'interface',
+        declaration:
+          'interface SelectSelectedItemContext {\n  readonly $implicit: SelectOption;\n  readonly option: SelectOption;\n}',
+        description: 'Context exposed to the selected-value template.',
+      },
+      {
+        name: 'SelectValue',
+        kind: 'type',
+        declaration: 'type SelectValue = SelectionValue;',
+        description: 'Value accepted by a select option.',
+      },
+      {
+        name: 'SelectVariant',
+        kind: 'type',
+        declaration: "type SelectVariant = 'filled';",
+        description: 'Additional visual treatment available to a select.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   SelectButton: {
     className: 'SelectButton',
     selector: 'sui-select-button',
+    description: 'Selects one value from a visible group of joined buttons.',
     members: [
       {
         name: 'value',
@@ -2244,10 +3222,94 @@ export const apiReference = {
         description: 'Replaces every option label and exposes option, index, selected, and disabled state.',
       },
     ],
+    types: [
+      {
+        name: 'ButtonSeverity',
+        kind: 'type',
+        declaration: 'type ButtonSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to buttons.',
+      },
+      {
+        name: 'ButtonSize',
+        kind: 'type',
+        declaration: 'type ButtonSize = ComponentSize;',
+        description: 'Size scale available to buttons.',
+      },
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'Orientation',
+        kind: 'type',
+        declaration: "type Orientation = 'horizontal' | 'vertical';",
+        description: 'Supported layout directions.',
+      },
+      {
+        name: 'SelectButtonOption',
+        kind: 'type',
+        declaration: 'type SelectButtonOption = SelectionOption;',
+        description: 'One option displayed by a select button.',
+      },
+      {
+        name: 'SelectButtonOptionContext',
+        kind: 'interface',
+        declaration:
+          'interface SelectButtonOptionContext {\n  readonly $implicit: SelectButtonOption;\n  readonly option: SelectButtonOption;\n  readonly selected: boolean;\n  readonly disabled: boolean;\n  readonly index: number;\n}',
+        description: 'Context exposed to a select-button option template.',
+      },
+      {
+        name: 'SelectButtonOrientation',
+        kind: 'type',
+        declaration: 'type SelectButtonOrientation = Orientation;',
+        description: 'Direction in which select-button options are joined.',
+      },
+      {
+        name: 'SelectButtonSeverity',
+        kind: 'type',
+        declaration: 'type SelectButtonSeverity = ButtonSeverity;',
+        description: 'Semantic colors available to select buttons.',
+      },
+      {
+        name: 'SelectButtonSize',
+        kind: 'type',
+        declaration: 'type SelectButtonSize = ButtonSize;',
+        description: 'Size scale available to select buttons.',
+      },
+      {
+        name: 'SelectButtonValue',
+        kind: 'type',
+        declaration: 'type SelectButtonValue = SelectionValue;',
+        description: 'Value accepted by a select-button option.',
+      },
+      {
+        name: 'SelectionOption',
+        kind: 'interface',
+        declaration:
+          'interface SelectionOption {\n  readonly label: string;\n  readonly value: SelectionValue;\n  readonly disabled?: boolean;\n}',
+        description: 'One selectable label and value with optional disabled state.',
+      },
+      {
+        name: 'SelectionValue',
+        kind: 'type',
+        declaration: 'type SelectionValue = string | number | boolean | object;',
+        description: 'Primitive or object value accepted by selection controls.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Spinner: {
     className: 'Spinner',
     selector: 'span[suiSpinner]',
+    description: 'Renders a decorative loading animation that inherits the current text color.',
     members: [
       {
         name: 'type',
@@ -2265,10 +3327,31 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'SpinnerSize',
+        kind: 'type',
+        declaration: 'type SpinnerSize = ComponentSize;',
+        description: 'Size scale available to loading spinners.',
+      },
+      {
+        name: 'SpinnerType',
+        kind: 'type',
+        declaration: "type SpinnerType = 'spinner' | 'dots' | 'ring' | 'ball' | 'bars' | 'infinity';",
+        description: 'Built-in loading animation shapes.',
+      },
+    ],
   },
   Status: {
     className: 'Status',
     selector: 'span[suiStatus]',
+    description: 'Renders a compact visual state marker beside descriptive content.',
     members: [
       {
         name: 'severity',
@@ -2293,10 +3376,44 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'StatusAnimation',
+        kind: 'type',
+        declaration: "type StatusAnimation = 'ping' | 'bounce';",
+        description: 'Optional motion treatments for live status markers.',
+      },
+      {
+        name: 'StatusSeverity',
+        kind: 'type',
+        declaration: 'type StatusSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to status markers.',
+      },
+      {
+        name: 'StatusSize',
+        kind: 'type',
+        declaration: 'type StatusSize = ComponentSize;',
+        description: 'Size scale available to status markers.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Tabs: {
     className: 'Tabs',
     selector: 'sui-tabs',
+    description: 'Switches between related templated views with Angular Aria keyboard behavior.',
     members: [
       {
         name: 'value',
@@ -2383,10 +3500,67 @@ export const apiReference = {
         description: 'Defines one tab label, value, and panel template.',
       },
     ],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'Orientation',
+        kind: 'type',
+        declaration: "type Orientation = 'horizontal' | 'vertical';",
+        description: 'Supported layout directions.',
+      },
+      {
+        name: 'TabsFocusMode',
+        kind: 'type',
+        declaration: "type TabsFocusMode = 'roving' | 'activedescendant';",
+        description: 'Keyboard focus strategy used by the tab list.',
+      },
+      {
+        name: 'TabsOrientation',
+        kind: 'type',
+        declaration: 'type TabsOrientation = Orientation;',
+        description: 'Direction in which tab labels are arranged.',
+      },
+      {
+        name: 'TabsPlacement',
+        kind: 'type',
+        declaration: "type TabsPlacement = 'top' | 'bottom';",
+        description: 'Edge on which a horizontal tab list is rendered.',
+      },
+      {
+        name: 'TabsSelectionMode',
+        kind: 'type',
+        declaration: "type TabsSelectionMode = 'follow' | 'explicit';",
+        description: 'Determines whether focus or explicit activation selects a tab.',
+      },
+      {
+        name: 'TabsSize',
+        kind: 'type',
+        declaration: 'type TabsSize = ComponentSize;',
+        description: 'Size scale available to tabs.',
+      },
+      {
+        name: 'TabsValue',
+        kind: 'type',
+        declaration: 'type TabsValue = string;',
+        description: 'Identifier used to select one tab.',
+      },
+      {
+        name: 'TabsVariant',
+        kind: 'type',
+        declaration: "type TabsVariant = 'plain' | 'border' | 'lift' | 'box';",
+        description: 'Visual treatments available to tab lists.',
+      },
+    ],
   },
   Textarea: {
     className: 'Textarea',
     selector: 'textarea[suiTextarea]',
+    description: 'Styles a native multiline text control and configures its resize behavior.',
     members: [
       {
         name: 'resize',
@@ -2439,10 +3613,44 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSeverity',
+        kind: 'type',
+        declaration: 'type FormControlSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to form controls.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'TextareaResize',
+        kind: 'type',
+        declaration: "type TextareaResize = 'none' | 'vertical' | 'horizontal' | 'both';",
+        description: 'Native resize directions available to textareas.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   Toggle: {
     className: 'Toggle',
     selector: 'input[type="checkbox"][suiToggle]',
+    description: 'Styles a native checkbox as an on-or-off switch.',
     members: [
       {
         name: 'severity',
@@ -2481,10 +3689,38 @@ export const apiReference = {
       },
     ],
     templates: [],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'FormControlSeverity',
+        kind: 'type',
+        declaration: 'type FormControlSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to form controls.',
+      },
+      {
+        name: 'FormControlSize',
+        kind: 'type',
+        declaration: 'type FormControlSize = ComponentSize;',
+        description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
   },
   ToggleButton: {
     className: 'ToggleButton',
     selector: 'sui-toggle-button',
+    description: 'Toggles one pressed state while retaining button semantics.',
     members: [
       {
         name: 'checked',
@@ -2579,6 +3815,76 @@ export const apiReference = {
         name: 'suiToggleButtonOn',
         context: 'void',
         description: 'Replaces content rendered while the button is pressed.',
+      },
+    ],
+    types: [
+      {
+        name: 'ButtonSeverity',
+        kind: 'type',
+        declaration: 'type ButtonSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to buttons.',
+      },
+      {
+        name: 'ButtonShape',
+        kind: 'type',
+        declaration: "type ButtonShape = 'default' | 'fluid' | 'circle' | 'square';",
+        description: 'Width and geometry options available to buttons.',
+      },
+      {
+        name: 'ButtonSize',
+        kind: 'type',
+        declaration: 'type ButtonSize = ComponentSize;',
+        description: 'Size scale available to buttons.',
+      },
+      {
+        name: 'ButtonVariant',
+        kind: 'type',
+        declaration: "type ButtonVariant = 'link' | 'outlined' | 'soft' | 'dash' | 'text';",
+        description: 'Visual treatments available to buttons.',
+      },
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+      },
+      {
+        name: 'ToggleButtonContext',
+        kind: 'interface',
+        declaration:
+          'interface ToggleButtonContext {\n  readonly $implicit: boolean;\n  readonly checked: boolean;\n  readonly disabled: boolean;\n  readonly loading: boolean;\n  readonly toggle: () => void;\n  readonly touch: () => void;\n}',
+        description: 'Context exposed to the complete toggle-button template.',
+      },
+      {
+        name: 'ToggleButtonSeverity',
+        kind: 'type',
+        declaration: 'type ToggleButtonSeverity = ButtonSeverity;',
+        description: 'Semantic colors available to toggle buttons.',
+      },
+      {
+        name: 'ToggleButtonShape',
+        kind: 'type',
+        declaration: 'type ToggleButtonShape = ButtonShape;',
+        description: 'Width and geometry options available to toggle buttons.',
+      },
+      {
+        name: 'ToggleButtonSize',
+        kind: 'type',
+        declaration: 'type ToggleButtonSize = ButtonSize;',
+        description: 'Size scale available to toggle buttons.',
+      },
+      {
+        name: 'ToggleButtonVariant',
+        kind: 'type',
+        declaration: "type ToggleButtonVariant = Exclude<ButtonVariant, 'text'>;",
+        description: 'Visual treatments available to toggle buttons.',
       },
     ],
   },

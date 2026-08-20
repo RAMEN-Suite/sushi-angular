@@ -9,11 +9,25 @@ import type {
   ApiMemberKind,
   ApiReferenceData,
   ApiTemplate,
+  ApiTypeDefinition,
+  ApiTypeKind,
 } from '../playground/src/app/shared/api-reference/api-reference.types';
 
-interface SourceReference extends Omit<ApiReferenceData, 'templates'> {
+interface SourceReference {
+  readonly className: string;
+  readonly selector: string;
+  readonly description: string;
   readonly folder: string;
+  readonly members: readonly ApiMember[];
 }
+
+interface CollectedApi {
+  readonly references: SourceReference[];
+  readonly templates: Map<string, ApiTemplate[]>;
+  readonly types: ReadonlyMap<string, ApiTypeDefinition>;
+}
+
+type ApiTypeNode = ts.InterfaceDeclaration | ts.TypeAliasDeclaration | ts.EnumDeclaration;
 
 const root: string = resolve(process.cwd());
 const sourceRoot: string = join(root, 'sushi/src/lib');
@@ -58,11 +72,23 @@ function findSelector(node: ts.ClassDeclaration): string | null {
 }
 
 function readJSDoc(node: ts.Node): string {
-  return ts
+  const description: string = ts
     .getJSDocCommentsAndTags(node)
     .filter(ts.isJSDoc)
     .map((comment: ts.JSDoc): string => ts.getTextOfJSDocComment(comment.comment) ?? '')
     .join(' ')
+    .replaceAll(/\s+/g, ' ')
+    .trim();
+  if (description || !ts.isClassDeclaration(node)) return description;
+
+  const source: string = node.getText();
+  const classStart: number = source.indexOf('export class');
+  if (classStart < 0) return '';
+
+  const comments: readonly RegExpMatchArray[] = [...source.slice(0, classStart).matchAll(/\/\*\*([\s\S]*?)\*\//gu)];
+  const comment: string = comments.at(-1)?.[1] ?? '';
+  return comment
+    .replaceAll(/^\s*\* ?/gmu, '')
     .replaceAll(/\s+/g, ' ')
     .trim();
 }
@@ -177,15 +203,68 @@ function readTemplateContext(node: ts.ClassDeclaration): string {
   return guard.type.type?.getText() ?? 'void';
 }
 
-function collectReferences(): { readonly references: SourceReference[]; readonly templates: Map<string, ApiTemplate[]> } {
+function isExported(node: ts.Node): boolean {
+  return Boolean(
+    ts.canHaveModifiers(node) &&
+    ts.getModifiers(node)?.some((modifier: ts.Modifier): boolean => modifier.kind === ts.SyntaxKind.ExportKeyword),
+  );
+}
+
+function isApiTypeNode(node: ts.Statement): node is ApiTypeNode {
+  return ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node) || ts.isEnumDeclaration(node);
+}
+
+function readTypeKind(node: ApiTypeNode): ApiTypeKind {
+  if (ts.isInterfaceDeclaration(node)) return 'interface';
+  if (ts.isTypeAliasDeclaration(node)) return 'type';
+  return 'enum';
+}
+
+function readTypeDeclaration(node: ApiTypeNode): string {
+  if (ts.isTypeAliasDeclaration(node)) {
+    const parameters: string =
+      node.typeParameters?.map((item: ts.TypeParameterDeclaration): string => item.getText()).join(', ') ?? '';
+    const suffix: string = parameters ? `<${parameters}>` : '';
+    return `type ${node.name.text}${suffix} = ${node.type.getText()};`;
+  }
+
+  if (ts.isEnumDeclaration(node)) {
+    const members: string = node.members.map((member: ts.EnumMember): string => `  ${member.getText()},`).join('\n');
+    return `enum ${node.name.text} {\n${members}\n}`;
+  }
+
+  const parameters: string =
+    node.typeParameters?.map((item: ts.TypeParameterDeclaration): string => item.getText()).join(', ') ?? '';
+  const suffix: string = parameters ? `<${parameters}>` : '';
+  const heritage: string = node.heritageClauses?.map((clause: ts.HeritageClause): string => clause.getText()).join(' ') ?? '';
+  const members: string = node.members.map((member: ts.TypeElement): string => `  ${member.getText()}`).join('\n');
+  return `interface ${node.name.text}${suffix}${heritage ? ` ${heritage}` : ''} {\n${members}\n}`;
+}
+
+function readTypeDefinition(statement: ts.Statement): ApiTypeDefinition | null {
+  if (!isApiTypeNode(statement) || !isExported(statement)) return null;
+
+  return {
+    name: statement.name.text,
+    kind: readTypeKind(statement),
+    declaration: readTypeDeclaration(statement),
+    description: readJSDoc(statement),
+  };
+}
+
+function collectApi(): CollectedApi {
   const references: SourceReference[] = [];
   const templates: Map<string, ApiTemplate[]> = new Map<string, ApiTemplate[]>();
+  const types: Map<string, ApiTypeDefinition> = new Map<string, ApiTypeDefinition>();
   const sources: readonly ts.SourceFile[] = program
     .getSourceFiles()
     .filter((file: ts.SourceFile): boolean => file.fileName.startsWith(sourceRoot));
 
   sources.forEach((source: ts.SourceFile): void => {
     source.statements.forEach((statement: ts.Statement): void => {
+      const type: ApiTypeDefinition | null = readTypeDefinition(statement);
+      if (type && !types.has(type.name)) types.set(type.name, type);
+
       if (!ts.isClassDeclaration(statement) || !statement.name) return;
       const selector: string | null = findSelector(statement);
       if (!selector) return;
@@ -205,18 +284,45 @@ function collectReferences(): { readonly references: SourceReference[]; readonly
       references.push({
         className: statement.name.text,
         selector,
+        description: readJSDoc(statement),
         folder,
         members: readMembers(statement),
       });
     });
   });
 
-  return { references, templates };
+  return { references, templates, types };
+}
+
+function findReferencedTypes(
+  members: readonly ApiMember[],
+  templates: readonly ApiTemplate[],
+  definitions: ReadonlyMap<string, ApiTypeDefinition>,
+): readonly ApiTypeDefinition[] {
+  const values: string[] = [
+    ...members.map((member: ApiMember): string => member.type),
+    ...templates.map((template: ApiTemplate): string => template.context),
+  ];
+  const found: Map<string, ApiTypeDefinition> = new Map<string, ApiTypeDefinition>();
+
+  for (let index: number = 0; index < values.length; index += 1) {
+    const value: string = values[index];
+    const names: readonly string[] = value.match(/\b[A-Za-z_$][\w$]*\b/gu) ?? [];
+    names.forEach((name: string): void => {
+      const definition: ApiTypeDefinition | undefined = definitions.get(name);
+      if (!definition || found.has(name)) return;
+      found.set(name, definition);
+      values.push(definition.declaration);
+    });
+  }
+
+  return [...found.values()].sort((first: ApiTypeDefinition, second: ApiTypeDefinition): number =>
+    first.name.localeCompare(second.name),
+  );
 }
 
 function buildReferenceData(): Readonly<Record<string, ApiReferenceData>> {
-  const collected: { readonly references: SourceReference[]; readonly templates: Map<string, ApiTemplate[]> } =
-    collectReferences();
+  const collected: CollectedApi = collectApi();
   const entries: [string, ApiReferenceData][] = collected.references
     .sort((first: SourceReference, second: SourceReference): number => first.className.localeCompare(second.className))
     .map((reference: SourceReference): [string, ApiReferenceData] => {
@@ -232,8 +338,10 @@ function buildReferenceData(): Readonly<Record<string, ApiReferenceData>> {
       const data: ApiReferenceData = {
         className: reference.className,
         selector: reference.selector,
+        description: reference.description,
         members: reference.members,
         templates,
+        types: findReferencedTypes(reference.members, templates, collected.types),
       };
       return [reference.className, data];
     });
