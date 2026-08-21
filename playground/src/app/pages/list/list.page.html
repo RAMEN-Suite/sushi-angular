@@ -1,0 +1,36 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">List</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">Render typed collections as native list rows without adding selection behavior.</p>
+    </div>
+    <div class="flex flex-wrap gap-2" aria-label="List architecture">
+      <span suiBadge variant="soft" size="sm">Component</span>
+      <span suiBadge variant="soft" size="sm">Templates</span>
+    </div>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>Recent activity</h2>
+    <p class="text-base-content/60">Combine concise row content with existing status and badge primitives.</p>
+    <div class="mt-5 rounded-box bg-base-200/30 p-4 sm:p-6"><pg-list-activity-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.activity.html" [typescript]="examples.activity.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Member directory</h2>
+    <p class="text-base-content/60">Place identity, supporting text, and explicit actions in one responsive row.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-list-directory-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.directory.html" [typescript]="examples.directory.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Controls inside rows</h2>
+    <p class="text-base-content/60">
+      Wrap a single checkbox action in a label to make the complete row an accessible target. Use Listbox when the rows themselves represent
+      choices.
+    </p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-list-tasks-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.tasks.html" [typescript]="examples.tasks.typescript" /></div>
+  </sui-card>
+</main>

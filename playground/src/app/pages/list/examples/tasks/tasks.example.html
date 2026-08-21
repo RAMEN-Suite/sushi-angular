@@ -1,0 +1,22 @@
+<sui-card size="sm" class="w-full max-w-2xl">
+  <sui-list [items]="tasks" ariaLabel="Release tasks">
+    <ng-template suiListItem let-task>
+      <label
+        class="list-col-grow grid cursor-pointer grid-cols-[auto_minmax(0,1fr)] items-center gap-x-5 gap-y-2 sm:grid-cols-[auto_minmax(0,1fr)_auto]">
+        <input suiCheckbox type="checkbox" [checked]="task.completed" [attr.aria-label]="task.title" />
+        <span class="min-w-0">
+          <strong class="block truncate">{{ task.title }}</strong>
+          <span class="block truncate text-sm text-base-content/60">{{ task.description }}</span>
+        </span>
+        <span
+          suiBadge
+          class="col-start-2 justify-self-start sm:col-start-auto"
+          size="sm"
+          [severity]="task.severity"
+          variant="soft">
+          {{ task.status }}
+        </span>
+      </label>
+    </ng-template>
+  </sui-list>
+</sui-card>

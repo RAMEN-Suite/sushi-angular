@@ -1,0 +1,39 @@
+<sui-card size="sm" class="w-full max-w-2xl">
+  <sui-list [items]="members" ariaLabel="Project members">
+    <ng-template suiListItem let-member>
+      @if (member.image) {
+        <sui-avatar shape="circle" size="md" status="online"><img src="/sample-avatar.svg" alt="" /></sui-avatar>
+      } @else {
+        <sui-avatar placeholder shape="circle" size="md" class="bg-neutral text-neutral-content">
+          <span>{{ member.initials }}</span>
+        </sui-avatar>
+      }
+      <div class="list-col-grow min-w-0">
+        <strong class="block truncate">{{ member.name }}</strong>
+        <span class="block truncate text-sm text-base-content/60">{{ member.role }} · {{ member.location }}</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <button
+          suiButton
+          type="button"
+          size="sm"
+          shape="square"
+          severity="neutral"
+          variant="text"
+          [attr.aria-label]="'Email ' + member.name">
+          <svg lucideMail class="size-4"></svg>
+        </button>
+        <button
+          suiButton
+          type="button"
+          size="sm"
+          shape="square"
+          severity="neutral"
+          variant="text"
+          [attr.aria-label]="'More actions for ' + member.name">
+          <svg lucideEllipsis class="size-4"></svg>
+        </button>
+      </div>
+    </ng-template>
+  </sui-list>
+</sui-card>

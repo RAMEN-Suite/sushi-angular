@@ -1,0 +1,13 @@
+<sui-card size="sm" class="w-full max-w-2xl">
+  <h3 suiCardTitle>Recent activity</h3>
+  <sui-list [items]="activities" ariaLabel="Recent activity">
+    <ng-template suiListItem let-activity>
+      <span suiStatus class="mr-1" [severity]="activity.severity"></span>
+      <div class="list-col-grow min-w-0">
+        <strong class="block">{{ activity.title }}</strong>
+        <span class="block truncate text-sm text-base-content/60">{{ activity.description }}</span>
+      </div>
+      <span suiBadge size="sm" [severity]="activity.severity" variant="soft">{{ activity.state }}</span>
+    </ng-template>
+  </sui-list>
+</sui-card>

@@ -1,0 +1,7 @@
+<ul class="list" [attr.aria-label]="ariaLabel()" [attr.aria-labelledby]="ariaLabelledby()">
+  @for (item of items(); track trackItem($index, item); let index = $index; let count = $count) {
+    <li class="list-row items-center">
+      <ng-container [ngTemplateOutlet]="itemTemplate()" [ngTemplateOutletContext]="itemContext(item, index, count)" />
+    </li>
+  }
+</ul>

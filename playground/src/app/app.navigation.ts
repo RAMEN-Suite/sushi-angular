@@ -169,6 +169,10 @@ export const navigation: NavigationGroup[] = [
         label: 'Keyboard Key',
         path: '/kbd',
       },
+      {
+        label: 'List',
+        path: '/list',
+      },
     ],
   },
   {
