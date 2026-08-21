@@ -1,0 +1,59 @@
+<div class="w-full max-w-xl">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <span suiLabel id="backlog-order-label" class="font-medium">Product backlog</span>
+    <button suiButton type="button" size="sm" severity="neutral" variant="soft" (click)="toggleLock()">
+      @if (locked()) {
+        <svg lucideLockKeyholeOpen class="size-4" aria-hidden="true"></svg>
+        Unlock order
+      } @else {
+        <svg lucideLockKeyhole class="size-4" aria-hidden="true"></svg>
+        Lock order
+      }
+    </button>
+  </div>
+
+  <sui-order-list
+    filter
+    class="mt-4"
+    ariaLabelledby="backlog-order-label"
+    filterPlaceholder="Filter backlog"
+    [disabled]="locked()"
+    [scrollHeight]="240"
+    [(value)]="backlog">
+    <ng-template suiOrderListHeader>
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <strong>Next release</strong>
+        <span suiBadge size="sm" variant="soft">{{ backlog().length }} candidates</span>
+      </div>
+    </ng-template>
+
+    <ng-template suiOrderListFilter let-query let-placeholder="placeholder" let-disabled="disabled" let-update="update">
+      <div suiInputSurface fluid>
+        <svg lucideSearch class="size-4 shrink-0 text-base-content/50" aria-hidden="true"></svg>
+        <input
+          #filterInput
+          suiInputSurfaceControl
+          type="search"
+          class="text-base"
+          [value]="query"
+          [placeholder]="placeholder"
+          [attr.aria-label]="placeholder"
+          [disabled]="disabled"
+          (input)="update(filterInput.value)" />
+        <span class="shrink-0 text-sm text-base-content/50">{{ backlog().length }} total</span>
+      </div>
+    </ng-template>
+
+    <ng-template suiOrderListItem let-item let-selected="selected">
+      <div class="flex min-w-0 items-center gap-3">
+        <span class="min-w-0 grow">
+          <strong class="block truncate">{{ item.label }}</strong>
+          <span class="block truncate text-sm" [class.text-base-content/60]="!selected">
+            {{ details.get(item.value)?.area }}
+          </span>
+        </span>
+        <span suiBadge size="sm" variant="soft">{{ details.get(item.value)?.effort }} points</span>
+      </div>
+    </ng-template>
+  </sui-order-list>
+</div>

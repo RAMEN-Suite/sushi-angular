@@ -59,6 +59,7 @@
             <tr>
               <th>Marker</th>
               <th>Context</th>
+              <th>Inputs</th>
               <th>Description</th>
             </tr>
           </thead>
@@ -78,6 +79,23 @@
                       }
                     }
                   </code>
+                </td>
+                <td class="min-w-64">
+                  @if (template.members.length > 0) {
+                    <ul class="grid gap-1.5">
+                      @for (member of template.members; track member.name) {
+                        <li class="flex flex-wrap items-baseline gap-x-2 text-sm">
+                          <code class="font-semibold">{{ member.name }}</code>
+                          <code class="text-base-content/60">{{ member.type }}</code>
+                          @if (member.defaultValue) {
+                            <span class="text-base-content/50">({{ member.defaultValue }})</span>
+                          }
+                        </li>
+                      }
+                    </ul>
+                  } @else {
+                    <span class="text-base-content/50">—</span>
+                  }
                 </td>
                 <td class="min-w-64 text-base-content/70">{{ template.description || '—' }}</td>
               </tr>

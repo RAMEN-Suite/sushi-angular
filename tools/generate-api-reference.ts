@@ -199,8 +199,14 @@ function readTemplateContext(node: ts.ClassDeclaration): string {
   const guard: ts.ClassElement | undefined = node.members.find(
     (member: ts.ClassElement): boolean => ts.isMethodDeclaration(member) && member.name.getText() === 'ngTemplateContextGuard',
   );
-  if (!guard || !ts.isMethodDeclaration(guard) || !guard.type || !ts.isTypePredicateNode(guard.type)) return 'void';
-  return guard.type.type?.getText() ?? 'void';
+  if (guard && ts.isMethodDeclaration(guard) && guard.type && ts.isTypePredicateNode(guard.type)) {
+    return guard.type.type?.getText() ?? 'void';
+  }
+
+  const context: ts.ClassElement | undefined = node.members.find(
+    (member: ts.ClassElement): boolean => ts.isPropertyDeclaration(member) && member.name.getText() === 'ngTemplateContextType',
+  );
+  return context && ts.isPropertyDeclaration(context) ? (context.type?.getText() ?? 'void') : 'void';
 }
 
 function isExported(node: ts.Node): boolean {
@@ -276,6 +282,7 @@ function collectApi(): CollectedApi {
           name: selector.slice('ng-template['.length, -1),
           context: readTemplateContext(statement),
           description: readJSDoc(statement),
+          members: readMembers(statement),
         });
         templates.set(folder, markers);
         return;
@@ -302,6 +309,9 @@ function findReferencedTypes(
   const values: string[] = [
     ...members.map((member: ApiMember): string => member.type),
     ...templates.map((template: ApiTemplate): string => template.context),
+    ...templates.flatMap((template: ApiTemplate): readonly string[] =>
+      template.members.map((member: ApiMember): string => member.type),
+    ),
   ];
   const found: Map<string, ApiTypeDefinition> = new Map<string, ApiTypeDefinition>();
 

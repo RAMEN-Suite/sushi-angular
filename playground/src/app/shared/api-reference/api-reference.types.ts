@@ -12,6 +12,7 @@ export interface ApiTemplate {
   readonly name: string;
   readonly context: string;
   readonly description: string;
+  readonly members: readonly ApiMember[];
 }
 
 export type ApiTypeKind = 'interface' | 'type' | 'enum';

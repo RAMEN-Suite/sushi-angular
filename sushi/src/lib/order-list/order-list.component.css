@@ -1,0 +1,37 @@
+.cdk-drag-placeholder {
+  opacity: 0.3;
+}
+
+.cdk-drag-preview.sui-order-list-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-sizing: border-box;
+  padding: 0.75rem 1rem;
+  color: var(--color-base-content);
+  background: var(--color-base-100);
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-field);
+}
+
+.cdk-drag-preview.sui-order-list-row .list-col-grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.cdk-drag-preview.sui-order-list-row[data-selected='true'] {
+  color: var(--color-primary);
+  background: color-mix(in oklab, var(--color-primary) 12%, var(--color-base-100));
+}
+
+.cdk-drag-animating,
+.cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) {
+  transition: transform 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cdk-drag-animating,
+  .cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) {
+    transition: none;
+  }
+}

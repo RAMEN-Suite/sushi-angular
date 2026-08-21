@@ -1,0 +1,15 @@
+<div class="w-full max-w-xl">
+  <span suiLabel id="workflow-order-label" class="font-medium">Release workflow</span>
+  <p id="workflow-order-hint" class="mt-1 text-sm text-base-content/60">
+    Select with Space. Reorder with Alt + Arrow Up or Down; use Alt + Home or End to move to an edge.
+  </p>
+
+  <sui-order-list
+    filter
+    id="workflow-order"
+    class="mt-4"
+    ariaLabelledby="workflow-order-label"
+    ariaDescribedby="workflow-order-hint"
+    filterPlaceholder="Filter workflow"
+    [formField]="workflowForm.steps" />
+</div>

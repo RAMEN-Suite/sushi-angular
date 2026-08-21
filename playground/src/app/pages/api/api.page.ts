@@ -5,6 +5,7 @@ import { ApiReference } from '../../shared/api-reference/api-reference.component
 import type { ApiReferenceData } from '../../shared/api-reference/api-reference.types';
 
 const references: Readonly<Record<string, readonly ApiReferenceData[]>> = {
+  accordion: [apiReference.Accordion],
   'auto-focus': [apiReference.AutoFocus],
   autocomplete: [apiReference.Autocomplete],
   avatar: [apiReference.Avatar, apiReference.AvatarGroup],
@@ -28,8 +29,11 @@ const references: Readonly<Record<string, readonly ApiReferenceData[]>> = {
   join: [apiReference.Join, apiReference.JoinItem],
   kbd: [apiReference.Kbd],
   label: [apiReference.Label],
+  list: [apiReference.List],
+  listbox: [apiReference.Listbox],
   message: [apiReference.Message, apiReference.MessageActions],
   'multi-select': [apiReference.MultiSelect],
+  'order-list': [apiReference.OrderList],
   progress: [apiReference.Progress],
   radio: [apiReference.Radio],
   range: [apiReference.Range],

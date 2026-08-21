@@ -26,6 +26,7 @@ export * from './lib/list';
 export * from './lib/listbox';
 export * from './lib/message';
 export * from './lib/multi-select';
+export * from './lib/order-list';
 export * from './lib/progress';
 export * from './lib/radio';
 export * from './lib/range';

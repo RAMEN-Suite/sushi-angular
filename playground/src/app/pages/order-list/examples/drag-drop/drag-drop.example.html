@@ -1,0 +1,23 @@
+<div class="w-full max-w-xl">
+  <span suiLabel id="movie-order-label" class="font-medium">Watchlist</span>
+  <p id="movie-order-hint" class="mt-1 text-sm text-base-content/60">Drag a complete row to reorder the movies.</p>
+
+  <sui-order-list
+    dragDrop
+    class="mt-4"
+    ariaLabelledby="movie-order-label"
+    ariaDescribedby="movie-order-hint"
+    [(value)]="movies">
+    <ng-template suiOrderListItem let-movie let-index="index" let-selected="selected">
+      <div class="flex min-w-0 items-center gap-3">
+        @if (selected) {
+          <svg lucideSquareCheckBig class="size-4 shrink-0" aria-hidden="true"></svg>
+        } @else {
+          <svg lucideSquare class="size-4 shrink-0 text-base-content/50" aria-hidden="true"></svg>
+        }
+        <span class="min-w-0 grow truncate">{{ movie.label }}</span>
+        <span class="shrink-0 text-sm tabular-nums text-base-content/50">#{{ index + 1 }}</span>
+      </div>
+    </ng-template>
+  </sui-order-list>
+</div>

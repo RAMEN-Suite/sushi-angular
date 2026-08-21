@@ -66,6 +66,10 @@ export const navigation: NavigationGroup[] = [
         path: '/multi-select',
       },
       {
+        label: 'Order List',
+        path: '/order-list',
+      },
+      {
         label: 'Radio',
         path: '/radio',
       },

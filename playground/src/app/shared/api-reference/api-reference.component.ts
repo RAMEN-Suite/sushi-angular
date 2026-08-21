@@ -46,6 +46,9 @@ export class ApiReference {
     const values: readonly string[] = [
       ...api.members.map((member: ApiMember): string => member.type),
       ...api.templates.map((template: ApiTemplate): string => template.context),
+      ...api.templates.flatMap((template: ApiTemplate): readonly string[] =>
+        template.members.map((member: ApiMember): string => member.type),
+      ),
     ];
 
     return new Map<string, readonly ApiTypePart[]>(

@@ -1,33 +1,36 @@
-# SUSHI component checklist
+# SUSHI component roadmap
 
-## Next: reusable primitives
+## Structure and collections
 
-- [ ] `suiChip`
-- [ ] `suiSkeleton`
-- [ ] `suiList`
-- [ ] `suiTooltip`
-- [ ] `suiPopover`
+Build these in dependency order so later components reuse established behavior and layouts.
 
-## Overlays and disclosure
+- [x] `suiAccordion`
+- [x] `suiList`
+- [x] `suiListbox`
+- [x] `suiOrderList`
+- [ ] `suiMenu`
+- [ ] `suiPagination`
+- [ ] `suiTable`
+- [ ] `suiDataView`
+
+## Application navigation
+
+- [ ] `suiNavbar`
+- [ ] `suiSidebar`
+- [ ] `suiDrawer`
+
+`suiSidebar` owns persistent application navigation. `suiDrawer` owns the responsive overlay and disclosure behavior; it may contain a sidebar but does not replace it.
+
+## Overlays and navigation
 
 - [ ] `suiDialog`
-- [ ] `suiAccordion`
-- [x] `suiTabs`
-
-## Navigation
-
-- [ ] `suiMenu`
+- [ ] `suiPopover`
+- [ ] `suiTooltip`
 - [ ] `suiContextMenu`
 - [ ] `suiBreadcrumb`
 - [ ] `suiSteps`
 
-## Selection
+## Supporting primitives
 
-- [x] `suiAutocomplete`
-- [ ] `suiListbox`
-
-## Data
-
-- [ ] `suiPagination`
-- [ ] `suiTable`
-- [ ] `suiDataView`
+- [x] `suiChip`
+- [ ] `suiSkeleton`
