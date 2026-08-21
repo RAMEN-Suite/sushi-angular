@@ -1,0 +1,63 @@
+<div
+  ngAccordionGroup
+  class="sui-accordion__group"
+  [class.sui-accordion__group--sm]="size() === 'sm'"
+  [class.sui-accordion__group--md]="size() === 'md'"
+  [class.sui-accordion__group--lg]="size() === 'lg'"
+  [class.join]="variant() === 'joined'"
+  [class.join-vertical]="variant() === 'joined'"
+  [class.grid]="variant() === 'separated'"
+  [class.gap-3]="variant() === 'separated'"
+  [multiExpandable]="multiple()"
+  [disabled]="disabled()"
+  [softDisabled]="softDisabled()"
+  [wrap]="wrap()"
+>
+  @for (item of items(); track item.value()) {
+    @let context = itemContext(item);
+    <section
+      class="collapse sui-accordion__item border border-base-300 bg-base-100"
+      [class.join-item]="variant() === 'joined'"
+      [class.collapse-open]="context.expanded"
+    >
+      <h3 class="contents">
+        <button
+          ngAccordionTrigger
+          type="button"
+          class="collapse-title sui-accordion__trigger"
+          [panel]="panel"
+          [disabled]="item.disabled()"
+          [expanded]="context.expanded"
+          (expandedChange)="handleExpanded(item.value(), $event)"
+        >
+          <span class="min-w-0 flex-1">
+            @if (headerTemplate(); as header) {
+              <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="context" />
+            } @else {
+              {{ item.label() }}
+            }
+          </span>
+
+          <span class="sui-accordion__indicator" aria-hidden="true">
+            @if (indicatorTemplate(); as indicator) {
+              <ng-container [ngTemplateOutlet]="indicator" [ngTemplateOutletContext]="context" />
+            } @else {
+              <svg lucideChevronDown class="size-4" [class.rotate-180]="context.expanded"></svg>
+            }
+          </span>
+        </button>
+      </h3>
+
+      <div
+        ngAccordionPanel
+        #panel="ngAccordionPanel"
+        class="collapse-content sui-accordion__panel leading-6"
+        [preserveContent]="item.preserveContent()"
+      >
+        <ng-template ngAccordionContent>
+          <ng-container [ngTemplateOutlet]="item.template" [ngTemplateOutletContext]="context" />
+        </ng-template>
+      </div>
+    </section>
+  }
+</div>

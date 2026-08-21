@@ -1,0 +1,28 @@
+<div class="grid max-w-2xl gap-4">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div>
+      <strong class="block">Workspace settings</strong>
+      <span class="text-sm text-base-content/60">Open one section or review the complete setup.</span>
+    </div>
+    <div class="flex gap-2">
+      <button suiButton type="button" size="sm" severity="neutral" variant="text" (click)="settings.collapseAll()">
+        Collapse
+      </button>
+      <button suiButton type="button" size="sm" severity="neutral" variant="soft" (click)="settings.expandAll()">
+        Expand all
+      </button>
+    </div>
+  </div>
+
+  <sui-accordion #settings multiple variant="separated" [(value)]="open">
+    <ng-template suiAccordionItem value="profile" label="Profile">
+      Choose the name, avatar, and contact details visible to your team.
+    </ng-template>
+    <ng-template suiAccordionItem value="security" label="Security">
+      Review sign-in methods, active sessions, and recovery options.
+    </ng-template>
+    <ng-template suiAccordionItem value="billing" label="Billing">
+      Manage invoices and payment methods. Only workspace owners can edit this section.
+    </ng-template>
+  </sui-accordion>
+</div>

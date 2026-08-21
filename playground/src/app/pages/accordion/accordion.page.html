@@ -1,0 +1,43 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Accordion</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Reveal related sections with predictable focus, keyboard navigation, and controlled expansion.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2" aria-label="Accordion architecture">
+      <span suiBadge variant="soft" size="sm">Component</span>
+      <span suiBadge variant="soft" size="sm">Angular Aria</span>
+      <span suiBadge variant="soft" size="sm">Templates</span>
+    </div>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>Frequently asked questions</h2>
+    <p class="text-base-content/60">The compact small size is the default for forms and general page content.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-accordion-basic-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Multiple and external control</h2>
+    <p class="text-base-content/60">Multiple sections and external controls share one model without changing the compact default size.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-accordion-control-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.control.html" [typescript]="examples.control.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Custom headers and indicators</h2>
+    <p class="text-base-content/60">Templates enrich the compact header without replacing accessible trigger behavior.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-accordion-templates-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Available sizes</h2>
+    <p class="text-base-content/60">Choose a density for the surrounding layout; small remains the consistent default.</p>
+    <sui-card size="sm" class="mt-5 border border-base-300 bg-base-200/30 shadow-none"><pg-accordion-sizes-example /></sui-card>
+    <div class="mt-6"><pg-example-code [html]="examples.sizes.html" [typescript]="examples.sizes.typescript" /></div>
+  </sui-card>
+</main>

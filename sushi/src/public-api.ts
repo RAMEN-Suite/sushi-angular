@@ -1,4 +1,5 @@
 export type { ComponentSize, Orientation, SelectionValue, ThemeSeverity } from './lib/sushi.types';
+export * from './lib/accordion';
 export * from './lib/auto-focus';
 export * from './lib/autocomplete';
 export * from './lib/avatar';

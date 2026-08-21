@@ -16,6 +16,11 @@ export const routes: Routes = [
     title: 'SUSHI Playground',
   },
   {
+    path: 'accordion',
+    loadComponent: () => import('./pages/accordion/accordion.page').then(({ AccordionPage }) => AccordionPage),
+    title: 'Accordion | SUSHI Playground',
+  },
+  {
     path: 'auto-focus',
     loadComponent: () => import('./pages/auto-focus/auto-focus.page').then(({ AutoFocusPage }) => AutoFocusPage),
     title: 'Auto Focus | SUSHI Playground',

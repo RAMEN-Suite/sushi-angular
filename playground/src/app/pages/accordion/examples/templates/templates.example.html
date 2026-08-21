@@ -1,0 +1,28 @@
+<sui-accordion class="max-w-2xl" multiple [(value)]="open">
+  <ng-template suiAccordionHeader let-item let-expanded="expanded">
+    <span class="flex items-center gap-3">
+      <span suiStatus [severity]="status(item.value)"></span>
+      <span class="min-w-0 flex-1 truncate">{{ item.label }}</span>
+      <span suiBadge size="sm" severity="neutral" variant="soft">{{ environment(item) }}</span>
+      <span class="sr-only">{{ expanded ? 'Expanded' : 'Collapsed' }}</span>
+    </span>
+  </ng-template>
+
+  <ng-template suiAccordionIndicator let-expanded="expanded">
+    @if (expanded) {
+      <svg lucideMinus class="size-4"></svg>
+    } @else {
+      <svg lucidePlus class="size-4"></svg>
+    }
+  </ng-template>
+
+  <ng-template suiAccordionItem value="production" label="Production">
+    Version 2.4.0 is serving all regions without active incidents.
+  </ng-template>
+  <ng-template suiAccordionItem value="preview" label="Preview">
+    Two changes are awaiting design review before the next deployment.
+  </ng-template>
+  <ng-template suiAccordionItem value="archive" label="Archive" disabled>
+    Archived environments remain readable but cannot be changed.
+  </ng-template>
+</sui-accordion>

@@ -175,6 +175,10 @@ export const navigation: NavigationGroup[] = [
     label: 'Layout',
     items: [
       {
+        label: 'Accordion',
+        path: '/accordion',
+      },
+      {
         label: 'Card',
         path: '/card',
       },

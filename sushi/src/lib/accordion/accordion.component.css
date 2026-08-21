@@ -1,0 +1,82 @@
+.sui-accordion__group {
+  width: 100%;
+}
+
+.sui-accordion__item {
+  min-width: 0;
+  border-color: color-mix(in oklab, var(--color-base-content) 16%, transparent);
+}
+
+.sui-accordion__trigger {
+  display: flex;
+  min-height: 3rem;
+  cursor: pointer;
+  align-items: center;
+  gap: 0.75rem;
+  padding-block: 0.75rem;
+  padding-inline: 1rem;
+  text-align: start;
+  font-weight: 600;
+}
+
+.sui-accordion__group--sm .sui-accordion__trigger {
+  min-height: 2.5rem;
+  padding-block: 0.625rem;
+  padding-inline: 0.875rem;
+  font-size: 0.9375rem;
+}
+
+.sui-accordion__group--md .sui-accordion__trigger {
+  font-size: 1.0625rem;
+}
+
+.sui-accordion__group--lg .sui-accordion__trigger {
+  min-height: 3.5rem;
+  padding-block: 0.875rem;
+  padding-inline: 1.125rem;
+  font-size: 1.125rem;
+}
+
+.sui-accordion__trigger[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.sui-accordion__trigger:focus-visible {
+  z-index: 1;
+}
+
+.sui-accordion__indicator {
+  display: grid;
+  flex: none;
+  place-items: center;
+}
+
+.sui-accordion__indicator svg {
+  transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sui-accordion__panel {
+  padding-inline: 1rem;
+  color: color-mix(in oklab, currentColor 72%, transparent);
+}
+
+.sui-accordion__group--sm .sui-accordion__panel {
+  padding-inline: 0.875rem;
+  font-size: 0.875rem;
+}
+
+.sui-accordion__group--md .sui-accordion__panel {
+  font-size: 1rem;
+}
+
+.sui-accordion__group--lg .sui-accordion__panel {
+  padding-inline: 1.125rem;
+  font-size: 1.0625rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sui-accordion__indicator svg {
+    transition: none;
+  }
+}
