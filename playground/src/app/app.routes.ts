@@ -191,6 +191,11 @@ export const routes: Routes = [
     title: 'List | SUSHI Playground',
   },
   {
+    path: 'listbox',
+    loadComponent: () => import('./pages/listbox/listbox.page').then(({ ListboxPage }) => ListboxPage),
+    title: 'Listbox | SUSHI Playground',
+  },
+  {
     path: 'spinner',
     loadComponent: () => import('./pages/spinner/spinner.page').then(({ SpinnerPage }) => SpinnerPage),
     title: 'Spinner | SUSHI Playground',

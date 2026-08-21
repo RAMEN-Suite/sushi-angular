@@ -1,0 +1,38 @@
+<div class="grid gap-4 lg:grid-cols-2">
+  <sui-card size="sm">
+    <span suiLabel id="disabled-listbox-label" class="font-medium">Disabled listbox</span>
+    <sui-listbox disabled class="mt-4" ariaLabelledby="disabled-listbox-label" [options]="options" />
+  </sui-card>
+
+  <sui-card size="sm">
+    <span suiLabel id="readonly-listbox-label" class="font-medium">Read-only with constrained height</span>
+    <sui-listbox
+      readOnly
+      class="mt-4"
+      ariaLabelledby="readonly-listbox-label"
+      [options]="options"
+      [scrollHeight]="144"
+      [value]="'review'" />
+  </sui-card>
+
+  <sui-card size="sm">
+    <span suiLabel id="required-listbox-label" class="font-medium">Required selection</span>
+    <p id="required-listbox-error" class="mt-1 text-sm text-error">Choose a publishing state.</p>
+    <sui-listbox
+      required
+      invalid
+      touched
+      id="publishing-state"
+      class="mt-4"
+      ariaLabelledby="required-listbox-label"
+      ariaDescribedby="required-listbox-error"
+      [options]="options" />
+  </sui-card>
+
+  <sui-card size="sm">
+    <span suiLabel class="font-medium">Empty collection</span>
+    <sui-listbox class="mt-4" ariaLabel="Available environments" [options]="noOptions">
+      <ng-template suiListboxEmpty>No matching environments are available.</ng-template>
+    </sui-listbox>
+  </sui-card>
+</div>

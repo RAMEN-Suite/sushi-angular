@@ -58,6 +58,10 @@ export const navigation: NavigationGroup[] = [
         path: '/checkbox',
       },
       {
+        label: 'Listbox',
+        path: '/listbox',
+      },
+      {
         label: 'Multi-Select',
         path: '/multi-select',
       },

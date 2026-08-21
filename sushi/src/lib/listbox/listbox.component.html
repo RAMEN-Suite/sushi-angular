@@ -1,0 +1,141 @@
+<div
+  class="max-w-full overflow-hidden rounded-box border border-base-300 bg-base-100 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2"
+  [class.border-error]="isInvalid()"
+  [class.opacity-50]="disabled()"
+  [class.pointer-events-none]="disabled()"
+  (focusout)="handleFocusout($event)"
+>
+  @if (headerTemplate(); as template) {
+    <div class="border-b border-base-300 p-3"><ng-container [ngTemplateOutlet]="template" /></div>
+  }
+
+  @if (filter() || (multiple() && selectAll())) {
+    <div class="flex flex-wrap items-center gap-2 border-b border-base-300 p-2">
+      @if (filter()) {
+        @if (filterTemplate(); as template) {
+          <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="filterContext()" />
+        } @else {
+          <div suiInputSurface fluid class="min-w-40 grow">
+            <svg lucideSearch class="size-4 shrink-0 text-base-content/50" aria-hidden="true"></svg>
+            <input
+              suiInputSurfaceControl
+              type="search"
+              class="text-base"
+              [value]="query()"
+              [placeholder]="filterPlaceholder()"
+              [attr.aria-label]="filterPlaceholder()"
+              [disabled]="disabled()"
+              [readonly]="readOnly()"
+              (input)="handleFilter($event)"
+            />
+          </div>
+        }
+      }
+      @if (multiple() && selectAll()) {
+        <button
+          suiButton
+          type="button"
+          size="md"
+          severity="neutral"
+          variant="text"
+          [disabled]="disabled() || readOnly()"
+          (click)="handleSelectAll()"
+        >
+          {{ allSelected() ? 'Clear all' : 'Select all' }}
+        </button>
+      }
+    </div>
+  }
+
+  <div
+    #listbox="ngListbox"
+    ngListbox
+    class="list max-w-full overflow-y-auto p-2 outline-none"
+    focusMode="activedescendant"
+    selectionMode="explicit"
+    [tabindex]="disabled() ? -1 : 0"
+    [attr.id]="id()"
+    [multi]="multiple()"
+    [disabled]="disabled()"
+    [readonly]="readOnly()"
+    [value]="listboxValue()"
+    [style.max-height.px]="scrollHeight()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledby()"
+    [attr.aria-describedby]="ariaDescribedby()"
+    [attr.aria-busy]="loading() || null"
+    [attr.aria-invalid]="isInvalid() || null"
+    [attr.aria-required]="required() || null"
+    (valueChange)="handleSelection($event)"
+    (scroll)="handleScroll($event)"
+  >
+    @for (option of visibleOptions(); track option.value; let index = $index) {
+      @if (option.group && option.group !== visibleOptions()[index - 1]?.group) {
+        <div class="px-4 pt-4 pb-2 text-xs font-semibold tracking-wide text-base-content/60 uppercase" role="presentation">
+          @if (groupTemplate(); as template) {
+            <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="groupContext(option)" />
+          } @else {
+            {{ option.group }}
+          }
+        </div>
+      }
+
+      <div
+        #ariaOption="ngOption"
+        ngOption
+        class="sui-selection-option list-row items-center rounded-field outline-none"
+        [class.cursor-pointer]="!option.disabled && !readOnly()"
+        [class.cursor-not-allowed]="option.disabled"
+        [class.cursor-default]="readOnly()"
+        [class.opacity-40]="option.disabled"
+        [class.pointer-events-none]="readOnly()"
+        [value]="option.value"
+        [label]="option.label"
+        [disabled]="option.disabled ?? false"
+        [attr.data-active]="ariaOption.active() || null"
+      >
+        @if (multiple() && checkbox()) {
+          <input
+            suiCheckbox
+            type="checkbox"
+            tabindex="-1"
+            class="pointer-events-none"
+            aria-hidden="true"
+            [checked]="ariaOption.selected()"
+            [disabled]="option.disabled ?? false"
+          />
+        }
+        <div class="list-col-grow min-w-0">
+          @if (itemTemplate(); as template) {
+            <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="itemContext(option, index, ariaOption.active())" />
+          } @else {
+            {{ option.label }}
+          }
+        </div>
+        @if (!checkbox() && ariaOption.selected()) {
+          <svg lucideCheck class="size-4 shrink-0" aria-hidden="true"></svg>
+        }
+      </div>
+    } @empty {
+      <div class="p-6 text-center text-sm text-base-content/60" role="presentation">
+        @if (query() && emptyFilterTemplate(); as template) {
+          <ng-container [ngTemplateOutlet]="template" />
+        } @else if (emptyTemplate(); as template) {
+          <ng-container [ngTemplateOutlet]="template" />
+        } @else {
+          {{ query() ? 'No matching options' : 'No options available' }}
+        }
+      </div>
+    }
+
+    @if (loading()) {
+      <div class="flex items-center justify-center gap-2 p-4 text-sm text-base-content/60" role="presentation">
+        <span suiSpinner size="sm"></span>Loading more options
+      </div>
+    }
+  </div>
+
+  @if (footerTemplate(); as template) {
+    <div class="border-t border-base-300 p-3"><ng-container [ngTemplateOutlet]="template" /></div>
+  }
+</div>

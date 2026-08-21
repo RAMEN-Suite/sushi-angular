@@ -1,0 +1,18 @@
+<div class="w-full max-w-lg">
+  <span suiLabel id="workspace-listbox-label" class="font-medium">Active workspace</span>
+  <p id="workspace-listbox-hint" class="mt-1 text-sm text-base-content/60">
+    Use the arrow keys to move and Space to select.
+  </p>
+
+  <sui-listbox
+    class="mt-4"
+    ariaLabelledby="workspace-listbox-label"
+    ariaDescribedby="workspace-listbox-hint"
+    [options]="workspaces"
+    [formField]="workspaceForm.workspace" />
+
+  <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+    <span class="text-sm text-base-content/60">Selected: {{ workspaceForm.workspace().value() }}</span>
+    <button suiButton type="button" size="sm" severity="neutral" variant="soft" (click)="reset()">Reset</button>
+  </div>
+</div>

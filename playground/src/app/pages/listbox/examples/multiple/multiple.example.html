@@ -1,0 +1,15 @@
+<div class="w-full max-w-lg">
+  <div class="flex items-center justify-between gap-3">
+    <span suiLabel id="channel-listbox-label" class="font-medium">Notification channels</span>
+    <span suiBadge size="sm" variant="soft">{{ selectionCount() }} selected</span>
+  </div>
+
+  <sui-listbox
+    multiple
+    checkbox
+    selectAll
+    class="mt-4"
+    ariaLabelledby="channel-listbox-label"
+    [options]="channels"
+    [formField]="channelForm.channels" />
+</div>

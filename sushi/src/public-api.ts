@@ -23,6 +23,7 @@ export * from './lib/join';
 export * from './lib/kbd';
 export * from './lib/label';
 export * from './lib/list';
+export * from './lib/listbox';
 export * from './lib/message';
 export * from './lib/multi-select';
 export * from './lib/progress';

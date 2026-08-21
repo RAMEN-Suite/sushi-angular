@@ -1,0 +1,24 @@
+<div class="w-full max-w-lg">
+  <span suiLabel id="member-listbox-label" class="font-medium">Project member</span>
+  <p id="member-listbox-hint" class="mt-1 text-sm text-base-content/60">
+    More members are appended as the list reaches its scroll boundary.
+  </p>
+
+  <sui-listbox
+    lazy
+    class="mt-4"
+    ariaLabelledby="member-listbox-label"
+    ariaDescribedby="member-listbox-hint"
+    [options]="options()"
+    [loading]="loading()"
+    [scrollHeight]="224"
+    (loadMore)="loadMore($event)">
+    <ng-template suiListboxHeader>
+      <strong>Workspace directory</strong>
+    </ng-template>
+
+    <ng-template suiListboxFooter>
+      <span suiBadge size="sm" variant="soft">{{ options().length }} members loaded</span>
+    </ng-template>
+  </sui-listbox>
+</div>
