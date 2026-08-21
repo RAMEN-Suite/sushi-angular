@@ -9,11 +9,14 @@
     [invalid]="invalid() || localInvalid()"
     [touched]="invalid() || localInvalid()"
     [value]="value()"
-    [disabled]="disabled()"
+    [attr.aria-disabled]="disabled() || null"
     [attr.aria-label]="ariaLabelledby() ? null : ariaLabel() + '. Current color ' + value()"
     [attr.aria-labelledby]="ariaLabelledby()"
     [attr.aria-describedby]="describedBy()"
     (input)="handleColorInput($event)"
+    (click)="handleDisabledEvent($event)"
+    (keydown.enter)="handleDisabledEvent($event)"
+    (keydown.space)="handleDisabledEvent($event)"
   />
   @if (showInput()) {
     <input
@@ -28,7 +31,8 @@
       [invalid]="invalid() || localInvalid()"
       [touched]="invalid() || localInvalid()"
       [value]="inputValue()"
-      [disabled]="disabled()"
+      [readOnly]="disabled()"
+      [attr.aria-disabled]="disabled() || null"
       [attr.aria-label]="id() || ariaLabelledby() ? null : 'Hex color value'"
       [attr.aria-labelledby]="ariaLabelledby()"
       [attr.aria-describedby]="describedBy()"

@@ -44,7 +44,7 @@ import { ChipContentTemplate, ChipRemoveIconTemplate } from './chip.templates';
     '[class.sui-chip--lg]': 'size() === "lg"',
     '[class.sui-chip--xl]': 'size() === "xl"',
     '[class.hidden]': 'removed()',
-    '[attr.tabindex]': 'removable() && !disabled() && !removed() ? 0 : null',
+    '[attr.tabindex]': 'removable() && !removed() ? 0 : null',
     '[attr.aria-label]': 'computedAriaLabel()',
     '[attr.aria-labelledby]': 'ariaLabelledby()',
     '[attr.aria-disabled]': 'disabled() || null',
@@ -63,7 +63,7 @@ export class Chip {
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
   /** Allows pointer and keyboard removal. */
   public readonly removable: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Prevents removal and applies disabled styling. */
+  /** Prevents removal while keeping a removable chip focusable. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Controls chip height, spacing, and text size. */
   public readonly size: InputSignal<ChipSize> = input<ChipSize>('md');

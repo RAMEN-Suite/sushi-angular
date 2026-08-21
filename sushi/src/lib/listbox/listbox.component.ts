@@ -101,7 +101,7 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
   /** IDs of elements that describe the listbox. */
   public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
 
-  /** Prevents focus and selection. */
+  /** Prevents selection while keeping the listbox focusable. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Keeps options focusable without allowing selection changes. */
   public readonly readOnly: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -137,7 +137,9 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
   protected readonly listbox: Signal<AriaListbox<ListboxValue>> = viewChild.required(AriaListbox);
 
   protected readonly query: WritableSignal<string> = signal('');
-  protected readonly updateFilter: (query: string) => void = (query: string): void => this.query.set(query);
+  protected readonly updateFilter: (query: string) => void = (query: string): void => {
+    if (!this.disabled() && !this.readOnly()) this.query.set(query);
+  };
   protected readonly filterContext: Signal<ListboxFilterContext> = computed((): ListboxFilterContext => ({
     $implicit: this.query(),
     query: this.query(),
@@ -177,12 +179,13 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
     });
   }
 
-  /** Moves focus to the listbox unless disabled. */
+  /** Moves focus to the listbox. */
   public focus(): void {
-    if (!this.disabled()) this.listbox().element.focus();
+    this.listbox().element.focus();
   }
 
   protected handleSelection(values: ListboxValue[]): void {
+    if (this.disabled() || this.readOnly()) return;
     this.value.set(this.multiple() ? values : (values.at(0) ?? null));
   }
 
@@ -192,7 +195,7 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
   }
 
   protected handleFilter(event: Event): void {
-    this.query.set((event.target as HTMLInputElement).value);
+    this.updateFilter((event.target as HTMLInputElement).value);
   }
 
   protected handleSelectAll(): void {

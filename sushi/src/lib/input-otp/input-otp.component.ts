@@ -41,7 +41,7 @@ export class InputOtp implements FormValueControl<string> {
   /** IDs of elements that label the native input. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
 
-  /** Prevents code entry and focus. */
+  /** Prevents code entry while keeping the input focusable. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Applies invalid semantics and styling to the complete group. */
   public readonly invalid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -73,6 +73,7 @@ export class InputOtp implements FormValueControl<string> {
   }
 
   protected handleInput(event: Event): void {
+    if (this.disabled()) return;
     const inputElement: HTMLInputElement = event.currentTarget as HTMLInputElement;
     const nextValue: string = (this.numeric() ? inputElement.value.replace(/\D/g, '') : inputElement.value).slice(
       0,

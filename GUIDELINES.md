@@ -135,6 +135,7 @@ Prefer in order:
 ## Accessibility and overlays
 
 - Every control needs an accessible name and visible focus.
+- Keep SUSHI actions and composite widgets focusable while disabled. Use `aria-disabled` or Angular Aria `softDisabled` and suppress activation; reserve native `disabled` for hard-disabled native form controls.
 - Visual wrappers such as Input Surface, Input Group, and Join do not name their controls.
 - Add `role="group"` and a group label only when the complete composition represents one named interaction.
 - Disabled covers pointer, keyboard, and forms behavior.

@@ -49,7 +49,6 @@ let nextColorPickerId: number = 0;
     '[class.w-full]': 'fluid()',
     '[attr.id]': 'null',
     '[attr.aria-disabled]': 'disabled() || null',
-    '[attr.inert]': 'disabled() ? "" : null',
     '(focusout)': 'handleFocusout($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -75,7 +74,7 @@ export class ColorPicker implements FormValueControl<string> {
   /** IDs of elements that describe the picker. */
   public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
 
-  /** Prevents color entry and preset selection. */
+  /** Prevents color entry and preset selection while keeping controls focusable. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Expands the editable picker to the available width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -143,6 +142,7 @@ export class ColorPicker implements FormValueControl<string> {
   }
 
   protected handleColorInput(event: Event): void {
+    if (this.disabled()) return;
     const input: HTMLInputElement = event.currentTarget as HTMLInputElement;
     this.draft.set(null);
     this.localInvalid.set(false);
@@ -151,6 +151,7 @@ export class ColorPicker implements FormValueControl<string> {
   }
 
   protected handleTextInput(event: Event): void {
+    if (this.disabled()) return;
     const input: HTMLInputElement = event.currentTarget as HTMLInputElement;
     this.draft.set(input.value);
     if (!HEX_COLOR_PATTERN.test(input.value)) return;
@@ -177,7 +178,7 @@ export class ColorPicker implements FormValueControl<string> {
   }
 
   protected isTabStop(option: ColorPickerOption, index: number): boolean {
-    if (this.disabled() || option.disabled) return false;
+    if (option.disabled) return false;
     if (option.selected) return true;
     const options: readonly ColorPickerOption[] = this.options();
     const hasEnabledSelection: boolean = options.some(
@@ -187,6 +188,7 @@ export class ColorPicker implements FormValueControl<string> {
   }
 
   protected handlePresetKeydown(event: KeyboardEvent, index: number): void {
+    if (this.disabled()) return;
     const keys: readonly string[] = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'];
     if (!keys.includes(event.key)) return;
     event.preventDefault();
@@ -225,6 +227,12 @@ export class ColorPicker implements FormValueControl<string> {
 
   protected handleFocusout(event: FocusEvent): void {
     if (!this.element.nativeElement.contains(event.relatedTarget as Node | null)) this.touch.emit();
+  }
+
+  protected handleDisabledEvent(event: Event): void {
+    if (!this.disabled()) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
   }
 
   private isPreset(color: string): boolean {

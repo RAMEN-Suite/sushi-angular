@@ -2,8 +2,6 @@ import {
   booleanAttribute,
   computed,
   Directive,
-  ElementRef,
-  inject,
   input,
   InputSignal,
   InputSignalWithTransform,
@@ -46,8 +44,8 @@ import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button
 
     '[attr.aria-busy]': 'loading() ? "true" : null',
     '[attr.aria-disabled]': 'isDisabled() ? "true" : null',
-    '[attr.disabled]': 'isDisabled() && isNativeButton ? "" : null',
-    '[attr.tabindex]': 'isDisabled() && !isNativeButton ? -1 : tabIndex()',
+    '[attr.disabled]': 'null',
+    '[attr.tabindex]': 'tabIndex()',
 
     '(click)': 'handleClick($event)',
   },
@@ -76,7 +74,6 @@ export class Button {
     transform: booleanAttribute,
   });
 
-  protected readonly isNativeButton: boolean = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.tagName === 'BUTTON';
   protected readonly isDisabled: Signal<boolean> = computed<boolean>((): boolean => this.disabled() || this.loading());
 
   protected handleClick(event: Event): void {

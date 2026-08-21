@@ -105,7 +105,7 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
   /** IDs of elements that describe the input. */
   public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
 
-  /** Prevents focus and interaction. */
+  /** Prevents interaction while keeping the input focusable. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Shows the loading state and prevents suggestion selection. */
   public readonly loading: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -211,9 +211,9 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
     });
   }
 
-  /** Moves focus to the search input unless disabled. */
+  /** Moves focus to the search input. */
   public focus(): void {
-    if (!this.disabled()) this.combobox().element.focus();
+    this.combobox().element.focus();
   }
 
   /** Clears the value, query, pending delay, and popup. */

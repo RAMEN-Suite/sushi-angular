@@ -83,7 +83,7 @@ export class InputNumber implements FormValueControl<number | null> {
   public readonly showButtons: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Expands the component to the available width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Prevents editing and step actions. */
+  /** Prevents editing and step actions while keeping the spinbutton focusable. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Applies invalid semantics and styling. */
   public readonly invalid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -139,6 +139,7 @@ export class InputNumber implements FormValueControl<number | null> {
   }
 
   protected handleInput(event: Event): void {
+    if (this.disabled()) return;
     const input: HTMLInputElement = event.currentTarget as HTMLInputElement;
     const parts: Intl.NumberFormatPart[] = this.formatter().formatToParts(12345.6);
     const group: string = parts.find((part): boolean => part.type === 'group')?.value ?? ',';
@@ -154,6 +155,7 @@ export class InputNumber implements FormValueControl<number | null> {
   }
 
   protected adjust(direction: 1 | -1): void {
+    if (this.disabled()) return;
     this.value.set(this.clamp((this.value() ?? 0) + this.step() * direction));
   }
 

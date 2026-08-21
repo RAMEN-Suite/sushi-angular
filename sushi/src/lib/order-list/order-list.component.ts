@@ -80,7 +80,7 @@ export class OrderList<T extends OrderListOption = OrderListOption>
   /** IDs of elements that describe the listbox. */
   public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
 
-  /** Prevents focus, selection, and reordering. */
+  /** Prevents selection and reordering while keeping controls focusable. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   /** Emits when interaction with the collection completes. */
@@ -102,7 +102,9 @@ export class OrderList<T extends OrderListOption = OrderListOption>
   protected readonly query: WritableSignal<string> = signal('');
   protected readonly selection: WritableSignal<readonly OrderListValue[]> = signal([]);
   protected readonly announcement: WritableSignal<string> = signal('');
-  protected readonly updateFilter: (query: string) => void = (query: string): void => this.query.set(query);
+  protected readonly updateFilter: (query: string) => void = (query: string): void => {
+    if (!this.disabled()) this.query.set(query);
+  };
   protected readonly filterContext: Signal<OrderListFilterContext> = computed((): OrderListFilterContext => ({
     $implicit: this.query(),
     query: this.query(),
@@ -150,13 +152,13 @@ export class OrderList<T extends OrderListOption = OrderListOption>
     });
   }
 
-  /** Moves focus to the ordered collection unless disabled. */
+  /** Moves focus to the ordered collection. */
   public focus(): void {
-    if (!this.disabled()) this.listbox().element.focus();
+    this.listbox().element.focus();
   }
 
   protected moveToTop(): void {
-    if (!this.canMoveTop()) return;
+    if (this.disabled() || !this.canMoveTop()) return;
     const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
     this.commit([
       ...this.value().filter((item: T): boolean => selected.has(item.value)),
@@ -165,7 +167,7 @@ export class OrderList<T extends OrderListOption = OrderListOption>
   }
 
   protected moveUp(): void {
-    if (!this.canMoveUp()) return;
+    if (this.disabled() || !this.canMoveUp()) return;
     const items: T[] = [...this.value()];
     const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
     for (const index of this.selectedIndexes()) {
@@ -175,7 +177,7 @@ export class OrderList<T extends OrderListOption = OrderListOption>
   }
 
   protected moveDown(): void {
-    if (!this.canMoveDown()) return;
+    if (this.disabled() || !this.canMoveDown()) return;
     const items: T[] = [...this.value()];
     const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
     for (const index of [...this.selectedIndexes()].reverse()) {
@@ -185,7 +187,7 @@ export class OrderList<T extends OrderListOption = OrderListOption>
   }
 
   protected moveToBottom(): void {
-    if (!this.canMoveBottom()) return;
+    if (this.disabled() || !this.canMoveBottom()) return;
     const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
     this.commit([
       ...this.value().filter((item: T): boolean => !selected.has(item.value)),
@@ -194,6 +196,7 @@ export class OrderList<T extends OrderListOption = OrderListOption>
   }
 
   protected handleSelection(values: OrderListValue[]): void {
+    if (this.disabled()) return;
     this.selection.set(values);
   }
 
@@ -222,10 +225,11 @@ export class OrderList<T extends OrderListOption = OrderListOption>
   }
 
   protected handleFilter(event: Event): void {
-    this.query.set((event.target as HTMLInputElement).value);
+    this.updateFilter((event.target as HTMLInputElement).value);
   }
 
   protected handleDrop(event: CdkDragDrop<readonly T[]>): void {
+    if (this.disabled()) return;
     if (event.previousIndex === event.currentIndex) return;
     const source: T | undefined = this.visibleItems().at(event.previousIndex);
     const target: T | undefined = this.visibleItems().at(event.currentIndex);

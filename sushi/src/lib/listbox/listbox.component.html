@@ -2,7 +2,6 @@
   class="max-w-full overflow-hidden rounded-box border border-base-300 bg-base-100 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2"
   [class.border-error]="isInvalid()"
   [class.opacity-50]="disabled()"
-  [class.pointer-events-none]="disabled()"
   (focusout)="handleFocusout($event)"
 >
   @if (headerTemplate(); as template) {
@@ -24,8 +23,8 @@
               [value]="query()"
               [placeholder]="filterPlaceholder()"
               [attr.aria-label]="filterPlaceholder()"
-              [disabled]="disabled()"
-              [readonly]="readOnly()"
+              [readonly]="disabled() || readOnly()"
+              [attr.aria-disabled]="disabled() || null"
               (input)="handleFilter($event)"
             />
           </div>
@@ -53,10 +52,11 @@
     class="list max-w-full overflow-y-auto p-2 outline-none"
     focusMode="activedescendant"
     selectionMode="explicit"
-    [tabindex]="disabled() ? -1 : 0"
+    [tabindex]="0"
     [attr.id]="id()"
     [multi]="multiple()"
     [disabled]="disabled()"
+    [softDisabled]="true"
     [readonly]="readOnly()"
     [value]="listboxValue()"
     [style.max-height.px]="scrollHeight()"

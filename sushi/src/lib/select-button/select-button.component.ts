@@ -66,7 +66,7 @@ export class SelectButton implements FormValueControl<SelectButtonValue | null> 
   public readonly allowEmpty: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
-  /** Prevents focus and selection for the complete group. */
+  /** Prevents selection while keeping the current option focusable. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
@@ -100,12 +100,8 @@ export class SelectButton implements FormValueControl<SelectButtonValue | null> 
   }
 
   protected isTabStop(option: SelectButtonOption, index: number): boolean {
-    if (this.isDisabled(option)) return false;
     if (this.isSelected(option)) return true;
-    return (
-      this.value() === null &&
-      this.options().findIndex((candidate: SelectButtonOption): boolean => !this.isDisabled(candidate)) === index
-    );
+    return this.value() === null && index === 0;
   }
 
   protected handleSelection(option: SelectButtonOption): void {
@@ -132,23 +128,14 @@ export class SelectButton implements FormValueControl<SelectButtonValue | null> 
     event.preventDefault();
 
     const options: readonly SelectButtonOption[] = this.options();
-    const enabled: number[] = options.reduce<number[]>(
-      (indices: number[], option: SelectButtonOption, optionIndex: number): number[] => {
-        if (!this.isDisabled(option)) indices.push(optionIndex);
-        return indices;
-      },
-      [],
-    );
-    if (enabled.length === 0) return;
-
-    const position: number = enabled.indexOf(index);
+    const position: number = index;
     const next: number =
       event.key === 'Home'
         ? 0
         : event.key === 'End'
-          ? enabled.length - 1
-          : (position + direction + enabled.length) % enabled.length;
-    const nextIndex: number = enabled[next];
+          ? options.length - 1
+          : (position + direction + options.length) % options.length;
+    const nextIndex: number = next;
 
     const target: EventTarget | null = event.currentTarget;
     if (!(target instanceof HTMLElement)) return;

@@ -116,7 +116,7 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   public readonly checkmark: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Expands the control to the available width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Prevents focus and interaction. */
+  /** Prevents interaction while keeping the combobox focusable. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Marks the control as required for accessibility and forms. */
   public readonly required: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -203,9 +203,9 @@ export class Select extends FormControlState implements FormValueControl<SelectM
     });
   }
 
-  /** Moves focus to the combobox unless disabled. */
+  /** Moves focus to the combobox. */
   public focus(): void {
-    if (!this.disabled()) this.combobox().element.focus();
+    this.combobox().element.focus();
   }
 
   /** Clears the selection and closes the popup. */

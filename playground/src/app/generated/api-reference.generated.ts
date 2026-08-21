@@ -291,7 +291,7 @@ export const apiReference = {
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents focus and interaction.',
+        description: 'Prevents interaction while keeping the input focusable.',
       },
       {
         name: 'loading',
@@ -340,7 +340,7 @@ export const apiReference = {
         kind: 'method',
         type: '() => void',
         defaultValue: null,
-        description: 'Moves focus to the search input unless disabled.',
+        description: 'Moves focus to the search input.',
       },
       {
         name: 'reset',
@@ -933,7 +933,7 @@ export const apiReference = {
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents removal and applies disabled styling.',
+        description: 'Prevents removal while keeping a removable chip focusable.',
       },
       {
         name: 'size',
@@ -1190,7 +1190,7 @@ export const apiReference = {
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents color entry and preset selection.',
+        description: 'Prevents color entry and preset selection while keeping controls focusable.',
       },
       {
         name: 'fluid',
@@ -1927,7 +1927,7 @@ export const apiReference = {
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents editing and step actions.',
+        description: 'Prevents editing and step actions while keeping the spinbutton focusable.',
       },
       {
         name: 'invalid',
@@ -2040,7 +2040,7 @@ export const apiReference = {
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents code entry and focus.',
+        description: 'Prevents code entry while keeping the input focusable.',
       },
       {
         name: 'invalid',
@@ -2456,7 +2456,7 @@ export const apiReference = {
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents focus and selection.',
+        description: 'Prevents selection while keeping the listbox focusable.',
       },
       {
         name: 'readOnly',
@@ -2491,7 +2491,7 @@ export const apiReference = {
         kind: 'method',
         type: '() => void',
         defaultValue: null,
-        description: 'Moves focus to the listbox unless disabled.',
+        description: 'Moves focus to the listbox.',
       },
       {
         name: 'invalid',
@@ -2826,7 +2826,7 @@ export const apiReference = {
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents focus and interaction.',
+        description: 'Prevents interaction while keeping the combobox focusable.',
       },
       {
         name: 'required',
@@ -2854,7 +2854,7 @@ export const apiReference = {
         kind: 'method',
         type: '() => void',
         defaultValue: null,
-        description: 'Moves focus to the combobox unless disabled.',
+        description: 'Moves focus to the combobox.',
       },
       {
         name: 'reset',
@@ -3179,7 +3179,7 @@ export const apiReference = {
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents focus, selection, and reordering.',
+        description: 'Prevents selection and reordering while keeping controls focusable.',
       },
       {
         name: 'touch',
@@ -3193,7 +3193,7 @@ export const apiReference = {
         kind: 'method',
         type: '() => void',
         defaultValue: null,
-        description: 'Moves focus to the ordered collection unless disabled.',
+        description: 'Moves focus to the ordered collection.',
       },
       {
         name: 'invalid',
@@ -3599,7 +3599,7 @@ export const apiReference = {
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents focus and interaction.',
+        description: 'Prevents interaction while keeping the combobox focusable.',
       },
       {
         name: 'required',
@@ -3627,7 +3627,7 @@ export const apiReference = {
         kind: 'method',
         type: '() => void',
         defaultValue: null,
-        description: 'Moves focus to the combobox unless disabled.',
+        description: 'Moves focus to the combobox.',
       },
       {
         name: 'reset',
@@ -3896,7 +3896,7 @@ export const apiReference = {
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents focus and selection for the complete group.',
+        description: 'Prevents selection while keeping the current option focusable.',
       },
       {
         name: 'touch',
@@ -4505,7 +4505,7 @@ export const apiReference = {
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents focus and interaction.',
+        description: 'Prevents interaction while keeping the button focusable.',
       },
       {
         name: 'loading',

@@ -57,7 +57,6 @@
   <div
     class="min-w-0 grow overflow-hidden rounded-box border border-base-300 bg-base-100 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2"
     [class.border-error]="isInvalid()"
-    [class.pointer-events-none]="disabled()"
   >
     @if (headerTemplate(); as template) {
       <div class="border-b border-base-300 p-3"><ng-container [ngTemplateOutlet]="template" /></div>
@@ -77,7 +76,8 @@
               [value]="query()"
               [placeholder]="filterPlaceholder()"
               [attr.aria-label]="filterPlaceholder()"
-              [disabled]="disabled()"
+              [readonly]="disabled()"
+              [attr.aria-disabled]="disabled() || null"
               (input)="handleFilter($event)"
             />
           </div>
@@ -94,9 +94,10 @@
       focusMode="activedescendant"
       selectionMode="explicit"
       [attr.id]="id()"
-      [tabindex]="disabled() ? -1 : 0"
+      [tabindex]="0"
       [multi]="true"
       [disabled]="disabled()"
+      [softDisabled]="true"
       [value]="ariaSelection()"
       [style.max-height.px]="scrollHeight()"
       [attr.aria-label]="ariaLabel()"
