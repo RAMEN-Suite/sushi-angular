@@ -19,13 +19,16 @@ const angularHtml: LanguageFn = (api: HLJSApi): Language => {
 highlighter.registerLanguage('html', angularHtml);
 highlighter.registerLanguage('typescript', typescript);
 
-export const highlightLines = (source: string, language: CodeLanguage): readonly string[] => {
+export const highlightLines: (source: string, language: CodeLanguage) => readonly string[] = (
+  source: string,
+  language: CodeLanguage,
+): readonly string[] => {
   const normalized: string = source.replaceAll('\r\n', '\n').trim();
   const highlighted: string = highlighter.highlight(normalized, { language, ignoreIllegals: true }).value;
   return splitLines(highlighted);
 };
 
-const splitLines = (source: string): readonly string[] => {
+const splitLines: (source: string) => readonly string[] = (source: string): readonly string[] => {
   const lines: string[] = [''];
   const spans: string[] = [];
   const tokens: readonly string[] = source.split(/(<span class="[^"]+">|<\/span>|\n)/);

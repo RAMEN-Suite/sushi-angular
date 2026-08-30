@@ -6,7 +6,7 @@ interface ColorModel {
   color: string;
 }
 
-const DEFAULT_COLOR = '#0369a1';
+const DEFAULT_COLOR: string = '#0369a1';
 
 @Component({
   selector: 'pg-color-picker-basic-example',

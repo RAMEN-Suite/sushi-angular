@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "lint": "ng lint",
+    "lint": "ng lint && eslint \"tools/**/*.ts\"",
     "generate:api": "tsx tools/generate-api-reference.ts",
     "prestart:playground": "npm run generate:api",
     "start:playground": "ng serve playground",

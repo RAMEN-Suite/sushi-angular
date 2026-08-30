@@ -43,6 +43,8 @@ sushi/src/lib/<feature>/
 
 - Organize by feature, not Angular type.
 - Prefer one declaration per file; related template markers may share `*.templates.ts`.
+- Keep small features flat; move private renderers into `internal/` when the public feature root becomes hard to scan.
+- Never export an `internal/` declaration.
 - Keep helpers private until two unrelated features need them.
 - Export through the feature barrel, then `public-api.ts`.
 - Import other features through their barrel.
@@ -69,8 +71,11 @@ sushi/src/lib/<feature>/
 - Derive state with `computed`; avoid synchronization effects.
 - Use `protected` for templates and `private` for internals.
 - Keep members `readonly` unless reassigned.
-- Type public and protected APIs explicitly; do not rely on accidental inference.
+- Type named variables, properties, parameters, and function returns explicitly.
+- Keep contextual callback and destructuring inference when repeating the type would reduce readability.
+- Name a local type when its repeated annotation becomes difficult to scan.
 - Keep templates declarative and handlers short.
+- Keep functions below 40 meaningful lines and cyclomatic complexity at or below 12.
 - Use early returns.
 - Add comments only for non-obvious constraints, compatibility workarounds, or architectural decisions.
 - Do not comment code that is already clear from its names and structure.
@@ -82,12 +87,13 @@ Class order:
 2. inputs
 3. outputs
 4. queries
-5. derived state
-6. private state and injections
-7. constructor/lifecycle
-8. public methods
-9. protected handlers
-10. private helpers
+5. template state
+6. derived state
+7. private state and injections
+8. constructor/lifecycle
+9. public methods
+10. protected handlers
+11. private helpers
 
 ## Components and directives
 
