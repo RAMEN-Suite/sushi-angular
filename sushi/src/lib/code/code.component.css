@@ -10,9 +10,12 @@
   overscroll-behavior-inline: contain;
 }
 
-.sui-code__copy-button {
-  @apply absolute right-4 top-7 z-10 -translate-y-1/2 overflow-hidden whitespace-nowrap;
-  max-width: calc(100% - 4rem);
+.sui-code__copy-control {
+  @apply absolute right-4 top-3 z-10 flex shrink-0 flex-nowrap items-center whitespace-nowrap;
+}
+
+.sui-code__copy-control > * {
+  @apply shrink-0 whitespace-nowrap;
 }
 
 .sui-code__copy-button:focus-visible {

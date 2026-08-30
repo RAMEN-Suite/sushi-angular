@@ -1,32 +1,34 @@
 @if (copyable()) {
-  @if (buttonRef(); as template) {
-    <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="buttonContext" />
-  } @else {
-    <button
-      suiButton
-      type="button"
-      class="sui-code__copy-button"
-      severity="neutral"
-      size="sm"
-      [shape]="buttonShape()"
-      [attr.aria-label]="isCopied() ? 'Code copied' : buttonAriaLabel()"
-      (click)="copyCodeLines()"
-    >
-      @if (isCopied()) {
-        @if (buttonOnRef(); as template) {
-          <ng-container [ngTemplateOutlet]="template" />
+  <div class="sui-code__copy-control">
+    @if (buttonRef(); as template) {
+      <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="buttonContext" />
+    } @else {
+      <button
+        suiButton
+        type="button"
+        class="sui-code__copy-button"
+        severity="neutral"
+        size="sm"
+        [shape]="buttonShape()"
+        [attr.aria-label]="isCopied() ? 'Code copied' : buttonAriaLabel()"
+        (click)="copyCodeLines()"
+      >
+        @if (isCopied()) {
+          @if (buttonOnRef(); as template) {
+            <ng-container [ngTemplateOutlet]="template" />
+          } @else {
+            <svg class="size-4" lucideCheck></svg>
+          }
         } @else {
-          <svg class="size-4" lucideCheck></svg>
+          @if (buttonOffRef(); as template) {
+            <ng-container [ngTemplateOutlet]="template" />
+          } @else {
+            <svg class="size-4" lucideCopy></svg>
+          }
         }
-      } @else {
-        @if (buttonOffRef(); as template) {
-          <ng-container [ngTemplateOutlet]="template" />
-        } @else {
-          <svg class="size-4" lucideCopy></svg>
-        }
-      }
-    </button>
-  }
+      </button>
+    }
+  </div>
 }
 
 <div class="sui-code__content" tabindex="-1">
