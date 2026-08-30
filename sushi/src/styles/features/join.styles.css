@@ -92,10 +92,11 @@
   z-index: 2;
 }
 
-.join > .join-item:active {
+.join > .join-item:not(.btn):active {
   z-index: 3;
 }
 
-.join > .join-item:is(:focus, :focus-within) {
+.join > .join-item:not(.btn):is(:focus, :focus-within),
+.join > .join-item.btn:focus-visible {
   z-index: 4;
 }

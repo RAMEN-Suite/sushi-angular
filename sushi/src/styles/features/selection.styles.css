@@ -2,7 +2,9 @@
   @apply select-none text-base font-medium transition-colors duration-150;
 }
 
-.sui-selection-option:not([aria-disabled='true']):not([aria-selected='true'], [data-matched='true']):is(:hover, [data-active='true']) {
+.sui-selection-option:not([aria-disabled='true']):not([aria-selected='true'], [data-matched='true']):hover,
+.sui-selection-list:not(.sui-selection-list--focus-bound) .sui-selection-option:not([aria-disabled='true']):not([aria-selected='true'], [data-matched='true'])[data-active='true'],
+.sui-selection-list--focus-bound:focus .sui-selection-option:not([aria-disabled='true']):not([aria-selected='true'], [data-matched='true'])[data-active='true'] {
   @apply bg-base-200 text-base-content;
 }
 
@@ -14,6 +16,8 @@
   @apply bg-primary/15 text-primary;
 }
 
-.sui-selection-option:not([aria-disabled='true']):is([aria-selected='true'], [data-matched='true']):is(:hover, :active, [data-active='true']) {
+.sui-selection-option:not([aria-disabled='true']):is([aria-selected='true'], [data-matched='true']):is(:hover, :active),
+.sui-selection-list:not(.sui-selection-list--focus-bound) .sui-selection-option:not([aria-disabled='true']):is([aria-selected='true'], [data-matched='true'])[data-active='true'],
+.sui-selection-list--focus-bound:focus .sui-selection-option:not([aria-disabled='true']):is([aria-selected='true'], [data-matched='true'])[data-active='true'] {
   @apply bg-primary/20;
 }
