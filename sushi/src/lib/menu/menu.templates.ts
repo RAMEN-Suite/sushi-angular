@@ -1,11 +1,11 @@
 import { Directive, input, InputSignal } from '@angular/core';
 import { MenuEntry, MenuGroupContext, MenuItem, MenuItemContext } from './menu.interfaces';
 
-/** Replaces the content rendered before all menu entries. */
+/** Adds content before all menu entries. */
 @Directive({ selector: 'ng-template[suiMenuStart]' })
 export class MenuStartTemplate {}
 
-/** Replaces the content rendered after all menu entries. */
+/** Adds content after all menu entries. */
 @Directive({ selector: 'ng-template[suiMenuEnd]' })
 export class MenuEndTemplate {}
 

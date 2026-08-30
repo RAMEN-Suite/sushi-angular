@@ -2,6 +2,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   booleanAttribute,
+  ChangeDetectionStrategy,
   Component,
   contentChild,
   contentChildren,
@@ -26,6 +27,7 @@ import { CodeButtonOffTemplate, CodeButtonOnTemplate, CodeButtonTemplate } from 
   imports: [NgTemplateOutlet, LucideCheck, LucideCopy, Button],
   templateUrl: './code.component.html',
   styleUrl: './code.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'mockup-code sui-code relative block',
   },

@@ -65,6 +65,7 @@ sushi/src/lib/<feature>/
 
 - Prefer `input`, `model`, `output`, `signal`, `computed`, `contentChild`, and `viewChild`.
 - Use `inject()`, not constructor injection.
+- Use `ChangeDetectionStrategy.OnPush` for every component.
 - Use Signal Forms for form controls.
 - Composite controls implement `FormValueControl<T>` or `FormCheckboxControl`.
 - Use `booleanAttribute` and `numberAttribute` for HTML-like inputs.

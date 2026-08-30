@@ -50,7 +50,7 @@ import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button
     '(click)': 'handleClick($event)',
   },
 })
-/** Styles native buttons and links while preserving their platform semantics. */
+/** Styles native buttons and links with consistent, focusable disabled behavior. */
 export class Button {
   /** Applies a semantic theme color. */
   public readonly severity: InputSignal<ButtonSeverity> = input<ButtonSeverity>('primary');

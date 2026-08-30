@@ -11,6 +11,11 @@ export default defineConfig(
   {
     files: ['sushi/src/lib/**/*.ts'],
     rules: {
+      '@angular-eslint/prefer-host-metadata-property': 'error',
+      '@angular-eslint/prefer-inject': 'error',
+      '@angular-eslint/prefer-on-push-component-change-detection': 'error',
+      '@angular-eslint/prefer-signal-model': 'error',
+      '@angular-eslint/prefer-signals': 'error',
       'no-restricted-imports': [
         'error',
         {

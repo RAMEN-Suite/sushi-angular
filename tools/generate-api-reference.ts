@@ -1,6 +1,6 @@
 import type { Dirent } from 'node:fs';
 import { mkdirSync, readdirSync, writeFileSync } from 'node:fs';
-import { dirname, extname, join, relative, resolve } from 'node:path';
+import { basename, dirname, extname, join, relative, resolve } from 'node:path';
 import type { Options as PrettierOptions } from 'prettier';
 import prettier from 'prettier';
 import ts from 'typescript';
@@ -25,6 +25,7 @@ interface CollectedApi {
   readonly references: SourceReference[];
   readonly templates: Map<string, ApiTemplate[]>;
   readonly types: ReadonlyMap<string, ApiTypeDefinition>;
+  readonly typesByClass: ReadonlyMap<string, readonly string[]>;
 }
 
 type ApiTypeNode = ts.InterfaceDeclaration | ts.TypeAliasDeclaration | ts.EnumDeclaration;
@@ -262,24 +263,37 @@ function readTypeDefinition(statement: ts.Statement): ApiTypeDefinition | null {
   };
 }
 
+function collectType(
+  statement: ts.Statement,
+  className: string,
+  types: Map<string, ApiTypeDefinition>,
+  typesByClass: Map<string, string[]>,
+): void {
+  const type: ApiTypeDefinition | null = readTypeDefinition(statement);
+  if (!type || types.has(type.name)) return;
+  types.set(type.name, type);
+  typesByClass.set(className, [...(typesByClass.get(className) ?? []), type.name]);
+}
+
 function collectApi(): CollectedApi {
   const references: SourceReference[] = [];
   const templates: Map<string, ApiTemplate[]> = new Map<string, ApiTemplate[]>();
   const types: Map<string, ApiTypeDefinition> = new Map<string, ApiTypeDefinition>();
+  const typesByClass: Map<string, string[]> = new Map<string, string[]>();
   const sources: readonly ts.SourceFile[] = program
     .getSourceFiles()
     .filter((file: ts.SourceFile): boolean => file.fileName.startsWith(sourceRoot));
 
   sources.forEach((source: ts.SourceFile): void => {
+    const folder: string = dirname(source.fileName);
+    const typeOwner: string = featureClassName(basename(source.fileName).split('.')[0]);
     source.statements.forEach((statement: ts.Statement): void => {
-      const type: ApiTypeDefinition | null = readTypeDefinition(statement);
-      if (type && !types.has(type.name)) types.set(type.name, type);
+      collectType(statement, typeOwner, types, typesByClass);
 
       if (!ts.isClassDeclaration(statement) || !statement.name || isInternal(statement)) return;
       const selector: string | null = findSelector(statement);
       if (!selector) return;
 
-      const folder: string = dirname(source.fileName);
       if (selector.startsWith('ng-template[')) {
         const markers: ApiTemplate[] = templates.get(folder) ?? [];
         markers.push({
@@ -302,13 +316,14 @@ function collectApi(): CollectedApi {
     });
   });
 
-  return { references, templates, types };
+  return { references, templates, types, typesByClass };
 }
 
 function findReferencedTypes(
   members: readonly ApiMember[],
   templates: readonly ApiTemplate[],
   definitions: ReadonlyMap<string, ApiTypeDefinition>,
+  includedNames: readonly string[] = [],
 ): readonly ApiTypeDefinition[] {
   const values: string[] = [
     ...members.map((member: ApiMember): string => member.type),
@@ -318,6 +333,12 @@ function findReferencedTypes(
     ),
   ];
   const found: Map<string, ApiTypeDefinition> = new Map<string, ApiTypeDefinition>();
+  includedNames.forEach((name: string): void => {
+    const definition: ApiTypeDefinition | undefined = definitions.get(name);
+    if (!definition) return;
+    found.set(name, definition);
+    values.push(definition.declaration);
+  });
 
   let index: number = 0;
   while (index < values.length) {
@@ -337,6 +358,13 @@ function findReferencedTypes(
   );
 }
 
+function featureClassName(folder: string): string {
+  return basename(folder)
+    .split('-')
+    .map((part: string): string => `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
+    .join('');
+}
+
 function buildReferenceData(): Readonly<Record<string, ApiReferenceData>> {
   const collected: CollectedApi = collectApi();
   const entries: [string, ApiReferenceData][] = collected.references
@@ -351,13 +379,14 @@ function buildReferenceData(): Readonly<Record<string, ApiReferenceData>> {
         folderReferences.length === 1
           ? folderTemplates
           : folderTemplates.filter((template: ApiTemplate): boolean => template.name.startsWith(prefix));
+      const featureTypes: readonly string[] = collected.typesByClass.get(reference.className) ?? [];
       const data: ApiReferenceData = {
         className: reference.className,
         selector: reference.selector,
         description: reference.description,
         members: reference.members,
         templates,
-        types: findReferencedTypes(reference.members, templates, collected.types),
+        types: findReferencedTypes(reference.members, templates, collected.types, featureTypes),
       };
       return [reference.className, data];
     });
@@ -365,8 +394,26 @@ function buildReferenceData(): Readonly<Record<string, ApiReferenceData>> {
   return references;
 }
 
+function validateDocumentation(data: Readonly<Record<string, ApiReferenceData>>): void {
+  const missing: string[] = [];
+  Object.values(data).forEach((reference: ApiReferenceData): void => {
+    if (!reference.description) missing.push(reference.className);
+    reference.members.forEach((member: ApiMember): void => {
+      if (!member.description) missing.push(`${reference.className}.${member.name}`);
+    });
+    reference.templates.forEach((template: ApiTemplate): void => {
+      if (!template.description) missing.push(`${reference.className}.${template.name}`);
+    });
+    reference.types.forEach((type: ApiTypeDefinition): void => {
+      if (!type.description) missing.push(`${reference.className}.${type.name}`);
+    });
+  });
+  if (missing.length) console.warn(`Missing public API documentation: ${missing.join(', ')}`);
+}
+
 async function writeReferenceFile(): Promise<void> {
   const data: Readonly<Record<string, ApiReferenceData>> = buildReferenceData();
+  validateDocumentation(data);
   const members: string = Object.keys(data)
     .map((name: string): string => `readonly ${name}: ApiReferenceData;`)
     .join('\n');

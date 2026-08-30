@@ -716,7 +716,7 @@ export const apiReference: Readonly<{
   Button: {
     className: 'Button',
     selector: 'button[suiButton], a[suiButton]',
-    description: 'Styles native buttons and links while preserving their platform semantics.',
+    description: 'Styles native buttons and links with consistent, focusable disabled behavior.',
     members: [
       {
         name: 'severity',
@@ -1687,6 +1687,18 @@ export const apiReference: Readonly<{
         description: 'Shared size scale used by visual components.',
       },
       {
+        name: 'FileInputSeverity',
+        kind: 'type',
+        declaration: 'type FileInputSeverity = FormControlSeverity;',
+        description: 'Semantic colors available to native file inputs.',
+      },
+      {
+        name: 'FileInputSize',
+        kind: 'type',
+        declaration: 'type FileInputSize = FormControlSize;',
+        description: 'Size scale available to native file inputs.',
+      },
+      {
         name: 'FormControlSeverity',
         kind: 'type',
         declaration: 'type FormControlSeverity = ThemeSeverity;',
@@ -1713,7 +1725,20 @@ export const apiReference: Readonly<{
     description: 'Establishes the positioning context for one or more indicator items.',
     members: [],
     templates: [],
-    types: [],
+    types: [
+      {
+        name: 'IndicatorHorizontalPosition',
+        kind: 'type',
+        declaration: "type IndicatorHorizontalPosition = 'start' | 'center' | 'end';",
+        description: 'Horizontal attachment point of an indicator item.',
+      },
+      {
+        name: 'IndicatorVerticalPosition',
+        kind: 'type',
+        declaration: "type IndicatorVerticalPosition = 'top' | 'middle' | 'bottom';",
+        description: 'Vertical attachment point of an indicator item.',
+      },
+    ],
   },
   IndicatorItem: {
     className: 'IndicatorItem',
@@ -1825,6 +1850,18 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+      },
+      {
+        name: 'InputSeverity',
+        kind: 'type',
+        declaration: 'type InputSeverity = FormControlSeverity;',
+        description: 'Semantic colors available to native inputs.',
+      },
+      {
+        name: 'InputSize',
+        kind: 'type',
+        declaration: 'type InputSize = FormControlSize;',
+        description: 'Size scale available to native inputs.',
       },
       {
         name: 'ThemeSeverity',
@@ -2828,13 +2865,13 @@ export const apiReference: Readonly<{
       {
         name: 'suiMenuStart',
         context: 'void',
-        description: 'Replaces the content rendered before all menu entries.',
+        description: 'Adds content before all menu entries.',
         members: [],
       },
       {
         name: 'suiMenuEnd',
         context: 'void',
-        description: 'Replaces the content rendered after all menu entries.',
+        description: 'Adds content after all menu entries.',
         members: [],
       },
       {
@@ -3600,6 +3637,12 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type OrderListOption = SelectionOption;',
         description: 'Item displayed and reordered by an order list. Values must be unique.',
+      },
+      {
+        name: 'OrderListValue',
+        kind: 'type',
+        declaration: 'type OrderListValue = SelectionValue;',
+        description: 'Value that uniquely identifies an order-list item.',
       },
       {
         name: 'SelectionFilterContext',
@@ -4703,6 +4746,18 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type TextareaResize = 'none' | 'vertical' | 'horizontal' | 'both';",
         description: 'Native resize directions available to textareas.',
+      },
+      {
+        name: 'TextareaSeverity',
+        kind: 'type',
+        declaration: 'type TextareaSeverity = FormControlSeverity;',
+        description: 'Semantic colors available to textareas.',
+      },
+      {
+        name: 'TextareaSize',
+        kind: 'type',
+        declaration: 'type TextareaSize = FormControlSize;',
+        description: 'Size scale available to textareas.',
       },
       {
         name: 'ThemeSeverity',
