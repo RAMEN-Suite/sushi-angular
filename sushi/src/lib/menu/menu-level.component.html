@@ -1,0 +1,66 @@
+<ul
+  #ariaMenu="ngMenu"
+  ngMenu
+  class="menu sui-menu-surface w-full gap-0.5 p-0 outline-none"
+  [class.menu-xs]="size() === 'xs'"
+  [class.menu-sm]="size() === 'sm'"
+  [class.menu-md]="size() === 'md'"
+  [class.menu-lg]="size() === 'lg'"
+  [class.menu-xl]="size() === 'xl'"
+  [class.sui-menu-surface--nested]="nested()"
+  [class.hidden]="nested() && !ariaMenu.visible()"
+  [attr.data-severity]="severity()"
+  [attr.id]="id()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-labelledby]="ariaLabelledby()"
+  [disabled]="disabled()"
+  [softDisabled]="true"
+  [wrap]="wrap()"
+  [typeaheadDelay]="typeaheadDelay()"
+  (itemSelected)="itemSelected.emit($event)"
+>
+  @for (entry of items(); track $index) {
+    @if (isGroup(entry)) {
+      <li role="group" class="pt-2 first:pt-0" [attr.aria-labelledby]="groupId($index)">
+        <div class="menu-title" [id]="groupId($index)">
+          @if (groupTemplate(); as template) {
+            <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="groupContext(entry)" />
+          } @else {
+            {{ entry.label }}
+          }
+        </div>
+        @for (item of entry.items; track item.value) {
+          <sui-menu-action
+            [item]="item"
+            [menuId]="id()"
+            [disabled]="disabled()"
+            [severity]="severity()"
+            [size]="size()"
+            [wrap]="wrap()"
+            [typeaheadDelay]="typeaheadDelay()"
+            [itemTemplate]="itemTemplate()"
+            [groupTemplate]="groupTemplate()"
+            (itemSelected)="itemSelected.emit($event)"
+          />
+        }
+      </li>
+    } @else if (isSeparator(entry)) {
+      <li role="separator">
+        <div suiDivider class="sui-menu-divider" aria-hidden="true"></div>
+      </li>
+    } @else {
+      <sui-menu-action
+        [item]="entry"
+        [menuId]="id()"
+        [disabled]="disabled()"
+        [severity]="severity()"
+        [size]="size()"
+        [wrap]="wrap()"
+        [typeaheadDelay]="typeaheadDelay()"
+        [itemTemplate]="itemTemplate()"
+        [groupTemplate]="groupTemplate()"
+        (itemSelected)="itemSelected.emit($event)"
+      />
+    }
+  }
+</ul>

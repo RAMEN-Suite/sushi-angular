@@ -1,0 +1,10 @@
+<div class="grid w-72 max-w-full gap-3">
+  <button suiButton type="button" variant="outlined" [suiMenuTrigger]="actionMenu">
+    Document actions
+    <svg lucideChevronDown class="size-4" aria-hidden="true"></svg>
+  </button>
+
+  <sui-menu #actionMenu popup [items]="actions" ariaLabel="Document actions" (itemSelected)="lastAction.set($event)" />
+
+  <span class="text-sm text-base-content/60">Last action: {{ lastAction() ?? 'None' }}</span>
+</div>

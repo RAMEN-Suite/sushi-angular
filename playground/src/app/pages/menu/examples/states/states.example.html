@@ -1,0 +1,11 @@
+<div class="grid gap-6 sm:grid-cols-2">
+  <div class="grid content-start gap-2">
+    <span suiLabel id="partial-menu-label" class="font-medium">Unavailable action</span>
+    <sui-menu [items]="items" ariaLabelledby="partial-menu-label" />
+  </div>
+
+  <div class="grid content-start gap-2">
+    <span suiLabel id="disabled-menu-label" class="font-medium">Disabled menu</span>
+    <sui-menu disabled [items]="items" ariaLabelledby="disabled-menu-label" />
+  </div>
+</div>

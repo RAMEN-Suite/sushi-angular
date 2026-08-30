@@ -1,0 +1,8 @@
+<div class="grid w-full max-w-sm gap-3">
+  <div>
+    <span suiLabel id="document-menu-label" class="font-medium">Document commands</span>
+    <p class="mt-1 text-sm text-base-content/60">Keep a short command list visible beside an editor or workspace.</p>
+  </div>
+  <sui-menu [items]="items" ariaLabelledby="document-menu-label" (itemSelected)="lastAction.set($event)" />
+  <p class="text-sm text-base-content/60">Last action: {{ lastAction() ?? 'None' }}</p>
+</div>

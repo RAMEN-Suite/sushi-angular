@@ -1,0 +1,12 @@
+<div class="grid w-full max-w-sm gap-3">
+  <div>
+    <span suiLabel id="view-menu-label" class="font-medium">Editor view</span>
+    <p class="mt-1 text-sm text-base-content/60">An active command can expose the current application mode.</p>
+  </div>
+  <sui-menu [items]="views()" ariaLabelledby="view-menu-label" (itemSelected)="view.set($event)">
+    <ng-template [suiMenuItem]="views()" let-item>
+      <ng-container [ngComponentOutlet]="item.icon" [ngComponentOutletInputs]="iconInputs" />
+      <span class="grow truncate">{{ item.label }}</span>
+    </ng-template>
+  </sui-menu>
+</div>

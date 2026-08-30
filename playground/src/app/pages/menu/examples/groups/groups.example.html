@@ -1,0 +1,32 @@
+<sui-menu fluid class="max-w-sm" [items]="items" ariaLabel="Workspace menu" (itemSelected)="lastAction.set($event)">
+  <ng-template suiMenuStart>
+    <div class="flex items-center gap-3 px-3 py-3">
+      <sui-avatar size="sm" placeholder aria-label="Avery Morgan">AM</sui-avatar>
+      <div class="min-w-0 grow">
+        <strong class="block truncate text-sm">Avery Morgan</strong>
+        <span class="block truncate text-xs opacity-60">avery@example.com</span>
+      </div>
+      <span suiBadge size="xs" variant="soft">Admin</span>
+    </div>
+    <div suiDivider class="my-1 h-px min-h-px before:h-px after:h-px" role="separator"></div>
+  </ng-template>
+
+  <ng-template [suiMenuGroup]="items" let-group>
+    <span class="text-xs font-semibold uppercase tracking-wide">{{ group.label }}</span>
+  </ng-template>
+
+  <ng-template [suiMenuItem]="items" let-item>
+    <span class="min-w-0 grow">
+      <strong class="block truncate text-sm">{{ item.label }}</strong>
+      <span class="block truncate text-xs opacity-60">{{ item.detail }}</span>
+    </span>
+    @if (item.status) {
+      <span suiBadge size="xs" variant="soft">{{ item.status }}</span>
+    }
+  </ng-template>
+
+  <ng-template suiMenuEnd>
+    <div suiDivider class="my-1 h-px min-h-px before:h-px after:h-px" role="separator"></div>
+    <p class="px-3 py-2 text-xs opacity-60">Signed in to Ramen Suite</p>
+  </ng-template>
+</sui-menu>

@@ -1,0 +1,17 @@
+<div class="grid w-full max-w-xl gap-3">
+  <div
+    tabindex="0"
+    class="grid min-h-40 place-content-center gap-2 rounded-box border border-dashed border-base-300 bg-base-100 p-6 text-center outline-none focus-visible:sui-focus-ring"
+    [suiContextMenuTrigger]="draftMenu">
+    <strong>Quarterly release draft</strong>
+    <span class="text-sm text-base-content/60">
+      Right-click this surface or press
+      <kbd suiKbd size="sm">Shift + F10</kbd>
+      .
+    </span>
+  </div>
+
+  <sui-menu #draftMenu popup [items]="actions" ariaLabel="Draft actions" (itemSelected)="lastAction.set($event)" />
+
+  <p class="text-sm text-base-content/60">Last action: {{ lastAction() ?? 'None' }}</p>
+</div>

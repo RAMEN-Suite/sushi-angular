@@ -1,0 +1,18 @@
+@reference "tailwindcss";
+
+:host {
+  display: contents;
+}
+
+.sui-menu-option {
+  @apply min-h-9 px-3 py-2 select-none font-medium transition-colors duration-150;
+}
+
+.sui-menu-option.menu-active {
+  color: var(--menu-active-fg);
+  background-color: var(--menu-active-bg);
+}
+
+.sui-menu-option:not([aria-disabled='true']):active {
+  transition-duration: 0s;
+}

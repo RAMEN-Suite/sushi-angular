@@ -186,6 +186,11 @@ export const routes: Routes = [
     title: 'Message | SUSHI Playground',
   },
   {
+    path: 'menu',
+    loadComponent: () => import('./pages/menu/menu.page').then(({ MenuPage }) => MenuPage),
+    title: 'Menu | SUSHI Playground',
+  },
+  {
     path: 'list',
     loadComponent: () => import('./pages/list/list.page').then(({ ListPage }) => ListPage),
     title: 'List | SUSHI Playground',

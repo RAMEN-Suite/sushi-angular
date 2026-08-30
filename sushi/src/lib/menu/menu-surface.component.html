@@ -1,0 +1,30 @@
+<div
+  class="max-w-full rounded-box border border-base-300 bg-base-100 p-1.5"
+  [class.w-60]="!fluid()"
+  [class.w-full]="fluid()"
+  [class.pointer-events-none]="disabled()"
+  [class.opacity-40]="disabled()"
+>
+  @if (startTemplate(); as template) {
+    <ng-container [ngTemplateOutlet]="template" />
+  }
+
+  <sui-menu-level
+    [items]="items()"
+    [id]="id()"
+    [ariaLabel]="ariaLabel()"
+    [ariaLabelledby]="ariaLabelledby()"
+    [disabled]="disabled()"
+    [severity]="severity()"
+    [size]="size()"
+    [wrap]="wrap()"
+    [typeaheadDelay]="typeaheadDelay()"
+    [itemTemplate]="itemTemplate()"
+    [groupTemplate]="groupTemplate()"
+    (itemSelected)="itemSelected.emit($event)"
+  />
+
+  @if (endTemplate(); as template) {
+    <ng-container [ngTemplateOutlet]="template" />
+  }
+</div>

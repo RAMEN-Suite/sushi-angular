@@ -1,0 +1,74 @@
+:host {
+  display: contents;
+}
+
+.sui-menu-surface {
+  --menu-active-bg: color-mix(in oklab, var(--sui-menu-active) 15%, transparent);
+  --menu-active-fg: var(--sui-menu-active-fg, var(--sui-menu-active));
+}
+
+.sui-menu-surface--nested {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: 10;
+  width: 15rem;
+  margin-left: 0.25rem;
+  padding: 0.375rem;
+  border: var(--border) solid var(--color-base-300);
+  border-radius: var(--radius-box);
+  background: var(--color-base-100);
+}
+
+.sui-menu-surface--nested::before {
+  display: none;
+  content: none;
+}
+
+.sui-menu-divider {
+  height: 1px;
+  min-height: 1px;
+  margin: 0.25rem 0.5rem;
+}
+
+.sui-menu-divider::before,
+.sui-menu-divider::after {
+  height: 1px;
+}
+
+.sui-menu-divider::after {
+  display: none;
+}
+
+.sui-menu-surface[data-severity='primary'] {
+  --sui-menu-active: var(--color-primary);
+}
+
+.sui-menu-surface[data-severity='secondary'] {
+  --sui-menu-active: var(--color-secondary);
+}
+
+.sui-menu-surface[data-severity='accent'] {
+  --sui-menu-active: var(--color-accent);
+}
+
+.sui-menu-surface[data-severity='neutral'] {
+  --sui-menu-active: var(--color-neutral);
+  --sui-menu-active-fg: var(--color-base-content);
+}
+
+.sui-menu-surface[data-severity='info'] {
+  --sui-menu-active: var(--color-info);
+}
+
+.sui-menu-surface[data-severity='success'] {
+  --sui-menu-active: var(--color-success);
+}
+
+.sui-menu-surface[data-severity='warning'] {
+  --sui-menu-active: var(--color-warning);
+}
+
+.sui-menu-surface[data-severity='error'] {
+  --sui-menu-active: var(--color-error);
+}

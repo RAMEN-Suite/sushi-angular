@@ -8,7 +8,7 @@ Build these in dependency order so later components reuse established behavior a
 - [x] `suiList`
 - [x] `suiListbox`
 - [x] `suiOrderList`
-- [ ] `suiMenu`
+- [x] `suiMenu`
 - [ ] `suiPagination`
 - [ ] `suiTable`
 - [ ] `suiDataView`
@@ -26,7 +26,7 @@ Build these in dependency order so later components reuse established behavior a
 - [ ] `suiDialog`
 - [ ] `suiPopover`
 - [ ] `suiTooltip`
-- [ ] `suiContextMenu`
+- [x] `suiContextMenuTrigger`
 - [ ] `suiBreadcrumb`
 - [ ] `suiSteps`
 

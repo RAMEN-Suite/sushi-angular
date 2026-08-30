@@ -127,6 +127,10 @@ export const navigation: NavigationGroup[] = [
         label: 'Button',
         path: '/button',
       },
+      {
+        label: 'Menu',
+        path: '/menu',
+      },
     ],
   },
   {

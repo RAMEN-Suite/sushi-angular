@@ -1,0 +1,69 @@
+<li role="presentation" class="relative">
+  @if (item().items?.length) {
+    <sui-menu-level
+      #submenu
+      [items]="item().items!"
+      [id]="submenuId()"
+      [disabled]="disabled()"
+      [nested]="true"
+      [severity]="severity()"
+      [size]="size()"
+      [wrap]="wrap()"
+      [typeaheadDelay]="typeaheadDelay()"
+      [itemTemplate]="itemTemplate()"
+      [groupTemplate]="groupTemplate()"
+      (itemSelected)="itemSelected.emit($event)"
+    />
+    <button
+      #ariaItem="ngMenuItem"
+      ngMenuItem
+      type="button"
+      class="sui-menu-option flex w-full items-center gap-3 text-left outline-none"
+      [class.cursor-not-allowed]="item().disabled"
+      [class.menu-active]="item().active || pressed()"
+      [class.opacity-40]="item().disabled"
+      [value]="item().value"
+      [submenu]="submenu.ariaMenu()"
+      [disabled]="item().disabled || disabled()"
+      [searchTerm]="item().label"
+      [attr.aria-current]="item().active ? 'true' : null"
+      (pointerdown)="handlePress($event)"
+      (pointerup)="handleRelease()"
+      (pointercancel)="handleRelease()"
+      (pointerleave)="handleRelease()"
+      (click)="handleSubmenu($event, ariaItem)"
+      (keydown.arrowRight)="handleSubmenu($event, ariaItem)"
+    >
+      @if (itemTemplate(); as template) {
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="itemContext(ariaItem.active() || !!item().active)" />
+      } @else {
+        <span class="min-w-0 grow truncate">{{ item().label }}</span>
+        <svg lucideChevronRight class="size-4 shrink-0" aria-hidden="true"></svg>
+      }
+    </button>
+  } @else {
+    <button
+      #ariaItem="ngMenuItem"
+      ngMenuItem
+      type="button"
+      class="sui-menu-option flex w-full items-center gap-3 text-left outline-none"
+      [class.cursor-not-allowed]="item().disabled"
+      [class.menu-active]="item().active || pressed()"
+      [class.opacity-40]="item().disabled"
+      [value]="item().value"
+      [disabled]="item().disabled || disabled()"
+      [searchTerm]="item().label"
+      [attr.aria-current]="item().active ? 'true' : null"
+      (pointerdown)="handlePress($event)"
+      (pointerup)="handleRelease()"
+      (pointercancel)="handleRelease()"
+      (pointerleave)="handleRelease()"
+    >
+      @if (itemTemplate(); as template) {
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="itemContext(ariaItem.active() || !!item().active)" />
+      } @else {
+        <span class="min-w-0 grow truncate">{{ item().label }}</span>
+      }
+    </button>
+  }
+</li>

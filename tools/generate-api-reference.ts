@@ -100,6 +100,10 @@ function isPublic(node: ts.Node & { readonly modifiers?: ts.NodeArray<ts.Modifie
   );
 }
 
+function isInternal(node: ts.Node): boolean {
+  return ts.getJSDocTags(node).some((tag: ts.JSDocTag): boolean => tag.tagName.text === 'internal');
+}
+
 function readSignalKind(initializer: ts.Expression | undefined): ApiMemberKind | null {
   if (!initializer || !ts.isCallExpression(initializer)) return null;
   const name: string = initializer.expression.getText();
@@ -271,7 +275,7 @@ function collectApi(): CollectedApi {
       const type: ApiTypeDefinition | null = readTypeDefinition(statement);
       if (type && !types.has(type.name)) types.set(type.name, type);
 
-      if (!ts.isClassDeclaration(statement) || !statement.name) return;
+      if (!ts.isClassDeclaration(statement) || !statement.name || isInternal(statement)) return;
       const selector: string | null = findSelector(statement);
       if (!selector) return;
 

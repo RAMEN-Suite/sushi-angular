@@ -1,0 +1,40 @@
+<ng-template #surface>
+  <sui-menu-surface
+    [items]="items()"
+    [id]="surfaceId"
+    [ariaLabel]="ariaLabel()"
+    [ariaLabelledby]="ariaLabelledby()"
+    [disabled]="disabled()"
+    [fluid]="fluid()"
+    [severity]="severity()"
+    [size]="size()"
+    [wrap]="wrap()"
+    [typeaheadDelay]="typeaheadDelay()"
+    [startTemplate]="startTemplate()"
+    [endTemplate]="endTemplate()"
+    [itemTemplate]="itemTemplate()"
+    [groupTemplate]="groupTemplate()"
+    (itemSelected)="handleSelection($event)"
+  />
+</ng-template>
+
+@if (popup()) {
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="origin()!"
+    [cdkConnectedOverlayOpen]="expanded() && !disabled()"
+    [cdkConnectedOverlayPositions]="positions"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    [cdkConnectedOverlayFlexibleDimensions]="true"
+    [cdkConnectedOverlayPush]="false"
+    [cdkConnectedOverlayViewportMargin]="8"
+    cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+    (backdropClick)="close()"
+    (detach)="close(false)"
+    (overlayKeydown)="handleOverlayKeydown($event)"
+  >
+    <ng-container [ngTemplateOutlet]="surface" />
+  </ng-template>
+} @else {
+  <ng-container [ngTemplateOutlet]="surface" />
+}

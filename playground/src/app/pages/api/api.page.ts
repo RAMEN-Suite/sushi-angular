@@ -32,6 +32,7 @@ const references: Readonly<Record<string, readonly ApiReferenceData[]>> = {
   list: [apiReference.List],
   listbox: [apiReference.Listbox],
   message: [apiReference.Message, apiReference.MessageActions],
+  menu: [apiReference.Menu, apiReference.MenuTrigger, apiReference.ContextMenuTrigger],
   'multi-select': [apiReference.MultiSelect],
   'order-list': [apiReference.OrderList],
   progress: [apiReference.Progress],
