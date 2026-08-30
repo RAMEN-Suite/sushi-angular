@@ -13,7 +13,7 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { LucideChevronRight } from '@lucide/angular';
-import { MenuGroupContext, MenuItem, MenuItemContext, MenuSeverity, MenuSize } from './menu.interfaces';
+import { MenuGroupContext, MenuItem, MenuItemContext, MenuSeverity, MenuSize } from '../menu.interfaces';
 import { MenuLevel } from './menu-level.component';
 
 let nextMenuActionId: number = 0;

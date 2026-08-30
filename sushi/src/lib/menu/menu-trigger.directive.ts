@@ -1,4 +1,4 @@
-import { booleanAttribute, Directive, ElementRef, inject, input, InputSignalWithTransform } from '@angular/core';
+import { booleanAttribute, Directive, ElementRef, inject, input, InputSignal, InputSignalWithTransform } from '@angular/core';
 import { Menu } from './menu.component';
 
 /** Opens a popup Menu from a native button. */
@@ -17,7 +17,7 @@ import { Menu } from './menu.component';
 })
 export class MenuTrigger {
   /** Popup Menu controlled by this button. */
-  public readonly menu = input.required<Menu>({ alias: 'suiMenuTrigger' });
+  public readonly menu: InputSignal<Menu> = input.required<Menu>({ alias: 'suiMenuTrigger' });
 
   /** Prevents opening the menu while keeping the trigger focusable. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });

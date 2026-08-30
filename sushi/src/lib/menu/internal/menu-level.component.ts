@@ -11,7 +11,7 @@ import {
   TemplateRef,
   viewChild,
 } from '@angular/core';
-import { Divider } from '../divider';
+import { Divider } from '../../divider';
 import { MenuAction } from './menu-action.component';
 import {
   MenuEntry,
@@ -22,7 +22,7 @@ import {
   MenuSeparator,
   MenuSeverity,
   MenuSize,
-} from './menu.interfaces';
+} from '../menu.interfaces';
 
 /** @internal */
 @Component({

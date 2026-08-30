@@ -21,7 +21,7 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { MenuEntry, MenuGroupContext, MenuItem, MenuItemContext, MenuSeverity, MenuSize } from './menu.interfaces';
-import { MenuSurface } from './menu-surface.component';
+import { MenuSurface } from './internal/menu-surface.component';
 import { MenuEndTemplate, MenuGroupTemplate, MenuItemTemplate, MenuStartTemplate } from './menu.templates';
 
 let nextMenuId: number = 0;

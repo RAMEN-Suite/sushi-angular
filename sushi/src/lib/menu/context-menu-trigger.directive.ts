@@ -1,4 +1,4 @@
-import { booleanAttribute, Directive, ElementRef, inject, input, InputSignalWithTransform } from '@angular/core';
+import { booleanAttribute, Directive, ElementRef, inject, input, InputSignal, InputSignalWithTransform } from '@angular/core';
 import { Menu } from './menu.component';
 
 /** Opens a popup Menu from a context-menu gesture on its host. */
@@ -15,7 +15,7 @@ import { Menu } from './menu.component';
 })
 export class ContextMenuTrigger {
   /** Popup Menu opened by the host's context-menu gesture. */
-  public readonly menu = input.required<Menu>({ alias: 'suiContextMenuTrigger' });
+  public readonly menu: InputSignal<Menu> = input.required<Menu>({ alias: 'suiContextMenuTrigger' });
 
   /** Preserves the browser context menu instead of opening the SUSHI menu. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });

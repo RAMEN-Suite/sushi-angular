@@ -10,7 +10,7 @@ import {
   TemplateRef,
   viewChild,
 } from '@angular/core';
-import { MenuEntry, MenuGroupContext, MenuItem, MenuItemContext, MenuSeverity, MenuSize } from './menu.interfaces';
+import { MenuEntry, MenuGroupContext, MenuItem, MenuItemContext, MenuSeverity, MenuSize } from '../menu.interfaces';
 import { MenuLevel } from './menu-level.component';
 
 /** @internal */
