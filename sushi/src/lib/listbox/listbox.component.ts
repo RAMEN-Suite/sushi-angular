@@ -27,6 +27,7 @@ import { Button } from '../button';
 import { Checkbox } from '../checkbox';
 import { FormControlState } from '../form-control';
 import { InputSurface, InputSurfaceControl } from '../input-surface';
+import { filterSelectionOption } from '../selection';
 import { Spinner } from '../spinner';
 import {
   ListboxFilterContext,
@@ -154,9 +155,9 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
     return value === null ? [] : [value];
   });
   protected readonly visibleOptions: Signal<readonly ListboxOption[]> = computed((): readonly ListboxOption[] => {
-    const query: string = this.query().trim().toLocaleLowerCase();
+    const query: string = this.query();
     return query
-      ? this.options().filter((option: ListboxOption): boolean => option.label.toLocaleLowerCase().includes(query))
+      ? this.options().filter((option: ListboxOption): boolean => filterSelectionOption(option, query))
       : this.options();
   });
   protected readonly allSelected: Signal<boolean> = computed((): boolean => {

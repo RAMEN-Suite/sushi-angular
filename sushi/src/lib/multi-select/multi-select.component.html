@@ -90,7 +90,7 @@
   [cdkConnectedOverlayFlexibleDimensions]="false"
   [cdkConnectedOverlayViewportMargin]="8"
   cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
-  (attach)="overlay.overlayRef?.updatePosition()"
+  (attach)="overlay.overlayRef.updatePosition()"
   (backdropClick)="handleExpanded(false)"
   (detach)="handleExpanded(false)"
 >

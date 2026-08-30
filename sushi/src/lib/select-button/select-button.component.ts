@@ -27,6 +27,9 @@ import {
 } from './select-button.interfaces';
 import { SelectButtonOptionTemplate } from './select-button.templates';
 
+const HORIZONTAL_KEYS: Readonly<Partial<Record<string, number>>> = { ArrowLeft: -1, ArrowRight: 1 };
+const VERTICAL_KEYS: Readonly<Partial<Record<string, number>>> = { ArrowDown: 1, ArrowUp: -1 };
+
 /** Selects one value from a visible group of joined buttons. */
 @Component({
   selector: 'sui-select-button',
@@ -81,8 +84,8 @@ export class SelectButton implements FormValueControl<SelectButtonValue | null> 
     },
   );
 
-  protected isDisabled(option?: SelectButtonOption): boolean {
-    return this.disabled() || Boolean(option?.disabled);
+  protected isDisabled(option: SelectButtonOption): boolean {
+    return this.disabled() || Boolean(option.disabled);
   }
 
   protected isSelected(option: SelectButtonOption): boolean {
@@ -112,30 +115,14 @@ export class SelectButton implements FormValueControl<SelectButtonValue | null> 
   }
 
   protected handleKeydown(event: KeyboardEvent, index: number): void {
-    const direction: number =
-      this.orientation() === 'vertical'
-        ? event.key === 'ArrowDown'
-          ? 1
-          : event.key === 'ArrowUp'
-            ? -1
-            : 0
-        : event.key === 'ArrowRight'
-          ? 1
-          : event.key === 'ArrowLeft'
-            ? -1
-            : 0;
-    if (direction === 0 && event.key !== 'Home' && event.key !== 'End') return;
+    const keys: Readonly<Partial<Record<string, number>>> = this.orientation() === 'vertical' ? VERTICAL_KEYS : HORIZONTAL_KEYS;
+    const direction: number | undefined = keys[event.key];
+    const edge: number | undefined = event.key === 'Home' ? 0 : event.key === 'End' ? this.options().length - 1 : undefined;
+    if (direction === undefined && edge === undefined) return;
     event.preventDefault();
 
     const options: readonly SelectButtonOption[] = this.options();
-    const position: number = index;
-    const next: number =
-      event.key === 'Home'
-        ? 0
-        : event.key === 'End'
-          ? options.length - 1
-          : (position + direction + options.length) % options.length;
-    const nextIndex: number = next;
+    const nextIndex: number = edge ?? (index + (direction ?? 0) + options.length) % options.length;
 
     const target: EventTarget | null = event.currentTarget;
     if (!(target instanceof HTMLElement)) return;

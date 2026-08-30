@@ -27,7 +27,7 @@ import { Combobox, ComboboxPopup, ComboboxWidget } from '@angular/aria/combobox'
 import { Listbox, Option } from '@angular/aria/listbox';
 import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { FormControlSeverity, FormControlSize, FormControlState } from '../form-control';
-import { compareSelectionValues, filterSelectionOption } from '../selection';
+import { compareSelectionValues, filterSelectionOption, SELECTION_ABOVE, SELECTION_BELOW } from '../selection';
 import { Spinner } from '../spinner';
 import {
   AutocompleteCompareWith,
@@ -190,10 +190,7 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
     const message: string = this.errorMessage() ?? '';
     return { $implicit: message, message, query: this.inputValue() };
   });
-  protected readonly positions: ConnectedPosition[] = [
-    { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: 4 },
-    { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -4 },
-  ];
+  protected readonly positions: ConnectedPosition[] = [SELECTION_BELOW, SELECTION_ABOVE];
 
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
   private queryTimer: ReturnType<typeof setTimeout> | undefined;
@@ -290,7 +287,7 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
   }
 
   private scheduleQuery(query: string): void {
-    const complete = (): void => {
+    const complete: () => void = (): void => {
       this.queryChange.emit(query);
       this.expanded.set(true);
     };

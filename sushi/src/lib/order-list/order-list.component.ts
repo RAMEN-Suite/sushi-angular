@@ -28,6 +28,7 @@ import { LucideChevronDown, LucideChevronUp, LucideChevronsDown, LucideChevronsU
 import { Button } from '../button';
 import { FormControlState } from '../form-control';
 import { InputSurface, InputSurfaceControl } from '../input-surface';
+import { filterSelectionOption } from '../selection';
 import { OrderListFilterContext, OrderListItemContext, OrderListOption, OrderListValue } from './order-list.interfaces';
 import { OrderListFilterTemplate, OrderListHeaderTemplate, OrderListItemTemplate } from './order-list.templates';
 
@@ -115,8 +116,8 @@ export class OrderList<T extends OrderListOption = OrderListOption>
   }));
   protected readonly ariaSelection: Signal<OrderListValue[]> = computed((): OrderListValue[] => [...this.selection()]);
   protected readonly visibleItems: Signal<readonly T[]> = computed((): readonly T[] => {
-    const query: string = this.query().trim().toLocaleLowerCase();
-    return query ? this.value().filter((item: T): boolean => item.label.toLocaleLowerCase().includes(query)) : this.value();
+    const query: string = this.query();
+    return query ? this.value().filter((item: T): boolean => filterSelectionOption(item, query)) : this.value();
   });
   protected readonly selectedIndexes: Signal<readonly number[]> = computed((): readonly number[] => {
     const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
