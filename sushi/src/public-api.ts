@@ -10,6 +10,7 @@ export * from './lib/checkbox';
 export * from './lib/chip';
 export * from './lib/color-picker';
 export * from './lib/code';
+export * from './lib/data-view';
 export * from './lib/divider';
 export * from './lib/fieldset';
 export * from './lib/file-input';

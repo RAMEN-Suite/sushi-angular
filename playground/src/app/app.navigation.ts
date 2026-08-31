@@ -174,6 +174,10 @@ export const navigation: NavigationGroup[] = [
         path: '/chip',
       },
       {
+        label: 'Data View',
+        path: '/data-view',
+      },
+      {
         label: 'Icons',
         path: '/icon',
       },

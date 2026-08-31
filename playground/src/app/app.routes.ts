@@ -211,6 +211,11 @@ export const routes: Routes = [
     title: 'Pagination | SUSHI Playground',
   },
   {
+    path: 'data-view',
+    loadComponent: () => import('./pages/data-view/data-view.page').then(({ DataViewPage }) => DataViewPage),
+    title: 'Data View | SUSHI Playground',
+  },
+  {
     path: 'spinner',
     loadComponent: () => import('./pages/spinner/spinner.page').then(({ SpinnerPage }) => SpinnerPage),
     title: 'Spinner | SUSHI Playground',

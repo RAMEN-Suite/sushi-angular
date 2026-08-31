@@ -1,0 +1,42 @@
+<sui-data-view
+  lazy
+  paginate
+  [items]="pageItems()"
+  [page]="page()"
+  [pageSize]="3"
+  [pageLinkSize]="3"
+  [totalItems]="18"
+  [loading]="loading()"
+  paginatorPosition="top"
+  ariaLabel="Deployments"
+  (pageChange)="handlePage($event)">
+  <ng-template suiDataViewItem let-deployment>
+    <sui-card size="sm">
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <strong class="block">{{ deployment.environment }}</strong>
+          <span class="mt-1 block text-sm text-base-content/60">Version {{ deployment.version }}</span>
+        </div>
+        <span suiBadge size="sm" variant="soft" severity="success">Ready</span>
+      </div>
+    </sui-card>
+  </ng-template>
+
+  <ng-template suiDataViewEmpty>
+    <div class="grid justify-items-center gap-3 px-4 py-12 text-center">
+      <p class="text-base-content/60">No deployments are available.</p>
+      <button suiButton type="button" size="sm" severity="neutral" variant="soft">Refresh</button>
+    </div>
+  </ng-template>
+
+  <ng-template suiDataViewLoading>
+    <div class="flex items-center justify-center gap-2 px-4 py-12 text-sm text-base-content/60" role="status">
+      <span suiSpinner size="sm"></span>
+      Fetching deployment page…
+    </div>
+  </ng-template>
+
+  <ng-template suiDataViewFooter let-total="totalItems">
+    <p class="text-end text-sm text-base-content/60">{{ total }} deployments across all environments.</p>
+  </ng-template>
+</sui-data-view>

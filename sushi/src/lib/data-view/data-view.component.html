@@ -1,0 +1,108 @@
+@if (headerTemplate(); as template) {
+  <header class="mb-4">
+    <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
+  </header>
+}
+
+@if (layouts().length > 1 || showPaginator('top')) {
+  <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+    @if (layouts().length > 1) {
+      <sui-select-button
+        size="sm"
+        severity="neutral"
+        [options]="layoutOptions()"
+        [value]="layout()"
+        [ariaLabel]="layoutLabel()"
+        (valueChange)="handleLayout($event)"
+      >
+        <ng-template suiSelectButtonOption let-option>
+          @if (option.value === 'list') {
+            <svg lucideList class="size-4" aria-hidden="true"></svg>
+          } @else {
+            <svg lucideGrid2X2 class="size-4" aria-hidden="true"></svg>
+          }
+        </ng-template>
+      </sui-select-button>
+    } @else {
+      <span></span>
+    }
+
+    @if (showPaginator('top')) {
+      <ng-container [ngTemplateOutlet]="paginator" />
+    }
+  </div>
+}
+
+<div #scrollViewport class="min-w-0" [class.overflow-y-auto]="scrollHeight()" [class.pe-1]="scrollHeight()" [style.height]="scrollHeight()">
+  @if (loading()) {
+    <div class="rounded-box border border-base-300">
+      @if (loadingTemplate(); as template) {
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
+      } @else {
+        <span class="flex items-center justify-center gap-2 px-4 py-12 text-sm text-base-content/60" role="status">
+          <span suiSpinner size="sm"></span>
+          {{ loadingMessage() }}
+        </span>
+      }
+    </div>
+  } @else {
+    <ul
+      class="m-0 list-none p-0"
+      [class.sui-data-view__list]="layout() === 'list'"
+      [class.sui-data-view__grid]="layout() === 'grid'"
+      [style.--sui-data-view-min-item-width]="minItemWidth()"
+      [attr.aria-label]="ariaLabel()"
+      [attr.aria-labelledby]="ariaLabelledby()"
+    >
+      @for (item of visibleItems(); track trackItem($index, item); let count = $count) {
+        <li class="min-w-0">
+          <ng-container [ngTemplateOutlet]="itemTemplate()" [ngTemplateOutletContext]="itemContext(item, $index, count)" />
+        </li>
+      } @empty {
+        <li class="rounded-box border border-base-300">
+          @if (emptyTemplate(); as template) {
+            <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
+          } @else {
+            <span class="block px-4 py-12 text-center text-sm text-base-content/60">{{ emptyMessage() }}</span>
+          }
+        </li>
+      }
+    </ul>
+  }
+
+  @if (infiniteScroll() && (hasMore() || loadingMore())) {
+    <div #loadMoreTrigger class="mt-4 flex min-h-12 items-center justify-center">
+      @if (loadMoreTemplate(); as template) {
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="loadMoreContext()" />
+      } @else {
+        <button suiButton type="button" size="sm" severity="neutral" variant="soft" [loading]="loadingMore()" (click)="handleLoadMore()">
+          {{ loadMoreLabel() }}
+        </button>
+      }
+    </div>
+  }
+</div>
+
+@if (showPaginator('bottom')) {
+  <div class="mt-4 flex justify-end">
+    <ng-container [ngTemplateOutlet]="paginator" />
+  </div>
+}
+
+@if (footerTemplate(); as template) {
+  <footer class="mt-4">
+    <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
+  </footer>
+}
+
+<ng-template #paginator>
+  <sui-pagination
+    [page]="currentPage()"
+    [pageSize]="normalizedPageSize()"
+    [totalItems]="collectionSize()"
+    [pageLinkSize]="pageLinkSize()"
+    [pageSizeOptions]="pageSizeOptions()"
+    (pageChange)="page.set($event)"
+    (pageSizeChange)="pageSize.set($event)"
+  />
+</ng-template>

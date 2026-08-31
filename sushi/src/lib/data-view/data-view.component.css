@@ -1,0 +1,10 @@
+.sui-data-view__list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sui-data-view__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--sui-data-view-min-item-width)), 1fr));
+  gap: 1rem;
+}

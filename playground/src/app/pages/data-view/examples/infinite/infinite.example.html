@@ -1,0 +1,40 @@
+<sui-data-view
+  infiniteScroll
+  layout="grid"
+  minItemWidth="17rem"
+  scrollHeight="28rem"
+  [items]="items()"
+  [hasMore]="hasMore()"
+  [loadingMore]="loading()"
+  ariaLabel="Pattern library"
+  (loadMore)="loadMore()">
+  <ng-template suiDataViewItem let-resource let-index="index">
+    <sui-card size="sm" class="h-full">
+      <div class="flex items-start justify-between gap-3">
+        <span class="grid size-9 shrink-0 place-items-center rounded-field bg-base-200 text-sm font-semibold">
+          {{ index + 1 }}
+        </span>
+        <span suiBadge size="sm" severity="neutral" variant="soft">{{ resource.area }}</span>
+      </div>
+      <h3 suiCardTitle class="mt-5">{{ resource.title }}</h3>
+      <p class="mt-2 text-sm leading-relaxed text-base-content/60">{{ resource.summary }}</p>
+    </sui-card>
+  </ng-template>
+
+  <ng-template suiDataViewLoadMore let-loading="loading" let-load="load">
+    <div class="grid justify-items-center gap-2">
+      @if (loading) {
+        <span class="flex min-h-8 items-center gap-2 text-sm text-base-content/60" role="status">
+          <span suiSpinner size="sm"></span>
+          Loading more resources…
+        </span>
+      } @else {
+        <button suiButton type="button" size="sm" severity="neutral" variant="soft" (click)="load()">
+          Discover more
+          <svg lucideArrowRight class="size-4" aria-hidden="true"></svg>
+        </button>
+      }
+      <span class="text-xs text-base-content/50">{{ items().length }} of 18 resources</span>
+    </div>
+  </ng-template>
+</sui-data-view>

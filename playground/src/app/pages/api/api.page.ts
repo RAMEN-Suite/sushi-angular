@@ -16,6 +16,7 @@ const references: Readonly<Record<string, readonly ApiReferenceData[]>> = {
   chip: [apiReference.Chip],
   code: [apiReference.Code, apiReference.CodeLine],
   'color-picker': [apiReference.ColorPicker],
+  'data-view': [apiReference.DataView],
   divider: [apiReference.Divider],
   fieldset: [apiReference.Fieldset, apiReference.FieldsetLegend, apiReference.FieldsetContent, apiReference.FieldsetToggle],
   'file-drop': [apiReference.FileDrop],

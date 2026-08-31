@@ -1,0 +1,28 @@
+<sui-data-view [items]="activities" ariaLabel="Recent activity">
+  <ng-template suiDataViewItem let-activity>
+    <sui-card size="sm">
+      <div class="flex items-start gap-3">
+        <span class="mt-0.5 grid size-9 shrink-0 place-items-center rounded-field bg-base-200">
+          @switch (activity.type) {
+            @case ('release') {
+              <svg lucidePackage class="size-4" aria-hidden="true"></svg>
+            }
+            @case ('review') {
+              <svg lucideGitPullRequest class="size-4" aria-hidden="true"></svg>
+            }
+            @default {
+              <svg lucideCircleCheck class="size-4" aria-hidden="true"></svg>
+            }
+          }
+        </span>
+
+        <span class="min-w-0 flex-1">
+          <strong class="block">{{ activity.title }}</strong>
+          <span class="mt-1 block text-sm text-base-content/60">{{ activity.detail }}</span>
+        </span>
+
+        <span suiBadge size="sm" variant="soft" severity="neutral">{{ activity.time }}</span>
+      </div>
+    </sui-card>
+  </ng-template>
+</sui-data-view>

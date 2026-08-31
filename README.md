@@ -11,7 +11,7 @@ Build these in dependency order so later components reuse established behavior a
 - [x] `suiMenu`
 - [x] `suiPagination`
 - [x] `suiTable`
-- [ ] `suiDataView`
+- [x] `suiDataView`
 
 ## Application navigation
 

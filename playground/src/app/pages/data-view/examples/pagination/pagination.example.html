@@ -1,0 +1,23 @@
+<sui-data-view paginate [items]="guides" [pageSize]="4" [pageSizeOptions]="[4, 8, 12]" ariaLabelledby="guides-title">
+  <ng-template suiDataViewHeader let-items let-total="totalItems">
+    <div class="flex flex-wrap items-end justify-between gap-3">
+      <div>
+        <h3 id="guides-title" class="font-semibold">Knowledge base</h3>
+        <p class="mt-1 text-sm text-base-content/60">Showing {{ items.length }} of {{ total }} guides.</p>
+      </div>
+      <span suiBadge size="sm" variant="soft" severity="neutral">Updated today</span>
+    </div>
+  </ng-template>
+
+  <ng-template suiDataViewItem let-guide>
+    <sui-card size="sm">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <strong class="block">{{ guide.title }}</strong>
+          <span class="mt-1 block text-sm text-base-content/60">{{ guide.area }}</span>
+        </div>
+        <span class="text-sm text-base-content/60">{{ guide.readingTime }} min read</span>
+      </div>
+    </sui-card>
+  </ng-template>
+</sui-data-view>
