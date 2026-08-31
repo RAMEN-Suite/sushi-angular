@@ -1,0 +1,16 @@
+.sui-pagination__action {
+  --btn-rest-fg: color-mix(in oklab, var(--color-base-content) 65%, transparent);
+}
+
+.sui-pagination__page-input {
+  width: var(--size);
+  padding-inline: 0.25rem;
+  border-radius: 9999px;
+  appearance: textfield;
+}
+
+.sui-pagination__page-input::-webkit-inner-spin-button,
+.sui-pagination__page-input::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}

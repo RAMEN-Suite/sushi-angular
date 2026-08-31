@@ -206,6 +206,11 @@ export const routes: Routes = [
     title: 'Order List | SUSHI Playground',
   },
   {
+    path: 'pagination',
+    loadComponent: () => import('./pages/pagination/pagination.page').then(({ PaginationPage }) => PaginationPage),
+    title: 'Pagination | SUSHI Playground',
+  },
+  {
     path: 'spinner',
     loadComponent: () => import('./pages/spinner/spinner.page').then(({ SpinnerPage }) => SpinnerPage),
     title: 'Spinner | SUSHI Playground',

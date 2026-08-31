@@ -9,7 +9,7 @@ Build these in dependency order so later components reuse established behavior a
 - [x] `suiListbox`
 - [x] `suiOrderList`
 - [x] `suiMenu`
-- [ ] `suiPagination`
+- [x] `suiPagination`
 - [ ] `suiTable`
 - [ ] `suiDataView`
 

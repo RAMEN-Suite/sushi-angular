@@ -35,6 +35,7 @@ const references: Readonly<Record<string, readonly ApiReferenceData[]>> = {
   menu: [apiReference.Menu, apiReference.MenuTrigger, apiReference.ContextMenuTrigger],
   'multi-select': [apiReference.MultiSelect],
   'order-list': [apiReference.OrderList],
+  pagination: [apiReference.Pagination],
   progress: [apiReference.Progress],
   radio: [apiReference.Radio],
   range: [apiReference.Range],

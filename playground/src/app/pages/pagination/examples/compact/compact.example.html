@@ -1,0 +1,15 @@
+<div class="grid w-full max-w-xl gap-3">
+  <sui-card size="sm">
+    <strong class="block">Audit log</strong>
+    <span class="text-sm text-base-content/60">240 events are available across the workspace.</span>
+  </sui-card>
+
+  <sui-pagination
+    showReport
+    [labels]="labels"
+    [pageSize]="20"
+    [showFirstLast]="false"
+    [showPageLinks]="false"
+    [totalItems]="240"
+    [(page)]="page" />
+</div>

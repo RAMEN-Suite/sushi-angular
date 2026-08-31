@@ -1,0 +1,78 @@
+<sui-card class="w-full max-w-3xl overflow-hidden bg-gradient-to-br from-secondary/10 via-base-100 to-primary/10">
+  <div class="grid gap-6">
+    <header class="flex flex-wrap items-start justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span
+          class="grid size-11 place-items-center rounded-field border border-secondary/30 bg-secondary/10 text-secondary">
+          <svg lucideOrbit class="size-6" aria-hidden="true"></svg>
+        </span>
+        <span>
+          <span
+            class="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-base-content/50">
+            <span suiStatus animation="ping" severity="success" size="xs"></span>
+            Live archive
+          </span>
+          <h3 suiCardTitle>Orbital telemetry</h3>
+        </span>
+      </div>
+
+      <span suiBadge severity="secondary" size="sm" variant="soft">
+        <svg lucideRadioTower class="size-3.5" aria-hidden="true"></svg>
+        Signal locked
+      </span>
+    </header>
+
+    <div class="grid gap-3 sm:grid-cols-3">
+      <div class="rounded-field border border-base-300 bg-base-100/70 p-3">
+        <span class="block text-xs uppercase tracking-wider text-base-content/50">Active sector</span>
+        <strong class="font-mono text-xl">{{ formatPage(page()) }}</strong>
+      </div>
+      <div class="rounded-field border border-base-300 bg-base-100/70 p-3">
+        <span class="block text-xs uppercase tracking-wider text-base-content/50">Packets</span>
+        <strong class="font-mono text-xl">{{ packets() }}/86</strong>
+      </div>
+      <div class="rounded-field border border-base-300 bg-base-100/70 p-3">
+        <span class="block text-xs uppercase tracking-wider text-base-content/50">Integrity</span>
+        <strong class="font-mono text-xl">99.8%</strong>
+      </div>
+    </div>
+
+    <progress suiProgress class="h-1.5 w-full" severity="secondary" [max]="9" [value]="page()"></progress>
+
+    <sui-pagination
+      showReport
+      ariaLabel="Telemetry sectors"
+      severity="secondary"
+      [pageLinkSize]="5"
+      [pageSize]="10"
+      [totalItems]="86"
+      [(page)]="page">
+      <ng-template suiPaginationPage let-page let-current="current">
+        <span class="font-mono text-xs" [class.font-bold]="current">{{ formatPage(page) }}</span>
+      </ng-template>
+
+      <ng-template suiPaginationNavigation let-navigation>
+        @switch (navigation) {
+          @case ('first') {
+            <svg lucideChevronsLeft class="size-[1em]" aria-hidden="true"></svg>
+          }
+          @case ('previous') {
+            <svg lucideArrowLeft class="size-[1em]" aria-hidden="true"></svg>
+          }
+          @case ('next') {
+            <svg lucideArrowRight class="size-[1em]" aria-hidden="true"></svg>
+          }
+          @case ('last') {
+            <svg lucideChevronsRight class="size-[1em]" aria-hidden="true"></svg>
+          }
+        }
+      </ng-template>
+
+      <ng-template suiPaginationReport let-page="page" let-pageCount="pageCount">
+        Sector
+        <span class="font-mono font-semibold text-base-content">{{ formatPage(page) }}</span>
+        / {{ formatPage(pageCount) }}
+      </ng-template>
+    </sui-pagination>
+  </div>
+</sui-card>

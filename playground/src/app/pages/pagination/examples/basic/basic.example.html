@@ -1,0 +1,21 @@
+<div class="grid w-full max-w-2xl gap-4">
+  <sui-list ariaLabel="Releases on the current page" [items]="visibleReleases()">
+    <ng-template suiListItem let-release>
+      <span class="min-w-0 flex-1">
+        <strong class="block truncate">{{ release.name }}</strong>
+        <span class="text-sm text-base-content/60">Release {{ release.id }}</span>
+      </span>
+      <span suiBadge size="sm" severity="neutral" variant="soft">{{ release.channel }}</span>
+    </ng-template>
+  </sui-list>
+
+  <sui-pagination
+    pageSizeCheckmark
+    showPageInput
+    showReport
+    ariaLabel="Release pages"
+    [pageSizeOptions]="[3, 6]"
+    [totalItems]="releases.length"
+    [(page)]="page"
+    [(pageSize)]="pageSize" />
+</div>

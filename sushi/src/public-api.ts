@@ -28,6 +28,7 @@ export * from './lib/message';
 export * from './lib/menu';
 export * from './lib/multi-select';
 export * from './lib/order-list';
+export * from './lib/pagination';
 export * from './lib/progress';
 export * from './lib/radio';
 export * from './lib/range';

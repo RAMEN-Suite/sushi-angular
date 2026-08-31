@@ -47,6 +47,7 @@ export const apiReference: Readonly<{
   readonly MessageActions: ApiReferenceData;
   readonly MultiSelect: ApiReferenceData;
   readonly OrderList: ApiReferenceData;
+  readonly Pagination: ApiReferenceData;
   readonly Progress: ApiReferenceData;
   readonly Radio: ApiReferenceData;
   readonly Range: ApiReferenceData;
@@ -3663,6 +3664,212 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type SelectionValue = string | number | boolean | object;',
         description: 'Primitive or object value accepted by selection controls.',
+      },
+    ],
+  },
+  Pagination: {
+    className: 'Pagination',
+    selector: 'sui-pagination',
+    description: 'Navigates a one-based page model across a known collection size.',
+    members: [
+      {
+        name: 'page',
+        kind: 'model',
+        type: 'number',
+        defaultValue: '1',
+        description: 'Requested one-based page. Rendered navigation clamps it to the available range.',
+      },
+      {
+        name: 'pageSize',
+        kind: 'model',
+        type: 'number',
+        defaultValue: '10',
+        description: 'Controlled number of items represented by one page.',
+      },
+      {
+        name: 'totalItems',
+        kind: 'input',
+        type: 'number',
+        defaultValue: '0',
+        description: 'Total number of items across every page.',
+      },
+      {
+        name: 'pageLinkSize',
+        kind: 'input',
+        type: 'number',
+        defaultValue: '5',
+        description: 'Maximum number of consecutive numbered page actions.',
+      },
+      {
+        name: 'pageSizeOptions',
+        kind: 'input',
+        type: 'readonly number[]',
+        defaultValue: '[]',
+        description: 'Available item counts shown in the optional page-size selector.',
+      },
+      {
+        name: 'pageSizeCheckmark',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Shows a checkmark beside the selected page size.',
+      },
+      {
+        name: 'size',
+        kind: 'input',
+        type: 'PaginationSize',
+        defaultValue: "'md'",
+        description: 'Controls the dimensions of every pagination action.',
+      },
+      {
+        name: 'severity',
+        kind: 'input',
+        type: 'PaginationSeverity',
+        defaultValue: "'primary'",
+        description: 'Applies one semantic color to the current page.',
+      },
+      {
+        name: 'ariaLabel',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: "'Pagination'",
+        description: 'Accessible name used when no visible label names the navigation.',
+      },
+      {
+        name: 'ariaLabelledby',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'ID of an element that names the navigation.',
+      },
+      {
+        name: 'labels',
+        kind: 'input',
+        type: 'PaginationLabels',
+        defaultValue: 'DEFAULT_LABELS',
+        description: 'Accessible labels for navigation and page actions.',
+      },
+      {
+        name: 'showPageLinks',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Shows direct links to a moving window of pages.',
+      },
+      {
+        name: 'showFirstLast',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Shows actions that move directly to the first and last pages.',
+      },
+      {
+        name: 'showReport',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Shows the current item range and total item count.',
+      },
+      {
+        name: 'showPageInput',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Makes the current page action editable for direct navigation.',
+      },
+      {
+        name: 'disabled',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Prevents navigation while keeping pagination actions focusable.',
+      },
+    ],
+    templates: [
+      {
+        name: 'suiPaginationPage',
+        context: 'PaginationPageContext',
+        description: 'Replaces the content of every numbered page action.',
+        members: [],
+      },
+      {
+        name: 'suiPaginationNavigation',
+        context: 'PaginationNavigationContext',
+        description: 'Replaces the content of every first, previous, next, and last action.',
+        members: [],
+      },
+      {
+        name: 'suiPaginationReport',
+        context: 'PaginationReportContext',
+        description: 'Replaces the optional current-page report.',
+        members: [],
+      },
+    ],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'PaginationLabels',
+        kind: 'interface',
+        declaration:
+          'interface PaginationLabels {\n  readonly first: string;\n  readonly previous: string;\n  readonly next: string;\n  readonly last: string;\n  readonly pageInput: string;\n  readonly pageSize: string;\n  readonly page: (page: number) => string;\n}',
+        description: 'Accessible labels used by pagination navigation.',
+      },
+      {
+        name: 'PaginationNavigation',
+        kind: 'type',
+        declaration: "type PaginationNavigation = 'first' | 'previous' | 'next' | 'last';",
+        description: 'Navigation actions rendered around the numbered page links.',
+      },
+      {
+        name: 'PaginationNavigationContext',
+        kind: 'interface',
+        declaration:
+          'interface PaginationNavigationContext extends PaginationState {\n  readonly $implicit: PaginationNavigation;\n  readonly navigation: PaginationNavigation;\n  readonly label: string;\n}',
+        description: 'Context exposed to a custom first, previous, next, or last action.',
+      },
+      {
+        name: 'PaginationPageContext',
+        kind: 'interface',
+        declaration:
+          'interface PaginationPageContext extends PaginationState {\n  readonly $implicit: number;\n  readonly current: boolean;\n}',
+        description: 'Context exposed to a custom numbered page action.',
+      },
+      {
+        name: 'PaginationReportContext',
+        kind: 'type',
+        declaration: 'type PaginationReportContext = PaginationState;',
+        description: 'Context exposed to a custom current-page report.',
+      },
+      {
+        name: 'PaginationSeverity',
+        kind: 'type',
+        declaration: 'type PaginationSeverity = ThemeSeverity;',
+        description: 'Semantic colors available to the current page action.',
+      },
+      {
+        name: 'PaginationSize',
+        kind: 'type',
+        declaration: 'type PaginationSize = ComponentSize;',
+        description: 'Size scale available to pagination controls.',
+      },
+      {
+        name: 'PaginationState',
+        kind: 'interface',
+        declaration:
+          'interface PaginationState {\n  readonly page: number;\n  readonly pageCount: number;\n  readonly pageSize: number;\n  readonly totalItems: number;\n  readonly firstItem: number;\n  readonly lastItem: number;\n}',
+        description: 'Current pagination boundaries exposed to reports and page templates.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
       },
     ],
   },

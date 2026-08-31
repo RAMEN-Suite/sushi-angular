@@ -1,0 +1,51 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Pagination</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Navigate a known collection with a controlled page model, responsive page links, and accessible labels.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2" aria-label="Pagination architecture">
+      <span suiBadge variant="soft" size="sm">Component</span>
+      <span suiBadge variant="soft" size="sm">Templates</span>
+    </div>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>Paginate a collection</h2>
+    <p class="text-base-content/60">
+      Bind the one-based page model and optionally make the active page editable. Press Enter or leave the field to apply; press Escape to
+      cancel.
+    </p>
+    <div class="mt-5 rounded-box bg-base-200/30 p-4 sm:p-6"><pg-pagination-basic-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Compact navigation</h2>
+    <p class="text-base-content/60">Hide direct and boundary links when previous and next actions are enough for a constrained surface.</p>
+    <div class="mt-5 rounded-box bg-base-200/30 p-4 sm:p-6"><pg-pagination-compact-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.compact.html" [typescript]="examples.compact.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Size, color, and state</h2>
+    <p class="text-base-content/60">
+      Keep one size and semantic color across the complete control. Disabled actions remain discoverable by keyboard.
+    </p>
+    <div class="mt-5 rounded-box bg-base-200/30 p-4 sm:p-6"><pg-pagination-appearance-example /></div>
+    <div class="mt-6">
+      <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript" />
+    </div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Custom telemetry console</h2>
+    <p class="text-base-content/60">
+      Replace page, navigation, and report content to build a distinct experience while Pagination retains state and interaction.
+    </p>
+    <div class="mt-5 rounded-box bg-base-200/30 p-4 sm:p-6"><pg-pagination-templates-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript" /></div>
+  </sui-card>
+</main>

@@ -185,6 +185,10 @@ export const navigation: NavigationGroup[] = [
         label: 'List',
         path: '/list',
       },
+      {
+        label: 'Pagination',
+        path: '/pagination',
+      },
     ],
   },
   {
