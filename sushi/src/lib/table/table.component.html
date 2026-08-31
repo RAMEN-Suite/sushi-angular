@@ -1,0 +1,155 @@
+<div
+  class="w-full min-w-0 max-w-full overflow-x-auto rounded-box border border-base-300"
+  [class.overflow-y-auto]="stickyHeader()"
+  [style.max-height.px]="stickyHeader() ? scrollHeight() : null"
+>
+  <table
+    class="table w-full"
+    [class.table-xs]="size() === 'xs'"
+    [class.table-sm]="size() === 'sm'"
+    [class.table-md]="size() === 'md'"
+    [class.table-lg]="size() === 'lg'"
+    [class.table-xl]="size() === 'xl'"
+    [class.table-zebra]="zebra()"
+    [class.table-pin-rows]="stickyHeader()"
+    [class.table-pin-cols]="pinFirstColumn()"
+    [class.sui-table--sticky-header]="stickyHeader()"
+    [class.sui-table--pin-first-column]="pinFirstColumn()"
+    [class.sui-table--gridlines]="showGridlines()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledby()"
+    [attr.aria-busy]="loading()"
+  >
+    @if (captionTemplate(); as template) {
+      <caption>
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
+      </caption>
+    } @else if (caption(); as text) {
+      <caption class="px-4 py-3 text-start text-sm text-base-content/60">
+        {{
+          text
+        }}
+      </caption>
+    }
+
+    <thead>
+      <tr>
+        @for (column of columns(); track column.key; let index = $index) {
+          <th
+            scope="col"
+            [class]="alignment(column)"
+            [style.width]="column.width"
+            [style.min-width]="column.minWidth"
+            [attr.aria-sort]="ariaSort(column)"
+          >
+            @if (column.sortable) {
+              <button
+                suiButton
+                type="button"
+                class="sui-table__sort"
+                severity="neutral"
+                variant="text"
+                size="sm"
+                [disabled]="loading()"
+                (click)="toggleSort(column)"
+              >
+                @if (headerTemplate(); as template) {
+                  <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="headerContext(column, index)" />
+                } @else {
+                  {{ column.header }}
+                }
+
+                @switch (direction(column)) {
+                  @case ('ascending') {
+                    <svg lucideArrowUp class="size-4" aria-hidden="true"></svg>
+                  }
+                  @case ('descending') {
+                    <svg lucideArrowDown class="size-4" aria-hidden="true"></svg>
+                  }
+                  @default {
+                    <svg lucideArrowUpDown class="size-4 text-base-content/40" aria-hidden="true"></svg>
+                  }
+                }
+              </button>
+            } @else if (headerTemplate(); as template) {
+              <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="headerContext(column, index)" />
+            } @else {
+              {{ column.header }}
+            }
+          </th>
+        }
+      </tr>
+    </thead>
+
+    <tbody>
+      @if (loading()) {
+        <tr>
+          <td [attr.colspan]="columnCount()">
+            @if (loadingTemplate(); as template) {
+              <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
+            } @else {
+              <span class="flex items-center justify-center gap-2 py-8 text-sm text-base-content/60">
+                <span suiSpinner size="sm"></span>
+                {{ loadingMessage() }}
+              </span>
+            }
+          </td>
+        </tr>
+      } @else {
+        @for (row of rows(); track trackRow($index, row); let rowIndex = $index) {
+          @if (rowTemplate(); as template) {
+            <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="rowContext(row, rowIndex)" />
+          } @else {
+            <tr [class.row-hover]="rowHover()">
+              @for (column of columns(); track column.key; let columnIndex = $index) {
+                @if (column.rowHeader) {
+                  <th scope="row" [class]="alignment(column)" [style.width]="column.width" [style.min-width]="column.minWidth">
+                    @if (cellTemplate(); as template) {
+                      <ng-container
+                        [ngTemplateOutlet]="template"
+                        [ngTemplateOutletContext]="cellContext(row, column, rowIndex, columnIndex)"
+                      />
+                    } @else {
+                      {{ column.value?.(row) }}
+                    }
+                  </th>
+                } @else {
+                  <td [class]="alignment(column)" [style.width]="column.width" [style.min-width]="column.minWidth">
+                    @if (cellTemplate(); as template) {
+                      <ng-container
+                        [ngTemplateOutlet]="template"
+                        [ngTemplateOutletContext]="cellContext(row, column, rowIndex, columnIndex)"
+                      />
+                    } @else {
+                      {{ column.value?.(row) }}
+                    }
+                  </td>
+                }
+              }
+            </tr>
+          }
+        } @empty {
+          <tr>
+            <td [attr.colspan]="columnCount()">
+              @if (emptyTemplate(); as template) {
+                <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
+              } @else {
+                <span class="block py-8 text-center text-sm text-base-content/60">{{ emptyMessage() }}</span>
+              }
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+
+    @if (footerTemplate(); as template) {
+      <tfoot>
+        <tr>
+          <td [attr.colspan]="columnCount()">
+            <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
+          </td>
+        </tr>
+      </tfoot>
+    }
+  </table>
+</div>

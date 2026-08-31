@@ -43,6 +43,7 @@ const references: Readonly<Record<string, readonly ApiReferenceData[]>> = {
   'select-button': [apiReference.SelectButton],
   spinner: [apiReference.Spinner],
   status: [apiReference.Status],
+  table: [apiReference.Table],
   tabs: [apiReference.Tabs],
   textarea: [apiReference.Textarea],
   toggle: [apiReference.Toggle],

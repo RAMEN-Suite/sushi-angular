@@ -1,0 +1,36 @@
+<div class="grid min-w-0 gap-4">
+  <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+    <span>
+      <strong class="block">Recent invoices</strong>
+      <span class="text-sm text-base-content/60">{{ filteredInvoices().length }} matching records</span>
+    </span>
+    <span class="grid min-w-0 gap-1">
+      <label suiLabel for="invoice-search" class="text-xs">Search invoices</label>
+      <input
+        id="invoice-search"
+        suiInput
+        type="search"
+        class="w-full min-w-0 sm:w-64"
+        placeholder="Customer, status, or ID"
+        [formField]="filterForm.query"
+        (input)="resetPage()" />
+    </span>
+  </div>
+
+  <sui-table
+    ariaLabel="Recent invoices"
+    [columns]="columns"
+    [rows]="visibleInvoices()"
+    [sort]="sort()"
+    (sortChange)="handleSort($event)" />
+
+  <div class="min-w-0 overflow-x-auto pb-1">
+    <sui-pagination
+      class="min-w-max"
+      showReport
+      ariaLabel="Invoice pages"
+      [pageSize]="pageSize"
+      [totalItems]="filteredInvoices().length"
+      [(page)]="page" />
+  </div>
+</div>

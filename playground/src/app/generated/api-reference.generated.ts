@@ -55,6 +55,7 @@ export const apiReference: Readonly<{
   readonly SelectButton: ApiReferenceData;
   readonly Spinner: ApiReferenceData;
   readonly Status: ApiReferenceData;
+  readonly Table: ApiReferenceData;
   readonly Tabs: ApiReferenceData;
   readonly Textarea: ApiReferenceData;
   readonly Toggle: ApiReferenceData;
@@ -4693,6 +4694,249 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+      },
+    ],
+  },
+  Table: {
+    className: 'Table',
+    selector: 'sui-table',
+    description: 'Renders a typed collection as a native data table with controlled sorting.',
+    members: [
+      {
+        name: 'sort',
+        kind: 'model',
+        type: 'TableSort | null',
+        defaultValue: 'null',
+        description: 'Controlled sorting request. Consumers apply it to local or remote rows.',
+      },
+      {
+        name: 'rows',
+        kind: 'input',
+        type: 'readonly T[]',
+        defaultValue: 'required',
+        description: 'Collection rendered in source order.',
+      },
+      {
+        name: 'columns',
+        kind: 'input',
+        type: 'readonly TableColumn<T>[]',
+        defaultValue: 'required',
+        description: 'Column definitions rendered in source order.',
+      },
+      {
+        name: 'trackBy',
+        kind: 'input',
+        type: 'TableTrackBy<T>',
+        defaultValue: '(_index: number, row: T): T => row',
+        description: 'Returns a stable identity for one row.',
+      },
+      {
+        name: 'caption',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'Native table caption used when no caption template is provided.',
+      },
+      {
+        name: 'emptyMessage',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "'No records found'",
+        description: 'Message shown when the collection is empty.',
+      },
+      {
+        name: 'loadingMessage',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "'Loading records'",
+        description: 'Message announced while rows are loading.',
+      },
+      {
+        name: 'ariaLabel',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'Accessible name used when the table has no caption.',
+      },
+      {
+        name: 'ariaLabelledby',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'ID of an element that names the table.',
+      },
+      {
+        name: 'size',
+        kind: 'input',
+        type: 'TableSize',
+        defaultValue: "'md'",
+        description: 'Controls table cell density.',
+      },
+      {
+        name: 'zebra',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Alternates body row backgrounds.',
+      },
+      {
+        name: 'showGridlines',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Draws borders between table cells.',
+      },
+      {
+        name: 'rowHover',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Applies the DaisyUI hover treatment to generated body rows.',
+      },
+      {
+        name: 'stickyHeader',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Keeps the heading visible within a vertically scrolling parent.',
+      },
+      {
+        name: 'pinFirstColumn',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Keeps the first column visible while the table scrolls horizontally.',
+      },
+      {
+        name: 'scrollHeight',
+        kind: 'input',
+        type: 'number',
+        defaultValue: '320',
+        description: 'Maximum table viewport height in pixels when the heading is sticky.',
+      },
+      {
+        name: 'loading',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Shows the loading state instead of body rows.',
+      },
+    ],
+    templates: [
+      {
+        name: 'suiTableCaption',
+        context: 'TableCollectionContext<unknown>',
+        description: 'Replaces the native caption and exposes the rendered collection.',
+        members: [],
+      },
+      {
+        name: 'suiTableHeader',
+        context: 'TableHeaderContext<unknown>',
+        description: 'Replaces every column heading and exposes its sort direction.',
+        members: [],
+      },
+      {
+        name: 'suiTableCell',
+        context: 'TableCellContext<unknown>',
+        description: 'Replaces every body cell and exposes its row, column, value, and indexes.',
+        members: [],
+      },
+      {
+        name: 'suiTableRow',
+        context: 'TableRowContext<unknown>',
+        description: 'Replaces every complete body row for advanced selection, expansion, or editing layouts.',
+        members: [],
+      },
+      {
+        name: 'suiTableEmpty',
+        context: 'TableCollectionContext<unknown>',
+        description: 'Replaces the empty collection row.',
+        members: [],
+      },
+      {
+        name: 'suiTableLoading',
+        context: 'TableCollectionContext<unknown>',
+        description: 'Replaces the loading row.',
+        members: [],
+      },
+      {
+        name: 'suiTableFooter',
+        context: 'TableCollectionContext<unknown>',
+        description: 'Renders an optional footer spanning the complete table.',
+        members: [],
+      },
+    ],
+    types: [
+      {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
+        name: 'TableAlignment',
+        kind: 'type',
+        declaration: "type TableAlignment = 'start' | 'center' | 'end';",
+        description: "Horizontal alignment of a column's header and cells.",
+      },
+      {
+        name: 'TableCellContext',
+        kind: 'interface',
+        declaration:
+          'interface TableCellContext<T> {\n  readonly $implicit: unknown;\n  readonly value: unknown;\n  readonly row: T;\n  readonly column: TableColumn<T>;\n  readonly rowIndex: number;\n  readonly columnIndex: number;\n}',
+        description: 'Row and column data exposed to a custom cell template.',
+      },
+      {
+        name: 'TableCollectionContext',
+        kind: 'interface',
+        declaration:
+          'interface TableCollectionContext<T> {\n  readonly $implicit: readonly T[];\n  readonly rows: readonly T[];\n  readonly columns: readonly TableColumn<T>[];\n}',
+        description: 'Collection data exposed to structural table templates.',
+      },
+      {
+        name: 'TableColumn',
+        kind: 'interface',
+        declaration:
+          'interface TableColumn<T> {\n  readonly key: string;\n  readonly header: string;\n  readonly value?: (row: T) => unknown;\n  readonly sortable?: boolean;\n  readonly align?: TableAlignment;\n  readonly minWidth?: string;\n  readonly width?: string;\n  readonly rowHeader?: boolean;\n}',
+        description: 'Describes one rendered table column.',
+      },
+      {
+        name: 'TableHeaderContext',
+        kind: 'interface',
+        declaration:
+          'interface TableHeaderContext<T> {\n  readonly $implicit: TableColumn<T>;\n  readonly column: TableColumn<T>;\n  readonly index: number;\n  readonly direction: TableSortDirection | null;\n}',
+        description: 'Column data exposed to a custom header template.',
+      },
+      {
+        name: 'TableRowContext',
+        kind: 'interface',
+        declaration:
+          'interface TableRowContext<T> {\n  readonly $implicit: T;\n  readonly row: T;\n  readonly columns: readonly TableColumn<T>[];\n  readonly rowIndex: number;\n}',
+        description: 'Row data exposed when replacing the complete native body row.',
+      },
+      {
+        name: 'TableSize',
+        kind: 'type',
+        declaration: 'type TableSize = ComponentSize;',
+        description: 'Size scale available to table cells.',
+      },
+      {
+        name: 'TableSort',
+        kind: 'interface',
+        declaration: 'interface TableSort {\n  readonly key: string;\n  readonly direction: TableSortDirection;\n}',
+        description: 'Controlled sorting state emitted by a Table.',
+      },
+      {
+        name: 'TableSortDirection',
+        kind: 'type',
+        declaration: "type TableSortDirection = 'ascending' | 'descending';",
+        description: 'Direction requested for a sortable column.',
+      },
+      {
+        name: 'TableTrackBy',
+        kind: 'type',
+        declaration: 'type TableTrackBy<T> = (index: number, row: T) => unknown;',
+        description: 'Identifies a rendered row across collection updates.',
       },
     ],
   },

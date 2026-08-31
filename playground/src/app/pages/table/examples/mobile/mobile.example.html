@@ -1,0 +1,21 @@
+<div class="mx-auto grid w-full min-w-0 max-w-sm gap-3">
+  <div class="grid gap-1">
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <strong>Release queue</strong>
+      <span suiBadge class="shrink-0 whitespace-nowrap" severity="neutral" variant="soft" size="sm">
+        {{ releases.length }} releases
+      </span>
+    </div>
+    <span class="text-sm text-base-content/60">Columns remain intact and scroll inside the table.</span>
+  </div>
+
+  <sui-table pinFirstColumn class="w-full min-w-0" ariaLabel="Release queue" [columns]="columns" [rows]="releases">
+    <ng-template suiTableCell let-value let-row="row" let-column="column">
+      @if (column.key === 'state') {
+        <span suiBadge [severity]="severity(row.state)" variant="soft" size="sm">{{ value }}</span>
+      } @else {
+        {{ value }}
+      }
+    </ng-template>
+  </sui-table>
+</div>

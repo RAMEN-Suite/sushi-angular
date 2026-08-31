@@ -1,0 +1,9 @@
+<div class="grid gap-3">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <strong class="text-sm">Collection state</strong>
+    <button suiButton type="button" variant="outlined" size="sm" (click)="toggleLoading()">
+      {{ loading() ? 'Show empty state' : 'Show loading state' }}
+    </button>
+  </div>
+  <sui-table caption="Deployment history" [columns]="columns" [loading]="loading()" [rows]="[]" />
+</div>

@@ -1,0 +1,34 @@
+<div class="grid gap-6 lg:grid-cols-2">
+  <div class="grid gap-2">
+    <span>
+      <strong class="block">Striped and compact</strong>
+      <span class="text-sm text-base-content/60">Increase scanability without adding visual weight.</span>
+    </span>
+    <sui-table zebra size="sm" ariaLabel="Compact team directory" [columns]="columns" [rows]="members.slice(0, 4)" />
+  </div>
+
+  <div class="grid gap-2">
+    <span>
+      <strong class="block">Grid lines</strong>
+      <span class="text-sm text-base-content/60">Separate dense values across both axes.</span>
+    </span>
+    <sui-table
+      showGridlines
+      ariaLabel="Team directory with grid lines"
+      [columns]="columns"
+      [rows]="members.slice(0, 4)" />
+  </div>
+
+  <div class="grid gap-2 lg:col-span-2">
+    <span>
+      <strong class="block">Sticky heading</strong>
+      <span class="text-sm text-base-content/60">Keep column context visible inside a bounded viewport.</span>
+    </span>
+    <sui-table
+      stickyHeader
+      ariaLabel="Scrollable team directory"
+      [columns]="columns"
+      [rows]="members"
+      [scrollHeight]="224" />
+  </div>
+</div>

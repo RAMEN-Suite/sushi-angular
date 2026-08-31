@@ -36,6 +36,7 @@ export * from './lib/select';
 export * from './lib/select-button';
 export * from './lib/spinner';
 export * from './lib/status';
+export * from './lib/table';
 export * from './lib/tabs';
 export * from './lib/textarea';
 export * from './lib/toggle';

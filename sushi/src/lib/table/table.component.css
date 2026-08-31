@@ -1,0 +1,80 @@
+.sui-table__sort {
+  width: 100%;
+  min-height: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.sui-table__sort:hover:not(.sui-button--disabled),
+.sui-table__sort:active:not(.sui-button--disabled) {
+  color: inherit;
+  background-color: color-mix(in oklab, var(--color-base-content) 7%, transparent);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.sui-table__cell--start .sui-table__sort {
+  justify-content: flex-start;
+}
+
+.sui-table__cell--center .sui-table__sort {
+  justify-content: center;
+}
+
+.sui-table__cell--end .sui-table__sort {
+  justify-content: flex-end;
+}
+
+.sui-table__cell--start {
+  text-align: start;
+}
+
+.sui-table__cell--center {
+  text-align: center;
+}
+
+.sui-table__cell--end {
+  text-align: end;
+}
+
+.sui-table--gridlines :is(th, td) {
+  border-inline-end: 1px solid var(--color-base-300);
+}
+
+.sui-table--gridlines :is(th, td):last-child {
+  border-inline-end: 0;
+}
+
+.sui-table--sticky-header thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: var(--color-base-100);
+}
+
+.sui-table--pin-first-column :is(th, td):first-child {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 1;
+  background-color: var(--color-base-100);
+}
+
+.sui-table--pin-first-column thead th:first-child {
+  z-index: 3;
+}
+
+.sui-table--pin-first-column.table-zebra tbody tr:nth-child(even) :is(th, td):first-child {
+  background-color: var(--color-base-200);
+}
+
+.sui-table--pin-first-column tbody tr.row-hover:hover :is(th, td):first-child {
+  background-color: var(--color-base-200);
+}
+
+.sui-table--pin-first-column.table-zebra tbody tr.row-hover:hover :is(th, td):first-child {
+  background-color: var(--color-base-300);
+}

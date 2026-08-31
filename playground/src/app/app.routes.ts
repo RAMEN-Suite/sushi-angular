@@ -226,6 +226,11 @@ export const routes: Routes = [
     title: 'Tabs | SUSHI Playground',
   },
   {
+    path: 'table',
+    loadComponent: () => import('./pages/table/table.page').then(({ TablePage }) => TablePage),
+    title: 'Table | SUSHI Playground',
+  },
+  {
     path: 'toggle-button',
     loadComponent: () => import('./pages/toggle-button/toggle-button.page').then(({ ToggleButtonPage }) => ToggleButtonPage),
     title: 'Toggle Button | SUSHI Playground',
