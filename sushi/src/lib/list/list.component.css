@@ -1,0 +1,23 @@
+.sui-list--xs .list-row {
+  gap: 0.25rem;
+  padding: 0.25rem;
+}
+
+.sui-list--sm .list-row {
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.sui-list--lg .list-row {
+  gap: 1.25rem;
+  padding: 1.25rem;
+}
+
+.sui-list--xl .list-row {
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.sui-list--without-dividers .list-row::after {
+  display: none;
+}

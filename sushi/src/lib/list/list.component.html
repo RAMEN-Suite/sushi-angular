@@ -1,4 +1,13 @@
-<ul class="list" [attr.aria-label]="ariaLabel()" [attr.aria-labelledby]="ariaLabelledby()">
+<ul
+  class="list"
+  [class.sui-list--xs]="size() === 'xs'"
+  [class.sui-list--sm]="size() === 'sm'"
+  [class.sui-list--lg]="size() === 'lg'"
+  [class.sui-list--xl]="size() === 'xl'"
+  [class.sui-list--without-dividers]="!dividers()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-labelledby]="ariaLabelledby()"
+>
   @for (item of items(); track trackItem($index, item); let index = $index; let count = $count) {
     <li class="list-row items-center">
       <ng-container [ngTemplateOutlet]="itemTemplate()" [ngTemplateOutletContext]="itemContext(item, index, count)" />

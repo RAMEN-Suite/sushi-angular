@@ -1,6 +1,16 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, contentChild, input, InputSignal, Signal, TemplateRef } from '@angular/core';
-import { ListItemContext, ListTrackBy } from './list.interfaces';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  contentChild,
+  input,
+  InputSignal,
+  InputSignalWithTransform,
+  Signal,
+  TemplateRef,
+} from '@angular/core';
+import { ListItemContext, ListSize, ListTrackBy } from './list.interfaces';
 import { ListItemTemplate } from './list.templates';
 
 /** Renders a typed collection as a native list with consumer-defined rows. */
@@ -8,6 +18,7 @@ import { ListItemTemplate } from './list.templates';
   selector: 'sui-list',
   imports: [NgTemplateOutlet],
   templateUrl: './list.component.html',
+  styleUrl: './list.component.css',
   host: { class: 'sui-list block' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -20,6 +31,10 @@ export class List<T> {
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   /** ID reference that names the native list. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
+  /** Controls the spacing within generated rows. */
+  public readonly size: InputSignal<ListSize> = input<ListSize>('md');
+  /** Draws subtle separators between adjacent rows. */
+  public readonly dividers: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
 
   protected readonly itemTemplate: Signal<TemplateRef<ListItemContext<T>>> = contentChild.required(ListItemTemplate, {
     read: TemplateRef,

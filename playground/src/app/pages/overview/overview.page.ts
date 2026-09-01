@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Badge, Button, Card, CardTitle } from '@ramen-suite/sushi';
+import { LucideArrowRight } from '@lucide/angular';
+import { Badge, Button, Card, CardTitle, List, ListItemTemplate } from '@ramen-suite/sushi';
 import { navigation, NavigationGroup } from '../../app.navigation';
 
 @Component({
   selector: 'pg-overview-page',
-  imports: [Badge, Button, Card, CardTitle, RouterLink],
+  imports: [Badge, Button, Card, CardTitle, List, ListItemTemplate, LucideArrowRight, RouterLink],
   templateUrl: './overview.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

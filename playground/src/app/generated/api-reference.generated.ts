@@ -2711,6 +2711,20 @@ export const apiReference: Readonly<{
         defaultValue: 'null',
         description: 'ID reference that names the native list.',
       },
+      {
+        name: 'size',
+        kind: 'input',
+        type: 'ListSize',
+        defaultValue: "'md'",
+        description: 'Controls the spacing within generated rows.',
+      },
+      {
+        name: 'dividers',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Draws subtle separators between adjacent rows.',
+      },
     ],
     templates: [
       {
@@ -2722,11 +2736,23 @@ export const apiReference: Readonly<{
     ],
     types: [
       {
+        name: 'ComponentSize',
+        kind: 'type',
+        declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Shared size scale used by visual components.',
+      },
+      {
         name: 'ListItemContext',
         kind: 'interface',
         declaration:
           'interface ListItemContext<T> {\n  readonly $implicit: T;\n  readonly item: T;\n  readonly index: number;\n  readonly count: number;\n  readonly first: boolean;\n  readonly last: boolean;\n  readonly even: boolean;\n  readonly odd: boolean;\n}',
         description: 'Item and position data exposed to the list item template.',
+      },
+      {
+        name: 'ListSize',
+        kind: 'type',
+        declaration: 'type ListSize = ComponentSize;',
+        description: 'Size scale controlling list row density.',
       },
       {
         name: 'ListTrackBy',
