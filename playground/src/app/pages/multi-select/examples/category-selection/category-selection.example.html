@@ -58,9 +58,9 @@
     </span>
   </div>
 
-  <aside class="rounded-box border border-base-300 bg-base-100 p-4" aria-label="Permission summary">
+  <sui-card size="sm" aria-label="Permission summary">
     <div class="flex items-center justify-between gap-3">
-      <strong>Access summary</strong>
+      <h3 suiCardTitle>Access summary</h3>
       <span suiBadge severity="neutral" variant="soft" size="sm">{{ value().length }}/{{ permissions.length }}</span>
     </div>
     <div class="mt-4 grid gap-3">
@@ -79,5 +79,5 @@
         </div>
       }
     </div>
-  </aside>
+  </sui-card>
 </div>

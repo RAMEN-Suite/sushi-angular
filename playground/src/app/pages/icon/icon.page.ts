@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge, Card, CardTitle, Code, CodeLine } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import usageHtml from './examples/usage/usage.example.html';
@@ -8,7 +8,7 @@ import { IconUsageExample } from './examples/usage/usage.example';
 
 @Component({
   selector: 'pg-icon-page',
-  imports: [Badge, Card, CardTitle, ExampleCode, IconUsageExample],
+  imports: [Badge, Card, CardTitle, Code, CodeLine, ExampleCode, IconUsageExample],
   templateUrl: './icon.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -11,16 +11,12 @@
 
   <sui-card size="sm">
     <h3 suiCardTitle>Recent activity</h3>
-    <div class="grid gap-3">
-      <div class="flex items-center justify-between gap-4 rounded-field bg-base-200 p-3">
-        <span>Synchronizing events</span>
-        <span suiSpinner type="dots" size="sm" class="text-info"></span>
-      </div>
-      <div class="flex items-center justify-between gap-4 rounded-field bg-base-200 p-3">
-        <span>Indexing documents</span>
-        <span suiSpinner type="bars" size="sm" class="text-secondary"></span>
-      </div>
-    </div>
+    <sui-list [items]="activities" ariaLabel="Background activity">
+      <ng-template suiListItem let-activity>
+        <span class="list-col-grow">{{ activity.label }}</span>
+        <span suiSpinner [type]="activity.spinner" size="sm" class="text-primary"></span>
+      </ng-template>
+    </sui-list>
     <button suiButton type="button" class="w-36" loading>
       <span suiSpinner size="sm"></span>
       Saving

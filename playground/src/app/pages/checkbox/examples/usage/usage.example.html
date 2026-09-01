@@ -1,42 +1,46 @@
 <div class="grid max-w-2xl gap-6">
-  <div class="grid divide-y divide-base-300 rounded-box border border-base-300 bg-base-100">
-    <label suiLabel class="flex cursor-pointer items-start gap-3 p-4">
-      <input suiCheckbox type="checkbox" class="mt-0.5" [formField]="preferencesForm.accepted" />
-      <span>
-        <strong class="block">Accept workspace terms</strong>
-        <small class="text-base-content/60">Required before collaborators can be invited.</small>
-      </span>
-    </label>
-    <label suiLabel class="flex cursor-pointer items-start gap-3 p-4">
-      <input suiCheckbox type="checkbox" class="mt-0.5" checked severity="success" />
-      <span>
-        <strong class="block">Weekly summary</strong>
-        <small class="text-base-content/60">Receive one concise activity email every Monday.</small>
-      </span>
-    </label>
-    <label suiLabel class="flex cursor-pointer items-start gap-3 p-4">
-      <input suiCheckbox type="checkbox" class="mt-0.5" disabled />
-      <span>
-        <strong class="block">Security reports</strong>
-        <small class="text-base-content/60">Managed by your organization.</small>
-      </span>
-    </label>
-  </div>
+  <sui-card size="sm">
+    <div class="grid divide-y divide-base-300">
+      <label suiLabel class="flex cursor-pointer items-start gap-3 py-3 first:pt-0 last:pb-0">
+        <input suiCheckbox type="checkbox" class="mt-0.5" [formField]="preferencesForm.accepted" />
+        <span>
+          <strong class="block">Accept workspace terms</strong>
+          <small class="text-base-content/60">Required before collaborators can be invited.</small>
+        </span>
+      </label>
+      <label suiLabel class="flex cursor-pointer items-start gap-3 py-3 last:pb-0">
+        <input suiCheckbox type="checkbox" class="mt-0.5" checked severity="success" />
+        <span>
+          <strong class="block">Weekly summary</strong>
+          <small class="text-base-content/60">Receive one concise activity email every Monday.</small>
+        </span>
+      </label>
+      <label suiLabel class="flex cursor-pointer items-start gap-3 py-3 last:pb-0">
+        <input suiCheckbox type="checkbox" class="mt-0.5" disabled />
+        <span>
+          <strong class="block">Security reports</strong>
+          <small class="text-base-content/60">Managed by your organization.</small>
+        </span>
+      </label>
+    </div>
+  </sui-card>
 
-  <div class="flex flex-wrap items-center gap-5 rounded-box bg-base-200/50 p-4">
-    <label suiLabel class="flex items-center gap-2">
-      <input suiCheckbox type="checkbox" [indeterminate]="true" />
-      Some items
-    </label>
-    <label suiLabel class="flex items-center gap-2">
-      <input suiCheckbox type="checkbox" invalid touched />
-      Needs attention
-    </label>
-    <label suiLabel class="flex items-center gap-2">
-      <input suiCheckbox type="checkbox" size="sm" checked />
-      Compact
-    </label>
-  </div>
+  <sui-card size="xs" variant="plain" class="bg-base-200/50">
+    <div class="flex flex-wrap items-center gap-5">
+      <label suiLabel class="flex items-center gap-2">
+        <input suiCheckbox type="checkbox" [indeterminate]="true" />
+        Some items
+      </label>
+      <label suiLabel class="flex items-center gap-2">
+        <input suiCheckbox type="checkbox" invalid touched />
+        Needs attention
+      </label>
+      <label suiLabel class="flex items-center gap-2">
+        <input suiCheckbox type="checkbox" size="sm" checked />
+        Compact
+      </label>
+    </div>
+  </sui-card>
 
   <div class="grid gap-3">
     <h3 class="font-semibold">Semantic colors</h3>

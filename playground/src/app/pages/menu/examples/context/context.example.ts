@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { ContextMenuTrigger, Kbd, Menu, MenuEntry, MenuValue } from '@ramen-suite/sushi';
+import { Card, ContextMenuTrigger, Kbd, Menu, MenuEntry, MenuValue } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-menu-context-example',
-  imports: [ContextMenuTrigger, Kbd, Menu],
+  imports: [Card, ContextMenuTrigger, Kbd, Menu],
   templateUrl: './context.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

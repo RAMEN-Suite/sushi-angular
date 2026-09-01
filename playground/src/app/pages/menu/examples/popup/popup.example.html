@@ -1,26 +1,28 @@
-<div class="flex w-full max-w-lg items-center justify-between gap-4 rounded-box border border-base-300 bg-base-100 p-4">
-  <div class="min-w-0">
-    <strong class="block truncate">Quarterly planning notes</strong>
-    <span class="text-sm text-base-content/60">Shared with the product team</span>
-  </div>
+<sui-card size="sm" class="w-full max-w-lg">
+  <div class="flex items-center justify-between gap-4">
+    <div class="min-w-0">
+      <strong class="block truncate">Quarterly planning notes</strong>
+      <span class="text-sm text-base-content/60">Shared with the product team</span>
+    </div>
 
-  <div suiJoin class="shrink-0">
-    <button suiButton suiJoinItem type="button" variant="soft" severity="neutral" (click)="lastAction.set('open')">
-      Open
-    </button>
-    <button
-      suiButton
-      suiJoinItem
-      type="button"
-      shape="square"
-      variant="soft"
-      severity="neutral"
-      aria-label="More message actions"
-      [suiMenuTrigger]="messageMenu">
-      <svg lucideChevronDown class="size-4" aria-hidden="true"></svg>
-    </button>
+    <div suiJoin class="shrink-0">
+      <button suiButton suiJoinItem type="button" variant="soft" severity="neutral" (click)="lastAction.set('open')">
+        Open
+      </button>
+      <button
+        suiButton
+        suiJoinItem
+        type="button"
+        shape="square"
+        variant="soft"
+        severity="neutral"
+        aria-label="More message actions"
+        [suiMenuTrigger]="messageMenu">
+        <svg lucideChevronDown class="size-4" aria-hidden="true"></svg>
+      </button>
+    </div>
   </div>
-</div>
+</sui-card>
 
 <sui-menu #messageMenu popup [items]="actions" ariaLabel="Message actions" (itemSelected)="lastAction.set($event)" />
 

@@ -21,19 +21,21 @@
     </div>
   </div>
 
-  <div class="flex items-center justify-between gap-4 rounded-box border border-base-300 bg-base-100 p-4">
-    <div>
-      <p class="font-medium">Design review</p>
-      <p class="text-sm text-base-content/60">6 collaborators</p>
+  <sui-card size="sm">
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <p class="font-medium">Design review</p>
+        <p class="text-sm text-base-content/60">6 collaborators</p>
+      </div>
+      <div suiAvatarGroup class="-space-x-5">
+        <sui-avatar shape="circle" size="sm"><img src="/sample-avatar.svg" alt="Ada" /></sui-avatar>
+        <sui-avatar placeholder shape="circle" size="sm" class="bg-secondary text-secondary-content">
+          <span>GH</span>
+        </sui-avatar>
+        <sui-avatar placeholder shape="circle" size="sm" class="bg-neutral text-neutral-content">
+          <span>+4</span>
+        </sui-avatar>
+      </div>
     </div>
-    <div suiAvatarGroup class="-space-x-5">
-      <sui-avatar shape="circle" size="sm"><img src="/sample-avatar.svg" alt="Ada" /></sui-avatar>
-      <sui-avatar placeholder shape="circle" size="sm" class="bg-secondary text-secondary-content">
-        <span>GH</span>
-      </sui-avatar>
-      <sui-avatar placeholder shape="circle" size="sm" class="bg-neutral text-neutral-content">
-        <span>+4</span>
-      </sui-avatar>
-    </div>
-  </div>
+  </sui-card>
 </div>

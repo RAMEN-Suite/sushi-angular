@@ -23,18 +23,18 @@
     </header>
 
     <div class="grid gap-3 sm:grid-cols-3">
-      <div class="rounded-field border border-base-300 bg-base-100/70 p-3">
+      <sui-card size="xs" class="bg-base-100/70">
         <span class="block text-xs uppercase tracking-wider text-base-content/50">Active sector</span>
         <strong class="font-mono text-xl">{{ formatPage(page()) }}</strong>
-      </div>
-      <div class="rounded-field border border-base-300 bg-base-100/70 p-3">
+      </sui-card>
+      <sui-card size="xs" class="bg-base-100/70">
         <span class="block text-xs uppercase tracking-wider text-base-content/50">Packets</span>
         <strong class="font-mono text-xl">{{ packets() }}/86</strong>
-      </div>
-      <div class="rounded-field border border-base-300 bg-base-100/70 p-3">
+      </sui-card>
+      <sui-card size="xs" class="bg-base-100/70">
         <span class="block text-xs uppercase tracking-wider text-base-content/50">Integrity</span>
         <strong class="font-mono text-xl">99.8%</strong>
-      </div>
+      </sui-card>
     </div>
 
     <progress suiProgress class="h-1.5 w-full" severity="secondary" [max]="9" [value]="page()"></progress>

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideCommand } from '@lucide/angular';
-import { Card, CardTitle, Kbd } from '@ramen-suite/sushi';
+import { Card, CardTitle, Divider, Kbd } from '@ramen-suite/sushi';
 
 interface Shortcut {
   readonly keys: readonly string[];
@@ -9,7 +9,7 @@ interface Shortcut {
 
 @Component({
   selector: 'pg-kbd-hotkeys-example',
-  imports: [Card, CardTitle, Kbd, LucideCommand],
+  imports: [Card, CardTitle, Divider, Kbd, LucideCommand],
   templateUrl: './hotkeys.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

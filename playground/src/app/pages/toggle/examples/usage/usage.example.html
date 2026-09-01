@@ -1,37 +1,41 @@
 <div class="grid max-w-2xl gap-5">
-  <div class="grid divide-y divide-base-300 rounded-box border border-base-300 bg-base-100">
-    <label suiLabel class="flex cursor-pointer items-center justify-between gap-4 p-4">
-      <span>
-        <strong class="block">Account notifications</strong>
-        <small class="text-base-content/60">Receive important workspace updates.</small>
-      </span>
-      <input suiToggle type="checkbox" [formField]="notificationForm.notifications" />
-    </label>
-    <label suiLabel class="flex cursor-pointer items-center justify-between gap-4 p-4">
-      <span>
-        <strong class="block">Product announcements</strong>
-        <small class="text-base-content/60">Learn about major feature releases.</small>
-      </span>
-      <input suiToggle type="checkbox" checked />
-    </label>
-    <label suiLabel class="flex cursor-not-allowed items-center justify-between gap-4 p-4 opacity-60">
-      <span>
-        <strong class="block">Organization policy</strong>
-        <small>Controlled by an administrator.</small>
-      </span>
-      <input suiToggle type="checkbox" checked disabled />
-    </label>
-  </div>
-  <div class="flex flex-wrap items-center gap-5 rounded-box bg-base-200/50 p-4">
-    <label suiLabel class="flex items-center gap-2">
-      <input suiToggle type="checkbox" size="sm" checked />
-      Compact
-    </label>
-    <label suiLabel class="flex items-center gap-2">
-      <input suiToggle type="checkbox" invalid touched />
-      Needs attention
-    </label>
-  </div>
+  <sui-card size="sm">
+    <div class="grid divide-y divide-base-300">
+      <label suiLabel class="flex cursor-pointer items-center justify-between gap-4 py-3 first:pt-0">
+        <span>
+          <strong class="block">Account notifications</strong>
+          <small class="text-base-content/60">Receive important workspace updates.</small>
+        </span>
+        <input suiToggle type="checkbox" [formField]="notificationForm.notifications" />
+      </label>
+      <label suiLabel class="flex cursor-pointer items-center justify-between gap-4 py-3">
+        <span>
+          <strong class="block">Product announcements</strong>
+          <small class="text-base-content/60">Learn about major feature releases.</small>
+        </span>
+        <input suiToggle type="checkbox" checked />
+      </label>
+      <label suiLabel class="flex cursor-not-allowed items-center justify-between gap-4 py-3 last:pb-0 opacity-60">
+        <span>
+          <strong class="block">Organization policy</strong>
+          <small>Controlled by an administrator.</small>
+        </span>
+        <input suiToggle type="checkbox" checked disabled />
+      </label>
+    </div>
+  </sui-card>
+  <sui-card size="xs" variant="plain" class="bg-base-200/50">
+    <div class="flex flex-wrap items-center gap-5">
+      <label suiLabel class="flex items-center gap-2">
+        <input suiToggle type="checkbox" size="sm" checked />
+        Compact
+      </label>
+      <label suiLabel class="flex items-center gap-2">
+        <input suiToggle type="checkbox" invalid touched />
+        Needs attention
+      </label>
+    </div>
+  </sui-card>
 
   <div class="grid gap-3">
     <h3 class="font-semibold">Semantic colors</h3>

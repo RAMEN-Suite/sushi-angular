@@ -172,6 +172,8 @@ Prefer in order:
 - Group by behavior; keep examples short, complete, copyable, and mobile-first.
 - Document every public input, output, state, template, native attribute, and useful composition.
 - Use existing SUSHI components in examples.
+- Render content collections with `List`, `DataView`, or `Table`; render independent content surfaces with `Card` instead of recreating them with utility classes.
+- Keep native elements when their semantics are the example or no SUSHI abstraction owns that behavior.
 - Do not mention DaisyUI in user-facing documentation.
 - Reset buttons use `severity="neutral"` and `variant="soft"`.
 

@@ -14,32 +14,22 @@
   </ng-template>
 
   <ng-template suiTab value="activity" label="Activity">
-    <ul class="grid gap-3 p-2">
-      <li class="flex items-center gap-3">
-        <span suiStatus severity="success"></span>
-        <span>Build completed successfully</span>
-      </li>
-      <li class="flex items-center gap-3">
-        <span suiStatus severity="info"></span>
-        <span>Documentation preview published</span>
-      </li>
-      <li class="flex items-center gap-3">
-        <span suiStatus severity="warning"></span>
-        <span>Two approvals still required</span>
-      </li>
-    </ul>
+    <sui-list class="p-2" [items]="activities" ariaLabel="Release activity">
+      <ng-template suiListItem let-activity>
+        <span suiStatus [severity]="activity.severity"></span>
+        <span class="list-col-grow">{{ activity.label }}</span>
+      </ng-template>
+    </sui-list>
   </ng-template>
 
   <ng-template suiTab value="checks" label="Checks">
     <div class="grid gap-3 p-2 sm:grid-cols-2">
-      <div class="rounded-field border border-base-300 p-3">
-        <p class="font-medium">Accessibility</p>
-        <p class="text-sm text-success">Passed</p>
-      </div>
-      <div class="rounded-field border border-base-300 p-3">
-        <p class="font-medium">Bundle budget</p>
-        <p class="text-sm text-warning">Review</p>
-      </div>
+      @for (check of checks; track check.label) {
+        <sui-card size="xs">
+          <h3 suiCardTitle>{{ check.label }}</h3>
+          <span suiBadge size="sm" [severity]="check.severity" variant="soft">{{ check.state }}</span>
+        </sui-card>
+      }
     </div>
   </ng-template>
 </sui-tabs>

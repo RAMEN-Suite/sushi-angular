@@ -1,11 +1,12 @@
 <sui-card size="sm" class="w-full max-w-lg">
-  <div class="flex items-center gap-3 border-b border-base-300 pb-4">
+  <div class="flex items-center gap-3">
     <svg lucideCommand class="size-5 text-base-content/60" aria-hidden="true"></svg>
     <div>
       <h3 suiCardTitle>Keyboard shortcuts</h3>
       <p class="text-sm text-base-content/60">Navigate the workspace without leaving the keyboard.</p>
     </div>
   </div>
+  <div suiDivider></div>
 
   <dl class="grid gap-1">
     @for (shortcut of shortcuts; track shortcut.label) {

@@ -25,16 +25,18 @@
       </label>
     </div>
   </fieldset>
-  <div class="flex flex-wrap items-center gap-5 rounded-box bg-base-200/50 p-4">
-    <label suiLabel class="flex items-center gap-2">
-      <input suiRadio type="radio" invalid touched />
-      Needs selection
-    </label>
-    <label suiLabel class="flex items-center gap-2">
-      <input suiRadio type="radio" size="sm" checked />
-      Compact
-    </label>
-  </div>
+  <sui-card size="xs" variant="plain" class="bg-base-200/50">
+    <div class="flex flex-wrap items-center gap-5">
+      <label suiLabel class="flex items-center gap-2">
+        <input suiRadio type="radio" invalid touched />
+        Needs selection
+      </label>
+      <label suiLabel class="flex items-center gap-2">
+        <input suiRadio type="radio" size="sm" checked />
+        Compact
+      </label>
+    </div>
+  </sui-card>
 
   <fieldset suiFieldset>
     <legend suiFieldsetLegend>Semantic colors</legend>

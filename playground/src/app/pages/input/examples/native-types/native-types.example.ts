@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Input, Label } from '@ramen-suite/sushi';
+import { Badge, Card, Input, Label } from '@ramen-suite/sushi';
 
 interface NativeType {
   label: string;
@@ -9,7 +9,7 @@ interface NativeType {
 
 @Component({
   selector: 'pg-input-native-types-example',
-  imports: [Badge, Input, Label],
+  imports: [Badge, Card, Input, Label],
   templateUrl: './native-types.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

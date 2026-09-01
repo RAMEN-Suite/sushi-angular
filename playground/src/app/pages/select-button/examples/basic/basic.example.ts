@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, Label, SelectButton, SelectButtonOption, SelectButtonValue } from '@ramen-suite/sushi';
+import { Button, Card, Label, SelectButton, SelectButtonOption, SelectButtonValue } from '@ramen-suite/sushi';
 
 interface AlignmentForm {
   alignment: SelectButtonValue | null;
@@ -8,7 +8,7 @@ interface AlignmentForm {
 
 @Component({
   selector: 'pg-select-button-basic-example',
-  imports: [FormField, Button, Label, SelectButton],
+  imports: [FormField, Button, Card, Label, SelectButton],
   templateUrl: './basic.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

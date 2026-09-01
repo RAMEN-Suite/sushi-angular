@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { LucideChevronDown } from '@lucide/angular';
-import { Button, Join, JoinItem, Menu, MenuEntry, MenuTrigger, MenuValue } from '@ramen-suite/sushi';
+import { Button, Card, Join, JoinItem, Menu, MenuEntry, MenuTrigger, MenuValue } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-menu-popup-example',
-  imports: [Button, Join, JoinItem, LucideChevronDown, Menu, MenuTrigger],
+  imports: [Button, Card, Join, JoinItem, LucideChevronDown, Menu, MenuTrigger],
   templateUrl: './popup.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

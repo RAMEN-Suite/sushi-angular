@@ -7,18 +7,12 @@
     <span suiBadge severity="neutral" variant="outlined">v2.4.0</span>
   </div>
 
-  <ul class="divide-y divide-base-300 rounded-box border border-base-300 bg-base-100">
-    <li class="flex items-center justify-between gap-4 p-3">
-      <span>Production</span>
-      <span suiBadge size="sm" severity="success" variant="soft">Healthy</span>
-    </li>
-    <li class="flex items-center justify-between gap-4 p-3">
-      <span>Staging</span>
-      <span suiBadge size="sm" severity="warning" variant="soft">Deploying</span>
-    </li>
-    <li class="flex items-center justify-between gap-4 p-3">
-      <span>Preview</span>
-      <span suiBadge size="sm" severity="neutral" variant="soft">Paused</span>
-    </li>
-  </ul>
+  <sui-card size="sm">
+    <sui-list [items]="environments" ariaLabel="Deployment environments">
+      <ng-template suiListItem let-environment>
+        <span class="list-col-grow">{{ environment.name }}</span>
+        <span suiBadge size="sm" [severity]="environment.severity" variant="soft">{{ environment.state }}</span>
+      </ng-template>
+    </sui-list>
+  </sui-card>
 </div>

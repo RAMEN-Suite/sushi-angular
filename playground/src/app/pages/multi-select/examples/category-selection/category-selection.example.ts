@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@ang
 import { LucideCreditCard, LucideFolderKanban, LucideUsers } from '@lucide/angular';
 import {
   Badge,
+  Card,
+  CardTitle,
   Checkbox,
   Label,
   MultiSelect,
@@ -21,6 +23,8 @@ interface Permission extends MultiSelectOption {
   selector: 'pg-multi-select-category-selection-example',
   imports: [
     Badge,
+    Card,
+    CardTitle,
     Checkbox,
     Label,
     MultiSelect,

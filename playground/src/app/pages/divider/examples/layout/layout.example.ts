@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Divider } from '@ramen-suite/sushi';
+import { Card, Divider } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-divider-layout-example',
-  imports: [Divider],
+  imports: [Card, Divider],
   templateUrl: './layout.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
