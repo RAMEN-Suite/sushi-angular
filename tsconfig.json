@@ -38,6 +38,9 @@
     },
     {
       "path": "./tools/tsconfig.json"
+    },
+    {
+      "path": "./e2e/tsconfig.json"
     }
   ]
 }
