@@ -18,6 +18,7 @@
   [wrap]="wrap()"
   [typeaheadDelay]="typeaheadDelay()"
   (itemSelected)="itemSelected.emit($event)"
+  (keydown.escape)="escapePressed.emit(undefined)"
 >
   @for (entry of items(); track $index) {
     @if (isGroup(entry)) {

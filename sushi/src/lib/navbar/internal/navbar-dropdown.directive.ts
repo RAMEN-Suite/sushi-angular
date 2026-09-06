@@ -23,7 +23,7 @@ export class NavbarDropdown {
       return;
     }
 
-    if (event.target instanceof Element && event.target.closest('a')) {
+    if (event.target instanceof Element && event.target.closest('a, button')) {
       this.close();
     }
   }

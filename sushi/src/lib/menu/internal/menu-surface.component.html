@@ -22,6 +22,7 @@
     [itemTemplate]="itemTemplate()"
     [groupTemplate]="groupTemplate()"
     (itemSelected)="itemSelected.emit($event)"
+    (escapePressed)="escapePressed.emit(undefined)"
   />
 
   @if (endTemplate(); as template) {

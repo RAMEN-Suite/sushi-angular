@@ -51,6 +51,7 @@ export class MenuLevel<I extends MenuItem = MenuItem> {
   >();
 
   public readonly itemSelected: OutputEmitterRef<I['value']> = output<I['value']>();
+  public readonly escapePressed: OutputEmitterRef<undefined> = output<undefined>();
 
   public readonly ariaMenu: Signal<AriaMenu<I['value']>> = viewChild.required(AriaMenu<I['value']>);
 
