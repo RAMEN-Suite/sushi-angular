@@ -8,16 +8,14 @@
   </div>
   <div suiDivider></div>
 
-  <dl class="grid gap-1">
-    @for (shortcut of shortcuts; track shortcut.label) {
-      <div class="flex items-center justify-between gap-4 rounded-field px-3 py-2 hover:bg-base-200">
-        <dt>{{ shortcut.label }}</dt>
-        <dd class="flex items-center gap-1">
-          @for (key of shortcut.keys; track key) {
-            <kbd suiKbd size="sm">{{ key }}</kbd>
-          }
-        </dd>
-      </div>
-    }
-  </dl>
+  <sui-list size="sm" [dividers]="false" [items]="shortcuts" ariaLabel="Keyboard shortcuts">
+    <ng-template suiListItem let-shortcut>
+      <span class="list-col-grow">{{ shortcut.label }}</span>
+      <span class="flex items-center gap-1">
+        @for (key of shortcut.keys; track key) {
+          <kbd suiKbd size="sm">{{ key }}</kbd>
+        }
+      </span>
+    </ng-template>
+  </sui-list>
 </sui-card>
