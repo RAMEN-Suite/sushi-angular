@@ -35,6 +35,8 @@ export class List<T> {
   public readonly size: InputSignal<ListSize> = input<ListSize>('md');
   /** Draws subtle separators between adjacent rows. */
   public readonly dividers: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
+  /** Highlights a row on pointer hover without adding interaction semantics. */
+  public readonly rowHover: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   protected readonly itemTemplate: Signal<TemplateRef<ListItemContext<T>>> = contentChild.required(ListItemTemplate, {
     read: TemplateRef,

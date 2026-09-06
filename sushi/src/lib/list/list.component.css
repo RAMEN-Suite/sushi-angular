@@ -21,3 +21,12 @@
 .sui-list--without-dividers .list-row::after {
   display: none;
 }
+
+.sui-list--row-hover .list-row {
+  @apply transition-colors duration-150;
+  border-radius: var(--radius-field);
+}
+
+.sui-list--row-hover .list-row:hover {
+  background-color: var(--color-base-200);
+}

@@ -8,7 +8,7 @@
   </div>
   <div suiDivider></div>
 
-  <sui-list size="sm" [dividers]="false" [items]="shortcuts" ariaLabel="Keyboard shortcuts">
+  <sui-list rowHover size="xs" [dividers]="false" [items]="shortcuts" ariaLabel="Keyboard shortcuts">
     <ng-template suiListItem let-shortcut>
       <span class="list-col-grow">{{ shortcut.label }}</span>
       <span class="flex items-center gap-1">

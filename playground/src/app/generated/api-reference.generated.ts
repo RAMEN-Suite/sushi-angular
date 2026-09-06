@@ -2729,6 +2729,13 @@ export const apiReference: Readonly<{
         defaultValue: 'true',
         description: 'Draws subtle separators between adjacent rows.',
       },
+      {
+        name: 'rowHover',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Highlights a row on pointer hover without adding interaction semantics.',
+      },
     ],
     templates: [
       {

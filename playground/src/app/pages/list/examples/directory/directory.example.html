@@ -1,5 +1,5 @@
 <sui-card size="sm" class="w-full max-w-2xl">
-  <sui-list size="sm" [dividers]="false" [items]="members" ariaLabel="Project members">
+  <sui-list rowHover size="sm" [dividers]="false" [items]="members" ariaLabel="Project members">
     <ng-template suiListItem let-member>
       @if (member.image) {
         <sui-avatar shape="circle" size="md" status="online"><img src="/sample-avatar.svg" alt="" /></sui-avatar>
