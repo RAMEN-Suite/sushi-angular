@@ -8,9 +8,9 @@
     [variant]="isSelected(option) ? null : 'outlined'"
     [size]="size()"
     [disabled]="isDisabled(option)"
+    [tabIndex]="isTabStop(option, index) ? 0 : -1"
     [attr.aria-checked]="isSelected(option)"
     [attr.aria-label]="option.label"
-    [attr.tabindex]="isTabStop(option, index) ? 0 : -1"
     (click)="handleSelection(option)"
     (keydown)="handleKeydown($event, index)"
   >
