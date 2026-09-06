@@ -15,6 +15,7 @@ import {
 } from '@lucide/angular';
 import {
   Button,
+  Divider,
   Join,
   JoinItem,
   Menu,
@@ -34,6 +35,7 @@ type WorkspaceDocument = 'Corpus review' | 'Annotation map' | 'Source graph';
   selector: 'pg-navbar-desktop-example',
   imports: [
     Button,
+    Divider,
     Join,
     JoinItem,
     LucideChevronDown,

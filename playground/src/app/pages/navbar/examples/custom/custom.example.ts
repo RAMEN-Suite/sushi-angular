@@ -1,6 +1,16 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { LucideBell, LucidePlus, LucideSearch, LucideZap } from '@lucide/angular';
-import { Badge, Button, Navbar, NavbarAction, NavbarBrand, NavbarItem, NavbarItemTemplate } from '@ramen-suite/sushi';
+import {
+  Badge,
+  Button,
+  Divider,
+  Navbar,
+  NavbarAction,
+  NavbarBrand,
+  NavbarItem,
+  NavbarItemTemplate,
+  Status,
+} from '@ramen-suite/sushi';
 
 type ConsolePage = 'Workspace' | 'Tasks' | 'Runs' | 'Settings';
 
@@ -13,6 +23,7 @@ interface ConsoleItem extends NavbarItem<ConsolePage> {
   imports: [
     Badge,
     Button,
+    Divider,
     LucideBell,
     LucidePlus,
     LucideSearch,
@@ -21,6 +32,7 @@ interface ConsoleItem extends NavbarItem<ConsolePage> {
     NavbarAction,
     NavbarBrand,
     NavbarItemTemplate,
+    Status,
   ],
   templateUrl: './custom.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
