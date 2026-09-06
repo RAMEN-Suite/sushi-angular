@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "test": "ng test sushi --no-watch",
+    "test:coverage": "ng test sushi --no-watch --coverage",
     "test:watch": "ng test sushi",
     "lint": "ng lint && eslint \"tools/**/*.ts\"",
     "generate:api": "tsx tools/generate-api-reference.ts",
@@ -41,6 +42,7 @@
     "@angular/compiler-cli": "^22.1.1",
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.2.0",
+    "@vitest/coverage-v8": "^4.1.11",
     "angular-eslint": "^22.1.0",
     "eslint": "^10.8.1",
     "eslint-config-prettier": "^10.1.8",
