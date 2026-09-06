@@ -1,7 +1,10 @@
 import { Directive, input, InputSignal } from '@angular/core';
-import { NavbarLinksOrientation, NavbarLinksVariant } from './navbar.interfaces';
+import { NavbarOrientation, NavbarVariant } from '../navbar.interfaces';
 
-/** Arranges native navigation links and menu triggers with one consistent treatment. */
+/**
+ * Arranges links rendered by the internal Navbar menu.
+ * @internal
+ */
 @Directive({
   selector: 'ul[suiNavbarLinks]',
   host: {
@@ -15,7 +18,7 @@ import { NavbarLinksOrientation, NavbarLinksVariant } from './navbar.interfaces'
 })
 export class NavbarLinks {
   /** Controls how links and menu triggers are arranged. */
-  public readonly orientation: InputSignal<NavbarLinksOrientation> = input<NavbarLinksOrientation>('responsive');
+  public readonly orientation: InputSignal<NavbarOrientation> = input<NavbarOrientation>('responsive');
   /** Selects a button-like menu treatment or native link treatment. */
-  public readonly variant: InputSignal<NavbarLinksVariant> = input<NavbarLinksVariant>('menu');
+  public readonly variant: InputSignal<NavbarVariant> = input<NavbarVariant>('menu');
 }

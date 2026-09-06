@@ -8,9 +8,9 @@ export interface NavigationGroup {
   readonly items: readonly NavigationItem[];
 }
 
-export const navigation: NavigationGroup[] = [
+export const navigation: readonly NavigationGroup[] = [
   {
-    label: 'Input',
+    label: 'Inputs',
     items: [
       {
         label: 'Color Picker',
@@ -92,12 +92,8 @@ export const navigation: NavigationGroup[] = [
     ],
   },
   {
-    label: 'Form Layout',
+    label: 'Form Structure',
     items: [
-      {
-        label: 'Auto Focus',
-        path: '/auto-focus',
-      },
       {
         label: 'Fieldset',
         path: '/fieldset',
@@ -121,15 +117,6 @@ export const navigation: NavigationGroup[] = [
     ],
   },
   {
-    label: 'Application Navigation',
-    items: [
-      {
-        label: 'Navbar',
-        path: '/navbar',
-      },
-    ],
-  },
-  {
     label: 'Actions',
     items: [
       {
@@ -139,6 +126,23 @@ export const navigation: NavigationGroup[] = [
       {
         label: 'Menu',
         path: '/menu',
+      },
+    ],
+  },
+  {
+    label: 'Navigation',
+    items: [
+      {
+        label: 'Navbar',
+        path: '/navbar',
+      },
+      {
+        label: 'Pagination',
+        path: '/pagination',
+      },
+      {
+        label: 'Tabs',
+        path: '/tabs',
       },
     ],
   },
@@ -187,20 +191,8 @@ export const navigation: NavigationGroup[] = [
         path: '/data-view',
       },
       {
-        label: 'Icons',
-        path: '/icon',
-      },
-      {
-        label: 'Keyboard Key',
-        path: '/kbd',
-      },
-      {
         label: 'List',
         path: '/list',
-      },
-      {
-        label: 'Pagination',
-        path: '/pagination',
       },
       {
         label: 'Table',
@@ -223,18 +215,26 @@ export const navigation: NavigationGroup[] = [
         label: 'Divider',
         path: '/divider',
       },
-      {
-        label: 'Tabs',
-        path: '/tabs',
-      },
     ],
   },
   {
-    label: 'Developer',
+    label: 'Utilities',
     items: [
+      {
+        label: 'Auto Focus',
+        path: '/auto-focus',
+      },
       {
         label: 'Code',
         path: '/code',
+      },
+      {
+        label: 'Icons',
+        path: '/icon',
+      },
+      {
+        label: 'Keyboard Key',
+        path: '/kbd',
       },
     ],
   },
@@ -243,3 +243,31 @@ export const navigation: NavigationGroup[] = [
 export const apiNavigation: readonly NavigationItem[] = navigation
   .flatMap((group: NavigationGroup): readonly NavigationItem[] => group.items)
   .filter((item: NavigationItem): boolean => item.path !== '/icon');
+
+export interface NavbarNavigationGroup {
+  readonly label: string;
+  readonly items: readonly NavbarItem<string>[];
+}
+
+export const overviewNavigation: readonly NavbarItem<string>[] = [{ label: 'Overview', value: '/', routerLink: '/' }];
+
+export const navbarNavigation: readonly NavbarNavigationGroup[] = navigation.map(
+  (group: NavigationGroup): NavbarNavigationGroup => ({
+    label: group.label,
+    items: group.items.map((item: NavigationItem): NavbarItem<string> => ({
+      label: item.label,
+      value: item.path,
+      routerLink: item.path,
+    })),
+  }),
+);
+
+export const mobileNavigation: readonly NavbarItem<string>[] = [
+  ...overviewNavigation,
+  ...navbarNavigation.map((group: NavbarNavigationGroup): NavbarItem<string> => ({
+    label: group.label,
+    value: `group:${group.label}`,
+    items: group.items,
+  })),
+];
+import type { NavbarItem } from '@ramen-suite/sushi';

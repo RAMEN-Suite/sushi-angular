@@ -1,6 +1,9 @@
 import { Directive } from '@angular/core';
 
-/** Styles a native navigation link or menu trigger without changing its semantics. */
+/**
+ * Styles links and buttons rendered by the internal Navbar menu.
+ * @internal
+ */
 @Directive({
   selector: 'a[suiNavbarLink], button[suiNavbarLink]',
   host: { class: 'sui-navbar__link' },

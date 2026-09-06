@@ -3,19 +3,34 @@
     <li>
       @if (hasChildren(item)) {
         <details suiNavbarDropdown>
-          <summary [attr.aria-current]="isActive(item) ? 'page' : null" [attr.aria-disabled]="item.disabled ? 'true' : null">
+          <summary [attr.aria-current]="isCurrent(item) ? 'page' : null" [attr.aria-disabled]="item.disabled ? 'true' : null">
             <ng-container [ngTemplateOutlet]="template() ?? defaultItem" [ngTemplateOutletContext]="{ $implicit: item, item, level: 0 }" />
             <svg lucideChevronDown class="size-4 transition-transform group-open:rotate-180" aria-hidden="true"></svg>
           </summary>
           <ul>
             @for (child of item.items; track child.value) {
               <li>
-                @if (child.href) {
+                @if (child.routerLink) {
                   <a
                     suiNavbarLink
-                    [href]="child.href"
-                    [attr.aria-current]="isActive(child) ? 'page' : null"
+                    [routerLink]="child.disabled ? null : child.routerLink"
+                    [attr.aria-current]="isCurrent(child) ? 'page' : null"
                     [attr.aria-disabled]="child.disabled ? 'true' : null"
+                    [attr.tabindex]="child.disabled ? 0 : null"
+                    (click)="select(child, $event)"
+                  >
+                    <ng-container
+                      [ngTemplateOutlet]="template() ?? defaultItem"
+                      [ngTemplateOutletContext]="{ $implicit: child, item: child, level: 1 }"
+                    />
+                  </a>
+                } @else if (child.href) {
+                  <a
+                    suiNavbarLink
+                    [href]="child.disabled ? null : child.href"
+                    [attr.aria-current]="isCurrent(child) ? 'page' : null"
+                    [attr.aria-disabled]="child.disabled ? 'true' : null"
+                    [attr.tabindex]="child.disabled ? 0 : null"
                     (click)="select(child, $event)"
                   >
                     <ng-container
@@ -27,7 +42,7 @@
                   <button
                     suiNavbarLink
                     type="button"
-                    [attr.aria-current]="isActive(child) ? 'page' : null"
+                    [attr.aria-current]="isCurrent(child) ? 'page' : null"
                     [attr.aria-disabled]="child.disabled ? 'true' : null"
                     (click)="select(child, $event)"
                   >
@@ -41,12 +56,24 @@
             }
           </ul>
         </details>
+      } @else if (item.routerLink) {
+        <a
+          suiNavbarLink
+          [routerLink]="item.disabled ? null : item.routerLink"
+          [attr.aria-current]="isCurrent(item) ? 'page' : null"
+          [attr.aria-disabled]="item.disabled ? 'true' : null"
+          [attr.tabindex]="item.disabled ? 0 : null"
+          (click)="select(item, $event)"
+        >
+          <ng-container [ngTemplateOutlet]="template() ?? defaultItem" [ngTemplateOutletContext]="{ $implicit: item, item, level: 0 }" />
+        </a>
       } @else if (item.href) {
         <a
           suiNavbarLink
-          [href]="item.href"
-          [attr.aria-current]="isActive(item) ? 'page' : null"
+          [href]="item.disabled ? null : item.href"
+          [attr.aria-current]="isCurrent(item) ? 'page' : null"
           [attr.aria-disabled]="item.disabled ? 'true' : null"
+          [attr.tabindex]="item.disabled ? 0 : null"
           (click)="select(item, $event)"
         >
           <ng-container [ngTemplateOutlet]="template() ?? defaultItem" [ngTemplateOutletContext]="{ $implicit: item, item, level: 0 }" />
@@ -55,7 +82,7 @@
         <button
           suiNavbarLink
           type="button"
-          [attr.aria-current]="isActive(item) ? 'page' : null"
+          [attr.aria-current]="isCurrent(item) ? 'page' : null"
           [attr.aria-disabled]="item.disabled ? 'true' : null"
           (click)="select(item, $event)"
         >

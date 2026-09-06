@@ -50,15 +50,7 @@ export const apiReference: Readonly<{
   readonly Navbar: ApiReferenceData;
   readonly NavbarAction: ApiReferenceData;
   readonly NavbarBrand: ApiReferenceData;
-  readonly NavbarCenter: ApiReferenceData;
-  readonly NavbarComponent: ApiReferenceData;
   readonly NavbarContent: ApiReferenceData;
-  readonly NavbarDropdown: ApiReferenceData;
-  readonly NavbarEnd: ApiReferenceData;
-  readonly NavbarLink: ApiReferenceData;
-  readonly NavbarLinks: ApiReferenceData;
-  readonly NavbarStart: ApiReferenceData;
-  readonly NavbarToggle: ApiReferenceData;
   readonly OrderList: ApiReferenceData;
   readonly Pagination: ApiReferenceData;
   readonly Progress: ApiReferenceData;
@@ -3798,92 +3790,6 @@ export const apiReference: Readonly<{
   },
   Navbar: {
     className: 'Navbar',
-    selector: 'nav[suiNavbar]',
-    description: 'Styles a native navigation landmark and coordinates its responsive content.',
-    members: [],
-    templates: [
-      {
-        name: 'suiNavbarItem',
-        context: 'NavbarItemContext<I>',
-        description: 'Customizes the visible content of every model-driven Navbar item.',
-        members: [
-          {
-            name: 'items',
-            kind: 'input',
-            type: 'readonly I[] | undefined',
-            defaultValue: 'undefined',
-            description: 'Item source used to infer custom fields inside the template.',
-          },
-        ],
-      },
-    ],
-    types: [
-      {
-        name: 'NavbarItem',
-        kind: 'interface',
-        declaration:
-          'interface NavbarItem<T extends NavbarItemValue = NavbarItemValue> {\n  readonly label: string;\n  readonly value: T;\n  readonly href?: string;\n  readonly items?: readonly NavbarItem<T>[];\n  readonly active?: boolean;\n  readonly disabled?: boolean;\n}',
-        description: 'Navigation destination or disclosure rendered by a Navbar Menu.',
-      },
-      {
-        name: 'NavbarItemContext',
-        kind: 'interface',
-        declaration:
-          'interface NavbarItemContext<I extends NavbarItem = NavbarItem> {\n  readonly $implicit: I;\n  readonly item: I;\n  readonly level: 0 | 1;\n}',
-        description: 'Context exposed to a custom Navbar item template.',
-      },
-      {
-        name: 'NavbarItemValue',
-        kind: 'type',
-        declaration: 'type NavbarItemValue = string | number;',
-        description: 'Primitive value emitted when a Navbar item is selected.',
-      },
-      {
-        name: 'NavbarLinksOrientation',
-        kind: 'type',
-        declaration: "type NavbarLinksOrientation = Orientation | 'responsive';",
-        description: 'Supported Navbar link arrangements.',
-      },
-      {
-        name: 'NavbarLinksVariant',
-        kind: 'type',
-        declaration: "type NavbarLinksVariant = 'links' | 'menu';",
-        description: 'Visual treatment shared by Navbar links and menu triggers.',
-      },
-      {
-        name: 'Orientation',
-        kind: 'type',
-        declaration: "type Orientation = 'horizontal' | 'vertical';",
-        description: 'Supported layout directions.',
-      },
-    ],
-  },
-  NavbarAction: {
-    className: 'NavbarAction',
-    selector: '[suiNavbarAction]',
-    description: 'Projects an action into the end of a model-driven Navbar.',
-    members: [],
-    templates: [],
-    types: [],
-  },
-  NavbarBrand: {
-    className: 'NavbarBrand',
-    selector: '[suiNavbarBrand]',
-    description: 'Projects brand or product identity into a model-driven Navbar.',
-    members: [],
-    templates: [],
-    types: [],
-  },
-  NavbarCenter: {
-    className: 'NavbarCenter',
-    selector: '[suiNavbarCenter]',
-    description: 'Aligns primary navigation or search content at the center of a Navbar.',
-    members: [],
-    templates: [],
-    types: [],
-  },
-  NavbarComponent: {
-    className: 'NavbarComponent',
     selector: 'sui-navbar',
     description: 'Builds a responsive navigation landmark from an item model or projected custom content.',
     members: [
@@ -3911,14 +3817,28 @@ export const apiReference: Readonly<{
       {
         name: 'orientation',
         kind: 'input',
-        type: 'NavbarLinksOrientation',
+        type: 'NavbarOrientation',
         defaultValue: "'responsive'",
         description: 'Controls the arrangement used when the Navbar remains visible.',
       },
       {
+        name: 'size',
+        kind: 'input',
+        type: 'NavbarSize',
+        defaultValue: "'md'",
+        description: 'Controls the minimum height of horizontal Navbar layouts.',
+      },
+      {
+        name: 'surface',
+        kind: 'input',
+        type: 'NavbarSurface',
+        defaultValue: "'bordered'",
+        description: 'Controls whether the Navbar renders its own bordered surface.',
+      },
+      {
         name: 'variant',
         kind: 'input',
-        type: 'NavbarLinksVariant',
+        type: 'NavbarVariant',
         defaultValue: "'links'",
         description: 'Selects a link-like or filled menu treatment.',
       },
@@ -3937,18 +3857,65 @@ export const apiReference: Readonly<{
         description: 'Emits the selected destination value.',
       },
     ],
-    templates: [],
+    templates: [
+      {
+        name: 'suiNavbarItem',
+        context: 'NavbarItemContext<I>',
+        description: 'Customizes the visible content of every item rendered from the Navbar model.',
+        members: [
+          {
+            name: 'items',
+            kind: 'input',
+            type: 'readonly I[] | undefined',
+            defaultValue: 'undefined',
+            description: 'Item source used to infer custom fields inside the template.',
+          },
+        ],
+      },
+    ],
     types: [
       {
-        name: 'NavbarLinksOrientation',
+        name: 'NavbarItem',
+        kind: 'interface',
+        declaration:
+          'interface NavbarItem<T extends NavbarItemValue = NavbarItemValue> {\n  readonly label: string;\n  readonly value: T;\n  readonly href?: string;\n  readonly routerLink?: string | readonly unknown[];\n  readonly items?: readonly NavbarItem<T>[];\n  readonly active?: boolean;\n  readonly disabled?: boolean;\n}',
+        description: 'Navigation destination or non-selectable disclosure rendered by a Navbar.',
+      },
+      {
+        name: 'NavbarItemContext',
+        kind: 'interface',
+        declaration:
+          'interface NavbarItemContext<I extends NavbarItem = NavbarItem> {\n  readonly $implicit: I;\n  readonly item: I;\n  readonly level: 0 | 1;\n}',
+        description: 'Context exposed to a custom Navbar item template.',
+      },
+      {
+        name: 'NavbarItemValue',
         kind: 'type',
-        declaration: "type NavbarLinksOrientation = Orientation | 'responsive';",
+        declaration: 'type NavbarItemValue = string | number;',
+        description: 'Primitive value emitted when a Navbar item is selected.',
+      },
+      {
+        name: 'NavbarOrientation',
+        kind: 'type',
+        declaration: "type NavbarOrientation = Orientation | 'responsive';",
         description: 'Supported Navbar link arrangements.',
       },
       {
-        name: 'NavbarLinksVariant',
+        name: 'NavbarSize',
         kind: 'type',
-        declaration: "type NavbarLinksVariant = 'links' | 'menu';",
+        declaration: "type NavbarSize = 'sm' | 'md';",
+        description: 'Supported Navbar heights.',
+      },
+      {
+        name: 'NavbarSurface',
+        kind: 'type',
+        declaration: "type NavbarSurface = 'bordered' | 'plain';",
+        description: 'Visual surface surrounding Navbar content.',
+      },
+      {
+        name: 'NavbarVariant',
+        kind: 'type',
+        declaration: "type NavbarVariant = 'links' | 'menu';",
         description: 'Visual treatment shared by Navbar links and menu triggers.',
       },
       {
@@ -3958,93 +3925,27 @@ export const apiReference: Readonly<{
         description: 'Supported layout directions.',
       },
     ],
+  },
+  NavbarAction: {
+    className: 'NavbarAction',
+    selector: '[suiNavbarAction]',
+    description: 'Projects a global action at the end of a Navbar.',
+    members: [],
+    templates: [],
+    types: [],
+  },
+  NavbarBrand: {
+    className: 'NavbarBrand',
+    selector: '[suiNavbarBrand]',
+    description: 'Projects brand or product identity at the start of a Navbar.',
+    members: [],
+    templates: [],
+    types: [],
   },
   NavbarContent: {
     className: 'NavbarContent',
     selector: '[suiNavbarContent]',
-    description: 'Marks the responsive region revealed by the Navbar toggle on narrow viewports.',
-    members: [],
-    templates: [],
-    types: [],
-  },
-  NavbarDropdown: {
-    className: 'NavbarDropdown',
-    selector: 'details[suiNavbarDropdown]',
-    description: 'Adapts a native disclosure to an inline mobile submenu and an anchored desktop dropdown.',
-    members: [],
-    templates: [],
-    types: [],
-  },
-  NavbarEnd: {
-    className: 'NavbarEnd',
-    selector: '[suiNavbarEnd]',
-    description: 'Aligns actions or account controls at the end of a Navbar.',
-    members: [],
-    templates: [],
-    types: [],
-  },
-  NavbarLink: {
-    className: 'NavbarLink',
-    selector: 'a[suiNavbarLink], button[suiNavbarLink]',
-    description: 'Styles a native navigation link or menu trigger without changing its semantics.',
-    members: [],
-    templates: [],
-    types: [],
-  },
-  NavbarLinks: {
-    className: 'NavbarLinks',
-    selector: 'ul[suiNavbarLinks]',
-    description: 'Arranges native navigation links and menu triggers with one consistent treatment.',
-    members: [
-      {
-        name: 'orientation',
-        kind: 'input',
-        type: 'NavbarLinksOrientation',
-        defaultValue: "'responsive'",
-        description: 'Controls how links and menu triggers are arranged.',
-      },
-      {
-        name: 'variant',
-        kind: 'input',
-        type: 'NavbarLinksVariant',
-        defaultValue: "'menu'",
-        description: 'Selects a button-like menu treatment or native link treatment.',
-      },
-    ],
-    templates: [],
-    types: [
-      {
-        name: 'NavbarLinksOrientation',
-        kind: 'type',
-        declaration: "type NavbarLinksOrientation = Orientation | 'responsive';",
-        description: 'Supported Navbar link arrangements.',
-      },
-      {
-        name: 'NavbarLinksVariant',
-        kind: 'type',
-        declaration: "type NavbarLinksVariant = 'links' | 'menu';",
-        description: 'Visual treatment shared by Navbar links and menu triggers.',
-      },
-      {
-        name: 'Orientation',
-        kind: 'type',
-        declaration: "type Orientation = 'horizontal' | 'vertical';",
-        description: 'Supported layout directions.',
-      },
-    ],
-  },
-  NavbarStart: {
-    className: 'NavbarStart',
-    selector: '[suiNavbarStart]',
-    description: 'Aligns projected identity or leading navigation at the start of a Navbar.',
-    members: [],
-    templates: [],
-    types: [],
-  },
-  NavbarToggle: {
-    className: 'NavbarToggle',
-    selector: 'button[suiNavbarToggle]',
-    description: 'Connects a button to the responsive Navbar content.',
+    description: 'Projects custom toolbar content into the responsive center of a Navbar.',
     members: [],
     templates: [],
     types: [],

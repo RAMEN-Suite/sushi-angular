@@ -1,0 +1,11 @@
+@media (min-width: 48rem) {
+  .workspace-search {
+    position: absolute;
+    left: 50%;
+    order: initial;
+    width: min(24rem, 40%);
+    margin: 0;
+    padding: 0;
+    transform: translateX(-50%);
+  }
+}

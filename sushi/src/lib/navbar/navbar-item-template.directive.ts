@@ -1,7 +1,7 @@
 import { Directive, input, InputSignal } from '@angular/core';
 import { NavbarItem, NavbarItemContext } from './navbar.interfaces';
 
-/** Customizes the visible content of every model-driven Navbar item. */
+/** Customizes the visible content of every item rendered from the Navbar model. */
 @Directive({ selector: 'ng-template[suiNavbarItem]' })
 export class NavbarItemTemplate<I extends NavbarItem = NavbarItem> {
   /** Item source used to infer custom fields inside the template. */

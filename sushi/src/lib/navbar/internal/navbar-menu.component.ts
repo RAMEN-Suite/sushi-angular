@@ -10,8 +10,9 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { LucideChevronDown } from '@lucide/angular';
+import { RouterLink } from '@angular/router';
+import { NavbarItem, NavbarItemContext, NavbarOrientation, NavbarVariant } from '../navbar.interfaces';
 import { NavbarDropdown } from './navbar-dropdown.directive';
-import { NavbarItem, NavbarItemContext, NavbarLinksOrientation, NavbarLinksVariant } from './navbar.interfaces';
 import { NavbarLink } from './navbar-link.directive';
 import { NavbarLinks } from './navbar-links.directive';
 import { NavbarState } from './navbar.state';
@@ -22,7 +23,7 @@ import { NavbarState } from './navbar.state';
  */
 @Component({
   selector: 'sui-navbar-menu',
-  imports: [LucideChevronDown, NavbarDropdown, NavbarLink, NavbarLinks, NgTemplateOutlet],
+  imports: [LucideChevronDown, NavbarDropdown, NavbarLink, NavbarLinks, NgTemplateOutlet, RouterLink],
   templateUrl: './navbar-menu.component.html',
   host: {
     class: 'block',
@@ -31,15 +32,14 @@ import { NavbarState } from './navbar.state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarMenu<I extends NavbarItem = NavbarItem> {
-  private readonly state: NavbarState | null = inject(NavbarState, { optional: true });
   /** Top-level destinations and disclosures rendered by the Navbar. */
   public readonly items: InputSignal<readonly I[]> = input.required<readonly I[]>();
   /** Accessible label for the navigation list. */
   public readonly ariaLabel: InputSignal<string> = input<string>('Primary links');
   /** Controls how items are arranged. */
-  public readonly orientation: InputSignal<NavbarLinksOrientation> = input<NavbarLinksOrientation>('responsive');
+  public readonly orientation: InputSignal<NavbarOrientation> = input<NavbarOrientation>('responsive');
   /** Selects a button-like menu treatment or native link treatment. */
-  public readonly variant: InputSignal<NavbarLinksVariant> = input<NavbarLinksVariant>('links');
+  public readonly variant: InputSignal<NavbarVariant> = input<NavbarVariant>('links');
   /** Value of the current destination. */
   public readonly value: InputSignal<I['value'] | null> = input<I['value'] | null>(null);
   /** Custom content rendered for each item. */
@@ -50,16 +50,14 @@ export class NavbarMenu<I extends NavbarItem = NavbarItem> {
   /** Emits the selected destination value. */
   public readonly itemSelected: OutputEmitterRef<I['value']> = output<I['value']>();
 
+  private readonly state: NavbarState = inject(NavbarState);
+
   protected hasChildren(item: I): boolean {
     return Boolean(item.items?.length);
   }
 
-  protected isActive(item: NavbarItem<I['value']>): boolean {
-    return (
-      item.active === true ||
-      item.value === this.value() ||
-      item.items?.some((child: NavbarItem<I['value']>): boolean => this.isActive(child)) === true
-    );
+  protected isCurrent(item: NavbarItem<I['value']>): boolean {
+    return item.active === true || item.value === this.value();
   }
 
   protected select(item: NavbarItem<I['value']>, event: Event): void {
@@ -69,6 +67,6 @@ export class NavbarMenu<I extends NavbarItem = NavbarItem> {
     }
 
     this.itemSelected.emit(item.value);
-    this.state?.close();
+    this.state.close();
   }
 }

@@ -1,7 +1,7 @@
 import { Directive, inject } from '@angular/core';
-import { NavbarState } from './navbar.state';
+import { NavbarState } from './internal/navbar.state';
 
-/** Marks the responsive region revealed by the Navbar toggle on narrow viewports. */
+/** Projects custom toolbar content into the responsive center of a Navbar. */
 @Directive({
   selector: '[suiNavbarContent]',
   host: {

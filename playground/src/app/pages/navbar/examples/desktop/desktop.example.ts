@@ -21,9 +21,9 @@ import {
   MenuEntry,
   MenuTrigger,
   MenuValue,
+  Navbar,
   NavbarAction,
   NavbarBrand,
-  NavbarComponent,
   NavbarContent,
 } from '@ramen-suite/sushi';
 
@@ -50,9 +50,9 @@ type WorkspaceDocument = 'Corpus review' | 'Annotation map' | 'Source graph';
     LucideShare2,
     Menu,
     MenuTrigger,
+    Navbar,
     NavbarAction,
     NavbarBrand,
-    NavbarComponent,
     NavbarContent,
   ],
   templateUrl: './desktop.example.html',

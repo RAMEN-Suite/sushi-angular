@@ -1,6 +1,14 @@
 <nav
-  class="navbar sui-navbar min-h-16 rounded-box border border-base-300 bg-base-100 px-1 sm:px-2"
+  class="navbar sui-navbar px-1 sm:px-2"
+  [class.min-h-0]="orientation() === 'vertical'"
+  [class.min-h-12]="orientation() !== 'vertical' && size() === 'sm'"
+  [class.min-h-16]="orientation() !== 'vertical' && size() === 'md'"
+  [class.rounded-box]="surface() === 'bordered'"
+  [class.border]="surface() === 'bordered'"
+  [class.border-base-300]="surface() === 'bordered'"
+  [class.bg-base-100]="surface() === 'bordered'"
   [attr.aria-label]="ariaLabel()"
+  [attr.data-collapsible]="collapsible()"
   [attr.data-expanded]="state.expanded() ? '' : null"
 >
   @if (brand()) {
@@ -11,7 +19,7 @@
 
   @if (customContent()) {
     <ng-content select="[suiNavbarContent]" />
-  } @else if (collapsible()) {
+  } @else if (items().length && collapsible()) {
     <div suiNavbarContent class="lg:flex-1" [class.sui-navbar__menu-offset]="brand()">
       <sui-navbar-menu
         [items]="items()"
@@ -23,7 +31,7 @@
         (itemSelected)="itemSelected.emit($event)"
       />
     </div>
-  } @else {
+  } @else if (items().length) {
     <sui-navbar-menu
       [class.sui-navbar__menu-offset]="brand()"
       [items]="items()"
@@ -36,10 +44,10 @@
     />
   }
 
-  @if (actions().length || collapsible()) {
+  @if (actions().length || (collapsible() && hasContent())) {
     <div class="navbar-end gap-1">
       <ng-content select="[suiNavbarAction]" />
-      @if (collapsible()) {
+      @if (collapsible() && hasContent()) {
         <button suiButton suiNavbarToggle size="sm" shape="square" severity="neutral" variant="text">
           <svg lucideMenu class="size-5" aria-hidden="true"></svg>
         </button>

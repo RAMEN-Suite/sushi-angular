@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { LucideBell, LucidePlus, LucideSearch, LucideZap } from '@lucide/angular';
-import { Badge, Button, NavbarAction, NavbarBrand, NavbarComponent, NavbarItem, NavbarItemTemplate } from '@ramen-suite/sushi';
+import { Badge, Button, Navbar, NavbarAction, NavbarBrand, NavbarItem, NavbarItemTemplate } from '@ramen-suite/sushi';
 
 type ConsolePage = 'Workspace' | 'Tasks' | 'Runs' | 'Settings';
 
@@ -17,9 +17,9 @@ interface ConsoleItem extends NavbarItem<ConsolePage> {
     LucidePlus,
     LucideSearch,
     LucideZap,
+    Navbar,
     NavbarAction,
     NavbarBrand,
-    NavbarComponent,
     NavbarItemTemplate,
   ],
   templateUrl: './custom.example.html',

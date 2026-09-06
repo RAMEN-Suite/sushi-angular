@@ -1,6 +1,9 @@
 import { Directive, ElementRef, inject } from '@angular/core';
 
-/** Adapts a native disclosure to an inline mobile submenu and an anchored desktop dropdown. */
+/**
+ * Adapts Navbar disclosures to mobile and desktop layouts.
+ * @internal
+ */
 @Directive({
   selector: 'details[suiNavbarDropdown]',
   host: {
@@ -49,7 +52,7 @@ export class NavbarDropdown {
       return;
     }
 
-    const navbar: HTMLElement | null = this.element.closest<HTMLElement>('nav[suiNavbar]');
+    const navbar: HTMLElement | null = this.element.closest<HTMLElement>('.sui-navbar');
     navbar
       ?.querySelectorAll<HTMLDetailsElement>('details[suiNavbarDropdown][open]')
       .forEach((dropdown: HTMLDetailsElement): void => {

@@ -29,7 +29,7 @@
   @apply inline-flex;
 }
 
-.sui-navbar__content {
+:where(.sui-navbar__content) {
   @apply order-last mt-2 hidden w-full basis-full flex-col border-t border-base-300 pt-2;
   align-items: stretch;
 }
@@ -44,6 +44,10 @@
 }
 
 .sui-navbar[data-expanded] .sui-navbar__content {
+  @apply flex;
+}
+
+.sui-navbar[data-collapsible='false'] > .sui-navbar__content {
   @apply flex;
 }
 
@@ -157,18 +161,13 @@
     @apply hidden;
   }
 
-  .sui-navbar__content {
+  :where(.sui-navbar__content) {
     @apply static order-none m-0 flex w-auto basis-auto flex-row border-0 bg-transparent p-0;
     align-items: center;
   }
 
   .sui-navbar__content > sui-navbar-menu {
     margin-inline-start: auto;
-  }
-
-  .sui-navbar__content.navbar-center {
-    flex: 1;
-    justify-content: center;
   }
 
   .sui-navbar__menu-offset {

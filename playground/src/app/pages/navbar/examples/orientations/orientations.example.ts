@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { NavbarComponent, NavbarItem } from '@ramen-suite/sushi';
+import { Navbar, NavbarItem } from '@ramen-suite/sushi';
 
 type ProjectView = 'Board' | 'Timeline' | 'Reports';
 type SettingsPage = 'Profile' | 'Notifications' | 'Security';
 
 @Component({
   selector: 'pg-navbar-orientations-example',
-  imports: [NavbarComponent],
+  imports: [Navbar],
   templateUrl: './orientations.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

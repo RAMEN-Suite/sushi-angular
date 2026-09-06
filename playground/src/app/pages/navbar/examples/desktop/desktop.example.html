@@ -26,14 +26,20 @@
 
     <div suiNavbarContent class="gap-3">
       <div class="flex min-w-0 items-center gap-1.5">
-        <button suiButton type="button" size="sm" severity="neutral" variant="text" [suiMenuTrigger]="workspaceMenu">
+        <button
+          suiButton
+          type="button"
+          size="sm"
+          severity="neutral"
+          variant="outlined"
+          [suiMenuTrigger]="workspaceMenu">
           {{ workspace() }}
           <svg lucideChevronDown class="size-3.5" aria-hidden="true"></svg>
         </button>
 
         <svg lucideChevronRight class="size-4 text-base-content/30" aria-hidden="true"></svg>
 
-        <button suiButton type="button" size="sm" severity="neutral" variant="soft" [suiMenuTrigger]="documentMenu">
+        <button suiButton type="button" size="sm" severity="neutral" variant="outlined" [suiMenuTrigger]="documentMenu">
           {{ document() }}
           <svg lucideChevronDown class="size-3.5" aria-hidden="true"></svg>
         </button>

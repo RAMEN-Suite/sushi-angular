@@ -52,6 +52,16 @@ sushi/src/lib/<feature>/
 - Put directive and shared composition CSS in `styles/features/<feature>.styles.css`.
 - `sushi.core.css` contains imports only.
 
+Complexity review:
+
+- Review a component for extraction when its TypeScript exceeds roughly 250 lines, its template exceeds roughly 150 lines, or it owns more than one independent interaction concern. These are review triggers, not targets to game.
+- Keep the public feature root limited to its primary declaration, public types, public template markers, styles, and barrel.
+- Put private renderers, state coordinators, overlay helpers, and interaction directives in `internal/`; group them one level deeper only when a domain has multiple related files.
+- Let the public component coordinate inputs, outputs, queries, and derived state. Move repeated rendering or a self-contained interaction into a private component or directive.
+- Extract pure collection or value transformations only when they are reused, independently testable, or obscure the component's main flow.
+- Do not create one-method services, pass-through wrappers, or one-file-per-function structures solely to reduce line counts.
+- A developer should be able to find the public API from `index.ts`, the primary behavior from the main declaration, and specialized behavior under `internal/` without searching the whole repository.
+
 ## Package size
 
 - Keep the published library tree-shakable; declarations must not register global runtime behavior.
@@ -111,6 +121,14 @@ Class order:
 - Add `floating` only to a native label that wraps its control.
 - Developers own explicit `for`, `id`, `aria-labelledby`, and `aria-describedby` associations.
 - Keep hints, errors, and validation behavior independent from labels.
+
+Navigation components:
+
+- Prefer a typed item model for repeated destinations and use projected content only for application-specific toolbars.
+- Use Angular Router destinations for client-side navigation and native `href` destinations for documents or external pages.
+- Keep disclosure labels non-selectable; only their child destinations may become current.
+- Preserve native links so navigation supports browser history, opening in a new tab, and copied addresses.
+- Keep persistent sidebar navigation full-width and use the complete row as its interaction target.
 
 ## Naming
 

@@ -1,9 +1,9 @@
 import { Directive } from '@angular/core';
 
-/** Projects brand or product identity into a model-driven Navbar. */
+/** Projects brand or product identity at the start of a Navbar. */
 @Directive({ selector: '[suiNavbarBrand]', host: { class: 'sui-navbar__brand' } })
 export class NavbarBrand {}
 
-/** Projects an action into the end of a model-driven Navbar. */
+/** Projects a global action at the end of a Navbar. */
 @Directive({ selector: '[suiNavbarAction]', host: { class: 'sui-navbar__action' } })
 export class NavbarAction {}

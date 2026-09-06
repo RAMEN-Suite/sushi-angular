@@ -51,23 +51,21 @@
             <span suiBadge size="sm" variant="soft">{{ group.items.length }}</span>
           </div>
 
-          <nav class="mt-2" [attr.aria-label]="group.label">
-            <sui-list size="xs" [dividers]="false" [items]="group.items">
-              <ng-template suiListItem let-item>
-                <a
-                  suiButton
-                  [routerLink]="item.path"
-                  class="list-col-grow w-full justify-between"
-                  size="sm"
-                  severity="neutral"
-                  variant="text"
-                >
-                  <span>{{ item.label }}</span>
-                  <svg lucideArrowRight class="size-4 opacity-50" aria-hidden="true"></svg>
-                </a>
+          <div class="mt-2">
+            <sui-navbar
+              [items]="group.items"
+              [collapsible]="false"
+              orientation="vertical"
+              surface="plain"
+              variant="menu"
+              [ariaLabel]="group.label"
+            >
+              <ng-template [suiNavbarItem]="group.items" let-item>
+                <span class="grow">{{ item.label }}</span>
+                <svg lucideArrowRight class="size-4 opacity-40" aria-hidden="true"></svg>
               </ng-template>
-            </sui-list>
-          </nav>
+            </sui-navbar>
+          </div>
         </sui-card>
       }
     </div>

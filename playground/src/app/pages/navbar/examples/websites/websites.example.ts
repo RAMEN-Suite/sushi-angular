@@ -1,6 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideBell, LucideCircleQuestionMark, LucidePlus, LucideSearch, LucideSparkles } from '@lucide/angular';
-import { Button, InputSurface, InputSurfaceControl, Kbd, Navbar, NavbarCenter, NavbarEnd, NavbarStart } from '@ramen-suite/sushi';
+import {
+  Button,
+  InputSurface,
+  InputSurfaceControl,
+  Kbd,
+  Navbar,
+  NavbarAction,
+  NavbarBrand,
+  NavbarContent,
+} from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-navbar-websites-example',
@@ -15,11 +24,12 @@ import { Button, InputSurface, InputSurfaceControl, Kbd, Navbar, NavbarCenter, N
     LucideSearch,
     LucideSparkles,
     Navbar,
-    NavbarCenter,
-    NavbarEnd,
-    NavbarStart,
+    NavbarAction,
+    NavbarBrand,
+    NavbarContent,
   ],
   templateUrl: './websites.example.html',
+  styleUrl: './websites.example.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarWebsitesExample {}

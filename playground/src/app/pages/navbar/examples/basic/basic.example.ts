@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { LucideSoup } from '@lucide/angular';
-import { NavbarBrand, NavbarComponent, NavbarItem } from '@ramen-suite/sushi';
+import { Navbar, NavbarBrand, NavbarItem } from '@ramen-suite/sushi';
 
 type Page = 'Products' | 'Solutions' | 'Pricing';
 
 @Component({
   selector: 'pg-navbar-basic-example',
-  imports: [LucideSoup, NavbarBrand, NavbarComponent],
+  imports: [LucideSoup, Navbar, NavbarBrand],
   templateUrl: './basic.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

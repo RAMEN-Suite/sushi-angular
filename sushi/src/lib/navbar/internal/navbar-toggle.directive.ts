@@ -1,7 +1,10 @@
 import { Directive, ElementRef, inject } from '@angular/core';
 import { NavbarState } from './navbar.state';
 
-/** Connects a button to the responsive Navbar content. */
+/**
+ * Connects the internal toggle to responsive Navbar content.
+ * @internal
+ */
 @Directive({
   selector: 'button[suiNavbarToggle]',
   host: {
