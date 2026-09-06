@@ -98,7 +98,7 @@
   (detach)="handleExpanded(false)"
 >
   <ng-template ngComboboxPopup [combobox]="combobox">
-    <div class="w-full overflow-hidden rounded-box border border-base-300 bg-base-100 shadow-lg">
+    <div class="w-full overflow-hidden rounded-box border border-base-300 bg-base-100">
       @if (headerTemplate(); as template) {
         <div class="border-base-300 border-b p-3" (pointerdown)="$event.preventDefault()">
           <ng-container [ngTemplateOutlet]="template" />

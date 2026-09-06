@@ -10,7 +10,6 @@ import {
   InputSignalWithTransform,
   model,
   ModelSignal,
-  numberAttribute,
   Signal,
   signal,
   TemplateRef,
@@ -20,6 +19,7 @@ import { LucideChevronLeft, LucideChevronRight, LucideChevronsLeft, LucideChevro
 import { AutoFocus } from '../auto-focus';
 import { Button } from '../button';
 import { Input } from '../input';
+import { integerAtLeast, nonNegativeInteger, positiveInteger } from '../number.transforms';
 import { Select, SelectModelValue, SelectOption } from '../select';
 import {
   PaginationLabels,
@@ -32,13 +32,6 @@ import {
   PaginationState,
 } from './pagination.interfaces';
 import { PaginationNavigationTemplate, PaginationPageTemplate, PaginationReportTemplate } from './pagination.templates';
-
-const integerAtLeast: (value: unknown, minimum: number) => number = (value: unknown, minimum: number): number => {
-  const integer: number = Math.floor(numberAttribute(value));
-  return Number.isFinite(integer) ? Math.max(minimum, integer) : minimum;
-};
-const positiveInteger: (value: unknown) => number = (value: unknown): number => integerAtLeast(value, 1);
-const nonNegativeInteger: (value: unknown) => number = (value: unknown): number => integerAtLeast(value, 0);
 
 const DEFAULT_LABELS: PaginationLabels = {
   first: 'First page',

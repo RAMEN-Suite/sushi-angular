@@ -88,7 +88,7 @@
             @if (loadingTemplate(); as template) {
               <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
             } @else {
-              <span class="flex items-center justify-center gap-2 py-8 text-sm text-base-content/60">
+              <span class="flex items-center justify-center gap-2 py-8 text-sm text-base-content/60" role="status" aria-live="polite">
                 <span suiSpinner size="sm"></span>
                 {{ loadingMessage() }}
               </span>

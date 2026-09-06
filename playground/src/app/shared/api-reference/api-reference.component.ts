@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, InputSignal, Signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Badge } from '@ramen-suite/sushi';
+import { Badge, List, ListItemTemplate, Table, TableCellTemplate, TableColumn } from '@ramen-suite/sushi';
 import type { ApiMember, ApiMemberKind, ApiReferenceData, ApiTemplate, ApiTypeDefinition } from './api-reference.types';
 
 interface ApiGroup {
@@ -21,14 +21,46 @@ const labels: Readonly<Record<ApiMemberKind, string>> = {
   method: 'Methods',
 };
 
+const memberColumns: readonly TableColumn<ApiMember>[] = [
+  { key: 'name', header: 'Name', value: (member: ApiMember): string => member.name, minWidth: '10rem' },
+  { key: 'type', header: 'Type', value: (member: ApiMember): string => member.type, minWidth: '12rem' },
+  { key: 'default', header: 'Default', value: (member: ApiMember): string => member.defaultValue ?? '—', minWidth: '8rem' },
+  {
+    key: 'description',
+    header: 'Description',
+    value: (member: ApiMember): string => member.description || '—',
+    minWidth: '16rem',
+  },
+];
+
+const templateColumns: readonly TableColumn<ApiTemplate>[] = [
+  { key: 'marker', header: 'Marker', value: (template: ApiTemplate): string => template.name, minWidth: '10rem' },
+  { key: 'context', header: 'Context', value: (template: ApiTemplate): string => template.context, minWidth: '12rem' },
+  {
+    key: 'inputs',
+    header: 'Inputs',
+    value: (template: ApiTemplate): readonly ApiMember[] => template.members,
+    minWidth: '16rem',
+  },
+  {
+    key: 'description',
+    header: 'Description',
+    value: (template: ApiTemplate): string => template.description || '—',
+    minWidth: '16rem',
+  },
+];
+
 @Component({
   selector: 'pg-api-reference',
-  imports: [Badge, RouterLink],
+  imports: [Badge, List, ListItemTemplate, RouterLink, Table, TableCellTemplate],
   templateUrl: './api-reference.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApiReference {
   public readonly api: InputSignal<ApiReferenceData> = input.required<ApiReferenceData>();
+
+  protected readonly memberColumns: readonly TableColumn<ApiMember>[] = memberColumns;
+  protected readonly templateColumns: readonly TableColumn<ApiTemplate>[] = templateColumns;
 
   protected readonly groups: Signal<readonly ApiGroup[]> = computed(() =>
     (Object.keys(labels) as ApiMemberKind[])

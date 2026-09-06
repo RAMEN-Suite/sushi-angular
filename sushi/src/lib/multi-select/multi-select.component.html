@@ -95,7 +95,7 @@
   (detach)="handleExpanded(false)"
 >
   <ng-template ngComboboxPopup [combobox]="combobox">
-    <div class="w-full overflow-hidden rounded-box border border-base-300 bg-base-100 shadow-lg">
+    <div class="w-full overflow-hidden rounded-box border border-base-300 bg-base-100">
       @if (showSelectAll() || headerTemplate()) {
         <div class="border-b border-base-300 p-3" (pointerdown)="$event.preventDefault()">
           @if (showSelectAll()) {

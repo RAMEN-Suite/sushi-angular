@@ -12,7 +12,6 @@ import {
   InputSignalWithTransform,
   model,
   ModelSignal,
-  numberAttribute,
   output,
   OutputEmitterRef,
   Signal,
@@ -21,6 +20,7 @@ import {
 } from '@angular/core';
 import { LucideGrid2x2, LucideList } from '@lucide/angular';
 import { Button } from '../button';
+import { nonNegativeInteger, positiveInteger } from '../number.transforms';
 import { Pagination } from '../pagination';
 import { SelectButton, SelectButtonOption, SelectButtonOptionTemplate, SelectButtonValue } from '../select-button';
 import { Spinner } from '../spinner';
@@ -40,16 +40,6 @@ import {
   DataViewLoadMoreTemplate,
   DataViewLoadingTemplate,
 } from './data-view.templates';
-
-const positiveInteger: (value: unknown) => number = (value: unknown): number => {
-  const integer: number = Math.floor(numberAttribute(value));
-  return Number.isFinite(integer) ? Math.max(1, integer) : 1;
-};
-
-const nonNegativeInteger: (value: unknown) => number = (value: unknown): number => {
-  const integer: number = Math.floor(numberAttribute(value));
-  return Number.isFinite(integer) ? Math.max(0, integer) : 0;
-};
 
 /** Renders a typed collection in switchable list or responsive grid layouts. */
 @Component({

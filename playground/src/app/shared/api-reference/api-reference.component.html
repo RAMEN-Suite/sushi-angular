@@ -11,98 +11,78 @@
   @for (group of groups(); track group.kind) {
     <section class="grid gap-3" [attr.aria-labelledby]="'api-' + api().className + '-' + group.kind">
       <h3 class="text-lg font-semibold" [id]="'api-' + api().className + '-' + group.kind">{{ group.label }}</h3>
-      <div class="overflow-x-auto rounded-box border border-base-300">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Default</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (member of group.members; track member.name) {
-              <tr>
-                <td>
-                  <code class="font-semibold">{{ member.name }}</code>
-                </td>
-                <td>
-                  <code class="whitespace-nowrap text-sm">
-                    @for (part of typeParts().get(member.type); track $index) {
-                      @if (part.reference) {
-                        <a class="link link-hover font-semibold" [routerLink]="[]" [fragment]="typeId(part.reference)">{{ part.text }}</a>
-                      } @else {
-                        {{ part.text }}
-                      }
-                    }
-                  </code>
-                </td>
-                <td>
-                  <code class="text-sm">{{ member.defaultValue ?? '—' }}</code>
-                </td>
-                <td class="min-w-64 text-base-content/70">{{ member.description || '—' }}</td>
-              </tr>
+      <sui-table size="sm" [columns]="memberColumns" [rows]="group.members">
+        <ng-template suiTableCell let-member="row" let-column="column">
+          @switch (column.key) {
+            @case ('name') {
+              <code class="font-semibold">{{ member.name }}</code>
             }
-          </tbody>
-        </table>
-      </div>
+            @case ('type') {
+              <code class="whitespace-nowrap text-sm">
+                @for (part of typeParts().get(member.type); track $index) {
+                  @if (part.reference) {
+                    <a class="link link-hover font-semibold" [routerLink]="[]" [fragment]="typeId(part.reference)">{{ part.text }}</a>
+                  } @else {
+                    {{ part.text }}
+                  }
+                }
+              </code>
+            }
+            @case ('default') {
+              <code class="text-sm">{{ member.defaultValue ?? '—' }}</code>
+            }
+            @default {
+              <span class="text-base-content/70">{{ member.description || '—' }}</span>
+            }
+          }
+        </ng-template>
+      </sui-table>
     </section>
   }
 
   <section class="grid gap-3" [attr.aria-labelledby]="'api-' + api().className + '-templates'">
     <h3 class="text-lg font-semibold" [id]="'api-' + api().className + '-templates'">Templates</h3>
     @if (api().templates.length > 0) {
-      <div class="overflow-x-auto rounded-box border border-base-300">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Marker</th>
-              <th>Context</th>
-              <th>Inputs</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (template of api().templates; track template.name) {
-              <tr>
-                <td>
-                  <code class="font-semibold">{{ template.name }}</code>
-                </td>
-                <td>
-                  <code class="text-sm">
-                    @for (part of typeParts().get(template.context); track $index) {
-                      @if (part.reference) {
-                        <a class="link link-hover font-semibold" [routerLink]="[]" [fragment]="typeId(part.reference)">{{ part.text }}</a>
-                      } @else {
-                        {{ part.text }}
-                      }
-                    }
-                  </code>
-                </td>
-                <td class="min-w-64">
-                  @if (template.members.length > 0) {
-                    <ul class="grid gap-1.5">
-                      @for (member of template.members; track member.name) {
-                        <li class="flex flex-wrap items-baseline gap-x-2 text-sm">
-                          <code class="font-semibold">{{ member.name }}</code>
-                          <code class="text-base-content/60">{{ member.type }}</code>
-                          @if (member.defaultValue) {
-                            <span class="text-base-content/50">({{ member.defaultValue }})</span>
-                          }
-                        </li>
-                      }
-                    </ul>
-                  } @else {
-                    <span class="text-base-content/50">—</span>
-                  }
-                </td>
-                <td class="min-w-64 text-base-content/70">{{ template.description || '—' }}</td>
-              </tr>
+      <sui-table size="sm" [columns]="templateColumns" [rows]="api().templates">
+        <ng-template suiTableCell let-template="row" let-column="column">
+          @switch (column.key) {
+            @case ('marker') {
+              <code class="font-semibold">{{ template.name }}</code>
             }
-          </tbody>
-        </table>
-      </div>
+            @case ('context') {
+              <code class="text-sm">
+                @for (part of typeParts().get(template.context); track $index) {
+                  @if (part.reference) {
+                    <a class="link link-hover font-semibold" [routerLink]="[]" [fragment]="typeId(part.reference)">{{ part.text }}</a>
+                  } @else {
+                    {{ part.text }}
+                  }
+                }
+              </code>
+            }
+            @case ('inputs') {
+              @if (template.members.length > 0) {
+                <sui-list size="xs" [dividers]="false" [items]="template.members">
+                  <ng-template suiListItem let-member>
+                    <span class="flex flex-wrap items-baseline gap-x-2 text-sm">
+                      <code class="font-semibold">{{ member.name }}</code>
+                      <code class="text-base-content/60">{{ member.type }}</code>
+                      @if (member.defaultValue) {
+                        <span class="text-base-content/50">({{ member.defaultValue }})</span>
+                      }
+                    </span>
+                  </ng-template>
+                </sui-list>
+              } @else {
+                <span class="text-base-content/50">—</span>
+              }
+            }
+            @default {
+              <span class="text-base-content/70">{{ template.description || '—' }}</span>
+            }
+          }
+        </ng-template>
+      </sui-table>
     } @else {
       <p class="text-sm text-base-content/60">No component templates. Native element content and attributes remain available.</p>
     }
