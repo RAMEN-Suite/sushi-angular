@@ -1,4 +1,5 @@
 @import './features/button.styles.css';
+@import './features/divider.styles.css';
 @import './features/fieldset.styles.css';
 @import './features/focus.styles.css';
 @import './features/form-control.styles.css';

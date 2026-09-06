@@ -1,0 +1,18 @@
+.sui-divider {
+  --divider-m: 0.5rem 0;
+}
+
+.sui-divider:empty {
+  height: var(--border);
+}
+
+.sui-divider::before,
+.sui-divider::after {
+  height: var(--border);
+}
+
+.sui-divider.divider-horizontal::before,
+.sui-divider.divider-horizontal::after {
+  width: var(--border);
+  height: 100%;
+}

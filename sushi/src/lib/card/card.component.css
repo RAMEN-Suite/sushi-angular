@@ -56,3 +56,7 @@
 :where(.sui-card.card-border, .sui-card.card-dash) {
   border-color: color-mix(in oklab, var(--color-base-content) 16%, transparent);
 }
+
+.sui-card__body > .sui-divider {
+  --divider-m: 0;
+}

@@ -6,9 +6,9 @@
       <p class="text-sm text-base-content/60">Navigate the workspace without leaving the keyboard.</p>
     </div>
   </div>
-  <div suiDivider></div>
+  <div suiDivider class="my-0.5"></div>
 
-  <sui-list rowHover size="xs" [dividers]="false" [items]="shortcuts" ariaLabel="Keyboard shortcuts">
+  <sui-list rowHover size="sm" [items]="shortcuts" ariaLabel="Keyboard shortcuts">
     <ng-template suiListItem let-shortcut>
       <span class="list-col-grow">{{ shortcut.label }}</span>
       <span class="flex items-center gap-1">

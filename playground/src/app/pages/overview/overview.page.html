@@ -37,21 +37,26 @@
     </sui-card>
   </section>
 
-  <section class="space-y-6">
+  <section class="space-y-7">
     <div class="max-w-3xl space-y-2">
-      <h2 class="text-3xl font-bold tracking-tight">Components</h2>
-      <p class="text-base-content/65">Pages are grouped here for discovery while their source folders remain flat and predictable.</p>
+      <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Component directory</p>
+      <h2 class="text-3xl font-bold tracking-tight">Find the right building block</h2>
+      <p class="text-base leading-relaxed text-base-content/65">
+        Browse by purpose, then open a component for complete examples and its public API.
+      </p>
     </div>
 
     <div class="grid items-start gap-5 md:grid-cols-2 xl:grid-cols-3">
       @for (group of groups; track group.label) {
-        <sui-card size="sm" class="h-full border border-base-300 shadow-none">
-          <div class="flex items-center justify-between gap-4">
+        <sui-card size="md" class="overflow-hidden bg-base-100 shadow-sm">
+          <div class="space-y-1.5">
             <h3 suiCardTitle>{{ group.label }}</h3>
-            <span suiBadge size="sm" variant="soft">{{ group.items.length }}</span>
+            <p class="text-sm leading-relaxed text-base-content/60">{{ group.description }}</p>
           </div>
 
-          <div class="mt-2">
+          <div suiDivider class="my-1 opacity-60"></div>
+
+          <div class="-mx-1">
             <sui-navbar
               [items]="group.items"
               [collapsible]="false"
@@ -61,8 +66,8 @@
               [ariaLabel]="group.label"
             >
               <ng-template [suiNavbarItem]="group.items" let-item>
-                <span class="grow">{{ item.label }}</span>
-                <svg lucideArrowRight class="size-4 opacity-40" aria-hidden="true"></svg>
+                <span class="grow font-medium">{{ item.label }}</span>
+                <svg lucideArrowRight class="size-4 text-base-content/35" aria-hidden="true"></svg>
               </ng-template>
             </sui-navbar>
           </div>
