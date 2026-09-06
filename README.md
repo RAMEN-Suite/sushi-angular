@@ -15,7 +15,7 @@ Build these in dependency order so later components reuse established behavior a
 
 ## Application navigation
 
-- [ ] `suiNavbar`
+- [x] `sui-navbar`
 - [ ] `suiSidebar`
 - [ ] `suiDrawer`
 

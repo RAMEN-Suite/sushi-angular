@@ -1,0 +1,31 @@
+<div class="grid items-start gap-5 sm:grid-cols-2">
+  <section class="grid gap-3">
+    <div>
+      <h3 class="font-semibold">Vertical links</h3>
+      <p class="mt-1 text-sm text-base-content/60">Quiet navigation for a settings sidebar.</p>
+    </div>
+    <sui-navbar
+      [items]="settingsPages"
+      [value]="settings()"
+      [collapsible]="false"
+      orientation="vertical"
+      variant="links"
+      ariaLabel="Account settings links"
+      (itemSelected)="settings.set($event)" />
+  </section>
+
+  <section class="grid gap-3">
+    <div>
+      <h3 class="font-semibold">Vertical buttons</h3>
+      <p class="mt-1 text-sm text-base-content/60">A stronger treatment for switching workspace views.</p>
+    </div>
+    <sui-navbar
+      [items]="views"
+      [value]="view()"
+      [collapsible]="false"
+      orientation="vertical"
+      variant="menu"
+      ariaLabel="Workspace views"
+      (itemSelected)="view.set($event)" />
+  </section>
+</div>

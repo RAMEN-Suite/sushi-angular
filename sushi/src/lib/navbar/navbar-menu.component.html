@@ -1,0 +1,71 @@
+<ul suiNavbarLinks [orientation]="orientation()" [variant]="variant()" [attr.aria-label]="ariaLabel()">
+  @for (item of items(); track item.value) {
+    <li>
+      @if (hasChildren(item)) {
+        <details suiNavbarDropdown>
+          <summary [attr.aria-current]="isActive(item) ? 'page' : null" [attr.aria-disabled]="item.disabled ? 'true' : null">
+            <ng-container [ngTemplateOutlet]="template() ?? defaultItem" [ngTemplateOutletContext]="{ $implicit: item, item, level: 0 }" />
+            <svg lucideChevronDown class="size-4 transition-transform group-open:rotate-180" aria-hidden="true"></svg>
+          </summary>
+          <ul>
+            @for (child of item.items; track child.value) {
+              <li>
+                @if (child.href) {
+                  <a
+                    suiNavbarLink
+                    [href]="child.href"
+                    [attr.aria-current]="isActive(child) ? 'page' : null"
+                    [attr.aria-disabled]="child.disabled ? 'true' : null"
+                    (click)="select(child, $event)"
+                  >
+                    <ng-container
+                      [ngTemplateOutlet]="template() ?? defaultItem"
+                      [ngTemplateOutletContext]="{ $implicit: child, item: child, level: 1 }"
+                    />
+                  </a>
+                } @else {
+                  <button
+                    suiNavbarLink
+                    type="button"
+                    [attr.aria-current]="isActive(child) ? 'page' : null"
+                    [attr.aria-disabled]="child.disabled ? 'true' : null"
+                    (click)="select(child, $event)"
+                  >
+                    <ng-container
+                      [ngTemplateOutlet]="template() ?? defaultItem"
+                      [ngTemplateOutletContext]="{ $implicit: child, item: child, level: 1 }"
+                    />
+                  </button>
+                }
+              </li>
+            }
+          </ul>
+        </details>
+      } @else if (item.href) {
+        <a
+          suiNavbarLink
+          [href]="item.href"
+          [attr.aria-current]="isActive(item) ? 'page' : null"
+          [attr.aria-disabled]="item.disabled ? 'true' : null"
+          (click)="select(item, $event)"
+        >
+          <ng-container [ngTemplateOutlet]="template() ?? defaultItem" [ngTemplateOutletContext]="{ $implicit: item, item, level: 0 }" />
+        </a>
+      } @else {
+        <button
+          suiNavbarLink
+          type="button"
+          [attr.aria-current]="isActive(item) ? 'page' : null"
+          [attr.aria-disabled]="item.disabled ? 'true' : null"
+          (click)="select(item, $event)"
+        >
+          <ng-container [ngTemplateOutlet]="template() ?? defaultItem" [ngTemplateOutletContext]="{ $implicit: item, item, level: 0 }" />
+        </button>
+      }
+    </li>
+  }
+</ul>
+
+<ng-template #defaultItem let-item
+  ><span class="sui-navbar__label">{{ item.label }}</span></ng-template
+>

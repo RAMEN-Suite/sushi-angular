@@ -1,0 +1,49 @@
+<nav
+  class="navbar sui-navbar min-h-16 rounded-box border border-base-300 bg-base-100 px-1 sm:px-2"
+  [attr.aria-label]="ariaLabel()"
+  [attr.data-expanded]="state.expanded() ? '' : null"
+>
+  @if (brand()) {
+    <div class="navbar-start gap-2">
+      <ng-content select="[suiNavbarBrand]" />
+    </div>
+  }
+
+  @if (customContent()) {
+    <ng-content select="[suiNavbarContent]" />
+  } @else if (collapsible()) {
+    <div suiNavbarContent class="lg:flex-1" [class.sui-navbar__menu-offset]="brand()">
+      <sui-navbar-menu
+        [items]="items()"
+        [value]="value()"
+        [orientation]="orientation()"
+        [variant]="variant()"
+        [ariaLabel]="ariaLabel()"
+        [template]="itemTemplate()"
+        (itemSelected)="itemSelected.emit($event)"
+      />
+    </div>
+  } @else {
+    <sui-navbar-menu
+      [class.sui-navbar__menu-offset]="brand()"
+      [items]="items()"
+      [value]="value()"
+      [orientation]="orientation()"
+      [variant]="variant()"
+      [ariaLabel]="ariaLabel()"
+      [template]="itemTemplate()"
+      (itemSelected)="itemSelected.emit($event)"
+    />
+  }
+
+  @if (actions().length || collapsible()) {
+    <div class="navbar-end gap-1">
+      <ng-content select="[suiNavbarAction]" />
+      @if (collapsible()) {
+        <button suiButton suiNavbarToggle size="sm" shape="square" severity="neutral" variant="text">
+          <svg lucideMenu class="size-5" aria-hidden="true"></svg>
+        </button>
+      }
+    </div>
+  }
+</nav>

@@ -28,6 +28,7 @@ export * from './lib/listbox';
 export * from './lib/message';
 export * from './lib/menu';
 export * from './lib/multi-select';
+export * from './lib/navbar';
 export * from './lib/order-list';
 export * from './lib/pagination';
 export * from './lib/progress';

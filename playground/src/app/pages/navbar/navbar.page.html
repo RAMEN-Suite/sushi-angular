@@ -1,0 +1,56 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Navbar</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Build a responsive product header from navigation data, projected identity, and optional global actions.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2" aria-label="Navbar architecture">
+      <span suiBadge variant="soft" size="sm">Component</span>
+      <span suiBadge variant="soft" size="sm">Model-driven</span>
+      <span suiBadge variant="soft" size="sm">Projected content</span>
+    </div>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>Website navigation</h2>
+    <p class="text-base-content/60">
+      Keep the brand on the left and navigation on the right. The same item model supports quiet links and stronger buttons.
+    </p>
+    <div class="mt-5"><pg-navbar-basic-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Workspace search</h2>
+    <p class="text-base-content/60">Place a primary search in the center while compact global actions remain easy to reach at the end.</p>
+    <div class="mt-5"><pg-navbar-websites-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.websites.html" [typescript]="examples.websites.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Vertical navigation</h2>
+    <p class="text-base-content/60">Use link or button treatments in persistent sidebars without enabling the responsive menu toggle.</p>
+    <div class="mt-5"><pg-navbar-orientations-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.orientations.html" [typescript]="examples.orientations.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Custom item content</h2>
+    <p class="text-base-content/60">
+      Add counts and contextual actions through one item template while the Navbar retains its interaction and responsive behavior.
+    </p>
+    <div class="mt-5"><pg-navbar-custom-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.custom.html" [typescript]="examples.custom.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Desktop editor toolbar</h2>
+    <p class="text-base-content/60">
+      Combine document context, editing tools, zoom controls, and sharing actions in an Electron-style application shell.
+    </p>
+    <div class="mt-5"><pg-navbar-desktop-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.desktop.html" [typescript]="examples.desktop.typescript" /></div>
+  </sui-card>
+</main>

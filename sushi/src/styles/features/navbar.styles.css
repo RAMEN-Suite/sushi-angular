@@ -1,0 +1,194 @@
+.sui-navbar {
+  @apply relative flex-wrap;
+}
+
+.sui-navbar > .navbar-start,
+.sui-navbar > .navbar-end {
+  width: auto;
+  flex: none;
+}
+
+.sui-navbar > .navbar-start {
+  justify-content: flex-start;
+  text-align: start;
+}
+
+.sui-navbar > .navbar-end {
+  margin-inline-start: auto;
+}
+
+.sui-navbar__brand {
+  @apply inline-flex min-h-10 items-center rounded-field;
+}
+
+:is(a, button).sui-navbar__brand:hover {
+  @apply bg-base-200/70;
+}
+
+.sui-navbar__toggle {
+  @apply inline-flex;
+}
+
+.sui-navbar__content {
+  @apply order-last mt-2 hidden w-full basis-full flex-col border-t border-base-300 pt-2;
+  align-items: stretch;
+}
+
+.sui-navbar__content .sui-navbar__links {
+  width: 100%;
+}
+
+.sui-navbar__content .sui-navbar__links > li,
+.sui-navbar__content .sui-navbar__links > li > :where(a, button) {
+  width: 100%;
+}
+
+.sui-navbar[data-expanded] .sui-navbar__content {
+  @apply flex;
+}
+
+.sui-navbar__links--responsive {
+  flex-direction: column;
+}
+
+.sui-navbar__links--vertical {
+  @apply w-full flex-col;
+}
+
+.sui-navbar__links--vertical > li,
+.sui-navbar__links--vertical > li > :where(a, button, details) {
+  @apply w-full;
+}
+
+.sui-navbar__links--horizontal {
+  @apply flex-row;
+}
+
+.sui-navbar__link {
+  @apply inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-field px-3 text-base-content no-underline transition-colors;
+}
+
+.sui-navbar__link:hover,
+.sui-navbar__dropdown > summary:hover {
+  @apply bg-base-200/70 text-base-content;
+}
+
+.sui-navbar__link:focus-visible {
+  outline: var(--sui-focus-ring-width) solid currentColor;
+  outline-offset: var(--sui-focus-ring-offset);
+}
+
+.sui-navbar__link[aria-current='page'] {
+  @apply bg-primary/10 font-semibold text-primary;
+}
+
+.sui-navbar__links--links > li > .sui-navbar__link[aria-current='page'] {
+  @apply rounded-none bg-transparent no-underline;
+}
+
+.sui-navbar__links--links > li > .sui-navbar__link[aria-current='page'] > .sui-navbar__label,
+.sui-navbar__links--links > li > .sui-navbar__dropdown > summary[aria-current='page'] .sui-navbar__label {
+  @apply underline decoration-2 underline-offset-8;
+}
+
+.sui-navbar__links--links > li > .sui-navbar__link:hover {
+  @apply bg-transparent text-primary;
+}
+
+.sui-navbar__link[aria-disabled='true'],
+.sui-navbar__dropdown > summary[aria-disabled='true'] {
+  @apply cursor-not-allowed opacity-40;
+}
+
+.sui-navbar__dropdown {
+  @apply relative w-full;
+}
+
+.sui-navbar__dropdown > summary {
+  @apply flex min-h-10 w-full cursor-pointer list-none items-center gap-2 rounded-field px-3 text-base-content transition-colors;
+}
+
+.sui-navbar__dropdown > summary > svg:last-child {
+  @apply ml-auto;
+}
+
+.sui-navbar button,
+.sui-navbar a[href],
+.sui-navbar summary {
+  cursor: pointer;
+}
+
+.sui-navbar__dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+
+.sui-navbar__dropdown > summary:focus-visible {
+  border-radius: var(--radius-field);
+  outline: var(--sui-focus-ring-width) solid currentColor;
+  outline-offset: var(--sui-focus-ring-offset);
+}
+
+.sui-navbar__dropdown > summary[aria-current='page'] {
+  @apply bg-primary/10 font-semibold text-primary;
+}
+
+.sui-navbar__links--links > li > .sui-navbar__dropdown > summary[aria-current='page'] {
+  @apply rounded-none bg-transparent no-underline;
+}
+
+.sui-navbar__links--links > li > .sui-navbar__dropdown > summary:hover {
+  @apply bg-transparent text-primary;
+}
+
+.sui-navbar__dropdown > ul {
+  @apply mt-1 grid w-full gap-1 rounded-field bg-base-200/50 p-1.5;
+}
+
+.sui-navbar__dropdown > ul .sui-navbar__link {
+  @apply w-full;
+}
+
+@media (min-width: 64rem) {
+  .sui-navbar {
+    @apply flex-nowrap;
+  }
+
+  .sui-navbar__toggle {
+    @apply hidden;
+  }
+
+  .sui-navbar__content {
+    @apply static order-none m-0 flex w-auto basis-auto flex-row border-0 bg-transparent p-0;
+    align-items: center;
+  }
+
+  .sui-navbar__content > sui-navbar-menu {
+    margin-inline-start: auto;
+  }
+
+  .sui-navbar__content.navbar-center {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .sui-navbar__menu-offset {
+    margin-inline-start: 0.25rem;
+  }
+
+  .sui-navbar__content .sui-navbar__links {
+    width: auto;
+  }
+
+  .sui-navbar__content .sui-navbar__links > li,
+  .sui-navbar__content .sui-navbar__links > li > :where(a, button) {
+    width: auto;
+  }
+
+  .sui-navbar__dropdown > ul {
+    @apply absolute top-full left-0 z-30 mt-2 w-auto min-w-52 rounded-box border border-base-300 bg-base-100 p-2;
+  }
+
+  .sui-navbar__links--responsive {
+    flex-direction: row;
+  }
+}

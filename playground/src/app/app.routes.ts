@@ -101,6 +101,11 @@ export const routes: Routes = [
     title: 'Multi-Select | SUSHI Playground',
   },
   {
+    path: 'navbar',
+    loadComponent: () => import('./pages/navbar/navbar.page').then(({ NavbarPage }) => NavbarPage),
+    title: 'Navbar | SUSHI Playground',
+  },
+  {
     path: 'radio',
     loadComponent: () => import('./pages/radio/radio.page').then(({ RadioPage }) => RadioPage),
     title: 'Radio | SUSHI Playground',

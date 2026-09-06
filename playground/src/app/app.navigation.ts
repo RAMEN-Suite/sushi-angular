@@ -121,6 +121,15 @@ export const navigation: NavigationGroup[] = [
     ],
   },
   {
+    label: 'Application Navigation',
+    items: [
+      {
+        label: 'Navbar',
+        path: '/navbar',
+      },
+    ],
+  },
+  {
     label: 'Actions',
     items: [
       {
