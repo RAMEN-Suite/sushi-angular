@@ -19,6 +19,8 @@ const items: readonly NavbarItem[] = [
     ],
   },
   { label: 'Activity', value: 'activity' },
+  { label: 'Tools', value: 'tools', items: [{ label: 'Reports', value: 'reports' }] },
+  { label: 'Unavailable', value: 'unavailable', disabled: true, items: [{ label: 'Hidden', value: 'hidden' }] },
 ];
 
 @Component({
@@ -118,6 +120,40 @@ describe('Navbar responsive behavior', (): void => {
 
     expect(toggle.getAttribute('aria-expanded')).toBe('false');
     expect(document.activeElement).toBe(toggle);
+  });
+});
+
+describe('Navbar disclosures', (): void => {
+  it('keeps only the most recently opened disclosure expanded', (): void => {
+    const fixture: ComponentFixture<NavbarHost> = render(NavbarHost);
+    const details: readonly Element[] = queryAll(fixture, 'details');
+    const first: HTMLDetailsElement = details[0] as HTMLDetailsElement;
+    const second: HTMLDetailsElement = details[1] as HTMLDetailsElement;
+    first.open = true;
+    first.dispatchEvent(new Event('toggle'));
+    second.open = true;
+    second.dispatchEvent(new Event('toggle'));
+    expect(first.open).toBe(false);
+    expect(second.open).toBe(true);
+  });
+
+  it('closes with Escape and returns focus to its summary', (): void => {
+    const fixture: ComponentFixture<NavbarHost> = render(NavbarHost);
+    const details: HTMLDetailsElement = query(fixture, 'details');
+    const summary: HTMLElement = query(fixture, 'summary');
+    details.open = true;
+    press(details, 'Escape');
+    expect(details.open).toBe(false);
+    expect(document.activeElement).toBe(summary);
+  });
+
+  it('does not open a disabled disclosure', (): void => {
+    const fixture: ComponentFixture<NavbarHost> = render(NavbarHost);
+    const summaries: readonly Element[] = queryAll(fixture, 'summary');
+    const disabled: HTMLElement = summaries[2] as HTMLElement;
+    disabled.click();
+    expect(disabled.getAttribute('aria-disabled')).toBe('true');
+    expect((disabled.parentElement as HTMLDetailsElement).open).toBe(false);
   });
 });
 
