@@ -8,14 +8,14 @@
   },
   "newProjectRoot": "projects",
   "schematics": {
-    "@schematics/angular:component": { "type": "component", "style": "none", "skipTests": true },
-    "@schematics/angular:directive": { "type": "directive", "skipTests": true },
-    "@schematics/angular:service": { "type": "service", "skipTests": true },
-    "@schematics/angular:guard": { "typeSeparator": ".", "skipTests": true },
-    "@schematics/angular:interceptor": { "typeSeparator": ".", "skipTests": true },
+    "@schematics/angular:component": { "type": "component", "style": "none" },
+    "@schematics/angular:directive": { "type": "directive" },
+    "@schematics/angular:service": { "type": "service" },
+    "@schematics/angular:guard": { "typeSeparator": "." },
+    "@schematics/angular:interceptor": { "typeSeparator": "." },
     "@schematics/angular:module": { "typeSeparator": "." },
-    "@schematics/angular:pipe": { "typeSeparator": ".", "skipTests": true },
-    "@schematics/angular:resolver": { "typeSeparator": ".", "skipTests": true }
+    "@schematics/angular:pipe": { "typeSeparator": "." },
+    "@schematics/angular:resolver": { "typeSeparator": "." }
   },
   "projects": {
     "sushi": {
@@ -40,6 +40,15 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": ["sushi/**/*.ts", "sushi/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "buildTarget": "sushi:build:development",
+            "tsConfig": "sushi/tsconfig.spec.json",
+            "runner": "vitest",
+            "isolate": true
           }
         }
       }
@@ -107,6 +116,15 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": ["playground/**/*.ts", "playground/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "buildTarget": "playground:build:development",
+            "tsConfig": "playground/tsconfig.spec.json",
+            "runner": "vitest",
+            "isolate": true
           }
         }
       }
