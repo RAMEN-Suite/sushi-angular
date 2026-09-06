@@ -1,6 +1,7 @@
 import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
+import { query, render } from '../../../testing/test-utils';
 import { Button } from './button.directive';
 
 @Component({
@@ -12,21 +13,9 @@ class ButtonHost {
   public activations: number = 0;
 }
 
-function setup(): ComponentFixture<ButtonHost> {
-  const fixture: ComponentFixture<ButtonHost> = TestBed.createComponent(ButtonHost);
-  fixture.detectChanges();
-  return fixture;
-}
-
-function getButton(fixture: ComponentFixture<ButtonHost>): HTMLButtonElement {
-  const button: HTMLButtonElement | null = (fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>('button');
-  if (button === null) throw new Error('Expected the button host to render a button.');
-  return button;
-}
-
 describe('Button', (): void => {
   it('applies the default appearance', (): void => {
-    const button: HTMLButtonElement = getButton(setup());
+    const button: HTMLButtonElement = query(render(ButtonHost), 'button');
 
     expect(button.classList).toContain('sui-button');
     expect(button.classList).toContain('btn-primary');
@@ -34,8 +23,8 @@ describe('Button', (): void => {
   });
 
   it('keeps disabled actions focusable without activating them', (): void => {
-    const fixture: ComponentFixture<ButtonHost> = setup();
-    const button: HTMLButtonElement = getButton(fixture);
+    const fixture: ComponentFixture<ButtonHost> = render(ButtonHost);
+    const button: HTMLButtonElement = query(fixture, 'button');
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
 

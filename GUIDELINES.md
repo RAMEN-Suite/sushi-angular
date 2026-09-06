@@ -9,7 +9,7 @@
 - Use only `@angular/forms/signals`; never `FormsModule`, Reactive Forms, CVA, or `NG_VALUE_ACCESSOR`.
 - Build mobile-first and accessible.
 - Keep APIs and implementations minimal.
-- Do not add tests until the project policy changes.
+- Protect public behavior with focused automated tests.
 
 ## Native, directive, or component
 
@@ -176,6 +176,22 @@ Prefer in order:
 - Position overlays before display; keep placement stable while open.
 - Interaction inside an overlay must not close it unexpectedly.
 
+## Testing
+
+- Keep library specs beside the declaration or helper they exercise as `*.spec.ts`.
+- Test components and directives through a standalone host template so bindings, projection, models, outputs, and native behavior are exercised together.
+- Use Vitest through Angular's `unit-test` builder and Angular `TestBed`; do not configure a second unit-test runner.
+- Use the helpers in `sushi/testing/test-utils.ts` for rendering hosts, required DOM queries, and keyboard events.
+- Keep test hosts minimal and drive dynamic host state with signals.
+- Test public behavior and observable DOM semantics; do not call private or protected members.
+- Cover applicable default, configured, disabled, readonly, loading, invalid, empty, keyboard, focus, model, output, and template behavior.
+- Assert ARIA roles, names, relationships, and states where the component owns them.
+- Do not snapshot complete DOM trees or assert every utility class. Assert a class only when it proves a required component-to-DaisyUI mapping.
+- Keep variables, fixtures, elements, events, and callbacks explicitly typed; shared test helpers must not return `any`.
+- Extract a fixture helper only after a setup pattern repeats or when it represents a reusable interaction contract.
+- Leave layout, real scrolling, overlay geometry, responsive behavior, and visual regression to Playwright against the playground.
+- Playground examples do not receive parallel unit tests; Playwright verifies them as consumer integrations.
+
 ## Playground
 
 - Generate API and styling references from the Angular and CSS sources with `npm run generate:api`; playground serve and build run it automatically.
@@ -216,6 +232,7 @@ Component page tags:
 ## Before handoff
 
 - Check semantics, keyboard, pointer, touch, focus, screen readers, mobile, zoom, themes, long text, and translated text.
+- Run `npm test`.
 - Run `npm run lint`.
 - Run `npm run build:sushi`.
 - Run `npm run build:playground`.
