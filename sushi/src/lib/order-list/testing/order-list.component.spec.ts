@@ -107,12 +107,14 @@ describe('OrderList reordering', (): void => {
     const fixture: ComponentFixture<OrderListHost> = render(OrderListHost);
     const listbox: HTMLElement = query(fixture, '[role="listbox"]') as HTMLElement;
     select(fixture, 'research');
+    listbox.focus();
 
     const event: KeyboardEvent = press(listbox, 'End', { altKey: true });
     fixture.detectChanges();
 
     expect(event.defaultPrevented).toBe(true);
     expect(values(fixture)).toEqual(['prototype', 'review', 'release', 'research']);
+    expect(document.activeElement).toBe(listbox);
   });
 
   it('never selects or moves disabled items', (): void => {

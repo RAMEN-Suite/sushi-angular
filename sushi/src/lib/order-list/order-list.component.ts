@@ -142,12 +142,18 @@ export class OrderList<T extends OrderListOption = OrderListOption>
     return indexes.some((index: number, position: number): boolean => index !== offset + position);
   });
 
+  private readonly refocusAfterRender: WritableSignal<boolean> = signal(false);
+
   public constructor() {
     super();
     afterRenderEffect({
       write: (): void => {
         // Re-run after reordered rows render even when the active value stays unchanged.
         this.value();
+        if (this.refocusAfterRender()) {
+          this.refocusAfterRender.set(false);
+          this.focus();
+        }
         if (this.listbox().activeDescendant()) this.listbox().scrollActiveItemIntoView();
       },
     });
@@ -221,6 +227,7 @@ export class OrderList<T extends OrderListOption = OrderListOption>
         return;
     }
 
+    this.refocusAfterRender.set(true);
     event.preventDefault();
     event.stopPropagation();
   }
