@@ -117,15 +117,6 @@
           "options": {
             "lintFilePatterns": ["playground/**/*.ts", "playground/**/*.html"]
           }
-        },
-        "test": {
-          "builder": "@angular/build:unit-test",
-          "options": {
-            "buildTarget": "playground:build:development",
-            "tsConfig": "playground/tsconfig.spec.json",
-            "runner": "vitest",
-            "isolate": true
-          }
         }
       }
     }

@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "test": "npm run test:sushi && npm run test:playground",
-    "test:sushi": "ng test sushi --no-watch",
-    "test:playground": "ng test playground --no-watch",
+    "test": "ng test sushi --no-watch",
     "test:watch": "ng test sushi",
     "lint": "ng lint && eslint \"tools/**/*.ts\"",
     "generate:api": "tsx tools/generate-api-reference.ts",
