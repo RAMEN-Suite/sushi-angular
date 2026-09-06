@@ -218,6 +218,7 @@ export const apiReference: Readonly<{
         description: 'Layout treatments available to an accordion group.',
       },
     ],
+    styles: [],
   },
   Autocomplete: {
     className: 'Autocomplete',
@@ -557,6 +558,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   AutoFocus: {
     className: 'AutoFocus',
@@ -573,6 +575,7 @@ export const apiReference: Readonly<{
     ],
     templates: [],
     types: [],
+    styles: [],
   },
   Avatar: {
     className: 'Avatar',
@@ -649,6 +652,7 @@ export const apiReference: Readonly<{
         description: 'Shared size scale used by visual components.',
       },
     ],
+    styles: [],
   },
   AvatarGroup: {
     className: 'AvatarGroup',
@@ -657,6 +661,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   Badge: {
     className: 'Badge',
@@ -719,6 +724,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Button: {
     className: 'Button',
@@ -815,6 +821,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Card: {
     className: 'Card',
@@ -857,6 +864,7 @@ export const apiReference: Readonly<{
         description: 'Shared size scale used by visual components.',
       },
     ],
+    styles: [],
   },
   CardActions: {
     className: 'CardActions',
@@ -865,6 +873,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   CardMedia: {
     className: 'CardMedia',
@@ -873,6 +882,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   CardTitle: {
     className: 'CardTitle',
@@ -881,6 +891,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   Checkbox: {
     className: 'Checkbox',
@@ -958,6 +969,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Chip: {
     className: 'Chip',
@@ -1094,6 +1106,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Code: {
     className: 'Code',
@@ -1164,6 +1177,104 @@ export const apiReference: Readonly<{
         description: 'Context exposed to the complete code copy-button template.',
       },
     ],
+    styles: [
+      {
+        name: '--sui-code-bg',
+        defaultValue: 'var(--color-base-200)',
+        exampleValue: 'color-mix(in oklab, var(--color-primary) 8%, var(--color-base-100))',
+        description: 'Background of the code surface.',
+      },
+      {
+        name: '--sui-code-content',
+        defaultValue: 'var(--color-base-content)',
+        exampleValue: null,
+        description: 'Default text color used by projected code.',
+      },
+      {
+        name: '--sui-code-border',
+        defaultValue: 'color-mix(in oklab, var(--color-base-content) 14%, transparent)',
+        exampleValue: null,
+        description: 'Border color around the code surface.',
+      },
+      {
+        name: '--sui-code-muted',
+        defaultValue: 'color-mix(in oklab, var(--sui-code-content) 45%, transparent)',
+        exampleValue: null,
+        description: 'Muted color used by prompts, line numbers, and window controls.',
+      },
+      {
+        name: '--sui-code-copy-bg',
+        defaultValue: 'var(--color-base-100)',
+        exampleValue: null,
+        description: 'Background of the default copy control.',
+      },
+      {
+        name: '--sui-code-copy-content',
+        defaultValue: 'var(--color-base-content)',
+        exampleValue: null,
+        description: 'Text and icon color of the default copy control.',
+      },
+      {
+        name: '--sui-code-copy-hover-bg',
+        defaultValue: 'var(--color-base-300)',
+        exampleValue: null,
+        description: 'Hover background of the default copy control.',
+      },
+      {
+        name: '--sui-code-syntax-comment',
+        defaultValue: 'light-dark(#59636e, #9399b2)',
+        exampleValue: null,
+        description: 'Syntax color for comments and quotations.',
+      },
+      {
+        name: '--sui-code-syntax-keyword',
+        defaultValue: 'light-dark(#6b21a8, #cba6f7)',
+        exampleValue: null,
+        description: 'Syntax color for language keywords.',
+      },
+      {
+        name: '--sui-code-syntax-tag',
+        defaultValue: 'light-dark(#9f1239, #ff7a85)',
+        exampleValue: null,
+        description: 'Syntax color for markup tag names.',
+      },
+      {
+        name: '--sui-code-syntax-punctuation',
+        defaultValue: 'light-dark(#57606a, #a6adc8)',
+        exampleValue: null,
+        description: 'Syntax color for punctuation.',
+      },
+      {
+        name: '--sui-code-syntax-attribute',
+        defaultValue: 'light-dark(#075985, #89b4fa)',
+        exampleValue: null,
+        description: 'Syntax color for attributes and properties.',
+      },
+      {
+        name: '--sui-code-syntax-string',
+        defaultValue: 'light-dark(#166534, #a6e3a1)',
+        exampleValue: null,
+        description: 'Syntax color for strings and regular expressions.',
+      },
+      {
+        name: '--sui-code-syntax-number',
+        defaultValue: 'light-dark(#92400e, #f9e2af)',
+        exampleValue: null,
+        description: 'Syntax color for numbers and literals.',
+      },
+      {
+        name: '--sui-code-syntax-type',
+        defaultValue: 'light-dark(#0f766e, #94e2d5)',
+        exampleValue: null,
+        description: 'Syntax color for types and built-in values.',
+      },
+      {
+        name: '--sui-code-syntax-expression',
+        defaultValue: 'light-dark(#9a3412, #fab387)',
+        exampleValue: null,
+        description: 'Syntax color for variables and expressions.',
+      },
+    ],
   },
   CodeLine: {
     className: 'CodeLine',
@@ -1187,6 +1298,7 @@ export const apiReference: Readonly<{
     ],
     templates: [],
     types: [],
+    styles: [],
   },
   ColorPicker: {
     className: 'ColorPicker',
@@ -1329,6 +1441,7 @@ export const apiReference: Readonly<{
         description: 'Shorthand or configured entry accepted by a preset palette.',
       },
     ],
+    styles: [],
   },
   ContextMenuTrigger: {
     className: 'ContextMenuTrigger',
@@ -1352,6 +1465,7 @@ export const apiReference: Readonly<{
     ],
     templates: [],
     types: [],
+    styles: [],
   },
   DataView: {
     className: 'DataView',
@@ -1620,6 +1734,7 @@ export const apiReference: Readonly<{
         description: 'Identifies a rendered item across collection updates.',
       },
     ],
+    styles: [],
   },
   Divider: {
     className: 'Divider',
@@ -1682,6 +1797,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Fieldset: {
     className: 'Fieldset',
@@ -1712,6 +1828,7 @@ export const apiReference: Readonly<{
     ],
     templates: [],
     types: [],
+    styles: [],
   },
   FieldsetContent: {
     className: 'FieldsetContent',
@@ -1720,6 +1837,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   FieldsetLegend: {
     className: 'FieldsetLegend',
@@ -1728,6 +1846,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   FieldsetToggle: {
     className: 'FieldsetToggle',
@@ -1736,6 +1855,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   FileDrop: {
     className: 'FileDrop',
@@ -1904,6 +2024,7 @@ export const apiReference: Readonly<{
         description: 'File rejected by the drop zone and its rejection reason.',
       },
     ],
+    styles: [],
   },
   FileInput: {
     className: 'FileInput',
@@ -1993,6 +2114,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Indicator: {
     className: 'Indicator',
@@ -2014,6 +2136,7 @@ export const apiReference: Readonly<{
         description: 'Vertical attachment point of an indicator item.',
       },
     ],
+    styles: [],
   },
   IndicatorItem: {
     className: 'IndicatorItem',
@@ -2050,6 +2173,7 @@ export const apiReference: Readonly<{
         description: 'Vertical attachment point of an indicator item.',
       },
     ],
+    styles: [],
   },
   Input: {
     className: 'Input',
@@ -2146,6 +2270,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   InputGroup: {
     className: 'InputGroup',
@@ -2181,6 +2306,7 @@ export const apiReference: Readonly<{
         description: 'Supported layout directions.',
       },
     ],
+    styles: [],
   },
   InputGroupAddon: {
     className: 'InputGroupAddon',
@@ -2189,6 +2315,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   InputNumber: {
     className: 'InputNumber',
@@ -2379,6 +2506,7 @@ export const apiReference: Readonly<{
         description: 'Context exposed to the complete input-number step-control template.',
       },
     ],
+    styles: [],
   },
   InputOtp: {
     className: 'InputOtp',
@@ -2499,6 +2627,7 @@ export const apiReference: Readonly<{
         description: 'Size scale available to form controls.',
       },
     ],
+    styles: [],
   },
   InputSurface: {
     className: 'InputSurface',
@@ -2562,6 +2691,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   InputSurfaceControl: {
     className: 'InputSurfaceControl',
@@ -2599,6 +2729,7 @@ export const apiReference: Readonly<{
     ],
     templates: [],
     types: [],
+    styles: [],
   },
   Join: {
     className: 'Join',
@@ -2628,6 +2759,7 @@ export const apiReference: Readonly<{
         description: 'Supported layout directions.',
       },
     ],
+    styles: [],
   },
   JoinItem: {
     className: 'JoinItem',
@@ -2636,6 +2768,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   Kbd: {
     className: 'Kbd',
@@ -2665,6 +2798,7 @@ export const apiReference: Readonly<{
         description: 'Size scale available to keyboard-key labels.',
       },
     ],
+    styles: [],
   },
   Label: {
     className: 'Label',
@@ -2681,6 +2815,7 @@ export const apiReference: Readonly<{
     ],
     templates: [],
     types: [],
+    styles: [],
   },
   List: {
     className: 'List',
@@ -2772,6 +2907,7 @@ export const apiReference: Readonly<{
         description: 'Identifies a rendered item across collection updates.',
       },
     ],
+    styles: [],
   },
   Listbox: {
     className: 'Listbox',
@@ -3043,6 +3179,7 @@ export const apiReference: Readonly<{
         description: 'Primitive or object value accepted by selection controls.',
       },
     ],
+    styles: [],
   },
   Menu: {
     className: 'Menu',
@@ -3284,6 +3421,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   MenuTrigger: {
     className: 'MenuTrigger',
@@ -3307,6 +3445,7 @@ export const apiReference: Readonly<{
     ],
     templates: [],
     types: [],
+    styles: [],
   },
   Message: {
     className: 'Message',
@@ -3362,6 +3501,7 @@ export const apiReference: Readonly<{
         description: 'Supported layout directions.',
       },
     ],
+    styles: [],
   },
   MessageActions: {
     className: 'MessageActions',
@@ -3370,6 +3510,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   MultiSelect: {
     className: 'MultiSelect',
@@ -3794,6 +3935,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Navbar: {
     className: 'Navbar',
@@ -3932,6 +4074,7 @@ export const apiReference: Readonly<{
         description: 'Supported layout directions.',
       },
     ],
+    styles: [],
   },
   NavbarAction: {
     className: 'NavbarAction',
@@ -3940,6 +4083,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   NavbarBrand: {
     className: 'NavbarBrand',
@@ -3948,6 +4092,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   NavbarContent: {
     className: 'NavbarContent',
@@ -3956,6 +4101,7 @@ export const apiReference: Readonly<{
     members: [],
     templates: [],
     types: [],
+    styles: [],
   },
   OrderList: {
     className: 'OrderList',
@@ -4135,6 +4281,7 @@ export const apiReference: Readonly<{
         description: 'Primitive or object value accepted by selection controls.',
       },
     ],
+    styles: [],
   },
   Pagination: {
     className: 'Pagination',
@@ -4341,6 +4488,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Progress: {
     className: 'Progress',
@@ -4384,6 +4532,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Radio: {
     className: 'Radio',
@@ -4454,6 +4603,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Range: {
     className: 'Range',
@@ -4524,6 +4674,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Select: {
     className: 'Select',
@@ -4892,6 +5043,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   SelectButton: {
     className: 'SelectButton',
@@ -5060,6 +5212,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Spinner: {
     className: 'Spinner',
@@ -5102,6 +5255,7 @@ export const apiReference: Readonly<{
         description: 'Built-in loading animation shapes.',
       },
     ],
+    styles: [],
   },
   Status: {
     className: 'Status',
@@ -5164,6 +5318,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Table: {
     className: 'Table',
@@ -5407,6 +5562,7 @@ export const apiReference: Readonly<{
         description: 'Identifies a rendered row across collection updates.',
       },
     ],
+    styles: [],
   },
   Tabs: {
     className: 'Tabs',
@@ -5584,6 +5740,7 @@ export const apiReference: Readonly<{
         description: 'Visual treatments available to tab lists.',
       },
     ],
+    styles: [],
   },
   Textarea: {
     className: 'Textarea',
@@ -5686,6 +5843,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   Toggle: {
     className: 'Toggle',
@@ -5756,6 +5914,7 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
   },
   ToggleButton: {
     className: 'ToggleButton',
@@ -5930,5 +6089,6 @@ export const apiReference: Readonly<{
         description: 'Visual treatments available to toggle buttons.',
       },
     ],
+    styles: [],
   },
 } as const;

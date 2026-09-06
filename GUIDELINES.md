@@ -137,6 +137,7 @@ Navigation components:
 - Booleans are positive: `disabled`, `loading`, `fluid`.
 - Handlers describe actions: `handleSelection`, `handleReset`.
 - CSS hooks use `.sui-feature` and `.sui-feature__element`.
+- Public CSS custom properties use `--sui-feature-*` and describe one stable consumer-facing styling role.
 - Names stay short but must remain unambiguous.
 - Prefer complete, familiar words over unexplained abbreviations.
 - Break dense expressions and markup into readable semantic steps; do not compress examples into clever one-liners.
@@ -153,6 +154,10 @@ Prefer in order:
 
 - Do not split component-owned styles across files.
 - Avoid fixed positioning, duplicated theme colors, broad selectors, and `!important`.
+- Use global theme tokens for shared semantics and component tokens for feature-specific surfaces or states.
+- Do not couple a component surface to a semantic severity such as `neutral` unless the component represents that severity.
+- Treat only documented `--sui-*` custom properties as public CSS API; internal classes and DaisyUI classes remain implementation details.
+- Document each public custom property with a JSDoc-style CSS comment immediately before its declaration so the styling reference can generate it.
 - Respect `prefers-reduced-motion`.
 - Static class order: primitive, feature hook, shared hook.
 - Utility order: layout, size, spacing, typography, color, border, effects, interaction, motion, state, responsive.
@@ -173,7 +178,7 @@ Prefer in order:
 
 ## Playground
 
-- Generate API references from the Angular source with `npm run generate:api`; playground serve and build run it automatically.
+- Generate API and styling references from the Angular and CSS sources with `npm run generate:api`; playground serve and build run it automatically.
 - Write API descriptions as JSDoc on the public member or template marker so code and documentation share one source.
 - Render the example first; show its exact HTML and TypeScript below.
 - Store each stateful example in `examples/<name>/<name>.example.ts|html`.
@@ -181,6 +186,7 @@ Prefer in order:
 - Never duplicate source as strings or handwritten `suiCodeLine` blocks.
 - Pages own only descriptions, layout, examples, and raw-source references.
 - Keep generated API references on the component's `/api` subpage; example pages contain no API data or API section heading.
+- Keep generated styling references on the component's `/styling` subpage and show only supported theme tokens, component properties, inputs, and templates.
 - Lazy-load every playground page through `loadComponent`.
 - Keep routed documentation in `playground/src/app/pages/<component>`; navigation groups do not create filesystem layers.
 - Use `pg-example-code` for HTML and TypeScript examples; do not add separate code-rendering wrappers.

@@ -1,5 +1,5 @@
 import type { Dirent } from 'node:fs';
-import { mkdirSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { basename, dirname, extname, join, relative, resolve } from 'node:path';
 import type { Options as PrettierOptions } from 'prettier';
 import prettier from 'prettier';
@@ -8,6 +8,7 @@ import type {
   ApiMember,
   ApiMemberKind,
   ApiReferenceData,
+  ApiStyleProperty,
   ApiTemplate,
   ApiTypeDefinition,
   ApiTypeKind,
@@ -19,6 +20,7 @@ interface SourceReference {
   readonly description: string;
   readonly folder: string;
   readonly members: readonly ApiMember[];
+  readonly styles: readonly ApiStyleProperty[];
 }
 
 interface CollectedApi {
@@ -52,7 +54,7 @@ const compilerOptions: ts.CompilerOptions = {
 const program: ts.Program = ts.createProgram(sourceFiles, compilerOptions);
 const checker: ts.TypeChecker = program.getTypeChecker();
 
-function findSelector(node: ts.ClassDeclaration): string | null {
+function findAngularMetadata(node: ts.ClassDeclaration): ts.ObjectLiteralExpression | null {
   const decorators: readonly ts.Decorator[] = ts.canHaveDecorators(node) ? (ts.getDecorators(node) ?? []) : [];
   const decorator: ts.Decorator | undefined = decorators.find((item: ts.Decorator): boolean => {
     if (!ts.isCallExpression(item.expression)) return false;
@@ -62,7 +64,12 @@ function findSelector(node: ts.ClassDeclaration): string | null {
   if (!decorator || !ts.isCallExpression(decorator.expression)) return null;
 
   const metadata: ts.Expression | undefined = decorator.expression.arguments.at(0);
-  if (!metadata || !ts.isObjectLiteralExpression(metadata)) return null;
+  return metadata && ts.isObjectLiteralExpression(metadata) ? metadata : null;
+}
+
+function findSelector(node: ts.ClassDeclaration): string | null {
+  const metadata: ts.ObjectLiteralExpression | null = findAngularMetadata(node);
+  if (!metadata) return null;
 
   const property: ts.ObjectLiteralElementLike | undefined = metadata.properties.find(
     (item: ts.ObjectLiteralElementLike): boolean => ts.isPropertyAssignment(item) && item.name.getText() === 'selector',
@@ -70,6 +77,41 @@ function findSelector(node: ts.ClassDeclaration): string | null {
   return property && ts.isPropertyAssignment(property) && ts.isStringLiteralLike(property.initializer)
     ? property.initializer.text
     : null;
+}
+
+function findStyleFile(node: ts.ClassDeclaration): string | null {
+  const metadata: ts.ObjectLiteralExpression | null = findAngularMetadata(node);
+  if (!metadata) return null;
+
+  const property: ts.ObjectLiteralElementLike | undefined = metadata.properties.find(
+    (item: ts.ObjectLiteralElementLike): boolean => ts.isPropertyAssignment(item) && item.name.getText() === 'styleUrl',
+  );
+  if (!property || !ts.isPropertyAssignment(property) || !ts.isStringLiteralLike(property.initializer)) return null;
+
+  const file: string = resolve(dirname(node.getSourceFile().fileName), property.initializer.text);
+  return existsSync(file) ? file : null;
+}
+
+function readStyleProperties(node: ts.ClassDeclaration): readonly ApiStyleProperty[] {
+  const file: string | null = findStyleFile(node);
+  if (!file) return [];
+
+  const css: string = readFileSync(file, 'utf8');
+  const pattern: RegExp = /\/\*\*([\s\S]*?)\*\/\s*(--sui-[\w-]+)\s*:\s*([^;]+);/gu;
+  const examplePattern: RegExp = /^@example\s+(.+)$/mu;
+  return [...css.matchAll(pattern)].map((match: RegExpMatchArray): ApiStyleProperty => {
+    const documentation: string = match[1].replaceAll(/^\s*\* ?/gmu, '').trim();
+    const example: RegExpExecArray | null = examplePattern.exec(documentation);
+    return {
+      name: match[2],
+      defaultValue: match[3].trim(),
+      exampleValue: example?.[1]?.trim() ?? null,
+      description: documentation
+        .replaceAll(/^@\w+.*$/gmu, '')
+        .replaceAll(/\s+/g, ' ')
+        .trim(),
+    };
+  });
 }
 
 function readJSDoc(node: ts.Node): string {
@@ -312,6 +354,7 @@ function collectApi(): CollectedApi {
         description: readJSDoc(statement),
         folder,
         members: readMembers(statement),
+        styles: readStyleProperties(statement),
       });
     });
   });
@@ -387,6 +430,7 @@ function buildReferenceData(): Readonly<Record<string, ApiReferenceData>> {
         members: reference.members,
         templates,
         types: findReferencedTypes(reference.members, templates, collected.types, featureTypes),
+        styles: reference.styles,
       };
       return [reference.className, data];
     });
@@ -406,6 +450,9 @@ function validateDocumentation(data: Readonly<Record<string, ApiReferenceData>>)
     });
     reference.types.forEach((type: ApiTypeDefinition): void => {
       if (!type.description) missing.push(`${reference.className}.${type.name}`);
+    });
+    reference.styles.forEach((style: ApiStyleProperty): void => {
+      if (!style.description) missing.push(`${reference.className}.${style.name}`);
     });
   });
   if (missing.length) console.warn(`Missing public API documentation: ${missing.join(', ')}`);

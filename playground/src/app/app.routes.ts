@@ -9,6 +9,13 @@ const apiRoutes: Routes = apiNavigation.map((item: NavigationItem): Route => ({
   data: { component: item.path.slice(1), name: item.label },
 }));
 
+const stylingRoutes: Routes = apiNavigation.map((item: NavigationItem): Route => ({
+  path: `${item.path.slice(1)}/styling`,
+  loadComponent: () => import('./pages/styling/styling.page').then(({ StylingPage }) => StylingPage),
+  title: `${item.label} Styling | SUSHI Playground`,
+  data: { component: item.path.slice(1), name: item.label },
+}));
+
 export const routes: Routes = [
   {
     path: '',
@@ -246,6 +253,7 @@ export const routes: Routes = [
     title: 'Toggle Button | SUSHI Playground',
   },
   ...apiRoutes,
+  ...stylingRoutes,
   {
     path: '**',
     redirectTo: '',

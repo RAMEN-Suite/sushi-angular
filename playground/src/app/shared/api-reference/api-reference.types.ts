@@ -24,6 +24,13 @@ export interface ApiTypeDefinition {
   readonly description: string;
 }
 
+export interface ApiStyleProperty {
+  readonly name: string;
+  readonly defaultValue: string;
+  readonly exampleValue: string | null;
+  readonly description: string;
+}
+
 export interface ApiReferenceData {
   readonly className: string;
   readonly selector: string;
@@ -31,4 +38,5 @@ export interface ApiReferenceData {
   readonly members: readonly ApiMember[];
   readonly templates: readonly ApiTemplate[];
   readonly types: readonly ApiTypeDefinition[];
+  readonly styles: readonly ApiStyleProperty[];
 }

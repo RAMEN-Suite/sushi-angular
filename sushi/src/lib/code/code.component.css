@@ -1,7 +1,56 @@
 @reference "tailwindcss";
 
 :host {
+  /**
+   * Background of the code surface.
+   * @example color-mix(in oklab, var(--color-primary) 8%, var(--color-base-100))
+   */
+  --sui-code-bg: var(--color-base-200);
+  /** Default text color used by projected code. */
+  --sui-code-content: var(--color-base-content);
+  /** Border color around the code surface. */
+  --sui-code-border: color-mix(in oklab, var(--color-base-content) 14%, transparent);
+  /** Muted color used by prompts, line numbers, and window controls. */
+  --sui-code-muted: color-mix(in oklab, var(--sui-code-content) 45%, transparent);
+  /** Background of the default copy control. */
+  --sui-code-copy-bg: var(--color-base-100);
+  /** Text and icon color of the default copy control. */
+  --sui-code-copy-content: var(--color-base-content);
+  /** Hover background of the default copy control. */
+  --sui-code-copy-hover-bg: var(--color-base-300);
+  /** Syntax color for comments and quotations. */
+  --sui-code-syntax-comment: light-dark(#59636e, #9399b2);
+  /** Syntax color for language keywords. */
+  --sui-code-syntax-keyword: light-dark(#6b21a8, #cba6f7);
+  /** Syntax color for markup tag names. */
+  --sui-code-syntax-tag: light-dark(#9f1239, #ff7a85);
+  /** Syntax color for punctuation. */
+  --sui-code-syntax-punctuation: light-dark(#57606a, #a6adc8);
+  /** Syntax color for attributes and properties. */
+  --sui-code-syntax-attribute: light-dark(#075985, #89b4fa);
+  /** Syntax color for strings and regular expressions. */
+  --sui-code-syntax-string: light-dark(#166534, #a6e3a1);
+  /** Syntax color for numbers and literals. */
+  --sui-code-syntax-number: light-dark(#92400e, #f9e2af);
+  /** Syntax color for types and built-in values. */
+  --sui-code-syntax-type: light-dark(#0f766e, #94e2d5);
+  /** Syntax color for variables and expressions. */
+  --sui-code-syntax-expression: light-dark(#9a3412, #fab387);
+
+  color: var(--sui-code-content);
+  background-color: var(--sui-code-bg);
+  border: var(--border) solid var(--sui-code-border);
   overflow-x: hidden;
+}
+
+:host::before {
+  color: var(--sui-code-muted);
+  opacity: 1;
+}
+
+:host :where(pre)::before {
+  color: var(--sui-code-muted);
+  opacity: 1;
 }
 
 .sui-code__content {
@@ -21,4 +70,13 @@
 .sui-code__copy-button:focus-visible {
   outline: none;
   box-shadow: inset 0 0 0 var(--sui-focus-ring-width) currentColor;
+}
+
+.sui-code__copy-button {
+  color: var(--sui-code-copy-content);
+  background-color: var(--sui-code-copy-bg);
+}
+
+.sui-code__copy-button:hover {
+  background-color: var(--sui-code-copy-hover-bg);
 }

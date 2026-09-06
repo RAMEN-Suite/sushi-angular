@@ -38,6 +38,7 @@ export class App {
     return [
       { label: 'Examples', value: path, routerLink: path },
       { label: 'API reference', value: `${path}/api`, routerLink: `${path}/api` },
+      { label: 'Styling', value: `${path}/styling`, routerLink: `${path}/styling` },
     ];
   });
 
