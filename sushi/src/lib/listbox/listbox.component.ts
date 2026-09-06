@@ -201,15 +201,16 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
 
   protected handleSelectAll(): void {
     if (!this.multiple() || this.disabled() || this.readOnly()) return;
-    const available: ListboxValue[] = this.visibleOptions()
+    const available: readonly ListboxValue[] = this.visibleOptions()
       .filter((option: ListboxOption): boolean => !option.disabled)
       .map((option: ListboxOption): ListboxValue => option.value);
-    const selected: ListboxValue[] = this.listboxValue();
+    const selected: readonly ListboxValue[] = this.listboxValue();
     const clear: boolean = this.allSelected();
+    const next: ReadonlySet<ListboxValue> = new Set(
+      clear ? selected.filter((value: ListboxValue): boolean => !available.includes(value)) : [...selected, ...available],
+    );
     this.value.set(
-      clear
-        ? selected.filter((value: ListboxValue): boolean => !available.includes(value))
-        : [...new Set([...selected, ...available])],
+      this.options().flatMap((option: ListboxOption): readonly ListboxValue[] => (next.has(option.value) ? [option.value] : [])),
     );
   }
 

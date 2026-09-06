@@ -15,3 +15,5 @@ class ResizeObserverStub implements ResizeObserver {
 }
 
 globalThis.ResizeObserver = ResizeObserverStub;
+
+HTMLElement.prototype.scrollIntoView = (): void => undefined;
