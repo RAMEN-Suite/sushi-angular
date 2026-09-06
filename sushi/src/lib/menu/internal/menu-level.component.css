@@ -25,18 +25,34 @@
   content: none;
 }
 
-.sui-menu-divider {
+.sui-menu-surface sui-menu-action,
+.sui-menu-surface sui-menu-level {
+  color: var(--color-base-content);
+  background: transparent;
+  box-shadow: none;
+}
+
+.sui-menu-separator {
+  pointer-events: none;
+}
+
+.sui-menu-separator > .sui-menu-divider {
   height: 1px;
   min-height: 1px;
   margin: 0.25rem 0.5rem;
+  padding: 0;
+  cursor: default;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
-.sui-menu-divider::before,
-.sui-menu-divider::after {
+.sui-menu-separator > .sui-menu-divider::before,
+.sui-menu-separator > .sui-menu-divider::after {
   height: 1px;
 }
 
-.sui-menu-divider::after {
+.sui-menu-separator > .sui-menu-divider::after {
   display: none;
 }
 

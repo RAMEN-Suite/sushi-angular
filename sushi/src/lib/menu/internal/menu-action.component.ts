@@ -8,9 +8,7 @@ import {
   InputSignal,
   output,
   OutputEmitterRef,
-  signal,
   TemplateRef,
-  WritableSignal,
 } from '@angular/core';
 import { LucideChevronRight } from '@lucide/angular';
 import { MenuGroupContext, MenuItem, MenuItemContext, MenuSeverity, MenuSize } from '../menu.interfaces';
@@ -43,17 +41,7 @@ export class MenuAction<I extends MenuItem = MenuItem> {
 
   public readonly itemSelected: OutputEmitterRef<I['value']> = output<I['value']>();
 
-  protected readonly pressed: WritableSignal<boolean> = signal<boolean>(false);
-
   private readonly actionId: number = ++nextMenuActionId;
-
-  protected handlePress(event: PointerEvent): void {
-    if (event.button === 0) this.pressed.set(true);
-  }
-
-  protected handleRelease(): void {
-    this.pressed.set(false);
-  }
 
   protected handleSubmenu(event: Event, item: AriaMenuItem<I['value']>): void {
     if (this.disabled() || this.item().disabled) {

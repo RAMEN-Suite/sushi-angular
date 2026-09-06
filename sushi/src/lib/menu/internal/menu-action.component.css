@@ -14,5 +14,7 @@
 }
 
 .sui-menu-option:not([aria-disabled='true']):active {
+  color: var(--menu-active-fg);
+  background-color: var(--menu-active-bg);
   transition-duration: 0s;
 }
