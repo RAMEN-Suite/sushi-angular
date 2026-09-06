@@ -1,11 +1,15 @@
 import {
   booleanAttribute,
   computed,
+  DestroyRef,
   Directive,
+  ElementRef,
+  inject,
   input,
   InputSignal,
   InputSignalWithTransform,
   numberAttribute,
+  Renderer2,
   Signal,
 } from '@angular/core';
 import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button.interfaces';
@@ -46,12 +50,14 @@ import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button
     '[attr.aria-disabled]': 'isDisabled() ? "true" : null',
     '[attr.disabled]': 'null',
     '[attr.tabindex]': 'tabIndex()',
-
-    '(click)': 'handleClick($event)',
   },
 })
 /** Styles native buttons and links with consistent, focusable disabled behavior. */
 export class Button {
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private readonly element: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly renderer: Renderer2 = inject(Renderer2);
+
   /** Applies a semantic theme color. */
   public readonly severity: InputSignal<ButtonSeverity> = input<ButtonSeverity>('primary');
   /** Controls the button dimensions. */
@@ -76,7 +82,17 @@ export class Button {
 
   protected readonly isDisabled: Signal<boolean> = computed<boolean>((): boolean => this.disabled() || this.loading());
 
-  protected handleClick(event: Event): void {
+  public constructor() {
+    const stopListening: () => void = this.renderer.listen(
+      this.element.nativeElement,
+      'click',
+      (event: Event): void => this.blockClick(event),
+      { capture: true },
+    );
+    this.destroyRef.onDestroy(stopListening);
+  }
+
+  private blockClick(event: Event): void {
     if (!this.isDisabled()) return;
     event.preventDefault();
     event.stopImmediatePropagation();

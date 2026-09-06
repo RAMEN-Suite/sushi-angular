@@ -5,10 +5,11 @@ import { Button } from './button.directive';
 
 @Component({
   imports: [Button],
-  template: `<button suiButton [disabled]="disabled()">Save</button>`,
+  template: `<button suiButton [disabled]="disabled()" (click)="activations += 1">Save</button>`,
 })
 class ButtonHost {
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
+  public activations: number = 0;
 }
 
 function setup(): ComponentFixture<ButtonHost> {
@@ -39,9 +40,11 @@ describe('Button', (): void => {
     fixture.detectChanges();
 
     button.focus();
+    button.click();
 
     expect(button.hasAttribute('disabled')).toBe(false);
     expect(button.getAttribute('aria-disabled')).toBe('true');
     expect(document.activeElement).toBe(button);
+    expect(fixture.componentInstance.activations).toBe(0);
   });
 });
