@@ -48,7 +48,8 @@
             "buildTarget": "sushi:build:development",
             "tsConfig": "sushi/tsconfig.spec.json",
             "runner": "vitest",
-            "isolate": true
+            "isolate": true,
+            "setupFiles": ["sushi/testing/setup.ts"]
           }
         }
       }

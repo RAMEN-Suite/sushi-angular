@@ -21,6 +21,17 @@ export function query(fixture: ComponentFixture<unknown>, selector: string): Ele
   return element;
 }
 
+/** Returns all matching descendants and infers native elements from their tag. */
+export function queryAll<K extends keyof HTMLElementTagNameMap>(
+  fixture: ComponentFixture<unknown>,
+  selector: K,
+): readonly HTMLElementTagNameMap[K][];
+export function queryAll(fixture: ComponentFixture<unknown>, selector: string): readonly Element[];
+export function queryAll(fixture: ComponentFixture<unknown>, selector: string): readonly Element[] {
+  const root: HTMLElement = fixture.nativeElement as HTMLElement;
+  return Array.from(root.querySelectorAll(selector));
+}
+
 /** Dispatches a cancelable keyboard event and returns it for assertions. */
 export function press(target: EventTarget, key: string, init: KeyboardEventInit = {}): KeyboardEvent {
   const event: KeyboardEvent = new KeyboardEvent('keydown', {
