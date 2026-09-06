@@ -1,10 +1,10 @@
 import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { afterEach, describe, expect, it } from 'vitest';
-import { query, render } from '../../../testing/test-utils';
-import { MultiSelect } from './multi-select.component';
-import type { MultiSelectModelValue, MultiSelectOption } from './multi-select.interfaces';
-import { MultiSelectHeaderTemplate, MultiSelectItemTemplate, MultiSelectSelectedItemsTemplate } from './multi-select.templates';
+import { query, render } from '../../../../testing/test-utils';
+import { MultiSelect } from '../multi-select.component';
+import type { MultiSelectModelValue, MultiSelectOption } from '../multi-select.interfaces';
+import { MultiSelectHeaderTemplate, MultiSelectItemTemplate, MultiSelectSelectedItemsTemplate } from '../multi-select.templates';
 
 const options: readonly MultiSelectOption[] = [
   { label: 'Miso', value: 'miso' },

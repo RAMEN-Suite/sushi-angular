@@ -1,10 +1,10 @@
 import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { afterEach, describe, expect, it } from 'vitest';
-import { query, render } from '../../../testing/test-utils';
-import { Select } from './select.component';
-import type { SelectModelValue, SelectOption } from './select.interfaces';
-import { SelectItemTemplate, SelectSelectedItemTemplate } from './select.templates';
+import { query, render } from '../../../../testing/test-utils';
+import { Select } from '../select.component';
+import type { SelectModelValue, SelectOption } from '../select.interfaces';
+import { SelectItemTemplate, SelectSelectedItemTemplate } from '../select.templates';
 
 const options: readonly SelectOption[] = [
   { label: 'Miso', value: 'miso' },

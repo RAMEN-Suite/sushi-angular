@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { selectionOverlayPositions, SELECTION_ABOVE, SELECTION_BELOW } from './selection-overlay';
+import { selectionOverlayPositions, SELECTION_ABOVE, SELECTION_BELOW } from '../selection-overlay';
 
 function originAt(top: number, bottom: number): HTMLElement {
   const origin: HTMLElement = document.createElement('button');

@@ -1,10 +1,10 @@
 import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { press, query, queryAll, render } from '../../../testing/test-utils';
-import { Listbox } from './listbox.component';
-import type { ListboxModelValue, ListboxOption } from './listbox.interfaces';
-import { ListboxFilterTemplate, ListboxItemTemplate } from './listbox.templates';
+import { press, query, queryAll, render } from '../../../../testing/test-utils';
+import { Listbox } from '../listbox.component';
+import type { ListboxModelValue, ListboxOption } from '../listbox.interfaces';
+import { ListboxFilterTemplate, ListboxItemTemplate } from '../listbox.templates';
 
 const options: readonly ListboxOption[] = [
   { label: 'Miso', value: 'miso', group: 'Classic' },

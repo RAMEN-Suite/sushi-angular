@@ -1,8 +1,8 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { queryAll, render } from '../../../testing/test-utils';
-import { Radio } from './radio.directive';
+import { queryAll, render } from '../../../../testing/test-utils';
+import { Radio } from '../radio.directive';
 
 @Component({
   imports: [Radio],

@@ -1,10 +1,10 @@
 import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { afterEach, describe, expect, it } from 'vitest';
-import { press, query, render } from '../../../testing/test-utils';
-import { Autocomplete } from './autocomplete.component';
-import type { AutocompleteOption, AutocompleteValue } from './autocomplete.interfaces';
-import { AutocompleteEmptyTemplate, AutocompleteItemTemplate, AutocompletePrefixTemplate } from './autocomplete.templates';
+import { press, query, render } from '../../../../testing/test-utils';
+import { Autocomplete } from '../autocomplete.component';
+import type { AutocompleteOption, AutocompleteValue } from '../autocomplete.interfaces';
+import { AutocompleteEmptyTemplate, AutocompleteItemTemplate, AutocompletePrefixTemplate } from '../autocomplete.templates';
 
 const options: readonly AutocompleteOption[] = [
   { label: 'Miso', value: 'miso' },

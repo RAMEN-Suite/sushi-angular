@@ -1,9 +1,9 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { query, render } from '../../../testing/test-utils';
-import type { FormControlSeverity, FormControlSize } from '../form-control';
-import { Checkbox } from './checkbox.directive';
+import { query, render } from '../../../../testing/test-utils';
+import type { FormControlSeverity, FormControlSize } from '../../form-control';
+import { Checkbox } from '../checkbox.directive';
 
 @Component({
   imports: [Checkbox],

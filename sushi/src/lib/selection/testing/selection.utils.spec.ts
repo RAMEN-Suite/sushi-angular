@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import type { SelectionOption } from './selection.interfaces';
-import { compareSelectionValues, filterSelectionOption } from './selection.utils';
+import type { SelectionOption } from '../selection.interfaces';
+import { compareSelectionValues, filterSelectionOption } from '../selection.utils';
 
 describe('selection utilities', (): void => {
   it('compares primitives and object references without coercion', (): void => {

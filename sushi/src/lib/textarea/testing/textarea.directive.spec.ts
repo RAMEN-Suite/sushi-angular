@@ -1,9 +1,9 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { query, render } from '../../../testing/test-utils';
-import { Textarea } from './textarea.directive';
-import type { TextareaResize } from './textarea.interfaces';
+import { query, render } from '../../../../testing/test-utils';
+import { Textarea } from '../textarea.directive';
+import type { TextareaResize } from '../textarea.interfaces';
 
 @Component({
   imports: [Textarea],

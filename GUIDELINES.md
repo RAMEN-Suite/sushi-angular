@@ -38,18 +38,24 @@ sushi/src/lib/<feature>/
 ├── <feature>.component.html
 ├── <feature>.component.css
 ├── <feature>.interfaces.ts
-└── <feature>.templates.ts
+├── <feature>.templates.ts
+├── internal/                         # private runtime declarations, only when needed
+└── testing/
+    └── <feature>.component.spec.ts
 ```
 
 - Organize by feature, not Angular type.
 - Prefer one declaration per file; related template markers may share `*.templates.ts`.
+- Keep the feature root focused on its production-facing API and primary implementation; place specs in its local `testing/` directory.
+- Never collect unrelated library specs in a repository-level test directory.
 - Keep small features flat; move private renderers into `internal/` when the public feature root becomes hard to scan.
 - Never export an `internal/` declaration.
 - Keep helpers private until two unrelated features need them.
 - Export through the feature barrel, then `public-api.ts`.
 - Import other features through their barrel.
-- Keep component CSS beside the component.
-- Put directive and shared composition CSS in `styles/features/<feature>.styles.css`.
+- Keep component-owned CSS beside the component with the same basename.
+- Put CSS in `styles/features/<feature>.styles.css` only when it must style consumer-owned native elements, projected content, or compositions shared by multiple declarations and therefore cannot be safely encapsulated by one component.
+- Keep globally loaded feature CSS narrowly scoped below `.sui-*`; it must not contain styles owned solely by one component template.
 - `sushi.core.css` contains imports only.
 
 Complexity review:
@@ -178,7 +184,7 @@ Prefer in order:
 
 ## Testing
 
-- Keep library specs beside the declaration or helper they exercise as `*.spec.ts`.
+- Keep library specs in the code-under-test feature's `testing/` directory as `*.spec.ts`; use the same basename as the declaration or helper they exercise.
 - Test components and directives through a standalone host template so bindings, projection, models, outputs, and native behavior are exercised together.
 - Use Vitest through Angular's `unit-test` builder and Angular `TestBed`; do not configure a second unit-test runner.
 - Use the helpers in `sushi/testing/test-utils.ts` for rendering hosts, required DOM queries, and keyboard events.

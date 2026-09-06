@@ -1,9 +1,9 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { query, render } from '../../../testing/test-utils';
-import { ToggleButton } from './toggle-button.component';
-import { ToggleButtonOffTemplate, ToggleButtonOnTemplate, ToggleButtonTemplate } from './toggle-button.templates';
+import { query, render } from '../../../../testing/test-utils';
+import { ToggleButton } from '../toggle-button.component';
+import { ToggleButtonOffTemplate, ToggleButtonOnTemplate, ToggleButtonTemplate } from '../toggle-button.templates';
 
 @Component({
   imports: [ToggleButton, ToggleButtonOffTemplate, ToggleButtonOnTemplate],

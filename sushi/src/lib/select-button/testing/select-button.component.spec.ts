@@ -1,10 +1,10 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { press, query, queryAll, render } from '../../../testing/test-utils';
-import { SelectButton } from './select-button.component';
-import type { SelectButtonOption, SelectButtonOrientation, SelectButtonValue } from './select-button.interfaces';
-import { SelectButtonOptionTemplate } from './select-button.templates';
+import { press, query, queryAll, render } from '../../../../testing/test-utils';
+import { SelectButton } from '../select-button.component';
+import type { SelectButtonOption, SelectButtonOrientation, SelectButtonValue } from '../select-button.interfaces';
+import { SelectButtonOptionTemplate } from '../select-button.templates';
 
 const options: readonly SelectButtonOption[] = [
   { label: 'List', value: 'list' },

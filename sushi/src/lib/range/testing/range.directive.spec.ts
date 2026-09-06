@@ -1,8 +1,8 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { query, render } from '../../../testing/test-utils';
-import { Range } from './range.directive';
+import { query, render } from '../../../../testing/test-utils';
+import { Range } from '../range.directive';
 
 @Component({
   imports: [Range],

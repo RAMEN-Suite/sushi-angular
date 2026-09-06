@@ -1,9 +1,9 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { query, render } from '../../../testing/test-utils';
-import { Button } from './button.directive';
-import type { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button.interfaces';
+import { query, render } from '../../../../testing/test-utils';
+import { Button } from '../button.directive';
+import type { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from '../button.interfaces';
 
 interface ClassCase<T> {
   readonly value: T;

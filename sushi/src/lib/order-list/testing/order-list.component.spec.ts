@@ -1,10 +1,10 @@
 import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { press, query, queryAll, render } from '../../../testing/test-utils';
-import { OrderList } from './order-list.component';
-import type { OrderListOption } from './order-list.interfaces';
-import { OrderListFilterTemplate, OrderListItemTemplate } from './order-list.templates';
+import { press, query, queryAll, render } from '../../../../testing/test-utils';
+import { OrderList } from '../order-list.component';
+import type { OrderListOption } from '../order-list.interfaces';
+import { OrderListFilterTemplate, OrderListItemTemplate } from '../order-list.templates';
 
 interface WorkItem extends OrderListOption {
   readonly value: string;
