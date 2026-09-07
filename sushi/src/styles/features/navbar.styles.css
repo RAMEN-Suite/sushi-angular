@@ -1,5 +1,5 @@
 .sui-navbar {
-  @apply relative flex-wrap;
+  @apply relative flex-wrap items-center p-2;
 }
 
 .sui-navbar > .navbar-start,
