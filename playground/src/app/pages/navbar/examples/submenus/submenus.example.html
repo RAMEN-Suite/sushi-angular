@@ -1,0 +1,14 @@
+<sui-navbar
+  [items]="items"
+  [value]="activeDestination()"
+  collapseAt="md"
+  inset="comfortable"
+  ariaLabel="Northstar website"
+  (itemSelected)="activeDestination.set($event)">
+  <span suiNavbarBrand class="inline-flex items-center gap-2 text-lg font-semibold">
+    <span class="grid size-8 place-items-center rounded-field bg-primary text-primary-content">
+      <svg lucideBoxes class="size-4" aria-hidden="true"></svg>
+    </span>
+    Northstar
+  </span>
+</sui-navbar>

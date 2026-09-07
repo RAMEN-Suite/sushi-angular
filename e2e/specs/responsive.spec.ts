@@ -80,6 +80,24 @@ test('compact navigation keeps its primary action while switching layouts', asyn
   await expect(navbar.getByRole('button', { name: 'New task' })).toBeVisible();
 });
 
+test('navbar disclosure selects a child destination without selecting its label', async ({
+  page,
+}: {
+  page: Page;
+}): Promise<void> => {
+  await page.setViewportSize({ width: 1000, height: 844 });
+  await page.goto('/navbar');
+  const navbar: Locator = page.getByRole('navigation', { name: 'Northstar website' });
+  const products: Locator = navbar.locator('summary').filter({ hasText: 'Products' });
+  await products.click();
+
+  const automation: Locator = navbar.locator('button.sui-navbar__link').filter({ hasText: 'Automation' });
+  await expect(automation).toBeVisible();
+  await automation.click();
+  await expect(automation).toHaveAttribute('aria-current', 'page');
+  await expect(products).not.toHaveAttribute('aria-current', 'page');
+});
+
 test('desktop toolbar scrolls without collapsing or overlapping actions', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/navbar');
   const navbar: Locator = page.getByRole('navigation', { name: 'Canvas editor' });

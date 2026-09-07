@@ -14,6 +14,9 @@ import * as desktopTs from './examples/desktop/desktop.example.ts' with { loader
 import { NavbarOrientationsExample } from './examples/orientations/orientations.example';
 import orientationsHtml from './examples/orientations/orientations.example.html';
 import * as orientationsTs from './examples/orientations/orientations.example.ts' with { loader: 'text' };
+import { NavbarSubmenusExample } from './examples/submenus/submenus.example';
+import submenusHtml from './examples/submenus/submenus.example.html';
+import * as submenusTs from './examples/submenus/submenus.example.ts' with { loader: 'text' };
 import { NavbarWebsitesExample } from './examples/websites/websites.example';
 import websitesHtml from './examples/websites/websites.example.html';
 import * as websitesTs from './examples/websites/websites.example.ts' with { loader: 'text' };
@@ -29,17 +32,21 @@ import * as websitesTs from './examples/websites/websites.example.ts' with { loa
     NavbarCustomExample,
     NavbarDesktopExample,
     NavbarOrientationsExample,
+    NavbarSubmenusExample,
     NavbarWebsitesExample,
   ],
   templateUrl: './navbar.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarPage {
-  protected readonly examples: Readonly<Record<'basic' | 'custom' | 'desktop' | 'orientations' | 'websites', ExampleSource>> = {
+  protected readonly examples: Readonly<
+    Record<'basic' | 'custom' | 'desktop' | 'orientations' | 'submenus' | 'websites', ExampleSource>
+  > = {
     basic: { html: basicHtml, typescript: textSource(basicTs) },
     custom: { html: customHtml, typescript: textSource(customTs) },
     desktop: { html: desktopHtml, typescript: textSource(desktopTs) },
     orientations: { html: orientationsHtml, typescript: textSource(orientationsTs) },
+    submenus: { html: submenusHtml, typescript: textSource(submenusTs) },
     websites: { html: websitesHtml, typescript: textSource(websitesTs) },
   };
 }
