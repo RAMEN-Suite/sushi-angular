@@ -52,7 +52,13 @@
             "setupFiles": ["sushi/testing/setup.ts"],
             "coverageInclude": ["src/lib/**/*.ts", "src/lib/**/*.html"],
             "coverageExclude": ["src/lib/**/*.interfaces.ts", "src/lib/**/index.ts"],
-            "coverageReporters": ["text-summary", "html", "json-summary"]
+            "coverageReporters": ["text-summary", "html", "json-summary"],
+            "coverageThresholds": {
+              "statements": 80,
+              "branches": 80,
+              "functions": 70,
+              "lines": 85
+            }
           }
         }
       }
