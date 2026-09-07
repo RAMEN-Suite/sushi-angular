@@ -2,10 +2,12 @@
   <sui-navbar
     [items]="items"
     [value]="activePage()"
+    collapseAt="md"
+    menuAlign="center"
     variant="menu"
     ariaLabel="Operations console"
     (itemSelected)="activePage.set($event)">
-    <span suiNavbarBrand class="inline-flex items-center gap-4 px-4 py-2 font-semibold">
+    <span suiNavbarBrand class="inline-flex items-center gap-4 font-semibold">
       <span class="grid size-11 shrink-0 place-items-center rounded-field bg-secondary text-secondary-content">
         <svg lucideZap class="size-5" aria-hidden="true"></svg>
       </span>
@@ -40,13 +42,12 @@
       shape="square"
       severity="neutral"
       variant="text"
-      class="hidden lg:inline-flex"
       aria-label="Notifications">
       <svg lucideBell class="size-4" aria-hidden="true"></svg>
     </button>
-    <button suiButton suiNavbarAction type="button" size="md" class="hidden lg:inline-flex">
+    <button suiButton suiNavbarAction type="button" size="md" aria-label="New task">
       <svg lucidePlus class="size-4" aria-hidden="true"></svg>
-      New task
+      <span class="hidden lg:inline">New task</span>
     </button>
   </sui-navbar>
 

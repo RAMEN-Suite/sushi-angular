@@ -1,8 +1,8 @@
 <div class="grid gap-5">
   <section class="grid gap-2">
     <span class="text-xs font-semibold tracking-wide text-base-content/50 uppercase">Link navigation</span>
-    <sui-navbar [items]="items" [value]="activePage()" (itemSelected)="activePage.set($event)">
-      <span suiNavbarBrand class="inline-flex items-center gap-2 px-2 text-lg font-semibold">
+    <sui-navbar [items]="items" [value]="activePage()" inset="comfortable" (itemSelected)="activePage.set($event)">
+      <span suiNavbarBrand class="inline-flex items-center gap-2 text-lg font-semibold">
         <svg lucideSoup class="size-5 text-primary" aria-hidden="true"></svg>
         Ramen
       </span>
@@ -11,8 +11,13 @@
 
   <section class="grid gap-2">
     <span class="text-xs font-semibold tracking-wide text-base-content/50 uppercase">Button navigation</span>
-    <sui-navbar [items]="items" [value]="activePage()" variant="menu" (itemSelected)="activePage.set($event)">
-      <span suiNavbarBrand class="inline-flex items-center gap-2 px-2 text-lg font-semibold">
+    <sui-navbar
+      [items]="items"
+      [value]="activePage()"
+      inset="comfortable"
+      variant="menu"
+      (itemSelected)="activePage.set($event)">
+      <span suiNavbarBrand class="inline-flex items-center gap-2 text-lg font-semibold">
         <svg lucideSoup class="size-5 text-primary" aria-hidden="true"></svg>
         Ramen
       </span>

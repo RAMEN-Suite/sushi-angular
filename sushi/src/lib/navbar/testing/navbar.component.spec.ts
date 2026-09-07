@@ -26,7 +26,14 @@ const items: readonly NavbarItem[] = [
 @Component({
   imports: [Navbar, NavbarAction, NavbarBrand, NavbarItemTemplate],
   template: `
-    <sui-navbar ariaLabel="Workspace navigation" [items]="items" [value]="value()" (itemSelected)="selected.push($event)">
+    <sui-navbar
+      ariaLabel="Workspace navigation"
+      inset="comfortable"
+      menuAlign="center"
+      [items]="items"
+      [value]="value()"
+      (itemSelected)="selected.push($event)"
+    >
       <span suiNavbarBrand data-brand>Ramen</span>
       <button suiNavbarAction data-action type="button">Help</button>
       <ng-template [suiNavbarItem]="items" let-item let-level="level">
@@ -44,7 +51,7 @@ class NavbarHost {
 @Component({
   imports: [Navbar, NavbarAction, NavbarBrand, NavbarContent],
   template: `
-    <sui-navbar ariaLabel="Editor toolbar">
+    <sui-navbar ariaLabel="Editor toolbar" collapseAt="md">
       <span suiNavbarBrand>Editor</span>
       <div suiNavbarContent><button data-tool type="button">Select</button></div>
       <button suiNavbarAction type="button">Save</button>
@@ -65,6 +72,8 @@ describe('Navbar item model', (): void => {
     expect(query(fixture, 'nav').getAttribute('aria-label')).toBe('Workspace navigation');
     expect(query(fixture, '[data-brand]').textContent).toBe('Ramen');
     expect(query(fixture, '[data-action]').textContent).toBe('Help');
+    expect(query(fixture, 'nav').classList.contains('sui-navbar--menu-center')).toBe(true);
+    expect(query(fixture, 'nav').classList.contains('sui-navbar--comfortable')).toBe(true);
     expect(query(fixture, 'a').getAttribute('href')).toBe('/overview');
     expect(query(fixture, 'a').getAttribute('aria-current')).toBe('page');
     expect(query(fixture, '[data-item="overview"]').getAttribute('data-level')).toBe('0');
@@ -164,5 +173,6 @@ describe('Navbar projected content', (): void => {
     expect(query(fixture, '[data-tool]').textContent).toBe('Select');
     expect(query(fixture, '.sui-navbar__content').id).not.toBe('');
     expect(query(fixture, '[aria-label="Toggle navigation"]')).toBeTruthy();
+    expect(query(fixture, 'sui-navbar').getAttribute('data-collapse-at')).toBe('md');
   });
 });

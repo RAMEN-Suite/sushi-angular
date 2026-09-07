@@ -13,6 +13,14 @@ interface NavbarAlignment {
   readonly top: number;
 }
 
+interface ToolbarGeometry {
+  readonly contentEnd: number;
+  readonly hasToggle: boolean;
+  readonly previewStart: number;
+  readonly scrollWidth: number;
+  readonly viewportWidth: number;
+}
+
 test('navbar exposes and closes its mobile navigation', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/navbar');
   const section: Locator = page.getByText('Link navigation', { exact: true }).locator('..');
@@ -58,6 +66,41 @@ test('wrapped navbar content keeps equal edge alignment', async ({ page }: { pag
   expect(alignment.start).toBeCloseTo(alignment.end, 0);
   expect(alignment.searchStart).toBeCloseTo(alignment.start, 0);
   expect(alignment.searchEnd).toBeCloseTo(alignment.end, 0);
+});
+
+test('compact navigation keeps its primary action while switching layouts', async ({ page }: { page: Page }): Promise<void> => {
+  await page.setViewportSize({ width: 1000, height: 844 });
+  await page.goto('/navbar');
+  const navbar: Locator = page.getByRole('navigation', { name: 'Operations console' });
+  await expect(navbar.getByRole('button', { name: 'Toggle navigation' })).toBeHidden();
+  await expect(navbar.getByRole('button', { name: 'New task' })).toBeVisible();
+
+  await page.setViewportSize({ width: 600, height: 844 });
+  await expect(navbar.getByRole('button', { name: 'Toggle navigation' })).toBeVisible();
+  await expect(navbar.getByRole('button', { name: 'New task' })).toBeVisible();
+});
+
+test('desktop toolbar scrolls without collapsing or overlapping actions', async ({ page }: { page: Page }): Promise<void> => {
+  await page.goto('/navbar');
+  const navbar: Locator = page.getByRole('navigation', { name: 'Canvas editor' });
+  const geometry: ToolbarGeometry = await navbar.evaluate((element: HTMLElement): ToolbarGeometry => {
+    const content: HTMLElement | null = element.querySelector<HTMLElement>('.sui-navbar__content');
+    const preview: HTMLElement | null = element.querySelector<HTMLElement>('.navbar-end');
+    if (content === null || preview === null) throw new Error('Expected toolbar content and its primary action.');
+    const scrollViewport: HTMLElement | null = element.parentElement?.parentElement ?? null;
+
+    return {
+      contentEnd: content.getBoundingClientRect().right,
+      hasToggle: element.querySelector('.sui-navbar__toggle') !== null,
+      previewStart: preview.getBoundingClientRect().left,
+      scrollWidth: scrollViewport?.scrollWidth ?? 0,
+      viewportWidth: scrollViewport?.clientWidth ?? 0,
+    };
+  });
+
+  expect(geometry.hasToggle).toBe(false);
+  expect(geometry.contentEnd).toBeLessThan(geometry.previewStart);
+  expect(geometry.scrollWidth).toBeGreaterThan(geometry.viewportWidth);
 });
 
 test('responsive table remains contained by a narrow viewport', async ({ page }: { page: Page }): Promise<void> => {

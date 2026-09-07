@@ -1,5 +1,19 @@
+.sui-navbar-container {
+  container-type: inline-size;
+}
+
+.sui-navbar-container[data-collapsible='false'][data-orientation='horizontal'] {
+  container-type: normal;
+  width: max-content;
+  min-width: 100%;
+}
+
 .sui-navbar {
   @apply relative flex-wrap items-center p-2;
+}
+
+.sui-navbar--comfortable {
+  @apply px-5;
 }
 
 .sui-navbar > .navbar-start,
@@ -49,6 +63,16 @@
 
 .sui-navbar[data-collapsible='false'] > .sui-navbar__content {
   @apply flex;
+}
+
+.sui-navbar--horizontal[data-collapsible='false'] {
+  @apply flex-nowrap gap-2;
+}
+
+.sui-navbar--horizontal[data-collapsible='false'] > :where(.sui-navbar__content) {
+  @apply static order-none m-0 flex w-auto basis-auto flex-row border-0 bg-transparent p-0;
+  align-items: center;
+  flex: none;
 }
 
 .sui-navbar__links--responsive {
@@ -152,42 +176,98 @@
   @apply w-full;
 }
 
-@media (min-width: 64rem) {
-  .sui-navbar {
+@container (min-width: 64rem) {
+  .sui-navbar-container[data-collapse-at='lg'] .sui-navbar {
     @apply flex-nowrap;
   }
 
-  .sui-navbar__toggle {
+  .sui-navbar-container[data-collapse-at='lg'] .sui-navbar__toggle {
     @apply hidden;
   }
 
-  :where(.sui-navbar__content) {
+  .sui-navbar-container[data-collapse-at='lg'] :where(.sui-navbar__content) {
     @apply static order-none m-0 flex w-auto basis-auto flex-row border-0 bg-transparent p-0;
     align-items: center;
   }
 
-  .sui-navbar__content > sui-navbar-menu {
+  .sui-navbar-container[data-collapse-at='lg'] .sui-navbar__content > sui-navbar-menu {
     margin-inline-start: auto;
   }
 
-  .sui-navbar__menu-offset {
+  .sui-navbar-container[data-collapse-at='lg'] .sui-navbar__menu-offset {
     margin-inline-start: 0.25rem;
   }
 
-  .sui-navbar__content .sui-navbar__links {
+  .sui-navbar-container[data-collapse-at='lg'] .sui-navbar__content .sui-navbar__links {
     width: auto;
   }
 
-  .sui-navbar__content .sui-navbar__links > li,
-  .sui-navbar__content .sui-navbar__links > li > :where(a, button) {
+  .sui-navbar-container[data-collapse-at='lg'] .sui-navbar__content .sui-navbar__links > li,
+  .sui-navbar-container[data-collapse-at='lg'] .sui-navbar__content .sui-navbar__links > li > :where(a, button) {
     width: auto;
   }
 
-  .sui-navbar__dropdown > ul {
+  .sui-navbar-container[data-collapse-at='lg'] .sui-navbar__dropdown > ul {
     @apply absolute top-full left-0 z-30 mt-2 w-auto min-w-52 rounded-box border border-base-300 bg-base-100 p-2;
   }
 
-  .sui-navbar__links--responsive {
+  .sui-navbar-container[data-collapse-at='lg'] .sui-navbar__links--responsive {
     flex-direction: row;
+  }
+
+  .sui-navbar-container[data-collapse-at='lg'] .sui-navbar--menu-center > .sui-navbar__content {
+    position: absolute;
+    left: 50%;
+    width: auto;
+    margin-inline-start: 0;
+    transform: translateX(-50%);
+  }
+}
+
+@container (min-width: 48rem) {
+  .sui-navbar-container[data-collapse-at='md'] .sui-navbar {
+    @apply flex-nowrap;
+  }
+
+  .sui-navbar-container[data-collapse-at='md'] .sui-navbar__toggle {
+    @apply hidden;
+  }
+
+  .sui-navbar-container[data-collapse-at='md'] :where(.sui-navbar__content) {
+    @apply static order-none m-0 flex w-auto basis-auto flex-row border-0 bg-transparent p-0;
+    align-items: center;
+  }
+
+  .sui-navbar-container[data-collapse-at='md'] .sui-navbar__content > sui-navbar-menu {
+    margin-inline-start: auto;
+  }
+
+  .sui-navbar-container[data-collapse-at='md'] .sui-navbar__menu-offset {
+    margin-inline-start: 0.25rem;
+  }
+
+  .sui-navbar-container[data-collapse-at='md'] .sui-navbar__content .sui-navbar__links {
+    width: auto;
+  }
+
+  .sui-navbar-container[data-collapse-at='md'] .sui-navbar__content .sui-navbar__links > li,
+  .sui-navbar-container[data-collapse-at='md'] .sui-navbar__content .sui-navbar__links > li > :where(a, button) {
+    width: auto;
+  }
+
+  .sui-navbar-container[data-collapse-at='md'] .sui-navbar__dropdown > ul {
+    @apply absolute top-full left-0 z-30 mt-2 w-auto min-w-52 rounded-box border border-base-300 bg-base-100 p-2;
+  }
+
+  .sui-navbar-container[data-collapse-at='md'] .sui-navbar__links--responsive {
+    flex-direction: row;
+  }
+
+  .sui-navbar-container[data-collapse-at='md'] .sui-navbar--menu-center > .sui-navbar__content {
+    position: absolute;
+    left: 50%;
+    width: auto;
+    margin-inline-start: 0;
+    transform: translateX(-50%);
   }
 }

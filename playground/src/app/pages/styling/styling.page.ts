@@ -20,6 +20,7 @@ const appearanceNames: ReadonlySet<string> = new Set<string>([
   'buttonShape',
   'dividers',
   'fluid',
+  'inset',
   'orientation',
   'pageLinkSize',
   'pinFirstColumn',

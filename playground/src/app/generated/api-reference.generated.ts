@@ -3964,11 +3964,32 @@ export const apiReference: Readonly<{
         description: 'Whether narrow layouts collapse behind a toggle.',
       },
       {
+        name: 'collapseAt',
+        kind: 'input',
+        type: 'NavbarCollapseAt',
+        defaultValue: "'lg'",
+        description: 'Container width at which the expanded layout begins. Use `md` when a compact navigation fits sooner.',
+      },
+      {
         name: 'orientation',
         kind: 'input',
         type: 'NavbarOrientation',
         defaultValue: "'responsive'",
         description: 'Controls the arrangement used when the Navbar remains visible.',
+      },
+      {
+        name: 'inset',
+        kind: 'input',
+        type: 'NavbarInset',
+        defaultValue: "'default'",
+        description: 'Controls the horizontal breathing room at both Navbar edges.',
+      },
+      {
+        name: 'menuAlign',
+        kind: 'input',
+        type: 'NavbarMenuAlign',
+        defaultValue: "'auto'",
+        description: 'Optionally centers generated navigation items in the expanded layout.',
       },
       {
         name: 'size',
@@ -4024,6 +4045,18 @@ export const apiReference: Readonly<{
     ],
     types: [
       {
+        name: 'NavbarCollapseAt',
+        kind: 'type',
+        declaration: "type NavbarCollapseAt = 'md' | 'lg';",
+        description: 'Container width at which a collapsible Navbar changes to its expanded layout.',
+      },
+      {
+        name: 'NavbarInset',
+        kind: 'type',
+        declaration: "type NavbarInset = 'default' | 'comfortable';",
+        description: 'Supported horizontal Navbar spacing.',
+      },
+      {
         name: 'NavbarItem',
         kind: 'interface',
         declaration:
@@ -4042,6 +4075,12 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type NavbarItemValue = string | number;',
         description: 'Primitive value emitted when a Navbar item is selected.',
+      },
+      {
+        name: 'NavbarMenuAlign',
+        kind: 'type',
+        declaration: "type NavbarMenuAlign = 'auto' | 'center';",
+        description: 'Optional placement override for generated navigation items in the expanded layout.',
       },
       {
         name: 'NavbarOrientation',

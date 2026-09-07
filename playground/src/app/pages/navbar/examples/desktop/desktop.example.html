@@ -15,116 +15,113 @@
     </span>
   </div>
 
-  <sui-navbar ariaLabel="Canvas editor">
-    <span suiNavbarBrand class="gap-2">
-      <span class="inline-flex items-center gap-2 px-1 font-bold tracking-wide">
-        <svg lucideNetwork class="size-6 text-primary" aria-hidden="true"></svg>
-        CANVAS
+  <div class="overflow-x-auto">
+    <sui-navbar
+      [collapsible]="false"
+      inset="comfortable"
+      surface="plain"
+      orientation="horizontal"
+      ariaLabel="Canvas editor">
+      <span suiNavbarBrand class="gap-2">
+        <span class="inline-flex items-center gap-2 font-bold tracking-wide">
+          <svg lucideNetwork class="size-6 text-primary" aria-hidden="true"></svg>
+          CANVAS
+        </span>
+        <span suiDivider orientation="vertical" class="hidden h-5 min-h-5 sm:flex" aria-hidden="true"></span>
       </span>
-      <span suiDivider orientation="vertical" class="hidden h-5 min-h-5 sm:flex" aria-hidden="true"></span>
-    </span>
 
-    <div suiNavbarContent class="gap-3">
-      <div class="flex min-w-0 items-center gap-1.5">
-        <button
-          suiButton
-          type="button"
-          size="sm"
-          severity="neutral"
-          variant="outlined"
-          [suiMenuTrigger]="workspaceMenu">
-          {{ workspace() }}
-          <svg lucideChevronDown class="size-3.5" aria-hidden="true"></svg>
-        </button>
+      <div suiNavbarContent class="gap-3">
+        <div class="flex min-w-0 items-center gap-1.5">
+          <button
+            suiButton
+            type="button"
+            size="sm"
+            severity="neutral"
+            variant="outlined"
+            [suiMenuTrigger]="workspaceMenu">
+            {{ workspace() }}
+            <svg lucideChevronDown class="size-3.5" aria-hidden="true"></svg>
+          </button>
 
-        <svg lucideChevronRight class="size-4 text-base-content/30" aria-hidden="true"></svg>
+          <svg lucideChevronRight class="size-4 text-base-content/30" aria-hidden="true"></svg>
 
-        <button suiButton type="button" size="sm" severity="neutral" variant="outlined" [suiMenuTrigger]="documentMenu">
-          {{ document() }}
-          <svg lucideChevronDown class="size-3.5" aria-hidden="true"></svg>
-        </button>
+          <button
+            suiButton
+            type="button"
+            size="sm"
+            severity="neutral"
+            variant="outlined"
+            [suiMenuTrigger]="documentMenu">
+            {{ document() }}
+            <svg lucideChevronDown class="size-3.5" aria-hidden="true"></svg>
+          </button>
+        </div>
+
+        <span suiDivider orientation="vertical" class="hidden h-6 min-h-6 lg:flex" aria-hidden="true"></span>
+
+        <div class="flex items-center gap-1" role="toolbar" aria-label="Editor tools">
+          <button
+            suiButton
+            type="button"
+            size="sm"
+            shape="square"
+            severity="neutral"
+            variant="soft"
+            aria-label="Select tool">
+            <svg lucideMousePointer2 class="size-4" aria-hidden="true"></svg>
+          </button>
+          <button
+            suiButton
+            type="button"
+            size="sm"
+            shape="square"
+            severity="neutral"
+            variant="text"
+            aria-label="Pan tool">
+            <svg lucideHand class="size-4" aria-hidden="true"></svg>
+          </button>
+          <button
+            suiButton
+            type="button"
+            size="sm"
+            shape="square"
+            severity="neutral"
+            variant="text"
+            aria-label="Comment tool">
+            <svg lucideMessageSquare class="size-4" aria-hidden="true"></svg>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-1" role="group" aria-label="Canvas zoom">
+          <button
+            suiButton
+            type="button"
+            size="sm"
+            shape="square"
+            severity="neutral"
+            variant="text"
+            aria-label="Zoom out">
+            <svg lucideMinus class="size-4" aria-hidden="true"></svg>
+          </button>
+          <button
+            suiButton
+            type="button"
+            size="sm"
+            shape="square"
+            severity="neutral"
+            variant="text"
+            aria-label="Zoom in">
+            <svg lucidePlus class="size-4" aria-hidden="true"></svg>
+          </button>
+        </div>
       </div>
 
-      <span suiDivider orientation="vertical" class="hidden h-6 min-h-6 lg:flex" aria-hidden="true"></span>
-
-      <div suiJoin class="hidden lg:flex" aria-label="Editor tools">
-        <button
-          suiButton
-          suiJoinItem
-          type="button"
-          size="sm"
-          shape="square"
-          severity="neutral"
-          aria-label="Select tool">
-          <svg lucideMousePointer2 class="size-4" aria-hidden="true"></svg>
-        </button>
-        <button
-          suiButton
-          suiJoinItem
-          type="button"
-          size="sm"
-          shape="square"
-          severity="neutral"
-          variant="outlined"
-          aria-label="Pan tool">
-          <svg lucideHand class="size-4" aria-hidden="true"></svg>
-        </button>
-        <button
-          suiButton
-          suiJoinItem
-          type="button"
-          size="sm"
-          shape="square"
-          severity="neutral"
-          variant="outlined"
-          aria-label="Comment tool">
-          <svg lucideMessageSquare class="size-4" aria-hidden="true"></svg>
-        </button>
-      </div>
-    </div>
-
-    <div suiJoin suiNavbarAction class="hidden lg:flex" aria-label="Canvas zoom">
-      <button
-        suiButton
-        suiJoinItem
-        type="button"
-        size="sm"
-        shape="square"
-        severity="neutral"
-        variant="outlined"
-        aria-label="Zoom out">
-        <svg lucideMinus class="size-4" aria-hidden="true"></svg>
+      <button suiButton suiNavbarAction type="button" size="sm">
+        <svg lucidePlay class="size-4" aria-hidden="true"></svg>
+        Preview
       </button>
-      <button suiButton suiJoinItem type="button" size="sm" severity="neutral" variant="outlined">100%</button>
-      <button
-        suiButton
-        suiJoinItem
-        type="button"
-        size="sm"
-        shape="square"
-        severity="neutral"
-        variant="outlined"
-        aria-label="Zoom in">
-        <svg lucidePlus class="size-4" aria-hidden="true"></svg>
-      </button>
-    </div>
-
-    <button
-      suiButton
-      suiNavbarAction
-      type="button"
-      size="sm"
-      severity="neutral"
-      variant="outlined"
-      class="hidden sm:inline-flex">
-      <svg lucideShare2 class="size-4" aria-hidden="true"></svg>
-      Share
-    </button>
-    <button suiButton suiNavbarAction type="button" size="sm">
-      <svg lucidePlay class="size-4" aria-hidden="true"></svg>
-      Preview
-    </button>
-  </sui-navbar>
+    </sui-navbar>
+  </div>
 </div>
 
 <sui-menu

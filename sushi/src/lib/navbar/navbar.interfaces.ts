@@ -8,6 +8,12 @@ export type NavbarVariant = 'links' | 'menu';
 export type NavbarSurface = 'bordered' | 'plain';
 /** Supported Navbar heights. */
 export type NavbarSize = 'sm' | 'md';
+/** Supported horizontal Navbar spacing. */
+export type NavbarInset = 'default' | 'comfortable';
+/** Container width at which a collapsible Navbar changes to its expanded layout. */
+export type NavbarCollapseAt = 'md' | 'lg';
+/** Optional placement override for generated navigation items in the expanded layout. */
+export type NavbarMenuAlign = 'auto' | 'center';
 
 /** Primitive value emitted when a Navbar item is selected. */
 export type NavbarItemValue = string | number;

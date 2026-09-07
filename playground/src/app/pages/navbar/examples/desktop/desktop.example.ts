@@ -11,13 +11,10 @@ import {
   LucidePencilLine,
   LucidePlay,
   LucidePlus,
-  LucideShare2,
 } from '@lucide/angular';
 import {
   Button,
   Divider,
-  Join,
-  JoinItem,
   Menu,
   MenuEntry,
   MenuTrigger,
@@ -36,8 +33,6 @@ type WorkspaceDocument = 'Corpus review' | 'Annotation map' | 'Source graph';
   imports: [
     Button,
     Divider,
-    Join,
-    JoinItem,
     LucideChevronDown,
     LucideChevronRight,
     LucideCloud,
@@ -49,7 +44,6 @@ type WorkspaceDocument = 'Corpus review' | 'Annotation map' | 'Source graph';
     LucidePencilLine,
     LucidePlay,
     LucidePlus,
-    LucideShare2,
     Menu,
     MenuTrigger,
     Navbar,
