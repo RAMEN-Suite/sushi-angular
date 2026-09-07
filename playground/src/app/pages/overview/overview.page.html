@@ -76,7 +76,7 @@
         <div suiDivider class="my-1 opacity-60"></div>
 
         <sui-list [items]="qualityLayers" size="sm" [dividers]="true" ariaLabel="Quality checks">
-          <ng-template [suiListItem]="qualityLayers" let-layer>
+          <ng-template suiListItem let-layer>
             <span suiStatus severity="success" size="sm" aria-hidden="true"></span>
             <div class="min-w-0 grow">
               <div class="font-semibold">{{ layer.label }}</div>
@@ -101,7 +101,7 @@
         </div>
 
         <sui-list [items]="contributionSteps" size="sm" [dividers]="true" ariaLabel="Component contribution steps">
-          <ng-template [suiListItem]="contributionSteps" let-step let-index="index">
+          <ng-template suiListItem let-step let-index="index">
             <span
               class="grid size-7 shrink-0 place-items-center rounded-full bg-primary/10 text-sm font-semibold text-primary"
               aria-hidden="true"
