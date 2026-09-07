@@ -1,6 +1,1 @@
 @import 'tailwindcss';
-
-/* Keep rendered examples visually separate from the surrounding documentation card. */
-main > sui-card > .sui-card__body > :has(+ * pg-example-code) {
-  background-color: color-mix(in oklab, var(--color-base-200) 55%, var(--color-base-100));
-}
