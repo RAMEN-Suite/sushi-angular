@@ -20,6 +20,10 @@ export const apiReference: Readonly<{
   readonly ColorPicker: ApiReferenceData;
   readonly ContextMenuTrigger: ApiReferenceData;
   readonly DataView: ApiReferenceData;
+  readonly Dialog: ApiReferenceData;
+  readonly DialogClose: ApiReferenceData;
+  readonly DialogDragHandle: ApiReferenceData;
+  readonly DialogTrigger: ApiReferenceData;
   readonly Divider: ApiReferenceData;
   readonly Drawer: ApiReferenceData;
   readonly DrawerClose: ApiReferenceData;
@@ -1763,6 +1767,184 @@ export const apiReference: Readonly<{
         description: 'Identifies a rendered item across collection updates.',
       },
     ],
+    styles: [],
+  },
+  Dialog: {
+    className: 'Dialog',
+    selector: 'dialog[suiDialog]',
+    description: 'Adds controlled modal behavior to the native dialog element.',
+    members: [
+      {
+        name: 'open',
+        kind: 'model',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Controls and reports whether the Dialog is open.',
+      },
+      {
+        name: 'modal',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Opens the Dialog with modal interaction and a native backdrop.',
+      },
+      {
+        name: 'closeOnEscape',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Allows Escape to close the Dialog.',
+      },
+      {
+        name: 'closeOnBackdrop',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Allows a click on the modal backdrop to close the Dialog.',
+      },
+      {
+        name: 'position',
+        kind: 'input',
+        type: 'DialogPosition',
+        defaultValue: "'center'",
+        description: 'Places the Dialog at a viewport edge or corner.',
+      },
+      {
+        name: 'draggable',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Enables dragging. Add `suiDialogDragHandle` to the intended handle.',
+      },
+      {
+        name: 'resizable',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Enables native pointer resizing from the bottom-right corner.',
+      },
+      {
+        name: 'maximized',
+        kind: 'model',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Controls the maximized viewport state.',
+      },
+      {
+        name: 'closed',
+        kind: 'output',
+        type: 'DialogCloseEvent',
+        defaultValue: null,
+        description: 'Emits after the native Dialog closes.',
+      },
+      {
+        name: 'showModal',
+        kind: 'method',
+        type: '(restoreTarget?: HTMLElement) => void',
+        defaultValue: null,
+        description: 'Opens the Dialog modally and remembers where focus should return.',
+      },
+      {
+        name: 'close',
+        kind: 'method',
+        type: "(returnValue: string = '', reason: DialogCloseReason = 'programmatic') => void",
+        defaultValue: null,
+        description: 'Closes the Dialog with an optional return value.',
+      },
+      {
+        name: 'toggle',
+        kind: 'method',
+        type: '(restoreTarget?: HTMLElement) => void',
+        defaultValue: null,
+        description: 'Toggles the modal Dialog.',
+      },
+      {
+        name: 'toggleMaximize',
+        kind: 'method',
+        type: '() => void',
+        defaultValue: null,
+        description: 'Toggles the maximized state and resets a previous drag offset.',
+      },
+    ],
+    templates: [],
+    types: [
+      {
+        name: 'DialogCloseEvent',
+        kind: 'interface',
+        declaration: 'interface DialogCloseEvent {\n  readonly reason: DialogCloseReason;\n  readonly returnValue: string;\n}',
+        description: 'Details emitted after a Dialog closes.',
+      },
+      {
+        name: 'DialogCloseReason',
+        kind: 'type',
+        declaration: "type DialogCloseReason = 'backdrop' | 'close' | 'escape' | 'programmatic';",
+        description: 'Reason a Dialog closed.',
+      },
+      {
+        name: 'DialogPosition',
+        kind: 'type',
+        declaration:
+          "type DialogPosition = 'center' | 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right' | 'left' | 'right';",
+        description: 'Placement of a Dialog inside the viewport.',
+      },
+    ],
+    styles: [],
+  },
+  DialogClose: {
+    className: 'DialogClose',
+    selector: 'button[suiDialogClose]',
+    description: 'Closes a Dialog from a native button.',
+    members: [
+      {
+        name: 'dialog',
+        kind: 'input',
+        type: 'Dialog',
+        defaultValue: 'required',
+        description: 'Dialog closed by this action.',
+      },
+      {
+        name: 'returnValue',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "''",
+        description: 'Value returned with the native close event.',
+      },
+    ],
+    templates: [],
+    types: [],
+    styles: [],
+  },
+  DialogDragHandle: {
+    className: 'DialogDragHandle',
+    selector: '[suiDialogDragHandle]',
+    description: 'Marks the region from which a draggable Dialog can be moved.',
+    members: [],
+    templates: [],
+    types: [],
+    styles: [],
+  },
+  DialogTrigger: {
+    className: 'DialogTrigger',
+    selector: 'button[suiDialogTrigger]',
+    description: 'Opens and closes a Dialog from a native button.',
+    members: [
+      {
+        name: 'dialog',
+        kind: 'input',
+        type: 'Dialog',
+        defaultValue: 'required',
+        description: 'Dialog controlled by this trigger.',
+      },
+      {
+        name: 'disabled',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Prevents activation while keeping the trigger focusable.',
+      },
+    ],
+    templates: [],
+    types: [],
     styles: [],
   },
   Divider: {

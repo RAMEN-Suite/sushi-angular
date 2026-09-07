@@ -12,6 +12,7 @@ export * from './lib/color-picker';
 export * from './lib/code';
 export * from './lib/data-view';
 export * from './lib/divider';
+export * from './lib/dialog';
 export * from './lib/drawer';
 export * from './lib/fieldset';
 export * from './lib/file-input';

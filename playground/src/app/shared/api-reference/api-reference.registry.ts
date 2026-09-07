@@ -16,6 +16,7 @@ export const apiReferences: Readonly<Record<string, readonly ApiReferenceData[]>
   'color-picker': [apiReference.ColorPicker],
   'data-view': [apiReference.DataView],
   divider: [apiReference.Divider],
+  dialog: [apiReference.Dialog, apiReference.DialogTrigger, apiReference.DialogClose, apiReference.DialogDragHandle],
   fieldset: [apiReference.Fieldset, apiReference.FieldsetLegend, apiReference.FieldsetContent, apiReference.FieldsetToggle],
   'file-drop': [apiReference.FileDrop],
   'file-input': [apiReference.FileInput],

@@ -35,7 +35,7 @@ Build these in dependency order so later components reuse established behavior a
 
 ## Overlays and navigation
 
-- [ ] `suiDialog`
+- [x] `suiDialog`
 - [ ] `suiPopover`
 - [ ] `suiTooltip`
 - [x] `suiContextMenuTrigger`

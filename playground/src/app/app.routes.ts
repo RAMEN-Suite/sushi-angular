@@ -188,6 +188,11 @@ export const routes: Routes = [
     title: 'Divider | SUSHI Playground',
   },
   {
+    path: 'dialog',
+    loadComponent: () => import('./pages/dialog/dialog.page').then(({ DialogPage }) => DialogPage),
+    title: 'Dialog | SUSHI Playground',
+  },
+  {
     path: 'icon',
     loadComponent: () => import('./pages/icon/icon.page').then(({ IconPage }) => IconPage),
     title: 'Icons | SUSHI Playground',

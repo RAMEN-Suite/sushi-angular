@@ -1,0 +1,43 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Dialog</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Present a focused modal task with native dialog semantics, controlled state, and explicit close results.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2" aria-label="Dialog architecture">
+      <span suiBadge variant="soft" size="sm">Native dialog</span>
+      <span suiBadge variant="soft" size="sm">Two-way binding</span>
+      <span suiBadge variant="soft" size="sm">Focus restoration</span>
+    </div>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>Confirmation</h2>
+    <p class="text-base-content/60">Reference the Dialog from a normal SUSHI button and compose its surface with a Card.</p>
+    <div class="mt-5"><pg-dialog-confirmation-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.confirmation.html" [typescript]="examples.confirmation.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Position, drag, resize, and maximize</h2>
+    <p class="text-base-content/60">Opt into desktop window behavior without changing the basic Dialog API.</p>
+    <div class="mt-5"><pg-dialog-workspace-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.workspace.html" [typescript]="examples.workspace.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Controlled state</h2>
+    <p class="text-base-content/60">Bind <code>open</code> directly when application state controls the modal task.</p>
+    <div class="mt-5"><pg-dialog-controlled-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.controlled.html" [typescript]="examples.controlled.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Required action</h2>
+    <p class="text-base-content/60">Disable implicit dismissal only when leaving the task would be invalid or destructive.</p>
+    <div class="mt-5"><pg-dialog-required-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.required.html" [typescript]="examples.required.typescript" /></div>
+  </sui-card>
+</main>

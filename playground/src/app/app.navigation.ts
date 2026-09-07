@@ -157,6 +157,15 @@ export const navigation: readonly NavigationGroup[] = [
     ],
   },
   {
+    label: 'Overlays',
+    items: [
+      {
+        label: 'Dialog',
+        path: '/dialog',
+      },
+    ],
+  },
+  {
     label: 'Feedback',
     items: [
       {

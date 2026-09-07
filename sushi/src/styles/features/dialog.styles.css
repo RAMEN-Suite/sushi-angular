@@ -1,0 +1,71 @@
+@layer components {
+  .sui-dialog {
+    inset: 0;
+    margin: auto;
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100dvh - 2rem);
+    padding: 0;
+    overflow: visible;
+    color: inherit;
+    background: transparent;
+    border: 0;
+  }
+
+  .sui-dialog[data-position='top'] {
+    margin: 1rem auto auto;
+  }
+
+  .sui-dialog[data-position='bottom'] {
+    margin: auto auto 1rem;
+  }
+
+  .sui-dialog[data-position='left'] {
+    margin: auto auto auto 1rem;
+  }
+
+  .sui-dialog[data-position='right'] {
+    margin: auto 1rem auto auto;
+  }
+
+  .sui-dialog[data-position='top-left'] {
+    margin: 1rem auto auto 1rem;
+  }
+
+  .sui-dialog[data-position='top-right'] {
+    margin: 1rem 1rem auto auto;
+  }
+
+  .sui-dialog[data-position='bottom-left'] {
+    margin: auto auto 1rem 1rem;
+  }
+
+  .sui-dialog[data-position='bottom-right'] {
+    margin: auto 1rem 1rem auto;
+  }
+
+  .sui-dialog--resizable {
+    min-width: min(18rem, calc(100vw - 2rem));
+    min-height: 10rem;
+    overflow: auto;
+    resize: both;
+  }
+
+  .sui-dialog--maximized {
+    width: calc(100vw - 2rem);
+    height: calc(100dvh - 2rem);
+    max-width: none;
+    max-height: none;
+    margin: auto;
+    overflow: auto;
+    resize: none;
+  }
+
+  .sui-dialog-drag-handle {
+    cursor: move;
+    touch-action: none;
+  }
+
+  .sui-dialog::backdrop {
+    background-color: color-mix(in oklab, var(--color-neutral) 45%, transparent);
+  }
+}
