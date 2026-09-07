@@ -1,8 +1,14 @@
 <div class="grid gap-6">
   @for (style of styles; track style.label) {
     <div class="grid gap-2">
-      <span class="text-sm font-medium">{{ style.label }}</span>
-      <sui-pagination [page]="3" [pageLinkSize]="3" [size]="style.size" [severity]="style.severity" [totalItems]="70" />
+      <span class="text-sm font-medium text-base-content/60">{{ style.label }}</span>
+      <sui-pagination
+        [page]="3"
+        [pageLinkSize]="3"
+        [size]="style.size"
+        [severity]="style.severity"
+        [totalItems]="70"
+        [variant]="style.variant" />
     </div>
   }
 

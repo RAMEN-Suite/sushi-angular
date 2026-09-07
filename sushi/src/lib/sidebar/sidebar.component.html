@@ -1,0 +1,51 @@
+@if (header()) {
+  <header class="sui-sidebar__header-region">
+    <ng-content select="[suiSidebarHeader]" />
+  </header>
+}
+
+<div class="sui-sidebar__body">
+  @for (group of groups(); track group.label) {
+    @if (group.items.length) {
+      <section class="sui-sidebar__group">
+        @if (group.heading !== null) {
+          <div class="menu-title sui-sidebar__group-label">
+            @if (groupTemplate(); as template) {
+              <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: group, group }" />
+            } @else {
+              {{ group.heading ?? group.label }}
+            }
+          </div>
+        }
+        <sui-navbar
+          [items]="group.items"
+          [value]="value()"
+          [collapsible]="false"
+          orientation="vertical"
+          size="sm"
+          surface="plain"
+          variant="menu"
+          [ariaLabel]="group.label"
+          (itemSelected)="selectItem($event)"
+        >
+          <ng-template [suiNavbarItem]="group.items" let-item let-level="level">
+            <ng-container
+              [ngTemplateOutlet]="itemTemplate() ?? defaultItem"
+              [ngTemplateOutletContext]="{ $implicit: item, item, level, group }"
+            />
+          </ng-template>
+        </sui-navbar>
+      </section>
+    }
+  }
+</div>
+
+@if (footer()) {
+  <footer class="sui-sidebar__footer-region">
+    <ng-content select="[suiSidebarFooter]" />
+  </footer>
+}
+
+<ng-template #defaultItem let-item
+  ><span>{{ item.label }}</span></ng-template
+>

@@ -1,7 +1,10 @@
 .sui-button.btn {
+  box-shadow: none;
+  text-shadow: none;
   transition-property: opacity;
 }
 
 .sui-button.btn:is(:hover, :focus-visible, :active) {
-  transition-property: opacity, background-color, border-color, color, box-shadow, transform;
+  box-shadow: none;
+  transition-property: opacity, background-color, border-color, color, transform;
 }

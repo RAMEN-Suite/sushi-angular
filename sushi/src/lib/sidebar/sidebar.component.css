@@ -1,0 +1,69 @@
+@reference "tailwindcss";
+
+@layer components {
+  :host {
+    @apply flex min-h-0 shrink-0 flex-col;
+    color: var(--color-base-content);
+    background-color: var(--color-base-100);
+  }
+
+  :host(.sui-sidebar--bordered) {
+    @apply border-x;
+    border-color: var(--color-base-300);
+  }
+
+  :host(.sui-sidebar--sm) {
+    width: 14rem;
+  }
+
+  :host(.sui-sidebar--md) {
+    width: 17rem;
+  }
+
+  :host(.sui-sidebar--lg) {
+    width: 20rem;
+  }
+
+  .sui-sidebar__header-region,
+  .sui-sidebar__footer-region {
+    @apply shrink-0 p-3;
+  }
+
+  .sui-sidebar__header-region {
+    @apply min-h-16 border-b;
+    border-color: var(--color-base-300);
+  }
+
+  .sui-sidebar__footer-region {
+    @apply border-t;
+    border-color: var(--color-base-300);
+  }
+
+  .sui-sidebar__body {
+    @apply min-h-0 flex-1 space-y-4 overflow-y-auto p-3;
+    overscroll-behavior: contain;
+    scrollbar-color: color-mix(in oklab, var(--color-base-content) 24%, transparent) transparent;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+  }
+
+  .sui-sidebar__body::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  .sui-sidebar__body::-webkit-scrollbar-thumb {
+    border: 0.125rem solid transparent;
+    border-radius: 9999px;
+    background-clip: padding-box;
+    background-color: color-mix(in oklab, var(--color-base-content) 24%, transparent);
+  }
+
+  .sui-sidebar__body::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklab, var(--color-base-content) 38%, transparent);
+  }
+
+  .sui-sidebar__group-label {
+    @apply flex items-center gap-2 px-3 pb-1.5 text-xs font-semibold uppercase tracking-wide;
+    color: color-mix(in oklab, var(--color-base-content) 45%, transparent);
+  }
+}

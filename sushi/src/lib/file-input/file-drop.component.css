@@ -1,0 +1,20 @@
+:host {
+  /** Border color of the idle drop zone. */
+  --sui-file-drop-border: color-mix(in oklab, var(--color-base-content) 30%, transparent);
+  /** Border color while a supported file is dragged over the drop zone. */
+  --sui-file-drop-active-border: var(--color-primary);
+  /** Border color of an invalid drop zone. */
+  --sui-file-drop-invalid-border: var(--color-error);
+}
+
+.sui-file-drop__zone {
+  border-color: var(--sui-file-drop-border);
+}
+
+.sui-file-drop__zone--active {
+  border-color: var(--sui-file-drop-active-border);
+}
+
+.sui-file-drop__zone--invalid {
+  border-color: var(--sui-file-drop-invalid-border);
+}

@@ -1,5 +1,8 @@
 <div
-  class="bg-inherit text-inherit"
+  [class.bg-inherit]="!placeholder()"
+  [class.text-inherit]="!placeholder()"
+  [class.bg-neutral]="placeholder()"
+  [class.text-neutral-content]="placeholder()"
   [class.w-8]="size() === 'xs'"
   [class.w-12]="size() === 'sm'"
   [class.w-16]="size() === 'md'"

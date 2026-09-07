@@ -61,7 +61,7 @@
         role="radio"
         size="sm"
         [shape]="presetTemplate() ? null : 'square'"
-        severity="neutral"
+        [severity]="option.selected ? presetSeverity() : 'neutral'"
         [variant]="option.selected ? null : 'soft'"
         [disabled]="disabled() || option.disabled"
         [attr.aria-label]="option.label + ' (' + option.color + ')'"

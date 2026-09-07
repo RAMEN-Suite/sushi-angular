@@ -18,6 +18,7 @@ import { NavbarSubmenusExample } from './examples/submenus/submenus.example';
 import submenusHtml from './examples/submenus/submenus.example.html';
 import * as submenusTs from './examples/submenus/submenus.example.ts' with { loader: 'text' };
 import { NavbarWebsitesExample } from './examples/websites/websites.example';
+import * as websitesCss from './examples/websites/websites.example.css' with { loader: 'text' };
 import websitesHtml from './examples/websites/websites.example.html';
 import * as websitesTs from './examples/websites/websites.example.ts' with { loader: 'text' };
 
@@ -47,6 +48,6 @@ export class NavbarPage {
     desktop: { html: desktopHtml, typescript: textSource(desktopTs) },
     orientations: { html: orientationsHtml, typescript: textSource(orientationsTs) },
     submenus: { html: submenusHtml, typescript: textSource(submenusTs) },
-    websites: { html: websitesHtml, typescript: textSource(websitesTs) },
+    websites: { css: textSource(websitesCss), html: websitesHtml, typescript: textSource(websitesTs) },
   };
 }

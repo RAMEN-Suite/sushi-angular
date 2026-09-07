@@ -1,0 +1,65 @@
+<sui-sidebar class="h-[34rem] w-72" [groups]="groups" [(value)]="activePage" ariaLabel="Northstar workspace">
+  <div suiSidebarHeader class="flex items-center justify-between gap-3">
+    <span class="inline-flex min-w-0 items-center gap-3">
+      <span class="grid size-9 shrink-0 place-items-center rounded-field bg-primary text-primary-content">
+        <svg lucideSparkles class="size-4" aria-hidden="true"></svg>
+      </span>
+      <span class="min-w-0">
+        <strong class="block truncate leading-tight">Northstar</strong>
+        <span class="block truncate text-xs">Design workspace</span>
+      </span>
+    </span>
+    <button
+      suiButton
+      type="button"
+      size="sm"
+      shape="square"
+      severity="neutral"
+      variant="text"
+      aria-label="Workspace settings">
+      <svg lucideSettings class="size-4" aria-hidden="true"></svg>
+    </button>
+  </div>
+
+  <ng-template [suiSidebarItem]="groups" let-item>
+    @switch (item.value) {
+      @case ('Overview') {
+        <svg lucideLayoutDashboard class="size-4" aria-hidden="true"></svg>
+      }
+      @case ('Projects') {
+        <svg lucideFolderKanban class="size-4" aria-hidden="true"></svg>
+      }
+      @case ('Analytics') {
+        <svg lucideChartNoAxesCombined class="size-4" aria-hidden="true"></svg>
+      }
+      @case ('Team') {
+        <svg lucideUsers class="size-4" aria-hidden="true"></svg>
+      }
+      @case ('Notifications') {
+        <svg lucideBell class="size-4" aria-hidden="true"></svg>
+      }
+      @case ('Settings') {
+        <svg lucideSettings class="size-4" aria-hidden="true"></svg>
+      }
+      @case ('Help') {
+        <svg lucideCircleQuestionMark class="size-4" aria-hidden="true"></svg>
+      }
+    }
+    <span class="min-w-0 flex-1 truncate">{{ item.label }}</span>
+    @if (item.badge) {
+      <span suiBadge size="xs" severity="neutral" variant="soft">{{ item.badge }}</span>
+    }
+  </ng-template>
+
+  <button
+    suiButton
+    suiSidebarFooter
+    type="button"
+    shape="fluid"
+    severity="neutral"
+    variant="soft"
+    class="justify-between">
+    <span>Acme Studio</span>
+    <svg lucideChevronRight class="size-4" aria-hidden="true"></svg>
+  </button>
+</sui-sidebar>

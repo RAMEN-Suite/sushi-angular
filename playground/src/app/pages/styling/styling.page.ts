@@ -25,6 +25,7 @@ const appearanceNames: ReadonlySet<string> = new Set<string>([
   'pageLinkSize',
   'pinFirstColumn',
   'placement',
+  'presetSeverity',
   'resize',
   'rowHover',
   'scrollHeight',

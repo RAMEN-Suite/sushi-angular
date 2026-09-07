@@ -39,12 +39,20 @@ test.describe('Menu browser behavior', (): void => {
     await expect(menu).toBeVisible();
     await expect(menu.getByRole('menuitem', { name: 'Rename draft' })).toBeFocused();
     const before: Bounds = await boundsOf(menu);
-    const scrollBefore: number = await page.evaluate((): number => window.scrollY);
-    await page.mouse.wheel(0, 240);
-    await expect.poll(async (): Promise<number> => page.evaluate((): number => window.scrollY)).toBeGreaterThan(scrollBefore);
-    const scrollAfter: number = await page.evaluate((): number => window.scrollY);
+    const scrollContainer: Locator = page.locator('[suiDrawerContent]').first();
+    const scrollBefore: number = await scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop);
+    await scrollContainer.evaluate((element: HTMLElement): void => {
+      element.scrollTop -= 240;
+      element.dispatchEvent(new Event('scroll'));
+    });
+    await expect
+      .poll(async (): Promise<number> => scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop))
+      .toBeLessThan(scrollBefore);
+    const scrollAfter: number = await scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop);
     const after: Bounds = await boundsOf(menu);
     await expect(menu).toBeVisible();
-    expect(before.y - after.y).toBeCloseTo(scrollAfter - scrollBefore, 0);
+    expect(scrollAfter).toBeLessThan(scrollBefore);
+    expect(after.x).toBeCloseTo(before.x, 0);
+    expect(after.y).toBeCloseTo(before.y, 0);
   });
 });

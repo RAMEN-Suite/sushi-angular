@@ -3,6 +3,7 @@ import { ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { press, query, queryAll, render } from '../../../../testing/test-utils';
 import { Pagination } from '../pagination.component';
+import { PaginationVariant } from '../pagination.interfaces';
 import { PaginationNavigationTemplate, PaginationPageTemplate, PaginationReportTemplate } from '../pagination.templates';
 
 @Component({
@@ -16,6 +17,7 @@ import { PaginationNavigationTemplate, PaginationPageTemplate, PaginationReportT
       [pageLinkSize]="3"
       [pageSizeOptions]="[10, 25]"
       [totalItems]="95"
+      [variant]="variant()"
       [(page)]="page"
       [(pageSize)]="pageSize"
     >
@@ -35,6 +37,7 @@ class PaginationHost {
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly page: WritableSignal<number> = signal<number>(5);
   public readonly pageSize: WritableSignal<number> = signal<number>(10);
+  public readonly variant: WritableSignal<PaginationVariant> = signal<PaginationVariant>('plain');
 }
 
 describe('Pagination range and templates', (): void => {
@@ -56,6 +59,29 @@ describe('Pagination range and templates', (): void => {
 
     expect(query(fixture, '[aria-current="page"] [data-page]').getAttribute('data-page')).toBe('10');
     expect(query(fixture, '[data-report]').textContent).toBe('91 to 95');
+  });
+});
+
+describe('Pagination appearance', (): void => {
+  it('renders separate round actions by default and a connected group on request', (): void => {
+    const fixture: ComponentFixture<PaginationHost> = render(PaginationHost);
+    const pagination: Element = query(fixture, '[role="navigation"]');
+
+    expect(pagination.classList).toContain('sui-pagination--plain');
+    expect(query(fixture, '[aria-label="Previous page"]').classList).toContain('btn-circle');
+
+    fixture.componentInstance.variant.set('joined');
+    fixture.detectChanges();
+
+    expect(pagination.classList).toContain('sui-pagination--joined');
+    expect(query(fixture, '.join')).toBeTruthy();
+    expect(queryAll(fixture, '.join-item')).toHaveLength(7);
+    expect(query(fixture, '[aria-label="Previous page"]').classList).not.toContain('btn-circle');
+    expect(query(fixture, '[aria-label="Previous page"]').classList).toContain('btn-soft');
+
+    query(fixture, '[aria-current="page"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    fixture.detectChanges();
+    expect(query(fixture, 'input').classList).toContain('join-item');
   });
 });
 

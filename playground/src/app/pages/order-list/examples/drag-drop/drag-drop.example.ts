@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { LucideSquare, LucideSquareCheckBig } from '@lucide/angular';
-import { Label, OrderList, OrderListItemTemplate, OrderListOption } from '@ramen-suite/sushi';
+import { Checkbox, Label, OrderList, OrderListItemTemplate, OrderListOption } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-order-list-drag-drop-example',
-  imports: [Label, LucideSquare, LucideSquareCheckBig, OrderList, OrderListItemTemplate],
+  imports: [Checkbox, Label, OrderList, OrderListItemTemplate],
   templateUrl: './drag-drop.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

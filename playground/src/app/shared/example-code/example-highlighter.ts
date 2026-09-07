@@ -1,9 +1,10 @@
 import type { HLJSApi, Language, LanguageFn, Mode } from 'highlight.js';
 import highlighter from 'highlight.js/lib/core';
+import css from 'highlight.js/lib/languages/css';
 import html from 'highlight.js/lib/languages/xml';
 import typescript from 'highlight.js/lib/languages/typescript';
 
-type CodeLanguage = 'html' | 'typescript';
+type CodeLanguage = 'css' | 'html' | 'typescript';
 
 const angularHtml: LanguageFn = (api: HLJSApi): Language => {
   const language: Language = html(api);
@@ -17,6 +18,7 @@ const angularHtml: LanguageFn = (api: HLJSApi): Language => {
 };
 
 highlighter.registerLanguage('html', angularHtml);
+highlighter.registerLanguage('css', css);
 highlighter.registerLanguage('typescript', typescript);
 
 export const highlightLines: (source: string, language: CodeLanguage) => readonly string[] = (

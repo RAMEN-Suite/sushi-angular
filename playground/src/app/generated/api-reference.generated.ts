@@ -21,6 +21,12 @@ export const apiReference: Readonly<{
   readonly ContextMenuTrigger: ApiReferenceData;
   readonly DataView: ApiReferenceData;
   readonly Divider: ApiReferenceData;
+  readonly Drawer: ApiReferenceData;
+  readonly DrawerClose: ApiReferenceData;
+  readonly DrawerContent: ApiReferenceData;
+  readonly DrawerFooter: ApiReferenceData;
+  readonly DrawerHeader: ApiReferenceData;
+  readonly DrawerTrigger: ApiReferenceData;
   readonly Fieldset: ApiReferenceData;
   readonly FieldsetContent: ApiReferenceData;
   readonly FieldsetLegend: ApiReferenceData;
@@ -58,6 +64,9 @@ export const apiReference: Readonly<{
   readonly Range: ApiReferenceData;
   readonly Select: ApiReferenceData;
   readonly SelectButton: ApiReferenceData;
+  readonly Sidebar: ApiReferenceData;
+  readonly SidebarFooter: ApiReferenceData;
+  readonly SidebarHeader: ApiReferenceData;
   readonly Spinner: ApiReferenceData;
   readonly Status: ApiReferenceData;
   readonly Table: ApiReferenceData;
@@ -1320,6 +1329,13 @@ export const apiReference: Readonly<{
         description: 'Optional preset colors rendered after the picker.',
       },
       {
+        name: 'presetSeverity',
+        kind: 'input',
+        type: 'ColorPickerPresetSeverity',
+        defaultValue: "'primary'",
+        description: 'Semantic color applied to the selected preset action.',
+      },
+      {
         name: 'defaultValue',
         kind: 'input',
         type: 'string',
@@ -1435,10 +1451,23 @@ export const apiReference: Readonly<{
         description: 'Context exposed to a color-picker preset template.',
       },
       {
+        name: 'ColorPickerPresetSeverity',
+        kind: 'type',
+        declaration: 'type ColorPickerPresetSeverity = ThemeSeverity;',
+        description: 'Semantic color used by the selected preset action.',
+      },
+      {
         name: 'ColorPickerPresetValue',
         kind: 'type',
         declaration: 'type ColorPickerPresetValue = string | ColorPickerPreset;',
         description: 'Shorthand or configured entry accepted by a preset palette.',
+      },
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
       },
     ],
     styles: [],
@@ -1799,6 +1828,193 @@ export const apiReference: Readonly<{
     ],
     styles: [],
   },
+  Drawer: {
+    className: 'Drawer',
+    selector: 'sui-drawer',
+    description: 'Controls an unstyled sliding panel, with optional responsive persistent layout.',
+    members: [
+      {
+        name: 'open',
+        kind: 'model',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Controls and reports whether the Drawer is open.',
+      },
+      {
+        name: 'ariaLabel',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: "'Drawer'",
+        description: 'Accessible label used when no visible element labels the Drawer.',
+      },
+      {
+        name: 'ariaLabelledby',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'ID of a visible element that labels the Drawer.',
+      },
+      {
+        name: 'dismissible',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Allows Escape and backdrop clicks to close the Drawer.',
+      },
+      {
+        name: 'placement',
+        kind: 'input',
+        type: 'DrawerPlacement',
+        defaultValue: "'start'",
+        description: 'Edge from which the Drawer enters.',
+      },
+      {
+        name: 'size',
+        kind: 'input',
+        type: 'DrawerSize',
+        defaultValue: "'md'",
+        description: 'Controls the Drawer panel width.',
+      },
+      {
+        name: 'responsiveAt',
+        kind: 'input',
+        type: 'DrawerResponsiveAt | null',
+        defaultValue: 'null',
+        description: 'Makes the side panel persistent at and above a viewport breakpoint.',
+      },
+      {
+        name: 'closed',
+        kind: 'output',
+        type: 'DrawerCloseReason',
+        defaultValue: null,
+        description: 'Emits when the Drawer requests to close.',
+      },
+      {
+        name: 'show',
+        kind: 'method',
+        type: '(restoreTarget?: HTMLElement) => void',
+        defaultValue: null,
+        description: 'Opens the Drawer and remembers where focus should return.',
+      },
+      {
+        name: 'close',
+        kind: 'method',
+        type: "(reason: DrawerCloseReason = 'programmatic') => void",
+        defaultValue: null,
+        description: 'Closes the Drawer and reports why it was dismissed.',
+      },
+      {
+        name: 'toggle',
+        kind: 'method',
+        type: '(restoreTarget?: HTMLElement) => void',
+        defaultValue: null,
+        description: 'Toggles the Drawer from an optional focus restoration target.',
+      },
+      {
+        name: 'isOpen',
+        kind: 'method',
+        type: '() => boolean',
+        defaultValue: null,
+        description: 'Returns whether the Drawer is currently open.',
+      },
+    ],
+    templates: [],
+    types: [
+      {
+        name: 'DrawerCloseReason',
+        kind: 'type',
+        declaration: "type DrawerCloseReason = 'backdrop' | 'escape' | 'programmatic';",
+        description: 'Reason emitted when a Drawer requests to close.',
+      },
+      {
+        name: 'DrawerPlacement',
+        kind: 'type',
+        declaration: "type DrawerPlacement = 'start' | 'end';",
+        description: 'Edge from which a Drawer enters the viewport.',
+      },
+      {
+        name: 'DrawerResponsiveAt',
+        kind: 'type',
+        declaration: "type DrawerResponsiveAt = 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Viewport width at which a Drawer becomes a persistent sidebar.',
+      },
+      {
+        name: 'DrawerSize',
+        kind: 'type',
+        declaration: "type DrawerSize = 'sm' | 'md' | 'lg';",
+        description: 'Supported Drawer widths.',
+      },
+    ],
+    styles: [],
+  },
+  DrawerClose: {
+    className: 'DrawerClose',
+    selector: 'button[suiDrawerClose]',
+    description: 'Closes a Drawer from a native button.',
+    members: [
+      {
+        name: 'drawer',
+        kind: 'input',
+        type: 'Drawer',
+        defaultValue: 'required',
+        description: 'Drawer closed by this action.',
+      },
+    ],
+    templates: [],
+    types: [],
+    styles: [],
+  },
+  DrawerContent: {
+    className: 'DrawerContent',
+    selector: '[suiDrawerContent]',
+    description: 'Marks the optional main content area used by a persistent responsive Drawer layout.',
+    members: [],
+    templates: [],
+    types: [],
+    styles: [],
+  },
+  DrawerFooter: {
+    className: 'DrawerFooter',
+    selector: '[suiDrawerFooter]',
+    description: 'Marks content that remains fixed below the scrollable Drawer body.',
+    members: [],
+    templates: [],
+    types: [],
+    styles: [],
+  },
+  DrawerHeader: {
+    className: 'DrawerHeader',
+    selector: '[suiDrawerHeader]',
+    description: 'Marks content that remains fixed above the scrollable Drawer body.',
+    members: [],
+    templates: [],
+    types: [],
+    styles: [],
+  },
+  DrawerTrigger: {
+    className: 'DrawerTrigger',
+    selector: 'button[suiDrawerTrigger]',
+    description: 'Opens and closes a Drawer from a native button.',
+    members: [
+      {
+        name: 'drawer',
+        kind: 'input',
+        type: 'Drawer',
+        defaultValue: 'required',
+        description: 'Drawer controlled by this trigger.',
+      },
+      {
+        name: 'disabled',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Prevents activation while keeping the trigger focusable.',
+      },
+    ],
+    templates: [],
+    types: [],
+    styles: [],
+  },
   Fieldset: {
     className: 'Fieldset',
     selector: 'fieldset[suiFieldset]',
@@ -1810,6 +2026,13 @@ export const apiReference: Readonly<{
         type: 'boolean',
         defaultValue: 'true',
         description: 'Controls and reports whether collapsible content is visible.',
+      },
+      {
+        name: 'bordered',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Shows the visual frame and its accompanying inset spacing.',
       },
       {
         name: 'collapsible',
@@ -2024,7 +2247,26 @@ export const apiReference: Readonly<{
         description: 'File rejected by the drop zone and its rejection reason.',
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-file-drop-border',
+        defaultValue: 'color-mix(in oklab, var(--color-base-content) 30%, transparent)',
+        exampleValue: null,
+        description: 'Border color of the idle drop zone.',
+      },
+      {
+        name: '--sui-file-drop-active-border',
+        defaultValue: 'var(--color-primary)',
+        exampleValue: null,
+        description: 'Border color while a supported file is dragged over the drop zone.',
+      },
+      {
+        name: '--sui-file-drop-invalid-border',
+        defaultValue: 'var(--color-error)',
+        exampleValue: null,
+        description: 'Border color of an invalid drop zone.',
+      },
+    ],
   },
   FileInput: {
     className: 'FileInput',
@@ -4384,6 +4626,13 @@ export const apiReference: Readonly<{
         description: 'Applies one semantic color to the current page.',
       },
       {
+        name: 'variant',
+        kind: 'input',
+        type: 'PaginationVariant',
+        defaultValue: "'plain'",
+        description: 'Displays separate round actions or one connected button group.',
+      },
+      {
         name: 'ariaLabel',
         kind: 'input',
         type: 'string | null',
@@ -4518,6 +4767,12 @@ export const apiReference: Readonly<{
         declaration:
           'interface PaginationState {\n  readonly page: number;\n  readonly pageCount: number;\n  readonly pageSize: number;\n  readonly totalItems: number;\n  readonly firstItem: number;\n  readonly lastItem: number;\n}',
         description: 'Current pagination boundaries exposed to reports and page templates.',
+      },
+      {
+        name: 'PaginationVariant',
+        kind: 'type',
+        declaration: "type PaginationVariant = 'plain' | 'joined';",
+        description: 'Visual arrangement of pagination actions.',
       },
       {
         name: 'ThemeSeverity',
@@ -5251,6 +5506,153 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
+    styles: [],
+  },
+  Sidebar: {
+    className: 'Sidebar',
+    selector: 'sui-sidebar',
+    description: 'Renders persistent, grouped application navigation with optional header and footer regions.',
+    members: [
+      {
+        name: 'groups',
+        kind: 'input',
+        type: 'readonly SidebarGroup<I>[]',
+        defaultValue: '[]',
+        description: 'Labeled navigation groups shown in the scrollable Sidebar body.',
+      },
+      {
+        name: 'ariaLabel',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "'Application sidebar'",
+        description: 'Accessible label for the complementary landmark.',
+      },
+      {
+        name: 'bordered',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Adds the standard border and surface color.',
+      },
+      {
+        name: 'size',
+        kind: 'input',
+        type: 'SidebarSize',
+        defaultValue: "'md'",
+        description: 'Controls the persistent Sidebar width.',
+      },
+      {
+        name: 'value',
+        kind: 'model',
+        type: "I['value'] | null",
+        defaultValue: 'null',
+        description: 'Value of the current destination.',
+      },
+      {
+        name: 'itemSelected',
+        kind: 'output',
+        type: "I['value']",
+        defaultValue: null,
+        description: 'Emits the selected destination value.',
+      },
+    ],
+    templates: [
+      {
+        name: 'suiSidebarGroup',
+        context: 'SidebarGroupContext<I>',
+        description: 'Customizes visible Sidebar group headings without changing navigation items.',
+        members: [
+          {
+            name: 'groups',
+            kind: 'input',
+            type: 'readonly SidebarGroup<I>[] | undefined',
+            defaultValue: 'undefined',
+            description: 'Group source used to infer custom fields inside the template.',
+          },
+        ],
+      },
+      {
+        name: 'suiSidebarItem',
+        context: 'SidebarItemContext<I>',
+        description: 'Customizes each destination rendered from Sidebar groups.',
+        members: [
+          {
+            name: 'groups',
+            kind: 'input',
+            type: 'readonly SidebarGroup<I>[] | undefined',
+            defaultValue: 'undefined',
+            description: 'Group source used to infer custom item fields inside the template.',
+          },
+        ],
+      },
+    ],
+    types: [
+      {
+        name: 'NavbarItem',
+        kind: 'interface',
+        declaration:
+          'interface NavbarItem<T extends NavbarItemValue = NavbarItemValue> {\n  readonly label: string;\n  readonly value: T;\n  readonly href?: string;\n  readonly routerLink?: string | readonly unknown[];\n  readonly items?: readonly NavbarItem<T>[];\n  readonly active?: boolean;\n  readonly disabled?: boolean;\n}',
+        description: 'Navigation destination or non-selectable disclosure rendered by a Navbar.',
+      },
+      {
+        name: 'NavbarItemContext',
+        kind: 'interface',
+        declaration:
+          'interface NavbarItemContext<I extends NavbarItem = NavbarItem> {\n  readonly $implicit: I;\n  readonly item: I;\n  readonly level: 0 | 1;\n}',
+        description: 'Context exposed to a custom Navbar item template.',
+      },
+      {
+        name: 'NavbarItemValue',
+        kind: 'type',
+        declaration: 'type NavbarItemValue = string | number;',
+        description: 'Primitive value emitted when a Navbar item is selected.',
+      },
+      {
+        name: 'SidebarGroup',
+        kind: 'interface',
+        declaration:
+          'interface SidebarGroup<I extends NavbarItem = NavbarItem> {\n  readonly label: string;\n  readonly heading?: string | null;\n  readonly items: readonly I[];\n}',
+        description: 'Labeled destination group rendered by a Sidebar.',
+      },
+      {
+        name: 'SidebarGroupContext',
+        kind: 'interface',
+        declaration:
+          'interface SidebarGroupContext<I extends NavbarItem = NavbarItem> {\n  readonly $implicit: SidebarGroup<I>;\n  readonly group: SidebarGroup<I>;\n}',
+        description: 'Context exposed to a custom Sidebar group-heading template.',
+      },
+      {
+        name: 'SidebarItemContext',
+        kind: 'interface',
+        declaration:
+          'interface SidebarItemContext<I extends NavbarItem = NavbarItem> extends NavbarItemContext<I> {\n  readonly group: SidebarGroup<I>;\n}',
+        description: 'Context exposed to a custom Sidebar item template.',
+      },
+      {
+        name: 'SidebarSize',
+        kind: 'type',
+        declaration: "type SidebarSize = 'sm' | 'md' | 'lg';",
+        description: 'Supported persistent Sidebar widths.',
+      },
+    ],
+    styles: [],
+  },
+  SidebarFooter: {
+    className: 'SidebarFooter',
+    selector: '[suiSidebarFooter]',
+    description: 'Projects account, status, or secondary actions below Sidebar navigation.',
+    members: [],
+    templates: [],
+    types: [],
+    styles: [],
+  },
+  SidebarHeader: {
+    className: 'SidebarHeader',
+    selector: '[suiSidebarHeader]',
+    description: 'Projects product identity or workspace controls above Sidebar navigation.',
+    members: [],
+    templates: [],
+    types: [],
     styles: [],
   },
   Spinner: {

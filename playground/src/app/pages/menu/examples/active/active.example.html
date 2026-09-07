@@ -5,7 +5,17 @@
   </div>
   <sui-menu [items]="views()" ariaLabelledby="view-menu-label" (itemSelected)="view.set($event)">
     <ng-template [suiMenuItem]="views()" let-item>
-      <ng-container [ngComponentOutlet]="item.icon" [ngComponentOutletInputs]="iconInputs" />
+      @switch (item.value) {
+        @case ('editor') {
+          <svg lucidePanelLeft class="size-4" aria-hidden="true"></svg>
+        }
+        @case ('split') {
+          <svg lucideColumns2 class="size-4" aria-hidden="true"></svg>
+        }
+        @case ('preview') {
+          <svg lucideEye class="size-4" aria-hidden="true"></svg>
+        }
+      }
       <span class="grow truncate">{{ item.label }}</span>
     </ng-template>
   </sui-menu>

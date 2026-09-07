@@ -1,26 +1,83 @@
 import { DOCUMENT } from '@angular/common';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 import { ChangeDetectionStrategy, Component, computed, inject, Signal, signal, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { LucideMoon, LucideSoup, LucideSun } from '@lucide/angular';
-import { Button, Navbar, NavbarAction, NavbarBrand, NavbarItem } from '@ramen-suite/sushi';
+import {
+  LucideHouse,
+  LucideListChecks,
+  LucideMenu,
+  LucideMessageCircle,
+  LucideMoon,
+  LucideMousePointerClick,
+  LucideNavigation,
+  LucidePanelsTopLeft,
+  LucideRows3,
+  LucideSoup,
+  LucideSun,
+  LucideTableProperties,
+  LucideTextCursorInput,
+  LucideWrench,
+  LucideX,
+} from '@lucide/angular';
+import {
+  Button,
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTrigger,
+  Navbar,
+  NavbarAction,
+  NavbarBrand,
+  NavbarItem,
+  Sidebar,
+  SidebarGroupTemplate,
+  SidebarHeader,
+} from '@ramen-suite/sushi';
 import { filter, map } from 'rxjs';
-import { apiNavigation, mobileNavigation, navbarNavigation, overviewNavigation } from './app.navigation';
-import type { NavbarNavigationGroup, NavigationItem } from './app.navigation';
+import { apiNavigation, sidebarNavigation } from './app.navigation';
+import type { NavigationItem, SidebarNavigationGroup } from './app.navigation';
 
 type PlaygroundTheme = 'sushi' | 'sushi-dark';
 
 @Component({
   selector: 'pg-root',
-  imports: [Button, LucideMoon, LucideSoup, LucideSun, Navbar, NavbarAction, NavbarBrand, RouterOutlet],
+  imports: [
+    Button,
+    CdkScrollable,
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerTrigger,
+    LucideHouse,
+    LucideListChecks,
+    LucideMenu,
+    LucideMessageCircle,
+    LucideMoon,
+    LucideMousePointerClick,
+    LucideNavigation,
+    LucidePanelsTopLeft,
+    LucideRows3,
+    LucideSoup,
+    LucideSun,
+    LucideTableProperties,
+    LucideTextCursorInput,
+    LucideWrench,
+    LucideX,
+    Navbar,
+    NavbarAction,
+    NavbarBrand,
+    RouterOutlet,
+    Sidebar,
+    SidebarGroupTemplate,
+    SidebarHeader,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
-  protected readonly sidebar: readonly NavbarNavigationGroup[] = navbarNavigation;
-  protected readonly overviewNavigation: readonly NavbarItem<string>[] = overviewNavigation;
-  protected readonly mobileNavigation: readonly NavbarItem<string>[] = mobileNavigation;
+  protected readonly sidebar: readonly SidebarNavigationGroup[] = sidebarNavigation;
   protected readonly activePath: Signal<string> = computed((): string => {
     const segment: string | undefined = this.currentPath()
       .split('/')
@@ -41,7 +98,6 @@ export class App {
       { label: 'Styling', value: `${path}/styling`, routerLink: `${path}/styling` },
     ];
   });
-
   private readonly document: Document = inject(DOCUMENT);
   private readonly router: Router = inject(Router);
   private readonly currentUrl: Signal<string> = toSignal(

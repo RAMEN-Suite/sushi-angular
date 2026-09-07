@@ -30,6 +30,7 @@ import {
   PaginationSeverity,
   PaginationSize,
   PaginationState,
+  PaginationVariant,
 } from './pagination.interfaces';
 import { PaginationNavigationTemplate, PaginationPageTemplate, PaginationReportTemplate } from './pagination.templates';
 
@@ -62,6 +63,8 @@ const DEFAULT_LABELS: PaginationLabels = {
   host: {
     class: 'sui-pagination flex max-w-full flex-wrap items-center justify-between gap-3',
     role: 'navigation',
+    '[class.sui-pagination--plain]': 'variant() === "plain"',
+    '[class.sui-pagination--joined]': 'variant() === "joined"',
     '[attr.aria-label]': 'ariaLabel()',
     '[attr.aria-labelledby]': 'ariaLabelledby()',
   },
@@ -88,6 +91,8 @@ export class Pagination {
   public readonly size: InputSignal<PaginationSize> = input<PaginationSize>('md');
   /** Applies one semantic color to the current page. */
   public readonly severity: InputSignal<PaginationSeverity> = input<PaginationSeverity>('primary');
+  /** Displays separate round actions or one connected button group. */
+  public readonly variant: InputSignal<PaginationVariant> = input<PaginationVariant>('plain');
   /** Accessible name used when no visible label names the navigation. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>('Pagination');
   /** ID of an element that names the navigation. */

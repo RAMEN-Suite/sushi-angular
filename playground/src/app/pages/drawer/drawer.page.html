@@ -1,0 +1,40 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Drawer</h1>
+      <p class="max-w-3xl text-lg text-base-content/70">
+        Control an unstyled sliding panel as a modal overlay or an optional persistent responsive layout.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2" aria-label="Drawer architecture">
+      <span suiBadge variant="soft" size="sm">Unstyled panel</span>
+      <span suiBadge variant="soft" size="sm">Two-way binding</span>
+      <span suiBadge variant="soft" size="sm">Responsive layout</span>
+    </div>
+  </section>
+
+  <sui-card>
+    <h2 suiCardTitle>Navigation drawer</h2>
+    <p class="text-base-content/60">
+      Place a styled Sidebar inside the headless Drawer. Unmarked content becomes the panel body automatically.
+    </p>
+    <div class="mt-5"><pg-drawer-navigation-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.navigation.html" [typescript]="examples.navigation.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Workspace filters</h2>
+    <p class="text-base-content/60">Compose the panel surface and spacing explicitly when a Sidebar is not the content.</p>
+    <div class="mt-5"><pg-drawer-settings-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.settings.html" [typescript]="examples.settings.typescript" /></div>
+  </sui-card>
+
+  <sui-card>
+    <h2 suiCardTitle>Responsive application shell</h2>
+    <p class="text-base-content/60">
+      Add <code>suiDrawerContent</code> only when the Drawer must also arrange persistent page content at a breakpoint.
+    </p>
+    <div class="mt-5"><pg-drawer-responsive-example /></div>
+    <div class="mt-6"><pg-example-code [html]="examples.responsive.html" [typescript]="examples.responsive.typescript" /></div>
+  </sui-card>
+</main>

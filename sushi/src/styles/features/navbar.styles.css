@@ -88,12 +88,22 @@
   @apply w-full;
 }
 
+.sui-navbar__links--vertical .sui-navbar__link,
+.sui-navbar__links--vertical .sui-navbar__dropdown > summary {
+  @apply justify-start text-left;
+}
+
 .sui-navbar__links--horizontal {
   @apply flex-row;
 }
 
 .sui-navbar__link {
   @apply inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-field px-3 text-base-content no-underline transition-colors;
+}
+
+.sui-navbar--sm .sui-navbar__link,
+.sui-navbar--sm .sui-navbar__dropdown > summary {
+  @apply min-h-9 text-sm;
 }
 
 .sui-navbar__link:hover,

@@ -13,7 +13,7 @@ interface QualityLayer {
   readonly detail: string;
 }
 
-interface ContributionStep {
+interface DocumentationSection {
   readonly label: string;
   readonly description: string;
 }
@@ -35,25 +35,27 @@ export class OverviewPage {
   protected readonly qualityLayers: readonly QualityLayer[] = [
     {
       label: 'Unit behavior',
-      description: 'Vitest exercises every public component family through Angular hosts.',
+      description: 'Vitest checks public inputs, outputs, state changes, and keyboard behavior.',
       detail: 'Vitest',
     },
     {
       label: 'Browser contracts',
-      description: 'Playwright protects keyboard, overlay, scrolling, and responsive behavior.',
+      description: 'Playwright checks focus, overlays, responsive layouts, and scrolling in Chromium.',
       detail: 'Playwright',
     },
     {
       label: 'Release checks',
-      description: 'Linting, generated references, and both production builds guard every handoff.',
+      description: 'Linting and production builds validate the library and its playground.',
       detail: 'Build + lint',
     },
   ];
 
-  protected readonly contributionSteps: readonly ContributionStep[] = [
-    { label: 'Shape the API', description: 'Start from native semantics and the smallest useful public contract.' },
-    { label: 'Build the behavior', description: 'Compose Angular and existing SUSHI primitives before adding custom UI.' },
-    { label: 'Teach by example', description: 'Ship copyable examples together with API and styling references.' },
-    { label: 'Protect the contract', description: 'Cover observable behavior, accessibility, and browser-only interactions.' },
+  protected readonly documentationSections: readonly DocumentationSection[] = [
+    { label: 'Examples', description: 'Complete Angular examples show the intended composition and interaction.' },
+    {
+      label: 'API reference',
+      description: 'Inputs, outputs, directives, and template contexts are generated from the public source.',
+    },
+    { label: 'Styling', description: 'Theme roles and supported CSS custom properties document safe visual adjustments.' },
   ];
 }

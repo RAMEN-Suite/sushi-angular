@@ -43,5 +43,7 @@ describe('Avatar', (): void => {
     expect(query(fixture, 'sui-avatar').classList).toContain('avatar-placeholder');
     expect(query(fixture, 'sui-avatar > div').classList).toContain('w-12');
     expect(query(fixture, 'sui-avatar > div').classList).toContain('rounded-full');
+    expect(query(fixture, 'sui-avatar > div').classList).toContain('bg-neutral');
+    expect(query(fixture, 'sui-avatar > div').classList).toContain('text-neutral-content');
   });
 });

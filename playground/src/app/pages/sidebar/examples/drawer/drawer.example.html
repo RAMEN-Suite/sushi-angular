@@ -1,0 +1,57 @@
+<sui-drawer
+  #sidebarDrawer="suiDrawer"
+  class="h-80 overflow-hidden rounded-box border border-base-300"
+  responsiveAt="lg"
+  size="sm"
+  ariaLabel="Responsive workspace navigation">
+  <div suiDrawerContent class="flex min-h-full flex-col bg-base-100">
+    <sui-navbar [collapsible]="false" surface="plain" ariaLabel="Current workspace page">
+      <strong suiNavbarBrand>{{ activePage() }}</strong>
+      <button
+        suiButton
+        suiNavbarAction
+        type="button"
+        size="sm"
+        shape="square"
+        severity="neutral"
+        variant="text"
+        class="lg:hidden"
+        [suiDrawerTrigger]="sidebarDrawer"
+        aria-label="Open workspace navigation">
+        <svg lucideMenu class="size-4" aria-hidden="true"></svg>
+      </button>
+    </sui-navbar>
+    <div class="grid min-h-0 flex-1 place-items-center border-t border-base-300 bg-base-200/35 p-6 text-center">
+      <p class="text-base-content/60">
+        The selected page is
+        <strong class="text-base-content">{{ activePage() }}</strong>
+        .
+      </p>
+    </div>
+  </div>
+
+  <sui-sidebar
+    class="h-full w-full"
+    size="lg"
+    [bordered]="false"
+    [groups]="groups"
+    [(value)]="activePage"
+    ariaLabel="Responsive workspace pages"
+    (itemSelected)="sidebarDrawer.close()">
+    <div suiSidebarHeader class="flex items-center justify-between gap-3">
+      <strong>Workspace</strong>
+      <button
+        suiButton
+        type="button"
+        size="sm"
+        shape="square"
+        severity="neutral"
+        variant="text"
+        class="lg:hidden"
+        [suiDrawerClose]="sidebarDrawer"
+        aria-label="Close workspace navigation">
+        <svg lucideX class="size-4" aria-hidden="true"></svg>
+      </button>
+    </div>
+  </sui-sidebar>
+</sui-drawer>

@@ -2,11 +2,23 @@
   --btn-rest-fg: color-mix(in oklab, var(--color-base-content) 65%, transparent);
 }
 
+@media (hover: hover) {
+  :host(.sui-pagination--plain) .sui-pagination__action:not([aria-disabled='true']):is(:hover, :focus-visible) {
+    color: var(--btn-color, var(--color-primary));
+    background-color: color-mix(in oklab, var(--btn-color, var(--color-primary)) 10%, transparent);
+    border-color: transparent;
+  }
+}
+
 .sui-pagination__page-input {
   width: var(--size);
   padding-inline: 0.25rem;
   border-radius: 9999px;
   appearance: textfield;
+}
+
+:host(.sui-pagination--joined) .sui-pagination__page-input {
+  border-radius: var(--radius-field);
 }
 
 .sui-pagination__page-input::-webkit-inner-spin-button,

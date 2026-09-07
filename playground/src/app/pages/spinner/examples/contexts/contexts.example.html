@@ -2,7 +2,7 @@
   <sui-card size="sm" class="min-h-48">
     <div class="grid flex-1 place-items-center text-center" role="status" aria-live="polite">
       <div>
-        <span suiSpinner type="ring" size="lg" class="text-primary"></span>
+        <span suiSpinner type="ring" size="lg"></span>
         <p class="mt-3 font-medium">Preparing dashboard</p>
         <p class="mt-1 text-sm text-base-content/60">This may take a few seconds.</p>
       </div>
@@ -14,7 +14,7 @@
     <sui-list [items]="activities" ariaLabel="Background activity">
       <ng-template suiListItem let-activity>
         <span class="list-col-grow">{{ activity.label }}</span>
-        <span suiSpinner [type]="activity.spinner" size="sm" class="text-primary"></span>
+        <span suiSpinner [type]="activity.spinner" size="sm"></span>
       </ng-template>
     </sui-list>
     <button suiButton type="button" class="w-36" loading>

@@ -24,7 +24,7 @@ import { FormValueControl } from '@angular/forms/signals';
 import { Button } from '../button';
 import { Input } from '../input';
 import { Join, JoinItem } from '../join';
-import { ColorPickerPresetContext, ColorPickerPresetValue } from './color-picker.interfaces';
+import { ColorPickerPresetContext, ColorPickerPresetSeverity, ColorPickerPresetValue } from './color-picker.interfaces';
 import { ColorPickerPresetTemplate } from './color-picker.templates';
 
 interface ColorPickerOption {
@@ -59,6 +59,8 @@ export class ColorPicker implements FormValueControl<string> {
 
   /** Optional preset colors rendered after the picker. */
   public readonly presets: InputSignal<readonly ColorPickerPresetValue[]> = input<readonly ColorPickerPresetValue[]>([]);
+  /** Semantic color applied to the selected preset action. */
+  public readonly presetSeverity: InputSignal<ColorPickerPresetSeverity> = input<ColorPickerPresetSeverity>('primary');
 
   /** Value restored by `reset()`. */
   public readonly defaultValue: InputSignal<string> = input<string>('#000000');

@@ -28,6 +28,8 @@ Rules:
 - Use typed `ng-template` markers only for contextual, repeated, deferred, or conditional content.
 - A component may use small companion directives for meaningful roles such as title or actions.
 - Keep internal coordination directives private.
+- Keep behavioral layout primitives headless when a composed SUSHI component owns the visible surface. Mechanical positioning, focus, overflow, and backdrop behavior are not an appearance contract.
+- Optimize the common case for unmarked projected content. Require slot markers only when the component must distinguish multiple regions or arrange persistent page content.
 
 ## Feature structure
 
@@ -56,6 +58,7 @@ sushi/src/lib/<feature>/
 - Keep component-owned CSS beside the component with the same basename.
 - Put CSS in `styles/features/<feature>.styles.css` only when it must style consumer-owned native elements, projected content, or compositions shared by multiple declarations and therefore cannot be safely encapsulated by one component.
 - Keep globally loaded feature CSS narrowly scoped below `.sui-*`; it must not contain styles owned solely by one component template.
+- Put overridable visual defaults in the CSS `components` layer so ordinary consumer utility classes can win without `!important` or internal selectors.
 - `sushi.core.css` contains imports only.
 
 Complexity review:
@@ -195,8 +198,8 @@ Prefer in order:
 - Do not snapshot complete DOM trees or assert every utility class. Assert a class only when it proves a required component-to-DaisyUI mapping.
 - Keep variables, fixtures, elements, events, and callbacks explicitly typed; shared test helpers must not return `any`.
 - Extract a fixture helper only after a setup pattern repeats or when it represents a reusable interaction contract.
-- Leave layout, real scrolling, overlay geometry, responsive behavior, and visual regression to Playwright against the playground.
-- Playground examples do not receive parallel unit tests; Playwright verifies them as consumer integrations.
+- Leave Library-owned layout, real scrolling, overlay geometry, responsive behavior, and focus continuity to Playwright. The playground may provide the fixture, but every assertion must protect public SUSHI behavior.
+- Do not add tests for the playground shell, documentation tabs, preview styling, copy, or other example-only decoration. Playground examples do not receive parallel unit tests.
 
 ## Playground
 
@@ -212,13 +215,16 @@ Prefer in order:
 - Lazy-load every playground page through `loadComponent`.
 - Keep routed documentation in `playground/src/app/pages/<component>`; navigation groups do not create filesystem layers.
 - Use `pg-example-code` for HTML and TypeScript examples; do not add separate code-rendering wrappers.
-- Use the shared HTML/TypeScript code tabs.
+- Use the shared HTML/TypeScript code tabs. Include the CSS tab whenever an example component has its own stylesheet.
+- Give rendered previews a subtle surface contrast from the surrounding documentation card through the shared playground styling.
 - Format `*.example.html` through the shared Prettier override; never hand-wrap displayed source.
 - Keep syntax highlighting and its dependencies inside the playground.
 - Group by behavior; keep examples short, complete, copyable, and mobile-first.
 - Document every public input, output, state, template, native attribute, and useful composition.
 - Use existing SUSHI components in examples.
 - Render content collections with `List`, `DataView`, or `Table`; render independent content surfaces with `Card` instead of recreating them with utility classes.
+- Show SUSHI components with their built-in appearance by default. Do not repair or restyle their colors, borders, radii, shadows, hover states, typography, or sizing merely to make a preview look more finished.
+- Use utilities primarily for layout and positioning. Restrained typography and color may clarify hierarchy or meaning in example content; richer visual utilities belong only to purposeful custom projected or templated content. In every case, prefer a SUSHI component when one owns the UI pattern.
 - Keep native elements when their semantics are the example or no SUSHI abstraction owns that behavior.
 - Do not mention DaisyUI in user-facing documentation.
 - Reset buttons use `severity="neutral"` and `variant="soft"`.

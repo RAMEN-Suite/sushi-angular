@@ -23,7 +23,12 @@ import { highlightLines } from './example-highlighter';
 export class ExampleCode {
   public readonly html: InputSignal<string> = input.required<string>();
   public readonly typescript: InputSignal<string> = input.required<string>();
+  public readonly css: InputSignal<string | undefined> = input<string>();
 
+  protected readonly cssLines: Signal<readonly string[]> = computed((): readonly string[] => {
+    const source: string | undefined = this.css();
+    return source === undefined ? [] : highlightLines(source, 'css');
+  });
   protected readonly htmlLines: Signal<readonly string[]> = computed((): readonly string[] =>
     highlightLines(this.html(), 'html'),
   );

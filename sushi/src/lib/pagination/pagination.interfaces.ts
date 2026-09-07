@@ -6,6 +6,9 @@ export type PaginationSize = ComponentSize;
 /** Semantic colors available to the current page action. */
 export type PaginationSeverity = ThemeSeverity;
 
+/** Visual arrangement of pagination actions. */
+export type PaginationVariant = 'plain' | 'joined';
+
 /** Navigation actions rendered around the numbered page links. */
 export type PaginationNavigation = 'first' | 'previous' | 'next' | 'last';
 

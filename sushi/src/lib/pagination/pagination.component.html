@@ -8,137 +8,154 @@
   </span>
 }
 
-<div class="flex max-w-full flex-wrap items-center gap-1">
-  @if (showFirstLast()) {
+<div class="flex max-w-full flex-wrap items-center gap-3">
+  <div
+    class="flex max-w-full items-center"
+    [class.join]="variant() === 'joined'"
+    [class.join-horizontal]="variant() === 'joined'"
+    [class.gap-1]="variant() === 'plain'"
+  >
+    @if (showFirstLast()) {
+      <button
+        suiButton
+        type="button"
+        class="sui-pagination__action"
+        [class.hidden]="variant() === 'plain'"
+        [class.sm:inline-flex]="variant() === 'plain'"
+        [class.join-item]="variant() === 'joined'"
+        [shape]="variant() === 'joined' ? null : 'circle'"
+        [variant]="variant() === 'joined' ? 'soft' : 'text'"
+        [severity]="severity()"
+        [size]="size()"
+        [disabled]="navigationDisabled('first')"
+        [attr.aria-label]="labels().first"
+        (click)="selectPage(1)"
+      >
+        @if (navigationTemplate(); as template) {
+          <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="navigationContext('first')" />
+        } @else {
+          <svg lucideChevronsLeft class="size-[1em]" aria-hidden="true"></svg>
+        }
+      </button>
+    }
+
     <button
       suiButton
       type="button"
-      class="sui-pagination__action hidden sm:inline-flex"
-      shape="square"
-      variant="text"
+      class="sui-pagination__action"
+      [class.join-item]="variant() === 'joined'"
+      [shape]="variant() === 'joined' ? null : 'circle'"
+      [variant]="variant() === 'joined' ? 'soft' : 'text'"
       [severity]="severity()"
       [size]="size()"
-      [disabled]="navigationDisabled('first')"
-      [attr.aria-label]="labels().first"
-      (click)="selectPage(1)"
+      [disabled]="navigationDisabled('previous')"
+      [attr.aria-label]="labels().previous"
+      (click)="selectPage(currentPage() - 1)"
     >
       @if (navigationTemplate(); as template) {
-        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="navigationContext('first')" />
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="navigationContext('previous')" />
       } @else {
-        <svg lucideChevronsLeft class="size-[1em]" aria-hidden="true"></svg>
+        <svg lucideChevronLeft class="size-[1em]" aria-hidden="true"></svg>
       }
     </button>
-  }
 
-  <button
-    suiButton
-    type="button"
-    class="sui-pagination__action"
-    shape="square"
-    variant="text"
-    [severity]="severity()"
-    [size]="size()"
-    [disabled]="navigationDisabled('previous')"
-    [attr.aria-label]="labels().previous"
-    (click)="selectPage(currentPage() - 1)"
-  >
-    @if (navigationTemplate(); as template) {
-      <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="navigationContext('previous')" />
-    } @else {
-      <svg lucideChevronLeft class="size-[1em]" aria-hidden="true"></svg>
-    }
-  </button>
-
-  @if (showPageLinks() || showPageInput()) {
-    @for (item of displayedPages(); track item) {
-      @if (item === currentPage() && showPageInput() && editingPage() && !disabled()) {
-        <input
-          #pageInput
-          suiInput
-          suiAutoFocus
-          type="number"
-          class="sui-pagination__page-input text-center"
-          inputmode="numeric"
-          autocomplete="off"
-          [size]="size()"
-          [min]="1"
-          [max]="pageCount()"
-          [value]="currentPage()"
-          [attr.aria-label]="labels().pageInput"
-          (focus)="pageInput.select()"
-          (blur)="commitPageInput(pageInput)"
-          (keydown.enter)="commitPageInput(pageInput, $event)"
-          (keydown.escape)="cancelPageInput($event, pageInput)"
-        />
-      } @else {
-        <button
-          suiButton
-          type="button"
-          shape="circle"
-          [class.sui-pagination__action]="item !== currentPage()"
-          [class.hidden]="item !== currentPage()"
-          [class.sm:inline-flex]="item !== currentPage()"
-          [severity]="severity()"
-          [variant]="item === currentPage() ? null : 'text'"
-          [size]="size()"
-          [disabled]="disabled()"
-          [attr.aria-label]="item === currentPage() && showPageInput() ? labels().pageInput : labels().page(item)"
-          [attr.aria-current]="item === currentPage() ? 'page' : null"
-          (click)="activatePage(item)"
-        >
-          @if (pageTemplate(); as template) {
-            <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="pageContext(item)" />
-          } @else {
-            {{ item }}
-          }
-        </button>
+    @if (showPageLinks() || showPageInput()) {
+      @for (item of displayedPages(); track item) {
+        @if (item === currentPage() && showPageInput() && editingPage() && !disabled()) {
+          <input
+            #pageInput
+            suiInput
+            suiAutoFocus
+            type="number"
+            class="sui-pagination__page-input text-center"
+            inputmode="numeric"
+            autocomplete="off"
+            [class.join-item]="variant() === 'joined'"
+            [size]="size()"
+            [min]="1"
+            [max]="pageCount()"
+            [value]="currentPage()"
+            [attr.aria-label]="labels().pageInput"
+            (focus)="pageInput.select()"
+            (blur)="commitPageInput(pageInput)"
+            (keydown.enter)="commitPageInput(pageInput, $event)"
+            (keydown.escape)="cancelPageInput($event, pageInput)"
+          />
+        } @else {
+          <button
+            suiButton
+            type="button"
+            [class.sui-pagination__action]="item !== currentPage()"
+            [class.hidden]="item !== currentPage()"
+            [class.sm:inline-flex]="item !== currentPage()"
+            [class.join-item]="variant() === 'joined'"
+            [shape]="variant() === 'joined' ? null : 'circle'"
+            [severity]="severity()"
+            [variant]="item === currentPage() ? null : variant() === 'joined' ? 'soft' : 'text'"
+            [size]="size()"
+            [disabled]="disabled()"
+            [attr.aria-label]="item === currentPage() && showPageInput() ? labels().pageInput : labels().page(item)"
+            [attr.aria-current]="item === currentPage() ? 'page' : null"
+            (click)="activatePage(item)"
+          >
+            @if (pageTemplate(); as template) {
+              <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="pageContext(item)" />
+            } @else {
+              {{ item }}
+            }
+          </button>
+        }
       }
     }
-  }
 
-  <button
-    suiButton
-    type="button"
-    class="sui-pagination__action"
-    shape="square"
-    variant="text"
-    [severity]="severity()"
-    [size]="size()"
-    [disabled]="navigationDisabled('next')"
-    [attr.aria-label]="labels().next"
-    (click)="selectPage(currentPage() + 1)"
-  >
-    @if (navigationTemplate(); as template) {
-      <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="navigationContext('next')" />
-    } @else {
-      <svg lucideChevronRight class="size-[1em]" aria-hidden="true"></svg>
-    }
-  </button>
-
-  @if (showFirstLast()) {
     <button
       suiButton
       type="button"
-      class="sui-pagination__action hidden sm:inline-flex"
-      shape="square"
-      variant="text"
+      class="sui-pagination__action"
+      [class.join-item]="variant() === 'joined'"
+      [shape]="variant() === 'joined' ? null : 'circle'"
+      [variant]="variant() === 'joined' ? 'soft' : 'text'"
       [severity]="severity()"
       [size]="size()"
-      [disabled]="navigationDisabled('last')"
-      [attr.aria-label]="labels().last"
-      (click)="selectPage(pageCount())"
+      [disabled]="navigationDisabled('next')"
+      [attr.aria-label]="labels().next"
+      (click)="selectPage(currentPage() + 1)"
     >
       @if (navigationTemplate(); as template) {
-        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="navigationContext('last')" />
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="navigationContext('next')" />
       } @else {
-        <svg lucideChevronsRight class="size-[1em]" aria-hidden="true"></svg>
+        <svg lucideChevronRight class="size-[1em]" aria-hidden="true"></svg>
       }
     </button>
-  }
+
+    @if (showFirstLast()) {
+      <button
+        suiButton
+        type="button"
+        class="sui-pagination__action"
+        [class.hidden]="variant() === 'plain'"
+        [class.sm:inline-flex]="variant() === 'plain'"
+        [class.join-item]="variant() === 'joined'"
+        [shape]="variant() === 'joined' ? null : 'circle'"
+        [variant]="variant() === 'joined' ? 'soft' : 'text'"
+        [severity]="severity()"
+        [size]="size()"
+        [disabled]="navigationDisabled('last')"
+        [attr.aria-label]="labels().last"
+        (click)="selectPage(pageCount())"
+      >
+        @if (navigationTemplate(); as template) {
+          <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="navigationContext('last')" />
+        } @else {
+          <svg lucideChevronsRight class="size-[1em]" aria-hidden="true"></svg>
+        }
+      </button>
+    }
+  </div>
 
   @if (pageSizeOptions().length) {
     <sui-select
-      class="ml-2 w-24"
+      class="w-24"
       [options]="pageSizeSelectOptions()"
       [checkmark]="pageSizeCheckmark()"
       [severity]="null"

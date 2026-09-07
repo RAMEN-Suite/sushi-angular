@@ -14,4 +14,14 @@
       }
     </sui-code>
   </ng-template>
+
+  @if (cssLines().length) {
+    <ng-template suiTab value="css" label="CSS">
+      <sui-code>
+        @for (line of cssLines(); track $index) {
+          <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
+        }
+      </sui-code>
+    </ng-template>
+  }
 </sui-tabs>

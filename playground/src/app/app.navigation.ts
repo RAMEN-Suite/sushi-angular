@@ -1,3 +1,5 @@
+import type { NavbarItem, SidebarGroup } from '@ramen-suite/sushi';
+
 export interface NavigationItem {
   readonly label: string;
   readonly path: string;
@@ -137,6 +139,14 @@ export const navigation: readonly NavigationGroup[] = [
         path: '/navbar',
       },
       {
+        label: 'Sidebar',
+        path: '/sidebar',
+      },
+      {
+        label: 'Drawer',
+        path: '/drawer',
+      },
+      {
         label: 'Pagination',
         path: '/pagination',
       },
@@ -244,15 +254,12 @@ export const apiNavigation: readonly NavigationItem[] = navigation
   .flatMap((group: NavigationGroup): readonly NavigationItem[] => group.items)
   .filter((item: NavigationItem): boolean => item.path !== '/icon');
 
-export interface NavbarNavigationGroup {
-  readonly label: string;
-  readonly items: readonly NavbarItem<string>[];
-}
+export type SidebarNavigationGroup = SidebarGroup<NavbarItem<string>>;
 
 export const overviewNavigation: readonly NavbarItem<string>[] = [{ label: 'Overview', value: '/', routerLink: '/' }];
 
-export const navbarNavigation: readonly NavbarNavigationGroup[] = navigation.map(
-  (group: NavigationGroup): NavbarNavigationGroup => ({
+export const navbarNavigation: readonly SidebarNavigationGroup[] = navigation.map(
+  (group: NavigationGroup): SidebarNavigationGroup => ({
     label: group.label,
     items: group.items.map((item: NavigationItem): NavbarItem<string> => ({
       label: item.label,
@@ -262,12 +269,16 @@ export const navbarNavigation: readonly NavbarNavigationGroup[] = navigation.map
   }),
 );
 
+export const sidebarNavigation: readonly SidebarNavigationGroup[] = [
+  { label: 'General', items: overviewNavigation },
+  ...navbarNavigation,
+];
+
 export const mobileNavigation: readonly NavbarItem<string>[] = [
   ...overviewNavigation,
-  ...navbarNavigation.map((group: NavbarNavigationGroup): NavbarItem<string> => ({
+  ...navbarNavigation.map((group: SidebarNavigationGroup): NavbarItem<string> => ({
     label: group.label,
     value: `group:${group.label}`,
     items: group.items,
   })),
 ];
-import type { NavbarItem } from '@ramen-suite/sushi';

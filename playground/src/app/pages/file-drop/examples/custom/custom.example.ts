@@ -16,4 +16,10 @@ interface ImagesModel {
 export class FileDropCustomExample {
   protected readonly model: WritableSignal<ImagesModel> = signal({ files: [] });
   protected readonly form: FieldTree<ImagesModel> = form(this.model);
+
+  protected contentLabel(files: readonly File[], active: boolean, disabled: boolean): string {
+    if (disabled) return 'Upload unavailable';
+    if (active) return 'Release images to add them';
+    return files.length > 0 ? 'Images ready' : 'Drop campaign images';
+  }
 }

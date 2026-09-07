@@ -1,0 +1,43 @@
+@reference "tailwindcss";
+
+:host {
+  @apply min-h-0;
+}
+
+.sui-drawer__side {
+  @apply z-50;
+}
+
+:host(.sui-drawer--persistent) > .sui-drawer__side {
+  @apply z-10;
+}
+
+:host(.sui-drawer--persistent) > .sui-drawer__side > .drawer-overlay {
+  display: none;
+}
+
+.sui-drawer__panel {
+  @apply flex h-full min-h-0 min-w-0 flex-col;
+  width: min(var(--drawer-width), 100vw);
+}
+
+:host(.sui-drawer--sm) {
+  --drawer-width: 20rem;
+}
+
+:host(.sui-drawer--md) {
+  --drawer-width: 24rem;
+}
+
+:host(.sui-drawer--lg) {
+  --drawer-width: 30rem;
+}
+
+.sui-drawer__body {
+  @apply min-h-0 flex-1 overflow-y-auto overscroll-contain;
+}
+
+.sui-drawer__header-region,
+.sui-drawer__footer-region {
+  @apply shrink-0;
+}

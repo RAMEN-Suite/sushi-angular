@@ -28,8 +28,8 @@ Build these in dependency order so later components reuse established behavior a
 ## Application navigation
 
 - [x] `sui-navbar`
-- [ ] `suiSidebar`
-- [ ] `suiDrawer`
+- [x] `suiSidebar`
+- [x] `suiDrawer`
 
 `suiSidebar` owns persistent application navigation. `suiDrawer` owns the responsive overlay and disclosure behavior; it may contain a sidebar but does not replace it.
 

@@ -1,0 +1,36 @@
+<input class="drawer-toggle" type="checkbox" tabindex="-1" aria-hidden="true" [id]="toggleId" [checked]="open()" />
+
+<div class="drawer-content sui-drawer__content">
+  <ng-content select="[suiDrawerContent]" />
+</div>
+
+<div class="drawer-side sui-drawer__side" (transitionend)="handleSideTransitionEnd($event)">
+  <button
+    class="drawer-overlay"
+    type="button"
+    tabindex="-1"
+    [attr.aria-label]="dismissible() ? 'Close drawer' : null"
+    (click)="handleBackdrop($event)"
+  ></button>
+  <section
+    class="sui-drawer__panel"
+    [cdkTrapFocus]="modalOpen()"
+    [id]="drawerId"
+    [attr.role]="modalOpen() ? 'dialog' : null"
+    [attr.aria-modal]="modalOpen() ? 'true' : null"
+    [attr.aria-label]="ariaLabelledby() ? null : ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledby()"
+    tabindex="-1"
+    (keydown.escape)="handleCancel($event)"
+  >
+    @if (header()) {
+      <header class="sui-drawer__header-region"><ng-content select="[suiDrawerHeader]" /></header>
+    }
+    <div class="sui-drawer__body">
+      <ng-content />
+    </div>
+    @if (footer()) {
+      <footer class="sui-drawer__footer-region"><ng-content select="[suiDrawerFooter]" /></footer>
+    }
+  </section>
+</div>

@@ -1,0 +1,32 @@
+<button suiButton type="button" [suiDrawerTrigger]="navigationDrawer">
+  <svg lucideMenu class="size-3.5" aria-hidden="true"></svg>
+  Open navigation
+</button>
+
+<sui-drawer #navigationDrawer="suiDrawer" size="sm" ariaLabel="Workspace navigation">
+  <sui-sidebar
+    class="h-full w-full"
+    [bordered]="false"
+    [groups]="groups"
+    [(value)]="activePage"
+    ariaLabel="Northstar pages"
+    (itemSelected)="navigationDrawer.close()">
+    <div suiSidebarHeader class="flex items-center gap-3">
+      <span class="grid size-9 shrink-0 place-items-center rounded-field bg-primary text-primary-content">
+        <svg lucideSparkles class="size-3.5" aria-hidden="true"></svg>
+      </span>
+      <strong class="min-w-0 flex-1 truncate">Northstar</strong>
+      <button
+        suiButton
+        type="button"
+        size="sm"
+        shape="square"
+        severity="neutral"
+        variant="text"
+        [suiDrawerClose]="navigationDrawer"
+        aria-label="Close navigation">
+        <svg lucideX class="size-3.5" aria-hidden="true"></svg>
+      </button>
+    </div>
+  </sui-sidebar>
+</sui-drawer>

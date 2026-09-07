@@ -33,6 +33,7 @@ let nextFileDropId: number = 0;
   selector: 'sui-file-drop',
   imports: [NgTemplateOutlet, LucideX, Button],
   templateUrl: './file-drop.component.html',
+  styleUrl: './file-drop.component.css',
   host: { class: 'sui-file-drop block', '[attr.aria-disabled]': 'disabled() || null' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,6 +18,7 @@ const presets: readonly ColorPickerPresetValue[] = [
     <sui-color-picker
       ariaLabel="Accent color"
       defaultValue="#123456"
+      presetSeverity="secondary"
       [disabled]="disabled()"
       [presets]="presets"
       [(value)]="value"
@@ -100,6 +101,7 @@ describe('ColorPicker presets', (): void => {
     expect(query(fixture, '[data-preset="#ff0000"]').getAttribute('data-selected')).toBe('true');
     expect(query(fixture, '[data-preset="#00ff00"]').getAttribute('data-disabled')).toBe('true');
     expect(query(fixture, '[data-custom="true"]').getAttribute('data-label')).toBe('Custom');
+    expect(query(fixture, '[data-preset="#ff0000"]').parentElement?.classList).toContain('btn-secondary');
   });
 
   it('selects enabled presets and skips disabled presets with arrow keys', (): void => {

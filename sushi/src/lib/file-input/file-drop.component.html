@@ -1,7 +1,7 @@
 <div
-  class="sui-file-drop__zone grid place-items-center gap-3 rounded-box border border-dashed border-base-300 bg-base-100 p-6 text-center transition-colors"
-  [class.border-primary]="active()"
-  [class.border-error]="isInvalid()"
+  class="sui-file-drop__zone grid place-items-center gap-3 rounded-box border border-dashed bg-base-100 p-6 text-center transition-colors"
+  [class.sui-file-drop__zone--active]="active()"
+  [class.sui-file-drop__zone--invalid]="isInvalid()"
   [class.bg-base-200]="active()"
   [class.opacity-50]="disabled()"
   [attr.aria-disabled]="disabled() || null"

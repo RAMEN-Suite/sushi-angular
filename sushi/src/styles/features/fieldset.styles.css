@@ -4,7 +4,12 @@
 }
 
 .sui-fieldset {
-  @apply gap-1;
+  @apply min-w-0 gap-1 rounded-box border border-base-300 px-4 pb-4;
+}
+
+.sui-fieldset--borderless {
+  @apply border-0 p-0;
+  border-style: none;
 }
 
 .sui-fieldset__toggle {

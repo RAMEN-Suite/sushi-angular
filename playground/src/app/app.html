@@ -1,25 +1,126 @@
-<div class="min-h-screen bg-base-100 text-base-content">
-  <header class="sticky top-0 z-40 border-b border-base-300 bg-base-100/95 backdrop-blur lg:hidden">
-    <sui-navbar [items]="mobileNavigation" [value]="activePath()" surface="plain" variant="menu" ariaLabel="Component navigation">
-      <div suiNavbarBrand class="inline-flex items-center gap-3">
-        <span class="grid size-8 place-items-center rounded-field bg-primary text-primary-content">
-          <svg lucideSoup class="size-4" aria-hidden="true"></svg>
-        </span>
-        <span>
-          <strong class="block leading-tight">SUSHI</strong>
-          <span class="block text-xs leading-tight text-base-content/50">Playground</span>
-        </span>
-      </div>
+<sui-drawer
+  #libraryDrawer="suiDrawer"
+  class="h-screen overflow-hidden bg-base-100 text-base-content"
+  responsiveAt="lg"
+  size="sm"
+  ariaLabel="Component library navigation"
+>
+  <div suiDrawerContent cdkScrollable class="h-screen overflow-y-auto bg-base-100">
+    @if (pagePath()) {
+      <header class="sticky top-0 z-30 h-16 border-b border-base-300 bg-base-100/95 backdrop-blur">
+        <div class="mx-auto flex h-full max-w-7xl items-center px-0 sm:px-3">
+          <sui-navbar
+            class="w-full"
+            [items]="documentationItems()"
+            [value]="currentPath()"
+            [collapsible]="false"
+            orientation="horizontal"
+            surface="plain"
+            size="sm"
+            ariaLabel="Component documentation"
+          >
+            <div suiNavbarBrand>
+              <button
+                suiButton
+                type="button"
+                size="sm"
+                shape="square"
+                severity="neutral"
+                variant="text"
+                class="lg:hidden"
+                [suiDrawerTrigger]="libraryDrawer"
+                aria-label="Open component navigation"
+              >
+                <svg lucideMenu class="size-4" aria-hidden="true"></svg>
+              </button>
+            </div>
+            <button
+              suiButton
+              suiNavbarAction
+              type="button"
+              size="sm"
+              shape="square"
+              severity="neutral"
+              variant="text"
+              class="lg:hidden"
+              [attr.aria-label]="theme() === 'sushi' ? 'Use dark theme' : 'Use light theme'"
+              (click)="toggleTheme()"
+            >
+              @if (theme() === 'sushi') {
+                <svg lucideMoon class="size-4" aria-hidden="true"></svg>
+              } @else {
+                <svg lucideSun class="size-4" aria-hidden="true"></svg>
+              }
+            </button>
+          </sui-navbar>
+        </div>
+      </header>
+    } @else {
+      <header class="sticky top-0 z-30 border-b border-base-300 bg-base-100/95 backdrop-blur lg:hidden">
+        <sui-navbar [collapsible]="false" surface="plain" size="sm" ariaLabel="Overview navigation">
+          <div suiNavbarBrand>
+            <button
+              suiButton
+              type="button"
+              size="sm"
+              shape="square"
+              severity="neutral"
+              variant="text"
+              [suiDrawerTrigger]="libraryDrawer"
+              aria-label="Open component navigation"
+            >
+              <svg lucideMenu class="size-4" aria-hidden="true"></svg>
+            </button>
+          </div>
+          <button
+            suiButton
+            suiNavbarAction
+            type="button"
+            size="sm"
+            shape="square"
+            severity="neutral"
+            variant="text"
+            [attr.aria-label]="theme() === 'sushi' ? 'Use dark theme' : 'Use light theme'"
+            (click)="toggleTheme()"
+          >
+            @if (theme() === 'sushi') {
+              <svg lucideMoon class="size-4" aria-hidden="true"></svg>
+            } @else {
+              <svg lucideSun class="size-4" aria-hidden="true"></svg>
+            }
+          </button>
+        </sui-navbar>
+      </header>
+    }
 
+    <router-outlet />
+  </div>
+
+  <sui-sidebar
+    class="h-full w-full"
+    size="lg"
+    [groups]="sidebar"
+    [value]="activePath()"
+    ariaLabel="Component library"
+    (itemSelected)="libraryDrawer.close()"
+  >
+    <div suiSidebarHeader class="flex items-center gap-3">
+      <span class="grid size-9 shrink-0 place-items-center rounded-field bg-primary text-primary-content">
+        <svg lucideSoup class="size-4" aria-hidden="true"></svg>
+      </span>
+      <span class="min-w-0 flex-1">
+        <strong class="block truncate leading-tight">SUSHI</strong>
+        <span class="block truncate text-xs leading-tight text-base-content/50">Component Playground</span>
+      </span>
       <button
         suiButton
-        suiNavbarAction
         type="button"
         size="sm"
         shape="square"
         severity="neutral"
         variant="text"
         [attr.aria-label]="theme() === 'sushi' ? 'Use dark theme' : 'Use light theme'"
+        [attr.title]="theme() === 'sushi' ? 'Use dark theme' : 'Use light theme'"
         (click)="toggleTheme()"
       >
         @if (theme() === 'sushi') {
@@ -28,94 +129,55 @@
           <svg lucideSun class="size-4" aria-hidden="true"></svg>
         }
       </button>
-    </sui-navbar>
-  </header>
+      <button
+        suiButton
+        type="button"
+        size="sm"
+        shape="square"
+        severity="neutral"
+        variant="text"
+        class="lg:hidden"
+        [suiDrawerClose]="libraryDrawer"
+        aria-label="Close component navigation"
+      >
+        <svg lucideX class="size-4" aria-hidden="true"></svg>
+      </button>
+    </div>
 
-  <div class="grid min-h-screen lg:grid-cols-[17rem_1fr]">
-    <aside class="sticky top-0 hidden h-screen flex-col border-r border-base-300 bg-base-100 lg:flex">
-      <div class="flex h-16 items-center gap-1 border-b border-base-300 px-3">
-        <sui-navbar class="min-w-0 flex-1" [collapsible]="false" surface="plain" size="sm" ariaLabel="Playground home">
-          <div suiNavbarBrand class="inline-flex items-center gap-2.5">
-            <span class="grid size-8 place-items-center rounded-field bg-primary text-primary-content">
-              <svg lucideSoup class="size-4" aria-hidden="true"></svg>
-            </span>
-            <span>
-              <strong class="block leading-tight">SUSHI</strong>
-              <span class="block text-xs leading-tight text-base-content/50">Component Playground</span>
-            </span>
-          </div>
-        </sui-navbar>
-
-        <button
-          suiButton
-          type="button"
-          size="sm"
-          shape="square"
-          severity="neutral"
-          variant="text"
-          [attr.aria-label]="theme() === 'sushi' ? 'Use dark theme' : 'Use light theme'"
-          [attr.title]="theme() === 'sushi' ? 'Use dark theme' : 'Use light theme'"
-          (click)="toggleTheme()"
-        >
-          @if (theme() === 'sushi') {
-            <svg lucideMoon class="size-4" aria-hidden="true"></svg>
-          } @else {
-            <svg lucideSun class="size-4" aria-hidden="true"></svg>
-          }
-        </button>
-      </div>
-
-      <div class="min-h-0 flex-1 overflow-y-auto px-3 py-4">
-        <div class="mb-5">
-          <sui-navbar
-            [items]="overviewNavigation"
-            [value]="activePath()"
-            [collapsible]="false"
-            orientation="vertical"
-            surface="plain"
-            variant="menu"
-            ariaLabel="Overview"
-          />
-        </div>
-
-        @for (group of sidebar; track group.label) {
-          <section class="mb-5 last:mb-0">
-            <h2 class="mb-1.5 px-3 text-xs font-semibold uppercase tracking-wide text-base-content/45">
-              {{ group.label }}
-            </h2>
-            <sui-navbar
-              [items]="group.items"
-              [value]="activePath()"
-              [collapsible]="false"
-              orientation="vertical"
-              surface="plain"
-              variant="menu"
-              [ariaLabel]="group.label"
-            />
-          </section>
+    <ng-template [suiSidebarGroup]="sidebar" let-group>
+      @switch (group.label) {
+        @case ('General') {
+          <svg lucideHouse class="size-3.5" aria-hidden="true"></svg>
         }
-      </div>
-    </aside>
-
-    <main class="min-w-0">
-      @if (pagePath()) {
-        <header class="z-30 border-b border-base-300 bg-base-100/95 backdrop-blur lg:sticky lg:top-0">
-          <div class="mx-auto flex h-16 max-w-7xl items-center px-0 sm:px-3">
-            <sui-navbar
-              class="w-full"
-              [items]="documentationItems()"
-              [value]="currentPath()"
-              [collapsible]="false"
-              orientation="horizontal"
-              surface="plain"
-              size="sm"
-              ariaLabel="Component documentation"
-            />
-          </div>
-        </header>
+        @case ('Inputs') {
+          <svg lucideTextCursorInput class="size-3.5" aria-hidden="true"></svg>
+        }
+        @case ('Selection') {
+          <svg lucideListChecks class="size-3.5" aria-hidden="true"></svg>
+        }
+        @case ('Form Structure') {
+          <svg lucideRows3 class="size-3.5" aria-hidden="true"></svg>
+        }
+        @case ('Actions') {
+          <svg lucideMousePointerClick class="size-3.5" aria-hidden="true"></svg>
+        }
+        @case ('Navigation') {
+          <svg lucideNavigation class="size-3.5" aria-hidden="true"></svg>
+        }
+        @case ('Feedback') {
+          <svg lucideMessageCircle class="size-3.5" aria-hidden="true"></svg>
+        }
+        @case ('Data Display') {
+          <svg lucideTableProperties class="size-3.5" aria-hidden="true"></svg>
+        }
+        @case ('Layout') {
+          <svg lucidePanelsTopLeft class="size-3.5" aria-hidden="true"></svg>
+        }
+        @case ('Utilities') {
+          <svg lucideWrench class="size-3.5" aria-hidden="true"></svg>
+        }
       }
-
-      <router-outlet />
-    </main>
-  </div>
-</div>
+      <span>{{ group.heading ?? group.label }}</span>
+    </ng-template>
+  </sui-sidebar>
+</sui-drawer>

@@ -1,0 +1,69 @@
+<sui-drawer
+  #workspaceDrawer="suiDrawer"
+  class="h-[32rem] overflow-hidden rounded-box border border-base-300"
+  responsiveAt="lg"
+  size="sm"
+  ariaLabel="Workspace navigation">
+  <div suiDrawerContent class="flex min-h-full flex-col bg-base-100">
+    <sui-navbar [collapsible]="false" surface="plain" ariaLabel="Workspace toolbar">
+      <div suiNavbarBrand class="inline-flex items-center gap-2">
+        <button
+          suiButton
+          type="button"
+          size="sm"
+          shape="square"
+          severity="neutral"
+          variant="text"
+          class="lg:hidden"
+          [suiDrawerTrigger]="workspaceDrawer"
+          aria-label="Open workspace navigation">
+          <svg lucideMenu class="size-3.5" aria-hidden="true"></svg>
+        </button>
+        <strong>{{ activePage() }}</strong>
+      </div>
+      <button suiButton suiNavbarAction type="button" size="sm">
+        <svg lucidePlus class="size-3.5" aria-hidden="true"></svg>
+        New project
+      </button>
+    </sui-navbar>
+
+    <div class="min-h-0 flex-1 border-t border-base-300 bg-base-200/35 p-5 sm:p-7">
+      <div class="mx-auto max-w-2xl rounded-box border border-base-300 bg-base-100 p-5">
+        <p class="text-sm text-base-content/60">Current workspace</p>
+        <h3 class="mt-1 text-xl font-semibold">{{ activePage() }}</h3>
+        <p class="mt-2 text-sm text-base-content/60">
+          Select another destination from the sidebar to update this view.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <sui-sidebar
+    class="h-full w-full"
+    size="lg"
+    [bordered]="false"
+    [groups]="groups"
+    [(value)]="activePage"
+    ariaLabel="Workspace pages"
+    (itemSelected)="workspaceDrawer.close()">
+    <div suiSidebarHeader class="flex items-center gap-3">
+      <span class="grid size-8 place-items-center rounded-field bg-primary text-primary-content">
+        <svg lucidePanelsTopLeft class="size-3.5" aria-hidden="true"></svg>
+      </span>
+      <strong class="min-w-0 flex-1 truncate">Northstar</strong>
+      <button
+        suiButton
+        type="button"
+        size="sm"
+        shape="square"
+        severity="neutral"
+        variant="text"
+        class="lg:hidden"
+        [suiDrawerClose]="workspaceDrawer"
+        aria-label="Close workspace navigation">
+        <svg lucidePanelLeftClose class="size-3.5" aria-hidden="true"></svg>
+      </button>
+    </div>
+    <div suiSidebarFooter class="text-sm text-base-content/60">Acme workspace</div>
+  </sui-sidebar>
+</sui-drawer>

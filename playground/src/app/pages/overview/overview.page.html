@@ -11,9 +11,9 @@
 
           <div class="space-y-3">
             <p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">SUSHI component library</p>
-            <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">Composable Angular UI, documented by example.</h1>
+            <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">Angular components for consistent application interfaces.</h1>
             <p class="max-w-2xl text-lg leading-relaxed text-base-content/70">
-              Browse the public API, copy complete examples, and combine consistent primitives without rebuilding common behavior.
+              Browse working examples, public APIs, and styling guidance for every documented component.
             </p>
           </div>
 
@@ -23,12 +23,12 @@
           </div>
         </div>
 
-        <sui-card size="sm" class="bg-base-100 shadow-sm">
+        <sui-card size="sm" class="bg-base-100">
           <div class="flex items-center gap-3">
             <span suiStatus severity="success" size="lg" aria-hidden="true"></span>
             <div>
-              <div class="font-semibold">Quality gates active</div>
-              <p class="text-sm text-base-content/60">Unit coverage is enforced on every coverage run.</p>
+              <div class="font-semibold">Automated checks</div>
+              <p class="text-sm text-base-content/60">Unit, browser, lint, and production-build checks are configured.</p>
             </div>
           </div>
         </sui-card>
@@ -38,15 +38,16 @@
 
   <section class="space-y-7">
     <div class="max-w-3xl space-y-2">
-      <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Engineering confidence</p>
-      <h2 class="text-3xl font-bold tracking-tight">A library that explains and protects itself</h2>
+      <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Project checks</p>
+      <h2 class="text-3xl font-bold tracking-tight">How the component contracts are verified</h2>
       <p class="text-base leading-relaxed text-base-content/65">
-        The sidebar is the component directory. This overview focuses on the standards that keep those components dependable.
+        Coverage thresholds apply to the library test suite. Browser tests cover behavior that depends on focus, layout, scrolling, or
+        responsive state.
       </p>
     </div>
 
     <div class="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-      <sui-card size="md" class="bg-base-100 shadow-sm">
+      <sui-card size="md" class="bg-base-100">
         <div class="space-y-1.5">
           <h3 suiCardTitle>Coverage gates</h3>
           <p class="text-sm leading-relaxed text-base-content/60">Minimum project-wide coverage required by the test runner.</p>
@@ -67,10 +68,10 @@
         </div>
       </sui-card>
 
-      <sui-card size="md" class="bg-base-100 shadow-sm">
+      <sui-card size="md" class="bg-base-100">
         <div class="space-y-1.5">
-          <h3 suiCardTitle>Confidence layers</h3>
-          <p class="text-sm leading-relaxed text-base-content/60">Fast feedback first, real browser behavior where geometry matters.</p>
+          <h3 suiCardTitle>Verification tools</h3>
+          <p class="text-sm leading-relaxed text-base-content/60">The checks currently used by this repository.</p>
         </div>
 
         <div suiDivider class="my-1 opacity-60"></div>
@@ -93,14 +94,15 @@
     <sui-card size="lg" class="bg-base-200/35">
       <div class="grid gap-8 lg:grid-cols-[minmax(15rem,0.7fr)_minmax(0,1.3fr)]">
         <div class="space-y-3">
-          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Contribution path</p>
-          <h2 class="text-3xl font-bold tracking-tight">One predictable route from idea to component</h2>
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Using the documentation</p>
+          <h2 class="text-3xl font-bold tracking-tight">What each component page contains</h2>
           <p class="leading-relaxed text-base-content/65">
-            The same sequence keeps implementation, examples, documentation, and tests aligned.
+            Use the three page sections to choose a component, integrate it, and adapt its appearance without relying on implementation
+            details.
           </p>
         </div>
 
-        <sui-list [items]="contributionSteps" size="sm" [dividers]="true" ariaLabel="Component contribution steps">
+        <sui-list [items]="documentationSections" size="sm" [dividers]="true" ariaLabel="Component page sections">
           <ng-template suiListItem let-step let-index="index">
             <span
               class="grid size-7 shrink-0 place-items-center rounded-full bg-primary/10 text-sm font-semibold text-primary"

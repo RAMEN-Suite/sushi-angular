@@ -113,6 +113,16 @@ export const routes: Routes = [
     title: 'Navbar | SUSHI Playground',
   },
   {
+    path: 'sidebar',
+    loadComponent: () => import('./pages/sidebar/sidebar.page').then(({ SidebarPage }) => SidebarPage),
+    title: 'Sidebar | SUSHI Playground',
+  },
+  {
+    path: 'drawer',
+    loadComponent: () => import('./pages/drawer/drawer.page').then(({ DrawerPage }) => DrawerPage),
+    title: 'Drawer | SUSHI Playground',
+  },
+  {
     path: 'radio',
     loadComponent: () => import('./pages/radio/radio.page').then(({ RadioPage }) => RadioPage),
     title: 'Radio | SUSHI Playground',

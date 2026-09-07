@@ -4,6 +4,7 @@ import { booleanAttribute, Directive, input, InputSignalWithTransform, model, Mo
   selector: 'fieldset[suiFieldset]',
   host: {
     class: 'fieldset sui-fieldset',
+    '[class.sui-fieldset--borderless]': '!bordered()',
     '[class.sui-fieldset--collapsible]': 'collapsible()',
     '[class.sui-fieldset--collapsed]': 'collapsible() && !expanded()',
   },
@@ -12,6 +13,10 @@ import { booleanAttribute, Directive, input, InputSignalWithTransform, model, Mo
 export class Fieldset {
   /** Controls and reports whether collapsible content is visible. */
   public readonly expanded: ModelSignal<boolean> = model<boolean>(true);
+  /** Shows the visual frame and its accompanying inset spacing. */
+  public readonly bordered: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, {
+    transform: booleanAttribute,
+  });
   /** Enables toggling of the fieldset content. */
   public readonly collapsible: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
