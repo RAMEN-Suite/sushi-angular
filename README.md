@@ -4,7 +4,7 @@ An Angular 22+ component library built around native semantics, typed signal API
 
 ## Development
 
-- [Component creation guide](docs/creating-components.md)
+- [Component development](docs/component-development.md)
 - [Engineering guidelines](GUIDELINES.md)
 - `npm test` runs the library unit suite.
 - `npm run test:coverage` enforces the project coverage gates.
