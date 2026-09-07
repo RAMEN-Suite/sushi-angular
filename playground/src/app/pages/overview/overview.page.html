@@ -1,7 +1,7 @@
 <main class="mx-auto max-w-7xl space-y-12 px-4 py-8 sm:px-8 sm:py-12">
   <section>
     <sui-card size="lg" class="overflow-hidden bg-base-200/40">
-      <div class="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_auto]">
+      <div class="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div class="max-w-3xl space-y-5">
           <div class="flex flex-wrap gap-2">
             <span suiBadge size="sm" variant="soft">Angular 22+</span>
@@ -23,56 +23,98 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-3 sm:min-w-72">
-          <sui-card size="sm" class="bg-base-100">
-            <div class="text-3xl font-bold">{{ componentCount }}</div>
-            <div class="mt-1 text-sm text-base-content/60">components</div>
-          </sui-card>
-          <sui-card size="sm" class="bg-base-100">
-            <div class="text-3xl font-bold">{{ groups.length }}</div>
-            <div class="mt-1 text-sm text-base-content/60">categories</div>
-          </sui-card>
-        </div>
+        <sui-card size="sm" class="bg-base-100 shadow-sm">
+          <div class="flex items-center gap-3">
+            <span suiStatus severity="success" size="lg" aria-hidden="true"></span>
+            <div>
+              <div class="font-semibold">Quality gates active</div>
+              <p class="text-sm text-base-content/60">Unit coverage is enforced on every coverage run.</p>
+            </div>
+          </div>
+        </sui-card>
       </div>
     </sui-card>
   </section>
 
   <section class="space-y-7">
     <div class="max-w-3xl space-y-2">
-      <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Component directory</p>
-      <h2 class="text-3xl font-bold tracking-tight">Find the right building block</h2>
+      <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Engineering confidence</p>
+      <h2 class="text-3xl font-bold tracking-tight">A library that explains and protects itself</h2>
       <p class="text-base leading-relaxed text-base-content/65">
-        Browse by purpose, then open a component for complete examples and its public API.
+        The sidebar is the component directory. This overview focuses on the standards that keep those components dependable.
       </p>
     </div>
 
-    <div class="grid items-start gap-5 md:grid-cols-2 xl:grid-cols-3">
-      @for (group of groups; track group.label) {
-        <sui-card size="md" class="overflow-hidden bg-base-100 shadow-sm">
-          <div class="space-y-1.5">
-            <h3 suiCardTitle>{{ group.label }}</h3>
-            <p class="text-sm leading-relaxed text-base-content/60">{{ group.description }}</p>
-          </div>
+    <div class="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+      <sui-card size="md" class="bg-base-100 shadow-sm">
+        <div class="space-y-1.5">
+          <h3 suiCardTitle>Coverage gates</h3>
+          <p class="text-sm leading-relaxed text-base-content/60">Minimum project-wide coverage required by the test runner.</p>
+        </div>
 
-          <div suiDivider class="my-1 opacity-60"></div>
+        <div suiDivider class="my-1 opacity-60"></div>
 
-          <div class="-mx-1">
-            <sui-navbar
-              [items]="group.items"
-              [collapsible]="false"
-              orientation="vertical"
-              surface="plain"
-              variant="menu"
-              [ariaLabel]="group.label"
-            >
-              <ng-template [suiNavbarItem]="group.items" let-item>
-                <span class="grow font-medium">{{ item.label }}</span>
-                <svg lucideArrowRight class="size-4 text-base-content/35" aria-hidden="true"></svg>
-              </ng-template>
-            </sui-navbar>
-          </div>
-        </sui-card>
-      }
+        <div class="space-y-4">
+          @for (gate of coverageGates; track gate.label) {
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between gap-4 text-sm">
+                <span class="font-medium">{{ gate.label }}</span>
+                <span class="tabular-nums text-base-content/60">{{ gate.value }}%</span>
+              </div>
+              <progress suiProgress severity="success" class="w-full" [value]="gate.value" max="100">{{ gate.value }}%</progress>
+            </div>
+          }
+        </div>
+      </sui-card>
+
+      <sui-card size="md" class="bg-base-100 shadow-sm">
+        <div class="space-y-1.5">
+          <h3 suiCardTitle>Confidence layers</h3>
+          <p class="text-sm leading-relaxed text-base-content/60">Fast feedback first, real browser behavior where geometry matters.</p>
+        </div>
+
+        <div suiDivider class="my-1 opacity-60"></div>
+
+        <sui-list [items]="qualityLayers" size="sm" [dividers]="true" ariaLabel="Quality checks">
+          <ng-template [suiListItem]="qualityLayers" let-layer>
+            <span suiStatus severity="success" size="sm" aria-hidden="true"></span>
+            <div class="min-w-0 grow">
+              <div class="font-semibold">{{ layer.label }}</div>
+              <p class="mt-0.5 text-sm leading-relaxed text-base-content/60">{{ layer.description }}</p>
+            </div>
+            <span suiBadge size="sm" severity="neutral" variant="soft">{{ layer.detail }}</span>
+          </ng-template>
+        </sui-list>
+      </sui-card>
     </div>
+  </section>
+
+  <section>
+    <sui-card size="lg" class="bg-base-200/35">
+      <div class="grid gap-8 lg:grid-cols-[minmax(15rem,0.7fr)_minmax(0,1.3fr)]">
+        <div class="space-y-3">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Contribution path</p>
+          <h2 class="text-3xl font-bold tracking-tight">One predictable route from idea to component</h2>
+          <p class="leading-relaxed text-base-content/65">
+            The same sequence keeps implementation, examples, documentation, and tests aligned.
+          </p>
+        </div>
+
+        <sui-list [items]="contributionSteps" size="sm" [dividers]="true" ariaLabel="Component contribution steps">
+          <ng-template [suiListItem]="contributionSteps" let-step let-index="index">
+            <span
+              class="grid size-7 shrink-0 place-items-center rounded-full bg-primary/10 text-sm font-semibold text-primary"
+              aria-hidden="true"
+            >
+              {{ index + 1 }}
+            </span>
+            <div class="min-w-0 grow">
+              <div class="font-semibold">{{ step.label }}</div>
+              <p class="mt-0.5 text-sm leading-relaxed text-base-content/60">{{ step.description }}</p>
+            </div>
+          </ng-template>
+        </sui-list>
+      </div>
+    </sui-card>
   </section>
 </main>

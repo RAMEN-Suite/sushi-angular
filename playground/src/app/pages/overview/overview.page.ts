@@ -1,38 +1,59 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LucideArrowRight } from '@lucide/angular';
-import { Badge, Button, Card, CardTitle, Divider, Navbar, NavbarItemTemplate } from '@ramen-suite/sushi';
-import { navbarNavigation, NavbarNavigationGroup } from '../../app.navigation';
+import { Badge, Button, Card, CardTitle, Divider, List, ListItemTemplate, Progress, Status } from '@ramen-suite/sushi';
 
-interface OverviewGroup extends NavbarNavigationGroup {
+interface CoverageGate {
+  readonly label: string;
+  readonly value: number;
+}
+
+interface QualityLayer {
+  readonly label: string;
+  readonly description: string;
+  readonly detail: string;
+}
+
+interface ContributionStep {
+  readonly label: string;
   readonly description: string;
 }
 
-const groupDescriptions: Readonly<Record<string, string>> = {
-  Inputs: 'Capture text, numbers, files, colors, and structured values.',
-  Selection: 'Choose and arrange values with familiar keyboard patterns.',
-  'Form Structure': 'Compose labels, groups, surfaces, and related controls.',
-  Actions: 'Trigger commands and reveal contextual actions.',
-  Navigation: 'Move between views, pages, and application sections.',
-  Feedback: 'Communicate progress, state, and important outcomes.',
-  'Data Display': 'Present collections, records, identities, and metadata.',
-  Layout: 'Structure related content and progressive disclosure.',
-  Utilities: 'Support focus, code, icons, and keyboard guidance.',
-};
-
 @Component({
   selector: 'pg-overview-page',
-  imports: [Badge, Button, Card, CardTitle, Divider, LucideArrowRight, Navbar, NavbarItemTemplate, RouterLink],
+  imports: [Badge, Button, Card, CardTitle, Divider, List, ListItemTemplate, Progress, RouterLink, Status],
   templateUrl: './overview.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OverviewPage {
-  protected readonly groups: readonly OverviewGroup[] = navbarNavigation.map((group: NavbarNavigationGroup): OverviewGroup => ({
-    ...group,
-    description: groupDescriptions[group.label] ?? 'Explore the components in this category.',
-  }));
-  protected readonly componentCount: number = navbarNavigation.reduce(
-    (count: number, group: NavbarNavigationGroup): number => count + group.items.length,
-    0,
-  );
+  protected readonly coverageGates: readonly CoverageGate[] = [
+    { label: 'Statements', value: 80 },
+    { label: 'Branches', value: 80 },
+    { label: 'Functions', value: 70 },
+    { label: 'Lines', value: 85 },
+  ];
+
+  protected readonly qualityLayers: readonly QualityLayer[] = [
+    {
+      label: 'Unit behavior',
+      description: 'Vitest exercises every public component family through Angular hosts.',
+      detail: 'Vitest',
+    },
+    {
+      label: 'Browser contracts',
+      description: 'Playwright protects keyboard, overlay, scrolling, and responsive behavior.',
+      detail: 'Playwright',
+    },
+    {
+      label: 'Release checks',
+      description: 'Linting, generated references, and both production builds guard every handoff.',
+      detail: 'Build + lint',
+    },
+  ];
+
+  protected readonly contributionSteps: readonly ContributionStep[] = [
+    { label: 'Shape the API', description: 'Start from native semantics and the smallest useful public contract.' },
+    { label: 'Build the behavior', description: 'Compose Angular and existing SUSHI primitives before adding custom UI.' },
+    { label: 'Teach by example', description: 'Ship copyable examples together with API and styling references.' },
+    { label: 'Protect the contract', description: 'Cover observable behavior, accessibility, and browser-only interactions.' },
+  ];
 }
