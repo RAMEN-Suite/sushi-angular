@@ -7,11 +7,6 @@
     background-color: var(--color-base-100);
   }
 
-  :host(.sui-sidebar--bordered) {
-    @apply border-x;
-    border-color: var(--color-base-300);
-  }
-
   :host(.sui-sidebar--sm) {
     width: 14rem;
   }

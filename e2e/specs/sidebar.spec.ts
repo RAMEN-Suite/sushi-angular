@@ -41,7 +41,7 @@ test('vertical sidebar destinations fill the menu and visibly retain selection',
     }),
   );
 
-  expect(frame).toEqual({ bottom: '0px', left: '1px', right: '1px', top: '0px' });
+  expect(frame).toEqual({ bottom: '0px', left: '0px', right: '0px', top: '0px' });
   expect(geometry).toHaveLength(3);
   expect(new Set(geometry.map((item: ItemGeometry): number => item.x)).size).toBe(1);
   expect(new Set(geometry.map((item: ItemGeometry): number => item.width)).size).toBe(1);

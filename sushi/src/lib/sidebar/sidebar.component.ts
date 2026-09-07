@@ -1,12 +1,10 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   contentChild,
   input,
   InputSignal,
-  InputSignalWithTransform,
   model,
   ModelSignal,
   output,
@@ -30,7 +28,6 @@ import { SidebarFooter, SidebarHeader } from './sidebar-slots.directive';
     class: 'sui-sidebar',
     role: 'complementary',
     '[attr.aria-label]': 'ariaLabel()',
-    '[class.sui-sidebar--bordered]': 'bordered()',
     '[class.sui-sidebar--sm]': 'size() === "sm"',
     '[class.sui-sidebar--md]': 'size() === "md"',
     '[class.sui-sidebar--lg]': 'size() === "lg"',
@@ -42,10 +39,6 @@ export class Sidebar<I extends NavbarItem = NavbarItem> {
   public readonly groups: InputSignal<readonly SidebarGroup<I>[]> = input<readonly SidebarGroup<I>[]>([]);
   /** Accessible label for the complementary landmark. */
   public readonly ariaLabel: InputSignal<string> = input<string>('Application sidebar');
-  /** Adds the standard border and surface color. */
-  public readonly bordered: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, {
-    transform: booleanAttribute,
-  });
   /** Controls the persistent Sidebar width. */
   public readonly size: InputSignal<SidebarSize> = input<SidebarSize>('md');
   /** Value of the current destination. */

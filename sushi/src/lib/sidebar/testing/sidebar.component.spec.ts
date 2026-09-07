@@ -21,7 +21,6 @@ interface AppItem extends NavbarItem<Page> {
     <sui-sidebar
       ariaLabel="Project navigation"
       size="lg"
-      [bordered]="bordered()"
       [groups]="groups"
       [(value)]="active"
       (itemSelected)="selected.push($event)"
@@ -41,7 +40,6 @@ interface AppItem extends NavbarItem<Page> {
 })
 class SidebarHost {
   public readonly active: WritableSignal<Page> = signal<Page>('overview');
-  public readonly bordered: WritableSignal<boolean> = signal<boolean>(true);
   public readonly selected: Page[] = [];
   public readonly groups: readonly SidebarGroup<AppItem>[] = [
     {
@@ -64,7 +62,6 @@ describe('Sidebar', (): void => {
     expect(sidebar.getAttribute('role')).toBe('complementary');
     expect(sidebar.getAttribute('aria-label')).toBe('Project navigation');
     expect(sidebar.classList.contains('sui-sidebar--lg')).toBe(true);
-    expect(sidebar.classList.contains('sui-sidebar--bordered')).toBe(true);
     expect(query(fixture, '[data-header]').textContent).toContain('Orbit');
     expect(query(fixture, '[data-footer]').textContent).toContain('Signed in');
     expect(queryAll(fixture, 'nav')).toHaveLength(2);
@@ -78,14 +75,6 @@ describe('Sidebar', (): void => {
     expect(activity.textContent).toContain('Activity 4');
     expect(activity.getAttribute('data-group')).toBe('Workspace');
     expect(activity.getAttribute('data-level')).toBe('0');
-  });
-
-  it('allows consumers to remove the default frame', (): void => {
-    const fixture: ComponentFixture<SidebarHost> = render(SidebarHost);
-    fixture.componentInstance.bordered.set(false);
-    fixture.detectChanges();
-
-    expect(query(fixture, 'sui-sidebar').classList).not.toContain('sui-sidebar--bordered');
   });
 
   it('reflects the current destination and emits selection changes', (): void => {

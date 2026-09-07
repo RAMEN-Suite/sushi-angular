@@ -5528,13 +5528,6 @@ export const apiReference: Readonly<{
         description: 'Accessible label for the complementary landmark.',
       },
       {
-        name: 'bordered',
-        kind: 'input',
-        type: 'boolean',
-        defaultValue: 'true',
-        description: 'Adds the standard border and surface color.',
-      },
-      {
         name: 'size',
         kind: 'input',
         type: 'SidebarSize',
