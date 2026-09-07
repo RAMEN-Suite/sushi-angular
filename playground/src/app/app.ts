@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, Location } from '@angular/common';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { ChangeDetectionStrategy, Component, computed, inject, Signal, signal, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -99,13 +99,14 @@ export class App {
     ];
   });
   private readonly document: Document = inject(DOCUMENT);
+  private readonly location: Location = inject(Location);
   private readonly router: Router = inject(Router);
   private readonly currentUrl: Signal<string> = toSignal(
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map((event: NavigationEnd): string => event.urlAfterRedirects),
     ),
-    { initialValue: this.router.url },
+    { initialValue: this.location.path(true) || this.router.url },
   );
   protected readonly currentPath: Signal<string> = computed((): string => this.currentUrl().split(/[?#]/, 1)[0] || '/');
   protected readonly theme: WritableSignal<PlaygroundTheme> = signal<PlaygroundTheme>(this.getInitialTheme());
