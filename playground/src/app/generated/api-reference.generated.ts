@@ -3792,7 +3792,7 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents every action while keeping disabled entries discoverable by keyboard.',
+        description: 'Prevents every action and removes its entries from keyboard navigation.',
       },
       {
         name: 'fluid',
@@ -4736,7 +4736,38 @@ export const apiReference: Readonly<{
         description: 'Supported layout directions.',
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-navbar-item-hover-background',
+        defaultValue: 'color-mix(in oklab, var(--color-base-200) 70%, transparent)',
+        exampleValue: null,
+        description: 'Background of an enabled navigation item on hover.',
+      },
+      {
+        name: '--sui-navbar-item-hover-color',
+        defaultValue: 'var(--color-base-content)',
+        exampleValue: null,
+        description: 'Text color of an enabled navigation item on hover.',
+      },
+      {
+        name: '--sui-navbar-link-hover-color',
+        defaultValue: 'var(--color-primary)',
+        exampleValue: null,
+        description: 'Text color of a link-style navigation item on hover.',
+      },
+      {
+        name: '--sui-navbar-item-active-background',
+        defaultValue: 'color-mix(in oklab, var(--color-primary) 10%, transparent)',
+        exampleValue: null,
+        description: 'Background of the current item or a disclosure containing it.',
+      },
+      {
+        name: '--sui-navbar-item-active-color',
+        defaultValue: 'var(--color-primary)',
+        exampleValue: null,
+        description: 'Text color of the current item or a disclosure containing it.',
+      },
+    ],
   },
   NavbarAction: {
     className: 'NavbarAction',

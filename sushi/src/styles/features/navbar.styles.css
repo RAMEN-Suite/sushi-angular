@@ -10,6 +10,16 @@
 
 .sui-navbar {
   @apply relative flex-wrap items-center p-2;
+  /** Background of an enabled navigation item on hover. */
+  --sui-navbar-item-hover-background: color-mix(in oklab, var(--color-base-200) 70%, transparent);
+  /** Text color of an enabled navigation item on hover. */
+  --sui-navbar-item-hover-color: var(--color-base-content);
+  /** Text color of a link-style navigation item on hover. */
+  --sui-navbar-link-hover-color: var(--color-primary);
+  /** Background of the current item or a disclosure containing it. */
+  --sui-navbar-item-active-background: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  /** Text color of the current item or a disclosure containing it. */
+  --sui-navbar-item-active-color: var(--color-primary);
 }
 
 .sui-navbar--comfortable {
@@ -108,7 +118,8 @@
 
 .sui-navbar__link:hover,
 .sui-navbar__dropdown > summary:hover {
-  @apply bg-base-200/70 text-base-content;
+  background-color: var(--sui-navbar-item-hover-background);
+  color: var(--sui-navbar-item-hover-color);
 }
 
 .sui-navbar__link:focus-visible {
@@ -117,20 +128,26 @@
 }
 
 .sui-navbar__link[aria-current='page'] {
-  @apply bg-primary/10 font-semibold text-primary;
+  background-color: var(--sui-navbar-item-active-background);
+  color: var(--sui-navbar-item-active-color);
 }
 
 .sui-navbar__links--links > li > .sui-navbar__link[aria-current='page'] {
   @apply rounded-none bg-transparent no-underline;
 }
 
+.sui-navbar__links--links > li > .sui-navbar__link:focus-visible {
+  border-radius: var(--radius-field);
+}
+
 .sui-navbar__links--links > li > .sui-navbar__link[aria-current='page'] > .sui-navbar__label,
-.sui-navbar__links--links > li > .sui-navbar__dropdown > summary[aria-current='page'] .sui-navbar__label {
+.sui-navbar__links--links > li > .sui-navbar__dropdown > summary:is([aria-current='page'], [data-child-current]) .sui-navbar__label {
   @apply underline decoration-2 underline-offset-8;
 }
 
 .sui-navbar__links--links > li > .sui-navbar__link:hover {
-  @apply bg-transparent text-primary;
+  background-color: transparent;
+  color: var(--sui-navbar-link-hover-color);
 }
 
 .sui-navbar__link[aria-disabled='true'],
@@ -166,16 +183,22 @@
   outline-offset: var(--sui-focus-ring-offset);
 }
 
-.sui-navbar__dropdown > summary[aria-current='page'] {
-  @apply bg-primary/10 font-semibold text-primary;
+.sui-navbar__dropdown > summary:is([aria-current='page'], [data-child-current]) {
+  background-color: var(--sui-navbar-item-active-background);
+  color: var(--sui-navbar-item-active-color);
 }
 
-.sui-navbar__links--links > li > .sui-navbar__dropdown > summary[aria-current='page'] {
+.sui-navbar__links--links > li > .sui-navbar__dropdown > summary:is([aria-current='page'], [data-child-current]) {
   @apply rounded-none bg-transparent no-underline;
 }
 
+.sui-navbar__links--links > li > .sui-navbar__dropdown > summary:focus-visible {
+  border-radius: var(--radius-field);
+}
+
 .sui-navbar__links--links > li > .sui-navbar__dropdown > summary:hover {
-  @apply bg-transparent text-primary;
+  background-color: transparent;
+  color: var(--sui-navbar-link-hover-color);
 }
 
 .sui-navbar__dropdown > ul {

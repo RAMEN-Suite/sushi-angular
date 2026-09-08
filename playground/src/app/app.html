@@ -6,55 +6,53 @@
   ariaLabel="Component library navigation"
 >
   <div #contentScroll suiDrawerContent class="h-screen overflow-y-auto bg-base-100">
-    @if (pagePath()) {
-      <header class="sticky top-0 z-30 h-[65px] border-b border-base-300 bg-base-100/95 backdrop-blur">
-        <div class="mx-auto flex h-full max-w-7xl items-center px-0 sm:px-3">
-          <sui-navbar
-            class="w-full"
-            [items]="documentationItems()"
-            [value]="currentPath()"
-            [collapsible]="false"
-            orientation="horizontal"
-            surface="plain"
-            size="md"
-            ariaLabel="Component documentation"
-          >
-            <div suiNavbarBrand>
-              <button
-                suiButton
-                type="button"
-                size="sm"
-                shape="square"
-                severity="neutral"
-                variant="text"
-                class="lg:hidden"
-                [suiDrawerTrigger]="libraryDrawer"
-                aria-label="Open component navigation"
-              >
-                <svg lucideMenu class="size-4" aria-hidden="true"></svg>
-              </button>
-            </div>
+    <header class="sticky top-0 z-30 h-[65px] border-b border-base-300 bg-base-100/95 backdrop-blur">
+      <div class="mx-auto flex h-full max-w-7xl items-center px-0 sm:px-3">
+        <sui-navbar
+          class="w-full"
+          [items]="documentationItems()"
+          [value]="currentPath()"
+          [collapsible]="false"
+          orientation="horizontal"
+          surface="plain"
+          size="md"
+          ariaLabel="Component documentation"
+        >
+          <div suiNavbarBrand>
             <button
               suiButton
-              suiNavbarAction
               type="button"
               size="sm"
               shape="square"
               severity="neutral"
               variant="text"
-              [attr.aria-label]="theme() === 'sushi' ? 'Use dark theme' : 'Use light theme'"
-              (click)="toggleTheme()"
+              class="lg:hidden"
+              [suiDrawerTrigger]="libraryDrawer"
+              aria-label="Open component navigation"
             >
-              @if (theme() === 'sushi') {
-                <svg lucideMoon class="size-4" aria-hidden="true"></svg>
-              } @else {
-                <svg lucideSun class="size-4" aria-hidden="true"></svg>
-              }
+              <svg lucideMenu class="size-4" aria-hidden="true"></svg>
             </button>
-          </sui-navbar>
-        </div>
-      </header>
-    }
+          </div>
+          <button
+            suiButton
+            suiNavbarAction
+            type="button"
+            size="sm"
+            shape="square"
+            severity="neutral"
+            variant="text"
+            [attr.aria-label]="theme() === 'sushi' ? 'Use dark theme' : 'Use light theme'"
+            (click)="toggleTheme()"
+          >
+            @if (theme() === 'sushi') {
+              <svg lucideMoon class="size-4" aria-hidden="true"></svg>
+            } @else {
+              <svg lucideSun class="size-4" aria-hidden="true"></svg>
+            }
+          </button>
+        </sui-navbar>
+      </div>
+    </header>
 
     <router-outlet (activate)="scrollContentToTop()" />
   </div>
@@ -69,10 +67,33 @@
   >
     <div suiSidebarHeader class="flex items-center gap-3">
       <svg class="size-10 shrink-0" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <path d="M8 17.5C8 12.8 15.2 9 24 9s16 3.8 16 8.5S32.8 26 24 26 8 22.2 8 17.5Z" fill="var(--color-primary)" />
-        <path d="m15 12.5-2 8M24 10l-2 14M33 12.5l-2 8" stroke="var(--color-primary-content)" stroke-width="2" stroke-linecap="round" />
-        <path d="M12 22.5v10C12 36.1 17.4 39 24 39s12-2.9 12-6.5v-10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
-        <path d="M24 26v13" stroke="var(--color-primary)" stroke-width="3" />
+        <path
+          d="M39.8 5.5 27.4 27.8M44 9.2 30.6 30.7"
+          stroke="var(--color-base-content)"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <path
+          d="M10.2 25.1c.7-4 5.9-7.1 12.4-7.1s11.8 3.1 12.5 7.1l2.1 12.3c.5 3-5.9 5.6-14.6 5.6S7.5 40.4 8 37.4l2.2-12.3Z"
+          fill="var(--color-base-100)"
+          stroke="var(--color-base-content)"
+          stroke-width="1.8"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M7 23.5c0-4.5 7-8.2 15.6-8.2s15.7 3.7 15.7 8.2-7 8.1-15.7 8.1S7 28 7 23.5Z"
+          fill="var(--color-primary)"
+          stroke="var(--color-base-content)"
+          stroke-width="1.8"
+        />
+        <path
+          d="M13.2 20.2c2.4 1.4 5.7 2.2 9.4 2.2s7.1-.8 9.5-2.2M12 25.2c2.7 1.5 6.4 2.4 10.6 2.4s8-.9 10.7-2.4"
+          stroke="var(--color-primary-content)"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          opacity=".7"
+        />
+        <path d="M18 31.1v10.8M27.2 31.1v11.4" stroke="var(--color-base-content)" stroke-width="1.5" opacity=".16" />
       </svg>
       <span class="min-w-0 flex-1">
         <strong class="block truncate leading-tight">SUSHI KIT</strong>

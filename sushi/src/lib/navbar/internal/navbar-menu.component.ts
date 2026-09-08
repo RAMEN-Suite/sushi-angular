@@ -60,6 +60,10 @@ export class NavbarMenu<I extends NavbarItem = NavbarItem> {
     return item.active === true || item.value === this.value();
   }
 
+  protected hasCurrentChild(item: NavbarItem<I['value']>): boolean {
+    return item.items?.some((child: NavbarItem<I['value']>): boolean => this.isCurrent(child)) ?? false;
+  }
+
   protected select(item: NavbarItem<I['value']>, event: Event): void {
     if (item.disabled) {
       event.preventDefault();

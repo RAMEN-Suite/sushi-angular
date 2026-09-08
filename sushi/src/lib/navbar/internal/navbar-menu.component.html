@@ -3,7 +3,11 @@
     <li>
       @if (hasChildren(item)) {
         <details suiNavbarDropdown>
-          <summary [attr.aria-current]="isCurrent(item) ? 'page' : null" [attr.aria-disabled]="item.disabled ? 'true' : null">
+          <summary
+            [attr.aria-current]="isCurrent(item) ? 'page' : null"
+            [attr.data-child-current]="hasCurrentChild(item) ? '' : null"
+            [attr.aria-disabled]="item.disabled ? 'true' : null"
+          >
             <ng-container [ngTemplateOutlet]="template() ?? defaultItem" [ngTemplateOutletContext]="{ $implicit: item, item, level: 0 }" />
             <svg lucideChevronDown class="size-4 transition-transform group-open:rotate-180" aria-hidden="true"></svg>
           </summary>

@@ -133,6 +133,16 @@ describe('Navbar responsive behavior', (): void => {
 });
 
 describe('Navbar disclosures', (): void => {
+  it('marks a disclosure when one of its children is current', (): void => {
+    const fixture: ComponentFixture<NavbarHost> = render(NavbarHost);
+    fixture.componentInstance.value.set('projects');
+    fixture.detectChanges();
+    const workspace: HTMLElement = query(fixture, 'summary');
+
+    expect(workspace.hasAttribute('data-child-current')).toBe(true);
+    expect(workspace.hasAttribute('aria-current')).toBe(false);
+  });
+
   it('keeps only the most recently opened disclosure expanded', (): void => {
     const fixture: ComponentFixture<NavbarHost> = render(NavbarHost);
     const details: readonly Element[] = queryAll(fixture, 'details');

@@ -44,6 +44,7 @@ const sharedStyleFiles: Readonly<Record<string, readonly string[]>> = {
 };
 const sharedStyleFilesByClass: Readonly<Record<string, readonly string[]>> = {
   Dialog: ['sushi/src/styles/features/dialog.styles.css'],
+  Navbar: ['sushi/src/styles/features/navbar.styles.css'],
 };
 
 function findSourceFiles(folder: string): string[] {
