@@ -52,6 +52,12 @@ export class MenuAction<I extends MenuItem = MenuItem> {
     item.open();
   }
 
+  protected handleAction(event: Event): void {
+    if (!this.disabled() && !this.item().disabled) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }
+
   protected itemContext(active: boolean): MenuItemContext<I> {
     const item: I = this.item();
     return { $implicit: item, item, active };

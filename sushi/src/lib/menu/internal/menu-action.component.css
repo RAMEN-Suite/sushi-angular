@@ -8,6 +8,20 @@
   @apply min-h-9 px-3 py-2 select-none font-medium transition-colors duration-150;
 }
 
+.sui-menu-option:not([aria-disabled='true'], :disabled) {
+  cursor: pointer;
+}
+
+.sui-menu-option:not([aria-disabled='true']):not(.menu-active, :active):is(:hover, :focus-visible) {
+  color: var(--color-base-content);
+  background-color: var(--color-base-200);
+}
+
+.sui-menu-option:is([aria-disabled='true'], :disabled) {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 .sui-menu-option.menu-active {
   color: var(--menu-active-fg);
   background-color: var(--menu-active-bg);

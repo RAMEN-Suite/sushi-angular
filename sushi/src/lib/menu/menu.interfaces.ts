@@ -13,7 +13,7 @@ export interface MenuItem<T extends MenuValue = MenuValue> {
   readonly items?: readonly MenuEntry<MenuItem<T>>[];
   /** Marks the action as the current destination or persistent state. */
   readonly active?: boolean;
-  /** Prevents activation while keeping the action discoverable by keyboard. */
+  /** Prevents activation and removes the action from keyboard navigation. */
   readonly disabled?: boolean;
 }
 

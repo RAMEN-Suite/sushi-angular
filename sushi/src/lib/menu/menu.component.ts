@@ -55,7 +55,7 @@ export class Menu<I extends MenuItem = MenuItem> {
   /** ID of the element that labels the menu. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
 
-  /** Prevents every action while keeping disabled entries discoverable by keyboard. */
+  /** Prevents every action and removes its entries from keyboard navigation. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Makes the menu surface fill the host width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });

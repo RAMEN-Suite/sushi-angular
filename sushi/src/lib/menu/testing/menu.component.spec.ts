@@ -88,6 +88,7 @@ describe('Menu inline semantics', (): void => {
 
     expect(fixture.componentInstance.selected).toEqual(['open']);
     expect(disabled.getAttribute('aria-disabled')).toBe('true');
+    expect(disabled.getAttribute('tabindex')).toBe('-1');
   });
 
   it('opens a nested submenu without selecting its disclosure', (): void => {
@@ -100,15 +101,14 @@ describe('Menu inline semantics', (): void => {
     expect(closest(query(fixture, '[data-item="copy"]'), '[role="menu"]').classList.contains('hidden')).toBe(false);
   });
 
-  it('keeps a disabled menu discoverable while blocking all actions', (): void => {
+  it('removes a disabled menu from keyboard navigation and blocks all actions', (): void => {
     const fixture: ComponentFixture<InlineMenuHost> = render(InlineMenuHost);
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
     const open: HTMLElement = closest(query(fixture, '[data-item="open"]'), '[role="menuitem"]');
-    open.focus();
     open.click();
 
-    expect(document.activeElement).toBe(open);
+    expect(open.getAttribute('tabindex')).toBe('-1');
     expect(fixture.componentInstance.selected).toEqual([]);
     expect(query(fixture, '[role="menu"]').getAttribute('aria-disabled')).toBe('true');
   });

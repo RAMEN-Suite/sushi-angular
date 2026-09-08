@@ -1,4 +1,4 @@
-<li role="presentation" class="relative">
+<li role="presentation" class="relative" [class.cursor-not-allowed]="item().disabled || disabled()">
   @if (item().items?.length) {
     <sui-menu-level
       #submenu
@@ -50,6 +50,7 @@
       [disabled]="item().disabled || disabled()"
       [searchTerm]="item().label"
       [attr.aria-current]="item().active ? 'true' : null"
+      (click)="handleAction($event)"
     >
       @if (itemTemplate(); as template) {
         <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="itemContext(ariaItem.active() || !!item().active)" />
