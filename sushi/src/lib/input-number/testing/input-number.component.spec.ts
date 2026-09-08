@@ -10,6 +10,7 @@ import { InputNumberButtonsTemplate } from '../input-number.templates';
   template: `
     <sui-input-number
       ariaLabel="Budget"
+      ariaDescribedby="budget-hint"
       currency="EUR"
       locale="de-DE"
       prefix="~"
@@ -64,6 +65,7 @@ describe('InputNumber value and formatting', (): void => {
     expect(input.value).toBe(expected);
     expect(input.getAttribute('role')).toBe('spinbutton');
     expect(input.getAttribute('aria-label')).toBe('Budget');
+    expect(input.getAttribute('aria-describedby')).toBe('budget-hint');
     expect(input.getAttribute('aria-valuemin')).toBe('2');
     expect(input.getAttribute('aria-valuemax')).toBe('12');
     expect(root.textContent).toContain('~');
@@ -133,7 +135,7 @@ describe('InputNumber interaction', (): void => {
 });
 
 describe('InputNumber disabled state', (): void => {
-  it('keeps disabled controls focusable and blocks every value change', (): void => {
+  it('hard-disables the native input and blocks every value change', (): void => {
     const fixture: ComponentFixture<InputNumberHost> = render(InputNumberHost);
     const input: HTMLInputElement = query(fixture, 'input');
     fixture.componentInstance.disabled.set(true);
@@ -145,9 +147,10 @@ describe('InputNumber disabled state', (): void => {
     press(input, 'ArrowDown');
     query(fixture, 'button').dispatchEvent(new MouseEvent('click', { bubbles: true }));
 
-    expect(document.activeElement).toBe(input);
-    expect(input.readOnly).toBe(true);
+    expect(document.activeElement).not.toBe(input);
+    expect(input.disabled).toBe(true);
     expect(input.getAttribute('aria-disabled')).toBe('true');
+    expect(queryAll(fixture, 'button').every((button: HTMLButtonElement): boolean => button.tabIndex === -1)).toBe(true);
     expect(fixture.componentInstance.value()).toBe(8);
   });
 });

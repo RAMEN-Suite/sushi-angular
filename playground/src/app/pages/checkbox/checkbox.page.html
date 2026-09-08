@@ -2,7 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Checkbox</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">Add consistent appearance and form state to a native checkbox.</p>
+      <p class="text-lg text-base-content/70">Add consistent appearance and form state to a native checkbox.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Checkbox architecture">
       <span suiBadge variant="soft" size="sm">Directive</span>
@@ -11,12 +11,15 @@
     </div>
   </section>
 
-  <sui-card
-    ><h2 suiCardTitle>Usage, appearance, and states</h2>
-    <p class="text-base-content/60">
-      Native checked, disabled, and indeterminate behavior remains intact while size, severity, and invalid state stay consistent.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-checkbox-usage-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="example.html" [typescript]="example.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Usage, appearance, and states</h2>
+      <p class="text-base-content/60">
+        Native checked, disabled, and indeterminate behavior remains intact while size, severity, and invalid state stay consistent.
+      </p>
+    </div>
+    <pg-example-code [html]="example.html" [typescript]="example.typescript">
+      <ng-template pgExamplePreview><pg-checkbox-usage-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

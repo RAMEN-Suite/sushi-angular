@@ -110,7 +110,7 @@ describe('Listbox selection', (): void => {
     expect(fixture.componentInstance.value()).toEqual([]);
   });
 
-  it('keeps disabled and readonly listboxes focusable without changes', (): void => {
+  it('hard-disables listboxes and keeps readonly listboxes unchanged', (): void => {
     const fixture: ComponentFixture<ListboxHost> = render(ListboxHost);
     const listbox: HTMLElement = query(fixture, '[role="listbox"]') as HTMLElement;
     fixture.componentInstance.disabled.set(true);
@@ -120,7 +120,9 @@ describe('Listbox selection', (): void => {
     const yuzu: HTMLElement = query(fixture, '[data-item="yuzu"]') as HTMLElement;
     yuzu.click();
     fixture.detectChanges();
-    expect(document.activeElement).toBe(listbox);
+    expect(listbox.tabIndex).toBe(-1);
+    expect(listbox.parentElement?.classList.contains('pointer-events-none')).toBe(true);
+    expect(query(fixture, 'sui-listbox').classList).toContain('cursor-not-allowed');
     expect(fixture.componentInstance.value()).toEqual(['shoyu']);
 
     fixture.componentInstance.disabled.set(false);

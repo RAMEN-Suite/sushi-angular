@@ -2,9 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Select Button</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">
-        Choose one option from a compact visible set with radio semantics and roving focus.
-      </p>
+      <p class="text-lg text-base-content/70">Choose one option from a compact visible set with radio semantics and roving focus.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Select Button architecture">
       <span suiBadge variant="soft" size="sm">Component</span>
@@ -13,26 +11,35 @@
     </div>
   </section>
 
-  <sui-card
-    ><h2 suiCardTitle>Basic usage and keyboard navigation</h2>
-    <p class="text-base-content/60">Arrow keys move and select, Home and End jump to the edges, and the form retains a single value.</p>
-    <sui-card size="sm" class="mt-5"><pg-select-button-basic-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Orientation and optional selection</h2>
-    <p class="text-base-content/60">
-      <code>allowEmpty</code> allows the active value to clear itself; orientation changes both layout and arrow keys.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-select-button-layout-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.layout.html" [typescript]="examples.layout.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Option template and states</h2>
-    <p class="text-base-content/60">
-      Replace option content while the component retains size, disabled state, selection, and ARIA behavior.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-select-button-template-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.template.html" [typescript]="examples.template.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Basic usage and keyboard navigation</h2>
+      <p class="text-base-content/60">Arrow keys move and select, Home and End jump to the edges, and the form retains a single value.</p>
+    </div>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript">
+      <ng-template pgExamplePreview><pg-select-button-basic-example /></ng-template>
+    </pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Orientation and optional selection</h2>
+      <p class="text-base-content/60">
+        <code>allowEmpty</code> allows the active value to clear itself; orientation changes both layout and arrow keys.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.layout.html" [typescript]="examples.layout.typescript">
+      <ng-template pgExamplePreview><pg-select-button-layout-example /></ng-template>
+    </pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Option template and states</h2>
+      <p class="text-base-content/60">
+        Replace option content while the component retains size, disabled state, selection, and ARIA behavior.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.template.html" [typescript]="examples.template.typescript">
+      <ng-template pgExamplePreview><pg-select-button-template-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

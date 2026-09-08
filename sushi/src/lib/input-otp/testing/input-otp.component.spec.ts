@@ -9,6 +9,7 @@ import { InputOtp } from '../input-otp.component';
   template: `
     <sui-input-otp
       ariaLabel="Verification code"
+      ariaDescribedby="verification-hint"
       [disabled]="disabled()"
       [invalid]="invalid()"
       [joined]="joined()"
@@ -43,6 +44,7 @@ describe('InputOtp semantics', (): void => {
     expect(input.inputMode).toBe('numeric');
     expect(input.pattern).toBe('[0-9]{4}');
     expect(input.getAttribute('aria-label')).toBe('Verification code');
+    expect(input.getAttribute('aria-describedby')).toBe('verification-hint');
   });
 
   it('switches masking, character mode, grouping, and invalid state', (): void => {
@@ -106,9 +108,10 @@ describe('InputOtp value and interaction', (): void => {
 });
 
 describe('InputOtp disabled state', (): void => {
-  it('remains focusable while blocking value changes', (): void => {
+  it('hard-disables the native input and blocks value changes', (): void => {
     const fixture: ComponentFixture<InputOtpHost> = render(InputOtpHost);
     const input: HTMLInputElement = query(fixture, 'input');
+    const label: HTMLLabelElement = query(fixture, 'label');
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
 
@@ -116,9 +119,10 @@ describe('InputOtp disabled state', (): void => {
     input.value = '9999';
     input.dispatchEvent(new Event('input', { bubbles: true }));
 
-    expect(document.activeElement).toBe(input);
-    expect(input.readOnly).toBe(true);
+    expect(document.activeElement).not.toBe(input);
+    expect(input.disabled).toBe(true);
     expect(input.getAttribute('aria-disabled')).toBe('true');
+    expect(label.classList.contains('sui-input-otp--disabled')).toBe(true);
     expect(fixture.componentInstance.value()).toBe('12');
   });
 });

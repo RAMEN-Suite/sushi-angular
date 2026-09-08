@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import basicHtml from './examples/basic/basic.example.html';
 import * as basicTs from './examples/basic/basic.example.ts' with { loader: 'text' };
@@ -14,15 +15,7 @@ import { SelectButtonTemplateExample } from './examples/template/template.exampl
 
 @Component({
   selector: 'pg-select-button-page',
-  imports: [
-    Badge,
-    Card,
-    CardTitle,
-    ExampleCode,
-    SelectButtonBasicExample,
-    SelectButtonLayoutExample,
-    SelectButtonTemplateExample,
-  ],
+  imports: [Badge, ExampleCode, ExamplePreview, SelectButtonBasicExample, SelectButtonLayoutExample, SelectButtonTemplateExample],
   templateUrl: './select-button.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

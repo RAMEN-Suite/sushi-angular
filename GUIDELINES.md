@@ -71,6 +71,15 @@ Complexity review:
 - Do not create one-method services, pass-through wrappers, or one-file-per-function structures solely to reduce line counts.
 - A developer should be able to find the public API from `index.ts`, the primary behavior from the main declaration, and specialized behavior under `internal/` without searching the whole repository.
 
+Component review checklist:
+
+- Remove or merge an input only when the same consumer outcome remains available without private DOM knowledge or a playground workaround.
+- Keep the common case short; advanced comparison, filtering, templates, and state inputs may remain explicit when they represent distinct behavior.
+- Verify every public member has a consumer-facing description and appears in the generated Interface reference.
+- Offer component tokens only for stable visual roles. Prefer shared family tokens when related components render the same interaction state.
+- Demonstrate defaults before customization, and ensure examples exercise meaningful API variations without restyling component internals.
+- Review source organization whenever a file crosses a complexity trigger; extract an independent concern, not arbitrary line ranges.
+
 ## Package size
 
 - Keep the published library tree-shakable; declarations must not register global runtime behavior.
@@ -174,7 +183,7 @@ Prefer in order:
 ## Accessibility and overlays
 
 - Every control needs an accessible name and visible focus.
-- Keep SUSHI actions and composite widgets focusable while disabled. Use `aria-disabled` or Angular Aria `softDisabled` and suppress activation; reserve native `disabled` for hard-disabled native form controls.
+- Match disabled behavior to the interaction: data-entry and selection controls are hard-disabled, leave sequential focus, and suppress pointer interaction; actions may remain focusable with `aria-disabled` when their presence still needs to be discoverable.
 - Visual wrappers such as Input Surface, Input Group, and Join do not name their controls.
 - Add `role="group"` and a group label only when the complete composition represents one named interaction.
 - Disabled covers pointer, keyboard, and forms behavior.

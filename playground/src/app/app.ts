@@ -1,6 +1,15 @@
 import { DOCUMENT, Location } from '@angular/common';
-import { CdkScrollable } from '@angular/cdk/scrolling';
-import { ChangeDetectionStrategy, Component, computed, inject, Signal, signal, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  Signal,
+  signal,
+  viewChild,
+  WritableSignal,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import {
@@ -13,7 +22,6 @@ import {
   LucideNavigation,
   LucidePanelsTopLeft,
   LucideRows3,
-  LucideSoup,
   LucideSun,
   LucideTableProperties,
   LucideTextCursorInput,
@@ -44,7 +52,6 @@ type PlaygroundTheme = 'sushi' | 'sushi-dark';
   selector: 'pg-root',
   imports: [
     Button,
-    CdkScrollable,
     Drawer,
     DrawerClose,
     DrawerContent,
@@ -58,7 +65,6 @@ type PlaygroundTheme = 'sushi' | 'sushi-dark';
     LucideNavigation,
     LucidePanelsTopLeft,
     LucideRows3,
-    LucideSoup,
     LucideSun,
     LucideTableProperties,
     LucideTextCursorInput,
@@ -94,13 +100,15 @@ export class App {
 
     return [
       { label: 'Examples', value: path, routerLink: path },
-      { label: 'API reference', value: `${path}/api`, routerLink: `${path}/api` },
-      { label: 'Styling', value: `${path}/styling`, routerLink: `${path}/styling` },
+      { label: 'Interface', value: `${path}/api`, routerLink: `${path}/api` },
+      { label: 'Theming', value: `${path}/styling`, routerLink: `${path}/styling` },
     ];
   });
   private readonly document: Document = inject(DOCUMENT);
   private readonly location: Location = inject(Location);
   private readonly router: Router = inject(Router);
+  private readonly contentScroll: Signal<ElementRef<HTMLElement> | undefined> =
+    viewChild<ElementRef<HTMLElement>>('contentScroll');
   private readonly currentUrl: Signal<string> = toSignal(
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
@@ -115,6 +123,12 @@ export class App {
     const nextTheme: PlaygroundTheme = this.theme() === 'sushi' ? 'sushi-dark' : 'sushi';
     this.theme.set(nextTheme);
     this.document.documentElement.dataset['theme'] = nextTheme;
+  }
+
+  protected scrollContentToTop(): void {
+    const element: HTMLElement | undefined = this.contentScroll()?.nativeElement;
+    if (!element) return;
+    element.scrollTo({ top: 0, left: 0 });
   }
 
   private getInitialTheme(): PlaygroundTheme {

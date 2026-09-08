@@ -3,7 +3,6 @@
   [class.sui-file-drop__zone--active]="active()"
   [class.sui-file-drop__zone--invalid]="isInvalid()"
   [class.bg-base-200]="active()"
-  [class.opacity-50]="disabled()"
   [attr.aria-disabled]="disabled() || null"
   [attr.aria-invalid]="isInvalid() || null"
   (dragenter)="handleDrag($event)"
@@ -43,6 +42,7 @@
     size="sm"
     variant="outlined"
     [disabled]="disabled()"
+    [tabIndex]="disabled() ? -1 : null"
     [attr.aria-labelledby]="buttonId + ' ' + labelId"
     [attr.aria-describedby]="descriptionId"
     (click)="openPicker()"
@@ -54,7 +54,7 @@
 
 <p class="sr-only" aria-live="polite">{{ announcement() }}</p>
 
-<div class="mt-3">
+<div class="sui-file-drop__selection mt-3">
   @if (rejectionMessage(); as message) {
     <p class="mb-2 text-sm text-error" aria-live="polite">{{ message }}</p>
   }
@@ -62,7 +62,15 @@
   @if (itemContexts().length) {
     <div class="mb-2 flex items-center justify-between gap-3">
       <strong>Selected files</strong>
-      <button suiButton type="button" size="xs" variant="text" [disabled]="disabled()" (click)="handleClear()">
+      <button
+        suiButton
+        type="button"
+        size="xs"
+        variant="text"
+        [disabled]="disabled()"
+        [tabIndex]="disabled() ? -1 : null"
+        (click)="handleClear()"
+      >
         {{ clearLabel() }}
       </button>
     </div>
@@ -86,6 +94,7 @@
             shape="square"
             variant="text"
             [disabled]="disabled()"
+            [tabIndex]="disabled() ? -1 : null"
             [attr.aria-label]="'Remove ' + context.file.name"
             (click)="handleRemove(index)"
           >

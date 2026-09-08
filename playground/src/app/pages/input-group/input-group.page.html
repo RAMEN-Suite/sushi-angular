@@ -2,25 +2,32 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Input Group</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">
-        Present related inputs, non-interactive add-ons, and actions as one field composition.
-      </p>
+      <p class="text-lg text-base-content/70">Present related inputs, non-interactive add-ons, and actions as one field composition.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Input Group architecture">
       <span suiBadge variant="soft" size="sm">Directive</span>
     </div>
   </section>
 
-  <sui-card
-    ><h2 suiCardTitle>Addresses and responsive fields</h2>
-    <p class="text-base-content/60">Add-ons communicate fixed text; responsive orientation stacks controls on narrow screens.</p>
-    <sui-card size="sm" class="mt-5"><pg-input-group-address-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.address.html" [typescript]="examples.address.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Mixed commerce controls</h2>
-    <p class="text-base-content/60">Inputs, add-ons, Select, and Button keep their own semantics while sharing one visual boundary.</p>
-    <sui-card size="sm" class="mt-5"><pg-input-group-commerce-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.commerce.html" [typescript]="examples.commerce.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Addresses and responsive fields</h2>
+      <p class="text-base-content/60">
+        Use add-ons for fixed text and responsive orientation when controls should stack on narrow screens.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.address.html" [typescript]="examples.address.typescript">
+      <ng-template pgExamplePreview><pg-input-group-address-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Mixed controls</h2>
+      <p class="text-base-content/60">Inputs, add-ons, Select, and Button retain their semantics inside one visual group.</p>
+    </div>
+    <pg-example-code [html]="examples.commerce.html" [typescript]="examples.commerce.typescript">
+      <ng-template pgExamplePreview><pg-input-group-commerce-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

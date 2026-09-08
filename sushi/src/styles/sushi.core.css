@@ -8,6 +8,7 @@
 @import './features/input.styles.css';
 @import './features/join.styles.css';
 @import './features/kbd.styles.css';
+@import './features/label.styles.css';
 @import './features/navbar.styles.css';
 @import './features/progress.styles.css';
 @import './features/range.styles.css';

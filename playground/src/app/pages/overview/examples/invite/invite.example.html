@@ -1,0 +1,71 @@
+<div class="mx-auto flex w-full max-w-5xl overflow-hidden rounded-box border border-base-300 bg-base-100">
+  <sui-sidebar
+    size="sm"
+    class="hidden min-h-[32rem] border-r border-base-300 bg-base-200 sm:flex"
+    ariaLabel="Workspace settings"
+    [groups]="navigation"
+    [(value)]="section">
+    <div suiSidebarFooter>
+      <button suiButton type="button" shape="fluid" variant="outlined">
+        <svg lucideArrowLeft class="size-4" aria-hidden="true"></svg>
+        Back to dashboard
+      </button>
+    </div>
+  </sui-sidebar>
+
+  <section class="min-w-0 grow p-5 sm:p-7">
+    <header>
+      <h3 class="text-xl font-semibold">Invite a team member</h3>
+      <p class="text-sm">Add someone to the Design workspace.</p>
+    </header>
+
+    <form class="mt-5 grid gap-4">
+      <label suiLabel class="grid gap-1.5">
+        Work email
+        <input suiInput fluid type="email" placeholder="name@company.com" />
+      </label>
+
+      <fieldset suiFieldset>
+        <legend suiFieldsetLegend>Role</legend>
+        <div suiFieldsetContent class="flex flex-wrap gap-x-6 gap-y-3">
+          <label suiLabel class="flex items-center gap-2">
+            <input suiRadio type="radio" name="role" checked />
+            Editor
+          </label>
+          <label suiLabel class="flex items-center gap-2">
+            <input suiRadio type="radio" name="role" />
+            Viewer
+          </label>
+          <label suiLabel class="flex items-center gap-2">
+            <input suiRadio type="radio" name="role" />
+            Admin
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset suiFieldset>
+        <legend suiFieldsetLegend>Access</legend>
+        <label suiLabel class="flex items-center justify-between gap-4">
+          <span>
+            <strong class="block">Project access</strong>
+            <span class="block text-sm">Share all current projects.</span>
+          </span>
+          <input suiToggle type="checkbox" checked />
+        </label>
+      </fieldset>
+
+      <div suiMessage severity="info" variant="soft" role="status">
+        <svg lucideShieldCheck class="size-5" aria-hidden="true"></svg>
+        Access can be changed at any time.
+      </div>
+
+      <div class="flex flex-wrap justify-end gap-2">
+        <button suiButton type="button" variant="outlined">Cancel</button>
+        <button suiButton type="submit">
+          <svg lucideSend class="size-4" aria-hidden="true"></svg>
+          Send invite
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

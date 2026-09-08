@@ -10,13 +10,14 @@ import { Fieldset } from '../fieldset.directive';
 @Component({
   imports: [Fieldset, FieldsetContent, FieldsetLegend, FieldsetToggle],
   template: `
-    <fieldset suiFieldset collapsible [bordered]="bordered()" [(expanded)]="expanded">
+    <fieldset suiFieldset [collapsible]="collapsible()" [bordered]="bordered()" [(expanded)]="expanded">
       <legend suiFieldsetLegend><button suiFieldsetToggle>Options</button></legend>
       <div suiFieldsetContent>Fields</div>
     </fieldset>
   `,
 })
 class FieldsetHost {
+  public readonly collapsible: WritableSignal<boolean> = signal<boolean>(true);
   public readonly bordered: WritableSignal<boolean> = signal<boolean>(true);
   public readonly expanded: WritableSignal<boolean> = signal<boolean>(true);
 }
@@ -47,5 +48,18 @@ describe('Fieldset', (): void => {
     expect(query(fixture, 'fieldset').classList).toContain('sui-fieldset--collapsed');
     expect(content.getAttribute('aria-hidden')).toBe('true');
     expect(content.hasAttribute('inert')).toBe(true);
+  });
+
+  it('does not change state when collapse behavior is disabled', (): void => {
+    const fixture: ComponentFixture<FieldsetHost> = render(FieldsetHost);
+    fixture.componentInstance.collapsible.set(false);
+    fixture.detectChanges();
+
+    query(fixture, 'button').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.expanded()).toBe(true);
+    expect(query(fixture, 'button').getAttribute('aria-disabled')).toBe('true');
+    expect(query(fixture, '[suiFieldsetContent]').hasAttribute('inert')).toBe(false);
   });
 });

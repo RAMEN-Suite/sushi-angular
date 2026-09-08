@@ -11,14 +11,4 @@
     </sui-color-picker>
     <p class="text-sm text-base-content/60">Enter a hex value or use the native color picker.</p>
   </div>
-
-  <sui-card size="xs" class="w-fit">
-    <div class="flex items-center gap-3">
-      <span class="size-10 rounded-field border border-base-300" [style.background-color]="form.color().value()"></span>
-      <span>
-        <span class="block text-xs text-base-content/60">Selected color</span>
-        <code class="font-mono uppercase">{{ form.color().value() }}</code>
-      </span>
-    </div>
-  </sui-card>
 </div>

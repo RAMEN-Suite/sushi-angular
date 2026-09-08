@@ -2,6 +2,7 @@
   class="max-w-full overflow-hidden rounded-box border border-base-300 bg-base-100 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2"
   [class.border-error]="isInvalid()"
   [class.opacity-50]="disabled()"
+  [class.pointer-events-none]="disabled()"
   (focusout)="handleFocusout($event)"
 >
   @if (headerTemplate(); as template) {
@@ -52,11 +53,11 @@
     class="list sui-selection-list sui-selection-list--focus-bound max-w-full overflow-y-auto p-2 outline-none"
     focusMode="activedescendant"
     selectionMode="explicit"
-    [tabindex]="0"
+    [tabindex]="disabled() ? -1 : 0"
     [attr.id]="id()"
     [multi]="multiple()"
     [disabled]="disabled()"
-    [softDisabled]="true"
+    [softDisabled]="false"
     [readonly]="readOnly()"
     [value]="listboxValue()"
     [style.max-height.px]="scrollHeight()"

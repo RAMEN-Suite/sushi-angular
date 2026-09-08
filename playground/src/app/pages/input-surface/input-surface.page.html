@@ -2,7 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Input Surface</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">
+      <p class="text-lg text-base-content/70">
         Keep a native input, icon, prefix, suffix, or shortcut inside one consistent field surface.
       </p>
     </div>
@@ -11,16 +11,23 @@
     </div>
   </section>
 
-  <sui-card
-    ><h2 suiCardTitle>Search with an action</h2>
-    <p class="text-base-content/60">Combine the surface with Join when an adjacent action belongs to the same task.</p>
-    <sui-card size="sm" class="mt-5"><pg-input-surface-search-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.search.html" [typescript]="examples.search.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Prefixes, suffixes, and state</h2>
-    <p class="text-base-content/60">Projected content stays visual; the nested native input continues to own value and accessibility.</p>
-    <sui-card size="sm" class="mt-5"><pg-input-surface-content-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.content.html" [typescript]="examples.content.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Search with an action</h2>
+      <p class="text-base-content/60">Combine Input Surface with Join when an adjacent action belongs to the same task.</p>
+    </div>
+    <pg-example-code [html]="examples.search.html" [typescript]="examples.search.typescript">
+      <ng-template pgExamplePreview><pg-input-surface-search-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Prefixes, suffixes, and state</h2>
+      <p class="text-base-content/60">Inline content stays visual while the native input owns value, disabled state, and accessibility.</p>
+    </div>
+    <pg-example-code [html]="examples.content.html" [typescript]="examples.content.typescript">
+      <ng-template pgExamplePreview><pg-input-surface-content-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

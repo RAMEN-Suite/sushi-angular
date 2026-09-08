@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import asyncHtml from './examples/async/async.example.html';
 import * as asyncTs from './examples/async/async.example.ts' with { loader: 'text' };
@@ -19,9 +20,8 @@ import { AutocompleteStatesExample } from './examples/states/states.example';
   selector: 'pg-autocomplete-page',
   imports: [
     Badge,
-    Card,
-    CardTitle,
     ExampleCode,
+    ExamplePreview,
     AutocompleteAsyncExample,
     AutocompleteBasicExample,
     AutocompleteFilteringExample,

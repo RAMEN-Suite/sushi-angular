@@ -9,17 +9,13 @@
   aria-labelledby="workspace-dialog-title"
   [(open)]="open"
   (closed)="record($event)">
-  <sui-card class="w-[min(30rem,calc(100vw-2rem))]">
-    <h2 suiCardTitle id="workspace-dialog-title">Workspace details</h2>
-    <div class="grid gap-4">
-      <label suiLabel for="workspace-name">Name</label>
-      <input suiInput fluid id="workspace-name" value="Northstar" />
-    </div>
-    <div suiCardActions class="justify-end">
-      <button suiButton type="button" severity="neutral" variant="soft" [suiDialogClose]="workspaceDialog">
-        Cancel
-      </button>
-      <button suiButton type="button" [suiDialogClose]="workspaceDialog" suiDialogCloseValue="saved">Save</button>
-    </div>
-  </sui-card>
+  <h2 id="workspace-dialog-title" class="text-lg font-semibold">Workspace details</h2>
+  <div class="mt-5 grid gap-2">
+    <label suiLabel for="workspace-name">Name</label>
+    <input suiInput fluid id="workspace-name" value="Northstar" />
+  </div>
+  <div class="mt-6 flex justify-end gap-2">
+    <button suiButton type="button" severity="neutral" variant="soft" [suiDialogClose]="workspaceDialog">Cancel</button>
+    <button suiButton type="button" [suiDialogClose]="workspaceDialog" suiDialogCloseValue="saved">Save</button>
+  </div>
 </dialog>

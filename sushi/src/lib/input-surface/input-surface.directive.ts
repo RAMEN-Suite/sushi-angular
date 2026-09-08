@@ -21,7 +21,7 @@ import { FormControlSeverity, FormControlSize } from '../form-control';
     '[class.w-full]': 'fluid()',
   },
 })
-/** Creates one input surface for a native control and inline prefixes or suffixes. */
+/** Creates one visual field around a native input and optional inline content. */
 export class InputSurface {
   /** Applies a semantic border color. */
   public readonly severity: InputSignal<FormControlSeverity | null> = input<FormControlSeverity | null>(null);

@@ -74,7 +74,7 @@ import {
     Spinner,
   ],
   templateUrl: './multi-select.component.html',
-  host: { class: 'inline-block max-w-full', '[class.w-full]': 'fluid()' },
+  host: { class: 'inline-block max-w-full', '[class.w-full]': 'fluid()', '[class.cursor-not-allowed]': 'disabled()' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultiSelect extends FormControlState implements FormValueControl<MultiSelectModelValue> {
@@ -121,7 +121,7 @@ export class MultiSelect extends FormControlState implements FormValueControl<Mu
   public readonly showSelectAll: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Expands the control to the available width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Prevents interaction while keeping the combobox focusable. */
+  /** Prevents interaction and removes the combobox from sequential focus. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Marks the control as required for accessibility and forms. */
   public readonly required: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -239,6 +239,7 @@ export class MultiSelect extends FormControlState implements FormValueControl<Mu
 
   /** Moves focus to the combobox. */
   public focus(): void {
+    if (this.disabled()) return;
     this.combobox().element.focus();
   }
 
@@ -249,6 +250,7 @@ export class MultiSelect extends FormControlState implements FormValueControl<Mu
   }
 
   protected handleExpanded(expanded: boolean): void {
+    if (expanded && (this.disabled() || this.loading())) return;
     if (this.expanded() === expanded) return;
     if (expanded) this.preferAvailableSpace();
     this.expanded.set(expanded);
@@ -257,6 +259,7 @@ export class MultiSelect extends FormControlState implements FormValueControl<Mu
   }
 
   protected handleSelection(values: MultiSelectValue[]): void {
+    if (this.disabled() || this.loading()) return;
     this.value.set(
       values.map(
         (value: MultiSelectValue): MultiSelectValue =>

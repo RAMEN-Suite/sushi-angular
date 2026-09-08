@@ -67,7 +67,7 @@ function isMultipleValue(value: ListboxModelValue): value is readonly ListboxVal
     Spinner,
   ],
   templateUrl: './listbox.component.html',
-  host: { class: 'sui-listbox block max-w-full' },
+  host: { class: 'sui-listbox block max-w-full', '[class.cursor-not-allowed]': 'disabled()' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Listbox extends FormControlState implements FormValueControl<ListboxModelValue> {
@@ -102,7 +102,7 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
   /** IDs of elements that describe the listbox. */
   public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
 
-  /** Prevents selection while keeping the listbox focusable. */
+  /** Prevents filtering and selection and removes the listbox from sequential focus. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Keeps options focusable without allowing selection changes. */
   public readonly readOnly: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -182,6 +182,7 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
 
   /** Moves focus to the listbox. */
   public focus(): void {
+    if (this.disabled()) return;
     this.listbox().element.focus();
   }
 

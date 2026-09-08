@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Button, Card, CardActions, CardTitle, Dialog, DialogClose, DialogTrigger } from '@ramen-suite/sushi';
+import { Button, Dialog, DialogClose, DialogTrigger } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-dialog-required-example',
-  imports: [Button, Card, CardActions, CardTitle, Dialog, DialogClose, DialogTrigger],
+  imports: [Button, Dialog, DialogClose, DialogTrigger],
   templateUrl: './required.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -22,10 +22,11 @@
       [id]="id()"
       [value]="displayValue()"
       [placeholder]="placeholder()"
-      [readOnly]="disabled()"
+      [disabled]="disabled()"
       [attr.aria-disabled]="disabled() || null"
       [attr.aria-label]="ariaLabel()"
       [attr.aria-labelledby]="ariaLabelledby()"
+      [attr.aria-describedby]="ariaDescribedby()"
       [attr.aria-valuemin]="min()"
       [attr.aria-valuemax]="max()"
       [attr.aria-valuenow]="value()"
@@ -56,6 +57,7 @@
           variant="soft"
           class="h-auto min-h-0 w-8 flex-1 px-0"
           [disabled]="disabled()"
+          [tabIndex]="disabled() ? -1 : null"
           aria-label="Increase"
           (click)="handleStep(1)"
         >
@@ -70,6 +72,7 @@
           variant="soft"
           class="h-auto min-h-0 w-8 flex-1 px-0"
           [disabled]="disabled()"
+          [tabIndex]="disabled() ? -1 : null"
           aria-label="Decrease"
           (click)="handleStep(-1)"
         >

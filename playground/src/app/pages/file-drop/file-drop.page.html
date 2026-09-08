@@ -2,7 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">File Drop</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">
+      <p class="text-lg text-base-content/70">
         Select or drop files with editable file lists, rejection feedback, Signal Forms, and replaceable content.
       </p>
     </div>
@@ -13,34 +13,37 @@
     </div>
   </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Selection and rejection</h2>
-    <p class="text-base-content/60">
-      Connect Signal Forms, accepted file types, editable labels, and drop events without starting an upload automatically.
-    </p>
-    <sui-card size="sm" class="mt-5">
-      <pg-file-drop-basic-example class="block" />
-    </sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Selection and rejection</h2>
+      <p class="text-base-content/60">
+        Connect Signal Forms, accepted file types, editable labels, and drop events without starting an upload automatically.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript">
+      <ng-template pgExamplePreview><pg-file-drop-basic-example class="block" /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Custom content and file rows</h2>
-    <p class="text-base-content/60">
-      Replace instructional content and repeated file rows while the component retains selection, removal, and accessibility behavior.
-    </p>
-    <sui-card size="sm" class="mt-5">
-      <pg-file-drop-custom-example class="block" />
-    </sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.custom.html" [typescript]="examples.custom.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Custom content and file rows</h2>
+      <p class="text-base-content/60">
+        Replace instructional content and repeated file rows while the component retains selection, removal, and accessibility behavior.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.custom.html" [typescript]="examples.custom.typescript">
+      <ng-template pgExamplePreview><pg-file-drop-custom-example class="block" /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Validation and disabled state</h2>
-    <p class="text-base-content/60">Invalid state covers the complete drop zone, while disabled prevents pointer and keyboard actions.</p>
-    <sui-card size="sm" class="mt-5">
-      <pg-file-drop-states-example class="block" />
-    </sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Validation and disabled state</h2>
+      <p class="text-base-content/60">Invalid state covers the complete drop zone, while disabled prevents pointer and keyboard actions.</p>
+    </div>
+    <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript">
+      <ng-template pgExamplePreview><pg-file-drop-states-example class="block" /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

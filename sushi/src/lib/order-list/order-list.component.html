@@ -1,4 +1,9 @@
-<div class="flex max-w-full flex-col gap-2 sm:flex-row" [class.opacity-50]="disabled()" (focusout)="handleFocusout($event)">
+<div
+  class="flex max-w-full flex-col gap-2 sm:flex-row"
+  [class.opacity-50]="disabled()"
+  [class.pointer-events-none]="disabled()"
+  (focusout)="handleFocusout($event)"
+>
   <div class="grid grid-cols-4 gap-1 self-center sm:grid-cols-1" role="group" aria-label="Reorder selected items">
     <button
       suiButton
@@ -94,10 +99,10 @@
       focusMode="activedescendant"
       selectionMode="explicit"
       [attr.id]="id()"
-      [tabindex]="0"
+      [tabindex]="disabled() ? -1 : 0"
       [multi]="true"
       [disabled]="disabled()"
-      [softDisabled]="true"
+      [softDisabled]="false"
       [value]="ariaSelection()"
       [style.max-height.px]="scrollHeight()"
       [attr.aria-label]="ariaLabel()"

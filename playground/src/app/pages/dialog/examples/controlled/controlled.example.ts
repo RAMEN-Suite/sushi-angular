@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Button, Card, CardActions, CardTitle, Dialog, DialogClose, DialogCloseEvent, Input, Label } from '@ramen-suite/sushi';
+import { Button, Dialog, DialogClose, DialogCloseEvent, Input, Label } from '@ramen-suite/sushi';
 
 @Component({
   selector: 'pg-dialog-controlled-example',
-  imports: [Button, Card, CardActions, CardTitle, Dialog, DialogClose, Input, Label],
+  imports: [Button, Dialog, DialogClose, Input, Label],
   templateUrl: './controlled.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

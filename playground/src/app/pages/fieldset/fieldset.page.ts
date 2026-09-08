@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import controlledHtml from './examples/controlled/controlled.example.html';
 import * as controlledTs from './examples/controlled/controlled.example.ts' with { loader: 'text' };
@@ -14,7 +15,7 @@ import { FieldsetTogglesExample } from './examples/toggles/toggles.example';
 
 @Component({
   selector: 'pg-fieldset-page',
-  imports: [Badge, Card, CardTitle, ExampleCode, FieldsetControlledExample, FieldsetPreferencesExample, FieldsetTogglesExample],
+  imports: [Badge, ExampleCode, ExamplePreview, FieldsetControlledExample, FieldsetPreferencesExample, FieldsetTogglesExample],
   templateUrl: './fieldset.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

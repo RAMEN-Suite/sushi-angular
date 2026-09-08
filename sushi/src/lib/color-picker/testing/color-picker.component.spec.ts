@@ -18,7 +18,6 @@ const presets: readonly ColorPickerPresetValue[] = [
     <sui-color-picker
       ariaLabel="Accent color"
       defaultValue="#123456"
-      presetSeverity="secondary"
       [disabled]="disabled()"
       [presets]="presets"
       [(value)]="value"
@@ -95,13 +94,15 @@ describe('ColorPicker editing', (): void => {
 });
 
 describe('ColorPicker presets', (): void => {
-  it('exposes stable preset state through its template context', (): void => {
+  it('exposes stable preset state and keeps every interaction on the neutral treatment', (): void => {
     const fixture: ComponentFixture<ColorPickerHost> = render(ColorPickerHost);
-    expect(queryAll(fixture, '[role="radio"]')).toHaveLength(4);
+    const radios: readonly HTMLButtonElement[] = queryAll(fixture, 'button[role="radio"]') as readonly HTMLButtonElement[];
+    expect(radios).toHaveLength(4);
     expect(query(fixture, '[data-preset="#ff0000"]').getAttribute('data-selected')).toBe('true');
     expect(query(fixture, '[data-preset="#00ff00"]').getAttribute('data-disabled')).toBe('true');
     expect(query(fixture, '[data-custom="true"]').getAttribute('data-label')).toBe('Custom');
-    expect(query(fixture, '[data-preset="#ff0000"]').parentElement?.classList).toContain('btn-secondary');
+    expect(radios.every((radio: HTMLButtonElement): boolean => radio.classList.contains('btn-neutral'))).toBe(true);
+    expect(radios.every((radio: HTMLButtonElement): boolean => radio.classList.contains('btn-outline'))).toBe(true);
   });
 
   it('selects enabled presets and skips disabled presets with arrow keys', (): void => {
@@ -115,6 +116,21 @@ describe('ColorPicker presets', (): void => {
 
     radios[1].click();
     expect(fixture.componentInstance.value()).toBe('#0000ff');
+  });
+
+  it('preserves the last custom color while switching through presets', (): void => {
+    const fixture: ComponentFixture<ColorPickerHost> = render(ColorPickerHost);
+    const native: HTMLInputElement = query(fixture, 'input[type="color"]') as HTMLInputElement;
+    native.value = '#123456';
+    native.dispatchEvent(new Event('input', { bubbles: true }));
+    fixture.detectChanges();
+
+    const radios: readonly HTMLButtonElement[] = queryAll(fixture, 'button[role="radio"]') as readonly HTMLButtonElement[];
+    radios[0].click();
+    fixture.detectChanges();
+    radios.at(-1)?.click();
+
+    expect(fixture.componentInstance.value()).toBe('#123456');
   });
 });
 
@@ -130,12 +146,14 @@ describe('ColorPicker public and disabled behavior', (): void => {
     expect(fixture.componentInstance.value()).toBe('#123456');
   });
 
-  it('remains focusable while disabled and blocks every color change', (): void => {
+  it('disables native controls and blocks every color change', (): void => {
     const fixture: ComponentFixture<ColorPickerHost> = render(ColorPickerHost);
     const native: HTMLInputElement = query(fixture, 'input[type="color"]') as HTMLInputElement;
     const text: HTMLInputElement = query(fixture, 'input[type="text"]') as HTMLInputElement;
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
+
+    const presets: readonly HTMLButtonElement[] = queryAll(fixture, 'button[role="radio"]') as readonly HTMLButtonElement[];
 
     fixture.componentInstance.control().focus();
     native.value = '#abcdef';
@@ -144,8 +162,22 @@ describe('ColorPicker public and disabled behavior', (): void => {
     text.dispatchEvent(new Event('input', { bubbles: true }));
     query(fixture, '[data-preset="#0000ff"]').parentElement?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
 
-    expect(document.activeElement).toBe(native);
-    expect(text.readOnly).toBe(true);
+    expect(document.activeElement).not.toBe(native);
+    expect(native.disabled).toBe(true);
+    expect(text.disabled).toBe(true);
+    expect(presets.every((preset: HTMLButtonElement): boolean => preset.tabIndex === -1)).toBe(true);
     expect(fixture.componentInstance.value()).toBe('#ff0000');
+  });
+
+  it('emits touch only when focus leaves the complete composite control', (): void => {
+    const fixture: ComponentFixture<ColorPickerHost> = render(ColorPickerHost);
+    const native: HTMLInputElement = query(fixture, 'input[type="color"]') as HTMLInputElement;
+    const text: HTMLInputElement = query(fixture, 'input[type="text"]') as HTMLInputElement;
+
+    native.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: text }));
+    expect(fixture.componentInstance.touches).toBe(0);
+
+    text.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }));
+    expect(fixture.componentInstance.touches).toBe(1);
   });
 });

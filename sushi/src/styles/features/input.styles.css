@@ -11,3 +11,31 @@
 :is(.sui-input, .sui-input-surface__control).sui-input--clear-hidden::-webkit-search-cancel-button {
   display: none;
 }
+
+.sui-input-otp--disabled,
+.sui-input-otp--disabled * {
+  cursor: not-allowed;
+}
+
+.sui-input-otp--disabled {
+  --input-color: color-mix(in oklab, var(--color-base-content) 12%, transparent);
+
+  color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+  user-select: none;
+}
+
+.sui-input-otp--disabled > span {
+  border-color: var(--input-color);
+  background-color: var(--color-base-200);
+  box-shadow: none;
+}
+
+.sui-input-otp--disabled > input {
+  color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+  opacity: 1;
+  -webkit-text-fill-color: currentColor;
+}
+
+.sui-input-otp--disabled::after {
+  outline-color: transparent;
+}

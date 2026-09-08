@@ -4,9 +4,11 @@
     <sui-input-otp
       id="input-otp-invalid"
       ariaLabelledby="input-otp-invalid-label"
+      ariaDescribedby="input-otp-error"
       [length]="4"
       invalid
       [value]="'1234'" />
+    <p id="input-otp-error" class="text-sm text-error">The code has expired.</p>
   </div>
 
   <div class="grid min-w-0 gap-2">

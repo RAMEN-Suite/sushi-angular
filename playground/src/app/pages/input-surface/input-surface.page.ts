@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import contentHtml from './examples/content/content.example.html';
 import * as contentTs from './examples/content/content.example.ts' with { loader: 'text' };
@@ -11,7 +12,7 @@ import { InputSurfaceSearchExample } from './examples/search/search.example';
 
 @Component({
   selector: 'pg-input-surface-page',
-  imports: [Badge, Card, CardTitle, ExampleCode, InputSurfaceContentExample, InputSurfaceSearchExample],
+  imports: [Badge, ExampleCode, ExamplePreview, InputSurfaceContentExample, InputSurfaceSearchExample],
   templateUrl: './input-surface.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

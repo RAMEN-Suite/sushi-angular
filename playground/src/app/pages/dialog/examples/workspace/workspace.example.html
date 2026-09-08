@@ -8,10 +8,10 @@
   resizable
   position="top"
   class="w-[min(36rem,calc(100vw-2rem))]">
-  <sui-card class="flex h-full w-full min-w-0 flex-col">
+  <div class="flex h-full min-w-0 flex-col">
     <div suiDialogDragHandle class="flex items-center gap-3">
       <svg lucideGripHorizontal class="size-4" aria-hidden="true"></svg>
-      <h2 suiCardTitle id="workspace-title" class="flex-1">Workspace settings</h2>
+      <h2 id="workspace-title" class="flex-1 text-lg font-semibold">Workspace settings</h2>
       <button
         suiButton
         type="button"
@@ -41,10 +41,10 @@
     <p class="min-h-28 flex-1 text-base-content/70">
       Drag from the header, resize from the lower corner, or maximize the dialog.
     </p>
-    <div suiCardActions class="justify-end">
+    <div class="mt-6 flex justify-end">
       <button suiButton type="button" [suiDialogClose]="workspaceDialog" suiDialogCloseValue="saved">
         Save changes
       </button>
     </div>
-  </sui-card>
+  </div>
 </dialog>

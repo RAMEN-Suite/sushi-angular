@@ -1,0 +1,4 @@
+/* DaisyUI dims labels by default; SUSHI labels inherit their surrounding text color. */
+.sui-label.label {
+  color: inherit;
+}

@@ -34,7 +34,11 @@ let nextFileDropId: number = 0;
   imports: [NgTemplateOutlet, LucideX, Button],
   templateUrl: './file-drop.component.html',
   styleUrl: './file-drop.component.css',
-  host: { class: 'sui-file-drop block', '[attr.aria-disabled]': 'disabled() || null' },
+  host: {
+    class: 'sui-file-drop block',
+    '[class.sui-file-drop--disabled]': 'disabled()',
+    '[attr.aria-disabled]': 'disabled() || null',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileDrop extends FormControlState implements FormValueControl<readonly File[]> {
@@ -111,6 +115,7 @@ export class FileDrop extends FormControlState implements FormValueControl<reado
 
   /** Moves focus to the file-picker action. */
   public focus(): void {
+    if (this.disabled()) return;
     this.chooseButton().nativeElement.focus();
   }
 
@@ -149,6 +154,7 @@ export class FileDrop extends FormControlState implements FormValueControl<reado
   }
 
   protected handleSelection(event: Event): void {
+    if (this.disabled()) return;
     const inputElement: EventTarget | null = event.currentTarget;
     if (!(inputElement instanceof HTMLInputElement)) return;
     this.value.set(this.selectFiles(inputElement.files));

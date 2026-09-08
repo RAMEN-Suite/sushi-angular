@@ -17,15 +17,16 @@ interface StyleTemplate extends ApiTemplate {
 
 const appearanceNames: ReadonlySet<string> = new Set<string>([
   'animation',
+  'bordered',
   'buttonShape',
   'dividers',
   'fluid',
+  'floating',
   'inset',
   'orientation',
   'pageLinkSize',
   'pinFirstColumn',
   'placement',
-  'presetSeverity',
   'resize',
   'rowHover',
   'scrollHeight',

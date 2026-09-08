@@ -2,7 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Input OTP</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">
+      <p class="text-lg text-base-content/70">
         Enter short verification codes with native selection, deletion, paste support, and Signal Forms.
       </p>
     </div>
@@ -37,41 +37,33 @@
     ];
     track section.key
   ) {
-    <sui-card>
-      <h2 suiCardTitle>{{ section.title }}</h2>
-      <p class="text-base-content/60">{{ section.description }}</p>
-      <sui-card size="sm" class="mt-5">
-        @switch (section.key) {
-          @case ('basic') {
-            <pg-input-otp-basic-example class="block" />
-          }
-          @case ('formats') {
-            <pg-input-otp-formats-example class="block" />
-          }
-          @case ('sizes') {
-            <pg-input-otp-sizes-example class="block" />
-          }
-          @case ('states') {
-            <pg-input-otp-states-example class="block" />
-          }
-        }
-      </sui-card>
-      <div class="mt-6">
-        @switch (section.key) {
-          @case ('basic') {
-            <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" />
-          }
-          @case ('formats') {
-            <pg-example-code [html]="examples.formats.html" [typescript]="examples.formats.typescript" />
-          }
-          @case ('sizes') {
-            <pg-example-code [html]="examples.sizes.html" [typescript]="examples.sizes.typescript" />
-          }
-          @case ('states') {
-            <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" />
-          }
-        }
+    <section class="space-y-6">
+      <div class="space-y-2">
+        <h2 class="text-2xl font-bold tracking-tight">{{ section.title }}</h2>
+        <p class="text-base-content/60">{{ section.description }}</p>
       </div>
-    </sui-card>
+      @switch (section.key) {
+        @case ('basic') {
+          <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript">
+            <ng-template pgExamplePreview><pg-input-otp-basic-example class="block" /></ng-template>
+          </pg-example-code>
+        }
+        @case ('formats') {
+          <pg-example-code [html]="examples.formats.html" [typescript]="examples.formats.typescript">
+            <ng-template pgExamplePreview><pg-input-otp-formats-example class="block" /></ng-template>
+          </pg-example-code>
+        }
+        @case ('sizes') {
+          <pg-example-code [html]="examples.sizes.html" [typescript]="examples.sizes.typescript">
+            <ng-template pgExamplePreview><pg-input-otp-sizes-example class="block" /></ng-template>
+          </pg-example-code>
+        }
+        @case ('states') {
+          <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript">
+            <ng-template pgExamplePreview><pg-input-otp-states-example class="block" /></ng-template>
+          </pg-example-code>
+        }
+      }
+    </section>
   }
 </main>

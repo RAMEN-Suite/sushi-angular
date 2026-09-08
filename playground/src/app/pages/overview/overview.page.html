@@ -1,122 +1,56 @@
-<main class="mx-auto max-w-7xl space-y-12 px-4 py-8 sm:px-8 sm:py-12">
+<main class="mx-auto max-w-7xl space-y-16 px-4 py-8 sm:px-8 sm:py-12">
   <section>
-    <sui-card size="lg" class="overflow-hidden bg-base-200/40">
-      <div class="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
-        <div class="max-w-3xl space-y-5">
-          <div class="flex flex-wrap gap-2">
-            <span suiBadge size="sm" variant="soft">Angular 22+</span>
-            <span suiBadge size="sm" variant="soft">Signal Forms</span>
-            <span suiBadge size="sm" variant="soft">Accessible</span>
-          </div>
-
-          <div class="space-y-3">
-            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">SUSHI component library</p>
-            <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">Angular components for consistent application interfaces.</h1>
-            <p class="max-w-2xl text-lg leading-relaxed text-base-content/70">
-              Browse working examples, public APIs, and styling guidance for every documented component.
-            </p>
-          </div>
-
-          <div class="flex flex-wrap gap-3">
-            <a suiButton routerLink="/input">Start with Input</a>
-            <a suiButton routerLink="/select" variant="outlined">Explore Select</a>
-          </div>
-        </div>
-
-        <sui-card size="sm" class="bg-base-100">
-          <div class="flex items-center gap-3">
-            <span suiStatus severity="success" size="lg" aria-hidden="true"></span>
-            <div>
-              <div class="font-semibold">Automated checks</div>
-              <p class="text-sm text-base-content/60">Unit, browser, lint, and production-build checks are configured.</p>
-            </div>
-          </div>
-        </sui-card>
-      </div>
-    </sui-card>
-  </section>
-
-  <section class="space-y-7">
-    <div class="max-w-3xl space-y-2">
-      <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Project checks</p>
-      <h2 class="text-3xl font-bold tracking-tight">How the component contracts are verified</h2>
-      <p class="text-base leading-relaxed text-base-content/65">
-        Coverage thresholds apply to the library test suite. Browser tests cover behavior that depends on focus, layout, scrolling, or
-        responsive state.
-      </p>
-    </div>
-
-    <div class="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-      <sui-card size="md" class="bg-base-100">
-        <div class="space-y-1.5">
-          <h3 suiCardTitle>Coverage gates</h3>
-          <p class="text-sm leading-relaxed text-base-content/60">Minimum project-wide coverage required by the test runner.</p>
-        </div>
-
-        <div suiDivider class="my-1 opacity-60"></div>
-
+    <sui-card size="xl" class="border-primary/20 bg-base-200/45">
+      <div class="grid gap-8 py-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(19rem,0.8fr)] lg:items-center lg:py-8">
         <div class="space-y-4">
-          @for (gate of coverageGates; track gate.label) {
-            <div class="space-y-1.5">
-              <div class="flex items-center justify-between gap-4 text-sm">
-                <span class="font-medium">{{ gate.label }}</span>
-                <span class="tabular-nums text-base-content/60">{{ gate.value }}%</span>
-              </div>
-              <progress suiProgress severity="success" class="w-full" [value]="gate.value" max="100">{{ gate.value }}%</progress>
-            </div>
-          }
-        </div>
-      </sui-card>
-
-      <sui-card size="md" class="bg-base-100">
-        <div class="space-y-1.5">
-          <h3 suiCardTitle>Verification tools</h3>
-          <p class="text-sm leading-relaxed text-base-content/60">The checks currently used by this repository.</p>
-        </div>
-
-        <div suiDivider class="my-1 opacity-60"></div>
-
-        <sui-list [items]="qualityLayers" size="sm" [dividers]="true" ariaLabel="Quality checks">
-          <ng-template suiListItem let-layer>
-            <span suiStatus severity="success" size="sm" aria-hidden="true"></span>
-            <div class="min-w-0 grow">
-              <div class="font-semibold">{{ layer.label }}</div>
-              <p class="mt-0.5 text-sm leading-relaxed text-base-content/60">{{ layer.description }}</p>
-            </div>
-            <span suiBadge size="sm" severity="neutral" variant="soft">{{ layer.detail }}</span>
-          </ng-template>
-        </sui-list>
-      </sui-card>
-    </div>
-  </section>
-
-  <section>
-    <sui-card size="lg" class="bg-base-200/35">
-      <div class="grid gap-8 lg:grid-cols-[minmax(15rem,0.7fr)_minmax(0,1.3fr)]">
-        <div class="space-y-3">
-          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Using the documentation</p>
-          <h2 class="text-3xl font-bold tracking-tight">What each component page contains</h2>
-          <p class="leading-relaxed text-base-content/65">
-            Use the three page sections to choose a component, integrate it, and adapt its appearance without relying on implementation
-            details.
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary">Angular component library</p>
+          <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">SUSHI for Angular</h1>
+          <p class="text-xl font-medium sm:text-2xl">Build consistent interfaces from composable components.</p>
+          <p class=" leading-relaxed text-base-content/65">
+            Accessible behavior, typed APIs, and flexible theme tokens are included.
           </p>
         </div>
 
-        <sui-list [items]="documentationSections" size="sm" [dividers]="true" ariaLabel="Component page sections">
-          <ng-template suiListItem let-step let-index="index">
-            <span
-              class="grid size-7 shrink-0 place-items-center rounded-full bg-primary/10 text-sm font-semibold text-primary"
-              aria-hidden="true"
-            >
-              {{ index + 1 }}
-            </span>
-            <div class="min-w-0 grow">
-              <div class="font-semibold">{{ step.label }}</div>
-              <p class="mt-0.5 text-sm leading-relaxed text-base-content/60">{{ step.description }}</p>
-            </div>
-          </ng-template>
-        </sui-list>
+        <div class="rounded-box border border-base-300 bg-base-100 p-6 sm:p-8">
+          <p class="mb-3 text-sm font-semibold text-base-content/60">Install the package</p>
+          <code class="block overflow-x-auto font-mono text-sm font-semibold">npm install @sushi-kit/angular</code>
+        </div>
       </div>
     </sui-card>
+  </section>
+
+  <section id="example" class="scroll-mt-24 space-y-6">
+    <div class="max-w-2xl space-y-2">
+      <h2 class="text-3xl font-bold tracking-tight">See the system in context</h2>
+      <p class="text-base-content/65">A complete form flow composed from public SUSHI APIs, without custom component logic.</p>
+    </div>
+
+    <sui-tabs [(value)]="showcaseTab" ariaLabel="Team invitation example" variant="lift">
+      <ng-template suiTab value="preview" label="Preview">
+        <div class="p-4 sm:p-7">
+          <pg-overview-invite-example />
+        </div>
+      </ng-template>
+
+      <ng-template suiTab value="html" label="HTML">
+        <div class="p-4 sm:p-6">
+          <sui-code buttonAriaLabel="Copy invitation HTML">
+            @for (line of showcaseHtmlLines; track $index) {
+              <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
+            }
+          </sui-code>
+        </div>
+      </ng-template>
+
+      <ng-template suiTab value="typescript" label="TypeScript">
+        <div class="p-4 sm:p-6">
+          <sui-code buttonAriaLabel="Copy invitation TypeScript">
+            @for (line of showcaseTypescriptLines; track $index) {
+              <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
+            }
+          </sui-code>
+        </div>
+      </ng-template>
+    </sui-tabs>
   </section>
 </main>

@@ -35,6 +35,13 @@ type ApiTypeNode = ts.InterfaceDeclaration | ts.TypeAliasDeclaration | ts.EnumDe
 const root: string = resolve(process.cwd());
 const sourceRoot: string = join(root, 'sushi/src/lib');
 const outputFile: string = join(root, 'playground/src/app/generated/api-reference.generated.ts');
+const sharedStyleFiles: Readonly<Record<string, readonly string[]>> = {
+  autocomplete: ['sushi/src/styles/features/selection.styles.css'],
+  listbox: ['sushi/src/styles/features/selection.styles.css'],
+  'multi-select': ['sushi/src/styles/features/selection.styles.css'],
+  'order-list': ['sushi/src/styles/features/selection.styles.css'],
+  select: ['sushi/src/styles/features/selection.styles.css'],
+};
 
 function findSourceFiles(folder: string): string[] {
   return readdirSync(folder, { withFileTypes: true }).flatMap((entry: Dirent): string[] => {
@@ -93,18 +100,26 @@ function findStyleFile(node: ts.ClassDeclaration): string | null {
 }
 
 function readStyleProperties(node: ts.ClassDeclaration): readonly ApiStyleProperty[] {
-  const file: string | null = findStyleFile(node);
-  if (!file) return [];
+  const folder: string = basename(dirname(node.getSourceFile().fileName));
+  const componentStyle: string | null = findStyleFile(node);
+  const files: readonly string[] = [
+    ...(componentStyle ? [componentStyle] : []),
+    ...(sharedStyleFiles[folder] ?? []).map((file: string): string => join(root, file)),
+  ];
+  if (files.length === 0) return [];
 
-  const css: string = readFileSync(file, 'utf8');
+  const css: string = files.map((file: string): string => readFileSync(file, 'utf8')).join('\n');
   const pattern: RegExp = /\/\*\*([\s\S]*?)\*\/\s*(--sui-[\w-]+)\s*:\s*([^;]+);/gu;
+  const fallbackPattern: RegExp = /\/\*\*([\s\S]*?)\*\/[\s\S]*?var\((--sui-[\w-]+),/gu;
   const examplePattern: RegExp = /^@example\s+(.+)$/mu;
-  return [...css.matchAll(pattern)].map((match: RegExpMatchArray): ApiStyleProperty => {
+  const matches: readonly RegExpMatchArray[] = [...css.matchAll(pattern), ...css.matchAll(fallbackPattern)];
+  const properties: ApiStyleProperty[] = matches.map((match: RegExpMatchArray): ApiStyleProperty => {
     const documentation: string = match[1].replaceAll(/^\s*\* ?/gmu, '').trim();
     const example: RegExpExecArray | null = examplePattern.exec(documentation);
+    const declaredDefault: string | undefined = match.at(3);
     return {
       name: match[2],
-      defaultValue: match[3].trim(),
+      defaultValue: declaredDefault?.trim() ?? 'theme default',
       exampleValue: example?.[1]?.trim() ?? null,
       description: documentation
         .replaceAll(/^@\w+.*$/gmu, '')
@@ -112,6 +127,10 @@ function readStyleProperties(node: ts.ClassDeclaration): readonly ApiStyleProper
         .trim(),
     };
   });
+  return properties.filter(
+    (property: ApiStyleProperty, index: number): boolean =>
+      properties.findIndex((candidate: ApiStyleProperty): boolean => candidate.name === property.name) === index,
+  );
 }
 
 function readJSDoc(node: ts.Node): string {

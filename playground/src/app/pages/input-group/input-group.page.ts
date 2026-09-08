@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import addressHtml from './examples/address/address.example.html';
 import * as addressTs from './examples/address/address.example.ts' with { loader: 'text' };
@@ -11,7 +12,7 @@ import { InputGroupCommerceExample } from './examples/commerce/commerce.example'
 
 @Component({
   selector: 'pg-input-group-page',
-  imports: [Badge, Card, CardTitle, ExampleCode, InputGroupAddressExample, InputGroupCommerceExample],
+  imports: [Badge, ExampleCode, ExamplePreview, InputGroupAddressExample, InputGroupCommerceExample],
   templateUrl: './input-group.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

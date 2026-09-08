@@ -369,7 +369,7 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents interaction while keeping the input focusable.',
+        description: 'Disables the native search input and prevents querying or selection.',
       },
       {
         name: 'loading',
@@ -571,7 +571,50 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-selection-option-hover-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of an enabled option when hovered or actively navigated.',
+      },
+      {
+        name: '--sui-selection-option-hover-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of an enabled option when hovered or actively navigated.',
+      },
+      {
+        name: '--sui-selection-option-active-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of an enabled option while pressed.',
+      },
+      {
+        name: '--sui-selection-option-active-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of an enabled option while pressed.',
+      },
+      {
+        name: '--sui-selection-option-selected-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of a selected or matched option.',
+      },
+      {
+        name: '--sui-selection-option-selected-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of a selected or matched option.',
+      },
+      {
+        name: '--sui-selection-option-selected-hover-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of a selected option when hovered, pressed, or actively navigated.',
+      },
+    ],
   },
   AutoFocus: {
     className: 'AutoFocus',
@@ -1330,21 +1373,14 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'readonly ColorPickerPresetValue[]',
         defaultValue: '[]',
-        description: 'Optional preset colors rendered after the picker.',
-      },
-      {
-        name: 'presetSeverity',
-        kind: 'input',
-        type: 'ColorPickerPresetSeverity',
-        defaultValue: "'primary'",
-        description: 'Semantic color applied to the selected preset action.',
+        description: 'Optional six-digit hex colors rendered as a radiogroup, followed by a reusable custom-color option.',
       },
       {
         name: 'defaultValue',
         kind: 'input',
         type: 'string',
         defaultValue: "'#000000'",
-        description: 'Value restored by `reset()`.',
+        description: 'Six-digit hex color restored by `reset()` when the picker is used outside Signal Forms.',
       },
       {
         name: 'invalidMessage',
@@ -1358,7 +1394,7 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'string | null',
         defaultValue: 'null',
-        description: 'ID applied to the primary visible control.',
+        description: 'ID applied to the text input, or to the native color input when `showInput` is false.',
       },
       {
         name: 'ariaLabel',
@@ -1386,7 +1422,7 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents color entry and preset selection while keeping controls focusable.',
+        description: 'Disables color entry, focus, and preset selection.',
       },
       {
         name: 'fluid',
@@ -1419,7 +1455,7 @@ export const apiReference: Readonly<{
       {
         name: 'focus',
         kind: 'method',
-        type: '() => void',
+        type: '(options?: FocusOptions) => void',
         defaultValue: null,
         description: 'Moves focus to the native color picker.',
       },
@@ -1435,7 +1471,8 @@ export const apiReference: Readonly<{
       {
         name: 'suiColorPickerPreset',
         context: 'ColorPickerPresetContext',
-        description: 'Replaces the content of each preset color action.',
+        description:
+          "Replaces each preset action's default swatch while preserving selection, keyboard behavior, and themed interaction states.",
         members: [],
       },
     ],
@@ -1445,7 +1482,7 @@ export const apiReference: Readonly<{
         kind: 'interface',
         declaration:
           'interface ColorPickerPreset {\n  readonly value: string;\n  readonly label: string;\n  readonly disabled?: boolean;\n}',
-        description: 'Named color offered by a color-picker preset palette.',
+        description: 'Named six-digit hex color offered by a preset palette, with optional disabled state.',
       },
       {
         name: 'ColorPickerPresetContext',
@@ -1455,26 +1492,62 @@ export const apiReference: Readonly<{
         description: 'Context exposed to a color-picker preset template.',
       },
       {
-        name: 'ColorPickerPresetSeverity',
-        kind: 'type',
-        declaration: 'type ColorPickerPresetSeverity = ThemeSeverity;',
-        description: 'Semantic color used by the selected preset action.',
-      },
-      {
         name: 'ColorPickerPresetValue',
         kind: 'type',
         declaration: 'type ColorPickerPresetValue = string | ColorPickerPreset;',
-        description: 'Shorthand or configured entry accepted by a preset palette.',
-      },
-      {
-        name: 'ThemeSeverity',
-        kind: 'type',
-        declaration:
-          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
-        description: 'Shared semantic color names provided by the theme.',
+        description: 'Six-digit hex shorthand or configured entry accepted by a preset palette.',
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-color-picker-swatch-radius',
+        defaultValue: 'var(--radius-field)',
+        exampleValue: '9999px',
+        description: 'Corner radius of the native and default preset swatches.',
+      },
+      {
+        name: '--sui-color-picker-preset-gap',
+        defaultValue: '0.5rem',
+        exampleValue: '0.75rem',
+        description: 'Space between preset actions.',
+      },
+      {
+        name: '--sui-color-picker-preset-swatch-size',
+        defaultValue: '1.25rem',
+        exampleValue: '1.5rem',
+        description: 'Width and height of the default preset swatch.',
+      },
+      {
+        name: '--sui-color-picker-preset-color',
+        defaultValue: 'var(--color-neutral)',
+        exampleValue: 'var(--color-accent)',
+        description: 'Color used to derive the subtle preset interaction states.',
+      },
+      {
+        name: '--sui-color-picker-preset-content',
+        defaultValue: 'var(--color-base-content)',
+        exampleValue: 'var(--color-accent-content)',
+        description: 'Content color used for selected presets.',
+      },
+      {
+        name: '--sui-color-picker-preset-background',
+        defaultValue: 'var(--color-base-100)',
+        exampleValue: 'var(--color-base-200)',
+        description: 'Background shared by idle, hovered, and selected preset fields.',
+      },
+      {
+        name: '--sui-color-picker-preset-border',
+        defaultValue: 'color-mix(in oklab, var(--color-base-content) 20%, transparent)',
+        exampleValue: 'var(--color-base-300)',
+        description: 'Border color of an idle preset field.',
+      },
+      {
+        name: '--sui-color-picker-preset-ring',
+        defaultValue: 'var(--sui-color-picker-preset-color)',
+        exampleValue: 'var(--color-primary)',
+        description: 'Ring color used for keyboard focus and the selected preset.',
+      },
+    ],
   },
   ContextMenuTrigger: {
     className: 'ContextMenuTrigger',
@@ -1903,7 +1976,7 @@ export const apiReference: Readonly<{
         description: 'Dialog closed by this action.',
       },
       {
-        name: 'returnValue',
+        name: 'suiDialogCloseValue',
         kind: 'input',
         type: 'string',
         defaultValue: "''",
@@ -2256,7 +2329,8 @@ export const apiReference: Readonly<{
   FieldsetToggle: {
     className: 'FieldsetToggle',
     selector: 'button[suiFieldsetToggle]',
-    description: 'Turns a legend button into the controller for its collapsible fieldset.',
+    description:
+      'Turns a legend button into the controller for a collapsible fieldset. Use it only when `collapsible` is enabled.',
     members: [],
     templates: [],
     types: [],
@@ -2699,7 +2773,7 @@ export const apiReference: Readonly<{
   InputGroup: {
     className: 'InputGroup',
     selector: '[suiInputGroup]',
-    description: 'Connects inputs, add-ons, and actions as one visual field group.',
+    description: 'Connects inputs, add-ons, and actions as one visual group without changing their semantics.',
     members: [
       {
         name: 'orientation',
@@ -2845,6 +2919,13 @@ export const apiReference: Readonly<{
         description: 'IDs of elements that label the internal spin-button.',
       },
       {
+        name: 'ariaDescribedby',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'IDs of elements that describe the internal spin-button.',
+      },
+      {
         name: 'size',
         kind: 'input',
         type: 'FormControlSize',
@@ -2870,7 +2951,7 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents editing and step actions while keeping the spinbutton focusable.',
+        description: 'Disables numeric entry, focus, and step actions.',
       },
       {
         name: 'invalid',
@@ -2980,11 +3061,18 @@ export const apiReference: Readonly<{
         description: 'IDs of elements that label the native input.',
       },
       {
+        name: 'ariaDescribedby',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'IDs of elements that describe the native input.',
+      },
+      {
         name: 'disabled',
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents code entry while keeping the input focusable.',
+        description: 'Disables code entry and focus.',
       },
       {
         name: 'invalid',
@@ -3056,7 +3144,7 @@ export const apiReference: Readonly<{
   InputSurface: {
     className: 'InputSurface',
     selector: 'div[suiInputSurface]',
-    description: 'Creates one input surface for a native control and inline prefixes or suffixes.',
+    description: 'Creates one visual field around a native input and optional inline content.',
     members: [
       {
         name: 'severity',
@@ -3120,7 +3208,7 @@ export const apiReference: Readonly<{
   InputSurfaceControl: {
     className: 'InputSurfaceControl',
     selector: 'input[suiInputSurfaceControl]',
-    description: 'Marks the native input that owns the value inside an input surface.',
+    description: 'Marks the native input that owns value, form state, and native attributes inside an input surface.',
     members: [
       {
         name: 'showClear',
@@ -3441,7 +3529,7 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents selection while keeping the listbox focusable.',
+        description: 'Prevents filtering and selection and removes the listbox from sequential focus.',
       },
       {
         name: 'readOnly',
@@ -3603,7 +3691,50 @@ export const apiReference: Readonly<{
         description: 'Primitive or object value accepted by selection controls.',
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-selection-option-hover-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of an enabled option when hovered or actively navigated.',
+      },
+      {
+        name: '--sui-selection-option-hover-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of an enabled option when hovered or actively navigated.',
+      },
+      {
+        name: '--sui-selection-option-active-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of an enabled option while pressed.',
+      },
+      {
+        name: '--sui-selection-option-active-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of an enabled option while pressed.',
+      },
+      {
+        name: '--sui-selection-option-selected-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of a selected or matched option.',
+      },
+      {
+        name: '--sui-selection-option-selected-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of a selected or matched option.',
+      },
+      {
+        name: '--sui-selection-option-selected-hover-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of a selected option when hovered, pressed, or actively navigated.',
+      },
+    ],
   },
   Menu: {
     className: 'Menu',
@@ -4080,7 +4211,7 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents interaction while keeping the combobox focusable.',
+        description: 'Prevents interaction and removes the combobox from sequential focus.',
       },
       {
         name: 'required',
@@ -4359,7 +4490,50 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-selection-option-hover-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of an enabled option when hovered or actively navigated.',
+      },
+      {
+        name: '--sui-selection-option-hover-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of an enabled option when hovered or actively navigated.',
+      },
+      {
+        name: '--sui-selection-option-active-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of an enabled option while pressed.',
+      },
+      {
+        name: '--sui-selection-option-active-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of an enabled option while pressed.',
+      },
+      {
+        name: '--sui-selection-option-selected-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of a selected or matched option.',
+      },
+      {
+        name: '--sui-selection-option-selected-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of a selected or matched option.',
+      },
+      {
+        name: '--sui-selection-option-selected-hover-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of a selected option when hovered, pressed, or actively navigated.',
+      },
+    ],
   },
   Navbar: {
     className: 'Navbar',
@@ -4639,7 +4813,7 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents selection and reordering while keeping controls focusable.',
+        description: 'Prevents filtering, selection, and reordering and removes controls from sequential focus.',
       },
       {
         name: 'touch',
@@ -4744,7 +4918,50 @@ export const apiReference: Readonly<{
         description: 'Primitive or object value accepted by selection controls.',
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-selection-option-hover-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of an enabled option when hovered or actively navigated.',
+      },
+      {
+        name: '--sui-selection-option-hover-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of an enabled option when hovered or actively navigated.',
+      },
+      {
+        name: '--sui-selection-option-active-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of an enabled option while pressed.',
+      },
+      {
+        name: '--sui-selection-option-active-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of an enabled option while pressed.',
+      },
+      {
+        name: '--sui-selection-option-selected-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of a selected or matched option.',
+      },
+      {
+        name: '--sui-selection-option-selected-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of a selected or matched option.',
+      },
+      {
+        name: '--sui-selection-option-selected-hover-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of a selected option when hovered, pressed, or actively navigated.',
+      },
+    ],
   },
   Pagination: {
     className: 'Pagination',
@@ -5289,7 +5506,7 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Prevents interaction while keeping the combobox focusable.',
+        description: 'Prevents interaction and removes the combobox from sequential focus.',
       },
       {
         name: 'required',
@@ -5519,7 +5736,50 @@ export const apiReference: Readonly<{
         description: 'Shared semantic color names provided by the theme.',
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-selection-option-hover-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of an enabled option when hovered or actively navigated.',
+      },
+      {
+        name: '--sui-selection-option-hover-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of an enabled option when hovered or actively navigated.',
+      },
+      {
+        name: '--sui-selection-option-active-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of an enabled option while pressed.',
+      },
+      {
+        name: '--sui-selection-option-active-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of an enabled option while pressed.',
+      },
+      {
+        name: '--sui-selection-option-selected-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of a selected or matched option.',
+      },
+      {
+        name: '--sui-selection-option-selected-color',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Text color of a selected or matched option.',
+      },
+      {
+        name: '--sui-selection-option-selected-hover-background',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Background of a selected option when hovered, pressed, or actively navigated.',
+      },
+    ],
   },
   SelectButton: {
     className: 'SelectButton',

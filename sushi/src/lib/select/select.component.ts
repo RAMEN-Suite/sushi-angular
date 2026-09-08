@@ -71,7 +71,7 @@ import {
     Spinner,
   ],
   templateUrl: './select.component.html',
-  host: { class: 'inline-block max-w-full', '[class.w-full]': 'fluid()' },
+  host: { class: 'inline-block max-w-full', '[class.w-full]': 'fluid()', '[class.cursor-not-allowed]': 'disabled()' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Select extends FormControlState implements FormValueControl<SelectModelValue> {
@@ -116,7 +116,7 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   public readonly checkmark: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Expands the control to the available width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Prevents interaction while keeping the combobox focusable. */
+  /** Prevents interaction and removes the combobox from sequential focus. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Marks the control as required for accessibility and forms. */
   public readonly required: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -205,6 +205,7 @@ export class Select extends FormControlState implements FormValueControl<SelectM
 
   /** Moves focus to the combobox. */
   public focus(): void {
+    if (this.disabled()) return;
     this.combobox().element.focus();
   }
 
@@ -215,6 +216,7 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   }
 
   protected handleExpanded(expanded: boolean): void {
+    if (expanded && (this.disabled() || this.loading())) return;
     if (this.expanded() === expanded) return;
     if (expanded) {
       this.preferAvailableSpace();
@@ -226,6 +228,7 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   }
 
   protected handleSelection(values: SelectValue[]): void {
+    if (this.disabled() || this.loading()) return;
     const value: SelectValue | undefined = values.at(0);
     if (value !== undefined) this.value.set(value);
     this.handleExpanded(false);

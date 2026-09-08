@@ -20,11 +20,14 @@
   [class.bg-base-200]="variant() === 'filled' || disabled()"
   [class.cursor-pointer]="!disabled()"
   [class.cursor-not-allowed]="disabled()"
+  [class.pointer-events-none]="disabled()"
+  [class.select-none]="disabled()"
   [class.sui-form-control--disabled]="disabled()"
   [preserveContent]="true"
   [expanded]="expanded() && !disabled()"
   [disabled]="disabled()"
-  [softDisabled]="true"
+  [softDisabled]="false"
+  [tabIndex]="disabled() ? -1 : 0"
   [attr.id]="id()"
   [attr.aria-label]="ariaLabel()"
   [attr.aria-labelledby]="ariaLabelledby()"
@@ -142,7 +145,7 @@
         >
           @for (option of options(); track option.value; let index = $index) {
             @if (option.group && option.group !== options()[index - 1]?.group) {
-              <div class="px-3 pb-2 pt-4 border-base-200" [class.mt-2]="index > 0" [class.border-t]="index > 0" role="presentation">
+              <div class="px-3 pt-4 pb-2" role="presentation">
                 @if (groupTemplate(); as template) {
                   <ng-container
                     [ngTemplateOutlet]="template"

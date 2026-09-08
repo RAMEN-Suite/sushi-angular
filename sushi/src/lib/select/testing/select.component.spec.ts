@@ -4,7 +4,19 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { Select } from '../select.component';
 import type { SelectModelValue, SelectOption } from '../select.interfaces';
-import { SelectItemTemplate, SelectSelectedItemTemplate } from '../select.templates';
+import {
+  SelectCheckmarkIconTemplate,
+  SelectClearIconTemplate,
+  SelectDropdownIconTemplate,
+  SelectEmptyTemplate,
+  SelectFooterTemplate,
+  SelectGroupTemplate,
+  SelectHeaderTemplate,
+  SelectItemTemplate,
+  SelectLoadingIconTemplate,
+  SelectLoadingTemplate,
+  SelectSelectedItemTemplate,
+} from '../select.templates';
 
 const options: readonly SelectOption[] = [
   { label: 'Miso', value: 'miso' },
@@ -49,6 +61,46 @@ class SelectHost {
   public touches: number = 0;
 }
 
+@Component({
+  imports: [
+    Select,
+    SelectCheckmarkIconTemplate,
+    SelectClearIconTemplate,
+    SelectDropdownIconTemplate,
+    SelectEmptyTemplate,
+    SelectFooterTemplate,
+    SelectGroupTemplate,
+    SelectHeaderTemplate,
+    SelectLoadingIconTemplate,
+    SelectLoadingTemplate,
+  ],
+  template: `
+    <sui-select checkmark showClear [loading]="loading()" [options]="options()" [(value)]="value">
+      <ng-template suiSelectHeader><span data-header>Header</span></ng-template>
+      <ng-template suiSelectFooter><span data-footer>Footer</span></ng-template>
+      <ng-template suiSelectEmpty><span data-empty>Nothing here</span></ng-template>
+      <ng-template suiSelectGroup let-group let-index="index"
+        ><span [attr.data-group]="index">{{ group }}</span></ng-template
+      >
+      <ng-template suiSelectLoading let-message
+        ><span data-loading>{{ message }}</span></ng-template
+      >
+      <ng-template suiSelectLoadingIcon><span data-loading-icon></span></ng-template>
+      <ng-template suiSelectDropdownIcon><span data-dropdown-icon></span></ng-template>
+      <ng-template suiSelectClearIcon><span data-clear-icon></span></ng-template>
+      <ng-template suiSelectCheckmarkIcon><span data-checkmark-icon></span></ng-template>
+    </sui-select>
+  `,
+})
+class SelectTemplatesHost {
+  public readonly loading: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly options: WritableSignal<readonly SelectOption[]> = signal<readonly SelectOption[]>([
+    { label: 'Miso', value: 'miso', group: 'Soup' },
+    { label: 'Shoyu', value: 'shoyu', group: 'Soup' },
+  ]);
+  public readonly value: WritableSignal<SelectModelValue> = signal<SelectModelValue>('miso');
+}
+
 afterEach((): void => document.querySelector('.cdk-overlay-container')?.remove());
 
 describe('Select value and state', (): void => {
@@ -88,7 +140,7 @@ describe('Select value and state', (): void => {
 });
 
 describe('Select interaction', (): void => {
-  it('keeps disabled controls focusable without opening', (): void => {
+  it('hard-disables controls without opening', (): void => {
     const fixture: ComponentFixture<SelectHost> = render(SelectHost);
     const combobox: HTMLElement = query(fixture, 'div');
     fixture.componentInstance.disabled.set(true);
@@ -98,7 +150,8 @@ describe('Select interaction', (): void => {
     combobox.click();
     fixture.detectChanges();
 
-    expect(document.activeElement).toBe(combobox);
+    expect(combobox.tabIndex).toBe(-1);
+    expect(combobox.classList.contains('pointer-events-none')).toBe(true);
     expect(combobox.getAttribute('aria-disabled')).toBe('true');
     expect(document.querySelector('[role="listbox"]')).toBeNull();
   });
@@ -117,5 +170,37 @@ describe('Select interaction', (): void => {
     fixture.detectChanges();
     expect(fixture.componentInstance.value()).toBe('miso');
     expect(fixture.componentInstance.touches).toBe(1);
+  });
+});
+
+describe('Select extension surfaces', (): void => {
+  it('renders structural and icon templates in their owned regions', async (): Promise<void> => {
+    const fixture: ComponentFixture<SelectTemplatesHost> = render(SelectTemplatesHost);
+    expect(query(fixture, '[data-clear-icon]')).toBeTruthy();
+    expect(query(fixture, '[data-dropdown-icon]')).toBeTruthy();
+
+    query(fixture, '[role="combobox"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    await fixture.whenStable();
+
+    expect(document.querySelector('[data-header]')).toBeTruthy();
+    expect(document.querySelector('[data-footer]')).toBeTruthy();
+    expect(document.querySelector('[data-group="0"]')?.textContent).toBe('Soup');
+    expect(document.querySelector('[data-checkmark-icon]')).toBeTruthy();
+  });
+
+  it('renders custom empty and loading states', async (): Promise<void> => {
+    const fixture: ComponentFixture<SelectTemplatesHost> = render(SelectTemplatesHost);
+    const combobox: Element = query(fixture, '[role="combobox"]');
+    fixture.componentInstance.options.set([]);
+    fixture.componentInstance.value.set(null);
+    fixture.detectChanges();
+    combobox.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    await fixture.whenStable();
+    expect(document.querySelector('[data-empty]')).toBeTruthy();
+
+    fixture.componentInstance.loading.set(true);
+    fixture.detectChanges();
+    expect(query(fixture, '[data-loading-icon]')).toBeTruthy();
+    expect(document.querySelector('[data-loading]')).toBeTruthy();
   });
 });

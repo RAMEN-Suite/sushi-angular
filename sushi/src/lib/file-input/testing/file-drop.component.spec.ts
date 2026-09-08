@@ -133,9 +133,10 @@ describe('FileDrop disabled and public behavior', (): void => {
     expect(fixture.componentInstance.value()).toEqual([]);
   });
 
-  it('keeps its action focusable while disabled and blocks drops and removal', (): void => {
+  it('hard-disables every picker action and blocks drops and removal', (): void => {
     const fixture: ComponentFixture<FileDropHost> = render(FileDropHost);
     const choose: HTMLButtonElement = query(fixture, 'button');
+    const input: HTMLInputElement = query(fixture, 'input[type="file"]') as HTMLInputElement;
     const zone: Element = query(fixture, '.sui-file-drop__zone');
     fixture.componentInstance.value.set([image]);
     fixture.componentInstance.disabled.set(true);
@@ -143,10 +144,14 @@ describe('FileDrop disabled and public behavior', (): void => {
 
     fixture.componentInstance.control().focus();
     drop(zone, [documentFile]);
+    assignFiles(input, [documentFile]);
+    input.dispatchEvent(new Event('change', { bubbles: true }));
     query(fixture, '[aria-label="Remove ramen.png"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
 
-    expect(document.activeElement).toBe(choose);
+    expect(document.activeElement).not.toBe(choose);
+    expect(input.disabled).toBe(true);
     expect(choose.getAttribute('aria-disabled')).toBe('true');
+    expect(queryAll(fixture, 'button').every((button: HTMLButtonElement): boolean => button.tabIndex === -1)).toBe(true);
     expect(fixture.componentInstance.value()).toEqual([image]);
     expect(fixture.componentInstance.drops).toEqual([]);
   });

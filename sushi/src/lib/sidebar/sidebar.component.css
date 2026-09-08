@@ -25,7 +25,8 @@
   }
 
   .sui-sidebar__header-region {
-    @apply min-h-16 border-b;
+    @apply border-b;
+    min-height: calc(4rem + 1px);
     border-color: var(--color-base-300);
   }
 

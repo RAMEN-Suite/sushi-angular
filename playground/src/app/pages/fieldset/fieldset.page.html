@@ -2,7 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Fieldset</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">
+      <p class="text-lg text-base-content/70">
         Group related form controls with native semantics and optionally reveal secondary settings on demand.
       </p>
     </div>
@@ -12,24 +12,35 @@
     </div>
   </section>
 
-  <sui-card
-    ><h2 suiCardTitle>Preference group with actions</h2>
-    <p class="text-base-content/60">Group one form decision, supporting controls, and its actions inside the same native fieldset.</p>
-    <sui-card size="sm" class="mt-5"><pg-fieldset-preferences-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.preferences.html" [typescript]="examples.preferences.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Collapse indicators and framing</h2>
-    <p class="text-base-content/60">
-      Fieldsets are framed by default. Opt out for visually subordinate groups; collapse controls can use the default sign or a custom icon.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-fieldset-toggles-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.toggles.html" [typescript]="examples.toggles.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Collapsible and externally controlled</h2>
-    <p class="text-base-content/60">Use the two-way expanded model when a control outside the fieldset must reveal the same content.</p>
-    <sui-card size="sm" class="mt-5"><pg-fieldset-controlled-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.controlled.html" [typescript]="examples.controlled.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Preference group with actions</h2>
+      <p class="text-base-content/60">Group one form decision, supporting controls, and its actions inside the same native fieldset.</p>
+    </div>
+    <pg-example-code [html]="examples.preferences.html" [typescript]="examples.preferences.typescript">
+      <ng-template pgExamplePreview><pg-fieldset-preferences-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Framing and collapse controls</h2>
+      <p class="text-base-content/60">
+        Fieldsets are framed by default. The same API supports collapse state and an optional borderless layout.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.toggles.html" [typescript]="examples.toggles.typescript">
+      <ng-template pgExamplePreview><pg-fieldset-toggles-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Controlled disclosure</h2>
+      <p class="text-base-content/60">Bind the expanded state when another control also needs to reveal or hide the content.</p>
+    </div>
+    <pg-example-code [html]="examples.controlled.html" [typescript]="examples.controlled.typescript">
+      <ng-template pgExamplePreview><pg-fieldset-controlled-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

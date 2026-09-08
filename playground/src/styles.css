@@ -1,1 +1,46 @@
 @import 'tailwindcss';
+
+.sui-code .hljs-comment,
+.sui-code .hljs-quote {
+  color: var(--sui-code-syntax-comment);
+  font-style: italic;
+}
+
+.sui-code .hljs-keyword {
+  color: var(--sui-code-syntax-keyword);
+}
+
+.sui-code .hljs-selector-tag,
+.sui-code .hljs-name {
+  color: var(--sui-code-syntax-tag);
+}
+
+.sui-code .hljs-tag {
+  color: var(--sui-code-syntax-punctuation);
+}
+
+.sui-code .hljs-attr,
+.sui-code .hljs-property {
+  color: var(--sui-code-syntax-attribute);
+}
+
+.sui-code .hljs-string,
+.sui-code .hljs-regexp {
+  color: var(--sui-code-syntax-string);
+}
+
+.sui-code .hljs-number,
+.sui-code .hljs-literal {
+  color: var(--sui-code-syntax-number);
+}
+
+.sui-code .hljs-title,
+.sui-code .hljs-type,
+.sui-code .hljs-built_in {
+  color: var(--sui-code-syntax-type);
+}
+
+.sui-code .hljs-variable,
+.sui-code .hljs-template-variable {
+  color: var(--sui-code-syntax-expression);
+}

@@ -18,7 +18,7 @@ const options: readonly AutocompleteOption[] = [
     <sui-autocomplete
       ariaLabel="Ramen style"
       placeholder="Search ramen"
-      [delay]="0"
+      [delay]="delay()"
       [disabled]="disabled()"
       [errorMessage]="errorMessage()"
       [forceSelection]="forceSelection()"
@@ -42,6 +42,7 @@ const options: readonly AutocompleteOption[] = [
 })
 class AutocompleteHost {
   public readonly control: Signal<Autocomplete> = viewChild.required(Autocomplete);
+  public readonly delay: WritableSignal<number> = signal<number>(0);
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly errorMessage: WritableSignal<string | null> = signal<string | null>(null);
   public readonly forceSelection: WritableSignal<boolean> = signal<boolean>(false);
@@ -108,6 +109,12 @@ describe('Autocomplete value and query', (): void => {
 });
 
 describe('Autocomplete constraints', (): void => {
+  it('emits touch when a closed input loses focus', (): void => {
+    const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
+    query(fixture, 'input').dispatchEvent(new FocusEvent('blur'));
+    expect(fixture.componentInstance.touches).toBe(1);
+  });
+
   it('restores an empty valid value when force selection closes', (): void => {
     const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
     fixture.componentInstance.forceSelection.set(true);
@@ -121,20 +128,41 @@ describe('Autocomplete constraints', (): void => {
     expect(fixture.componentInstance.touches).toBe(1);
   });
 
-  it('keeps disabled inputs focusable without querying or opening', (): void => {
+  it('hard-disables the input without querying or opening', (): void => {
     const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
     const input: HTMLInputElement = enter(fixture, 'Miso');
-    input.focus();
+    fixture.componentInstance.control().focus();
 
-    expect(input.disabled).toBe(false);
-    expect(input.getAttribute('aria-disabled')).toBe('true');
-    expect(document.activeElement).toBe(input);
+    expect(input.disabled).toBe(true);
+    expect(input.tabIndex).toBe(-1);
+    expect(input.classList.contains('select-none')).toBe(true);
+    expect(fixture.componentInstance.value()).toBe('shoyu');
     expect(fixture.componentInstance.queries).toEqual([]);
     expect(document.querySelector('[role="listbox"]')).toBeNull();
   });
+});
 
+describe('Autocomplete pending queries', (): void => {
+  it('cancels a pending query when disabled', async (): Promise<void> => {
+    const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
+    fixture.componentInstance.delay.set(10);
+    fixture.detectChanges();
+
+    enter(fixture, 'Miso');
+    fixture.componentInstance.disabled.set(true);
+    fixture.detectChanges();
+    await new Promise<void>((resolve: () => void): void => {
+      setTimeout(resolve, 20);
+    });
+
+    expect(fixture.componentInstance.queries).toEqual([]);
+    expect(document.querySelector('[role="listbox"]')).toBeNull();
+  });
+});
+
+describe('Autocomplete templates', (): void => {
   it('renders custom prefix and empty-result context', async (): Promise<void> => {
     const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
     expect(query(fixture, '[data-prefix]').textContent).toBe('⌕');

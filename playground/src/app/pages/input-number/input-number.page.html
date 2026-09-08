@@ -2,7 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Input Number</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">
+      <p class="text-lg text-base-content/70">
         Edit numeric values with localization, currency formatting, bounds, precision, and Signal Forms state.
       </p>
     </div>
@@ -14,49 +14,40 @@
     </div>
   </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Basic usage and forms</h2>
-    <p class="text-base-content/60">
-      Keep the model numeric while the visible value follows its locale and currency. The reset action restores the initial form value.
-    </p>
-
-    <sui-card size="sm" class="mt-5">
-      <pg-input-number-basic-example />
-    </sui-card>
-
-    <div class="mt-6">
-      <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" />
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Basic usage and forms</h2>
+      <p class="text-base-content/60">
+        Keep the model numeric while the visible value follows its locale and currency. The reset action restores the initial form value.
+      </p>
     </div>
-  </sui-card>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript">
+      <ng-template pgExamplePreview><pg-input-number-basic-example /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Limits, steps, precision, and custom controls</h2>
-    <p class="text-base-content/60">
-      Combine bounds, step sizes, and fraction digits. The buttons template replaces the complete stepper while retaining the component's
-      value logic.
-    </p>
-
-    <sui-card size="sm" class="mt-5">
-      <pg-input-number-limits-example />
-    </sui-card>
-
-    <div class="mt-6">
-      <pg-example-code [html]="examples.limits.html" [typescript]="examples.limits.typescript" />
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Limits, steps, precision, and custom controls</h2>
+      <p class="text-base-content/60">
+        Combine bounds, step sizes, and fraction digits. The buttons template replaces the complete stepper while retaining the component's
+        value logic.
+      </p>
     </div>
-  </sui-card>
+    <pg-example-code [html]="examples.limits.html" [typescript]="examples.limits.typescript">
+      <ng-template pgExamplePreview><pg-input-number-limits-example /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Affixes and states</h2>
-    <p class="text-base-content/60">
-      Prefixes and suffixes remain visual. Invalid and disabled controls retain the same dimensions and native interaction semantics.
-    </p>
-
-    <sui-card size="sm" class="mt-5">
-      <pg-input-number-states-example />
-    </sui-card>
-
-    <div class="mt-6">
-      <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" />
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Affixes and states</h2>
+      <p class="text-base-content/60">
+        Prefixes and suffixes remain visual. Invalid and disabled controls retain the same dimensions and native interaction semantics.
+      </p>
     </div>
-  </sui-card>
+    <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript">
+      <ng-template pgExamplePreview><pg-input-number-states-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

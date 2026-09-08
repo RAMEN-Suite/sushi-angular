@@ -24,7 +24,7 @@ import { FormValueControl } from '@angular/forms/signals';
 import { Button } from '../button';
 import { Input } from '../input';
 import { Join, JoinItem } from '../join';
-import { ColorPickerPresetContext, ColorPickerPresetSeverity, ColorPickerPresetValue } from './color-picker.interfaces';
+import { ColorPickerPresetContext, ColorPickerPresetValue } from './color-picker.interfaces';
 import { ColorPickerPresetTemplate } from './color-picker.templates';
 
 interface ColorPickerOption {
@@ -57,17 +57,15 @@ export class ColorPicker implements FormValueControl<string> {
   /** Current six-digit hex color. */
   public readonly value: ModelSignal<string> = model<string>('#000000');
 
-  /** Optional preset colors rendered after the picker. */
+  /** Optional six-digit hex colors rendered as a radiogroup, followed by a reusable custom-color option. */
   public readonly presets: InputSignal<readonly ColorPickerPresetValue[]> = input<readonly ColorPickerPresetValue[]>([]);
-  /** Semantic color applied to the selected preset action. */
-  public readonly presetSeverity: InputSignal<ColorPickerPresetSeverity> = input<ColorPickerPresetSeverity>('primary');
 
-  /** Value restored by `reset()`. */
+  /** Six-digit hex color restored by `reset()` when the picker is used outside Signal Forms. */
   public readonly defaultValue: InputSignal<string> = input<string>('#000000');
   /** Validation message shown for an incomplete or invalid hex value. */
   public readonly invalidMessage: InputSignal<string> = input<string>('Enter a valid six-digit hex color, for example #3b82f6.');
 
-  /** ID applied to the primary visible control. */
+  /** ID applied to the text input, or to the native color input when `showInput` is false. */
   public readonly id: InputSignal<string | null> = input<string | null>(null);
   /** Accessible name used when no labelled-by reference is supplied. */
   public readonly ariaLabel: InputSignal<string> = input<string>('Choose color');
@@ -76,7 +74,7 @@ export class ColorPicker implements FormValueControl<string> {
   /** IDs of elements that describe the picker. */
   public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
 
-  /** Prevents color entry and preset selection while keeping controls focusable. */
+  /** Disables color entry, focus, and preset selection. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Expands the editable picker to the available width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -95,6 +93,8 @@ export class ColorPicker implements FormValueControl<string> {
     },
   );
   private readonly picker: Signal<ElementRef<HTMLInputElement>> = viewChild.required('pickerElement');
+
+  protected readonly localInvalid: WritableSignal<boolean> = signal(false);
 
   protected readonly inputValue: Signal<string> = computed(() => this.draft() ?? this.value().toUpperCase());
   protected readonly controlId: Signal<string> = computed(() => this.id() ?? this.generatedId);
@@ -122,16 +122,15 @@ export class ColorPicker implements FormValueControl<string> {
     return [...options, { color: customColor, label: 'Custom', custom: true, selected: !isPreset, disabled: false }];
   });
 
-  protected readonly localInvalid: WritableSignal<boolean> = signal(false);
-
   private readonly generatedId: string = `sui-color-picker-${nextColorPickerId++}`;
   private readonly draft: WritableSignal<string | null> = signal(null);
   private readonly customColor: WritableSignal<string> = signal('#000000');
   private readonly element: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
 
   /** Moves focus to the native color picker. */
-  public focus(): void {
-    this.picker().nativeElement.focus();
+  public focus(options?: FocusOptions): void {
+    if (this.disabled()) return;
+    this.picker().nativeElement.focus(options);
   }
 
   /** Restores `defaultValue` and clears local validation state. */
@@ -163,6 +162,7 @@ export class ColorPicker implements FormValueControl<string> {
   }
 
   protected validateInput(): void {
+    if (this.disabled()) return;
     const value: string | null = this.draft();
     if (value === null) return;
     const valid: boolean = HEX_COLOR_PATTERN.test(value);
@@ -180,7 +180,7 @@ export class ColorPicker implements FormValueControl<string> {
   }
 
   protected isTabStop(option: ColorPickerOption, index: number): boolean {
-    if (option.disabled) return false;
+    if (this.disabled() || option.disabled) return false;
     if (option.selected) return true;
     const options: readonly ColorPickerOption[] = this.options();
     const hasEnabledSelection: boolean = options.some(

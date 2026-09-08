@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import actionsHtml from './examples/actions/actions.example.html';
 import * as actionsTs from './examples/actions/actions.example.ts' with { loader: 'text' };
@@ -11,7 +12,7 @@ import { JoinNestedExample } from './examples/nested/nested.example';
 
 @Component({
   selector: 'pg-join-page',
-  imports: [Badge, Card, CardTitle, ExampleCode, JoinActionsExample, JoinNestedExample],
+  imports: [Badge, ExampleCode, ExamplePreview, JoinActionsExample, JoinNestedExample],
   templateUrl: './join.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

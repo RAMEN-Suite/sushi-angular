@@ -2,9 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Range</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">
-        A styled native slider with numeric Signal Forms values and full range semantics.
-      </p>
+      <p class="text-lg text-base-content/70">A styled native slider with numeric Signal Forms values and full range semantics.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Range architecture">
       <span suiBadge variant="soft" size="sm">Directive</span>
@@ -13,30 +11,37 @@
     </div>
   </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Value, limits, and steps</h2>
-    <p class="text-base-content/60">Define limits in the form schema, keep the native step, and connect a visible label.</p>
-    <sui-card size="sm" class="mt-5"><pg-range-basic-example class="block" /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Value, limits, and steps</h2>
+      <p class="text-base-content/60">Define limits in the form schema, keep the native step, and connect a visible label.</p>
+    </div>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript">
+      <ng-template pgExamplePreview><pg-range-basic-example class="block" /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Sizes and semantic colors</h2>
-    <p class="text-base-content/60">
-      Choose a size for the surrounding density and reserve semantic colors for ranges with an established meaning.
-    </p>
-    <sui-card size="sm" class="mt-5">
-      <pg-range-appearance-example class="block" />
-    </sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Sizes and semantic colors</h2>
+      <p class="text-base-content/60">
+        Choose a size for the surrounding density and reserve semantic colors for ranges with an established meaning.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript">
+      <ng-template pgExamplePreview><pg-range-appearance-example class="block" /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Audio mixer and states</h2>
-    <p class="text-base-content/60">
-      Related sliders retain consistent dimensions while semantic and native states communicate their purpose.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-range-mixer-example class="block" /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.mixer.html" [typescript]="examples.mixer.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Audio mixer and states</h2>
+      <p class="text-base-content/60">
+        Related sliders retain consistent dimensions while semantic and native states communicate their purpose.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.mixer.html" [typescript]="examples.mixer.typescript">
+      <ng-template pgExamplePreview><pg-range-mixer-example class="block" /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

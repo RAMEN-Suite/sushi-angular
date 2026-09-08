@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@ang
 import { LucideMenu, LucideX } from '@lucide/angular';
 import {
   Button,
+  Card,
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -21,6 +22,7 @@ type Page = 'Overview' | 'Projects' | 'Team';
   selector: 'pg-sidebar-drawer-example',
   imports: [
     Button,
+    Card,
     Drawer,
     DrawerClose,
     DrawerContent,

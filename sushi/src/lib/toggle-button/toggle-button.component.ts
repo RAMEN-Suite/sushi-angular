@@ -35,6 +35,7 @@ import { ToggleButtonOffTemplate, ToggleButtonOnTemplate, ToggleButtonTemplate }
     class: 'inline-flex sui-toggle-button',
     '[class.sui-toggle-button--checked]': 'checked()',
     '[class.sui-toggle-button--disabled]': 'disabled()',
+    '[class.cursor-not-allowed]': 'disabled() || loading()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

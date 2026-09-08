@@ -1,25 +1,25 @@
 <div class="grid max-w-2xl gap-6">
   <sui-card size="sm">
     <div class="grid divide-y divide-base-300">
-      <label suiLabel class="flex cursor-pointer items-start gap-3 py-3 first:pt-0 last:pb-0">
+      <label suiLabel class="flex cursor-pointer items-start gap-3 py-3 text-sm first:pt-0 last:pb-0">
         <input suiCheckbox type="checkbox" class="mt-0.5" [formField]="preferencesForm.accepted" />
         <span>
           <strong class="block">Accept workspace terms</strong>
-          <small class="text-base-content/60">Required before collaborators can be invited.</small>
+          <small class="text-xs text-base-content/60">Required before collaborators can be invited.</small>
         </span>
       </label>
-      <label suiLabel class="flex cursor-pointer items-start gap-3 py-3 last:pb-0">
+      <label suiLabel class="flex cursor-pointer items-start gap-3 py-3 text-sm last:pb-0">
         <input suiCheckbox type="checkbox" class="mt-0.5" checked severity="success" />
         <span>
           <strong class="block">Weekly summary</strong>
-          <small class="text-base-content/60">Receive one concise activity email every Monday.</small>
+          <small class="text-xs text-base-content/60">Receive one concise activity email every Monday.</small>
         </span>
       </label>
-      <label suiLabel class="flex cursor-pointer items-start gap-3 py-3 last:pb-0">
+      <label suiLabel class="flex cursor-pointer items-start gap-3 py-3 text-sm last:pb-0">
         <input suiCheckbox type="checkbox" class="mt-0.5" disabled />
         <span>
           <strong class="block">Security reports</strong>
-          <small class="text-base-content/60">Managed by your organization.</small>
+          <small class="text-xs text-base-content/60">Managed by your organization.</small>
         </span>
       </label>
     </div>

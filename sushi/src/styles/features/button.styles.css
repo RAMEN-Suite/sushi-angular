@@ -4,7 +4,16 @@
   transition-property: opacity;
 }
 
-.sui-button.btn:is(:hover, :focus-visible, :active) {
+.sui-button.btn:not(.sui-button--disabled):is(:hover, :focus-visible, :active) {
   box-shadow: none;
   transition-property: opacity, background-color, border-color, color, transform;
+}
+
+.sui-button.btn.sui-button--disabled {
+  cursor: not-allowed;
+  pointer-events: auto;
+  transform: none;
+  translate: none;
+  animation: none;
+  transition-property: opacity;
 }

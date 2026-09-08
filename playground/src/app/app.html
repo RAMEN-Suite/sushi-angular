@@ -5,9 +5,9 @@
   size="sm"
   ariaLabel="Component library navigation"
 >
-  <div suiDrawerContent cdkScrollable class="h-screen overflow-y-auto bg-base-100">
+  <div #contentScroll suiDrawerContent class="h-screen overflow-y-auto bg-base-100">
     @if (pagePath()) {
-      <header class="sticky top-0 z-30 h-16 border-b border-base-300 bg-base-100/95 backdrop-blur">
+      <header class="sticky top-0 z-30 h-[65px] border-b border-base-300 bg-base-100/95 backdrop-blur">
         <div class="mx-auto flex h-full max-w-7xl items-center px-0 sm:px-3">
           <sui-navbar
             class="w-full"
@@ -16,7 +16,7 @@
             [collapsible]="false"
             orientation="horizontal"
             surface="plain"
-            size="sm"
+            size="md"
             ariaLabel="Component documentation"
           >
             <div suiNavbarBrand>
@@ -42,7 +42,6 @@
               shape="square"
               severity="neutral"
               variant="text"
-              class="lg:hidden"
               [attr.aria-label]="theme() === 'sushi' ? 'Use dark theme' : 'Use light theme'"
               (click)="toggleTheme()"
             >
@@ -55,45 +54,9 @@
           </sui-navbar>
         </div>
       </header>
-    } @else {
-      <header class="sticky top-0 z-30 border-b border-base-300 bg-base-100/95 backdrop-blur lg:hidden">
-        <sui-navbar [collapsible]="false" surface="plain" size="sm" ariaLabel="Overview navigation">
-          <div suiNavbarBrand>
-            <button
-              suiButton
-              type="button"
-              size="sm"
-              shape="square"
-              severity="neutral"
-              variant="text"
-              [suiDrawerTrigger]="libraryDrawer"
-              aria-label="Open component navigation"
-            >
-              <svg lucideMenu class="size-4" aria-hidden="true"></svg>
-            </button>
-          </div>
-          <button
-            suiButton
-            suiNavbarAction
-            type="button"
-            size="sm"
-            shape="square"
-            severity="neutral"
-            variant="text"
-            [attr.aria-label]="theme() === 'sushi' ? 'Use dark theme' : 'Use light theme'"
-            (click)="toggleTheme()"
-          >
-            @if (theme() === 'sushi') {
-              <svg lucideMoon class="size-4" aria-hidden="true"></svg>
-            } @else {
-              <svg lucideSun class="size-4" aria-hidden="true"></svg>
-            }
-          </button>
-        </sui-navbar>
-      </header>
     }
 
-    <router-outlet />
+    <router-outlet (activate)="scrollContentToTop()" />
   </div>
 
   <sui-sidebar
@@ -105,30 +68,16 @@
     (itemSelected)="libraryDrawer.close()"
   >
     <div suiSidebarHeader class="flex items-center gap-3">
-      <span class="grid size-9 shrink-0 place-items-center rounded-field bg-primary text-primary-content">
-        <svg lucideSoup class="size-4" aria-hidden="true"></svg>
-      </span>
+      <svg class="size-10 shrink-0" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <path d="M8 17.5C8 12.8 15.2 9 24 9s16 3.8 16 8.5S32.8 26 24 26 8 22.2 8 17.5Z" fill="var(--color-primary)" />
+        <path d="m15 12.5-2 8M24 10l-2 14M33 12.5l-2 8" stroke="var(--color-primary-content)" stroke-width="2" stroke-linecap="round" />
+        <path d="M12 22.5v10C12 36.1 17.4 39 24 39s12-2.9 12-6.5v-10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+        <path d="M24 26v13" stroke="var(--color-primary)" stroke-width="3" />
+      </svg>
       <span class="min-w-0 flex-1">
-        <strong class="block truncate leading-tight">SUSHI</strong>
+        <strong class="block truncate leading-tight">SUSHI KIT</strong>
         <span class="block truncate text-xs leading-tight text-base-content/50">Component Playground</span>
       </span>
-      <button
-        suiButton
-        type="button"
-        size="sm"
-        shape="square"
-        severity="neutral"
-        variant="text"
-        [attr.aria-label]="theme() === 'sushi' ? 'Use dark theme' : 'Use light theme'"
-        [attr.title]="theme() === 'sushi' ? 'Use dark theme' : 'Use light theme'"
-        (click)="toggleTheme()"
-      >
-        @if (theme() === 'sushi') {
-          <svg lucideMoon class="size-4" aria-hidden="true"></svg>
-        } @else {
-          <svg lucideSun class="size-4" aria-hidden="true"></svg>
-        }
-      </button>
       <button
         suiButton
         type="button"

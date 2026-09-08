@@ -40,8 +40,10 @@ export class InputOtp implements FormValueControl<string> {
   public readonly ariaLabel: InputSignal<string> = input<string>('One-time password');
   /** IDs of elements that label the native input. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
+  /** IDs of elements that describe the native input. */
+  public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
 
-  /** Prevents code entry while keeping the input focusable. */
+  /** Disables code entry and focus. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Applies invalid semantics and styling to the complete group. */
   public readonly invalid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -64,6 +66,7 @@ export class InputOtp implements FormValueControl<string> {
 
   /** Moves focus to the native input. */
   public focus(): void {
+    if (this.disabled()) return;
     this.inputElement().nativeElement.focus();
   }
 

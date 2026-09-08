@@ -16,6 +16,7 @@ describe('Label', (): void => {
   it('styles a label while preserving its native association', (): void => {
     const fixture: ComponentFixture<LabelHost> = render(LabelHost);
     const label: HTMLLabelElement = query(fixture, 'label');
+    expect(label.classList).toContain('sui-label');
     expect(label.classList).toContain('label');
     expect(label.htmlFor).toBe('name');
     fixture.componentInstance.floating.set(true);

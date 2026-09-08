@@ -53,7 +53,7 @@ import { OrderListFilterTemplate, OrderListHeaderTemplate, OrderListItemTemplate
   ],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.css',
-  host: { class: 'sui-order-list block max-w-full' },
+  host: { class: 'sui-order-list block max-w-full', '[class.cursor-not-allowed]': 'disabled()' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderList<T extends OrderListOption = OrderListOption>
@@ -81,7 +81,7 @@ export class OrderList<T extends OrderListOption = OrderListOption>
   /** IDs of elements that describe the listbox. */
   public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
 
-  /** Prevents selection and reordering while keeping controls focusable. */
+  /** Prevents filtering, selection, and reordering and removes controls from sequential focus. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   /** Emits when interaction with the collection completes. */
@@ -161,6 +161,7 @@ export class OrderList<T extends OrderListOption = OrderListOption>
 
   /** Moves focus to the ordered collection. */
   public focus(): void {
+    if (this.disabled()) return;
     this.listbox().element.focus();
   }
 

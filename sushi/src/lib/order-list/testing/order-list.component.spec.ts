@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { press, query, queryAll, render } from '../../../../testing/test-utils';
 import { OrderList } from '../order-list.component';
 import type { OrderListOption } from '../order-list.interfaces';
-import { OrderListFilterTemplate, OrderListItemTemplate } from '../order-list.templates';
+import { OrderListFilterTemplate, OrderListHeaderTemplate, OrderListItemTemplate } from '../order-list.templates';
 
 interface WorkItem extends OrderListOption {
   readonly value: string;
@@ -19,7 +19,7 @@ const items: readonly WorkItem[] = [
 ];
 
 @Component({
-  imports: [OrderList, OrderListFilterTemplate, OrderListItemTemplate],
+  imports: [OrderList, OrderListFilterTemplate, OrderListHeaderTemplate, OrderListItemTemplate],
   template: `
     <sui-order-list
       ariaLabel="Workflow"
@@ -30,6 +30,7 @@ const items: readonly WorkItem[] = [
       [(value)]="value"
       (touch)="touches += 1"
     >
+      <ng-template suiOrderListHeader><span data-header>Workflow steps</span></ng-template>
       <ng-template suiOrderListFilter let-query let-update="update">
         <input data-filter [value]="query" (input)="update($any($event.target).value)" />
       </ng-template>
@@ -50,6 +51,14 @@ class OrderListHost {
   public touches: number = 0;
 }
 
+@Component({
+  imports: [OrderList],
+  template: `<sui-order-list filter ariaLabel="Workflow" [(value)]="value" />`,
+})
+class DefaultOrderListHost {
+  public readonly value: WritableSignal<readonly WorkItem[]> = signal<readonly WorkItem[]>(items);
+}
+
 function select(fixture: ComponentFixture<OrderListHost>, value: string): void {
   const content: HTMLElement = query(fixture, `[data-item="${value}"]`) as HTMLElement;
   const option: HTMLElement | null = content.closest<HTMLElement>('[role="option"]');
@@ -66,6 +75,7 @@ describe('OrderList value and templates', (): void => {
   it('renders typed custom items and filters them', (): void => {
     const fixture: ComponentFixture<OrderListHost> = render(OrderListHost);
     expect(queryAll(fixture, '[role="option"]')).toHaveLength(4);
+    expect(query(fixture, '[data-header]').textContent).toBe('Workflow steps');
     expect(query(fixture, '[data-item="prototype"]').textContent.trim()).toBe('Prototype');
 
     const filter: HTMLInputElement = query(fixture, 'input');
@@ -82,6 +92,22 @@ describe('OrderList value and templates', (): void => {
     fixture.componentInstance.value.set([...items].reverse());
     fixture.detectChanges();
     expect(values(fixture)).toEqual(['release', 'review', 'prototype', 'research']);
+  });
+});
+
+describe('OrderList edge actions', (): void => {
+  it('moves selected items to the top and one position down', (): void => {
+    const topFixture: ComponentFixture<OrderListHost> = render(OrderListHost);
+    select(topFixture, 'release');
+    query(topFixture, '[aria-label="Move selected items to top"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    topFixture.detectChanges();
+    expect(values(topFixture)).toEqual(['release', 'research', 'prototype', 'review']);
+
+    const downFixture: ComponentFixture<OrderListHost> = render(OrderListHost);
+    select(downFixture, 'research');
+    query(downFixture, '[aria-label="Move selected items down"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    downFixture.detectChanges();
+    expect(values(downFixture)).toEqual(['prototype', 'research', 'review', 'release']);
   });
 });
 
@@ -129,7 +155,7 @@ describe('OrderList reordering', (): void => {
 });
 
 describe('OrderList disabled and validation state', (): void => {
-  it('stays focusable while disabled and blocks reordering', (): void => {
+  it('hard-disables the list and blocks reordering', (): void => {
     const fixture: ComponentFixture<OrderListHost> = render(OrderListHost);
     const listbox: HTMLElement = query(fixture, '[role="listbox"]') as HTMLElement;
     select(fixture, 'prototype');
@@ -140,8 +166,9 @@ describe('OrderList disabled and validation state', (): void => {
     press(listbox, 'ArrowUp', { altKey: true });
     fixture.detectChanges();
 
-    expect(document.activeElement).toBe(listbox);
+    expect(listbox.tabIndex).toBe(-1);
     expect(listbox.getAttribute('aria-disabled')).toBe('true');
+    expect(listbox.parentElement?.parentElement?.classList.contains('pointer-events-none')).toBe(true);
     expect(values(fixture)).toEqual(['research', 'prototype', 'review', 'release']);
   });
 
@@ -155,5 +182,18 @@ describe('OrderList disabled and validation state', (): void => {
     fixture.componentInstance.touched.set(true);
     fixture.detectChanges();
     expect(listbox.getAttribute('aria-invalid')).toBe('true');
+  });
+
+  it('uses the default filter and emits touch only after focus leaves', (): void => {
+    const fixture: ComponentFixture<DefaultOrderListHost> = render(DefaultOrderListHost);
+    const filter: HTMLInputElement = query(fixture, 'input[type="search"]') as HTMLInputElement;
+    filter.value = 'prototype';
+    filter.dispatchEvent(new Event('input', { bubbles: true }));
+    fixture.detectChanges();
+    expect(queryAll(fixture, '[role="option"]')).toHaveLength(1);
+
+    const root: Element = query(fixture, '.sui-order-list > div');
+    root.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: filter }));
+    root.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }));
   });
 });

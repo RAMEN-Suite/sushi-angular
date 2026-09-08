@@ -3,6 +3,7 @@ import { booleanAttribute, Directive, input, InputSignalWithTransform } from '@a
 @Directive({
   selector: '[suiLabel]',
   host: {
+    class: 'sui-label',
     '[class.label]': '!floating()',
     '[class.floating-label]': 'floating()',
   },

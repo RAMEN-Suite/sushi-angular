@@ -5,14 +5,14 @@ import type { NavigationItem } from './app.navigation';
 const apiRoutes: Routes = apiNavigation.map((item: NavigationItem): Route => ({
   path: `${item.path.slice(1)}/api`,
   loadComponent: () => import('./pages/api/api.page').then(({ ApiPage }) => ApiPage),
-  title: `${item.label} API | SUSHI Playground`,
+  title: `${item.label} Interface | SUSHI Playground`,
   data: { component: item.path.slice(1), name: item.label },
 }));
 
 const stylingRoutes: Routes = apiNavigation.map((item: NavigationItem): Route => ({
   path: `${item.path.slice(1)}/styling`,
   loadComponent: () => import('./pages/styling/styling.page').then(({ StylingPage }) => StylingPage),
-  title: `${item.label} Styling | SUSHI Playground`,
+  title: `${item.label} Theming | SUSHI Playground`,
   data: { component: item.path.slice(1), name: item.label },
 }));
 

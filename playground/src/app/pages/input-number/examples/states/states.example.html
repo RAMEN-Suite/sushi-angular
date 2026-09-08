@@ -17,7 +17,8 @@
 
   <div class="grid gap-2">
     <label suiLabel for="input-number-invalid">Invalid quantity</label>
-    <sui-input-number id="input-number-invalid" fluid invalid [value]="120" />
+    <sui-input-number id="input-number-invalid" fluid invalid ariaDescribedby="input-number-error" [value]="120" />
+    <p id="input-number-error" class="text-sm text-error">Enter a quantity between 1 and 99.</p>
   </div>
 
   <div class="grid gap-2">

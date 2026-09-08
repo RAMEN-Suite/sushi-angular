@@ -77,13 +77,15 @@ export class InputNumber implements FormValueControl<number | null> {
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   /** IDs of elements that label the internal spin-button. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
+  /** IDs of elements that describe the internal spin-button. */
+  public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
   /** Sets the control height and text size. */
   public readonly size: InputSignal<FormControlSize> = input<FormControlSize>('md');
   /** Shows increment and decrement controls. */
   public readonly showButtons: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Expands the component to the available width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Prevents editing and step actions while keeping the spinbutton focusable. */
+  /** Disables numeric entry, focus, and step actions. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Applies invalid semantics and styling. */
   public readonly invalid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -126,6 +128,7 @@ export class InputNumber implements FormValueControl<number | null> {
 
   /** Moves focus to the internal spinbutton. */
   public focus(): void {
+    if (this.disabled()) return;
     this.inputElement().nativeElement.focus();
   }
 

@@ -1,6 +1,6 @@
 <div class="grid w-full max-w-lg gap-5">
   <div class="grid gap-1.5">
-    <label suiLabel for="profile-name" class="font-medium">Display name</label>
+    <label suiLabel for="profile-name">Display name</label>
     <input suiInput fluid id="profile-name" autocomplete="name" placeholder="Ada Lovelace" />
     <p class="text-xs leading-5 text-base-content/60">Used on your public profile.</p>
   </div>
@@ -22,7 +22,7 @@
   </div>
 
   <div class="grid gap-1.5">
-    <span suiLabel id="priority-label" class="font-medium">Priority</span>
+    <span suiLabel id="priority-label">Priority</span>
     <sui-select fluid ariaLabelledby="priority-label" [options]="priorities" />
     <p class="text-xs leading-5 text-base-content/60">Composite controls reference their visible label through ARIA.</p>
   </div>

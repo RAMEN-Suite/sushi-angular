@@ -4,7 +4,19 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { MultiSelect } from '../multi-select.component';
 import type { MultiSelectModelValue, MultiSelectOption } from '../multi-select.interfaces';
-import { MultiSelectHeaderTemplate, MultiSelectItemTemplate, MultiSelectSelectedItemsTemplate } from '../multi-select.templates';
+import {
+  MultiSelectCheckmarkIconTemplate,
+  MultiSelectClearIconTemplate,
+  MultiSelectDropdownIconTemplate,
+  MultiSelectEmptyTemplate,
+  MultiSelectFooterTemplate,
+  MultiSelectGroupTemplate,
+  MultiSelectHeaderTemplate,
+  MultiSelectItemTemplate,
+  MultiSelectLoadingIconTemplate,
+  MultiSelectLoadingTemplate,
+  MultiSelectSelectedItemsTemplate,
+} from '../multi-select.templates';
 
 const options: readonly MultiSelectOption[] = [
   { label: 'Miso', value: 'miso' },
@@ -29,11 +41,15 @@ const options: readonly MultiSelectOption[] = [
       [(value)]="value"
       (touch)="touches += 1"
     >
-      <ng-template suiMultiSelectSelectedItems let-selected>
+      <ng-template suiMultiSelectSelectedItems let-selected let-remove="remove">
         <span data-selected>{{ labels(selected) }}</span>
+        @if (selected[0]) {
+          <button data-remove type="button" (click)="remove(selected[0])">Remove first</button>
+        }
       </ng-template>
-      <ng-template suiMultiSelectHeader let-selectedCount="selectedCount">
+      <ng-template suiMultiSelectHeader let-selectedCount="selectedCount" let-toggleAll="toggleAll">
         <span data-selected-count>{{ selectedCount }}</span>
+        <button data-toggle-all type="button" (click)="toggleAll()">Toggle all</button>
       </ng-template>
       <ng-template suiMultiSelectItem let-option let-index="index">
         <span [attr.data-index]="index">{{ option.label }}</span>
@@ -56,6 +72,44 @@ class MultiSelectHost {
   }
 }
 
+@Component({
+  imports: [
+    MultiSelect,
+    MultiSelectCheckmarkIconTemplate,
+    MultiSelectClearIconTemplate,
+    MultiSelectDropdownIconTemplate,
+    MultiSelectEmptyTemplate,
+    MultiSelectFooterTemplate,
+    MultiSelectGroupTemplate,
+    MultiSelectLoadingIconTemplate,
+    MultiSelectLoadingTemplate,
+  ],
+  template: `
+    <sui-multi-select showClear [loading]="loading()" [options]="options()" [(value)]="value">
+      <ng-template suiMultiSelectFooter><span data-footer>Footer</span></ng-template>
+      <ng-template suiMultiSelectEmpty><span data-empty>Nothing here</span></ng-template>
+      <ng-template suiMultiSelectGroup let-group let-index="index"
+        ><span [attr.data-group]="index">{{ group }}</span></ng-template
+      >
+      <ng-template suiMultiSelectLoading let-message
+        ><span data-loading>{{ message }}</span></ng-template
+      >
+      <ng-template suiMultiSelectLoadingIcon><span data-loading-icon></span></ng-template>
+      <ng-template suiMultiSelectDropdownIcon><span data-dropdown-icon></span></ng-template>
+      <ng-template suiMultiSelectClearIcon><span data-clear-icon></span></ng-template>
+      <ng-template suiMultiSelectCheckmarkIcon><span data-checkmark-icon></span></ng-template>
+    </sui-multi-select>
+  `,
+})
+class MultiSelectTemplatesHost {
+  public readonly loading: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly options: WritableSignal<readonly MultiSelectOption[]> = signal<readonly MultiSelectOption[]>([
+    { label: 'Miso', value: 'miso', group: 'Soup' },
+    { label: 'Shoyu', value: 'shoyu', group: 'Soup' },
+  ]);
+  public readonly value: WritableSignal<MultiSelectModelValue> = signal<MultiSelectModelValue>(['miso']);
+}
+
 afterEach((): void => document.querySelector('.cdk-overlay-container')?.remove());
 
 describe('MultiSelect value and state', (): void => {
@@ -76,6 +130,18 @@ describe('MultiSelect value and state', (): void => {
     fixture.detectChanges();
 
     expect(fixture.componentInstance.value()).toEqual([]);
+  });
+
+  it('removes selected values and toggles all through template callbacks', async (): Promise<void> => {
+    const fixture: ComponentFixture<MultiSelectHost> = render(MultiSelectHost);
+    query(fixture, '[data-remove]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    fixture.detectChanges();
+    expect(fixture.componentInstance.value()).toEqual(['shoyu']);
+
+    await fixture.whenStable();
+    document.querySelector<HTMLElement>('[data-toggle-all]')?.click();
+    fixture.detectChanges();
+    expect(fixture.componentInstance.value()).toEqual(['miso', 'shoyu']);
   });
 
   it('exposes required, selection count, and delayed invalid state', async (): Promise<void> => {
@@ -111,7 +177,7 @@ describe('MultiSelect interaction', (): void => {
     expect(fixture.componentInstance.value()).toEqual(['miso', 'shoyu']);
   });
 
-  it('keeps disabled controls focusable and closed', (): void => {
+  it('hard-disables controls and keeps them closed', (): void => {
     const fixture: ComponentFixture<MultiSelectHost> = render(MultiSelectHost);
     const combobox: HTMLElement = query(fixture, 'div');
     fixture.componentInstance.disabled.set(true);
@@ -121,10 +187,43 @@ describe('MultiSelect interaction', (): void => {
     combobox.click();
     fixture.detectChanges();
 
-    expect(document.activeElement).toBe(combobox);
+    expect(combobox.tabIndex).toBe(-1);
+    expect(combobox.classList.contains('pointer-events-none')).toBe(true);
     expect(combobox.getAttribute('aria-disabled')).toBe('true');
     expect(document.querySelector('[role="listbox"]')).toBeNull();
     const root: HTMLElement = fixture.nativeElement as HTMLElement;
     expect(root.querySelector('[aria-label="Clear selection"]')).toBeNull();
+  });
+});
+
+describe('MultiSelect extension surfaces', (): void => {
+  it('renders default selected text and structural templates', async (): Promise<void> => {
+    const fixture: ComponentFixture<MultiSelectTemplatesHost> = render(MultiSelectTemplatesHost);
+    expect(query(fixture, '[role="combobox"]').textContent).toContain('Miso');
+    expect(query(fixture, '[data-clear-icon]')).toBeTruthy();
+    expect(query(fixture, '[data-dropdown-icon]')).toBeTruthy();
+
+    query(fixture, '[role="combobox"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    await fixture.whenStable();
+
+    expect(document.querySelector('[data-footer]')).toBeTruthy();
+    expect(document.querySelector('[data-group="0"]')?.textContent).toBe('Soup');
+    expect(document.querySelector('[data-checkmark-icon]')).toBeTruthy();
+  });
+
+  it('renders custom empty and loading states', async (): Promise<void> => {
+    const fixture: ComponentFixture<MultiSelectTemplatesHost> = render(MultiSelectTemplatesHost);
+    const combobox: Element = query(fixture, '[role="combobox"]');
+    fixture.componentInstance.options.set([]);
+    fixture.componentInstance.value.set([]);
+    fixture.detectChanges();
+    combobox.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    await fixture.whenStable();
+    expect(document.querySelector('[data-empty]')).toBeTruthy();
+
+    fixture.componentInstance.loading.set(true);
+    fixture.detectChanges();
+    expect(query(fixture, '[data-loading-icon]')).toBeTruthy();
+    expect(document.querySelector('[data-loading]')).toBeTruthy();
   });
 });

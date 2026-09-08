@@ -2,7 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Textarea</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">
+      <p class="text-lg text-base-content/70">
         Collect multiline content with native behavior, controlled resizing, semantic colors, and Signal Forms state.
       </p>
     </div>
@@ -14,63 +14,51 @@
     </div>
   </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Basic usage and forms</h2>
-    <p class="text-base-content/60">
-      Keep labels, rows, character limits, and validation native while Signal Forms owns the value and reset behavior.
-    </p>
-
-    <sui-card size="sm" class="mt-5">
-      <pg-textarea-basic-example />
-    </sui-card>
-
-    <div class="mt-6">
-      <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" />
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Basic usage and forms</h2>
+      <p class="text-base-content/60">
+        Keep labels, rows, character limits, and validation native while Signal Forms owns the value and reset behavior.
+      </p>
     </div>
-  </sui-card>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript">
+      <ng-template pgExamplePreview><pg-textarea-basic-example /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Resize behavior</h2>
-    <p class="text-base-content/60">
-      Vertical resizing is the default. Restrict or expand it only when the surrounding layout and content make that behavior useful.
-    </p>
-
-    <sui-card size="sm" class="mt-5">
-      <pg-textarea-resize-example />
-    </sui-card>
-
-    <div class="mt-6">
-      <pg-example-code [html]="examples.resize.html" [typescript]="examples.resize.typescript" />
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Resize behavior</h2>
+      <p class="text-base-content/60">
+        Vertical resizing is the default. Restrict or expand it only when the surrounding layout and content make that behavior useful.
+      </p>
     </div>
-  </sui-card>
+    <pg-example-code [html]="examples.resize.html" [typescript]="examples.resize.typescript">
+      <ng-template pgExamplePreview><pg-textarea-resize-example /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Sizes and semantic colors</h2>
-    <p class="text-base-content/60">
-      Match the control size to its context and reserve semantic colors for states with an established meaning.
-    </p>
-
-    <sui-card size="sm" class="mt-5">
-      <pg-textarea-appearance-example />
-    </sui-card>
-
-    <div class="mt-6">
-      <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript" />
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Sizes and semantic colors</h2>
+      <p class="text-base-content/60">
+        Match the control size to its context and reserve semantic colors for states with an established meaning.
+      </p>
     </div>
-  </sui-card>
+    <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript">
+      <ng-template pgExamplePreview><pg-textarea-appearance-example /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Native states</h2>
-    <p class="text-base-content/60">
-      Readonly, disabled, and invalid behavior remains native. Connect validation details with a stable ARIA description.
-    </p>
-
-    <sui-card size="sm" class="mt-5">
-      <pg-textarea-states-example />
-    </sui-card>
-
-    <div class="mt-6">
-      <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" />
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Native states</h2>
+      <p class="text-base-content/60">
+        Readonly, disabled, and invalid behavior remains native. Connect validation details with a stable ARIA description.
+      </p>
     </div>
-  </sui-card>
+    <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript">
+      <ng-template pgExamplePreview><pg-textarea-states-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

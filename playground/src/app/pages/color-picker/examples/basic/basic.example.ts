@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, Card, ColorPicker, JoinItem, Label } from '@ramen-suite/sushi';
+import { Button, ColorPicker, JoinItem, Label } from '@ramen-suite/sushi';
 
 interface ColorModel {
   color: string;
@@ -10,7 +10,7 @@ const DEFAULT_COLOR: string = '#0369a1';
 
 @Component({
   selector: 'pg-color-picker-basic-example',
-  imports: [FormField, Button, Card, ColorPicker, JoinItem, Label],
+  imports: [FormField, Button, ColorPicker, JoinItem, Label],
   templateUrl: './basic.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

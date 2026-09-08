@@ -17,5 +17,6 @@ export class ColorPickerPresetsExample {
     { label: 'Forest', value: '#15803d' },
     { label: 'Ocean', value: '#0369a1' },
     { label: 'Violet', value: '#6d28d9' },
+    { label: 'Unavailable', value: '#94a3b8', disabled: true },
   ];
 }

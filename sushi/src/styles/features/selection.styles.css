@@ -2,22 +2,46 @@
   @apply select-none text-base font-medium transition-colors duration-150;
 }
 
+.sui-selection-list[aria-disabled='true'] {
+  @apply cursor-not-allowed bg-base-200 text-base-content/40 select-none;
+}
+
+.sui-selection-list[aria-disabled='true'] * {
+  cursor: inherit;
+}
+
 .sui-selection-option:not([aria-disabled='true']):not([aria-selected='true'], [data-matched='true']):hover,
 .sui-selection-list:not(.sui-selection-list--focus-bound) .sui-selection-option:not([aria-disabled='true']):not([aria-selected='true'], [data-matched='true'])[data-active='true'],
 .sui-selection-list--focus-bound:focus .sui-selection-option:not([aria-disabled='true']):not([aria-selected='true'], [data-matched='true'])[data-active='true'] {
-  @apply bg-base-200 text-base-content;
+  /** Background of an enabled option when hovered or actively navigated. */
+  background-color: var(--sui-selection-option-hover-background, var(--color-base-200));
+  /** Text color of an enabled option when hovered or actively navigated. */
+  color: var(--sui-selection-option-hover-color, var(--color-base-content));
 }
 
 .sui-selection-option:not([aria-disabled='true']):not([aria-selected='true'], [data-matched='true']):active {
-  @apply bg-primary/20 text-primary;
+  /** Background of an enabled option while pressed. */
+  background-color: var(--sui-selection-option-active-background, color-mix(in oklab, var(--color-primary) 20%, transparent));
+  /** Text color of an enabled option while pressed. */
+  color: var(--sui-selection-option-active-color, var(--color-primary));
 }
 
 .sui-selection-option:is([aria-selected='true'], [data-matched='true']) {
-  @apply bg-primary/15 text-primary;
+  /** Background of a selected or matched option. */
+  background-color: var(--sui-selection-option-selected-background, color-mix(in oklab, var(--color-primary) 15%, transparent));
+  /** Text color of a selected or matched option. */
+  color: var(--sui-selection-option-selected-color, var(--color-primary));
 }
 
 .sui-selection-option:not([aria-disabled='true']):is([aria-selected='true'], [data-matched='true']):is(:hover, :active),
 .sui-selection-list:not(.sui-selection-list--focus-bound) .sui-selection-option:not([aria-disabled='true']):is([aria-selected='true'], [data-matched='true'])[data-active='true'],
 .sui-selection-list--focus-bound:focus .sui-selection-option:not([aria-disabled='true']):is([aria-selected='true'], [data-matched='true'])[data-active='true'] {
-  @apply bg-primary/20;
+  /** Background of a selected option when hovered, pressed, or actively navigated. */
+  background-color: var(--sui-selection-option-selected-hover-background, color-mix(in oklab, var(--color-primary) 20%, transparent));
+}
+
+.sui-selection-list.sui-selection-list[aria-disabled='true'] .sui-selection-option {
+  pointer-events: none;
+  background-color: transparent;
+  color: inherit;
 }

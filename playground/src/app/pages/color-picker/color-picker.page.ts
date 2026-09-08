@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import basicHtml from './examples/basic/basic.example.html';
 import * as basicTs from './examples/basic/basic.example.ts' with { loader: 'text' };
@@ -14,7 +15,7 @@ import { ColorPickerStatesExample } from './examples/states/states.example';
 
 @Component({
   selector: 'pg-color-picker-page',
-  imports: [Badge, Card, CardTitle, ExampleCode, ColorPickerBasicExample, ColorPickerPresetsExample, ColorPickerStatesExample],
+  imports: [Badge, ColorPickerBasicExample, ColorPickerPresetsExample, ColorPickerStatesExample, ExampleCode, ExamplePreview],
   templateUrl: './color-picker.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,4 +1,12 @@
-<sui-tabs ariaLabel="Example source" variant="lift" [(value)]="activeTab">
+<sui-tabs ariaLabel="Example preview and source" variant="lift" [(value)]="activeTab">
+  @if (preview(); as previewTemplate) {
+    <ng-template suiTab value="preview" label="Preview">
+      <div class="p-5 sm:p-6">
+        <ng-container [ngTemplateOutlet]="previewTemplate" />
+      </div>
+    </ng-template>
+  }
+
   <ng-template suiTab value="html" label="HTML">
     <sui-code>
       @for (line of htmlLines(); track $index) {

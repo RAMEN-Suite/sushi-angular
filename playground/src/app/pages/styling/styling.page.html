@@ -1,16 +1,16 @@
 <main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
   <section class="space-y-3 py-2">
-    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">{{ name() }} styling</h1>
-    <p class="max-w-3xl text-lg text-base-content/70">
-      Supported CSS properties form the stable styling contract. Set them globally, on an ancestor, or on one component instance.
+    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">{{ name() }} theming</h1>
+    <p class="text-lg text-base-content/70">
+      Supported CSS properties form the stable theming contract. Set them globally, on an ancestor, or on one component instance.
     </p>
   </section>
 
   <sui-card>
     <h2 suiCardTitle>Theme foundation</h2>
-    <p class="max-w-3xl text-base-content/70">
-      The component inherits the active SUSHI theme. Base colors define surfaces and content; semantic colors are applied through the
-      documented appearance inputs.
+    <p class="text-base-content/70">
+      The component inherits the active SUSHI theme. Use the supported appearance inputs and component tokens below for intentional
+      overrides.
     </p>
     <div class="mt-3 flex flex-wrap gap-2" aria-label="Global styling foundations">
       <code suiBadge severity="neutral" variant="soft" size="sm">--color-base-*</code>
@@ -30,7 +30,7 @@
   @if (appearanceInputs().length > 0) {
     <sui-card>
       <h2 suiCardTitle>Appearance inputs</h2>
-      <p class="max-w-3xl text-base-content/70">
+      <p class="text-base-content/70">
         Use these public inputs before adding CSS. Their values preserve the component's supported states and theme behavior.
       </p>
       <div class="mt-3">
@@ -62,7 +62,7 @@
   @if (templates().length > 0) {
     <sui-card>
       <h2 suiCardTitle>Content templates</h2>
-      <p class="max-w-3xl text-base-content/70">
+      <p class="text-base-content/70">
         Templates replace supported content regions while the component continues to own behavior and accessibility.
       </p>
       <div class="mt-3">
@@ -94,7 +94,7 @@
 
       <div class="mt-2 space-y-1">
         <h2 suiCardTitle>CSS custom properties</h2>
-        <p class="max-w-3xl text-base-content/70">
+        <p class="text-base-content/70">
           Defaults follow the active theme and can be overridden without relying on internal component classes.
         </p>
       </div>

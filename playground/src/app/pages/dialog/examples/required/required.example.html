@@ -6,13 +6,11 @@
   aria-labelledby="progress-dialog-title"
   [closeOnBackdrop]="false"
   [closeOnEscape]="false">
-  <sui-card class="w-[min(28rem,calc(100vw-2rem))]">
-    <h2 suiCardTitle id="progress-dialog-title">Finish importing</h2>
-    <p class="text-base-content/70">
-      This example ignores Escape and backdrop clicks, so it always provides an explicit completion action.
-    </p>
-    <div suiCardActions class="justify-end">
-      <button suiButton type="button" [suiDialogClose]="progressDialog" suiDialogCloseValue="done">Finish</button>
-    </div>
-  </sui-card>
+  <h2 id="progress-dialog-title" class="text-lg font-semibold">Finish importing</h2>
+  <p class="mt-2 text-base-content/70">
+    This example ignores Escape and backdrop clicks, so it always provides an explicit completion action.
+  </p>
+  <div class="mt-6 flex justify-end">
+    <button suiButton type="button" [suiDialogClose]="progressDialog" suiDialogCloseValue="done">Finish</button>
+  </div>
 </dialog>

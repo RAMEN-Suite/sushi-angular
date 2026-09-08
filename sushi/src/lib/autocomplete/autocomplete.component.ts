@@ -105,7 +105,7 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
   /** IDs of elements that describe the input. */
   public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
 
-  /** Prevents interaction while keeping the input focusable. */
+  /** Disables the native search input and prevents querying or selection. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Shows the loading state and prevents suggestion selection. */
   public readonly loading: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -210,6 +210,7 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
 
   /** Moves focus to the search input. */
   public focus(): void {
+    if (this.disabled()) return;
     this.combobox().element.focus();
   }
 
@@ -223,13 +224,13 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
 
   protected handleInput(event: Event): void {
     if (!(event.target instanceof HTMLInputElement)) return;
+    if (this.disabled()) return;
     const query: string = event.target.value;
 
     clearTimeout(this.queryTimer);
     this.query.set(query);
     if (!query) this.value.set(null);
     else if (this.selectedOption()?.label !== query) this.value.set(this.forceSelection() ? null : query);
-    if (this.disabled()) return;
     if (query.length < this.minQueryLength()) {
       this.expanded.set(false);
       if (!query) this.queryChange.emit('');
@@ -245,6 +246,7 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
   }
 
   protected handleSelection(values: AutocompleteValue[]): void {
+    if (this.disabled() || this.loading()) return;
     clearTimeout(this.queryTimer);
     const value: AutocompleteValue = values.at(0) ?? null;
     if (value === null) {
@@ -259,6 +261,7 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
   }
 
   protected handleExpanded(expanded: boolean): void {
+    if (expanded && (this.disabled() || this.loading())) return;
     if (this.expanded() === expanded) return;
     this.expanded.set(expanded);
     if (expanded) return;
@@ -288,6 +291,8 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
 
   private scheduleQuery(query: string): void {
     const complete: () => void = (): void => {
+      this.queryTimer = undefined;
+      if (this.disabled() || query !== this.query()) return;
       this.queryChange.emit(query);
       this.expanded.set(true);
     };

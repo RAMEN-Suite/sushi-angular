@@ -2,7 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Autocomplete</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">
+      <p class="text-lg text-base-content/70">
         Suggest matching values while a user types, with keyboard navigation and optional free text.
       </p>
     </div>
@@ -15,40 +15,51 @@
     </div>
   </section>
 
-  <sui-card
-    ><h2 suiCardTitle>Basic usage and forms</h2>
-    <p class="text-base-content/60">
-      Keep the popup closed until typing by default; use <code>forceSelection</code> when only listed values are valid. Escape closes the
-      suggestions and discards an unconfirmed forced value.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-autocomplete-basic-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Filtering and templates</h2>
-    <p class="text-base-content/60">
-      Suggestions open after the query reaches <code>minQueryLength</code>. Replace matching through <code>filterWith</code> and customize
-      meaningful visual regions.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-autocomplete-filtering-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.filtering.html" [typescript]="examples.filtering.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Asynchronous suggestions</h2>
-    <p class="text-base-content/60">
-      <code>queryChange</code> fires after the configurable <code>delay</code>. Loading, empty, and error templates keep remote states
-      replaceable.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-autocomplete-async-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.async.html" [typescript]="examples.async.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Sizes and states</h2>
-    <p class="text-base-content/60">
-      All sizes share the same behavior. Search values are always clearable, while loading, disabled, and invalid states follow the shared
-      form-control conventions.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-autocomplete-states-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Basic usage and forms</h2>
+      <p class="text-base-content/60">
+        Keep the popup closed until typing by default; use <code>forceSelection</code> when only listed values are valid. Escape closes the
+        suggestions and discards an unconfirmed forced value.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript">
+      <ng-template pgExamplePreview><pg-autocomplete-basic-example /></ng-template>
+    </pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Filtering and templates</h2>
+      <p class="text-base-content/60">
+        Suggestions open after the query reaches <code>minQueryLength</code>. Replace matching through <code>filterWith</code> and customize
+        meaningful visual regions.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.filtering.html" [typescript]="examples.filtering.typescript">
+      <ng-template pgExamplePreview><pg-autocomplete-filtering-example /></ng-template>
+    </pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Asynchronous suggestions</h2>
+      <p class="text-base-content/60">
+        <code>queryChange</code> fires after the configurable <code>delay</code>. Loading, empty, and error templates keep remote states
+        replaceable.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.async.html" [typescript]="examples.async.typescript">
+      <ng-template pgExamplePreview><pg-autocomplete-async-example /></ng-template>
+    </pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Sizes and states</h2>
+      <p class="text-base-content/60">
+        All sizes share the same behavior. Loading, disabled, and invalid states follow the shared form-control conventions.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript">
+      <ng-template pgExamplePreview><pg-autocomplete-states-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

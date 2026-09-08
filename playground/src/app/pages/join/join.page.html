@@ -2,25 +2,30 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Join</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">Connect related surfaces while every child keeps its own behavior and semantics.</p>
+      <p class="text-lg text-base-content/70">Connect related surfaces while every child keeps its own behavior and semantics.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Join architecture">
       <span suiBadge variant="soft" size="sm">Directive</span>
     </div>
   </section>
 
-  <sui-card
-    ><h2 suiCardTitle>Search and period controls</h2>
-    <p class="text-base-content/60">Use separate joins for distinct tasks and add a group name when several actions form one control.</p>
-    <sui-card size="sm" class="mt-5"><pg-join-actions-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.actions.html" [typescript]="examples.actions.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Nested quantity stepper</h2>
-    <p class="text-base-content/60">
-      A vertical Join can serve as one item beside an input while preserving equal height and outer corners.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-join-nested-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.nested.html" [typescript]="examples.nested.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Search and period controls</h2>
+      <p class="text-base-content/60">Use separate joins for distinct tasks and label a group when several actions form one control.</p>
+    </div>
+    <pg-example-code [html]="examples.actions.html" [typescript]="examples.actions.typescript">
+      <ng-template pgExamplePreview><pg-join-actions-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Nested quantity stepper</h2>
+      <p class="text-base-content/60">Use a vertical Join as one item inside a horizontal composition.</p>
+    </div>
+    <pg-example-code [html]="examples.nested.html" [typescript]="examples.nested.typescript">
+      <ng-template pgExamplePreview><pg-join-nested-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

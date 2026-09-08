@@ -2,7 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Select</h1>
-      <p class="max-w-3xl text-lg text-base-content/70">
+      <p class="text-lg text-base-content/70">
         Choose one value from a short, fixed, familiar list without turning the field into a text input.
       </p>
     </div>
@@ -15,44 +15,59 @@
     </div>
   </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Basic usage and forms</h2>
-    <p class="text-base-content/60">Bind a Signal Forms field and compose actions through the shared join primitives.</p>
-    <sui-card size="sm" class="mt-5"><pg-select-basic-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Basic usage and forms</h2>
+      <p class="text-base-content/60">Bind a Signal Forms field and compose actions through the shared join primitives.</p>
+    </div>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript">
+      <ng-template pgExamplePreview><pg-select-basic-example /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Options, groups, and object values</h2>
-    <p class="text-base-content/60">
-      Use <code>compareWith</code> for object identity and templates for richer rows, selected content, and clearly separated categories.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-select-options-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.options.html" [typescript]="examples.options.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Options, groups, and object values</h2>
+      <p class="text-base-content/60">
+        Use <code>compareWith</code> for object identity and templates for richer rows, selected content, and clearly separated categories.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.options.html" [typescript]="examples.options.typescript">
+      <ng-template pgExamplePreview><pg-select-options-example /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Messages and popup behavior</h2>
-    <p class="text-base-content/60">
-      Customize placeholder, empty and loading messages, row density, visible popup height, clear behavior, and touch handling.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-select-behavior-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.behavior.html" [typescript]="examples.behavior.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Messages and popup behavior</h2>
+      <p class="text-base-content/60">
+        Customize placeholder, empty and loading messages, row density, visible popup height, clear behavior, and touch handling.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.behavior.html" [typescript]="examples.behavior.typescript">
+      <ng-template pgExamplePreview><pg-select-behavior-example /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Popup and icon templates</h2>
-    <p class="text-base-content/60">Replace structural popup content and icons without duplicating selection behavior.</p>
-    <sui-card size="sm" class="mt-5"><pg-select-templates-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Popup and icon templates</h2>
+      <p class="text-base-content/60">Replace structural popup content and icons without duplicating selection behavior.</p>
+    </div>
+    <pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript">
+      <ng-template pgExamplePreview><pg-select-templates-example /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Sizes and states</h2>
-    <p class="text-base-content/60">
-      Keep disabled, loading, required, invalid, fluid, and label composition consistent with other form controls.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-select-states-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Sizes and states</h2>
+      <p class="text-base-content/60">
+        Keep disabled, loading, required, invalid, fluid, and label composition consistent with other form controls.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript">
+      <ng-template pgExamplePreview><pg-select-states-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>
