@@ -74,11 +74,12 @@ export class Drawer {
   /** Emits when the Drawer requests to close. */
   public readonly closed: OutputEmitterRef<DrawerCloseReason> = output<DrawerCloseReason>();
 
+  /** Stable ID referenced by Drawer triggers. */
+  public readonly drawerId: string = `sui-drawer-${++nextDrawerId}`;
+
   protected readonly header: Signal<DrawerHeader | undefined> = contentChild(DrawerHeader);
   protected readonly footer: Signal<DrawerFooter | undefined> = contentChild(DrawerFooter);
 
-  /** Stable ID referenced by Drawer triggers. */
-  public readonly drawerId: string = `sui-drawer-${++nextDrawerId}`;
   protected readonly toggleId: string = `${this.drawerId}-toggle`;
 
   protected readonly persistent: Signal<boolean> = computed((): boolean => {

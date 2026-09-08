@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import { DrawerNavigationExample } from './examples/navigation/navigation.example';
 import navigationHtml from './examples/navigation/navigation.example.html';
@@ -14,7 +15,7 @@ import * as responsiveTs from './examples/responsive/responsive.example.ts' with
 
 @Component({
   selector: 'pg-drawer-page',
-  imports: [Badge, Card, CardTitle, DrawerNavigationExample, DrawerResponsiveExample, DrawerSettingsExample, ExampleCode],
+  imports: [Badge, DrawerNavigationExample, DrawerResponsiveExample, DrawerSettingsExample, ExampleCode, ExamplePreview],
   templateUrl: './drawer.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

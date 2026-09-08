@@ -2,50 +2,46 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Pagination</h1>
-      <p class=" text-lg text-base-content/70">
-        Navigate a known collection with a controlled page model, responsive page links, and accessible labels.
-      </p>
+      <p class="text-lg text-base-content/70">Navigate a known collection with a controlled page model and accessible labels.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Pagination architecture">
-      <span suiBadge variant="soft" size="sm">Component</span>
-      <span suiBadge variant="soft" size="sm">Templates</span>
+      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Templates</span>
     </div>
   </section>
-
-  <sui-card>
-    <h2 suiCardTitle>Paginate a collection</h2>
-    <p class="text-base-content/60">
-      Bind the one-based page model and optionally make the active page editable. Press Enter or leave the field to apply; press Escape to
-      cancel.
-    </p>
-    <div class="mt-5 rounded-box bg-base-200/30 p-4 sm:p-6"><pg-pagination-basic-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
-  </sui-card>
-
-  <sui-card>
-    <h2 suiCardTitle>Compact navigation</h2>
-    <p class="text-base-content/60">Hide direct and boundary links when previous and next actions are enough for a constrained surface.</p>
-    <div class="mt-5"><pg-pagination-compact-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.compact.html" [typescript]="examples.compact.typescript" /></div>
-  </sui-card>
-
-  <sui-card>
-    <h2 suiCardTitle>Style, size, color, and state</h2>
-    <p class="text-base-content/60">
-      Choose separate round actions or a connected group, then keep one size and semantic color across the complete control.
-    </p>
-    <div class="mt-5"><pg-pagination-appearance-example /></div>
-    <div class="mt-6">
-      <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript" />
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Paginate a collection</h2>
+      <p class="text-base-content/60">Bind the one-based page model and optionally make the active page editable.</p>
     </div>
-  </sui-card>
-
-  <sui-card>
-    <h2 suiCardTitle>Custom telemetry console</h2>
-    <p class="text-base-content/60">
-      Replace page, navigation, and report content to build a distinct experience while Pagination retains state and interaction.
-    </p>
-    <div class="mt-5"><pg-pagination-templates-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript" /></div>
-  </sui-card>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
+      ><ng-template pgExamplePreview><pg-pagination-basic-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Compact navigation</h2>
+      <p class="text-base-content/60">Hide page and boundary links when previous and next are enough.</p>
+    </div>
+    <pg-example-code [html]="examples.compact.html" [typescript]="examples.compact.typescript"
+      ><ng-template pgExamplePreview><pg-pagination-compact-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Appearance and state</h2>
+      <p class="text-base-content/60">Choose separate round actions or a connected group with one size and semantic color.</p>
+    </div>
+    <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript"
+      ><ng-template pgExamplePreview><pg-pagination-appearance-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Custom content</h2>
+      <p class="text-base-content/60">Replace page, navigation, and report content while Pagination keeps state and interaction.</p>
+    </div>
+    <pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript"
+      ><ng-template pgExamplePreview><pg-pagination-templates-example /></ng-template
+    ></pg-example-code>
+  </section>
 </main>

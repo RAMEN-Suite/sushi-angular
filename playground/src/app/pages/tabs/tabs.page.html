@@ -2,31 +2,37 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Tabs</h1>
-      <p class=" text-lg text-base-content/70">Switch between related views with Angular Aria keyboard and focus behavior.</p>
+      <p class="text-lg text-base-content/70">Switch between related views with accessible keyboard and focus behavior.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Tabs architecture">
-      <span suiBadge variant="soft" size="sm">Component</span>
-      <span suiBadge variant="soft" size="sm">Angular Aria</span>
-      <span suiBadge variant="soft" size="sm">Templates</span>
+      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Angular Aria</span>
     </div>
   </section>
-
-  <sui-card
-    ><h2 suiCardTitle>Account sections</h2>
-    <p class="text-base-content/60">Bind the active value and define each label and panel in one template.</p>
-    <sui-card size="sm" class="mt-5"><pg-tabs-basic-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Layout and activation</h2>
-    <p class="text-base-content/60">Use explicit activation for expensive views and vertical orientation for side navigation.</p>
-    <sui-card size="sm" class="mt-5"><pg-tabs-behavior-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.behavior.html" [typescript]="examples.behavior.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Release workspace</h2>
-    <p class="text-base-content/60">Combine tabs with status, progress, and actions when several related views form one workflow.</p>
-    <sui-card size="sm" class="mt-5"><pg-tabs-workspace-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.workspace.html" [typescript]="examples.workspace.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Account sections</h2>
+      <p class="text-base-content/60">Bind the active value and define each label and panel together.</p>
+    </div>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
+      ><ng-template pgExamplePreview><pg-tabs-basic-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Layout and activation</h2>
+      <p class="text-base-content/60">Use explicit activation for expensive views and vertical orientation for side navigation.</p>
+    </div>
+    <pg-example-code [html]="examples.behavior.html" [typescript]="examples.behavior.typescript"
+      ><ng-template pgExamplePreview><pg-tabs-behavior-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Release workspace</h2>
+      <p class="text-base-content/60">Combine tabs with status, progress, and actions in one workflow.</p>
+    </div>
+    <pg-example-code [html]="examples.workspace.html" [typescript]="examples.workspace.typescript"
+      ><ng-template pgExamplePreview><pg-tabs-workspace-example /></ng-template
+    ></pg-example-code>
+  </section>
 </main>

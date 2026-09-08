@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle, Kbd } from '@ramen-suite/sushi';
+import { Badge, Kbd } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import activeHtml from './examples/active/active.example.html';
 import * as activeTs from './examples/active/active.example.ts' with { loader: 'text' };
@@ -28,9 +29,8 @@ import { MenuSubmenuExample } from './examples/submenu/submenu.example';
   selector: 'pg-menu-page',
   imports: [
     Badge,
-    Card,
-    CardTitle,
     ExampleCode,
+    ExamplePreview,
     Kbd,
     MenuActiveExample,
     MenuBasicExample,

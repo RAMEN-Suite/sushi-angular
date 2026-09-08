@@ -54,10 +54,6 @@ import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button
 })
 /** Styles native buttons and links with consistent, focusable disabled behavior. */
 export class Button {
-  private readonly destroyRef: DestroyRef = inject(DestroyRef);
-  private readonly element: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly renderer: Renderer2 = inject(Renderer2);
-
   /** Applies a semantic theme color. */
   public readonly severity: InputSignal<ButtonSeverity> = input<ButtonSeverity>('primary');
   /** Controls the button dimensions. */
@@ -81,6 +77,10 @@ export class Button {
   });
 
   protected readonly isDisabled: Signal<boolean> = computed<boolean>((): boolean => this.disabled() || this.loading());
+
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private readonly element: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly renderer: Renderer2 = inject(Renderer2);
 
   public constructor() {
     const stopListening: () => void = this.renderer.listen(

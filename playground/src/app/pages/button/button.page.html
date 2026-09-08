@@ -2,32 +2,37 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Button</h1>
-      <p class=" text-lg text-base-content/70">Trigger actions with native button and link semantics.</p>
+      <p class="text-lg text-base-content/70">Trigger actions while preserving native button and link behavior.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Button architecture">
-      <span suiBadge variant="soft" size="sm">Directive</span>
-      <span suiBadge variant="soft" size="sm">Native element</span>
+      <span suiBadge variant="soft" size="sm">Directive</span><span suiBadge variant="soft" size="sm">Native element</span>
     </div>
   </section>
-
-  <sui-card>
-    <h2 suiCardTitle>Native actions</h2>
-    <p class="text-base-content/60">Use the directive on buttons, external links, and router links.</p>
-    <sui-card size="sm" class="mt-5"><pg-button-basic-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
-  </sui-card>
-
-  <sui-card>
-    <h2 suiCardTitle>Appearance</h2>
-    <p class="text-base-content/60">Severity, variant, size, and shape compose without changing behavior.</p>
-    <sui-card size="sm" class="mt-5"><pg-button-appearance-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript" /></div>
-  </sui-card>
-
-  <sui-card>
-    <h2 suiCardTitle>Disabled and loading</h2>
-    <p class="text-base-content/60">Both states prevent activation; loading additionally exposes the busy state.</p>
-    <sui-card size="sm" class="mt-5"><pg-button-states-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Native actions</h2>
+      <p class="text-base-content/60">Use the same directive on buttons, external links, and router links.</p>
+    </div>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
+      ><ng-template pgExamplePreview><pg-button-basic-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Appearance</h2>
+      <p class="text-base-content/60">Combine severity, variant, size, and shape without changing behavior.</p>
+    </div>
+    <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript"
+      ><ng-template pgExamplePreview><pg-button-appearance-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Disabled and loading</h2>
+      <p class="text-base-content/60">Both states prevent activation; loading also exposes the busy state.</p>
+    </div>
+    <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript"
+      ><ng-template pgExamplePreview><pg-button-states-example /></ng-template
+    ></pg-example-code>
+  </section>
 </main>

@@ -2,39 +2,40 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Sidebar</h1>
-      <p class=" text-lg text-base-content/70">
-        Organize persistent application navigation into labeled groups with stable header and footer regions.
+      <p class="text-lg text-base-content/70">
+        Organize persistent application navigation into labeled groups with fixed header and footer regions.
       </p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Sidebar architecture">
-      <span suiBadge variant="soft" size="sm">Component</span>
-      <span suiBadge variant="soft" size="sm">Templates</span>
-      <span suiBadge variant="soft" size="sm">Projected content</span>
+      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Templates</span
+      ><span suiBadge variant="soft" size="sm">Projected content</span>
     </div>
   </section>
-
-  <sui-card>
-    <h2 suiCardTitle>Workspace navigation</h2>
-    <p class="text-base-content/60">
-      Keep identity and account actions fixed while grouped destinations scroll independently in the center.
-    </p>
-    <div class="mt-5"><pg-sidebar-workspace-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.workspace.html" [typescript]="examples.workspace.typescript" /></div>
-  </sui-card>
-
-  <sui-card>
-    <h2 suiCardTitle>Responsive Sidebar</h2>
-    <p class="text-base-content/60">
-      Use the Sidebar as a persistent desktop region and place the same instance inside a Drawer on smaller screens.
-    </p>
-    <div class="mt-5"><pg-sidebar-drawer-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.drawer.html" [typescript]="examples.drawer.typescript" /></div>
-  </sui-card>
-
-  <sui-card>
-    <h2 suiCardTitle>Persistent widths</h2>
-    <p class="text-base-content/60">Choose a standard size or override it with a consumer utility such as <code>w-72</code>.</p>
-    <div class="mt-5"><pg-sidebar-sizes-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.sizes.html" [typescript]="examples.sizes.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Workspace navigation</h2>
+      <p class="text-base-content/60">Keep identity and account actions fixed while grouped destinations scroll in the center.</p>
+    </div>
+    <pg-example-code [html]="examples.workspace.html" [typescript]="examples.workspace.typescript"
+      ><ng-template pgExamplePreview><pg-sidebar-workspace-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Responsive Sidebar</h2>
+      <p class="text-base-content/60">Use one Sidebar persistently on desktop and inside a Drawer on compact screens.</p>
+    </div>
+    <pg-example-code [html]="examples.drawer.html" [typescript]="examples.drawer.typescript"
+      ><ng-template pgExamplePreview><pg-sidebar-drawer-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Persistent widths</h2>
+      <p class="text-base-content/60">Choose a standard size or override the width with a consumer utility.</p>
+    </div>
+    <pg-example-code [html]="examples.sizes.html" [typescript]="examples.sizes.typescript"
+      ><ng-template pgExamplePreview><pg-sidebar-sizes-example /></ng-template
+    ></pg-example-code>
+  </section>
 </main>

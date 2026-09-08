@@ -1,16 +1,37 @@
 @layer components {
   .sui-dialog {
+    /**
+     * Preferred width of a Dialog before viewport constraints apply.
+     * @example 36rem
+     */
+    --sui-dialog-width: 28rem;
+    /**
+     * Inner spacing of the Dialog surface.
+     * @example 2rem
+     */
+    --sui-dialog-padding: 1.5rem;
+    /**
+     * Corner radius of the Dialog surface.
+     * @example var(--radius-field)
+     */
+    --sui-dialog-radius: var(--radius-box);
+    /**
+     * Color of the native modal backdrop.
+     * @example rgb(0 0 0 / 40%)
+     */
+    --sui-dialog-backdrop-color: rgb(0 0 0 / 55%);
+
     inset: 0;
     margin: auto;
-    width: min(28rem, calc(100vw - 2rem));
+    width: min(var(--sui-dialog-width), calc(100vw - 2rem));
     max-width: calc(100vw - 2rem);
     max-height: calc(100dvh - 2rem);
-    padding: 1.5rem;
+    padding: var(--sui-dialog-padding);
     overflow: auto;
     color: var(--color-base-content);
     background-color: var(--color-base-100);
     border: 0;
-    border-radius: var(--radius-box);
+    border-radius: var(--sui-dialog-radius);
     box-shadow: none;
   }
 
@@ -69,6 +90,6 @@
   }
 
   .sui-dialog::backdrop {
-    background-color: rgb(0 0 0 / 55%);
+    background-color: var(--sui-dialog-backdrop-color);
   }
 }

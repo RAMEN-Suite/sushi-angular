@@ -1961,7 +1961,32 @@ export const apiReference: Readonly<{
         description: 'Placement of a Dialog inside the viewport.',
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-dialog-width',
+        defaultValue: '28rem',
+        exampleValue: '36rem',
+        description: 'Preferred width of a Dialog before viewport constraints apply.',
+      },
+      {
+        name: '--sui-dialog-padding',
+        defaultValue: '1.5rem',
+        exampleValue: '2rem',
+        description: 'Inner spacing of the Dialog surface.',
+      },
+      {
+        name: '--sui-dialog-radius',
+        defaultValue: 'var(--radius-box)',
+        exampleValue: 'var(--radius-field)',
+        description: 'Corner radius of the Dialog surface.',
+      },
+      {
+        name: '--sui-dialog-backdrop-color',
+        defaultValue: 'rgb(0 0 0 / 55%)',
+        exampleValue: 'rgb(0 0 0 / 40%)',
+        description: 'Color of the native modal backdrop.',
+      },
+    ],
   },
   DialogClose: {
     className: 'DialogClose',
@@ -6070,7 +6095,32 @@ export const apiReference: Readonly<{
         description: 'Supported persistent Sidebar widths.',
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-sidebar-background',
+        defaultValue: 'var(--color-base-100)',
+        exampleValue: 'var(--color-base-200)',
+        description: 'Background of the persistent Sidebar surface.',
+      },
+      {
+        name: '--sui-sidebar-divider-color',
+        defaultValue: 'var(--color-base-300)',
+        exampleValue: 'color-mix(in oklab, var(--color-base-content) 12%, transparent)',
+        description: 'Color of fixed header and footer separators.',
+      },
+      {
+        name: '--sui-sidebar-group-label-color',
+        defaultValue: 'color-mix(in oklab, var(--color-base-content) 45%, transparent)',
+        exampleValue: 'color-mix(in oklab, var(--color-primary) 65%, var(--color-base-content))',
+        description: 'Color of group headings.',
+      },
+      {
+        name: '--sui-sidebar-scrollbar-color',
+        defaultValue: 'color-mix(in oklab, var(--color-base-content) 24%, transparent)',
+        exampleValue: 'color-mix(in oklab, var(--color-base-content) 32%, transparent)',
+        description: 'Color of the scroll thumb in the navigation region.',
+      },
+    ],
   },
   SidebarFooter: {
     className: 'SidebarFooter',

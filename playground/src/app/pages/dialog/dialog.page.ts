@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import { DialogConfirmationExample } from './examples/confirmation/confirmation.example';
 import confirmationHtml from './examples/confirmation/confirmation.example.html';
@@ -19,13 +20,12 @@ import * as workspaceTs from './examples/workspace/workspace.example.ts' with { 
   selector: 'pg-dialog-page',
   imports: [
     Badge,
-    Card,
-    CardTitle,
     DialogConfirmationExample,
     DialogControlledExample,
     DialogRequiredExample,
     DialogWorkspaceExample,
     ExampleCode,
+    ExamplePreview,
   ],
   templateUrl: './dialog.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

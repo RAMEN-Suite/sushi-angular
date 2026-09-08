@@ -5,7 +5,7 @@
 
 <sui-drawer #filterDrawer="suiDrawer" placement="end" ariaLabelledby="filter-drawer-title">
   <div class="flex h-full flex-col bg-base-100">
-    <div class="flex items-start justify-between gap-4 border-b border-base-300 p-4">
+    <div suiDrawerHeader class="flex items-start justify-between gap-4 border-b border-base-300 p-4">
       <span>
         <strong id="filter-drawer-title" class="block text-lg">Workspace filters</strong>
         <span class="text-sm text-base-content/60">Refine the current project view.</span>
@@ -57,7 +57,7 @@
       </fieldset>
     </div>
 
-    <div class="flex justify-end gap-2 border-t border-base-300 p-4">
+    <div suiDrawerFooter class="flex justify-end gap-2 border-t border-base-300 p-4">
       <button suiButton type="button" severity="neutral" variant="soft" [suiDrawerClose]="filterDrawer">Cancel</button>
       <button suiButton type="button" [suiDrawerClose]="filterDrawer">Apply filters</button>
     </div>

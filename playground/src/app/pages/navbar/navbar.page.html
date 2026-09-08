@@ -2,66 +2,67 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Navbar</h1>
-      <p class=" text-lg text-base-content/70">
-        Build a responsive product header from navigation data, projected identity, and optional global actions.
+      <p class="text-lg text-base-content/70">
+        Build responsive navigation from typed destinations, projected identity, and optional actions.
       </p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Navbar architecture">
-      <span suiBadge variant="soft" size="sm">Component</span>
-      <span suiBadge variant="soft" size="sm">Templates</span>
-      <span suiBadge variant="soft" size="sm">Projected content</span>
+      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Templates</span
+      ><span suiBadge variant="soft" size="sm">Projected content</span>
     </div>
   </section>
-
-  <sui-card>
-    <h2 suiCardTitle>Website navigation</h2>
-    <p class="text-base-content/60">
-      Keep the brand on the left and navigation on the right. The same item model supports quiet links and stronger buttons.
-    </p>
-    <div class="mt-5"><pg-navbar-basic-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
-  </sui-card>
-
-  <sui-card>
-    <h2 suiCardTitle>Navigation with submenus</h2>
-    <p class="text-base-content/60">
-      Group related destinations under non-selectable disclosure labels while direct destinations remain one click away.
-    </p>
-    <div class="mt-5"><pg-navbar-submenus-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.submenus.html" [typescript]="examples.submenus.typescript" /></div>
-  </sui-card>
-
-  <sui-card>
-    <h2 suiCardTitle>Workspace search</h2>
-    <p class="text-base-content/60">Place a primary search in the center while compact global actions remain easy to reach at the end.</p>
-    <div class="mt-5"><pg-navbar-websites-example /></div>
-    <div class="mt-6">
-      <pg-example-code [css]="examples.websites.css" [html]="examples.websites.html" [typescript]="examples.websites.typescript" />
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Website navigation</h2>
+      <p class="text-base-content/60">Keep identity at the start and primary destinations and actions easy to reach.</p>
     </div>
-  </sui-card>
-
-  <sui-card>
-    <h2 suiCardTitle>Vertical navigation</h2>
-    <p class="text-base-content/60">Use link or button treatments in persistent sidebars without enabling the responsive menu toggle.</p>
-    <div class="mt-5"><pg-navbar-orientations-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.orientations.html" [typescript]="examples.orientations.typescript" /></div>
-  </sui-card>
-
-  <sui-card>
-    <h2 suiCardTitle>Custom item content</h2>
-    <p class="text-base-content/60">
-      Add counts and contextual actions through one item template while the Navbar retains its interaction and responsive behavior.
-    </p>
-    <div class="mt-5"><pg-navbar-custom-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.custom.html" [typescript]="examples.custom.typescript" /></div>
-  </sui-card>
-
-  <sui-card>
-    <h2 suiCardTitle>Desktop editor toolbar</h2>
-    <p class="text-base-content/60">
-      Keep document context, editing tools, zoom controls, and the primary preview action in one horizontally scrollable desktop toolbar.
-    </p>
-    <div class="mt-5"><pg-navbar-desktop-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.desktop.html" [typescript]="examples.desktop.typescript" /></div>
-  </sui-card>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
+      ><ng-template pgExamplePreview><pg-navbar-basic-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Navigation with submenus</h2>
+      <p class="text-base-content/60">Group destinations under disclosure labels while direct links remain one click away.</p>
+    </div>
+    <pg-example-code [html]="examples.submenus.html" [typescript]="examples.submenus.typescript"
+      ><ng-template pgExamplePreview><pg-navbar-submenus-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Workspace search</h2>
+      <p class="text-base-content/60">Center a primary search while compact global actions stay at the end.</p>
+    </div>
+    <pg-example-code [css]="examples.websites.css" [html]="examples.websites.html" [typescript]="examples.websites.typescript"
+      ><ng-template pgExamplePreview><pg-navbar-websites-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Vertical navigation</h2>
+      <p class="text-base-content/60">Use the same item model for persistent vertical navigation without a menu toggle.</p>
+    </div>
+    <pg-example-code [html]="examples.orientations.html" [typescript]="examples.orientations.typescript"
+      ><ng-template pgExamplePreview><pg-navbar-orientations-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Custom item content</h2>
+      <p class="text-base-content/60">Add counts and contextual actions while Navbar retains responsive behavior.</p>
+    </div>
+    <pg-example-code [html]="examples.custom.html" [typescript]="examples.custom.typescript"
+      ><ng-template pgExamplePreview><pg-navbar-custom-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Desktop toolbar</h2>
+      <p class="text-base-content/60">Keep dense desktop controls horizontally scrollable instead of collapsing them.</p>
+    </div>
+    <pg-example-code [html]="examples.desktop.html" [typescript]="examples.desktop.typescript"
+      ><ng-template pgExamplePreview><pg-navbar-desktop-example /></ng-template
+    ></pg-example-code>
+  </section>
 </main>

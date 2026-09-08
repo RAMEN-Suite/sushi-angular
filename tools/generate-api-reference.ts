@@ -42,6 +42,9 @@ const sharedStyleFiles: Readonly<Record<string, readonly string[]>> = {
   'order-list': ['sushi/src/styles/features/selection.styles.css'],
   select: ['sushi/src/styles/features/selection.styles.css'],
 };
+const sharedStyleFilesByClass: Readonly<Record<string, readonly string[]>> = {
+  Dialog: ['sushi/src/styles/features/dialog.styles.css'],
+};
 
 function findSourceFiles(folder: string): string[] {
   return readdirSync(folder, { withFileTypes: true }).flatMap((entry: Dirent): string[] => {
@@ -101,10 +104,12 @@ function findStyleFile(node: ts.ClassDeclaration): string | null {
 
 function readStyleProperties(node: ts.ClassDeclaration): readonly ApiStyleProperty[] {
   const folder: string = basename(dirname(node.getSourceFile().fileName));
+  const className: string = node.name?.text ?? '';
   const componentStyle: string | null = findStyleFile(node);
   const files: readonly string[] = [
     ...(componentStyle ? [componentStyle] : []),
     ...(sharedStyleFiles[folder] ?? []).map((file: string): string => join(root, file)),
+    ...(sharedStyleFilesByClass[className] ?? []).map((file: string): string => join(root, file)),
   ];
   if (files.length === 0) return [];
 

@@ -3,8 +3,8 @@
 }
 
 .sui-menu-surface {
-  --menu-active-bg: color-mix(in oklab, var(--sui-menu-active) 15%, transparent);
-  --menu-active-fg: var(--sui-menu-active-fg, var(--sui-menu-active));
+  --menu-active-bg: color-mix(in oklab, var(--menu-active-color) 15%, transparent);
+  --menu-active-fg: var(--menu-active-color);
 }
 
 .sui-menu-surface--nested {
@@ -57,34 +57,34 @@
 }
 
 .sui-menu-surface[data-severity='primary'] {
-  --sui-menu-active: var(--color-primary);
+  --menu-active-color: var(--color-primary);
 }
 
 .sui-menu-surface[data-severity='secondary'] {
-  --sui-menu-active: var(--color-secondary);
+  --menu-active-color: var(--color-secondary);
 }
 
 .sui-menu-surface[data-severity='accent'] {
-  --sui-menu-active: var(--color-accent);
+  --menu-active-color: var(--color-accent);
 }
 
 .sui-menu-surface[data-severity='neutral'] {
-  --sui-menu-active: var(--color-neutral);
-  --sui-menu-active-fg: var(--color-base-content);
+  --menu-active-color: var(--color-neutral);
+  --menu-active-fg: var(--color-base-content);
 }
 
 .sui-menu-surface[data-severity='info'] {
-  --sui-menu-active: var(--color-info);
+  --menu-active-color: var(--color-info);
 }
 
 .sui-menu-surface[data-severity='success'] {
-  --sui-menu-active: var(--color-success);
+  --menu-active-color: var(--color-success);
 }
 
 .sui-menu-surface[data-severity='warning'] {
-  --sui-menu-active: var(--color-warning);
+  --menu-active-color: var(--color-warning);
 }
 
 .sui-menu-surface[data-severity='error'] {
-  --sui-menu-active: var(--color-error);
+  --menu-active-color: var(--color-error);
 }
