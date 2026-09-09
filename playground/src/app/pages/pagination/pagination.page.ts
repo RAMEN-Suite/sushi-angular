@@ -12,29 +12,17 @@ import { PaginationBasicExample } from './examples/basic/basic.example';
 import compactHtml from './examples/compact/compact.example.html';
 import * as compactTs from './examples/compact/compact.example.ts' with { loader: 'text' };
 import { PaginationCompactExample } from './examples/compact/compact.example';
-import templatesHtml from './examples/templates/templates.example.html';
-import * as templatesTs from './examples/templates/templates.example.ts' with { loader: 'text' };
-import { PaginationTemplatesExample } from './examples/templates/templates.example';
 
 @Component({
   selector: 'pg-pagination-page',
-  imports: [
-    Badge,
-    ExampleCode,
-    ExamplePreview,
-    PaginationAppearanceExample,
-    PaginationBasicExample,
-    PaginationCompactExample,
-    PaginationTemplatesExample,
-  ],
+  imports: [Badge, ExampleCode, ExamplePreview, PaginationAppearanceExample, PaginationBasicExample, PaginationCompactExample],
   templateUrl: './pagination.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginationPage {
-  protected readonly examples: Readonly<Record<'appearance' | 'basic' | 'compact' | 'templates', ExampleSource>> = {
+  protected readonly examples: Readonly<Record<'appearance' | 'basic' | 'compact', ExampleSource>> = {
     appearance: { html: appearanceHtml, typescript: textSource(appearanceTs) },
     basic: { html: basicHtml, typescript: textSource(basicTs) },
     compact: { html: compactHtml, typescript: textSource(compactTs) },
-    templates: { html: templatesHtml, typescript: textSource(templatesTs) },
   };
 }

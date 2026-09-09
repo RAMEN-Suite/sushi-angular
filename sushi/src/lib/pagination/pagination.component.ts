@@ -20,8 +20,9 @@ import { AutoFocus } from '../auto-focus';
 import { Button } from '../button';
 import { Input } from '../input';
 import { integerAtLeast, nonNegativeInteger, positiveInteger } from '../number.transforms';
-import { Select, SelectModelValue, SelectOption } from '../select';
-import {
+import { Select } from '../select';
+import type { SelectModelValue, SelectOption } from '../select';
+import type {
   PaginationLabels,
   PaginationNavigation,
   PaginationNavigationContext,

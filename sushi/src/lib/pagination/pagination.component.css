@@ -1,11 +1,24 @@
+:host {
+  /**
+   * Foreground color of inactive page and navigation actions.
+   * @example color-mix(in oklab, var(--color-base-content) 75%, transparent)
+   */
+  --sui-pagination-action-color: color-mix(in oklab, var(--color-base-content) 65%, transparent);
+  /**
+   * Semantic color proportion used by the soft hover background.
+   * @example 15%
+   */
+  --sui-pagination-hover-mix: 10%;
+}
+
 .sui-pagination__action {
-  --btn-rest-fg: color-mix(in oklab, var(--color-base-content) 65%, transparent);
+  --btn-rest-fg: var(--sui-pagination-action-color);
 }
 
 @media (hover: hover) {
   :host(.sui-pagination--plain) .sui-pagination__action:not([aria-disabled='true']):is(:hover, :focus-visible) {
     color: var(--btn-color, var(--color-primary));
-    background-color: color-mix(in oklab, var(--btn-color, var(--color-primary)) 10%, transparent);
+    background-color: color-mix(in oklab, var(--btn-color, var(--color-primary)) var(--sui-pagination-hover-mix), transparent);
     border-color: transparent;
   }
 }

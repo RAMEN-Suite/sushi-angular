@@ -1,9 +1,9 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { press, query, queryAll, render } from '../../../../testing/test-utils';
 import { Pagination } from '../pagination.component';
-import { PaginationVariant } from '../pagination.interfaces';
+import type { PaginationVariant } from '../pagination.interfaces';
 import { PaginationNavigationTemplate, PaginationPageTemplate, PaginationReportTemplate } from '../pagination.templates';
 
 @Component({
@@ -40,6 +40,8 @@ class PaginationHost {
   public readonly variant: WritableSignal<PaginationVariant> = signal<PaginationVariant>('plain');
 }
 
+afterEach((): void => document.querySelector('.cdk-overlay-container')?.remove());
+
 describe('Pagination range and templates', (): void => {
   it('renders a centered page window and report context', (): void => {
     const fixture: ComponentFixture<PaginationHost> = render(PaginationHost);
@@ -59,6 +61,25 @@ describe('Pagination range and templates', (): void => {
 
     expect(query(fixture, '[aria-current="page"] [data-page]').getAttribute('data-page')).toBe('10');
     expect(query(fixture, '[data-report]').textContent).toBe('91 to 95');
+  });
+
+  it('keeps the page window inside the first and last collection boundaries', (): void => {
+    const fixture: ComponentFixture<PaginationHost> = render(PaginationHost);
+    fixture.componentInstance.page.set(1);
+    fixture.detectChanges();
+    expect(queryAll(fixture, '[data-page]').map((page: Element): string | null => page.getAttribute('data-page'))).toEqual([
+      '1',
+      '2',
+      '3',
+    ]);
+
+    fixture.componentInstance.page.set(10);
+    fixture.detectChanges();
+    expect(queryAll(fixture, '[data-page]').map((page: Element): string | null => page.getAttribute('data-page'))).toEqual([
+      '8',
+      '9',
+      '10',
+    ]);
   });
 });
 
@@ -95,6 +116,46 @@ describe('Pagination navigation', (): void => {
     expect(fixture.componentInstance.page()).toBe(10);
 
     query(fixture, '[aria-label="First page"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    expect(fixture.componentInstance.page()).toBe(1);
+  });
+
+  it('selects a numbered page directly', (): void => {
+    const fixture: ComponentFixture<PaginationHost> = render(PaginationHost);
+    query(fixture, '[aria-label="Page 4"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
+    expect(fixture.componentInstance.page()).toBe(4);
+  });
+
+  it('disables navigation actions at collection boundaries', (): void => {
+    const fixture: ComponentFixture<PaginationHost> = render(PaginationHost);
+    fixture.componentInstance.page.set(1);
+    fixture.detectChanges();
+
+    expect(query(fixture, '[aria-label="First page"]').getAttribute('aria-disabled')).toBe('true');
+    expect(query(fixture, '[aria-label="Previous page"]').getAttribute('aria-disabled')).toBe('true');
+
+    fixture.componentInstance.page.set(10);
+    fixture.detectChanges();
+    expect(query(fixture, '[aria-label="Next page"]').getAttribute('aria-disabled')).toBe('true');
+    expect(query(fixture, '[aria-label="Last page"]').getAttribute('aria-disabled')).toBe('true');
+  });
+});
+
+describe('Pagination page size and editing', (): void => {
+  it('resets to the first page when selecting a page size', async (): Promise<void> => {
+    const fixture: ComponentFixture<PaginationHost> = render(PaginationHost);
+    query(fixture, '[role="combobox"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    await fixture.whenStable();
+
+    const option: HTMLElement | undefined = [...document.querySelectorAll<HTMLElement>('[role="option"]')].find(
+      (element: HTMLElement): boolean => element.textContent.trim() === '25',
+    );
+    expect(option).toBeDefined();
+    if (!option) return;
+    option.click();
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.pageSize()).toBe(25);
     expect(fixture.componentInstance.page()).toBe(1);
   });
 

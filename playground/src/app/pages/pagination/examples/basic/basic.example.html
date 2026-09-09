@@ -1,10 +1,10 @@
 <sui-card size="sm" class="w-full max-w-2xl">
   <div class="flex flex-wrap items-start justify-between gap-3">
-    <div class="min-w-0">
+    <div>
       <h3 suiCardTitle>Release train</h3>
       <p class="mt-1 text-sm text-base-content/60">Upcoming component milestones and their target channels.</p>
     </div>
-    <span suiBadge severity="neutral" variant="soft" class="ml-auto">{{ releases.length }} releases</span>
+    <span suiBadge severity="neutral" variant="soft">{{ releases.length }} releases</span>
   </div>
 
   <div suiDivider></div>
@@ -14,14 +14,9 @@
       <span suiBadge size="sm" severity="neutral" variant="soft" class="mr-1">{{ release.code }}</span>
       <span class="min-w-0 flex-1">
         <strong class="block">{{ release.name }}</strong>
-        <span class="mt-1 flex flex-wrap items-center gap-2 text-sm text-base-content/60">
-          Target {{ release.target }}
-          <span suiBadge size="sm" severity="neutral" variant="soft" class="sm:hidden">{{ release.channel }}</span>
-        </span>
+        <span class="mt-1 block text-sm text-base-content/60">Target {{ release.target }}</span>
       </span>
-      <span suiBadge size="sm" severity="neutral" variant="soft" class="hidden sm:inline-flex">
-        {{ release.channel }}
-      </span>
+      <span suiBadge size="sm" severity="neutral" variant="soft">{{ release.channel }}</span>
     </ng-template>
   </sui-list>
 
