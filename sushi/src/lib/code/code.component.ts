@@ -18,6 +18,7 @@ import {
 } from '@angular/core';
 import { LucideCheck, LucideCopy } from '@lucide/angular';
 import { Button, ButtonShape } from '../button';
+import { nonNegativeInteger } from '../number.transforms';
 import { CodeButtonContext } from './code.interfaces';
 import { CodeLine } from './code-line.directive';
 import { CodeButtonOffTemplate, CodeButtonOnTemplate, CodeButtonTemplate } from './code.templates';
@@ -39,12 +40,12 @@ export class Code {
     transform: booleanAttribute,
   });
   /** Sets how long copied feedback remains visible in milliseconds. */
-  public readonly cooldown: InputSignal<number> = input<number>(1200);
+  public readonly cooldown: InputSignalWithTransform<number, unknown> = input(1200, { transform: nonNegativeInteger });
 
   /** Controls the default copy button geometry. */
   public readonly buttonShape: InputSignal<ButtonShape | null> = input<ButtonShape | null>('square');
   /** Provides the accessible name of the default copy button. */
-  public readonly buttonAriaLabel: InputSignal<string | null> = input<string | null>('Copy code');
+  public readonly buttonAriaLabel: InputSignal<string> = input<string>('Copy code');
 
   protected readonly codeLines: Signal<readonly CodeLine[]> = contentChildren(CodeLine, { descendants: true });
   protected readonly buttonOnRef: Signal<TemplateRef<void> | undefined> = contentChild(CodeButtonOnTemplate, {

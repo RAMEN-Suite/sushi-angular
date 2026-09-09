@@ -53,6 +53,8 @@ const sharedStyleFiles: Readonly<Record<string, readonly string[]>> = {
 };
 const sharedStyleFilesByClass: Readonly<Record<string, readonly string[]>> = {
   Dialog: ['sushi/src/styles/features/dialog.styles.css'],
+  Divider: ['sushi/src/styles/features/divider.styles.css'],
+  Kbd: ['sushi/src/styles/features/kbd.styles.css'],
   Message: ['sushi/src/styles/features/message.styles.css'],
   Navbar: ['sushi/src/styles/features/navbar.styles.css'],
   Progress: ['sushi/src/styles/features/progress.styles.css'],

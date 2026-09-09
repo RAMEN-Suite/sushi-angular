@@ -1,12 +1,17 @@
 @reference "tailwindcss";
 
 :host {
+  /** Background used by a Chip without a semantic severity. */
+  --sui-chip-background: var(--color-base-200);
+  /** Text color used by a Chip without a semantic severity. */
+  --sui-chip-color: var(--color-base-content);
+
   @apply inline-flex h-8 max-w-full items-center gap-2 rounded-full px-3 text-sm font-medium;
 }
 
 :host(:not([class*='badge-'])) {
-  background-color: var(--color-base-200);
-  color: var(--color-base-content);
+  background-color: var(--sui-chip-background);
+  color: var(--sui-chip-color);
 }
 
 :host(.sui-chip--disabled) {

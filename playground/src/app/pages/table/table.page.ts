@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import appearanceHtml from './examples/appearance/appearance.example.html';
 import * as appearanceTs from './examples/appearance/appearance.example.ts' with { loader: 'text' };
@@ -25,9 +26,8 @@ import { TableTemplatesExample } from './examples/templates/templates.example';
   selector: 'pg-table-page',
   imports: [
     Badge,
-    Card,
-    CardTitle,
     ExampleCode,
+    ExamplePreview,
     TableAppearanceExample,
     TableBasicExample,
     TableMobileExample,

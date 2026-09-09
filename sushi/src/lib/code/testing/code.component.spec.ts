@@ -37,6 +37,18 @@ class CodeHost {}
 })
 class CustomCodeHost {}
 
+@Component({
+  imports: [Code],
+  template: `<sui-code></sui-code>`,
+})
+class EmptyCodeHost {}
+
+@Component({
+  imports: [Code],
+  template: `<sui-code [copyable]="false"></sui-code>`,
+})
+class StaticCodeHost {}
+
 beforeEach((): void => {
   copy.mockReset();
   copy.mockReturnValue(true);
@@ -77,5 +89,16 @@ describe('Code', (): void => {
     query(fixture, 'button').dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
     expect(query(fixture, 'button').textContent).toBe('Run');
+  });
+
+  it('does not call the clipboard when no copyable lines exist', (): void => {
+    const fixture: ComponentFixture<EmptyCodeHost> = render(EmptyCodeHost);
+    query(fixture, 'button').click();
+    expect(copy).not.toHaveBeenCalled();
+  });
+
+  it('omits the copy control when copying is disabled', (): void => {
+    const fixture: ComponentFixture<StaticCodeHost> = render(StaticCodeHost);
+    expect((fixture.nativeElement as HTMLElement).querySelector('button')).toBeNull();
   });
 });

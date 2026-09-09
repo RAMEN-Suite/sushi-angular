@@ -3,60 +3,64 @@
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Table</h1>
       <p class="text-lg text-base-content/70">
-        Present structured records with native table semantics, controlled sorting, responsive overflow, and typed templates.
+        Present structured records with native semantics, controlled sorting, overflow, and typed templates.
       </p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Table architecture">
-      <span suiBadge variant="soft" size="sm">Component</span>
-      <span suiBadge variant="soft" size="sm">Templates</span>
+      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Templates</span>
     </div>
   </section>
 
-  <sui-card class="min-w-0">
-    <h2 suiCardTitle>Basic table</h2>
-    <p class="text-base-content/60">Describe typed columns once and render records with native table semantics.</p>
-    <div class="mt-5 min-w-0"><pg-table-simple-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.simple.html" [typescript]="examples.simple.typescript" /></div>
-  </sui-card>
-
-  <sui-card class="min-w-0">
-    <h2 suiCardTitle>Search, sort, and paginate</h2>
-    <p class="text-base-content/60">
-      Compose the table with Signal Forms and Pagination while keeping every piece of collection state controlled.
-    </p>
-    <div class="mt-5 min-w-0"><pg-table-basic-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
-  </sui-card>
-
-  <sui-card class="min-w-0">
-    <h2 suiCardTitle>Table appearance</h2>
-    <p class="text-base-content/60">Adjust density, row separation, and scrolling without changing the underlying table markup.</p>
-    <div class="mt-5 min-w-0"><pg-table-appearance-example /></div>
-    <div class="mt-6">
-      <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript" />
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Basic table</h2>
+      <p class="text-base-content/60">Define typed columns once and render records with native table semantics.</p>
     </div>
-  </sui-card>
+    <pg-example-code [html]="examples.simple.html" [typescript]="examples.simple.typescript"
+      ><ng-template pgExamplePreview><pg-table-simple-example /></ng-template
+    ></pg-example-code>
+  </section>
 
-  <sui-card class="min-w-0">
-    <h2 suiCardTitle>Responsive scroll and pinned column</h2>
-    <p class="text-base-content/60">Preserve columns and native table semantics on small screens while the row heading remains visible.</p>
-    <div class="mt-5 min-w-0"><pg-table-mobile-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.mobile.html" [typescript]="examples.mobile.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Search, sort, and paginate</h2>
+      <p class="text-base-content/60">Compose controlled collection state with existing SUSHI controls.</p>
+    </div>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
+      ><ng-template pgExamplePreview><pg-table-basic-example /></ng-template
+    ></pg-example-code>
+  </section>
 
-  <sui-card class="min-w-0">
-    <h2 suiCardTitle>Loading and empty data</h2>
-    <p class="text-base-content/60">Keep headings stable while the table communicates an unavailable collection.</p>
-    <div class="mt-5 min-w-0"><pg-table-states-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Appearance and overflow</h2>
+      <p class="text-base-content/60">Adjust density and row treatment, or pin headings and the first column while scrolling.</p>
+    </div>
+    <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript"
+      ><ng-template pgExamplePreview><pg-table-appearance-example /></ng-template
+    ></pg-example-code>
+    <pg-example-code [html]="examples.mobile.html" [typescript]="examples.mobile.typescript"
+      ><ng-template pgExamplePreview><pg-table-mobile-example /></ng-template
+    ></pg-example-code>
+  </section>
 
-  <sui-card class="min-w-0">
-    <h2 suiCardTitle>Inventory templates</h2>
-    <p class="text-base-content/60">
-      Replace caption, headings, complete rows, state rows, and footer when a richer table layout needs full control.
-    </p>
-    <div class="mt-5 min-w-0"><pg-table-templates-example /></div>
-    <div class="mt-6"><pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Collection states</h2>
+      <p class="text-base-content/60">Keep headings stable while loading or displaying an empty collection.</p>
+    </div>
+    <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript"
+      ><ng-template pgExamplePreview><pg-table-states-example /></ng-template
+    ></pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Templates</h2>
+      <p class="text-base-content/60">Replace captions, headings, cells, rows, states, and the footer when richer content requires it.</p>
+    </div>
+    <pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript"
+      ><ng-template pgExamplePreview><pg-table-templates-example /></ng-template
+    ></pg-example-code>
+  </section>
 </main>

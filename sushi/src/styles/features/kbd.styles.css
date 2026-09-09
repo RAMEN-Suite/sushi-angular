@@ -1,10 +1,9 @@
 .sui-kbd {
-  transition:
-    translate 80ms ease-out,
-    border-bottom-width 80ms ease-out;
-}
+  /** Background of a Keyboard Key label. */
+  --sui-kbd-background: var(--color-base-200);
+  /** Text color of a Keyboard Key label. */
+  --sui-kbd-color: var(--color-base-content);
 
-.sui-kbd:active {
-  translate: 0 1px;
-  border-bottom-width: var(--border);
+  color: var(--sui-kbd-color);
+  background-color: var(--sui-kbd-background);
 }

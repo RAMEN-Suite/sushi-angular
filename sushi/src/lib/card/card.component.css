@@ -54,9 +54,13 @@
 }
 
 :where(.sui-card.card-border, .sui-card.card-dash) {
-  border-color: color-mix(in oklab, var(--color-base-content) 16%, transparent);
+  border-color: var(--sui-card-border-color);
 }
 
 .sui-card__body > .sui-divider {
   --divider-m: 0;
+}
+:where(.sui-card) {
+  /** Border color used by bordered and dashed Card variants. */
+  --sui-card-border-color: color-mix(in oklab, var(--color-base-content) 16%, transparent);
 }

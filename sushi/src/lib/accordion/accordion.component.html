@@ -16,7 +16,7 @@
   @for (item of items(); track item.value()) {
     @let context = itemContext(item);
     <section
-      class="collapse sui-accordion__item border border-base-300 bg-base-100"
+      class="collapse sui-accordion__item border"
       [class.join-item]="variant() === 'joined'"
       [class.collapse-open]="context.expanded"
     >

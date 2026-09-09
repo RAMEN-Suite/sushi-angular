@@ -1,7 +1,23 @@
+:host {
+  /** Divider color used when grid lines are enabled. */
+  --sui-table-border-color: var(--color-base-300);
+  /** Background behind sticky headings and pinned cells. */
+  --sui-table-pinned-background: var(--color-base-100);
+  /** Background used by a hovered body row. */
+  --sui-table-row-hover-background: var(--color-base-200);
+  /** Background behind a pinned cell in an alternating row. */
+  --sui-table-pinned-zebra-background: var(--color-base-200);
+  /** Background used by a hovered pinned cell in a striped row. */
+  --sui-table-zebra-hover-background: var(--color-base-300);
+  /** Background used by sortable heading actions on hover and press. */
+  --sui-table-sort-hover-background: color-mix(in oklab, var(--color-base-content) 7%, transparent);
+}
+
 .sui-table__sort {
-  width: 100%;
+  width: calc(100% + 1.5rem);
   min-height: 0;
-  padding: 0;
+  margin-inline: -0.75rem;
+  padding: 0 0.75rem;
   font: inherit;
   color: inherit;
   background-color: transparent;
@@ -12,7 +28,7 @@
 .sui-table__sort:hover:not(.sui-button--disabled),
 .sui-table__sort:active:not(.sui-button--disabled) {
   color: inherit;
-  background-color: color-mix(in oklab, var(--color-base-content) 7%, transparent);
+  background-color: var(--sui-table-sort-hover-background);
   border-color: transparent;
   box-shadow: none;
 }
@@ -42,7 +58,7 @@
 }
 
 .sui-table--gridlines :is(th, td) {
-  border-inline-end: 1px solid var(--color-base-300);
+  border-inline-end: 1px solid var(--sui-table-border-color);
 }
 
 .sui-table--gridlines :is(th, td):last-child {
@@ -53,14 +69,14 @@
   position: sticky;
   top: 0;
   z-index: 2;
-  background-color: var(--color-base-100);
+  background-color: var(--sui-table-pinned-background);
 }
 
 .sui-table--pin-first-column :is(th, td):first-child {
   position: sticky;
   inset-inline-start: 0;
   z-index: 1;
-  background-color: var(--color-base-100);
+  background-color: var(--sui-table-pinned-background);
 }
 
 .sui-table--pin-first-column thead th:first-child {
@@ -68,13 +84,17 @@
 }
 
 .sui-table--pin-first-column.table-zebra tbody tr:nth-child(even) :is(th, td):first-child {
-  background-color: var(--color-base-200);
+  background-color: var(--sui-table-pinned-zebra-background);
+}
+
+tbody tr.row-hover:hover {
+  background-color: var(--sui-table-row-hover-background);
 }
 
 .sui-table--pin-first-column tbody tr.row-hover:hover :is(th, td):first-child {
-  background-color: var(--color-base-200);
+  background-color: var(--sui-table-row-hover-background);
 }
 
 .sui-table--pin-first-column.table-zebra tbody tr.row-hover:hover :is(th, td):first-child {
-  background-color: var(--color-base-300);
+  background-color: var(--sui-table-zebra-hover-background);
 }

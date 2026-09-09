@@ -3,50 +3,49 @@
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Icons</h1>
       <p class="text-lg text-base-content/70">
-        Bring the icon system that fits your product. Lucide is the recommended integration used by SUSHI's defaults and examples.
+        Use the SVG icon system that fits your application. SUSHI examples use Lucide with selective imports.
       </p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Icon guidance classification">
-      <span suiBadge variant="soft" size="sm">Integration</span>
+      <span suiBadge variant="soft" size="sm">Integration guide</span>
     </div>
   </section>
-  <sui-card>
-    <h2 suiCardTitle>Recommended: Lucide</h2>
-    <p class="text-base-content/60">
-      SUSHI uses Lucide for built-in icons where a component needs a default. Consumers can project or template another SVG icon system
-      wherever the component exposes customization. Install Lucide only when you want to use these defaults or follow the examples below.
-    </p>
 
-    <ol class="mt-5 grid gap-4 md:grid-cols-3">
-      <li>
-        <sui-card size="sm" class="h-full">
-          <span suiBadge size="sm" variant="soft">1</span>
-          <h3 class="mt-3 font-semibold">Install when needed</h3>
-          <sui-code class="mt-3" buttonAriaLabel="Copy install command">
-            <pre suiCodeLine prefix="$"><code>npm install &#64;lucide/angular</code></pre>
-          </sui-code>
-        </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Set up Lucide</h2>
+      <p class="text-base-content/60">
+        Install the optional package, import individual icons, and keep control labels on their semantic owner.
+      </p>
+    </div>
+    <ol class="grid gap-4 md:grid-cols-3">
+      <li class="rounded-box border border-base-300 p-4">
+        <span suiBadge size="sm" variant="soft">1</span>
+        <h3 class="mt-3 font-semibold">Install</h3>
+        <sui-code class="mt-3" [copyable]="false">
+          <pre suiCodeLine prefix="$"><code>npm install &#64;lucide/angular</code></pre>
+        </sui-code>
       </li>
-      <li>
-        <sui-card size="sm" class="h-full">
-          <span suiBadge size="sm" variant="soft">2</span>
-          <h3 class="mt-3 font-semibold">Import selectively</h3>
-          <p class="mt-2 text-sm text-base-content/60">Add individual directives such as <code>LucideSearch</code> to component imports.</p>
-        </sui-card>
+      <li class="rounded-box border border-base-300 p-4">
+        <span suiBadge size="sm" variant="soft">2</span>
+        <h3 class="mt-3 font-semibold">Import selectively</h3>
+        <p class="mt-2 text-sm text-base-content/60">Add only the icon directives used by a component.</p>
       </li>
-      <li>
-        <sui-card size="sm" class="h-full">
-          <span suiBadge size="sm" variant="soft">3</span>
-          <h3 class="mt-3 font-semibold">Keep semantics native</h3>
-          <p class="mt-2 text-sm text-base-content/60">Hide decorative SVGs and label the surrounding control instead.</p>
-        </sui-card>
+      <li class="rounded-box border border-base-300 p-4">
+        <span suiBadge size="sm" variant="soft">3</span>
+        <h3 class="mt-3 font-semibold">Preserve semantics</h3>
+        <p class="mt-2 text-sm text-base-content/60">Hide decorative SVGs and label the surrounding control.</p>
       </li>
     </ol>
-  </sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Standalone and actionable icons</h2>
-    <p class="text-base-content/60">Icons inherit the current text color and size; icon-only controls still require an accessible name.</p>
-    <sui-card size="sm" class="mt-5"><pg-icon-usage-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="example.html" [typescript]="example.typescript" /></div
-  ></sui-card>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Icons in context</h2>
+      <p class="text-base-content/60">Icons inherit text color and size; icon-only actions still need an accessible name.</p>
+    </div>
+    <pg-example-code [html]="example.html" [typescript]="example.typescript"
+      ><ng-template pgExamplePreview><pg-icon-usage-example /></ng-template
+    ></pg-example-code>
+  </section>
 </main>

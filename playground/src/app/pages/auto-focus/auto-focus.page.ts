@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import disabledHtml from './examples/disabled/disabled.example.html';
 import * as disabledTs from './examples/disabled/disabled.example.ts' with { loader: 'text' };
@@ -11,7 +12,7 @@ import { AutoFocusDynamicExample } from './examples/dynamic/dynamic.example';
 
 @Component({
   selector: 'pg-auto-focus-page',
-  imports: [Badge, Card, CardTitle, ExampleCode, AutoFocusDisabledExample, AutoFocusDynamicExample],
+  imports: [Badge, ExampleCode, ExamplePreview, AutoFocusDisabledExample, AutoFocusDynamicExample],
   templateUrl: './auto-focus.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

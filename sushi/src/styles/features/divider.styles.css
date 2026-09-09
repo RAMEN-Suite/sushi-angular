@@ -1,18 +1,23 @@
 .sui-divider {
-  --divider-m: 0.5rem 0;
+  /** Outer margin around a Divider. */
+  --sui-divider-margin: 0.5rem 0;
+  /** Thickness of the Divider line. */
+  --sui-divider-thickness: var(--border);
+
+  --divider-m: var(--sui-divider-margin);
 }
 
 .sui-divider:empty {
-  height: var(--border);
+  height: var(--sui-divider-thickness);
 }
 
 .sui-divider::before,
 .sui-divider::after {
-  height: var(--border);
+  height: var(--sui-divider-thickness);
 }
 
 .sui-divider.divider-horizontal::before,
 .sui-divider.divider-horizontal::after {
-  width: var(--border);
+  width: var(--sui-divider-thickness);
   height: 100%;
 }

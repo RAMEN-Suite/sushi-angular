@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import profilesHtml from './examples/profiles/profiles.example.html';
 import * as profilesTs from './examples/profiles/profiles.example.ts' with { loader: 'text' };
@@ -11,7 +12,7 @@ import { AvatarUsageExample } from './examples/usage/usage.example';
 
 @Component({
   selector: 'pg-avatar-page',
-  imports: [AvatarProfilesExample, AvatarUsageExample, Badge, Card, CardTitle, ExampleCode],
+  imports: [AvatarProfilesExample, AvatarUsageExample, Badge, ExampleCode, ExamplePreview],
   templateUrl: './avatar.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

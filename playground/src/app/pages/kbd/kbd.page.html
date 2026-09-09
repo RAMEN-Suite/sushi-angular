@@ -5,21 +5,25 @@
       <p class="text-lg text-base-content/70">Display individual keys and keyboard shortcuts with native semantics.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Keyboard Key architecture">
-      <span suiBadge variant="soft" size="sm">Directive</span>
-      <span suiBadge variant="soft" size="sm">Native element</span>
+      <span suiBadge variant="soft" size="sm">Directive</span><span suiBadge variant="soft" size="sm">Native element</span>
     </div>
   </section>
-
-  <sui-card
-    ><h2 suiCardTitle>Keys and sizing</h2>
-    <p class="text-base-content/60">Compose shortcuts from semantic key elements and match their density to the surrounding text.</p>
-    <sui-card size="sm" class="mt-5"><pg-kbd-usage-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Shortcut reference</h2>
-    <p class="text-base-content/60">A compact help window keeps command names and their corresponding keys easy to scan.</p>
-    <sui-card size="sm" class="mt-5"><pg-kbd-hotkeys-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.hotkeys.html" [typescript]="examples.hotkeys.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Keys and sizes</h2>
+      <p class="text-base-content/60">Compose shortcuts from semantic key elements and match surrounding density.</p>
+    </div>
+    <pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript"
+      ><ng-template pgExamplePreview><pg-kbd-usage-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Shortcut reference</h2>
+      <p class="text-base-content/60">Keep command names and corresponding keys easy to scan.</p>
+    </div>
+    <pg-example-code [html]="examples.hotkeys.html" [typescript]="examples.hotkeys.typescript"
+      ><ng-template pgExamplePreview><pg-kbd-hotkeys-example /></ng-template
+    ></pg-example-code>
+  </section>
 </main>

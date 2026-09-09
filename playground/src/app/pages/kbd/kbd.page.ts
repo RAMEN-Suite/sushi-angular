@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import hotkeysHtml from './examples/hotkeys/hotkeys.example.html';
 import * as hotkeysTs from './examples/hotkeys/hotkeys.example.ts' with { loader: 'text' };
@@ -11,7 +12,7 @@ import { KbdUsageExample } from './examples/usage/usage.example';
 
 @Component({
   selector: 'pg-kbd-page',
-  imports: [Badge, Card, CardTitle, ExampleCode, KbdHotkeysExample, KbdUsageExample],
+  imports: [Badge, ExampleCode, ExamplePreview, KbdHotkeysExample, KbdUsageExample],
   templateUrl: './kbd.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

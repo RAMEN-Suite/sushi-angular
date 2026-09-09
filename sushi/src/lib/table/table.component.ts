@@ -77,7 +77,7 @@ export class Table<T> {
   public readonly showGridlines: InputSignalWithTransform<boolean, unknown> = input(false, {
     transform: booleanAttribute,
   });
-  /** Applies the DaisyUI hover treatment to generated body rows. */
+  /** Highlights generated body rows on pointer hover. */
   public readonly rowHover: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Keeps the heading visible within a vertically scrolling parent. */
   public readonly stickyHeader: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });

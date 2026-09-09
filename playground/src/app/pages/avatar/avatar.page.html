@@ -10,16 +10,23 @@
     </div>
   </section>
 
-  <sui-card
-    ><h2 suiCardTitle>Sizes and shapes</h2>
-    <p class="text-base-content/60">Choose a consistent size for each context and reserve decorative masks for expressive surfaces.</p>
-    <sui-card size="sm" class="mt-5"><pg-avatar-usage-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Profiles, presence, and groups</h2>
-    <p class="text-base-content/60">Pair avatars with identity text, meaningful image alternatives, and concise fallback initials.</p>
-    <sui-card size="sm" class="mt-5"><pg-avatar-profiles-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.profiles.html" [typescript]="examples.profiles.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Sizes and shapes</h2>
+      <p class="text-base-content/60">Choose a consistent size and reserve decorative masks for expressive surfaces.</p>
+    </div>
+    <pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript">
+      <ng-template pgExamplePreview><pg-avatar-usage-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Profiles and presence</h2>
+      <p class="text-base-content/60">Combine meaningful image alternatives, fallback initials, presence, and groups.</p>
+    </div>
+    <pg-example-code [html]="examples.profiles.html" [typescript]="examples.profiles.typescript">
+      <ng-template pgExamplePreview><pg-avatar-profiles-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

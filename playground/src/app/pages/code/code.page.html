@@ -2,26 +2,29 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Code</h1>
-      <p class="text-lg text-base-content/70">Present terminal-like snippets with prefixes, copy behavior, and replaceable feedback.</p>
+      <p class="text-lg text-base-content/70">Present terminal-like snippets with prefixes and accessible copy feedback.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Code architecture">
-      <span suiBadge variant="soft" size="sm">Component</span>
-      <span suiBadge variant="soft" size="sm">Angular CDK</span>
-      <span suiBadge variant="soft" size="sm">Templates</span>
-      <span suiBadge variant="soft" size="sm">Projected content</span>
+      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Angular CDK</span
+      ><span suiBadge variant="soft" size="sm">Templates</span>
     </div>
   </section>
-
-  <sui-card
-    ><h2 suiCardTitle>Lines and prefixes</h2>
-    <p class="text-base-content/60">Only marked code lines participate in the copied value.</p>
-    <sui-card size="sm" class="mt-5"><pg-code-basic-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Copy feedback templates</h2>
-    <p class="text-base-content/60">Replace either state of the default control without rebuilding clipboard behavior.</p>
-    <sui-card size="sm" class="mt-5"><pg-code-templates-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Lines and prefixes</h2>
+      <p class="text-base-content/60">Mark the exact lines that participate in the copied value.</p>
+    </div>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
+      ><ng-template pgExamplePreview><pg-code-basic-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Copy control templates</h2>
+      <p class="text-base-content/60">Replace the control or its feedback states while retaining clipboard behavior.</p>
+    </div>
+    <pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript"
+      ><ng-template pgExamplePreview><pg-code-templates-example /></ng-template
+    ></pg-example-code>
+  </section>
 </main>

@@ -1,10 +1,20 @@
+:host {
+  /** Background of each Accordion item. */
+  --sui-accordion-background: var(--color-base-100);
+  /** Border color separating Accordion items. */
+  --sui-accordion-border-color: color-mix(in oklab, var(--color-base-content) 16%, transparent);
+  /** Text color of expanded Accordion content. */
+  --sui-accordion-content-color: color-mix(in oklab, currentColor 72%, transparent);
+}
+
 .sui-accordion__group {
   width: 100%;
 }
 
 .sui-accordion__item {
   min-width: 0;
-  border-color: color-mix(in oklab, var(--color-base-content) 16%, transparent);
+  background-color: var(--sui-accordion-background);
+  border-color: var(--sui-accordion-border-color);
 }
 
 .sui-accordion__trigger {
@@ -58,7 +68,7 @@
 
 .sui-accordion__panel {
   padding-inline: 1rem;
-  color: color-mix(in oklab, currentColor 72%, transparent);
+  color: var(--sui-accordion-content-color);
 }
 
 .sui-accordion__group--sm .sui-accordion__panel {

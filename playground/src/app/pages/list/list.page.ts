@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import activityHtml from './examples/activity/activity.example.html';
 import * as activityTs from './examples/activity/activity.example.ts' with { loader: 'text' };
@@ -14,7 +15,7 @@ import { ListTasksExample } from './examples/tasks/tasks.example';
 
 @Component({
   selector: 'pg-list-page',
-  imports: [Badge, Card, CardTitle, ExampleCode, ListActivityExample, ListDirectoryExample, ListTasksExample],
+  imports: [Badge, ExampleCode, ExamplePreview, ListActivityExample, ListDirectoryExample, ListTasksExample],
   templateUrl: './list.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

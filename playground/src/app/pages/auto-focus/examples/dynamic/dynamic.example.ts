@@ -11,7 +11,6 @@ export class AutoFocusDynamicExample {
   protected readonly visible: WritableSignal<boolean> = signal<boolean>(false);
 
   protected show(): void {
-    this.visible.set(false);
-    queueMicrotask((): void => this.visible.set(true));
+    this.visible.set(true);
   }
 }

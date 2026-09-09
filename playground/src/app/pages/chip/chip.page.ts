@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import basicHtml from './examples/basic/basic.example.html';
 import * as basicTs from './examples/basic/basic.example.ts' with { loader: 'text' };
@@ -28,8 +29,6 @@ import { ChipTemplateExample } from './examples/template/template.example';
   selector: 'pg-chip-page',
   imports: [
     Badge,
-    Card,
-    CardTitle,
     ChipAppearanceExample,
     ChipBasicExample,
     ChipColorsExample,
@@ -38,6 +37,7 @@ import { ChipTemplateExample } from './examples/template/template.example';
     ChipRemovalExample,
     ChipTemplateExample,
     ExampleCode,
+    ExamplePreview,
   ],
   templateUrl: './chip.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

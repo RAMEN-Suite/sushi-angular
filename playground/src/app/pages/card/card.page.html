@@ -2,26 +2,30 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Card</h1>
-      <p class="text-lg text-base-content/70">Group related content, media, and actions in a responsive surface.</p>
+      <p class="text-lg text-base-content/70">Group related content, media, and actions in one responsive surface.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Card architecture">
-      <span suiBadge variant="soft" size="sm">Component</span>
-      <span suiBadge variant="soft" size="sm">Projected content</span>
+      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Projected content</span>
     </div>
   </section>
-
-  <sui-card
-    ><h2 suiCardTitle>Project summary</h2>
-    <p class="text-base-content/60">
-      Combine media, status, progress, and related actions without turning the whole surface into a button.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-card-content-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.content.html" [typescript]="examples.content.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Sizes and surfaces</h2>
-    <p class="text-base-content/60">Compare spacing separately from border treatment so each choice remains easy to judge.</p>
-    <sui-card size="sm" class="mt-5"><pg-card-appearance-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Content composition</h2>
+      <p class="text-base-content/60">
+        Combine semantic headings, media, status, and actions without making the complete surface interactive.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.content.html" [typescript]="examples.content.typescript"
+      ><ng-template pgExamplePreview><pg-card-content-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Sizes and surfaces</h2>
+      <p class="text-base-content/60">Choose content density independently from the border treatment.</p>
+    </div>
+    <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript"
+      ><ng-template pgExamplePreview><pg-card-appearance-example /></ng-template
+    ></pg-example-code>
+  </section>
 </main>

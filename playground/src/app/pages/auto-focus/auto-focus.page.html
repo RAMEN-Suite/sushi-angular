@@ -2,25 +2,28 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Auto Focus</h1>
-      <p class="text-lg text-base-content/70">
-        Request focus after an element is rendered while disabled controls and explicit opt-outs remain untouched.
-      </p>
+      <p class="text-lg text-base-content/70">Request focus after an enabled element enters the rendered view.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Auto Focus architecture">
-      <span suiBadge variant="soft" size="sm">Directive</span>
+      <span suiBadge variant="soft" size="sm">Directive</span><span suiBadge variant="soft" size="sm">Native focus</span>
     </div>
   </section>
-
-  <sui-card
-    ><h2 suiCardTitle>Dynamic content</h2>
-    <p class="text-base-content/60">Focus a newly created field after Angular completes rendering it.</p>
-    <sui-card size="sm" class="mt-5"><pg-auto-focus-dynamic-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.dynamic.html" [typescript]="examples.dynamic.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Opt-out and disabled controls</h2>
-    <p class="text-base-content/60">A false input suppresses the request; disabled elements are skipped automatically.</p>
-    <sui-card size="sm" class="mt-5"><pg-auto-focus-disabled-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.disabled.html" [typescript]="examples.disabled.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Dynamic content</h2>
+      <p class="text-base-content/60">Move focus when Angular finishes rendering a newly requested control.</p>
+    </div>
+    <pg-example-code [html]="examples.dynamic.html" [typescript]="examples.dynamic.typescript"
+      ><ng-template pgExamplePreview><pg-auto-focus-dynamic-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Opt-out and disabled controls</h2>
+      <p class="text-base-content/60">Suppress the request explicitly; disabled elements are skipped automatically.</p>
+    </div>
+    <pg-example-code [html]="examples.disabled.html" [typescript]="examples.disabled.typescript"
+      ><ng-template pgExamplePreview><pg-auto-focus-disabled-example /></ng-template
+    ></pg-example-code>
+  </section>
 </main>
