@@ -5,13 +5,7 @@
     surface="plain"
     inset="comfortable"
     ariaLabel="Workspace toolbar">
-    <span suiNavbarBrand class="inline-flex min-w-0 items-center gap-3">
-      <svg lucideSparkles class="size-5 shrink-0 text-primary" aria-hidden="true"></svg>
-      <span class="min-w-0">
-        <strong class="block truncate leading-tight">Northstar</strong>
-        <span class="block truncate text-xs text-base-content/60">Design workspace</span>
-      </span>
-    </span>
+    <span suiNavbarBrand>Workspace</span>
     <button
       suiButton
       suiNavbarAction
@@ -63,7 +57,7 @@
       <main class="mx-auto grid max-w-2xl gap-5">
         <div class="flex items-start justify-between gap-4">
           <div>
-            <p class="text-sm text-base-content/60">Northstar workspace</p>
+            <p class="text-sm text-base-content/60">SUSHI workspace</p>
             <h3 class="text-2xl font-semibold tracking-tight">{{ activePage() }}</h3>
           </div>
           <button suiButton type="button" size="sm">Create project</button>
@@ -93,8 +87,16 @@
       [groups]="groups"
       [(value)]="activePage"
       [(collapsed)]="sidebarCollapsed"
-      ariaLabel="Northstar workspace"
+      ariaLabel="SUSHI workspace"
       (valueChange)="sidebarDrawer.close()">
+      <div suiSidebarHeader class="flex min-h-16 items-center justify-center gap-3 px-3">
+        <svg lucideSoup class="size-5 shrink-0 text-primary" aria-hidden="true"></svg>
+        <span class="min-w-0" [class.sr-only]="sidebarCollapsed()">
+          <strong class="block truncate leading-tight">SUSHI KIT</strong>
+          <span class="block truncate text-xs text-base-content/60">Workspace</span>
+        </span>
+      </div>
+
       <ng-template [suiSidebarItem]="groups" let-item let-collapsed="collapsed">
         <span class="flex min-w-0 flex-1 items-center gap-2.5" [class.justify-center]="collapsed">
           <svg [lucideIcon]="item.icon" class="size-4 shrink-0" aria-hidden="true"></svg>

@@ -2,11 +2,11 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Drawer</h1>
-      <p class="text-lg text-base-content/70">Control an unstyled sliding panel as a modal overlay or responsive layout region.</p>
+      <p class="text-lg text-base-content/70">Present supporting content in a headless panel at either side of the viewport.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Drawer architecture">
-      <span suiBadge variant="soft" size="sm">Unstyled panel</span><span suiBadge variant="soft" size="sm">Two-way binding</span
-      ><span suiBadge variant="soft" size="sm">Responsive layout</span>
+      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Angular CDK</span
+      ><span suiBadge variant="soft" size="sm">Projected content</span>
     </div>
   </section>
   <section class="space-y-6">
@@ -20,20 +20,11 @@
   </section>
   <section class="space-y-6">
     <div class="space-y-2">
-      <h2 class="text-2xl font-bold tracking-tight">Workspace filters</h2>
-      <p class="text-base-content/60">Compose the panel surface explicitly when a Sidebar is not the content.</p>
+      <h2 class="text-2xl font-bold tracking-tight">Cart summary</h2>
+      <p class="text-base-content/60">Use an end Drawer for supporting tasks that should not replace the current page.</p>
     </div>
-    <pg-example-code [html]="examples.settings.html" [typescript]="examples.settings.typescript"
-      ><ng-template pgExamplePreview><pg-drawer-settings-example /></ng-template
-    ></pg-example-code>
-  </section>
-  <section class="space-y-6">
-    <div class="space-y-2">
-      <h2 class="text-2xl font-bold tracking-tight">Responsive application shell</h2>
-      <p class="text-base-content/60">Add <code>suiDrawerContent</code> only when the Drawer also arranges persistent page content.</p>
-    </div>
-    <pg-example-code [html]="examples.responsive.html" [typescript]="examples.responsive.typescript"
-      ><ng-template pgExamplePreview><pg-drawer-responsive-example /></ng-template
+    <pg-example-code [html]="examples.cart.html" [typescript]="examples.cart.typescript"
+      ><ng-template pgExamplePreview><pg-drawer-cart-example /></ng-template
     ></pg-example-code>
   </section>
 </main>

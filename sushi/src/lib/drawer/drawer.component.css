@@ -7,10 +7,19 @@
    * @example 18rem
    */
   --sui-drawer-width: 24rem;
+  /**
+   * Backdrop color used while the Drawer is a modal overlay.
+   * @example color-mix(in oklab, black 48%, transparent)
+   */
+  --sui-drawer-backdrop-color: oklch(0% 0 0 / 40%);
 }
 
 .sui-drawer__side {
   @apply z-50;
+}
+
+.sui-drawer__side > .drawer-overlay {
+  background-color: var(--sui-drawer-backdrop-color);
 }
 
 :host(.sui-drawer--persistent) > .sui-drawer__side {

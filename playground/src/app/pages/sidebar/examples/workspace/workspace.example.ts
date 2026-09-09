@@ -12,7 +12,7 @@ import {
   LucideMenu,
   LucidePanelLeft,
   LucideSettings,
-  LucideSparkles,
+  LucideSoup,
   LucideUsers,
 } from '@lucide/angular';
 import type { LucideIconData } from '@lucide/angular';
@@ -30,6 +30,7 @@ import {
   Sidebar,
   SidebarFooter,
   SidebarGroup,
+  SidebarHeader,
   SidebarItemTemplate,
 } from '@ramen-suite/sushi';
 
@@ -55,12 +56,13 @@ interface WorkspaceItem extends NavbarItem<WorkspacePage> {
     LucideMenu,
     LucidePanelLeft,
     LucideSettings,
-    LucideSparkles,
+    LucideSoup,
     Navbar,
     NavbarAction,
     NavbarBrand,
     Sidebar,
     SidebarFooter,
+    SidebarHeader,
     SidebarItemTemplate,
   ],
   templateUrl: './workspace.example.html',

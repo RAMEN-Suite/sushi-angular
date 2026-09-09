@@ -13,9 +13,11 @@ import { DrawerTrigger } from '../drawer-trigger.directive';
   imports: [Drawer, DrawerClose, DrawerFooter, DrawerHeader, DrawerTrigger],
   template: `
     <button data-trigger [suiDrawerTrigger]="drawer" [disabled]="triggerDisabled()">Open panel</button>
+    <p id="drawer-description">Edit the current project.</p>
     <sui-drawer
       #drawer="suiDrawer"
       ariaLabel="Project settings"
+      ariaDescribedby="drawer-description"
       [dismissible]="dismissible()"
       [placement]="placement()"
       [responsiveAt]="responsiveAt()"
@@ -54,6 +56,7 @@ describe('Drawer', (): void => {
     expect(drawer.classList).not.toContain('drawer-end');
     expect(drawer.classList).toContain('sui-drawer--md');
     expect(panel.getAttribute('aria-label')).toBe('Project settings');
+    expect(panel.getAttribute('aria-describedby')).toBe('drawer-description');
     expect(query(fixture, '.sui-drawer__header-region').textContent).toContain('Project settings');
     expect(query(fixture, '.sui-drawer__body [data-body]').textContent).toContain('Close panel');
     expect(query(fixture, '.sui-drawer__footer-region').textContent).toContain('Footer actions');
@@ -88,6 +91,23 @@ describe('Drawer', (): void => {
   });
 });
 
+describe('Drawer focus', (): void => {
+  it('restores focus to the trigger after closing', (): void => {
+    const fixture: ComponentFixture<DrawerHost> = render(DrawerHost);
+    const trigger: HTMLButtonElement = query(fixture, '[data-trigger]') as HTMLButtonElement;
+    const close: HTMLButtonElement = query(fixture, '[data-close]') as HTMLButtonElement;
+
+    trigger.focus();
+    trigger.click();
+    fixture.detectChanges();
+    close.focus();
+    close.click();
+    fixture.detectChanges();
+
+    expect(document.activeElement).toBe(trigger);
+  });
+});
+
 describe('Drawer dismissal', (): void => {
   it('supports Escape and backdrop dismissal', (): void => {
     const fixture: ComponentFixture<DrawerHost> = render(DrawerHost);
@@ -119,6 +139,8 @@ describe('Drawer dismissal', (): void => {
     overlay.click();
     fixture.detectChanges();
 
+    expect(overlay.disabled).toBe(true);
+    expect(overlay.getAttribute('aria-hidden')).toBe('true');
     expect(fixture.componentInstance.open()).toBe(true);
     expect(fixture.componentInstance.closeReasons).toEqual([]);
   });

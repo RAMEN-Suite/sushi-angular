@@ -1,7 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import {
   afterRenderEffect,
   booleanAttribute,
@@ -9,7 +8,6 @@ import {
   Component,
   computed,
   contentChild,
-  DestroyRef,
   inject,
   input,
   InputSignal,
@@ -33,6 +31,7 @@ const DRAWER_BREAKPOINTS: Readonly<Record<DrawerResponsiveAt, string>> = {
   xl: '(min-width: 80rem)',
 };
 
+/** Controls a headless sliding panel as a modal overlay or responsive layout region. */
 @Component({
   selector: 'sui-drawer',
   exportAs: 'suiDrawer',
@@ -50,10 +49,10 @@ const DRAWER_BREAKPOINTS: Readonly<Record<DrawerResponsiveAt, string>> = {
     '[class.md:drawer-open]': 'responsiveAt() === "md"',
     '[class.lg:drawer-open]': 'responsiveAt() === "lg"',
     '[class.xl:drawer-open]': 'responsiveAt() === "xl"',
+    '(document:keydown.escape)': 'handleCancel($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-/** Controls an unstyled sliding panel, with optional responsive persistent layout. */
 export class Drawer {
   /** Controls and reports whether the Drawer is open. */
   public readonly open: ModelSignal<boolean> = model<boolean>(false);
@@ -62,6 +61,8 @@ export class Drawer {
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>('Drawer');
   /** ID of a visible element that labels the Drawer. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
+  /** IDs of elements that describe the Drawer. */
+  public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
   /** Allows Escape and backdrop clicks to close the Drawer. */
   public readonly dismissible: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Edge from which the Drawer enters. */
@@ -89,9 +90,7 @@ export class Drawer {
   protected readonly modalOpen: Signal<boolean> = computed((): boolean => this.open() && !this.persistent());
 
   private readonly breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
-  private readonly destroyRef: DestroyRef = inject(DestroyRef);
   private readonly document: Document = inject(DOCUMENT);
-  private readonly scrollStrategy: ScrollStrategy = inject(Overlay).scrollStrategies.block();
   private readonly viewport: Signal<BreakpointState> = toSignal(
     this.breakpointObserver.observe(Object.values(DRAWER_BREAKPOINTS)),
     { initialValue: { breakpoints: {}, matches: false } },
@@ -100,10 +99,7 @@ export class Drawer {
   private wasModalOpen: boolean = false;
 
   public constructor() {
-    afterRenderEffect({ write: (): void => this.syncOpenState() });
-    this.destroyRef.onDestroy((): void => {
-      this.scrollStrategy.disable();
-    });
+    afterRenderEffect({ write: (): void => this.syncModalState() });
   }
 
   /** Opens the Drawer and remembers where focus should return. */
@@ -132,6 +128,7 @@ export class Drawer {
   }
 
   protected handleCancel(event: Event): void {
+    if (!this.modalOpen()) return;
     event.preventDefault();
     if (this.dismissible()) this.close('escape');
   }
@@ -142,30 +139,35 @@ export class Drawer {
     this.close('backdrop');
   }
 
-  private syncOpenState(): void {
+  protected handleSideTransitionEnd(event: TransitionEvent): void {
+    if (event.target !== event.currentTarget || event.propertyName !== 'visibility' || !this.modalOpen()) return;
+    const panel: HTMLElement | null = this.document.getElementById(this.drawerId);
+    if (!panel?.contains(this.document.activeElement)) this.focusPanel();
+  }
+
+  private syncModalState(): void {
     const open: boolean = this.modalOpen();
     if (open === this.wasModalOpen) return;
 
     this.wasModalOpen = open;
     if (open) {
       this.restoreTarget ??= this.activeElement();
-      this.scrollStrategy.enable();
+      this.document.defaultView?.requestAnimationFrame((): void => {
+        if (this.modalOpen()) this.focusPanel();
+      });
       return;
     }
 
-    this.scrollStrategy.disable();
+    if (this.persistent()) {
+      this.restoreTarget = null;
+      return;
+    }
     this.restoreFocus();
   }
 
   private activeElement(): HTMLElement | null {
     const activeElement: Element | null = this.document.activeElement;
     return activeElement instanceof HTMLElement ? activeElement : null;
-  }
-
-  protected handleSideTransitionEnd(event: TransitionEvent): void {
-    if (event.target !== event.currentTarget || event.propertyName !== 'visibility' || !this.modalOpen()) return;
-    const panel: HTMLElement | null = this.document.getElementById(this.drawerId);
-    if (!panel?.contains(this.document.activeElement)) this.focusPanel();
   }
 
   private focusPanel(): void {

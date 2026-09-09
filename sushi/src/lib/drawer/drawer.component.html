@@ -9,7 +9,9 @@
     class="drawer-overlay"
     type="button"
     tabindex="-1"
+    [disabled]="!dismissible()"
     [attr.aria-label]="dismissible() ? 'Close drawer' : null"
+    [attr.aria-hidden]="dismissible() ? null : 'true'"
     (click)="handleBackdrop($event)"
   ></button>
   <section
@@ -20,6 +22,7 @@
     [attr.aria-modal]="modalOpen() ? 'true' : null"
     [attr.aria-label]="ariaLabelledby() ? null : ariaLabel()"
     [attr.aria-labelledby]="ariaLabelledby()"
+    [attr.aria-describedby]="ariaDescribedby()"
     tabindex="-1"
     (keydown.escape)="handleCancel($event)"
   >

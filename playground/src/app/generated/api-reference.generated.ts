@@ -2543,7 +2543,7 @@ export const apiReference: Readonly<{
     className: 'Drawer',
     declaration: 'Drawer',
     selector: 'sui-drawer',
-    description: 'Controls an unstyled sliding panel, with optional responsive persistent layout.',
+    description: 'Controls a headless sliding panel as a modal overlay or responsive layout region.',
     members: [
       {
         name: 'open',
@@ -2565,6 +2565,13 @@ export const apiReference: Readonly<{
         type: 'string | null',
         defaultValue: 'null',
         description: 'ID of a visible element that labels the Drawer.',
+      },
+      {
+        name: 'ariaDescribedby',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'IDs of elements that describe the Drawer.',
       },
       {
         name: 'dismissible',
@@ -2667,6 +2674,12 @@ export const apiReference: Readonly<{
         defaultValue: '24rem',
         exampleValue: '18rem',
         description: 'Width of the Drawer panel before it is constrained by the viewport.',
+      },
+      {
+        name: '--sui-drawer-backdrop-color',
+        defaultValue: 'oklch(0% 0 0 / 40%)',
+        exampleValue: 'color-mix(in oklab, black 48%, transparent)',
+        description: 'Backdrop color used while the Drawer is a modal overlay.',
       },
     ],
   },

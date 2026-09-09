@@ -42,8 +42,8 @@ test('end placement keeps the panel at the viewport edge and backdrop dismisses 
   page: Page;
 }): Promise<void> => {
   await page.goto('/drawer');
-  await page.getByRole('button', { name: 'Edit filters' }).click();
-  const panel: Locator = page.getByRole('dialog', { name: 'Workspace filters' });
+  await page.getByRole('button', { name: /Cart/ }).click();
+  const panel: Locator = page.getByRole('dialog', { name: 'Your cart' });
   await expect(panel).toBeVisible();
   await expect
     .poll(async (): Promise<number | null> => {
@@ -62,19 +62,21 @@ test('responsive Drawers use one Sidebar as an overlay and persistent desktop la
   page: Page;
 }): Promise<void> => {
   await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto('/drawer');
-  const responsiveDrawer: Locator = page.locator('pg-drawer-responsive-example > sui-drawer.lg\\:drawer-open');
-  await expect(responsiveDrawer.getByRole('complementary', { name: 'Workspace pages' })).toBeVisible();
+  await page.goto('/sidebar');
+  const responsiveDrawer: Locator = page.locator('pg-sidebar-workspace-example sui-drawer.lg\\:drawer-open');
+  await expect(responsiveDrawer.getByRole('complementary', { name: 'SUSHI workspace' })).toBeVisible();
   await expect(responsiveDrawer.locator('[role="dialog"]')).toHaveCount(0);
 
   await page.setViewportSize({ width: 360, height: 640 });
-  await expect(responsiveDrawer.getByRole('complementary', { name: 'Workspace pages' })).toBeHidden();
-  await responsiveDrawer.getByRole('button', { name: 'Open workspace navigation' }).click();
+  await expect(responsiveDrawer.getByRole('complementary', { name: 'SUSHI workspace' })).toBeHidden();
+  const mobileTrigger: Locator = page.getByRole('button', { name: 'Open workspace navigation' });
+  await mobileTrigger.click();
 
   const modalPanel: Locator = responsiveDrawer.getByRole('dialog', { name: 'Workspace navigation' });
   await expect(modalPanel).toBeVisible();
-  await modalPanel.getByRole('button', { name: 'Close workspace navigation' }).click();
+  await page.keyboard.press('Escape');
   await expect(modalPanel).toBeHidden();
+  await expect(mobileTrigger).toBeFocused();
 });
 
 test('small Drawers fill narrow viewports without horizontal overflow', async ({ page }: { page: Page }): Promise<void> => {
