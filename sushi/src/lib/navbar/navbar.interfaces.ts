@@ -28,8 +28,8 @@ export interface NavbarItem<T extends NavbarItemValue = NavbarItemValue> {
   readonly href?: string;
   /** Angular Router destination used for client-side navigation. Takes precedence over `href`. */
   readonly routerLink?: string | readonly unknown[];
-  /** Destinations revealed by a non-selectable disclosure. */
-  readonly items?: readonly NavbarItem<T>[];
+  /** Child destinations with the same item shape, revealed by a non-selectable disclosure. */
+  readonly items?: readonly this[];
   /** Marks the item as current when selection is controlled outside `value`. */
   readonly active?: boolean;
   /** Prevents pointer and keyboard activation while keeping the item focusable. */
@@ -42,6 +42,6 @@ export interface NavbarItemContext<I extends NavbarItem = NavbarItem> {
   readonly $implicit: I;
   /** Navbar item available by its explicit context name. */
   readonly item: I;
-  /** Nesting level of the rendered item. */
+  /** Position in the Navbar tree: `0` for a top-level item and `1` for an item inside a submenu. */
   readonly level: 0 | 1;
 }

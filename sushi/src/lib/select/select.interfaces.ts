@@ -15,25 +15,25 @@ export interface SelectOption extends SelectionOption {
 export type SelectCompareWith = SelectionCompareWith;
 
 /** Context exposed to a select option template. */
-export interface SelectItemContext {
-  readonly $implicit: SelectOption;
-  readonly option: SelectOption;
+export interface SelectItemContext<O extends SelectOption = SelectOption> {
+  readonly $implicit: O;
+  readonly option: O;
   readonly selected: boolean;
   readonly disabled: boolean;
   readonly index: number;
 }
 
 /** Context exposed to the selected-value template. */
-export interface SelectSelectedItemContext {
-  readonly $implicit: SelectOption;
-  readonly option: SelectOption;
+export interface SelectSelectedItemContext<O extends SelectOption = SelectOption> {
+  readonly $implicit: O;
+  readonly option: O;
 }
 
 /** Context exposed to a select group-heading template. */
-export interface SelectGroupContext {
+export interface SelectGroupContext<O extends SelectOption = SelectOption> {
   readonly $implicit: string;
   readonly group: string;
-  readonly option: SelectOption;
+  readonly option: O;
   readonly index: number;
 }
 

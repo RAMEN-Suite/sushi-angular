@@ -6,11 +6,15 @@ import { Listbox } from '../listbox.component';
 import type { ListboxModelValue, ListboxOption } from '../listbox.interfaces';
 import { ListboxFilterTemplate, ListboxItemTemplate } from '../listbox.templates';
 
-const options: readonly ListboxOption[] = [
-  { label: 'Miso', value: 'miso', group: 'Classic' },
-  { label: 'Shoyu', value: 'shoyu', group: 'Classic' },
-  { label: 'Sold out', value: 'sold-out', group: 'Seasonal', disabled: true },
-  { label: 'Yuzu', value: 'yuzu', group: 'Seasonal' },
+interface RamenOption extends ListboxOption {
+  readonly note: string;
+}
+
+const options: readonly RamenOption[] = [
+  { label: 'Miso', value: 'miso', group: 'Classic', note: 'Savory' },
+  { label: 'Shoyu', value: 'shoyu', group: 'Classic', note: 'Soy' },
+  { label: 'Sold out', value: 'sold-out', group: 'Seasonal', disabled: true, note: 'Unavailable' },
+  { label: 'Yuzu', value: 'yuzu', group: 'Seasonal', note: 'Citrus' },
 ];
 
 @Component({
@@ -37,8 +41,13 @@ const options: readonly ListboxOption[] = [
       <ng-template suiListboxFilter let-query let-update="update">
         <input data-filter [value]="query" (input)="update($any($event.target).value)" />
       </ng-template>
-      <ng-template suiListboxItem let-option let-selected="selected" let-disabled="disabled">
-        <span [attr.data-item]="option.value" [attr.data-selected]="selected" [attr.data-disabled]="disabled">
+      <ng-template [suiListboxItem]="options" let-option let-selected="selected" let-disabled="disabled">
+        <span
+          [attr.data-item]="option.value"
+          [attr.data-note]="option.note"
+          [attr.data-selected]="selected"
+          [attr.data-disabled]="disabled"
+        >
           {{ option.label }}
         </span>
       </ng-template>
@@ -46,7 +55,7 @@ const options: readonly ListboxOption[] = [
   `,
 })
 class ListboxHost {
-  public readonly control: Signal<Listbox> = viewChild.required(Listbox);
+  public readonly control: Signal<Listbox<RamenOption>> = viewChild.required(Listbox<RamenOption>);
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly invalid: WritableSignal<boolean> = signal<boolean>(false);
   public readonly loading: WritableSignal<boolean> = signal<boolean>(false);
@@ -54,7 +63,7 @@ class ListboxHost {
   public readonly readOnly: WritableSignal<boolean> = signal<boolean>(false);
   public readonly touched: WritableSignal<boolean> = signal<boolean>(false);
   public readonly value: WritableSignal<ListboxModelValue> = signal<ListboxModelValue>(['shoyu']);
-  public readonly options: readonly ListboxOption[] = options;
+  public readonly options: readonly RamenOption[] = options;
   public readonly offsets: number[] = [];
   public touches: number = 0;
 }
@@ -66,6 +75,7 @@ describe('Listbox value and templates', (): void => {
     expect(queryAll(fixture, '[role="option"]')).toHaveLength(4);
     expect(queryAll(fixture, '[role="presentation"]')).toHaveLength(2);
     expect(query(fixture, '[data-item="shoyu"]').getAttribute('data-selected')).toBe('true');
+    expect(query(fixture, '[data-item="shoyu"]').getAttribute('data-note')).toBe('Soy');
     expect(query(fixture, '[data-item="sold-out"]').getAttribute('data-disabled')).toBe('true');
   });
 

@@ -15,6 +15,13 @@ export interface ApiTemplate {
   readonly members: readonly ApiMember[];
 }
 
+export interface ApiTypeMember {
+  readonly name: string;
+  readonly type: string;
+  readonly optional: boolean;
+  readonly description: string;
+}
+
 export type ApiTypeKind = 'interface' | 'type' | 'enum';
 
 export interface ApiTypeDefinition {
@@ -22,6 +29,7 @@ export interface ApiTypeDefinition {
   readonly kind: ApiTypeKind;
   readonly declaration: string;
   readonly description: string;
+  readonly members: readonly ApiTypeMember[];
 }
 
 export interface ApiStyleProperty {
@@ -33,6 +41,7 @@ export interface ApiStyleProperty {
 
 export interface ApiReferenceData {
   readonly className: string;
+  readonly declaration: string;
   readonly selector: string;
   readonly description: string;
   readonly members: readonly ApiMember[];

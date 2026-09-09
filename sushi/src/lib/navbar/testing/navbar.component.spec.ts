@@ -142,7 +142,6 @@ describe('Navbar disclosures', (): void => {
     expect(workspace.hasAttribute('data-child-current')).toBe(true);
     expect(workspace.hasAttribute('aria-current')).toBe(false);
   });
-
   it('keeps only the most recently opened disclosure expanded', (): void => {
     const fixture: ComponentFixture<NavbarHost> = render(NavbarHost);
     const details: readonly Element[] = queryAll(fixture, 'details');

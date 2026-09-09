@@ -1,0 +1,28 @@
+.sui-sidebar__rail {
+  @apply grid list-none gap-1 p-0;
+}
+
+.sui-sidebar__rail-item {
+  @apply mx-auto flex min-h-9 w-9 cursor-pointer items-center justify-center no-underline;
+  border-radius: var(--radius-field);
+  color: var(--sui-sidebar-item-color);
+}
+
+.sui-sidebar__rail-item:hover {
+  background-color: var(--sui-sidebar-item-hover-background);
+  color: var(--sui-sidebar-item-hover-color);
+}
+
+.sui-sidebar__rail-item:is([aria-current='page'], [data-child-current]) {
+  background-color: var(--sui-sidebar-item-active-background);
+  color: var(--sui-sidebar-item-active-color);
+}
+
+.sui-sidebar__rail-item:focus-visible {
+  outline: var(--sui-focus-ring-width) solid currentColor;
+  outline-offset: var(--sui-focus-ring-offset);
+}
+
+.sui-sidebar__rail-item:is([aria-disabled='true'], :disabled) {
+  @apply cursor-not-allowed opacity-40;
+}

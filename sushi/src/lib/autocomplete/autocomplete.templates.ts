@@ -1,13 +1,18 @@
-import { Directive } from '@angular/core';
-import { AutocompleteItemContext, AutocompleteStatusContext } from './autocomplete.interfaces';
+import { Directive, input, InputSignal } from '@angular/core';
+import { AutocompleteItemContext, AutocompleteOption, AutocompleteStatusContext } from './autocomplete.interfaces';
 
 /** Replaces each suggestion and exposes its option, index, and selection state. */
 @Directive({ selector: 'ng-template[suiAutocompleteItem]' })
-export class AutocompleteItemTemplate {
-  public static ngTemplateContextGuard(
-    _directive: AutocompleteItemTemplate,
+export class AutocompleteItemTemplate<O extends AutocompleteOption = AutocompleteOption> {
+  /** Option source used to infer custom fields inside the template. */
+  public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
+    alias: 'suiAutocompleteItem',
+  });
+
+  public static ngTemplateContextGuard<O extends AutocompleteOption>(
+    _directive: AutocompleteItemTemplate<O>,
     _context: unknown,
-  ): _context is AutocompleteItemContext {
+  ): _context is AutocompleteItemContext<O> {
     return true;
   }
 }

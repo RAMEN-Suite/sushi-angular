@@ -6,10 +6,14 @@ import { Autocomplete } from '../autocomplete.component';
 import type { AutocompleteOption, AutocompleteValue } from '../autocomplete.interfaces';
 import { AutocompleteEmptyTemplate, AutocompleteItemTemplate, AutocompletePrefixTemplate } from '../autocomplete.templates';
 
-const options: readonly AutocompleteOption[] = [
-  { label: 'Miso', value: 'miso' },
-  { label: 'Shoyu', value: 'shoyu' },
-  { label: 'Unavailable', value: 'disabled', disabled: true },
+interface RamenOption extends AutocompleteOption {
+  readonly origin: string;
+}
+
+const options: readonly RamenOption[] = [
+  { label: 'Miso', value: 'miso', origin: 'Sapporo' },
+  { label: 'Shoyu', value: 'shoyu', origin: 'Tokyo' },
+  { label: 'Unavailable', value: 'disabled', disabled: true, origin: 'Kyoto' },
 ];
 
 @Component({
@@ -31,8 +35,8 @@ const options: readonly AutocompleteOption[] = [
       (touch)="touches += 1"
     >
       <ng-template suiAutocompletePrefix><span data-prefix>⌕</span></ng-template>
-      <ng-template suiAutocompleteItem let-option let-index="index">
-        <span [attr.data-index]="index">{{ option.label }}</span>
+      <ng-template [suiAutocompleteItem]="options" let-option let-index="index">
+        <span [attr.data-index]="index">{{ option.label }} · {{ option.origin }}</span>
       </ng-template>
       <ng-template suiAutocompleteEmpty let-query="query"
         ><span data-empty>No match for {{ query }}</span></ng-template
@@ -41,13 +45,13 @@ const options: readonly AutocompleteOption[] = [
   `,
 })
 class AutocompleteHost {
-  public readonly control: Signal<Autocomplete> = viewChild.required(Autocomplete);
+  public readonly control: Signal<Autocomplete<RamenOption>> = viewChild.required<Autocomplete<RamenOption>>(Autocomplete);
   public readonly delay: WritableSignal<number> = signal<number>(0);
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly errorMessage: WritableSignal<string | null> = signal<string | null>(null);
   public readonly forceSelection: WritableSignal<boolean> = signal<boolean>(false);
   public readonly loading: WritableSignal<boolean> = signal<boolean>(false);
-  public readonly options: readonly AutocompleteOption[] = options;
+  public readonly options: readonly RamenOption[] = options;
   public readonly required: WritableSignal<boolean> = signal<boolean>(false);
   public readonly value: WritableSignal<AutocompleteValue> = signal<AutocompleteValue>('shoyu');
   public readonly queries: string[] = [];

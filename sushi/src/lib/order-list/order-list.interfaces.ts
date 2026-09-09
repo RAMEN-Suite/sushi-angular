@@ -11,9 +11,9 @@ export type OrderListOption = SelectionOption;
 export type OrderListFilterContext = SelectionFilterContext;
 
 /** Context exposed to the order-list item template. */
-export interface OrderListItemContext<T extends OrderListOption = OrderListOption> {
-  readonly $implicit: T;
-  readonly option: T;
+export interface OrderListItemContext<I extends OrderListOption = OrderListOption> {
+  readonly $implicit: I;
+  readonly option: I;
   readonly index: number;
   readonly selected: boolean;
 }

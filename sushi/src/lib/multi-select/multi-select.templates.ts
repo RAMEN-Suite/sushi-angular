@@ -1,41 +1,51 @@
-import { Directive } from '@angular/core';
+import { Directive, input, InputSignal } from '@angular/core';
 import {
   MultiSelectGroupContext,
   MultiSelectHeaderContext,
   MultiSelectItemContext,
   MultiSelectLoadingContext,
+  MultiSelectOption,
   MultiSelectSelectedItemsContext,
 } from './multi-select.interfaces';
 
 /** Replaces each option and exposes its index, selected, and disabled state. */
 @Directive({ selector: 'ng-template[suiMultiSelectItem]' })
-export class MultiSelectItemTemplate {
-  public static ngTemplateContextGuard(
-    _directive: MultiSelectItemTemplate,
+export class MultiSelectItemTemplate<O extends MultiSelectOption = MultiSelectOption> {
+  public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
+    alias: 'suiMultiSelectItem',
+  });
+  public static ngTemplateContextGuard<O extends MultiSelectOption>(
+    _directive: MultiSelectItemTemplate<O>,
     _context: unknown,
-  ): _context is MultiSelectItemContext {
+  ): _context is MultiSelectItemContext<O> {
     return true;
   }
 }
 
 /** Replaces the selected-value summary and exposes removal behavior. */
 @Directive({ selector: 'ng-template[suiMultiSelectSelectedItems]' })
-export class MultiSelectSelectedItemsTemplate {
-  public static ngTemplateContextGuard(
-    _directive: MultiSelectSelectedItemsTemplate,
+export class MultiSelectSelectedItemsTemplate<O extends MultiSelectOption = MultiSelectOption> {
+  public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
+    alias: 'suiMultiSelectSelectedItems',
+  });
+  public static ngTemplateContextGuard<O extends MultiSelectOption>(
+    _directive: MultiSelectSelectedItemsTemplate<O>,
     _context: unknown,
-  ): _context is MultiSelectSelectedItemsContext {
+  ): _context is MultiSelectSelectedItemsContext<O> {
     return true;
   }
 }
 
 /** Replaces each group heading and exposes its group and first option. */
 @Directive({ selector: 'ng-template[suiMultiSelectGroup]' })
-export class MultiSelectGroupTemplate {
-  public static ngTemplateContextGuard(
-    _directive: MultiSelectGroupTemplate,
+export class MultiSelectGroupTemplate<O extends MultiSelectOption = MultiSelectOption> {
+  public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
+    alias: 'suiMultiSelectGroup',
+  });
+  public static ngTemplateContextGuard<O extends MultiSelectOption>(
+    _directive: MultiSelectGroupTemplate<O>,
     _context: unknown,
-  ): _context is MultiSelectGroupContext {
+  ): _context is MultiSelectGroupContext<O> {
     return true;
   }
 }
@@ -69,11 +79,14 @@ export class MultiSelectCheckmarkIconTemplate {}
 
 /** Adds content above the list and exposes aggregate selection behavior. */
 @Directive({ selector: 'ng-template[suiMultiSelectHeader]' })
-export class MultiSelectHeaderTemplate {
-  public static ngTemplateContextGuard(
-    _directive: MultiSelectHeaderTemplate,
+export class MultiSelectHeaderTemplate<O extends MultiSelectOption = MultiSelectOption> {
+  public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
+    alias: 'suiMultiSelectHeader',
+  });
+  public static ngTemplateContextGuard<O extends MultiSelectOption>(
+    _directive: MultiSelectHeaderTemplate<O>,
     _context: unknown,
-  ): _context is MultiSelectHeaderContext {
+  ): _context is MultiSelectHeaderContext<O> {
     return true;
   }
 }

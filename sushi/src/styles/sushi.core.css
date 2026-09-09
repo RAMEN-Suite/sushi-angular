@@ -13,6 +13,7 @@
 @import './features/progress.styles.css';
 @import './features/range.styles.css';
 @import './features/selection.styles.css';
+@import './features/sidebar.styles.css';
 @import './features/select-button.styles.css';
 @import './features/status.styles.css';
 @import './features/tabs.styles.css';

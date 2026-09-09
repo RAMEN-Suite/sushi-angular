@@ -42,6 +42,7 @@ export const apiReferences: Readonly<Record<string, readonly ApiReferenceData[]>
   range: [apiReference.Range],
   select: [apiReference.Select],
   'select-button': [apiReference.SelectButton],
+  sidebar: [apiReference.Sidebar, apiReference.SidebarHeader, apiReference.SidebarFooter],
   spinner: [apiReference.Spinner],
   status: [apiReference.Status],
   table: [apiReference.Table],

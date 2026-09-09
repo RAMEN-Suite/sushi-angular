@@ -12,9 +12,9 @@ export interface ListboxOption extends SelectionOption {
 /** Context exposed when replacing the listbox filter. */
 export type ListboxFilterContext = SelectionFilterContext;
 /** Context exposed to the listbox item template. */
-export interface ListboxItemContext {
-  readonly $implicit: ListboxOption;
-  readonly option: ListboxOption;
+export interface ListboxItemContext<O extends ListboxOption = ListboxOption> {
+  readonly $implicit: O;
+  readonly option: O;
   readonly index: number;
   readonly selected: boolean;
   readonly active: boolean;

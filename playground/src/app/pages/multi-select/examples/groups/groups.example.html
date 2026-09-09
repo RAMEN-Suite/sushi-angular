@@ -9,7 +9,7 @@
       [optionHeight]="56"
       [scrollHeight]="220"
       [(value)]="value">
-      <ng-template suiMultiSelectGroup let-group>
+      <ng-template [suiMultiSelectGroup]="countries" let-group>
         <span class="flex w-full items-center justify-between gap-3">
           <span class="flex items-center gap-2 font-semibold">
             <svg lucideGlobe class="size-4" aria-hidden="true"></svg>
@@ -18,8 +18,7 @@
           <span suiBadge severity="neutral" variant="soft" size="xs">{{ groupSize(group) }}</span>
         </span>
       </ng-template>
-      <ng-template suiMultiSelectItem let-item>
-        @let country = asCountry(item);
+      <ng-template [suiMultiSelectItem]="countries" let-country>
         <span class="flex min-w-0 items-center gap-3">
           <span class="text-xl" aria-hidden="true">{{ country.flag }}</span>
           <span class="min-w-0">

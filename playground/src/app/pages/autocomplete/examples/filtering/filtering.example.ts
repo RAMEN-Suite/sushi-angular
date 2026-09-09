@@ -16,6 +16,10 @@ interface DestinationValue {
   readonly id: string;
 }
 
+interface DestinationOption extends AutocompleteOption {
+  readonly country: string;
+}
+
 @Component({
   selector: 'pg-autocomplete-filtering-example',
   imports: [Autocomplete, AutocompleteEmptyTemplate, AutocompleteItemTemplate, AutocompletePrefixTemplate, Label, LucideMapPin],
@@ -23,12 +27,12 @@ interface DestinationValue {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutocompleteFilteringExample {
-  protected readonly cities: readonly AutocompleteOption[] = [
-    { label: 'Berlin', value: { id: 'berlin' } },
-    { label: 'Barcelona', value: { id: 'barcelona' } },
-    { label: 'Copenhagen', value: { id: 'copenhagen' } },
-    { label: 'Lisbon', value: { id: 'lisbon' } },
-    { label: 'London', value: { id: 'london' } },
+  protected readonly cities: readonly DestinationOption[] = [
+    { label: 'Berlin', value: { id: 'berlin' }, country: 'Germany' },
+    { label: 'Barcelona', value: { id: 'barcelona' }, country: 'Spain' },
+    { label: 'Copenhagen', value: { id: 'copenhagen' }, country: 'Denmark' },
+    { label: 'Lisbon', value: { id: 'lisbon' }, country: 'Portugal' },
+    { label: 'London', value: { id: 'london' }, country: 'United Kingdom' },
   ];
   protected readonly value: WritableSignal<AutocompleteValue> = signal<AutocompleteValue>({ id: 'lisbon' });
   protected readonly startsWith: AutocompleteFilter = (option: AutocompleteOption, query: string): boolean =>

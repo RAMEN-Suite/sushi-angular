@@ -63,12 +63,15 @@ import {
   host: { class: 'inline-block max-w-full', '[class.w-full]': 'fluid()', '[attr.id]': 'null' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Autocomplete extends FormControlState implements FormValueControl<AutocompleteValue> {
+export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
+  extends FormControlState
+  implements FormValueControl<AutocompleteValue>
+{
   /** Selected option value, free-text value, or `null` when empty. */
   public readonly value: ModelSignal<AutocompleteValue> = model<AutocompleteValue>(null);
 
   /** Suggestions available to filtering and keyboard selection. */
-  public readonly options: InputSignal<readonly AutocompleteOption[]> = input.required<readonly AutocompleteOption[]>();
+  public readonly options: InputSignal<readonly O[]> = input.required<readonly O[]>();
   /** Compares option values when reference identity is not sufficient. */
   public readonly compareWith: InputSignal<AutocompleteCompareWith> = input<AutocompleteCompareWith>(compareSelectionValues);
   /** Filters suggestions for the current query. */
@@ -121,7 +124,7 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
   /** Emits when the user completes an interaction. */
   public readonly touch: OutputEmitterRef<void> = output();
 
-  protected readonly itemTemplate: Signal<TemplateRef<AutocompleteItemContext> | undefined> = contentChild(
+  protected readonly itemTemplate: Signal<TemplateRef<AutocompleteItemContext<O>> | undefined> = contentChild(
     AutocompleteItemTemplate,
     {
       read: TemplateRef,
@@ -154,26 +157,24 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
   protected readonly query: WritableSignal<string> = signal<string>('');
   protected readonly expanded: WritableSignal<boolean> = signal<boolean>(false);
 
-  protected readonly selectedOption: Signal<AutocompleteOption | undefined> = computed(() => {
+  protected readonly selectedOption: Signal<O | undefined> = computed(() => {
     const value: AutocompleteValue = this.value();
-    return value === null
-      ? undefined
-      : this.options().find((option: AutocompleteOption): boolean => this.compareWith()(option.value, value));
+    return value === null ? undefined : this.options().find((option: O): boolean => this.compareWith()(option.value, value));
   });
   protected readonly inputValue: Signal<string> = computed(() => {
     const query: string = this.query();
     return query.length > 0 ? query : (this.selectedOption()?.label ?? '');
   });
-  protected readonly filteredOptions: Signal<readonly AutocompleteOption[]> = computed(() =>
-    this.options().filter((option: AutocompleteOption): boolean => this.filterWith()(option, this.inputValue())),
+  protected readonly filteredOptions: Signal<readonly O[]> = computed(() =>
+    this.options().filter((option: O): boolean => this.filterWith()(option, this.inputValue())),
   );
-  protected readonly matchedOption: Signal<AutocompleteOption | undefined> = computed(() => {
+  protected readonly matchedOption: Signal<O | undefined> = computed(() => {
     const query: string = this.inputValue().trim().toLocaleLowerCase();
     if (!query) return undefined;
-    return this.options().find((option: AutocompleteOption): boolean => option.label.trim().toLocaleLowerCase() === query);
+    return this.options().find((option: O): boolean => option.label.trim().toLocaleLowerCase() === query);
   });
   protected readonly listboxValue: Signal<AutocompleteValue[]> = computed(() => {
-    const option: AutocompleteOption | undefined = this.selectedOption();
+    const option: O | undefined = this.selectedOption();
     return option ? [option.value] : [];
   });
   protected readonly emptyContext: Signal<AutocompleteStatusContext> = computed(() => ({
@@ -254,9 +255,7 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
       return;
     }
     this.value.set(value);
-    this.query.set(
-      this.options().find((option: AutocompleteOption): boolean => this.compareWith()(option.value, value))?.label ?? '',
-    );
+    this.query.set(this.options().find((option: O): boolean => this.compareWith()(option.value, value))?.label ?? '');
     this.handleExpanded(false);
   }
 
@@ -277,7 +276,7 @@ export class Autocomplete extends FormControlState implements FormValueControl<A
     if (!this.forceSelection()) this.query.set(query);
   }
 
-  protected itemContext(option: AutocompleteOption, index: number): AutocompleteItemContext {
+  protected itemContext(option: O, index: number): AutocompleteItemContext<O> {
     const value: AutocompleteValue = this.value();
     return {
       $implicit: option,

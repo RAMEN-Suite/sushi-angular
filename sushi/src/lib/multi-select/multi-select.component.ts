@@ -77,12 +77,15 @@ import {
   host: { class: 'inline-block max-w-full', '[class.w-full]': 'fluid()', '[class.cursor-not-allowed]': 'disabled()' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MultiSelect extends FormControlState implements FormValueControl<MultiSelectModelValue> {
+export class MultiSelect<O extends MultiSelectOption = MultiSelectOption>
+  extends FormControlState
+  implements FormValueControl<MultiSelectModelValue>
+{
   /** Selected option values in option order. */
   public readonly value: ModelSignal<MultiSelectModelValue> = model<MultiSelectModelValue>([]);
 
   /** Fixed options available for multiple selection. */
-  public readonly options: InputSignal<readonly MultiSelectOption[]> = input.required<readonly MultiSelectOption[]>();
+  public readonly options: InputSignal<readonly O[]> = input.required<readonly O[]>();
   /** Compares object values when reference identity is not sufficient. Primitive values use the default comparator. */
   public readonly compareWith: InputSignal<MultiSelectCompareWith> = input<MultiSelectCompareWith>(compareSelectionValues);
 
@@ -131,17 +134,17 @@ export class MultiSelect extends FormControlState implements FormValueControl<Mu
   /** Emits when the user closes the popup after interaction. */
   public readonly touch: OutputEmitterRef<void> = output();
 
-  protected readonly itemTemplate: Signal<TemplateRef<MultiSelectItemContext> | undefined> = contentChild(
+  protected readonly itemTemplate: Signal<TemplateRef<MultiSelectItemContext<O>> | undefined> = contentChild(
     MultiSelectItemTemplate,
     {
       read: TemplateRef,
     },
   );
-  protected readonly selectedItemsTemplate: Signal<TemplateRef<MultiSelectSelectedItemsContext> | undefined> = contentChild(
+  protected readonly selectedItemsTemplate: Signal<TemplateRef<MultiSelectSelectedItemsContext<O>> | undefined> = contentChild(
     MultiSelectSelectedItemsTemplate,
     { read: TemplateRef },
   );
-  protected readonly headerTemplate: Signal<TemplateRef<MultiSelectHeaderContext> | undefined> = contentChild(
+  protected readonly headerTemplate: Signal<TemplateRef<MultiSelectHeaderContext<O>> | undefined> = contentChild(
     MultiSelectHeaderTemplate,
     {
       read: TemplateRef,
@@ -153,7 +156,7 @@ export class MultiSelect extends FormControlState implements FormValueControl<Mu
   protected readonly emptyTemplate: Signal<TemplateRef<void> | undefined> = contentChild(MultiSelectEmptyTemplate, {
     read: TemplateRef,
   });
-  protected readonly groupTemplate: Signal<TemplateRef<MultiSelectGroupContext> | undefined> = contentChild(
+  protected readonly groupTemplate: Signal<TemplateRef<MultiSelectGroupContext<O>> | undefined> = contentChild(
     MultiSelectGroupTemplate,
     {
       read: TemplateRef,
@@ -185,37 +188,37 @@ export class MultiSelect extends FormControlState implements FormValueControl<Mu
   protected readonly expanded: WritableSignal<boolean> = signal(false);
   protected readonly positions: WritableSignal<ConnectedPosition[]> = signal([SELECTION_BELOW, SELECTION_ABOVE]);
 
-  protected readonly selectedOptions: Signal<readonly MultiSelectOption[]> = computed(() =>
-    this.options().filter((option: MultiSelectOption): boolean => this.isSelected(option)),
+  protected readonly selectedOptions: Signal<readonly O[]> = computed(() =>
+    this.options().filter((option: O): boolean => this.isSelected(option)),
   );
   protected readonly displayValue: Signal<string> = computed(() => {
-    const options: readonly MultiSelectOption[] = this.selectedOptions();
+    const options: readonly O[] = this.selectedOptions();
     if (!options.length) return this.placeholder();
     return options.length === 1 ? options[0].label : `${options[0].label} +${options.length - 1}`;
   });
-  protected readonly enabledOptions: Signal<readonly MultiSelectOption[]> = computed(() =>
-    this.options().filter((option: MultiSelectOption): boolean => !option.disabled),
+  protected readonly enabledOptions: Signal<readonly O[]> = computed(() =>
+    this.options().filter((option: O): boolean => !option.disabled),
   );
   protected readonly allSelected: Signal<boolean> = computed(() => {
-    const options: readonly MultiSelectOption[] = this.enabledOptions();
-    return options.length > 0 && options.every((option: MultiSelectOption): boolean => this.isSelected(option));
+    const options: readonly O[] = this.enabledOptions();
+    return options.length > 0 && options.every((option: O): boolean => this.isSelected(option));
   });
   protected readonly partiallySelected: Signal<boolean> = computed(
-    () => !this.allSelected() && this.enabledOptions().some((option: MultiSelectOption): boolean => this.isSelected(option)),
+    () => !this.allSelected() && this.enabledOptions().some((option: O): boolean => this.isSelected(option)),
   );
   protected readonly listboxValue: Signal<MultiSelectValue[]> = computed(() =>
     this.value().map(
       (value: MultiSelectValue): MultiSelectValue =>
-        this.options().find((option: MultiSelectOption): boolean => this.compareWith()(option.value, value))?.value ?? value,
+        this.options().find((option: O): boolean => this.compareWith()(option.value, value))?.value ?? value,
     ),
   );
-  protected readonly selectedContext: Signal<MultiSelectSelectedItemsContext> = computed(() => ({
+  protected readonly selectedContext: Signal<MultiSelectSelectedItemsContext<O>> = computed(() => ({
     $implicit: this.selectedOptions(),
     options: this.selectedOptions(),
-    remove: (option: MultiSelectOption): void => this.handleRemove(option),
+    remove: (option: O): void => this.handleRemove(option),
     disabled: this.disabled(),
   }));
-  protected readonly headerContext: Signal<MultiSelectHeaderContext> = computed(() => ({
+  protected readonly headerContext: Signal<MultiSelectHeaderContext<O>> = computed(() => ({
     $implicit: this.enabledOptions(),
     options: this.enabledOptions(),
     selectedCount: this.selectedOptions().length,
@@ -277,22 +280,20 @@ export class MultiSelect extends FormControlState implements FormValueControl<Mu
 
   protected handleToggleAll(): void {
     if (this.disabled()) return;
-    this.value.set(
-      this.allSelected() ? [] : this.enabledOptions().map((option: MultiSelectOption): MultiSelectValue => option.value),
-    );
+    this.value.set(this.allSelected() ? [] : this.enabledOptions().map((option: O): MultiSelectValue => option.value));
   }
 
-  protected handleRemove(option: MultiSelectOption): void {
+  protected handleRemove(option: O): void {
     if (this.disabled()) return;
     this.value.set(this.value().filter((value: MultiSelectValue): boolean => !this.compareWith()(option.value, value)));
     this.focus();
   }
 
-  protected isSelected(option: MultiSelectOption): boolean {
+  protected isSelected(option: O): boolean {
     return this.value().some((value: MultiSelectValue): boolean => this.compareWith()(option.value, value));
   }
 
-  protected itemContext(option: MultiSelectOption, index: number): MultiSelectItemContext {
+  protected itemContext(option: O, index: number): MultiSelectItemContext<O> {
     return { $implicit: option, option, selected: this.isSelected(option), disabled: Boolean(option.disabled), index };
   }
 

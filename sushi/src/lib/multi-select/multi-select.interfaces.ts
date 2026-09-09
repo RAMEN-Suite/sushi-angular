@@ -19,24 +19,24 @@ export type MultiSelectCompareWith = SelectCompareWith;
 /** Additional visual treatment available to a multi-select. */
 export type MultiSelectVariant = SelectVariant;
 /** Context exposed to a multi-select option template. */
-export type MultiSelectItemContext = SelectItemContext;
+export type MultiSelectItemContext<O extends MultiSelectOption = MultiSelectOption> = SelectItemContext<O>;
 /** Context exposed to a multi-select group-heading template. */
-export type MultiSelectGroupContext = SelectGroupContext;
+export type MultiSelectGroupContext<O extends MultiSelectOption = MultiSelectOption> = SelectGroupContext<O>;
 /** Context exposed to the multi-select loading template. */
 export type MultiSelectLoadingContext = SelectLoadingContext;
 
 /** Context exposed to the selected-values summary template. */
-export interface MultiSelectSelectedItemsContext {
-  readonly $implicit: readonly MultiSelectOption[];
-  readonly options: readonly MultiSelectOption[];
-  readonly remove: (option: MultiSelectOption) => void;
+export interface MultiSelectSelectedItemsContext<O extends MultiSelectOption = MultiSelectOption> {
+  readonly $implicit: readonly O[];
+  readonly options: readonly O[];
+  readonly remove: (option: O) => void;
   readonly disabled: boolean;
 }
 
 /** Context exposed to a multi-select header template. */
-export interface MultiSelectHeaderContext {
-  readonly $implicit: readonly MultiSelectOption[];
-  readonly options: readonly MultiSelectOption[];
+export interface MultiSelectHeaderContext<O extends MultiSelectOption = MultiSelectOption> {
+  readonly $implicit: readonly O[];
+  readonly options: readonly O[];
   readonly selectedCount: number;
   readonly allSelected: boolean;
   readonly disabled: boolean;

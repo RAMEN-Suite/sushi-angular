@@ -12,15 +12,24 @@ import type {
   ApiTemplate,
   ApiTypeDefinition,
   ApiTypeKind,
+  ApiTypeMember,
 } from '../playground/src/app/shared/api-reference/api-reference.types';
 
 interface SourceReference {
   readonly className: string;
+  readonly declaration: string;
   readonly selector: string;
   readonly description: string;
   readonly folder: string;
   readonly members: readonly ApiMember[];
   readonly styles: readonly ApiStyleProperty[];
+}
+
+function readClassDeclaration(node: ts.ClassDeclaration): string {
+  const className: string = node.name?.text ?? '';
+  const parameters: string =
+    node.typeParameters?.map((parameter: ts.TypeParameterDeclaration): string => parameter.getText()).join(', ') ?? '';
+  return parameters ? `${className}<${parameters}>` : className;
 }
 
 interface CollectedApi {
@@ -319,6 +328,22 @@ function readTypeDeclaration(node: ApiTypeNode): string {
   return `interface ${node.name.text}${suffix}${heritage ? ` ${heritage}` : ''} {\n${members}\n}`;
 }
 
+function readTypeMembers(node: ApiTypeNode): readonly ApiTypeMember[] {
+  if (!ts.isInterfaceDeclaration(node)) return [];
+
+  return node.members.flatMap((member: ts.TypeElement): readonly ApiTypeMember[] => {
+    if (!ts.isPropertySignature(member) || !member.type) return [];
+    return [
+      {
+        name: member.name.getText(),
+        type: member.type.getText(),
+        optional: Boolean(member.questionToken),
+        description: readJSDoc(member),
+      },
+    ];
+  });
+}
+
 function readTypeDefinition(statement: ts.Statement): ApiTypeDefinition | null {
   if (!isApiTypeNode(statement) || !isExported(statement)) return null;
 
@@ -327,6 +352,7 @@ function readTypeDefinition(statement: ts.Statement): ApiTypeDefinition | null {
     kind: readTypeKind(statement),
     declaration: readTypeDeclaration(statement),
     description: readJSDoc(statement),
+    members: readTypeMembers(statement),
   };
 }
 
@@ -375,6 +401,7 @@ function collectApi(): CollectedApi {
 
       references.push({
         className: statement.name.text,
+        declaration: readClassDeclaration(statement),
         selector,
         description: readJSDoc(statement),
         folder,
@@ -450,6 +477,7 @@ function buildReferenceData(): Readonly<Record<string, ApiReferenceData>> {
       const featureTypes: readonly string[] = collected.typesByClass.get(reference.className) ?? [];
       const data: ApiReferenceData = {
         className: reference.className,
+        declaration: reference.declaration,
         selector: reference.selector,
         description: reference.description,
         members: reference.members,

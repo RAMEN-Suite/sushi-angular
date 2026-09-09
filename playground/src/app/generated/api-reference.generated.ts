@@ -81,6 +81,7 @@ export const apiReference: Readonly<{
 }> = {
   Accordion: {
     className: 'Accordion',
+    declaration: 'Accordion',
     selector: 'sui-accordion',
     description: 'Organizes related content into accessible expandable sections.',
     members: [
@@ -204,6 +205,26 @@ export const apiReference: Readonly<{
         declaration:
           'interface AccordionItemContext {\n  readonly $implicit: AccordionItemData;\n  readonly item: AccordionItemData;\n  readonly expanded: boolean;\n}',
         description: 'Item data and expansion state exposed to accordion templates.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'AccordionItemData',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'item',
+            type: 'AccordionItemData',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'expanded',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'AccordionItemData',
@@ -211,30 +232,54 @@ export const apiReference: Readonly<{
         declaration:
           'interface AccordionItemData {\n  readonly value: AccordionValue;\n  readonly label: string;\n  readonly disabled: boolean;\n}',
         description: 'Public item state exposed to custom templates.',
+        members: [
+          {
+            name: 'value',
+            type: 'AccordionValue',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'AccordionSize',
         kind: 'type',
         declaration: "type AccordionSize = 'sm' | 'md' | 'lg';",
         description: 'Density and type scales available to an accordion.',
+        members: [],
       },
       {
         name: 'AccordionValue',
         kind: 'type',
         declaration: 'type AccordionValue = string;',
         description: 'Stable identifier used to control one accordion item.',
+        members: [],
       },
       {
         name: 'AccordionVariant',
         kind: 'type',
         declaration: "type AccordionVariant = 'joined' | 'separated';",
         description: 'Layout treatments available to an accordion group.',
+        members: [],
       },
     ],
     styles: [],
   },
   Autocomplete: {
     className: 'Autocomplete',
+    declaration: 'Autocomplete<O extends AutocompleteOption = AutocompleteOption>',
     selector: 'sui-autocomplete',
     description: 'Suggests and filters values while preserving native text input behavior.',
     members: [
@@ -248,7 +293,7 @@ export const apiReference: Readonly<{
       {
         name: 'options',
         kind: 'input',
-        type: 'readonly AutocompleteOption[]',
+        type: 'readonly O[]',
         defaultValue: 'required',
         description: 'Suggestions available to filtering and keyboard selection.',
       },
@@ -452,9 +497,17 @@ export const apiReference: Readonly<{
     templates: [
       {
         name: 'suiAutocompleteItem',
-        context: 'AutocompleteItemContext',
+        context: 'AutocompleteItemContext<O>',
         description: 'Replaces each suggestion and exposes its option, index, and selection state.',
-        members: [],
+        members: [
+          {
+            name: 'options',
+            kind: 'input',
+            type: "readonly O[] | '' | undefined",
+            defaultValue: 'undefined',
+            description: 'Option source used to infer custom fields inside the template.',
+          },
+        ],
       },
       {
         name: 'suiAutocompleteEmpty',
@@ -487,25 +540,66 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type AutocompleteCompareWith = SelectionCompareWith;',
         description: 'Compares autocomplete values for identity.',
+        members: [],
       },
       {
         name: 'AutocompleteFilter',
         kind: 'type',
         declaration: 'type AutocompleteFilter = SelectionFilter;',
         description: 'Filters autocomplete suggestions for a query.',
+        members: [],
       },
       {
         name: 'AutocompleteItemContext',
         kind: 'interface',
         declaration:
-          'interface AutocompleteItemContext {\n  readonly $implicit: AutocompleteOption;\n  readonly option: AutocompleteOption;\n  readonly selected: boolean;\n  readonly matched: boolean;\n  readonly disabled: boolean;\n  readonly index: number;\n}',
+          'interface AutocompleteItemContext<O extends AutocompleteOption = AutocompleteOption> {\n  readonly $implicit: O;\n  readonly option: O;\n  readonly selected: boolean;\n  readonly matched: boolean;\n  readonly disabled: boolean;\n  readonly index: number;\n}',
         description: 'Context exposed to an autocomplete item template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'O',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'option',
+            type: 'O',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'selected',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'matched',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'AutocompleteOption',
         kind: 'type',
         declaration: 'type AutocompleteOption = SelectionOption;',
         description: 'One suggestion available to an autocomplete control.',
+        members: [],
       },
       {
         name: 'AutocompleteStatusContext',
@@ -513,42 +607,68 @@ export const apiReference: Readonly<{
         declaration:
           'interface AutocompleteStatusContext {\n  readonly $implicit: string;\n  readonly message: string;\n  readonly query: string;\n}',
         description: 'Context exposed to autocomplete status templates.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'message',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'query',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'AutocompleteValue',
         kind: 'type',
         declaration: 'type AutocompleteValue = SelectionValue | null;',
         description: 'Value held by an autocomplete control.',
+        members: [],
       },
       {
         name: 'ComponentSize',
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FormControlSeverity',
         kind: 'type',
         declaration: 'type FormControlSeverity = ThemeSeverity;',
         description: 'Semantic colors available to form controls.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
       {
         name: 'SelectionCompareWith',
         kind: 'type',
         declaration: 'type SelectionCompareWith = (first: SelectionValue, second: SelectionValue) => boolean;',
         description: 'Compares two selection values for identity.',
+        members: [],
       },
       {
         name: 'SelectionFilter',
         kind: 'type',
         declaration: 'type SelectionFilter = (option: SelectionOption, query: string) => boolean;',
         description: 'Determines whether an option matches a text query.',
+        members: [],
       },
       {
         name: 'SelectionOption',
@@ -556,12 +676,33 @@ export const apiReference: Readonly<{
         declaration:
           'interface SelectionOption {\n  readonly label: string;\n  readonly value: SelectionValue;\n  readonly disabled?: boolean;\n}',
         description: 'One selectable label and value with optional disabled state.',
+        members: [
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'value',
+            type: 'SelectionValue',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: true,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectionValue',
         kind: 'type',
         declaration: 'type SelectionValue = string | number | boolean | object;',
         description: 'Primitive or object value accepted by selection controls.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -569,6 +710,7 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [
@@ -618,6 +760,7 @@ export const apiReference: Readonly<{
   },
   AutoFocus: {
     className: 'AutoFocus',
+    declaration: 'AutoFocus',
     selector: '[suiAutoFocus]',
     description: 'Moves focus to an enabled element after its first render.',
     members: [
@@ -635,6 +778,7 @@ export const apiReference: Readonly<{
   },
   Avatar: {
     className: 'Avatar',
+    declaration: 'Avatar',
     selector: 'sui-avatar',
     description: 'Displays an image or fallback identity with optional presence state and masking.',
     members: [
@@ -681,6 +825,7 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type AvatarMaskHalf = 'first' | 'second';",
         description: 'Half retained by half-mask avatar shapes.',
+        members: [],
       },
       {
         name: 'AvatarShape',
@@ -688,30 +833,35 @@ export const apiReference: Readonly<{
         declaration:
           "type AvatarShape = | 'square'\n  | 'rounded'\n  | 'circle'\n  | 'squircle'\n  | 'heart'\n  | 'hexagon'\n  | 'hexagon-2'\n  | 'decagon'\n  | 'pentagon'\n  | 'diamond'\n  | 'mask-square'\n  | 'mask-circle'\n  | 'star'\n  | 'star-2'\n  | 'triangle'\n  | 'triangle-2'\n  | 'triangle-3'\n  | 'triangle-4';",
         description: 'Built-in shapes and masks available to avatars.',
+        members: [],
       },
       {
         name: 'AvatarSize',
         kind: 'type',
         declaration: 'type AvatarSize = ComponentSize;',
         description: 'Size scale available to avatars.',
+        members: [],
       },
       {
         name: 'AvatarStatus',
         kind: 'type',
         declaration: "type AvatarStatus = 'online' | 'offline';",
         description: 'Presence states displayed by an avatar.',
+        members: [],
       },
       {
         name: 'ComponentSize',
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
     ],
     styles: [],
   },
   AvatarGroup: {
     className: 'AvatarGroup',
+    declaration: 'AvatarGroup',
     selector: '[suiAvatarGroup]',
     description: 'Groups multiple avatars into an overlapping visual stack.',
     members: [],
@@ -721,6 +871,7 @@ export const apiReference: Readonly<{
   },
   Badge: {
     className: 'Badge',
+    declaration: 'Badge',
     selector: '[suiBadge]',
     description: 'Styles compact, non-interactive labels for status or metadata.',
     members: [
@@ -753,24 +904,28 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type BadgeSeverity = ThemeSeverity;',
         description: 'Semantic colors available to badges.',
+        members: [],
       },
       {
         name: 'BadgeSize',
         kind: 'type',
         declaration: 'type BadgeSize = ComponentSize;',
         description: 'Size scale available to badges.',
+        members: [],
       },
       {
         name: 'BadgeVariant',
         kind: 'type',
         declaration: "type BadgeVariant = 'outlined' | 'soft' | 'dash';",
         description: 'Visual treatments available to badges.',
+        members: [],
       },
       {
         name: 'ComponentSize',
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -778,12 +933,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Button: {
     className: 'Button',
+    declaration: 'Button',
     selector: 'button[suiButton], a[suiButton]',
     description: 'Styles native buttons and links with consistent, focusable disabled behavior.',
     members: [
@@ -844,30 +1001,35 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type ButtonSeverity = ThemeSeverity;',
         description: 'Semantic colors available to buttons.',
+        members: [],
       },
       {
         name: 'ButtonShape',
         kind: 'type',
         declaration: "type ButtonShape = 'default' | 'fluid' | 'circle' | 'square';",
         description: 'Width and geometry options available to buttons.',
+        members: [],
       },
       {
         name: 'ButtonSize',
         kind: 'type',
         declaration: 'type ButtonSize = ComponentSize;',
         description: 'Size scale available to buttons.',
+        members: [],
       },
       {
         name: 'ButtonVariant',
         kind: 'type',
         declaration: "type ButtonVariant = 'link' | 'outlined' | 'soft' | 'dash' | 'text';",
         description: 'Visual treatments available to buttons.',
+        members: [],
       },
       {
         name: 'ComponentSize',
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -875,12 +1037,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Card: {
     className: 'Card',
+    declaration: 'Card',
     selector: 'sui-card',
     description: 'Groups related content, media, and actions in one visual surface.',
     members: [
@@ -906,24 +1070,28 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type CardSize = ComponentSize;',
         description: 'Size scale controlling card content density.',
+        members: [],
       },
       {
         name: 'CardVariant',
         kind: 'type',
         declaration: "type CardVariant = 'plain' | 'border' | 'dash';",
         description: 'Surface treatments available to cards.',
+        members: [],
       },
       {
         name: 'ComponentSize',
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
     ],
     styles: [],
   },
   CardActions: {
     className: 'CardActions',
+    declaration: 'CardActions',
     selector: '[suiCardActions]',
     description: 'Aligns related actions inside a card.',
     members: [],
@@ -933,6 +1101,7 @@ export const apiReference: Readonly<{
   },
   CardMedia: {
     className: 'CardMedia',
+    declaration: 'CardMedia',
     selector: '[suiCardMedia]',
     description: 'Marks media that participates in a card layout.',
     members: [],
@@ -942,6 +1111,7 @@ export const apiReference: Readonly<{
   },
   CardTitle: {
     className: 'CardTitle',
+    declaration: 'CardTitle',
     selector: '[suiCardTitle]',
     description: 'Applies card title typography to a semantic heading.',
     members: [],
@@ -951,6 +1121,7 @@ export const apiReference: Readonly<{
   },
   Checkbox: {
     className: 'Checkbox',
+    declaration: 'Checkbox',
     selector: 'input[type="checkbox"][suiCheckbox]',
     description: 'Styles a native checkbox and exposes consistent form state.',
     members: [
@@ -1004,18 +1175,21 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FormControlSeverity',
         kind: 'type',
         declaration: 'type FormControlSeverity = ThemeSeverity;',
         description: 'Semantic colors available to form controls.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -1023,12 +1197,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Chip: {
     className: 'Chip',
+    declaration: 'Chip',
     selector: 'sui-chip',
     description: 'Displays a compact value that can optionally be removed.',
     members: [
@@ -1116,12 +1292,14 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type BadgeSeverity = ThemeSeverity;',
         description: 'Semantic colors available to badges.',
+        members: [],
       },
       {
         name: 'BadgeVariant',
         kind: 'type',
         declaration: "type BadgeVariant = 'outlined' | 'soft' | 'dash';",
         description: 'Visual treatments available to badges.',
+        members: [],
       },
       {
         name: 'ChipContentContext',
@@ -1129,30 +1307,60 @@ export const apiReference: Readonly<{
         declaration:
           'interface ChipContentContext {\n  readonly $implicit: string | null;\n  readonly label: string | null;\n  readonly removable: boolean;\n  readonly disabled: boolean;\n}',
         description: 'Context exposed to a chip content template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'string | null',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'label',
+            type: 'string | null',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'removable',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'ChipSeverity',
         kind: 'type',
         declaration: 'type ChipSeverity = BadgeSeverity;',
         description: 'Semantic colors available to chips.',
+        members: [],
       },
       {
         name: 'ChipSize',
         kind: 'type',
         declaration: 'type ChipSize = ComponentSize;',
         description: 'Size scale available to chips.',
+        members: [],
       },
       {
         name: 'ChipVariant',
         kind: 'type',
         declaration: 'type ChipVariant = BadgeVariant;',
         description: 'Visual treatments available to chips.',
+        members: [],
       },
       {
         name: 'ComponentSize',
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -1160,12 +1368,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Code: {
     className: 'Code',
+    declaration: 'Code',
     selector: 'sui-code',
     description: 'Presents terminal-like code and copies all projected code lines.',
     members: [
@@ -1224,6 +1434,7 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ButtonShape = 'default' | 'fluid' | 'circle' | 'square';",
         description: 'Width and geometry options available to buttons.',
+        members: [],
       },
       {
         name: 'CodeButtonContext',
@@ -1231,6 +1442,26 @@ export const apiReference: Readonly<{
         declaration:
           'interface CodeButtonContext {\n  $implicit: () => void;\n  copy: () => void;\n  copied: Signal<boolean>;\n}',
         description: 'Context exposed to the complete code copy-button template.',
+        members: [
+          {
+            name: '$implicit',
+            type: '() => void',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'copy',
+            type: '() => void',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'copied',
+            type: 'Signal<boolean>',
+            optional: false,
+            description: '',
+          },
+        ],
       },
     ],
     styles: [
@@ -1334,6 +1565,7 @@ export const apiReference: Readonly<{
   },
   CodeLine: {
     className: 'CodeLine',
+    declaration: 'CodeLine',
     selector: '[suiCodeLine]',
     description: 'Marks one copyable line and optionally displays a prefix.',
     members: [
@@ -1358,6 +1590,7 @@ export const apiReference: Readonly<{
   },
   ColorPicker: {
     className: 'ColorPicker',
+    declaration: 'ColorPicker',
     selector: 'sui-color-picker',
     description: 'Selects a color through a native picker, text value, or preset palette.',
     members: [
@@ -1483,6 +1716,26 @@ export const apiReference: Readonly<{
         declaration:
           'interface ColorPickerPreset {\n  readonly value: string;\n  readonly label: string;\n  readonly disabled?: boolean;\n}',
         description: 'Named six-digit hex color offered by a preset palette, with optional disabled state.',
+        members: [
+          {
+            name: 'value',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: true,
+            description: '',
+          },
+        ],
       },
       {
         name: 'ColorPickerPresetContext',
@@ -1490,12 +1743,51 @@ export const apiReference: Readonly<{
         declaration:
           'interface ColorPickerPresetContext {\n  $implicit: string;\n  color: string;\n  label: string;\n  custom: boolean;\n  selected: boolean;\n  disabled: boolean;\n}',
         description: 'Context exposed to a color-picker preset template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'color',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'custom',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'selected',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'ColorPickerPresetValue',
         kind: 'type',
         declaration: 'type ColorPickerPresetValue = string | ColorPickerPreset;',
         description: 'Six-digit hex shorthand or configured entry accepted by a preset palette.',
+        members: [],
       },
     ],
     styles: [
@@ -1551,6 +1843,7 @@ export const apiReference: Readonly<{
   },
   ContextMenuTrigger: {
     className: 'ContextMenuTrigger',
+    declaration: 'ContextMenuTrigger',
     selector: '[suiContextMenuTrigger]',
     description: 'Opens a popup Menu from a context-menu gesture on its host.',
     members: [
@@ -1575,6 +1868,7 @@ export const apiReference: Readonly<{
   },
   DataView: {
     className: 'DataView',
+    declaration: 'DataView<T>',
     selector: 'sui-data-view',
     description: 'Renders a typed collection in switchable list or responsive grid layouts.',
     members: [
@@ -1806,6 +2100,50 @@ export const apiReference: Readonly<{
         declaration:
           'interface DataViewCollectionContext<T> {\n  readonly $implicit: readonly T[];\n  readonly items: readonly T[];\n  readonly source: readonly T[];\n  readonly layout: DataViewLayout;\n  readonly page: number;\n  readonly pageSize: number;\n  readonly totalItems: number;\n}',
         description: 'Collection state exposed to structural DataView templates.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'readonly T[]',
+            optional: false,
+            description: 'Items currently rendered after local pagination.',
+          },
+          {
+            name: 'items',
+            type: 'readonly T[]',
+            optional: false,
+            description: 'Items currently rendered after local pagination.',
+          },
+          {
+            name: 'source',
+            type: 'readonly T[]',
+            optional: false,
+            description: 'Complete input collection when pagination is local.',
+          },
+          {
+            name: 'layout',
+            type: 'DataViewLayout',
+            optional: false,
+            description: 'Active collection layout.',
+          },
+          {
+            name: 'page',
+            type: 'number',
+            optional: false,
+            description: 'One-based current page.',
+          },
+          {
+            name: 'pageSize',
+            type: 'number',
+            optional: false,
+            description: 'Number of items requested per page.',
+          },
+          {
+            name: 'totalItems',
+            type: 'number',
+            optional: false,
+            description: 'Total number of available items.',
+          },
+        ],
       },
       {
         name: 'DataViewItemContext',
@@ -1813,12 +2151,57 @@ export const apiReference: Readonly<{
         declaration:
           'interface DataViewItemContext<T> {\n  readonly $implicit: T;\n  readonly item: T;\n  readonly layout: DataViewLayout;\n  readonly index: number;\n  readonly count: number;\n  readonly first: boolean;\n  readonly last: boolean;\n}',
         description: 'Item data exposed to the repeated DataView template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'T',
+            optional: false,
+            description: 'Current item.',
+          },
+          {
+            name: 'item',
+            type: 'T',
+            optional: false,
+            description: 'Current item.',
+          },
+          {
+            name: 'layout',
+            type: 'DataViewLayout',
+            optional: false,
+            description: 'Active collection layout.',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: 'Zero-based index within the rendered collection.',
+          },
+          {
+            name: 'count',
+            type: 'number',
+            optional: false,
+            description: 'Number of currently rendered items.',
+          },
+          {
+            name: 'first',
+            type: 'boolean',
+            optional: false,
+            description: 'Whether this is the first rendered item.',
+          },
+          {
+            name: 'last',
+            type: 'boolean',
+            optional: false,
+            description: 'Whether this is the last rendered item.',
+          },
+        ],
       },
       {
         name: 'DataViewLayout',
         kind: 'type',
         declaration: "type DataViewLayout = 'list' | 'grid';",
         description: 'Layout used to arrange DataView items.',
+        members: [],
       },
       {
         name: 'DataViewLoadMoreContext',
@@ -1826,24 +2209,47 @@ export const apiReference: Readonly<{
         declaration:
           'interface DataViewLoadMoreContext {\n  readonly loading: boolean;\n  readonly hasMore: boolean;\n  readonly load: () => void;\n}',
         description: 'State and action exposed to a custom infinite-scroll control.',
+        members: [
+          {
+            name: 'loading',
+            type: 'boolean',
+            optional: false,
+            description: 'Whether the next collection segment is loading.',
+          },
+          {
+            name: 'hasMore',
+            type: 'boolean',
+            optional: false,
+            description: 'Whether another collection segment is available.',
+          },
+          {
+            name: 'load',
+            type: '() => void',
+            optional: false,
+            description: 'Requests the next collection segment.',
+          },
+        ],
       },
       {
         name: 'DataViewPaginatorPosition',
         kind: 'type',
         declaration: "type DataViewPaginatorPosition = 'top' | 'bottom' | 'both';",
         description: 'Position of the optional pagination controls.',
+        members: [],
       },
       {
         name: 'DataViewTrackBy',
         kind: 'type',
         declaration: 'type DataViewTrackBy<T> = (index: number, item: T) => unknown;',
         description: 'Identifies a rendered item across collection updates.',
+        members: [],
       },
     ],
     styles: [],
   },
   Dialog: {
     className: 'Dialog',
+    declaration: 'Dialog',
     selector: 'dialog[suiDialog]',
     description: 'Adds controlled modal behavior to the native dialog element.',
     members: [
@@ -1946,12 +2352,27 @@ export const apiReference: Readonly<{
         kind: 'interface',
         declaration: 'interface DialogCloseEvent {\n  readonly reason: DialogCloseReason;\n  readonly returnValue: string;\n}',
         description: 'Details emitted after a Dialog closes.',
+        members: [
+          {
+            name: 'reason',
+            type: 'DialogCloseReason',
+            optional: false,
+            description: 'Interaction that closed the Dialog.',
+          },
+          {
+            name: 'returnValue',
+            type: 'string',
+            optional: false,
+            description: 'Optional value returned by the Dialog action.',
+          },
+        ],
       },
       {
         name: 'DialogCloseReason',
         kind: 'type',
         declaration: "type DialogCloseReason = 'backdrop' | 'close' | 'escape' | 'programmatic';",
         description: 'Reason a Dialog closed.',
+        members: [],
       },
       {
         name: 'DialogPosition',
@@ -1959,6 +2380,7 @@ export const apiReference: Readonly<{
         declaration:
           "type DialogPosition = 'center' | 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right' | 'left' | 'right';",
         description: 'Placement of a Dialog inside the viewport.',
+        members: [],
       },
     ],
     styles: [
@@ -1990,6 +2412,7 @@ export const apiReference: Readonly<{
   },
   DialogClose: {
     className: 'DialogClose',
+    declaration: 'DialogClose',
     selector: 'button[suiDialogClose]',
     description: 'Closes a Dialog from a native button.',
     members: [
@@ -2014,6 +2437,7 @@ export const apiReference: Readonly<{
   },
   DialogDragHandle: {
     className: 'DialogDragHandle',
+    declaration: 'DialogDragHandle',
     selector: '[suiDialogDragHandle]',
     description: 'Marks the region from which a draggable Dialog can be moved.',
     members: [],
@@ -2023,6 +2447,7 @@ export const apiReference: Readonly<{
   },
   DialogTrigger: {
     className: 'DialogTrigger',
+    declaration: 'DialogTrigger',
     selector: 'button[suiDialogTrigger]',
     description: 'Opens and closes a Dialog from a native button.',
     members: [
@@ -2047,6 +2472,7 @@ export const apiReference: Readonly<{
   },
   Divider: {
     className: 'Divider',
+    declaration: 'Divider',
     selector: '[suiDivider]',
     description: 'Separates related content horizontally or vertically with an optional label.',
     members: [
@@ -2079,24 +2505,28 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type DividerOrientation = Orientation;',
         description: 'Direction in which a divider separates content.',
+        members: [],
       },
       {
         name: 'DividerPlacement',
         kind: 'type',
         declaration: "type DividerPlacement = 'start' | 'center' | 'end';",
         description: 'Position of divider content along its line.',
+        members: [],
       },
       {
         name: 'DividerSeverity',
         kind: 'type',
         declaration: 'type DividerSeverity = ThemeSeverity;',
         description: 'Semantic colors available to dividers.',
+        members: [],
       },
       {
         name: 'Orientation',
         kind: 'type',
         declaration: "type Orientation = 'horizontal' | 'vertical';",
         description: 'Supported layout directions.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -2104,12 +2534,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Drawer: {
     className: 'Drawer',
+    declaration: 'Drawer',
     selector: 'sui-drawer',
     description: 'Controls an unstyled sliding panel, with optional responsive persistent layout.',
     members: [
@@ -2205,30 +2637,42 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type DrawerCloseReason = 'backdrop' | 'escape' | 'programmatic';",
         description: 'Reason emitted when a Drawer requests to close.',
+        members: [],
       },
       {
         name: 'DrawerPlacement',
         kind: 'type',
         declaration: "type DrawerPlacement = 'start' | 'end';",
         description: 'Edge from which a Drawer enters the viewport.',
+        members: [],
       },
       {
         name: 'DrawerResponsiveAt',
         kind: 'type',
         declaration: "type DrawerResponsiveAt = 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Viewport width at which a Drawer becomes a persistent sidebar.',
+        members: [],
       },
       {
         name: 'DrawerSize',
         kind: 'type',
         declaration: "type DrawerSize = 'sm' | 'md' | 'lg';",
         description: 'Supported Drawer widths.',
+        members: [],
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-drawer-width',
+        defaultValue: '24rem',
+        exampleValue: '18rem',
+        description: 'Width of the Drawer panel before it is constrained by the viewport.',
+      },
+    ],
   },
   DrawerClose: {
     className: 'DrawerClose',
+    declaration: 'DrawerClose',
     selector: 'button[suiDrawerClose]',
     description: 'Closes a Drawer from a native button.',
     members: [
@@ -2246,6 +2690,7 @@ export const apiReference: Readonly<{
   },
   DrawerContent: {
     className: 'DrawerContent',
+    declaration: 'DrawerContent',
     selector: '[suiDrawerContent]',
     description: 'Marks the optional main content area used by a persistent responsive Drawer layout.',
     members: [],
@@ -2255,6 +2700,7 @@ export const apiReference: Readonly<{
   },
   DrawerFooter: {
     className: 'DrawerFooter',
+    declaration: 'DrawerFooter',
     selector: '[suiDrawerFooter]',
     description: 'Marks content that remains fixed below the scrollable Drawer body.',
     members: [],
@@ -2264,6 +2710,7 @@ export const apiReference: Readonly<{
   },
   DrawerHeader: {
     className: 'DrawerHeader',
+    declaration: 'DrawerHeader',
     selector: '[suiDrawerHeader]',
     description: 'Marks content that remains fixed above the scrollable Drawer body.',
     members: [],
@@ -2273,6 +2720,7 @@ export const apiReference: Readonly<{
   },
   DrawerTrigger: {
     className: 'DrawerTrigger',
+    declaration: 'DrawerTrigger',
     selector: 'button[suiDrawerTrigger]',
     description: 'Opens and closes a Drawer from a native button.',
     members: [
@@ -2297,6 +2745,7 @@ export const apiReference: Readonly<{
   },
   Fieldset: {
     className: 'Fieldset',
+    declaration: 'Fieldset',
     selector: 'fieldset[suiFieldset]',
     description: 'Styles a native fieldset and optionally controls collapsible content.',
     members: [
@@ -2335,6 +2784,7 @@ export const apiReference: Readonly<{
   },
   FieldsetContent: {
     className: 'FieldsetContent',
+    declaration: 'FieldsetContent',
     selector: '[suiFieldsetContent]',
     description: 'Marks the animated and inert-aware content of a collapsible fieldset.',
     members: [],
@@ -2344,6 +2794,7 @@ export const apiReference: Readonly<{
   },
   FieldsetLegend: {
     className: 'FieldsetLegend',
+    declaration: 'FieldsetLegend',
     selector: 'legend[suiFieldsetLegend]',
     description: 'Styles the native legend that names a fieldset.',
     members: [],
@@ -2353,6 +2804,7 @@ export const apiReference: Readonly<{
   },
   FieldsetToggle: {
     className: 'FieldsetToggle',
+    declaration: 'FieldsetToggle',
     selector: 'button[suiFieldsetToggle]',
     description:
       'Turns a legend button into the controller for a collapsible fieldset. Use it only when `collapsible` is enabled.',
@@ -2363,6 +2815,7 @@ export const apiReference: Readonly<{
   },
   FileDrop: {
     className: 'FileDrop',
+    declaration: 'FileDrop',
     selector: 'sui-file-drop',
     description: 'Selects files through a drop zone or the native file dialog.',
     members: [
@@ -2514,18 +2967,84 @@ export const apiReference: Readonly<{
         declaration:
           'interface FileDropContentContext {\n  $implicit: readonly File[];\n  files: readonly File[];\n  active: boolean;\n  disabled: boolean;\n}',
         description: 'Context exposed to the file-drop instruction template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'readonly File[]',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'files',
+            type: 'readonly File[]',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'active',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'FileDropItemContext',
         kind: 'interface',
         declaration: 'interface FileDropItemContext {\n  $implicit: File;\n  file: File;\n  index: number;\n  size: string;\n}',
         description: 'Context exposed to each selected file template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'File',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'file',
+            type: 'File',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'size',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'FileDropRejection',
         kind: 'interface',
         declaration: "interface FileDropRejection {\n  readonly file: File;\n  readonly reason: 'accept';\n}",
         description: 'File rejected by the drop zone and its rejection reason.',
+        members: [
+          {
+            name: 'file',
+            type: 'File',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'reason',
+            type: "'accept'",
+            optional: false,
+            description: '',
+          },
+        ],
       },
     ],
     styles: [
@@ -2551,6 +3070,7 @@ export const apiReference: Readonly<{
   },
   FileInput: {
     className: 'FileInput',
+    declaration: 'FileInput',
     selector: 'input[type="file"][suiFileInput]',
     description: 'Styles a native file input and exposes consistent form state.',
     members: [
@@ -2604,30 +3124,35 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FileInputSeverity',
         kind: 'type',
         declaration: 'type FileInputSeverity = FormControlSeverity;',
         description: 'Semantic colors available to native file inputs.',
+        members: [],
       },
       {
         name: 'FileInputSize',
         kind: 'type',
         declaration: 'type FileInputSize = FormControlSize;',
         description: 'Size scale available to native file inputs.',
+        members: [],
       },
       {
         name: 'FormControlSeverity',
         kind: 'type',
         declaration: 'type FormControlSeverity = ThemeSeverity;',
         description: 'Semantic colors available to form controls.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -2635,12 +3160,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Indicator: {
     className: 'Indicator',
+    declaration: 'Indicator',
     selector: '[suiIndicator]',
     description: 'Establishes the positioning context for one or more indicator items.',
     members: [],
@@ -2651,18 +3178,21 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type IndicatorHorizontalPosition = 'start' | 'center' | 'end';",
         description: 'Horizontal attachment point of an indicator item.',
+        members: [],
       },
       {
         name: 'IndicatorVerticalPosition',
         kind: 'type',
         declaration: "type IndicatorVerticalPosition = 'top' | 'middle' | 'bottom';",
         description: 'Vertical attachment point of an indicator item.',
+        members: [],
       },
     ],
     styles: [],
   },
   IndicatorItem: {
     className: 'IndicatorItem',
+    declaration: 'IndicatorItem',
     selector: '[suiIndicatorItem]',
     description: 'Positions projected content relative to its indicator target.',
     members: [
@@ -2688,18 +3218,21 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type IndicatorHorizontalPosition = 'start' | 'center' | 'end';",
         description: 'Horizontal attachment point of an indicator item.',
+        members: [],
       },
       {
         name: 'IndicatorVerticalPosition',
         kind: 'type',
         declaration: "type IndicatorVerticalPosition = 'top' | 'middle' | 'bottom';",
         description: 'Vertical attachment point of an indicator item.',
+        members: [],
       },
     ],
     styles: [],
   },
   Input: {
     className: 'Input',
+    declaration: 'Input',
     selector: 'input[suiInput]',
     description: 'Styles a native input without replacing its browser behavior.',
     members: [
@@ -2760,30 +3293,35 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FormControlSeverity',
         kind: 'type',
         declaration: 'type FormControlSeverity = ThemeSeverity;',
         description: 'Semantic colors available to form controls.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
       {
         name: 'InputSeverity',
         kind: 'type',
         declaration: 'type InputSeverity = FormControlSeverity;',
         description: 'Semantic colors available to native inputs.',
+        members: [],
       },
       {
         name: 'InputSize',
         kind: 'type',
         declaration: 'type InputSize = FormControlSize;',
         description: 'Size scale available to native inputs.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -2791,12 +3329,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   InputGroup: {
     className: 'InputGroup',
+    declaration: 'InputGroup',
     selector: '[suiInputGroup]',
     description: 'Connects inputs, add-ons, and actions as one visual group without changing their semantics.',
     members: [
@@ -2815,24 +3355,28 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type InputGroupOrientation = JoinOrientation | 'responsive';",
         description: 'Layout directions supported by an input group.',
+        members: [],
       },
       {
         name: 'JoinOrientation',
         kind: 'type',
         declaration: 'type JoinOrientation = Orientation;',
         description: 'Direction in which joined items are connected.',
+        members: [],
       },
       {
         name: 'Orientation',
         kind: 'type',
         declaration: "type Orientation = 'horizontal' | 'vertical';",
         description: 'Supported layout directions.',
+        members: [],
       },
     ],
     styles: [],
   },
   InputGroupAddon: {
     className: 'InputGroupAddon',
+    declaration: 'InputGroupAddon',
     selector: '[suiInputGroupAddon]',
     description: 'Marks non-interactive prefix or suffix content inside an input group.',
     members: [],
@@ -2842,6 +3386,7 @@ export const apiReference: Readonly<{
   },
   InputNumber: {
     className: 'InputNumber',
+    declaration: 'InputNumber',
     selector: 'sui-input-number',
     description: 'Edits numeric values with locale formatting and optional step controls.',
     members: [
@@ -3021,12 +3566,14 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
       {
         name: 'InputNumberButtonsContext',
@@ -3034,12 +3581,51 @@ export const apiReference: Readonly<{
         declaration:
           'interface InputNumberButtonsContext {\n  readonly $implicit: number | null;\n  readonly value: number | null;\n  readonly disabled: boolean;\n  readonly size: FormControlSize;\n  readonly decrement: () => void;\n  readonly increment: () => void;\n}',
         description: 'Context exposed to the complete input-number step-control template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'number | null',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'value',
+            type: 'number | null',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'size',
+            type: 'FormControlSize',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'decrement',
+            type: '() => void',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'increment',
+            type: '() => void',
+            optional: false,
+            description: '',
+          },
+        ],
       },
     ],
     styles: [],
   },
   InputOtp: {
     className: 'InputOtp',
+    declaration: 'InputOtp',
     selector: 'sui-input-otp',
     description: 'Edits a fixed-length one-time code through one accessible native input.',
     members: [
@@ -3156,18 +3742,21 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
     ],
     styles: [],
   },
   InputSurface: {
     className: 'InputSurface',
+    declaration: 'InputSurface',
     selector: 'div[suiInputSurface]',
     description: 'Creates one visual field around a native input and optional inline content.',
     members: [
@@ -3207,18 +3796,21 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FormControlSeverity',
         kind: 'type',
         declaration: 'type FormControlSeverity = ThemeSeverity;',
         description: 'Semantic colors available to form controls.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -3226,12 +3818,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   InputSurfaceControl: {
     className: 'InputSurfaceControl',
+    declaration: 'InputSurfaceControl',
     selector: 'input[suiInputSurfaceControl]',
     description: 'Marks the native input that owns value, form state, and native attributes inside an input surface.',
     members: [
@@ -3270,6 +3864,7 @@ export const apiReference: Readonly<{
   },
   Join: {
     className: 'Join',
+    declaration: 'Join',
     selector: '[suiJoin]',
     description: 'Visually connects related controls without changing their semantics.',
     members: [
@@ -3288,18 +3883,21 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type JoinOrientation = Orientation;',
         description: 'Direction in which joined items are connected.',
+        members: [],
       },
       {
         name: 'Orientation',
         kind: 'type',
         declaration: "type Orientation = 'horizontal' | 'vertical';",
         description: 'Supported layout directions.',
+        members: [],
       },
     ],
     styles: [],
   },
   JoinItem: {
     className: 'JoinItem',
+    declaration: 'JoinItem',
     selector: '[suiJoinItem]',
     description: 'Marks a direct child as part of a join.',
     members: [],
@@ -3309,6 +3907,7 @@ export const apiReference: Readonly<{
   },
   Kbd: {
     className: 'Kbd',
+    declaration: 'Kbd',
     selector: 'kbd[suiKbd]',
     description: 'Styles a semantic keyboard key without introducing button behavior.',
     members: [
@@ -3327,18 +3926,21 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'KbdSize',
         kind: 'type',
         declaration: 'type KbdSize = ComponentSize;',
         description: 'Size scale available to keyboard-key labels.',
+        members: [],
       },
     ],
     styles: [],
   },
   Label: {
     className: 'Label',
+    declaration: 'Label',
     selector: '[suiLabel]',
     description: 'Styles a visible control label without prescribing its native or ARIA association.',
     members: [
@@ -3356,6 +3958,7 @@ export const apiReference: Readonly<{
   },
   List: {
     className: 'List',
+    declaration: 'List<T>',
     selector: 'sui-list',
     description: 'Renders a typed collection as a native list with consumer-defined rows.',
     members: [
@@ -3423,6 +4026,7 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'ListItemContext',
@@ -3430,24 +4034,77 @@ export const apiReference: Readonly<{
         declaration:
           'interface ListItemContext<T> {\n  readonly $implicit: T;\n  readonly item: T;\n  readonly index: number;\n  readonly count: number;\n  readonly first: boolean;\n  readonly last: boolean;\n  readonly even: boolean;\n  readonly odd: boolean;\n}',
         description: 'Item and position data exposed to the list item template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'T',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'item',
+            type: 'T',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'count',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'first',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'last',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'even',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'odd',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'ListSize',
         kind: 'type',
         declaration: 'type ListSize = ComponentSize;',
         description: 'Size scale controlling list row density.',
+        members: [],
       },
       {
         name: 'ListTrackBy',
         kind: 'type',
         declaration: 'type ListTrackBy<T> = (index: number, item: T) => unknown;',
         description: 'Identifies a rendered item across collection updates.',
+        members: [],
       },
     ],
     styles: [],
   },
   Listbox: {
     className: 'Listbox',
+    declaration: 'Listbox<O extends ListboxOption = ListboxOption>',
     selector: 'sui-listbox',
     description: 'Presents a persistent collection from which one or more options can be selected.',
     members: [
@@ -3461,7 +4118,7 @@ export const apiReference: Readonly<{
       {
         name: 'options',
         kind: 'input',
-        type: 'readonly ListboxOption[]',
+        type: 'readonly O[]',
         defaultValue: 'required',
         description: 'Fixed options available for selection.',
       },
@@ -3622,9 +4279,17 @@ export const apiReference: Readonly<{
       },
       {
         name: 'suiListboxItem',
-        context: 'ListboxItemContext',
+        context: 'ListboxItemContext<O>',
         description: 'Replaces each option and exposes its index, selected, active, and disabled state.',
-        members: [],
+        members: [
+          {
+            name: 'options',
+            kind: 'input',
+            type: "readonly O[] | '' | undefined",
+            defaultValue: 'undefined',
+            description: 'Option source used to infer custom fields inside the template.',
+          },
+        ],
       },
       {
         name: 'suiListboxEmpty',
@@ -3663,37 +4328,100 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type ListboxFilterContext = SelectionFilterContext;',
         description: 'Context exposed when replacing the listbox filter.',
+        members: [],
       },
       {
         name: 'ListboxGroupContext',
         kind: 'interface',
         declaration: 'interface ListboxGroupContext {\n  readonly $implicit: string;\n  readonly group: string;\n}',
         description: 'Context exposed to a listbox group template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'group',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'ListboxItemContext',
         kind: 'interface',
         declaration:
-          'interface ListboxItemContext {\n  readonly $implicit: ListboxOption;\n  readonly option: ListboxOption;\n  readonly index: number;\n  readonly selected: boolean;\n  readonly active: boolean;\n  readonly disabled: boolean;\n}',
+          'interface ListboxItemContext<O extends ListboxOption = ListboxOption> {\n  readonly $implicit: O;\n  readonly option: O;\n  readonly index: number;\n  readonly selected: boolean;\n  readonly active: boolean;\n  readonly disabled: boolean;\n}',
         description: 'Context exposed to the listbox item template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'O',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'option',
+            type: 'O',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'selected',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'active',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'ListboxModelValue',
         kind: 'type',
         declaration: 'type ListboxModelValue = ListboxValue | readonly ListboxValue[] | null;',
         description: 'Selected value for single selection or values for multiple selection.',
+        members: [],
       },
       {
         name: 'ListboxOption',
         kind: 'interface',
         declaration: 'interface ListboxOption extends SelectionOption {\n  readonly group?: string;\n}',
         description: 'Selectable item rendered by a listbox.',
+        members: [
+          {
+            name: 'group',
+            type: 'string',
+            optional: true,
+            description: '',
+          },
+        ],
       },
       {
         name: 'ListboxValue',
         kind: 'type',
         declaration: 'type ListboxValue = SelectionValue;',
         description: 'Value accepted by a listbox option.',
+        members: [],
       },
       {
         name: 'SelectionFilterContext',
@@ -3701,6 +4429,44 @@ export const apiReference: Readonly<{
         declaration:
           'interface SelectionFilterContext {\n  readonly $implicit: string;\n  readonly query: string;\n  readonly placeholder: string;\n  readonly disabled: boolean;\n  readonly readOnly: boolean;\n  readonly update: (query: string) => void;\n}',
         description: 'Shared context exposed by replaceable filters on selection collections.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'query',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'placeholder',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'readOnly',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'update',
+            type: '(query: string) => void',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectionOption',
@@ -3708,12 +4474,33 @@ export const apiReference: Readonly<{
         declaration:
           'interface SelectionOption {\n  readonly label: string;\n  readonly value: SelectionValue;\n  readonly disabled?: boolean;\n}',
         description: 'One selectable label and value with optional disabled state.',
+        members: [
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'value',
+            type: 'SelectionValue',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: true,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectionValue',
         kind: 'type',
         declaration: 'type SelectionValue = string | number | boolean | object;',
         description: 'Primitive or object value accepted by selection controls.',
+        members: [],
       },
     ],
     styles: [
@@ -3763,6 +4550,7 @@ export const apiReference: Readonly<{
   },
   Menu: {
     className: 'Menu',
+    declaration: 'Menu<I extends MenuItem = MenuItem>',
     selector: 'sui-menu',
     description: 'Presents related commands inline or in a trigger-controlled popup.',
     members: [
@@ -3821,6 +4609,13 @@ export const apiReference: Readonly<{
         type: 'boolean',
         defaultValue: 'false',
         description: 'Renders the menu in an overlay controlled by a Menu Trigger.',
+      },
+      {
+        name: 'placement',
+        kind: 'input',
+        type: 'MenuPlacement',
+        defaultValue: "'bottom'",
+        description: 'Preferred side of a popup Menu relative to its trigger.',
       },
       {
         name: 'wrap',
@@ -3934,12 +4729,14 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'MenuEntry',
         kind: 'type',
         declaration: 'type MenuEntry<I extends MenuItem = MenuItem> = I | MenuGroup<I> | MenuSeparator;',
         description: 'Entry accepted by a Menu model.',
+        members: [],
       },
       {
         name: 'MenuGroup',
@@ -3947,6 +4744,26 @@ export const apiReference: Readonly<{
         declaration:
           "interface MenuGroup<I extends MenuItem = MenuItem> {\n  readonly type: 'group';\n  readonly label: string;\n  readonly items: readonly I[];\n}",
         description: 'Labeled collection of related menu actions.',
+        members: [
+          {
+            name: 'type',
+            type: "'group'",
+            optional: false,
+            description: 'Identifies the entry as a group.',
+          },
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: 'Accessible and visible heading for the grouped actions.',
+          },
+          {
+            name: 'items',
+            type: 'readonly I[]',
+            optional: false,
+            description: 'Actions contained by the group.',
+          },
+        ],
       },
       {
         name: 'MenuGroupContext',
@@ -3954,6 +4771,20 @@ export const apiReference: Readonly<{
         declaration:
           'interface MenuGroupContext<I extends MenuItem = MenuItem> {\n  readonly $implicit: MenuGroup<I>;\n  readonly group: MenuGroup<I>;\n}',
         description: 'Context exposed to a custom menu group template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'MenuGroup<I>',
+            optional: false,
+            description: 'Menu group available as the implicit template value.',
+          },
+          {
+            name: 'group',
+            type: 'MenuGroup<I>',
+            optional: false,
+            description: 'Menu group available by its explicit context name.',
+          },
+        ],
       },
       {
         name: 'MenuItem',
@@ -3961,6 +4792,38 @@ export const apiReference: Readonly<{
         declaration:
           'interface MenuItem<T extends MenuValue = MenuValue> {\n  readonly label: string;\n  readonly value: T;\n  readonly items?: readonly MenuEntry<MenuItem<T>>[];\n  readonly active?: boolean;\n  readonly disabled?: boolean;\n}',
         description: 'Selectable action rendered by a Menu.',
+        members: [
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: 'Text used for rendering, typeahead, and the accessible name.',
+          },
+          {
+            name: 'value',
+            type: 'T',
+            optional: false,
+            description: 'Value emitted when the action is selected.',
+          },
+          {
+            name: 'items',
+            type: 'readonly MenuEntry<MenuItem<T>>[]',
+            optional: true,
+            description: 'Nested actions opened as a submenu.',
+          },
+          {
+            name: 'active',
+            type: 'boolean',
+            optional: true,
+            description: 'Marks the action as the current destination or persistent state.',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: true,
+            description: 'Prevents activation and removes the action from keyboard navigation.',
+          },
+        ],
       },
       {
         name: 'MenuItemContext',
@@ -3968,30 +4831,68 @@ export const apiReference: Readonly<{
         declaration:
           'interface MenuItemContext<I extends MenuItem = MenuItem> {\n  readonly $implicit: I;\n  readonly item: I;\n  readonly active: boolean;\n}',
         description: 'Context exposed to a custom menu item template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'I',
+            optional: false,
+            description: 'Menu item available as the implicit template value.',
+          },
+          {
+            name: 'item',
+            type: 'I',
+            optional: false,
+            description: 'Menu item available by its explicit context name.',
+          },
+          {
+            name: 'active',
+            type: 'boolean',
+            optional: false,
+            description: 'Whether keyboard navigation or persistent state marks the item active.',
+          },
+        ],
+      },
+      {
+        name: 'MenuPlacement',
+        kind: 'type',
+        declaration: "type MenuPlacement = 'bottom' | 'right';",
+        description: 'Preferred side of a popup Menu relative to its trigger.',
+        members: [],
       },
       {
         name: 'MenuSeparator',
         kind: 'interface',
         declaration: "interface MenuSeparator {\n  readonly type: 'separator';\n}",
         description: 'Visual separator between adjacent menu actions.',
+        members: [
+          {
+            name: 'type',
+            type: "'separator'",
+            optional: false,
+            description: 'Identifies the entry as a separator.',
+          },
+        ],
       },
       {
         name: 'MenuSeverity',
         kind: 'type',
         declaration: 'type MenuSeverity = ThemeSeverity;',
         description: 'Theme color used for pressed and active menu actions.',
+        members: [],
       },
       {
         name: 'MenuSize',
         kind: 'type',
         declaration: 'type MenuSize = ComponentSize;',
         description: 'Size scale available to menus.',
+        members: [],
       },
       {
         name: 'MenuValue',
         kind: 'type',
         declaration: 'type MenuValue = string | number;',
         description: 'Primitive value emitted when a menu action is selected.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -3999,19 +4900,21 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   MenuTrigger: {
     className: 'MenuTrigger',
+    declaration: 'MenuTrigger<I extends MenuItem = MenuItem>',
     selector: 'button[suiMenuTrigger]',
     description: 'Opens a popup Menu from a native button.',
     members: [
       {
         name: 'menu',
         kind: 'input',
-        type: 'Menu',
+        type: 'Menu<I>',
         defaultValue: 'required',
         description: 'Popup Menu controlled by this button.',
       },
@@ -4029,6 +4932,7 @@ export const apiReference: Readonly<{
   },
   Message: {
     className: 'Message',
+    declaration: 'Message',
     selector: '[suiMessage]',
     description: 'Presents contextual feedback with optional semantic color and layout.',
     members: [
@@ -4061,30 +4965,35 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type MessageOrientation = Orientation;',
         description: 'Direction used to arrange message content and actions.',
+        members: [],
       },
       {
         name: 'MessageSeverity',
         kind: 'type',
         declaration: "type MessageSeverity = 'info' | 'success' | 'warning' | 'error';",
         description: 'Semantic feedback colors available to messages.',
+        members: [],
       },
       {
         name: 'MessageVariant',
         kind: 'type',
         declaration: "type MessageVariant = 'soft' | 'outlined' | 'dash';",
         description: 'Visual treatments available to messages.',
+        members: [],
       },
       {
         name: 'Orientation',
         kind: 'type',
         declaration: "type Orientation = 'horizontal' | 'vertical';",
         description: 'Supported layout directions.',
+        members: [],
       },
     ],
     styles: [],
   },
   MessageActions: {
     className: 'MessageActions',
+    declaration: 'MessageActions',
     selector: '[suiMessageActions]',
     description: 'Aligns related actions within a message.',
     members: [],
@@ -4094,6 +5003,7 @@ export const apiReference: Readonly<{
   },
   MultiSelect: {
     className: 'MultiSelect',
+    declaration: 'MultiSelect<O extends MultiSelectOption = MultiSelectOption>',
     selector: 'sui-multi-select',
     description: 'Selects multiple values from a fixed list with keyboard-accessible popup behavior.',
     members: [
@@ -4107,7 +5017,7 @@ export const apiReference: Readonly<{
       {
         name: 'options',
         kind: 'input',
-        type: 'readonly MultiSelectOption[]',
+        type: 'readonly O[]',
         defaultValue: 'required',
         description: 'Fixed options available for multiple selection.',
       },
@@ -4298,21 +5208,45 @@ export const apiReference: Readonly<{
     templates: [
       {
         name: 'suiMultiSelectItem',
-        context: 'MultiSelectItemContext',
+        context: 'MultiSelectItemContext<O>',
         description: 'Replaces each option and exposes its index, selected, and disabled state.',
-        members: [],
+        members: [
+          {
+            name: 'options',
+            kind: 'input',
+            type: "readonly O[] | '' | undefined",
+            defaultValue: 'undefined',
+            description: '',
+          },
+        ],
       },
       {
         name: 'suiMultiSelectSelectedItems',
-        context: 'MultiSelectSelectedItemsContext',
+        context: 'MultiSelectSelectedItemsContext<O>',
         description: 'Replaces the selected-value summary and exposes removal behavior.',
-        members: [],
+        members: [
+          {
+            name: 'options',
+            kind: 'input',
+            type: "readonly O[] | '' | undefined",
+            defaultValue: 'undefined',
+            description: '',
+          },
+        ],
       },
       {
         name: 'suiMultiSelectGroup',
-        context: 'MultiSelectGroupContext',
+        context: 'MultiSelectGroupContext<O>',
         description: 'Replaces each group heading and exposes its group and first option.',
-        members: [],
+        members: [
+          {
+            name: 'options',
+            kind: 'input',
+            type: "readonly O[] | '' | undefined",
+            defaultValue: 'undefined',
+            description: '',
+          },
+        ],
       },
       {
         name: 'suiMultiSelectLoading',
@@ -4346,9 +5280,17 @@ export const apiReference: Readonly<{
       },
       {
         name: 'suiMultiSelectHeader',
-        context: 'MultiSelectHeaderContext',
+        context: 'MultiSelectHeaderContext<O>',
         description: 'Adds content above the list and exposes aggregate selection behavior.',
-        members: [],
+        members: [
+          {
+            name: 'options',
+            kind: 'input',
+            type: "readonly O[] | '' | undefined",
+            defaultValue: 'undefined',
+            description: '',
+          },
+        ],
       },
       {
         name: 'suiMultiSelectFooter',
@@ -4369,99 +5311,202 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FormControlSeverity',
         kind: 'type',
         declaration: 'type FormControlSeverity = ThemeSeverity;',
         description: 'Semantic colors available to form controls.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
       {
         name: 'MultiSelectCompareWith',
         kind: 'type',
         declaration: 'type MultiSelectCompareWith = SelectCompareWith;',
         description: 'Compares multi-select values for identity.',
+        members: [],
       },
       {
         name: 'MultiSelectGroupContext',
         kind: 'type',
-        declaration: 'type MultiSelectGroupContext = SelectGroupContext;',
+        declaration: 'type MultiSelectGroupContext<O extends MultiSelectOption = MultiSelectOption> = SelectGroupContext<O>;',
         description: 'Context exposed to a multi-select group-heading template.',
+        members: [],
       },
       {
         name: 'MultiSelectHeaderContext',
         kind: 'interface',
         declaration:
-          'interface MultiSelectHeaderContext {\n  readonly $implicit: readonly MultiSelectOption[];\n  readonly options: readonly MultiSelectOption[];\n  readonly selectedCount: number;\n  readonly allSelected: boolean;\n  readonly disabled: boolean;\n  readonly toggleAll: () => void;\n}',
+          'interface MultiSelectHeaderContext<O extends MultiSelectOption = MultiSelectOption> {\n  readonly $implicit: readonly O[];\n  readonly options: readonly O[];\n  readonly selectedCount: number;\n  readonly allSelected: boolean;\n  readonly disabled: boolean;\n  readonly toggleAll: () => void;\n}',
         description: 'Context exposed to a multi-select header template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'readonly O[]',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'options',
+            type: 'readonly O[]',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'selectedCount',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'allSelected',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'toggleAll',
+            type: '() => void',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'MultiSelectItemContext',
         kind: 'type',
-        declaration: 'type MultiSelectItemContext = SelectItemContext;',
+        declaration: 'type MultiSelectItemContext<O extends MultiSelectOption = MultiSelectOption> = SelectItemContext<O>;',
         description: 'Context exposed to a multi-select option template.',
+        members: [],
       },
       {
         name: 'MultiSelectLoadingContext',
         kind: 'type',
         declaration: 'type MultiSelectLoadingContext = SelectLoadingContext;',
         description: 'Context exposed to the multi-select loading template.',
+        members: [],
       },
       {
         name: 'MultiSelectModelValue',
         kind: 'type',
         declaration: 'type MultiSelectModelValue = MultiSelectValue[];',
         description: 'Array held by a multi-select model.',
+        members: [],
       },
       {
         name: 'MultiSelectOption',
         kind: 'type',
         declaration: 'type MultiSelectOption = SelectOption;',
         description: 'One option available to a multi-select.',
+        members: [],
       },
       {
         name: 'MultiSelectSelectedItemsContext',
         kind: 'interface',
         declaration:
-          'interface MultiSelectSelectedItemsContext {\n  readonly $implicit: readonly MultiSelectOption[];\n  readonly options: readonly MultiSelectOption[];\n  readonly remove: (option: MultiSelectOption) => void;\n  readonly disabled: boolean;\n}',
+          'interface MultiSelectSelectedItemsContext<O extends MultiSelectOption = MultiSelectOption> {\n  readonly $implicit: readonly O[];\n  readonly options: readonly O[];\n  readonly remove: (option: O) => void;\n  readonly disabled: boolean;\n}',
         description: 'Context exposed to the selected-values summary template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'readonly O[]',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'options',
+            type: 'readonly O[]',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'remove',
+            type: '(option: O) => void',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'MultiSelectValue',
         kind: 'type',
         declaration: 'type MultiSelectValue = SelectValue;',
         description: 'Value accepted by a multi-select option.',
+        members: [],
       },
       {
         name: 'MultiSelectVariant',
         kind: 'type',
         declaration: 'type MultiSelectVariant = SelectVariant;',
         description: 'Additional visual treatment available to a multi-select.',
+        members: [],
       },
       {
         name: 'SelectCompareWith',
         kind: 'type',
         declaration: 'type SelectCompareWith = SelectionCompareWith;',
         description: 'Compares select values for identity.',
+        members: [],
       },
       {
         name: 'SelectGroupContext',
         kind: 'interface',
         declaration:
-          'interface SelectGroupContext {\n  readonly $implicit: string;\n  readonly group: string;\n  readonly option: SelectOption;\n  readonly index: number;\n}',
+          'interface SelectGroupContext<O extends SelectOption = SelectOption> {\n  readonly $implicit: string;\n  readonly group: string;\n  readonly option: O;\n  readonly index: number;\n}',
         description: 'Context exposed to a select group-heading template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'group',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'option',
+            type: 'O',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectionCompareWith',
         kind: 'type',
         declaration: 'type SelectionCompareWith = (first: SelectionValue, second: SelectionValue) => boolean;',
         description: 'Compares two selection values for identity.',
+        members: [],
       },
       {
         name: 'SelectionOption',
@@ -4469,43 +5514,120 @@ export const apiReference: Readonly<{
         declaration:
           'interface SelectionOption {\n  readonly label: string;\n  readonly value: SelectionValue;\n  readonly disabled?: boolean;\n}',
         description: 'One selectable label and value with optional disabled state.',
+        members: [
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'value',
+            type: 'SelectionValue',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: true,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectionValue',
         kind: 'type',
         declaration: 'type SelectionValue = string | number | boolean | object;',
         description: 'Primitive or object value accepted by selection controls.',
+        members: [],
       },
       {
         name: 'SelectItemContext',
         kind: 'interface',
         declaration:
-          'interface SelectItemContext {\n  readonly $implicit: SelectOption;\n  readonly option: SelectOption;\n  readonly selected: boolean;\n  readonly disabled: boolean;\n  readonly index: number;\n}',
+          'interface SelectItemContext<O extends SelectOption = SelectOption> {\n  readonly $implicit: O;\n  readonly option: O;\n  readonly selected: boolean;\n  readonly disabled: boolean;\n  readonly index: number;\n}',
         description: 'Context exposed to a select option template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'O',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'option',
+            type: 'O',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'selected',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectLoadingContext',
         kind: 'interface',
         declaration: 'interface SelectLoadingContext {\n  readonly $implicit: string;\n  readonly message: string;\n}',
         description: 'Context exposed to the select loading template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'message',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectOption',
         kind: 'interface',
         declaration: 'interface SelectOption extends SelectionOption {\n  readonly group?: string;\n}',
         description: 'Selectable option with optional group membership.',
+        members: [
+          {
+            name: 'group',
+            type: 'string',
+            optional: true,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectValue',
         kind: 'type',
         declaration: 'type SelectValue = SelectionValue;',
         description: 'Value accepted by a select option.',
+        members: [],
       },
       {
         name: 'SelectVariant',
         kind: 'type',
         declaration: "type SelectVariant = 'filled';",
         description: 'Additional visual treatment available to a select.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -4513,6 +5635,7 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [
@@ -4562,6 +5685,7 @@ export const apiReference: Readonly<{
   },
   Navbar: {
     className: 'Navbar',
+    declaration: 'Navbar<I extends NavbarItem = NavbarItem>',
     selector: 'sui-navbar',
     description: 'Builds a responsive navigation landmark from an item model or projected custom content.',
     members: [
@@ -4672,19 +5796,65 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type NavbarCollapseAt = 'md' | 'lg';",
         description: 'Container width at which a collapsible Navbar changes to its expanded layout.',
+        members: [],
       },
       {
         name: 'NavbarInset',
         kind: 'type',
         declaration: "type NavbarInset = 'default' | 'comfortable';",
         description: 'Supported horizontal Navbar spacing.',
+        members: [],
       },
       {
         name: 'NavbarItem',
         kind: 'interface',
         declaration:
-          'interface NavbarItem<T extends NavbarItemValue = NavbarItemValue> {\n  readonly label: string;\n  readonly value: T;\n  readonly href?: string;\n  readonly routerLink?: string | readonly unknown[];\n  readonly items?: readonly NavbarItem<T>[];\n  readonly active?: boolean;\n  readonly disabled?: boolean;\n}',
+          'interface NavbarItem<T extends NavbarItemValue = NavbarItemValue> {\n  readonly label: string;\n  readonly value: T;\n  readonly href?: string;\n  readonly routerLink?: string | readonly unknown[];\n  readonly items?: readonly this[];\n  readonly active?: boolean;\n  readonly disabled?: boolean;\n}',
         description: 'Navigation destination or non-selectable disclosure rendered by a Navbar.',
+        members: [
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: 'Visible label and fallback content for the item.',
+          },
+          {
+            name: 'value',
+            type: 'T',
+            optional: false,
+            description: 'Stable value emitted when a destination is selected.',
+          },
+          {
+            name: 'href',
+            type: 'string',
+            optional: true,
+            description: 'Native destination used for documents and external navigation.',
+          },
+          {
+            name: 'routerLink',
+            type: 'string | readonly unknown[]',
+            optional: true,
+            description: 'Angular Router destination used for client-side navigation. Takes precedence over `href`.',
+          },
+          {
+            name: 'items',
+            type: 'readonly this[]',
+            optional: true,
+            description: 'Child destinations with the same item shape, revealed by a non-selectable disclosure.',
+          },
+          {
+            name: 'active',
+            type: 'boolean',
+            optional: true,
+            description: 'Marks the item as current when selection is controlled outside `value`.',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: true,
+            description: 'Prevents pointer and keyboard activation while keeping the item focusable.',
+          },
+        ],
       },
       {
         name: 'NavbarItemContext',
@@ -4692,51 +5862,102 @@ export const apiReference: Readonly<{
         declaration:
           'interface NavbarItemContext<I extends NavbarItem = NavbarItem> {\n  readonly $implicit: I;\n  readonly item: I;\n  readonly level: 0 | 1;\n}',
         description: 'Context exposed to a custom Navbar item template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'I',
+            optional: false,
+            description: 'Navbar item available as the implicit template value.',
+          },
+          {
+            name: 'item',
+            type: 'I',
+            optional: false,
+            description: 'Navbar item available by its explicit context name.',
+          },
+          {
+            name: 'level',
+            type: '0 | 1',
+            optional: false,
+            description: 'Position in the Navbar tree: `0` for a top-level item and `1` for an item inside a submenu.',
+          },
+        ],
       },
       {
         name: 'NavbarItemValue',
         kind: 'type',
         declaration: 'type NavbarItemValue = string | number;',
         description: 'Primitive value emitted when a Navbar item is selected.',
+        members: [],
       },
       {
         name: 'NavbarMenuAlign',
         kind: 'type',
         declaration: "type NavbarMenuAlign = 'auto' | 'center';",
         description: 'Optional placement override for generated navigation items in the expanded layout.',
+        members: [],
       },
       {
         name: 'NavbarOrientation',
         kind: 'type',
         declaration: "type NavbarOrientation = Orientation | 'responsive';",
         description: 'Supported Navbar link arrangements.',
+        members: [],
       },
       {
         name: 'NavbarSize',
         kind: 'type',
         declaration: "type NavbarSize = 'sm' | 'md';",
         description: 'Supported Navbar heights.',
+        members: [],
       },
       {
         name: 'NavbarSurface',
         kind: 'type',
         declaration: "type NavbarSurface = 'bordered' | 'plain';",
         description: 'Visual surface surrounding Navbar content.',
+        members: [],
       },
       {
         name: 'NavbarVariant',
         kind: 'type',
         declaration: "type NavbarVariant = 'links' | 'menu';",
         description: 'Visual treatment shared by Navbar links and menu triggers.',
+        members: [],
       },
       {
         name: 'Orientation',
         kind: 'type',
         declaration: "type Orientation = 'horizontal' | 'vertical';",
         description: 'Supported layout directions.',
+        members: [],
       },
     ],
     styles: [
+      {
+        name: '--sui-navbar-background',
+        defaultValue: 'var(--color-base-100)',
+        exampleValue: 'var(--color-base-200)',
+        description: 'Background of the bordered Navbar surface.',
+      },
+      {
+        name: '--sui-navbar-color',
+        defaultValue: 'var(--color-base-content)',
+        exampleValue: 'color-mix(in oklab, var(--color-base-content) 80%, transparent)',
+        description: 'Text and icon color inherited by projected Navbar content.',
+      },
+      {
+        name: '--sui-navbar-border-color',
+        defaultValue: 'var(--color-base-300)',
+        exampleValue: 'color-mix(in oklab, var(--color-primary) 20%, var(--color-base-300))',
+        description: 'Border color of the bordered Navbar surface.',
+      },
+      {
+        name: '--sui-navbar-item-color',
+        defaultValue: 'var(--sui-navbar-color)',
+        exampleValue: 'color-mix(in oklab, var(--color-base-content) 80%, transparent)',
+        description: 'Text and icon color of navigation items at rest.',
+      },
       {
         name: '--sui-navbar-item-hover-background',
         defaultValue: 'color-mix(in oklab, var(--color-base-200) 70%, transparent)',
@@ -4771,6 +5992,7 @@ export const apiReference: Readonly<{
   },
   NavbarAction: {
     className: 'NavbarAction',
+    declaration: 'NavbarAction',
     selector: '[suiNavbarAction]',
     description: 'Projects a global action at the end of a Navbar.',
     members: [],
@@ -4780,6 +6002,7 @@ export const apiReference: Readonly<{
   },
   NavbarBrand: {
     className: 'NavbarBrand',
+    declaration: 'NavbarBrand',
     selector: '[suiNavbarBrand]',
     description: 'Projects brand or product identity at the start of a Navbar.',
     members: [],
@@ -4789,6 +6012,7 @@ export const apiReference: Readonly<{
   },
   NavbarContent: {
     className: 'NavbarContent',
+    declaration: 'NavbarContent',
     selector: '[suiNavbarContent]',
     description: 'Projects custom toolbar content into the responsive center of a Navbar.',
     members: [],
@@ -4798,13 +6022,14 @@ export const apiReference: Readonly<{
   },
   OrderList: {
     className: 'OrderList',
+    declaration: 'OrderList<I extends OrderListOption = OrderListOption>',
     selector: 'sui-order-list',
     description: 'Sorts a collection with selection controls or optional drag and drop.',
     members: [
       {
         name: 'value',
         kind: 'model',
-        type: 'readonly T[]',
+        type: 'readonly I[]',
         defaultValue: '[]',
         description: 'Ordered collection controlled directly or through Signal Forms.',
       },
@@ -4916,9 +6141,17 @@ export const apiReference: Readonly<{
       },
       {
         name: 'suiOrderListItem',
-        context: 'OrderListItemContext',
+        context: 'OrderListItemContext<I>',
         description: 'Replaces each row and exposes its item, index, and selection state.',
-        members: [],
+        members: [
+          {
+            name: 'items',
+            kind: 'input',
+            type: "readonly I[] | '' | undefined",
+            defaultValue: 'undefined',
+            description: '',
+          },
+        ],
       },
       {
         name: 'suiOrderListHeader',
@@ -4933,25 +6166,54 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type OrderListFilterContext = SelectionFilterContext;',
         description: 'Context exposed when replacing the order-list filter control.',
+        members: [],
       },
       {
         name: 'OrderListItemContext',
         kind: 'interface',
         declaration:
-          'interface OrderListItemContext<T extends OrderListOption = OrderListOption> {\n  readonly $implicit: T;\n  readonly option: T;\n  readonly index: number;\n  readonly selected: boolean;\n}',
+          'interface OrderListItemContext<I extends OrderListOption = OrderListOption> {\n  readonly $implicit: I;\n  readonly option: I;\n  readonly index: number;\n  readonly selected: boolean;\n}',
         description: 'Context exposed to the order-list item template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'I',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'option',
+            type: 'I',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'selected',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'OrderListOption',
         kind: 'type',
         declaration: 'type OrderListOption = SelectionOption;',
         description: 'Item displayed and reordered by an order list. Values must be unique.',
+        members: [],
       },
       {
         name: 'OrderListValue',
         kind: 'type',
         declaration: 'type OrderListValue = SelectionValue;',
         description: 'Value that uniquely identifies an order-list item.',
+        members: [],
       },
       {
         name: 'SelectionFilterContext',
@@ -4959,6 +6221,44 @@ export const apiReference: Readonly<{
         declaration:
           'interface SelectionFilterContext {\n  readonly $implicit: string;\n  readonly query: string;\n  readonly placeholder: string;\n  readonly disabled: boolean;\n  readonly readOnly: boolean;\n  readonly update: (query: string) => void;\n}',
         description: 'Shared context exposed by replaceable filters on selection collections.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'query',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'placeholder',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'readOnly',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'update',
+            type: '(query: string) => void',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectionOption',
@@ -4966,12 +6266,33 @@ export const apiReference: Readonly<{
         declaration:
           'interface SelectionOption {\n  readonly label: string;\n  readonly value: SelectionValue;\n  readonly disabled?: boolean;\n}',
         description: 'One selectable label and value with optional disabled state.',
+        members: [
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'value',
+            type: 'SelectionValue',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: true,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectionValue',
         kind: 'type',
         declaration: 'type SelectionValue = string | number | boolean | object;',
         description: 'Primitive or object value accepted by selection controls.',
+        members: [],
       },
     ],
     styles: [
@@ -5021,6 +6342,7 @@ export const apiReference: Readonly<{
   },
   Pagination: {
     className: 'Pagination',
+    declaration: 'Pagination',
     selector: 'sui-pagination',
     description: 'Navigates a one-based page model across a known collection size.',
     members: [
@@ -5170,6 +6492,7 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'PaginationLabels',
@@ -5177,12 +6500,57 @@ export const apiReference: Readonly<{
         declaration:
           'interface PaginationLabels {\n  readonly first: string;\n  readonly previous: string;\n  readonly next: string;\n  readonly last: string;\n  readonly pageInput: string;\n  readonly pageSize: string;\n  readonly page: (page: number) => string;\n}',
         description: 'Accessible labels used by pagination navigation.',
+        members: [
+          {
+            name: 'first',
+            type: 'string',
+            optional: false,
+            description: 'First-page action.',
+          },
+          {
+            name: 'previous',
+            type: 'string',
+            optional: false,
+            description: 'Previous-page action.',
+          },
+          {
+            name: 'next',
+            type: 'string',
+            optional: false,
+            description: 'Next-page action.',
+          },
+          {
+            name: 'last',
+            type: 'string',
+            optional: false,
+            description: 'Last-page action.',
+          },
+          {
+            name: 'pageInput',
+            type: 'string',
+            optional: false,
+            description: 'Editable current-page field.',
+          },
+          {
+            name: 'pageSize',
+            type: 'string',
+            optional: false,
+            description: 'Page-size selector.',
+          },
+          {
+            name: 'page',
+            type: '(page: number) => string',
+            optional: false,
+            description: 'Numbered page action.',
+          },
+        ],
       },
       {
         name: 'PaginationNavigation',
         kind: 'type',
         declaration: "type PaginationNavigation = 'first' | 'previous' | 'next' | 'last';",
         description: 'Navigation actions rendered around the numbered page links.',
+        members: [],
       },
       {
         name: 'PaginationNavigationContext',
@@ -5190,6 +6558,26 @@ export const apiReference: Readonly<{
         declaration:
           'interface PaginationNavigationContext extends PaginationState {\n  readonly $implicit: PaginationNavigation;\n  readonly navigation: PaginationNavigation;\n  readonly label: string;\n}',
         description: 'Context exposed to a custom first, previous, next, or last action.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'PaginationNavigation',
+            optional: false,
+            description: 'Navigation action rendered by the current template instance.',
+          },
+          {
+            name: 'navigation',
+            type: 'PaginationNavigation',
+            optional: false,
+            description: 'Navigation action rendered by the current template instance.',
+          },
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: 'Accessible label configured for the action.',
+          },
+        ],
       },
       {
         name: 'PaginationPageContext',
@@ -5197,24 +6585,41 @@ export const apiReference: Readonly<{
         declaration:
           'interface PaginationPageContext extends PaginationState {\n  readonly $implicit: number;\n  readonly current: boolean;\n}',
         description: 'Context exposed to a custom numbered page action.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'number',
+            optional: false,
+            description: 'Page rendered by the current template instance.',
+          },
+          {
+            name: 'current',
+            type: 'boolean',
+            optional: false,
+            description: 'Whether the rendered page is current.',
+          },
+        ],
       },
       {
         name: 'PaginationReportContext',
         kind: 'type',
         declaration: 'type PaginationReportContext = PaginationState;',
         description: 'Context exposed to a custom current-page report.',
+        members: [],
       },
       {
         name: 'PaginationSeverity',
         kind: 'type',
         declaration: 'type PaginationSeverity = ThemeSeverity;',
         description: 'Semantic colors available to the current page action.',
+        members: [],
       },
       {
         name: 'PaginationSize',
         kind: 'type',
         declaration: 'type PaginationSize = ComponentSize;',
         description: 'Size scale available to pagination controls.',
+        members: [],
       },
       {
         name: 'PaginationState',
@@ -5222,12 +6627,51 @@ export const apiReference: Readonly<{
         declaration:
           'interface PaginationState {\n  readonly page: number;\n  readonly pageCount: number;\n  readonly pageSize: number;\n  readonly totalItems: number;\n  readonly firstItem: number;\n  readonly lastItem: number;\n}',
         description: 'Current pagination boundaries exposed to reports and page templates.',
+        members: [
+          {
+            name: 'page',
+            type: 'number',
+            optional: false,
+            description: 'Current one-based page.',
+          },
+          {
+            name: 'pageCount',
+            type: 'number',
+            optional: false,
+            description: 'Total number of available pages.',
+          },
+          {
+            name: 'pageSize',
+            type: 'number',
+            optional: false,
+            description: 'Number of items represented by one page.',
+          },
+          {
+            name: 'totalItems',
+            type: 'number',
+            optional: false,
+            description: 'Total number of items in the collection.',
+          },
+          {
+            name: 'firstItem',
+            type: 'number',
+            optional: false,
+            description: 'One-based index of the first visible item, or zero for an empty collection.',
+          },
+          {
+            name: 'lastItem',
+            type: 'number',
+            optional: false,
+            description: 'One-based index of the last visible item, or zero for an empty collection.',
+          },
+        ],
       },
       {
         name: 'PaginationVariant',
         kind: 'type',
         declaration: "type PaginationVariant = 'plain' | 'joined';",
         description: 'Visual arrangement of pagination actions.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -5235,12 +6679,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Progress: {
     className: 'Progress',
+    declaration: 'Progress',
     selector: 'progress[suiProgress]',
     description: 'Styles a native progress element without replacing its value, maximum, or accessibility semantics.',
     members: [
@@ -5266,12 +6712,14 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ProgressAnimation = 'glow' | 'pulse';",
         description: 'Optional motion treatments for active progress.',
+        members: [],
       },
       {
         name: 'ProgressSeverity',
         kind: 'type',
         declaration: 'type ProgressSeverity = ThemeSeverity;',
         description: 'Semantic colors available to progress indicators.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -5279,12 +6727,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Radio: {
     className: 'Radio',
+    declaration: 'Radio',
     selector: 'input[type="radio"][suiRadio]',
     description: 'Styles a native radio control and exposes consistent form state.',
     members: [
@@ -5331,18 +6781,21 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FormControlSeverity',
         kind: 'type',
         declaration: 'type FormControlSeverity = ThemeSeverity;',
         description: 'Semantic colors available to form controls.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -5350,12 +6803,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Range: {
     className: 'Range',
+    declaration: 'Range',
     selector: 'input[type="range"][suiRange]',
     description: 'Styles a native range control and reflects its current progress.',
     members: [
@@ -5402,18 +6857,21 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FormControlSeverity',
         kind: 'type',
         declaration: 'type FormControlSeverity = ThemeSeverity;',
         description: 'Semantic colors available to form controls.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -5421,12 +6879,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Select: {
     className: 'Select',
+    declaration: 'Select',
     selector: 'sui-select',
     description: 'Selects one value from a fixed list with keyboard-accessible popup behavior.',
     members: [
@@ -5695,37 +7155,68 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FormControlSeverity',
         kind: 'type',
         declaration: 'type FormControlSeverity = ThemeSeverity;',
         description: 'Semantic colors available to form controls.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
       {
         name: 'SelectCompareWith',
         kind: 'type',
         declaration: 'type SelectCompareWith = SelectionCompareWith;',
         description: 'Compares select values for identity.',
+        members: [],
       },
       {
         name: 'SelectGroupContext',
         kind: 'interface',
         declaration:
-          'interface SelectGroupContext {\n  readonly $implicit: string;\n  readonly group: string;\n  readonly option: SelectOption;\n  readonly index: number;\n}',
+          'interface SelectGroupContext<O extends SelectOption = SelectOption> {\n  readonly $implicit: string;\n  readonly group: string;\n  readonly option: O;\n  readonly index: number;\n}',
         description: 'Context exposed to a select group-heading template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'group',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'option',
+            type: 'O',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectionCompareWith',
         kind: 'type',
         declaration: 'type SelectionCompareWith = (first: SelectionValue, second: SelectionValue) => boolean;',
         description: 'Compares two selection values for identity.',
+        members: [],
       },
       {
         name: 'SelectionOption',
@@ -5733,56 +7224,148 @@ export const apiReference: Readonly<{
         declaration:
           'interface SelectionOption {\n  readonly label: string;\n  readonly value: SelectionValue;\n  readonly disabled?: boolean;\n}',
         description: 'One selectable label and value with optional disabled state.',
+        members: [
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'value',
+            type: 'SelectionValue',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: true,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectionValue',
         kind: 'type',
         declaration: 'type SelectionValue = string | number | boolean | object;',
         description: 'Primitive or object value accepted by selection controls.',
+        members: [],
       },
       {
         name: 'SelectItemContext',
         kind: 'interface',
         declaration:
-          'interface SelectItemContext {\n  readonly $implicit: SelectOption;\n  readonly option: SelectOption;\n  readonly selected: boolean;\n  readonly disabled: boolean;\n  readonly index: number;\n}',
+          'interface SelectItemContext<O extends SelectOption = SelectOption> {\n  readonly $implicit: O;\n  readonly option: O;\n  readonly selected: boolean;\n  readonly disabled: boolean;\n  readonly index: number;\n}',
         description: 'Context exposed to a select option template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'O',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'option',
+            type: 'O',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'selected',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectLoadingContext',
         kind: 'interface',
         declaration: 'interface SelectLoadingContext {\n  readonly $implicit: string;\n  readonly message: string;\n}',
         description: 'Context exposed to the select loading template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'message',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectModelValue',
         kind: 'type',
         declaration: 'type SelectModelValue = SelectValue | null;',
         description: 'Current single-select value, including its empty state.',
+        members: [],
       },
       {
         name: 'SelectOption',
         kind: 'interface',
         declaration: 'interface SelectOption extends SelectionOption {\n  readonly group?: string;\n}',
         description: 'Selectable option with optional group membership.',
+        members: [
+          {
+            name: 'group',
+            type: 'string',
+            optional: true,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectSelectedItemContext',
         kind: 'interface',
         declaration:
-          'interface SelectSelectedItemContext {\n  readonly $implicit: SelectOption;\n  readonly option: SelectOption;\n}',
+          'interface SelectSelectedItemContext<O extends SelectOption = SelectOption> {\n  readonly $implicit: O;\n  readonly option: O;\n}',
         description: 'Context exposed to the selected-value template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'O',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'option',
+            type: 'O',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectValue',
         kind: 'type',
         declaration: 'type SelectValue = SelectionValue;',
         description: 'Value accepted by a select option.',
+        members: [],
       },
       {
         name: 'SelectVariant',
         kind: 'type',
         declaration: "type SelectVariant = 'filled';",
         description: 'Additional visual treatment available to a select.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -5790,6 +7373,7 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [
@@ -5839,6 +7423,7 @@ export const apiReference: Readonly<{
   },
   SelectButton: {
     className: 'SelectButton',
+    declaration: 'SelectButton',
     selector: 'sui-select-button',
     description: 'Selects one value from a visible group of joined buttons.',
     members: [
@@ -5927,30 +7512,35 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type ButtonSeverity = ThemeSeverity;',
         description: 'Semantic colors available to buttons.',
+        members: [],
       },
       {
         name: 'ButtonSize',
         kind: 'type',
         declaration: 'type ButtonSize = ComponentSize;',
         description: 'Size scale available to buttons.',
+        members: [],
       },
       {
         name: 'ComponentSize',
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'Orientation',
         kind: 'type',
         declaration: "type Orientation = 'horizontal' | 'vertical';",
         description: 'Supported layout directions.',
+        members: [],
       },
       {
         name: 'SelectButtonOption',
         kind: 'type',
         declaration: 'type SelectButtonOption = SelectionOption;',
         description: 'One option displayed by a select button.',
+        members: [],
       },
       {
         name: 'SelectButtonOptionContext',
@@ -5958,30 +7548,66 @@ export const apiReference: Readonly<{
         declaration:
           'interface SelectButtonOptionContext {\n  readonly $implicit: SelectButtonOption;\n  readonly option: SelectButtonOption;\n  readonly selected: boolean;\n  readonly disabled: boolean;\n  readonly index: number;\n}',
         description: 'Context exposed to a select-button option template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'SelectButtonOption',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'option',
+            type: 'SelectButtonOption',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'selected',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectButtonOrientation',
         kind: 'type',
         declaration: 'type SelectButtonOrientation = Orientation;',
         description: 'Direction in which select-button options are joined.',
+        members: [],
       },
       {
         name: 'SelectButtonSeverity',
         kind: 'type',
         declaration: 'type SelectButtonSeverity = ButtonSeverity;',
         description: 'Semantic colors available to select buttons.',
+        members: [],
       },
       {
         name: 'SelectButtonSize',
         kind: 'type',
         declaration: 'type SelectButtonSize = ButtonSize;',
         description: 'Size scale available to select buttons.',
+        members: [],
       },
       {
         name: 'SelectButtonValue',
         kind: 'type',
         declaration: 'type SelectButtonValue = SelectionValue;',
         description: 'Value accepted by a select-button option.',
+        members: [],
       },
       {
         name: 'SelectionOption',
@@ -5989,12 +7615,33 @@ export const apiReference: Readonly<{
         declaration:
           'interface SelectionOption {\n  readonly label: string;\n  readonly value: SelectionValue;\n  readonly disabled?: boolean;\n}',
         description: 'One selectable label and value with optional disabled state.',
+        members: [
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'value',
+            type: 'SelectionValue',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: true,
+            description: '',
+          },
+        ],
       },
       {
         name: 'SelectionValue',
         kind: 'type',
         declaration: 'type SelectionValue = string | number | boolean | object;',
         description: 'Primitive or object value accepted by selection controls.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -6002,12 +7649,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Sidebar: {
     className: 'Sidebar',
+    declaration: 'Sidebar<I extends NavbarItem = NavbarItem>',
     selector: 'sui-sidebar',
     description: 'Renders persistent, grouped application navigation with optional header and footer regions.',
     members: [
@@ -6016,7 +7665,7 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'readonly SidebarGroup<I>[]',
         defaultValue: '[]',
-        description: 'Labeled navigation groups shown in the scrollable Sidebar body.',
+        description: 'Typed navigation groups shown in the scrollable body and reused across persistent and Drawer layouts.',
       },
       {
         name: 'ariaLabel',
@@ -6040,11 +7689,12 @@ export const apiReference: Readonly<{
         description: 'Value of the current destination.',
       },
       {
-        name: 'itemSelected',
-        kind: 'output',
-        type: "I['value']",
-        defaultValue: null,
-        description: 'Emits the selected destination value.',
+        name: 'collapsed',
+        kind: 'model',
+        type: 'boolean',
+        defaultValue: 'false',
+        description:
+          'Reduces the Sidebar to an icon rail and hides default headings and item labels. Custom templates receive the collapsed state.',
       },
     ],
     templates: [
@@ -6082,8 +7732,52 @@ export const apiReference: Readonly<{
         name: 'NavbarItem',
         kind: 'interface',
         declaration:
-          'interface NavbarItem<T extends NavbarItemValue = NavbarItemValue> {\n  readonly label: string;\n  readonly value: T;\n  readonly href?: string;\n  readonly routerLink?: string | readonly unknown[];\n  readonly items?: readonly NavbarItem<T>[];\n  readonly active?: boolean;\n  readonly disabled?: boolean;\n}',
+          'interface NavbarItem<T extends NavbarItemValue = NavbarItemValue> {\n  readonly label: string;\n  readonly value: T;\n  readonly href?: string;\n  readonly routerLink?: string | readonly unknown[];\n  readonly items?: readonly this[];\n  readonly active?: boolean;\n  readonly disabled?: boolean;\n}',
         description: 'Navigation destination or non-selectable disclosure rendered by a Navbar.',
+        members: [
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: 'Visible label and fallback content for the item.',
+          },
+          {
+            name: 'value',
+            type: 'T',
+            optional: false,
+            description: 'Stable value emitted when a destination is selected.',
+          },
+          {
+            name: 'href',
+            type: 'string',
+            optional: true,
+            description: 'Native destination used for documents and external navigation.',
+          },
+          {
+            name: 'routerLink',
+            type: 'string | readonly unknown[]',
+            optional: true,
+            description: 'Angular Router destination used for client-side navigation. Takes precedence over `href`.',
+          },
+          {
+            name: 'items',
+            type: 'readonly this[]',
+            optional: true,
+            description: 'Child destinations with the same item shape, revealed by a non-selectable disclosure.',
+          },
+          {
+            name: 'active',
+            type: 'boolean',
+            optional: true,
+            description: 'Marks the item as current when selection is controlled outside `value`.',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: true,
+            description: 'Prevents pointer and keyboard activation while keeping the item focusable.',
+          },
+        ],
       },
       {
         name: 'NavbarItemContext',
@@ -6091,12 +7785,33 @@ export const apiReference: Readonly<{
         declaration:
           'interface NavbarItemContext<I extends NavbarItem = NavbarItem> {\n  readonly $implicit: I;\n  readonly item: I;\n  readonly level: 0 | 1;\n}',
         description: 'Context exposed to a custom Navbar item template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'I',
+            optional: false,
+            description: 'Navbar item available as the implicit template value.',
+          },
+          {
+            name: 'item',
+            type: 'I',
+            optional: false,
+            description: 'Navbar item available by its explicit context name.',
+          },
+          {
+            name: 'level',
+            type: '0 | 1',
+            optional: false,
+            description: 'Position in the Navbar tree: `0` for a top-level item and `1` for an item inside a submenu.',
+          },
+        ],
       },
       {
         name: 'NavbarItemValue',
         kind: 'type',
         declaration: 'type NavbarItemValue = string | number;',
         description: 'Primitive value emitted when a Navbar item is selected.',
+        members: [],
       },
       {
         name: 'SidebarGroup',
@@ -6104,26 +7819,83 @@ export const apiReference: Readonly<{
         declaration:
           'interface SidebarGroup<I extends NavbarItem = NavbarItem> {\n  readonly label: string;\n  readonly heading?: string | null;\n  readonly items: readonly I[];\n}',
         description: 'Labeled destination group rendered by a Sidebar.',
+        members: [
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: 'Accessible group label and default visible heading. Keep labels unique within one Sidebar.',
+          },
+          {
+            name: 'heading',
+            type: 'string | null',
+            optional: true,
+            description: 'Optional visible heading override. Set `null` to keep only the accessible label.',
+          },
+          {
+            name: 'items',
+            type: 'readonly I[]',
+            optional: false,
+            description: 'Destinations rendered through the Navbar item model.',
+          },
+        ],
       },
       {
         name: 'SidebarGroupContext',
         kind: 'interface',
         declaration:
-          'interface SidebarGroupContext<I extends NavbarItem = NavbarItem> {\n  readonly $implicit: SidebarGroup<I>;\n  readonly group: SidebarGroup<I>;\n}',
+          'interface SidebarGroupContext<I extends NavbarItem = NavbarItem> {\n  readonly $implicit: SidebarGroup<I>;\n  readonly group: SidebarGroup<I>;\n  readonly collapsed: boolean;\n}',
         description: 'Context exposed to a custom Sidebar group-heading template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'SidebarGroup<I>',
+            optional: false,
+            description: 'Sidebar group available as the implicit template value.',
+          },
+          {
+            name: 'group',
+            type: 'SidebarGroup<I>',
+            optional: false,
+            description: 'Sidebar group available by its explicit context name.',
+          },
+          {
+            name: 'collapsed',
+            type: 'boolean',
+            optional: false,
+            description:
+              'Whether the Sidebar currently renders as an icon rail. Use it to hide text or show a meaningful group icon.',
+          },
+        ],
       },
       {
         name: 'SidebarItemContext',
         kind: 'interface',
         declaration:
-          'interface SidebarItemContext<I extends NavbarItem = NavbarItem> extends NavbarItemContext<I> {\n  readonly group: SidebarGroup<I>;\n}',
+          'interface SidebarItemContext<I extends NavbarItem = NavbarItem> extends NavbarItemContext<I> {\n  readonly group: SidebarGroup<I>;\n  readonly collapsed: boolean;\n}',
         description: 'Context exposed to a custom Sidebar item template.',
+        members: [
+          {
+            name: 'group',
+            type: 'SidebarGroup<I>',
+            optional: false,
+            description: 'Group containing the rendered item.',
+          },
+          {
+            name: 'collapsed',
+            type: 'boolean',
+            optional: false,
+            description:
+              'Whether the Sidebar currently renders as an icon rail. Use it to hide item labels and supporting content.',
+          },
+        ],
       },
       {
         name: 'SidebarSize',
         kind: 'type',
         declaration: "type SidebarSize = 'sm' | 'md' | 'lg';",
         description: 'Supported persistent Sidebar widths.',
+        members: [],
       },
     ],
     styles: [
@@ -6132,6 +7904,12 @@ export const apiReference: Readonly<{
         defaultValue: 'var(--color-base-100)',
         exampleValue: 'var(--color-base-200)',
         description: 'Background of the persistent Sidebar surface.',
+      },
+      {
+        name: '--sui-sidebar-color',
+        defaultValue: 'var(--color-base-content)',
+        exampleValue: 'var(--color-base-content)',
+        description: 'Text and icon color of the Sidebar surface.',
       },
       {
         name: '--sui-sidebar-divider-color',
@@ -6151,12 +7929,49 @@ export const apiReference: Readonly<{
         exampleValue: 'color-mix(in oklab, var(--color-base-content) 32%, transparent)',
         description: 'Color of the scroll thumb in the navigation region.',
       },
+      {
+        name: '--sui-sidebar-collapsed-width',
+        defaultValue: '4.5rem',
+        exampleValue: '5rem',
+        description: 'Width of the collapsed icon rail.',
+      },
+      {
+        name: '--sui-sidebar-item-color',
+        defaultValue: 'var(--sui-sidebar-color)',
+        exampleValue: 'color-mix(in oklab, var(--color-base-content) 80%, transparent)',
+        description: 'Text and icon color of navigation items at rest.',
+      },
+      {
+        name: '--sui-sidebar-item-hover-background',
+        defaultValue: 'color-mix(in oklab, var(--color-base-200) 70%, transparent)',
+        exampleValue: 'color-mix(in oklab, var(--color-primary) 8%, transparent)',
+        description: 'Background of an enabled navigation item on hover.',
+      },
+      {
+        name: '--sui-sidebar-item-hover-color',
+        defaultValue: 'var(--color-base-content)',
+        exampleValue: 'var(--color-base-content)',
+        description: 'Text color of an enabled navigation item on hover.',
+      },
+      {
+        name: '--sui-sidebar-item-active-background',
+        defaultValue: 'color-mix(in oklab, var(--color-primary) 10%, transparent)',
+        exampleValue: 'color-mix(in oklab, var(--color-primary) 12%, transparent)',
+        description: 'Background of the current navigation item.',
+      },
+      {
+        name: '--sui-sidebar-item-active-color',
+        defaultValue: 'var(--color-primary)',
+        exampleValue: 'var(--color-primary)',
+        description: 'Text color of the current navigation item.',
+      },
     ],
   },
   SidebarFooter: {
     className: 'SidebarFooter',
+    declaration: 'SidebarFooter',
     selector: '[suiSidebarFooter]',
-    description: 'Projects account, status, or secondary actions below Sidebar navigation.',
+    description: 'Marks account, status, or secondary actions projected below Sidebar navigation.',
     members: [],
     templates: [],
     types: [],
@@ -6164,8 +7979,9 @@ export const apiReference: Readonly<{
   },
   SidebarHeader: {
     className: 'SidebarHeader',
+    declaration: 'SidebarHeader',
     selector: '[suiSidebarHeader]',
-    description: 'Projects product identity or workspace controls above Sidebar navigation.',
+    description: 'Marks product identity or workspace controls projected above Sidebar navigation.',
     members: [],
     templates: [],
     types: [],
@@ -6173,6 +7989,7 @@ export const apiReference: Readonly<{
   },
   Spinner: {
     className: 'Spinner',
+    declaration: 'Spinner',
     selector: 'span[suiSpinner]',
     description: 'Renders a decorative loading animation that inherits the current text color.',
     members: [
@@ -6198,24 +8015,28 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'SpinnerSize',
         kind: 'type',
         declaration: 'type SpinnerSize = ComponentSize;',
         description: 'Size scale available to loading spinners.',
+        members: [],
       },
       {
         name: 'SpinnerType',
         kind: 'type',
         declaration: "type SpinnerType = 'spinner' | 'dots' | 'ring' | 'ball' | 'bars' | 'infinity';",
         description: 'Built-in loading animation shapes.',
+        members: [],
       },
     ],
     styles: [],
   },
   Status: {
     className: 'Status',
+    declaration: 'Status',
     selector: 'span[suiStatus]',
     description: 'Renders a compact visual state marker beside descriptive content.',
     members: [
@@ -6248,24 +8069,28 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'StatusAnimation',
         kind: 'type',
         declaration: "type StatusAnimation = 'ping' | 'bounce';",
         description: 'Optional motion treatments for live status markers.',
+        members: [],
       },
       {
         name: 'StatusSeverity',
         kind: 'type',
         declaration: 'type StatusSeverity = ThemeSeverity;',
         description: 'Semantic colors available to status markers.',
+        members: [],
       },
       {
         name: 'StatusSize',
         kind: 'type',
         declaration: 'type StatusSize = ComponentSize;',
         description: 'Size scale available to status markers.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -6273,12 +8098,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Table: {
     className: 'Table',
+    declaration: 'Table<T>',
     selector: 'sui-table',
     description: 'Renders a typed collection as a native data table with controlled sorting.',
     members: [
@@ -6452,12 +8279,14 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'TableAlignment',
         kind: 'type',
         declaration: "type TableAlignment = 'start' | 'center' | 'end';",
         description: "Horizontal alignment of a column's header and cells.",
+        members: [],
       },
       {
         name: 'TableCellContext',
@@ -6465,6 +8294,44 @@ export const apiReference: Readonly<{
         declaration:
           'interface TableCellContext<T> {\n  readonly $implicit: unknown;\n  readonly value: unknown;\n  readonly row: T;\n  readonly column: TableColumn<T>;\n  readonly rowIndex: number;\n  readonly columnIndex: number;\n}',
         description: 'Row and column data exposed to a custom cell template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'unknown',
+            optional: false,
+            description: 'Resolved cell value.',
+          },
+          {
+            name: 'value',
+            type: 'unknown',
+            optional: false,
+            description: 'Resolved cell value.',
+          },
+          {
+            name: 'row',
+            type: 'T',
+            optional: false,
+            description: 'Current row.',
+          },
+          {
+            name: 'column',
+            type: 'TableColumn<T>',
+            optional: false,
+            description: 'Current column.',
+          },
+          {
+            name: 'rowIndex',
+            type: 'number',
+            optional: false,
+            description: 'Zero-based row index.',
+          },
+          {
+            name: 'columnIndex',
+            type: 'number',
+            optional: false,
+            description: 'Zero-based column index.',
+          },
+        ],
       },
       {
         name: 'TableCollectionContext',
@@ -6472,6 +8339,26 @@ export const apiReference: Readonly<{
         declaration:
           'interface TableCollectionContext<T> {\n  readonly $implicit: readonly T[];\n  readonly rows: readonly T[];\n  readonly columns: readonly TableColumn<T>[];\n}',
         description: 'Collection data exposed to structural table templates.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'readonly T[]',
+            optional: false,
+            description: 'Currently rendered rows.',
+          },
+          {
+            name: 'rows',
+            type: 'readonly T[]',
+            optional: false,
+            description: 'Currently rendered rows.',
+          },
+          {
+            name: 'columns',
+            type: 'readonly TableColumn<T>[]',
+            optional: false,
+            description: 'Configured columns.',
+          },
+        ],
       },
       {
         name: 'TableColumn',
@@ -6479,6 +8366,56 @@ export const apiReference: Readonly<{
         declaration:
           'interface TableColumn<T> {\n  readonly key: string;\n  readonly header: string;\n  readonly value?: (row: T) => unknown;\n  readonly sortable?: boolean;\n  readonly align?: TableAlignment;\n  readonly minWidth?: string;\n  readonly width?: string;\n  readonly rowHeader?: boolean;\n}',
         description: 'Describes one rendered table column.',
+        members: [
+          {
+            name: 'key',
+            type: 'string',
+            optional: false,
+            description: 'Stable column identity used by sorting and templates.',
+          },
+          {
+            name: 'header',
+            type: 'string',
+            optional: false,
+            description: 'Visible column heading.',
+          },
+          {
+            name: 'value',
+            type: '(row: T) => unknown',
+            optional: true,
+            description: 'Resolves the default cell content from a row. Omit for template-only columns.',
+          },
+          {
+            name: 'sortable',
+            type: 'boolean',
+            optional: true,
+            description: 'Enables the controlled sorting action for this column.',
+          },
+          {
+            name: 'align',
+            type: 'TableAlignment',
+            optional: true,
+            description: "Aligns the column's heading and cell content.",
+          },
+          {
+            name: 'minWidth',
+            type: 'string',
+            optional: true,
+            description: 'Minimum column width used before horizontal scrolling begins.',
+          },
+          {
+            name: 'width',
+            type: 'string',
+            optional: true,
+            description: 'Preferred column width passed to the native header and body cells.',
+          },
+          {
+            name: 'rowHeader',
+            type: 'boolean',
+            optional: true,
+            description: 'Renders body cells as native row headings with `scope="row"`.',
+          },
+        ],
       },
       {
         name: 'TableHeaderContext',
@@ -6486,6 +8423,32 @@ export const apiReference: Readonly<{
         declaration:
           'interface TableHeaderContext<T> {\n  readonly $implicit: TableColumn<T>;\n  readonly column: TableColumn<T>;\n  readonly index: number;\n  readonly direction: TableSortDirection | null;\n}',
         description: 'Column data exposed to a custom header template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'TableColumn<T>',
+            optional: false,
+            description: 'Current column.',
+          },
+          {
+            name: 'column',
+            type: 'TableColumn<T>',
+            optional: false,
+            description: 'Current column.',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: 'Zero-based column index.',
+          },
+          {
+            name: 'direction',
+            type: 'TableSortDirection | null',
+            optional: false,
+            description: 'Active direction, or null when the column is not sorted.',
+          },
+        ],
       },
       {
         name: 'TableRowContext',
@@ -6493,36 +8456,80 @@ export const apiReference: Readonly<{
         declaration:
           'interface TableRowContext<T> {\n  readonly $implicit: T;\n  readonly row: T;\n  readonly columns: readonly TableColumn<T>[];\n  readonly rowIndex: number;\n}',
         description: 'Row data exposed when replacing the complete native body row.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'T',
+            optional: false,
+            description: 'Current row.',
+          },
+          {
+            name: 'row',
+            type: 'T',
+            optional: false,
+            description: 'Current row.',
+          },
+          {
+            name: 'columns',
+            type: 'readonly TableColumn<T>[]',
+            optional: false,
+            description: 'Configured columns.',
+          },
+          {
+            name: 'rowIndex',
+            type: 'number',
+            optional: false,
+            description: 'Zero-based row index.',
+          },
+        ],
       },
       {
         name: 'TableSize',
         kind: 'type',
         declaration: 'type TableSize = ComponentSize;',
         description: 'Size scale available to table cells.',
+        members: [],
       },
       {
         name: 'TableSort',
         kind: 'interface',
         declaration: 'interface TableSort {\n  readonly key: string;\n  readonly direction: TableSortDirection;\n}',
         description: 'Controlled sorting state emitted by a Table.',
+        members: [
+          {
+            name: 'key',
+            type: 'string',
+            optional: false,
+            description: 'Stable key of the sorted column.',
+          },
+          {
+            name: 'direction',
+            type: 'TableSortDirection',
+            optional: false,
+            description: 'Requested sorting direction.',
+          },
+        ],
       },
       {
         name: 'TableSortDirection',
         kind: 'type',
         declaration: "type TableSortDirection = 'ascending' | 'descending';",
         description: 'Direction requested for a sortable column.',
+        members: [],
       },
       {
         name: 'TableTrackBy',
         kind: 'type',
         declaration: 'type TableTrackBy<T> = (index: number, row: T) => unknown;',
         description: 'Identifies a rendered row across collection updates.',
+        members: [],
       },
     ],
     styles: [],
   },
   Tabs: {
     className: 'Tabs',
+    declaration: 'Tabs',
     selector: 'sui-tabs',
     description: 'Switches between related templated views with Angular Aria keyboard behavior.',
     members: [
@@ -6647,60 +8654,70 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'Orientation',
         kind: 'type',
         declaration: "type Orientation = 'horizontal' | 'vertical';",
         description: 'Supported layout directions.',
+        members: [],
       },
       {
         name: 'TabsFocusMode',
         kind: 'type',
         declaration: "type TabsFocusMode = 'roving' | 'activedescendant';",
         description: 'Keyboard focus strategy used by the tab list.',
+        members: [],
       },
       {
         name: 'TabsOrientation',
         kind: 'type',
         declaration: 'type TabsOrientation = Orientation;',
         description: 'Direction in which tab labels are arranged.',
+        members: [],
       },
       {
         name: 'TabsPlacement',
         kind: 'type',
         declaration: "type TabsPlacement = 'top' | 'bottom';",
         description: 'Edge on which a horizontal tab list is rendered.',
+        members: [],
       },
       {
         name: 'TabsSelectionMode',
         kind: 'type',
         declaration: "type TabsSelectionMode = 'follow' | 'explicit';",
         description: 'Determines whether focus or explicit activation selects a tab.',
+        members: [],
       },
       {
         name: 'TabsSize',
         kind: 'type',
         declaration: 'type TabsSize = ComponentSize;',
         description: 'Size scale available to tabs.',
+        members: [],
       },
       {
         name: 'TabsValue',
         kind: 'type',
         declaration: 'type TabsValue = string;',
         description: 'Identifier used to select one tab.',
+        members: [],
       },
       {
         name: 'TabsVariant',
         kind: 'type',
         declaration: "type TabsVariant = 'plain' | 'border' | 'lift' | 'box';",
         description: 'Visual treatments available to tab lists.',
+        members: [],
       },
     ],
     styles: [],
   },
   Textarea: {
     className: 'Textarea',
+    declaration: 'Textarea',
     selector: 'textarea[suiTextarea]',
     description: 'Styles a native multiline text control and configures its resize behavior.',
     members: [
@@ -6761,36 +8778,42 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FormControlSeverity',
         kind: 'type',
         declaration: 'type FormControlSeverity = ThemeSeverity;',
         description: 'Semantic colors available to form controls.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
       {
         name: 'TextareaResize',
         kind: 'type',
         declaration: "type TextareaResize = 'none' | 'vertical' | 'horizontal' | 'both';",
         description: 'Native resize directions available to textareas.',
+        members: [],
       },
       {
         name: 'TextareaSeverity',
         kind: 'type',
         declaration: 'type TextareaSeverity = FormControlSeverity;',
         description: 'Semantic colors available to textareas.',
+        members: [],
       },
       {
         name: 'TextareaSize',
         kind: 'type',
         declaration: 'type TextareaSize = FormControlSize;',
         description: 'Size scale available to textareas.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -6798,12 +8821,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   Toggle: {
     className: 'Toggle',
+    declaration: 'Toggle',
     selector: 'input[type="checkbox"][suiToggle]',
     description: 'Styles a native checkbox as an on-or-off switch.',
     members: [
@@ -6850,18 +8875,21 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'FormControlSeverity',
         kind: 'type',
         declaration: 'type FormControlSeverity = ThemeSeverity;',
         description: 'Semantic colors available to form controls.',
+        members: [],
       },
       {
         name: 'FormControlSize',
         kind: 'type',
         declaration: 'type FormControlSize = ComponentSize;',
         description: 'Size scale available to form controls.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -6869,12 +8897,14 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
     ],
     styles: [],
   },
   ToggleButton: {
     className: 'ToggleButton',
+    declaration: 'ToggleButton',
     selector: 'sui-toggle-button',
     description: 'Toggles one pressed state while retaining button semantics.',
     members: [
@@ -6982,30 +9012,35 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: 'type ButtonSeverity = ThemeSeverity;',
         description: 'Semantic colors available to buttons.',
+        members: [],
       },
       {
         name: 'ButtonShape',
         kind: 'type',
         declaration: "type ButtonShape = 'default' | 'fluid' | 'circle' | 'square';",
         description: 'Width and geometry options available to buttons.',
+        members: [],
       },
       {
         name: 'ButtonSize',
         kind: 'type',
         declaration: 'type ButtonSize = ComponentSize;',
         description: 'Size scale available to buttons.',
+        members: [],
       },
       {
         name: 'ButtonVariant',
         kind: 'type',
         declaration: "type ButtonVariant = 'link' | 'outlined' | 'soft' | 'dash' | 'text';",
         description: 'Visual treatments available to buttons.',
+        members: [],
       },
       {
         name: 'ComponentSize',
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
       },
       {
         name: 'ThemeSeverity',
@@ -7013,6 +9048,7 @@ export const apiReference: Readonly<{
         declaration:
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
+        members: [],
       },
       {
         name: 'ToggleButtonContext',
@@ -7020,30 +9056,72 @@ export const apiReference: Readonly<{
         declaration:
           'interface ToggleButtonContext {\n  readonly $implicit: boolean;\n  readonly checked: boolean;\n  readonly disabled: boolean;\n  readonly loading: boolean;\n  readonly toggle: () => void;\n  readonly touch: () => void;\n}',
         description: 'Context exposed to the complete toggle-button template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'checked',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'loading',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'toggle',
+            type: '() => void',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'touch',
+            type: '() => void',
+            optional: false,
+            description: '',
+          },
+        ],
       },
       {
         name: 'ToggleButtonSeverity',
         kind: 'type',
         declaration: 'type ToggleButtonSeverity = ButtonSeverity;',
         description: 'Semantic colors available to toggle buttons.',
+        members: [],
       },
       {
         name: 'ToggleButtonShape',
         kind: 'type',
         declaration: 'type ToggleButtonShape = ButtonShape;',
         description: 'Width and geometry options available to toggle buttons.',
+        members: [],
       },
       {
         name: 'ToggleButtonSize',
         kind: 'type',
         declaration: 'type ToggleButtonSize = ButtonSize;',
         description: 'Size scale available to toggle buttons.',
+        members: [],
       },
       {
         name: 'ToggleButtonVariant',
         kind: 'type',
         declaration: "type ToggleButtonVariant = Exclude<ButtonVariant, 'text'>;",
         description: 'Visual treatments available to toggle buttons.',
+        members: [],
       },
     ],
     styles: [],

@@ -12,15 +12,15 @@
       <span>{{ group }}</span>
     </ng-template>
 
-    <ng-template suiListboxItem let-reviewer let-disabled="disabled">
+    <ng-template [suiListboxItem]="reviewers" let-reviewer let-disabled="disabled">
       <div class="flex min-w-0 items-center gap-3">
         <sui-avatar placeholder shape="circle" size="sm" class="shrink-0">
-          <span>{{ reviewerDetails.get(reviewer.value)?.initials }}</span>
+          <span>{{ reviewer.initials }}</span>
         </sui-avatar>
         <span class="min-w-0 grow">
           <strong class="block truncate">{{ reviewer.label }}</strong>
           <span class="block truncate text-sm text-base-content/60">
-            {{ reviewerDetails.get(reviewer.value)?.role }}
+            {{ reviewer.role }}
           </span>
         </span>
         <span suiBadge size="sm" [severity]="disabled ? 'neutral' : 'success'" variant="soft">

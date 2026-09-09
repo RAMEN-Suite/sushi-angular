@@ -1,7 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, input, InputSignal, Signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Badge, List, ListItemTemplate, Table, TableCellTemplate, TableColumn } from '@ramen-suite/sushi';
-import type { ApiMember, ApiMemberKind, ApiReferenceData, ApiTemplate, ApiTypeDefinition } from './api-reference.types';
+import type {
+  ApiMember,
+  ApiMemberKind,
+  ApiReferenceData,
+  ApiTemplate,
+  ApiTypeDefinition,
+  ApiTypeMember,
+} from './api-reference.types';
 
 interface ApiGroup {
   readonly kind: ApiMemberKind;
@@ -50,6 +57,17 @@ const templateColumns: readonly TableColumn<ApiTemplate>[] = [
   },
 ];
 
+const typeMemberColumns: readonly TableColumn<ApiTypeMember>[] = [
+  { key: 'name', header: 'Field', value: (member: ApiTypeMember): string => member.name, minWidth: '10rem' },
+  { key: 'type', header: 'Type', value: (member: ApiTypeMember): string => member.type, minWidth: '12rem' },
+  {
+    key: 'description',
+    header: 'Description',
+    value: (member: ApiTypeMember): string => member.description,
+    minWidth: '18rem',
+  },
+];
+
 @Component({
   selector: 'pg-api-reference',
   imports: [Badge, List, ListItemTemplate, RouterLink, Table, TableCellTemplate],
@@ -61,6 +79,7 @@ export class ApiReference {
 
   protected readonly memberColumns: readonly TableColumn<ApiMember>[] = memberColumns;
   protected readonly templateColumns: readonly TableColumn<ApiTemplate>[] = templateColumns;
+  protected readonly typeMemberColumns: readonly TableColumn<ApiTypeMember>[] = typeMemberColumns;
 
   protected readonly groups: Signal<readonly ApiGroup[]> = computed(() =>
     (Object.keys(labels) as ApiMemberKind[])

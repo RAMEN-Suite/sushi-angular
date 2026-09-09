@@ -56,12 +56,12 @@ import { OrderListFilterTemplate, OrderListHeaderTemplate, OrderListItemTemplate
   host: { class: 'sui-order-list block max-w-full', '[class.cursor-not-allowed]': 'disabled()' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OrderList<T extends OrderListOption = OrderListOption>
+export class OrderList<I extends OrderListOption = OrderListOption>
   extends FormControlState
-  implements FormValueControl<readonly T[]>
+  implements FormValueControl<readonly I[]>
 {
   /** Ordered collection controlled directly or through Signal Forms. */
-  public readonly value: ModelSignal<readonly T[]> = model<readonly T[]>([]);
+  public readonly value: ModelSignal<readonly I[]> = model<readonly I[]>([]);
 
   /** Shows a text filter above the collection. */
   public readonly filter: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -94,7 +94,7 @@ export class OrderList<T extends OrderListOption = OrderListOption>
     OrderListFilterTemplate,
     { read: TemplateRef },
   );
-  protected readonly itemTemplate: Signal<TemplateRef<OrderListItemContext<T>> | undefined> = contentChild(
+  protected readonly itemTemplate: Signal<TemplateRef<OrderListItemContext<I>> | undefined> = contentChild(
     OrderListItemTemplate,
     { read: TemplateRef },
   );
@@ -115,13 +115,13 @@ export class OrderList<T extends OrderListOption = OrderListOption>
     update: this.updateFilter,
   }));
   protected readonly ariaSelection: Signal<OrderListValue[]> = computed((): OrderListValue[] => [...this.selection()]);
-  protected readonly visibleItems: Signal<readonly T[]> = computed((): readonly T[] => {
+  protected readonly visibleItems: Signal<readonly I[]> = computed((): readonly I[] => {
     const query: string = this.query();
-    return query ? this.value().filter((item: T): boolean => filterSelectionOption(item, query)) : this.value();
+    return query ? this.value().filter((item: I): boolean => filterSelectionOption(item, query)) : this.value();
   });
   protected readonly selectedIndexes: Signal<readonly number[]> = computed((): readonly number[] => {
     const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
-    return this.value().flatMap((item: T, index: number): readonly number[] =>
+    return this.value().flatMap((item: I, index: number): readonly number[] =>
       selected.has(item.value) && !item.disabled ? [index] : [],
     );
   });
@@ -169,14 +169,14 @@ export class OrderList<T extends OrderListOption = OrderListOption>
     if (this.disabled() || !this.canMoveTop()) return;
     const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
     this.commit([
-      ...this.value().filter((item: T): boolean => selected.has(item.value)),
-      ...this.value().filter((item: T): boolean => !selected.has(item.value)),
+      ...this.value().filter((item: I): boolean => selected.has(item.value)),
+      ...this.value().filter((item: I): boolean => !selected.has(item.value)),
     ]);
   }
 
   protected moveUp(): void {
     if (this.disabled() || !this.canMoveUp()) return;
-    const items: T[] = [...this.value()];
+    const items: I[] = [...this.value()];
     const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
     for (const index of this.selectedIndexes()) {
       if (index > 0 && !selected.has(items[index - 1].value)) moveItemInArray(items, index, index - 1);
@@ -186,7 +186,7 @@ export class OrderList<T extends OrderListOption = OrderListOption>
 
   protected moveDown(): void {
     if (this.disabled() || !this.canMoveDown()) return;
-    const items: T[] = [...this.value()];
+    const items: I[] = [...this.value()];
     const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
     for (const index of [...this.selectedIndexes()].reverse()) {
       if (index < items.length - 1 && !selected.has(items[index + 1].value)) moveItemInArray(items, index, index + 1);
@@ -198,8 +198,8 @@ export class OrderList<T extends OrderListOption = OrderListOption>
     if (this.disabled() || !this.canMoveBottom()) return;
     const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
     this.commit([
-      ...this.value().filter((item: T): boolean => !selected.has(item.value)),
-      ...this.value().filter((item: T): boolean => selected.has(item.value)),
+      ...this.value().filter((item: I): boolean => !selected.has(item.value)),
+      ...this.value().filter((item: I): boolean => selected.has(item.value)),
     ]);
   }
 
@@ -237,14 +237,14 @@ export class OrderList<T extends OrderListOption = OrderListOption>
     this.updateFilter((event.target as HTMLInputElement).value);
   }
 
-  protected handleDrop(event: CdkDragDrop<readonly T[]>): void {
+  protected handleDrop(event: CdkDragDrop<readonly I[]>): void {
     if (this.disabled()) return;
     if (event.previousIndex === event.currentIndex) return;
-    const source: T | undefined = this.visibleItems().at(event.previousIndex);
-    const target: T | undefined = this.visibleItems().at(event.currentIndex);
+    const source: I | undefined = this.visibleItems().at(event.previousIndex);
+    const target: I | undefined = this.visibleItems().at(event.currentIndex);
     if (!source || !target || source.disabled) return;
 
-    const items: T[] = [...this.value()];
+    const items: I[] = [...this.value()];
     moveItemInArray(items, items.indexOf(source), items.indexOf(target));
     this.commit(items, `Moved ${source.label} to position ${items.indexOf(source) + 1}`);
   }
@@ -254,7 +254,7 @@ export class OrderList<T extends OrderListOption = OrderListOption>
     if (!currentTarget.contains(event.relatedTarget as Node | null)) this.touch.emit();
   }
 
-  protected itemContext(item: T, index: number): OrderListItemContext<T> {
+  protected itemContext(item: I, index: number): OrderListItemContext<I> {
     return {
       $implicit: item,
       option: item,
@@ -263,7 +263,7 @@ export class OrderList<T extends OrderListOption = OrderListOption>
     };
   }
 
-  private commit(items: readonly T[], message: string = 'Order updated'): void {
+  private commit(items: readonly I[], message: string = 'Order updated'): void {
     this.value.set(items);
     this.announcement.set(message);
     this.touch.emit();

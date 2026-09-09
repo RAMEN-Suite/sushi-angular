@@ -11,11 +11,11 @@
     [(value)]="value"
     placeholder="Search destinations">
     <ng-template suiAutocompletePrefix><svg lucideMapPin class="size-4" aria-hidden="true"></svg></ng-template>
-    <ng-template suiAutocompleteItem let-option let-index="index">
+    <ng-template [suiAutocompleteItem]="cities" let-option let-index="index">
       <span class="flex w-full items-center gap-2">
         <svg lucideMapPin class="size-4" aria-hidden="true"></svg>
         <span class="grow">{{ option.label }}</span>
-        <small>{{ index + 1 }}</small>
+        <small>{{ option.country }} · {{ index + 1 }}</small>
       </span>
     </ng-template>
     <ng-template suiAutocompleteEmpty let-query="query">No destinations match “{{ query }}”.</ng-template>

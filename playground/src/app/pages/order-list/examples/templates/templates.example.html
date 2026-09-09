@@ -44,7 +44,7 @@
       </div>
     </ng-template>
 
-    <ng-template suiOrderListItem let-item let-selected="selected">
+    <ng-template [suiOrderListItem]="backlog()" let-item let-selected="selected">
       <div class="flex min-w-0 items-center gap-3">
         <span class="min-w-0 grow">
           <strong class="block truncate">{{ item.label }}</strong>

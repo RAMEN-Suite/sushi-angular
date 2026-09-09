@@ -10,7 +10,6 @@ import {
   ListboxItemTemplate,
   ListboxModelValue,
   ListboxOption,
-  ListboxValue,
 } from '@ramen-suite/sushi';
 
 interface ReviewerOption extends ListboxOption {
@@ -43,7 +42,4 @@ export class ListboxTemplatesExample {
   ];
   protected readonly model: WritableSignal<ReviewerForm> = signal<ReviewerForm>({ reviewer: 'ada' });
   protected readonly reviewerForm: FieldTree<ReviewerForm> = form(this.model);
-  protected readonly reviewerDetails: ReadonlyMap<ListboxValue, ReviewerOption> = new Map(
-    this.reviewers.map((reviewer: ReviewerOption): readonly [ListboxValue, ReviewerOption] => [reviewer.value, reviewer]),
-  );
 }

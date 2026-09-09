@@ -34,9 +34,9 @@ const items: readonly WorkItem[] = [
       <ng-template suiOrderListFilter let-query let-update="update">
         <input data-filter [value]="query" (input)="update($any($event.target).value)" />
       </ng-template>
-      <ng-template suiOrderListItem let-item let-index="index" let-selected="selected">
+      <ng-template [suiOrderListItem]="value()" let-item let-index="index" let-selected="selected">
         <span [attr.data-item]="item.value" [attr.data-index]="index" [attr.data-selected]="selected">
-          {{ item.label }}
+          {{ item.label }} · {{ item.owner }}
         </span>
       </ng-template>
     </sui-order-list>
@@ -76,7 +76,7 @@ describe('OrderList value and templates', (): void => {
     const fixture: ComponentFixture<OrderListHost> = render(OrderListHost);
     expect(queryAll(fixture, '[role="option"]')).toHaveLength(4);
     expect(query(fixture, '[data-header]').textContent).toBe('Workflow steps');
-    expect(query(fixture, '[data-item="prototype"]').textContent.trim()).toBe('Prototype');
+    expect(query(fixture, '[data-item="prototype"]').textContent.trim()).toBe('Prototype · Bo');
 
     const filter: HTMLInputElement = query(fixture, 'input');
     filter.value = 'release';

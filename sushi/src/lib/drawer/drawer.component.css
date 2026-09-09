@@ -2,6 +2,11 @@
 
 :host {
   @apply min-h-0;
+  /**
+   * Width of the Drawer panel before it is constrained by the viewport.
+   * @example 18rem
+   */
+  --sui-drawer-width: 24rem;
 }
 
 .sui-drawer__side {
@@ -18,19 +23,19 @@
 
 .sui-drawer__panel {
   @apply flex h-full min-h-0 min-w-0 flex-col;
-  width: min(var(--drawer-width), 100vw);
+  width: min(var(--sui-drawer-width), 100vw);
 }
 
 :host(.sui-drawer--sm) {
-  --drawer-width: 20rem;
+  --sui-drawer-width: 20rem;
 }
 
 :host(.sui-drawer--md) {
-  --drawer-width: 24rem;
+  --sui-drawer-width: 24rem;
 }
 
 :host(.sui-drawer--lg) {
-  --drawer-width: 30rem;
+  --sui-drawer-width: 30rem;
 }
 
 .sui-drawer__body {

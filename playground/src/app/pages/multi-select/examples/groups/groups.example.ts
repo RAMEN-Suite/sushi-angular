@@ -43,10 +43,6 @@ export class MultiSelectGroupsExample {
   protected readonly compareCountries: MultiSelectCompareWith = (first: MultiSelectValue, second: MultiSelectValue): boolean =>
     typeof first === 'object' && typeof second === 'object' && 'code' in first && 'code' in second && first.code === second.code;
 
-  protected asCountry(value: MultiSelectOption): Country {
-    return value as Country;
-  }
-
   protected groupSize(group: string): number {
     return this.countries.filter((country: Country): boolean => country.group === group).length;
   }

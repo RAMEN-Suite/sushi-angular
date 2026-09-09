@@ -1,10 +1,10 @@
 <div class="grid gap-6">
   <div class="flex flex-wrap items-center gap-2">
     <code suiBadge severity="neutral" variant="soft" size="sm">{{ api().selector }}</code>
-    <span class="text-sm text-base-content/60">Generated from {{ api().className }}</span>
+    <code class="text-sm text-base-content/70">{{ api().declaration }}</code>
   </div>
 
-  <p class=" text-base-content/70">
+  <p class="text-base-content/70">
     {{ api().description || 'Public API exposed by ' + api().selector + '.' }}
   </p>
 
@@ -102,6 +102,23 @@
               <p class="text-sm text-base-content/70">{{ type.description }}</p>
             }
             <pre class="overflow-x-auto rounded-field bg-base-200 p-3 text-sm"><code>{{ type.declaration }}</code></pre>
+            @if (type.members.length > 0) {
+              <sui-table size="sm" [columns]="typeMemberColumns" [rows]="type.members">
+                <ng-template suiTableCell let-member="row" let-column="column">
+                  @switch (column.key) {
+                    @case ('name') {
+                      <code class="font-semibold">{{ member.name }}{{ member.optional ? '?' : '' }}</code>
+                    }
+                    @case ('type') {
+                      <code class="text-sm">{{ member.type }}</code>
+                    }
+                    @default {
+                      <span class="text-base-content/70">{{ member.description }}</span>
+                    }
+                  }
+                </ng-template>
+              </sui-table>
+            }
           </article>
         }
       </div>

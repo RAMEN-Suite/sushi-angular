@@ -13,29 +13,70 @@
   </section>
   <section class="space-y-6">
     <div class="space-y-2">
-      <h2 class="text-2xl font-bold tracking-tight">Workspace navigation</h2>
-      <p class="text-base-content/60">Keep identity and account actions fixed while grouped destinations scroll in the center.</p>
+      <h2 class="text-2xl font-bold tracking-tight">Responsive application shell</h2>
+      <p class="text-base-content/60">
+        Keep navigation visible on wide layouts, reduce it to an icon rail, and reuse it inside a Drawer on compact screens.
+      </p>
     </div>
     <pg-example-code [html]="examples.workspace.html" [typescript]="examples.workspace.typescript"
       ><ng-template pgExamplePreview><pg-sidebar-workspace-example /></ng-template
     ></pg-example-code>
   </section>
+
   <section class="space-y-6">
     <div class="space-y-2">
-      <h2 class="text-2xl font-bold tracking-tight">Responsive Sidebar</h2>
-      <p class="text-base-content/60">Use one Sidebar persistently on desktop and inside a Drawer on compact screens.</p>
+      <h2 class="text-2xl font-bold tracking-tight">Connect separate navigation components</h2>
+      <p class="text-base-content/60">
+        Keep navigation state at the nearest shared layout or route. Navbar, Sidebar, and Drawer can then stay independent.
+      </p>
     </div>
-    <pg-example-code [html]="examples.drawer.html" [typescript]="examples.drawer.typescript"
-      ><ng-template pgExamplePreview><pg-sidebar-drawer-example /></ng-template
-    ></pg-example-code>
-  </section>
-  <section class="space-y-6">
-    <div class="space-y-2">
-      <h2 class="text-2xl font-bold tracking-tight">Persistent widths</h2>
-      <p class="text-base-content/60">Choose a standard size or override the width with a consumer utility.</p>
-    </div>
-    <pg-example-code [html]="examples.sizes.html" [typescript]="examples.sizes.typescript"
-      ><ng-template pgExamplePreview><pg-sidebar-sizes-example /></ng-template
-    ></pg-example-code>
+
+    <ol class="divide-y divide-base-300 border-y border-base-300">
+      <li class="grid gap-4 py-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-8">
+        <div>
+          <span suiBadge size="sm" variant="soft">1 · Share state</span>
+          <h3 class="mt-3 font-semibold">Create an app-level state</h3>
+          <p class="mt-1 text-sm text-base-content/60">Use injection when navigation controls live in separate components.</p>
+        </div>
+        <sui-code>
+          @for (line of stateLines; track $index) {
+            <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
+          }
+        </sui-code>
+      </li>
+
+      <li class="grid gap-4 py-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-8">
+        <div>
+          <span suiBadge size="sm" variant="soft">2 · Provide and bind</span>
+          <h3 class="mt-3 font-semibold">Scope it to the shared layout</h3>
+          <p class="mt-1 text-sm text-base-content/60">
+            This may be a layout component or route provider; it does not need to be called a shell.
+          </p>
+        </div>
+        <sui-code>
+          @for (line of providerLines; track $index) {
+            <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
+          }
+        </sui-code>
+      </li>
+
+      <li class="grid gap-4 py-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-8">
+        <div>
+          <span suiBadge size="sm" variant="soft">3 · Control it</span>
+          <h3 class="mt-3 font-semibold">Inject state into the Navbar</h3>
+          <p class="mt-1 text-sm text-base-content/60">Bind the shared Signals; controls in the Navbar update the same state.</p>
+        </div>
+        <sui-code>
+          @for (line of bindingLines; track $index) {
+            <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
+          }
+        </sui-code>
+      </li>
+    </ol>
+
+    <p class="text-sm text-base-content/60">
+      Use <code>ViewChild</code> only when one component directly owns a Drawer or Sidebar and needs its imperative methods. For separated
+      navigation components, shared injected state keeps the dependency explicit and testable.
+    </p>
   </section>
 </main>

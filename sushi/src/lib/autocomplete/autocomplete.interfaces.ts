@@ -11,9 +11,9 @@ export type AutocompleteCompareWith = SelectionCompareWith;
 export type AutocompleteFilter = SelectionFilter;
 
 /** Context exposed to an autocomplete item template. */
-export interface AutocompleteItemContext {
-  readonly $implicit: AutocompleteOption;
-  readonly option: AutocompleteOption;
+export interface AutocompleteItemContext<O extends AutocompleteOption = AutocompleteOption> {
+  readonly $implicit: O;
+  readonly option: O;
   readonly selected: boolean;
   readonly matched: boolean;
   readonly disabled: boolean;

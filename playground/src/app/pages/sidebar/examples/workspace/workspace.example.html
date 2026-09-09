@@ -1,14 +1,20 @@
-<sui-sidebar class="h-[34rem] w-72" [groups]="groups" [(value)]="activePage" ariaLabel="Northstar workspace">
-  <div suiSidebarHeader class="flex items-center justify-between gap-3">
-    <span class="inline-flex min-w-0 items-center gap-3">
+<div class="h-[34rem] overflow-hidden rounded-box border border-base-300">
+  <sui-navbar
+    class="border-b border-base-300"
+    [collapsible]="false"
+    surface="plain"
+    inset="comfortable"
+    ariaLabel="Workspace toolbar">
+    <span suiNavbarBrand class="inline-flex min-w-0 items-center gap-3">
       <svg lucideSparkles class="size-5 shrink-0 text-primary" aria-hidden="true"></svg>
       <span class="min-w-0">
         <strong class="block truncate leading-tight">Northstar</strong>
-        <span class="block truncate text-xs">Design workspace</span>
+        <span class="block truncate text-xs text-base-content/60">Design workspace</span>
       </span>
     </span>
     <button
       suiButton
+      suiNavbarAction
       type="button"
       size="sm"
       shape="square"
@@ -17,47 +23,98 @@
       aria-label="Workspace settings">
       <svg lucideSettings class="size-4" aria-hidden="true"></svg>
     </button>
-  </div>
+    <button
+      suiButton
+      suiNavbarAction
+      type="button"
+      size="sm"
+      shape="square"
+      severity="neutral"
+      variant="text"
+      class="hidden lg:inline-flex"
+      [attr.aria-label]="sidebarCollapsed() ? 'Expand workspace navigation' : 'Collapse workspace navigation'"
+      (click)="sidebarCollapsed.update((collapsed) => !collapsed)">
+      <svg lucidePanelLeft class="size-4" aria-hidden="true"></svg>
+    </button>
+    <button
+      suiButton
+      suiNavbarAction
+      type="button"
+      size="sm"
+      shape="square"
+      severity="neutral"
+      variant="text"
+      class="lg:hidden"
+      [suiDrawerTrigger]="sidebarDrawer"
+      (click)="sidebarCollapsed.set(false)"
+      aria-label="Open workspace navigation">
+      <svg lucideMenu class="size-4" aria-hidden="true"></svg>
+    </button>
+  </sui-navbar>
 
-  <ng-template [suiSidebarItem]="groups" let-item>
-    @switch (item.value) {
-      @case ('Overview') {
-        <svg lucideLayoutDashboard class="size-4" aria-hidden="true"></svg>
-      }
-      @case ('Projects') {
-        <svg lucideFolderKanban class="size-4" aria-hidden="true"></svg>
-      }
-      @case ('Analytics') {
-        <svg lucideChartNoAxesCombined class="size-4" aria-hidden="true"></svg>
-      }
-      @case ('Team') {
-        <svg lucideUsers class="size-4" aria-hidden="true"></svg>
-      }
-      @case ('Notifications') {
-        <svg lucideBell class="size-4" aria-hidden="true"></svg>
-      }
-      @case ('Settings') {
-        <svg lucideSettings class="size-4" aria-hidden="true"></svg>
-      }
-      @case ('Help') {
-        <svg lucideCircleQuestionMark class="size-4" aria-hidden="true"></svg>
-      }
-    }
-    <span class="min-w-0 flex-1 truncate">{{ item.label }}</span>
-    @if (item.badge) {
-      <span suiBadge size="xs" severity="neutral" variant="soft">{{ item.badge }}</span>
-    }
-  </ng-template>
+  <sui-drawer
+    #sidebarDrawer="suiDrawer"
+    class="h-[calc(34rem-4rem)] overflow-hidden"
+    responsiveAt="lg"
+    size="sm"
+    ariaLabel="Workspace navigation"
+    [style.--sui-drawer-width]="sidebarCollapsed() ? '4.5rem' : '20rem'">
+    <div suiDrawerContent class="min-h-full bg-base-100 p-6">
+      <main class="mx-auto grid max-w-2xl gap-5">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-sm text-base-content/60">Northstar workspace</p>
+            <h3 class="text-2xl font-semibold tracking-tight">{{ activePage() }}</h3>
+          </div>
+          <button suiButton type="button" size="sm">Create project</button>
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <sui-card size="sm">
+            <span class="text-sm text-base-content/60">Active projects</span>
+            <strong class="text-2xl">8</strong>
+          </sui-card>
+          <sui-card size="sm">
+            <span class="text-sm text-base-content/60">Team members</span>
+            <strong class="text-2xl">14</strong>
+          </sui-card>
+        </div>
+        <sui-card size="sm">
+          <strong>Current destination</strong>
+          <p class="text-sm text-base-content/60">
+            Selecting a destination updates the workspace while navigation remains available.
+          </p>
+        </sui-card>
+      </main>
+    </div>
 
-  <button
-    suiButton
-    suiSidebarFooter
-    type="button"
-    shape="fluid"
-    severity="neutral"
-    variant="soft"
-    class="justify-between">
-    <span>Acme Studio</span>
-    <svg lucideChevronRight class="size-4" aria-hidden="true"></svg>
-  </button>
-</sui-sidebar>
+    <sui-sidebar
+      class="h-full border-r border-base-300"
+      size="lg"
+      [groups]="groups"
+      [(value)]="activePage"
+      [(collapsed)]="sidebarCollapsed"
+      ariaLabel="Northstar workspace"
+      (valueChange)="sidebarDrawer.close()">
+      <ng-template [suiSidebarItem]="groups" let-item let-collapsed="collapsed">
+        <span class="flex min-w-0 flex-1 items-center gap-2.5" [class.justify-center]="collapsed">
+          <svg [lucideIcon]="item.icon" class="size-4 shrink-0" aria-hidden="true"></svg>
+          <span class="min-w-0 flex-1 truncate" [class.sr-only]="collapsed">{{ item.label }}</span>
+          @if (item.badge && !collapsed) {
+            <span suiBadge size="xs" severity="neutral" variant="soft">{{ item.badge }}</span>
+          }
+        </span>
+      </ng-template>
+
+      <button
+        suiButton
+        suiSidebarFooter
+        type="button"
+        severity="neutral"
+        variant="text"
+        [shape]="sidebarCollapsed() ? 'square' : 'fluid'">
+        <span [class.sr-only]="sidebarCollapsed()">Back to dashboard</span>
+        <svg lucideChevronRight class="size-4" aria-hidden="true"></svg>
+      </button>
+    </sui-sidebar>
+  </sui-drawer>
+</div>

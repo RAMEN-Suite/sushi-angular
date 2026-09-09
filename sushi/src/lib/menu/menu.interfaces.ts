@@ -23,6 +23,9 @@ export type MenuSeverity = ThemeSeverity;
 /** Size scale available to menus. */
 export type MenuSize = ComponentSize;
 
+/** Preferred side of a popup Menu relative to its trigger. */
+export type MenuPlacement = 'bottom' | 'right';
+
 /** Labeled collection of related menu actions. */
 export interface MenuGroup<I extends MenuItem = MenuItem> {
   /** Identifies the entry as a group. */

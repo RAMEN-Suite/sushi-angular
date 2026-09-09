@@ -5,6 +5,7 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  computed,
   contentChild,
   DestroyRef,
   inject,
@@ -20,7 +21,7 @@ import {
   viewChild,
   WritableSignal,
 } from '@angular/core';
-import { MenuEntry, MenuGroupContext, MenuItem, MenuItemContext, MenuSeverity, MenuSize } from './menu.interfaces';
+import { MenuEntry, MenuGroupContext, MenuItem, MenuItemContext, MenuPlacement, MenuSeverity, MenuSize } from './menu.interfaces';
 import { MenuSurface } from './internal/menu-surface.component';
 import { MenuEndTemplate, MenuGroupTemplate, MenuItemTemplate, MenuStartTemplate } from './menu.templates';
 
@@ -31,6 +32,11 @@ const MENU_POSITIONS: ConnectedPosition[] = [
   { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -4 },
   { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetY: 4 },
   { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom', offsetY: -4 },
+];
+
+const MENU_RIGHT_POSITIONS: ConnectedPosition[] = [
+  { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top', offsetX: 4 },
+  { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top', offsetX: -4 },
 ];
 
 /** Presents related commands inline or in a trigger-controlled popup. */
@@ -65,6 +71,8 @@ export class Menu<I extends MenuItem = MenuItem> {
   public readonly size: InputSignal<MenuSize> = input<MenuSize>('md');
   /** Renders the menu in an overlay controlled by a Menu Trigger. */
   public readonly popup: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+  /** Preferred side of a popup Menu relative to its trigger. */
+  public readonly placement: InputSignal<MenuPlacement> = input<MenuPlacement>('bottom');
   /** Wraps arrow navigation between the first and last action. */
   public readonly wrap: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Delay in milliseconds before the typeahead buffer is cleared. */
@@ -92,7 +100,9 @@ export class Menu<I extends MenuItem = MenuItem> {
 
   protected readonly expanded: WritableSignal<boolean> = signal(false);
   protected readonly origin: WritableSignal<FlexibleConnectedPositionStrategyOrigin | undefined> = signal(undefined);
-  protected readonly positions: ConnectedPosition[] = MENU_POSITIONS;
+  protected readonly positions: Signal<ConnectedPosition[]> = computed(() =>
+    this.placement() === 'right' ? MENU_RIGHT_POSITIONS : MENU_POSITIONS,
+  );
 
   private readonly focusPending: WritableSignal<boolean> = signal(false);
   private restoreTarget: HTMLElement | undefined;

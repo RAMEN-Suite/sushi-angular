@@ -5,19 +5,98 @@
 }
 
 <div class="sui-sidebar__body">
-  @for (group of groups(); track group.label) {
-    @if (group.items.length) {
-      <section class="sui-sidebar__group">
-        @if (group.heading !== null) {
-          <div class="menu-title sui-sidebar__group-label">
-            @if (groupTemplate(); as template) {
-              <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: group, group }" />
-            } @else {
-              {{ group.heading ?? group.label }}
-            }
-          </div>
-        }
+  @for (group of renderedGroups(); track group.label) {
+    <section class="sui-sidebar__group">
+      @if (group.heading !== null && (groupTemplate() || !collapsed())) {
+        <div class="menu-title sui-sidebar__group-label" [class.justify-center]="collapsed()" [class.px-0]="collapsed()">
+          @if (groupTemplate(); as template) {
+            <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: group, group, collapsed: collapsed() }" />
+          } @else {
+            {{ group.heading ?? group.label }}
+          }
+        </div>
+      }
+      @if (collapsed()) {
+        <ul class="sui-sidebar__rail" [attr.aria-label]="group.label">
+          @for (item of group.items; track item.value) {
+            <li>
+              @if (item.items?.length) {
+                <button
+                  type="button"
+                  class="sui-sidebar__rail-item"
+                  [suiMenuTrigger]="flyout"
+                  [disabled]="item.disabled ?? false"
+                  [attr.aria-label]="item.label"
+                  [attr.title]="item.label"
+                  [attr.data-child-current]="hasCurrentChild(item) ? '' : null"
+                >
+                  <ng-container [ngTemplateOutlet]="railItem" [ngTemplateOutletContext]="{ item, group }" />
+                </button>
+                <sui-menu
+                  #flyout
+                  popup
+                  placement="right"
+                  size="sm"
+                  [items]="item.items"
+                  [ariaLabel]="item.label"
+                  (itemSelected)="selectItem($event)"
+                >
+                  <ng-template [suiMenuItem]="item.items" let-child>
+                    <ng-container
+                      [ngTemplateOutlet]="itemTemplate() ?? defaultItem"
+                      [ngTemplateOutletContext]="{ $implicit: child, item: child, level: 1, group, collapsed: false }"
+                    />
+                  </ng-template>
+                </sui-menu>
+              } @else if (item.routerLink) {
+                <a
+                  class="sui-sidebar__rail-item"
+                  [routerLink]="item.disabled ? null : item.routerLink"
+                  [attr.aria-label]="item.label"
+                  [attr.title]="item.label"
+                  [attr.aria-current]="isCurrent(item) ? 'page' : null"
+                  [attr.aria-disabled]="item.disabled ? 'true' : null"
+                  (click)="selectRailItem(item, $event)"
+                >
+                  <ng-container [ngTemplateOutlet]="railItem" [ngTemplateOutletContext]="{ item, group }" />
+                </a>
+              } @else if (item.href) {
+                <a
+                  class="sui-sidebar__rail-item"
+                  [href]="item.disabled ? null : item.href"
+                  [attr.aria-label]="item.label"
+                  [attr.title]="item.label"
+                  [attr.aria-current]="isCurrent(item) ? 'page' : null"
+                  [attr.aria-disabled]="item.disabled ? 'true' : null"
+                  (click)="selectRailItem(item, $event)"
+                >
+                  <ng-container [ngTemplateOutlet]="railItem" [ngTemplateOutletContext]="{ item, group }" />
+                </a>
+              } @else {
+                <button
+                  type="button"
+                  class="sui-sidebar__rail-item"
+                  [attr.aria-label]="item.label"
+                  [attr.title]="item.label"
+                  [attr.aria-current]="isCurrent(item) ? 'page' : null"
+                  [attr.aria-disabled]="item.disabled ? 'true' : null"
+                  (click)="selectRailItem(item, $event)"
+                >
+                  <ng-container [ngTemplateOutlet]="railItem" [ngTemplateOutletContext]="{ item, group }" />
+                </button>
+              }
+            </li>
+          }
+        </ul>
+      } @else {
         <sui-navbar
+          style="
+            --sui-navbar-item-color: var(--sui-sidebar-item-color);
+            --sui-navbar-item-hover-background: var(--sui-sidebar-item-hover-background);
+            --sui-navbar-item-hover-color: var(--sui-sidebar-item-hover-color);
+            --sui-navbar-item-active-background: var(--sui-sidebar-item-active-background);
+            --sui-navbar-item-active-color: var(--sui-sidebar-item-active-color);
+          "
           [items]="group.items"
           [value]="value()"
           [collapsible]="false"
@@ -31,12 +110,12 @@
           <ng-template [suiNavbarItem]="group.items" let-item let-level="level">
             <ng-container
               [ngTemplateOutlet]="itemTemplate() ?? defaultItem"
-              [ngTemplateOutletContext]="{ $implicit: item, item, level, group }"
+              [ngTemplateOutletContext]="{ $implicit: item, item, level, group, collapsed: collapsed() }"
             />
           </ng-template>
         </sui-navbar>
-      </section>
-    }
+      }
+    </section>
   }
 </div>
 
@@ -46,6 +125,13 @@
   </footer>
 }
 
-<ng-template #defaultItem let-item
-  ><span>{{ item.label }}</span></ng-template
+<ng-template #defaultItem let-item let-collapsed="collapsed"
+  ><span [class.sr-only]="collapsed">{{ item.label }}</span></ng-template
 >
+
+<ng-template #railItem let-item="item" let-group="group">
+  <ng-container
+    [ngTemplateOutlet]="itemTemplate() ?? defaultItem"
+    [ngTemplateOutletContext]="{ $implicit: item, item, level: 0, group, collapsed: true }"
+  />
+</ng-template>

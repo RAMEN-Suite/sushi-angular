@@ -1,5 +1,5 @@
-import { Directive } from '@angular/core';
-import { ListboxFilterContext, ListboxGroupContext, ListboxItemContext } from './listbox.interfaces';
+import { Directive, input, InputSignal } from '@angular/core';
+import type { ListboxFilterContext, ListboxGroupContext, ListboxItemContext, ListboxOption } from './listbox.interfaces';
 
 /** Replaces the filter control and exposes its query, state, and update function. */
 @Directive({ selector: 'ng-template[suiListboxFilter]' })
@@ -11,8 +11,16 @@ export class ListboxFilterTemplate {
 
 /** Replaces each option and exposes its index, selected, active, and disabled state. */
 @Directive({ selector: 'ng-template[suiListboxItem]' })
-export class ListboxItemTemplate {
-  public static ngTemplateContextGuard(_directive: ListboxItemTemplate, _context: unknown): _context is ListboxItemContext {
+export class ListboxItemTemplate<O extends ListboxOption = ListboxOption> {
+  /** Option source used to infer custom fields inside the template. */
+  public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
+    alias: 'suiListboxItem',
+  });
+
+  public static ngTemplateContextGuard<O extends ListboxOption>(
+    _directive: ListboxItemTemplate<O>,
+    _context: unknown,
+  ): _context is ListboxItemContext<O> {
     return true;
   }
 }

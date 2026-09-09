@@ -1,5 +1,6 @@
 import { booleanAttribute, Directive, ElementRef, inject, input, InputSignal, InputSignalWithTransform } from '@angular/core';
 import { Menu } from './menu.component';
+import { MenuItem } from './menu.interfaces';
 
 /** Opens a popup Menu from a native button. */
 @Directive({
@@ -15,9 +16,9 @@ import { Menu } from './menu.component';
     '(keydown.arrowDown)': 'handleArrowDown($event)',
   },
 })
-export class MenuTrigger {
+export class MenuTrigger<I extends MenuItem = MenuItem> {
   /** Popup Menu controlled by this button. */
-  public readonly menu: InputSignal<Menu> = input.required<Menu>({ alias: 'suiMenuTrigger' });
+  public readonly menu: InputSignal<Menu<I>> = input.required<Menu<I>>({ alias: 'suiMenuTrigger' });
 
   /** Prevents opening the menu while keeping the trigger focusable. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
@@ -25,7 +26,7 @@ export class MenuTrigger {
   private readonly element: ElementRef<HTMLButtonElement> = inject<ElementRef<HTMLButtonElement>>(ElementRef);
 
   protected handleClick(event: MouseEvent): void {
-    const menu: Menu = this.menu();
+    const menu: Menu<I> = this.menu();
     if (this.disabled() || menu.disabled()) {
       event.preventDefault();
       event.stopImmediatePropagation();
@@ -36,7 +37,7 @@ export class MenuTrigger {
   }
 
   protected handleArrowDown(event: Event): void {
-    const menu: Menu = this.menu();
+    const menu: Menu<I> = this.menu();
     if (this.disabled() || menu.disabled()) return;
     event.preventDefault();
     menu.open(this.element.nativeElement);

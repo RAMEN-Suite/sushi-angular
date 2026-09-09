@@ -70,12 +70,15 @@ function isMultipleValue(value: ListboxModelValue): value is readonly ListboxVal
   host: { class: 'sui-listbox block max-w-full', '[class.cursor-not-allowed]': 'disabled()' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Listbox extends FormControlState implements FormValueControl<ListboxModelValue> {
+export class Listbox<O extends ListboxOption = ListboxOption>
+  extends FormControlState
+  implements FormValueControl<ListboxModelValue>
+{
   /** Selected value in single mode or selected values in multiple mode. */
   public readonly value: ModelSignal<ListboxModelValue> = model<ListboxModelValue>(null);
 
   /** Fixed options available for selection. */
-  public readonly options: InputSignal<readonly ListboxOption[]> = input.required<readonly ListboxOption[]>();
+  public readonly options: InputSignal<readonly O[]> = input.required<readonly O[]>();
   /** Enables selection of more than one option. */
   public readonly multiple: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Limits the visible list height in pixels before it scrolls. */
@@ -123,7 +126,7 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
   protected readonly groupTemplate: Signal<TemplateRef<ListboxGroupContext> | undefined> = contentChild(ListboxGroupTemplate, {
     read: TemplateRef,
   });
-  protected readonly itemTemplate: Signal<TemplateRef<ListboxItemContext> | undefined> = contentChild(ListboxItemTemplate, {
+  protected readonly itemTemplate: Signal<TemplateRef<ListboxItemContext<O>> | undefined> = contentChild(ListboxItemTemplate, {
     read: TemplateRef,
   });
   protected readonly emptyTemplate: Signal<TemplateRef<void> | undefined> = contentChild(ListboxEmptyTemplate, {
@@ -154,19 +157,13 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
     if (isMultipleValue(value)) return [...value];
     return value === null ? [] : [value];
   });
-  protected readonly visibleOptions: Signal<readonly ListboxOption[]> = computed((): readonly ListboxOption[] => {
+  protected readonly visibleOptions: Signal<readonly O[]> = computed((): readonly O[] => {
     const query: string = this.query();
-    return query
-      ? this.options().filter((option: ListboxOption): boolean => filterSelectionOption(option, query))
-      : this.options();
+    return query ? this.options().filter((option: O): boolean => filterSelectionOption(option, query)) : this.options();
   });
   protected readonly allSelected: Signal<boolean> = computed((): boolean => {
-    const available: readonly ListboxOption[] = this.visibleOptions().filter(
-      (option: ListboxOption): boolean => !option.disabled,
-    );
-    return (
-      available.length > 0 && available.every((option: ListboxOption): boolean => this.listboxValue().includes(option.value))
-    );
+    const available: readonly O[] = this.visibleOptions().filter((option: O): boolean => !option.disabled);
+    return available.length > 0 && available.every((option: O): boolean => this.listboxValue().includes(option.value));
   });
 
   private readonly loadedOffset: WritableSignal<number> = signal(-1);
@@ -203,15 +200,15 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
   protected handleSelectAll(): void {
     if (!this.multiple() || this.disabled() || this.readOnly()) return;
     const available: readonly ListboxValue[] = this.visibleOptions()
-      .filter((option: ListboxOption): boolean => !option.disabled)
-      .map((option: ListboxOption): ListboxValue => option.value);
+      .filter((option: O): boolean => !option.disabled)
+      .map((option: O): ListboxValue => option.value);
     const selected: readonly ListboxValue[] = this.listboxValue();
     const clear: boolean = this.allSelected();
     const next: ReadonlySet<ListboxValue> = new Set(
       clear ? selected.filter((value: ListboxValue): boolean => !available.includes(value)) : [...selected, ...available],
     );
     this.value.set(
-      this.options().flatMap((option: ListboxOption): readonly ListboxValue[] => (next.has(option.value) ? [option.value] : [])),
+      this.options().flatMap((option: O): readonly ListboxValue[] => (next.has(option.value) ? [option.value] : [])),
     );
   }
 
@@ -225,7 +222,7 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
     this.loadMore.emit(offset);
   }
 
-  protected itemContext(option: ListboxOption, index: number, active: boolean): ListboxItemContext {
+  protected itemContext(option: O, index: number, active: boolean): ListboxItemContext<O> {
     return {
       $implicit: option,
       option,
@@ -236,7 +233,7 @@ export class Listbox extends FormControlState implements FormValueControl<Listbo
     };
   }
 
-  protected groupContext(option: ListboxOption): ListboxGroupContext {
+  protected groupContext(option: O): ListboxGroupContext {
     return { $implicit: option.group ?? '', group: option.group ?? '' };
   }
 }

@@ -8,7 +8,7 @@
     ariaLabelledby="movie-order-label"
     ariaDescribedby="movie-order-hint"
     [(value)]="movies">
-    <ng-template suiOrderListItem let-movie let-index="index" let-selected="selected">
+    <ng-template [suiOrderListItem]="movies()" let-movie let-index="index" let-selected="selected">
       <div class="flex min-w-0 items-center gap-3">
         <input
           suiCheckbox

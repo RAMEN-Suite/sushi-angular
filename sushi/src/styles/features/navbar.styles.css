@@ -10,6 +10,26 @@
 
 .sui-navbar {
   @apply relative flex-wrap items-center p-2;
+  /**
+   * Background of the bordered Navbar surface.
+   * @example var(--color-base-200)
+   */
+  --sui-navbar-background: var(--color-base-100);
+  /**
+   * Text and icon color inherited by projected Navbar content.
+   * @example color-mix(in oklab, var(--color-base-content) 80%, transparent)
+   */
+  --sui-navbar-color: var(--color-base-content);
+  /**
+   * Border color of the bordered Navbar surface.
+   * @example color-mix(in oklab, var(--color-primary) 20%, var(--color-base-300))
+   */
+  --sui-navbar-border-color: var(--color-base-300);
+  /**
+   * Text and icon color of navigation items at rest.
+   * @example color-mix(in oklab, var(--color-base-content) 80%, transparent)
+   */
+  --sui-navbar-item-color: var(--sui-navbar-color);
   /** Background of an enabled navigation item on hover. */
   --sui-navbar-item-hover-background: color-mix(in oklab, var(--color-base-200) 70%, transparent);
   /** Text color of an enabled navigation item on hover. */
@@ -20,6 +40,12 @@
   --sui-navbar-item-active-background: color-mix(in oklab, var(--color-primary) 10%, transparent);
   /** Text color of the current item or a disclosure containing it. */
   --sui-navbar-item-active-color: var(--color-primary);
+  color: var(--sui-navbar-color);
+}
+
+.sui-navbar--bordered {
+  border-color: var(--sui-navbar-border-color);
+  background-color: var(--sui-navbar-background);
 }
 
 .sui-navbar--comfortable {
@@ -108,7 +134,8 @@
 }
 
 .sui-navbar__link {
-  @apply inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-field px-3 text-base-content no-underline transition-colors;
+  @apply inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-field px-3 no-underline;
+  color: var(--sui-navbar-item-color);
 }
 
 .sui-navbar--sm .sui-navbar__link,
@@ -160,7 +187,8 @@
 }
 
 .sui-navbar__dropdown > summary {
-  @apply flex min-h-10 w-full cursor-pointer list-none items-center gap-2 rounded-field px-3 text-base-content transition-colors;
+  @apply flex min-h-10 w-full cursor-pointer list-none items-center gap-2 rounded-field px-3;
+  color: var(--sui-navbar-item-color);
 }
 
 .sui-navbar__dropdown > summary > svg:last-child {

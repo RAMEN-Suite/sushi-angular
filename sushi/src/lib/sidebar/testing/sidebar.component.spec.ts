@@ -1,6 +1,6 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { query, queryAll, render } from '../../../../testing/test-utils';
 import { NavbarItem } from '../../navbar';
 import { Sidebar } from '../sidebar.component';
@@ -9,7 +9,7 @@ import { SidebarItemTemplate } from '../sidebar-item-template.directive';
 import { SidebarGroup } from '../sidebar.interfaces';
 import { SidebarFooter, SidebarHeader } from '../sidebar-slots.directive';
 
-type Page = 'overview' | 'activity' | 'settings';
+type Page = 'overview' | 'activity' | 'reports' | 'activity-reports' | 'settings';
 
 interface AppItem extends NavbarItem<Page> {
   readonly badge?: string;
@@ -23,14 +23,20 @@ interface AppItem extends NavbarItem<Page> {
       size="lg"
       [groups]="groups"
       [(value)]="active"
-      (itemSelected)="selected.push($event)"
+      [(collapsed)]="collapsed"
+      (valueChange)="selected.push($event)"
     >
       <div suiSidebarHeader data-header>Orbit</div>
-      <ng-template [suiSidebarGroup]="groups" let-group
-        ><span [attr.data-drawer-group]="group.label">{{ group.label }}</span></ng-template
+      <ng-template [suiSidebarGroup]="groups" let-group let-collapsed="collapsed"
+        ><span [attr.data-drawer-group]="group.label" [attr.data-collapsed]="collapsed">{{ group.label }}</span></ng-template
       >
-      <ng-template [suiSidebarItem]="groups" let-item let-group="group" let-level="level">
-        <span [attr.data-item]="item.value" [attr.data-group]="group.label" [attr.data-level]="level">
+      <ng-template [suiSidebarItem]="groups" let-item let-group="group" let-level="level" let-collapsed="collapsed">
+        <span
+          [attr.data-item]="item.value"
+          [attr.data-group]="group.label"
+          [attr.data-level]="level"
+          [attr.data-collapsed]="collapsed"
+        >
           {{ item.label }} {{ item.badge }}
         </span>
       </ng-template>
@@ -40,19 +46,23 @@ interface AppItem extends NavbarItem<Page> {
 })
 class SidebarHost {
   public readonly active: WritableSignal<Page> = signal<Page>('overview');
-  public readonly selected: Page[] = [];
+  public readonly collapsed: WritableSignal<boolean> = signal(false);
+  public readonly selected: (Page | null)[] = [];
   public readonly groups: readonly SidebarGroup<AppItem>[] = [
     {
       label: 'Workspace',
       items: [
         { label: 'Overview', value: 'overview' },
         { label: 'Activity', value: 'activity', badge: '4' },
+        { label: 'Reports', value: 'reports', items: [{ label: 'Activity reports', value: 'activity-reports' }] },
       ],
     },
     { label: 'Administration', items: [{ label: 'Settings', value: 'settings' }] },
     { label: 'Empty', items: [] },
   ];
 }
+
+afterEach((): void => document.querySelector('.cdk-overlay-container')?.remove());
 
 describe('Sidebar', (): void => {
   it('renders one labeled landmark with header, footer, and non-empty navigation groups', (): void => {
@@ -75,6 +85,7 @@ describe('Sidebar', (): void => {
     expect(activity.textContent).toContain('Activity 4');
     expect(activity.getAttribute('data-group')).toBe('Workspace');
     expect(activity.getAttribute('data-level')).toBe('0');
+    expect(query(fixture, '[data-item="activity-reports"][data-level="1"]')).toBeDefined();
   });
 
   it('reflects the current destination and emits selection changes', (): void => {
@@ -89,5 +100,39 @@ describe('Sidebar', (): void => {
     expect(fixture.componentInstance.selected).toEqual(['activity']);
     expect(fixture.componentInstance.active()).toBe('activity');
     expect(activity.getAttribute('aria-current')).toBe('page');
+  });
+});
+
+describe('Sidebar collapsed rail', (): void => {
+  it('reflects and exposes its collapsed icon-rail state', (): void => {
+    const fixture: ComponentFixture<SidebarHost> = render(SidebarHost);
+    fixture.componentInstance.collapsed.set(true);
+    fixture.detectChanges();
+
+    expect(query(fixture, 'sui-sidebar').hasAttribute('data-collapsed')).toBe(true);
+    expect(query(fixture, '[data-item="overview"]').getAttribute('data-collapsed')).toBe('true');
+    expect(query(fixture, '[data-drawer-group="Workspace"]').getAttribute('data-collapsed')).toBe('true');
+  });
+
+  it('opens nested destinations in a flyout while collapsed', async (): Promise<void> => {
+    const fixture: ComponentFixture<SidebarHost> = render(SidebarHost);
+    fixture.componentInstance.collapsed.set(true);
+    fixture.detectChanges();
+
+    expect(queryAll(fixture, '[data-item="activity-reports"]')).toHaveLength(0);
+
+    const reports: HTMLButtonElement | null = query(fixture, '[data-item="reports"]').closest('button');
+    if (reports === null) throw new Error('Expected the collapsed parent inside a button.');
+    reports.click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const child: HTMLElement | null = document.querySelector('[data-item="activity-reports"]');
+    expect(child).not.toBeNull();
+    child?.closest('button')?.click();
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.active()).toBe('activity-reports');
+    expect(document.querySelector('[data-item="activity-reports"]')).toBeNull();
   });
 });

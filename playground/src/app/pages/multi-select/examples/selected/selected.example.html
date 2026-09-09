@@ -7,7 +7,7 @@
     [options]="teams"
     [compareWith]="compareTeams"
     [(value)]="value">
-    <ng-template suiMultiSelectSelectedItems let-options let-remove="remove">
+    <ng-template [suiMultiSelectSelectedItems]="teams" let-options let-remove="remove">
       <span class="flex min-w-0 gap-1 overflow-hidden">
         @for (option of options; track option.value) {
           <sui-chip [label]="option.label" size="sm" removable (remove)="remove(option)" />
@@ -16,7 +16,7 @@
         }
       </span>
     </ng-template>
-    <ng-template suiMultiSelectItem let-option let-selected="selected">
+    <ng-template [suiMultiSelectItem]="teams" let-option let-selected="selected">
       <span class="flex w-full items-center justify-between gap-4">
         <span>{{ option.label }}</span>
         <span suiBadge severity="neutral" size="xs" variant="soft">{{ selected ? 'Included' : 'Available' }}</span>
