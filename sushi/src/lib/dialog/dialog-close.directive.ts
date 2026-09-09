@@ -1,5 +1,5 @@
 import { Directive, input, InputSignal } from '@angular/core';
-import { Dialog } from './dialog.directive';
+import { Dialog } from './dialog.component';
 
 @Directive({
   selector: 'button[suiDialogClose]',

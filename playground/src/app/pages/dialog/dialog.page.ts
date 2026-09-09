@@ -3,27 +3,29 @@ import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
-import { DialogConfirmationExample } from './examples/confirmation/confirmation.example';
-import confirmationHtml from './examples/confirmation/confirmation.example.html';
-import * as confirmationTs from './examples/confirmation/confirmation.example.ts' with { loader: 'text' };
-import { DialogControlledExample } from './examples/controlled/controlled.example';
-import controlledHtml from './examples/controlled/controlled.example.html';
-import * as controlledTs from './examples/controlled/controlled.example.ts' with { loader: 'text' };
-import { DialogRequiredExample } from './examples/required/required.example';
-import requiredHtml from './examples/required/required.example.html';
-import * as requiredTs from './examples/required/required.example.ts' with { loader: 'text' };
-import { DialogWorkspaceExample } from './examples/workspace/workspace.example';
-import workspaceHtml from './examples/workspace/workspace.example.html';
-import * as workspaceTs from './examples/workspace/workspace.example.ts' with { loader: 'text' };
+import { DialogAdvancedExample } from './examples/advanced/advanced.example';
+import * as advancedCss from './examples/advanced/advanced.example.css' with { loader: 'text' };
+import advancedHtml from './examples/advanced/advanced.example.html';
+import * as advancedTs from './examples/advanced/advanced.example.ts' with { loader: 'text' };
+import { DialogBasicExample } from './examples/basic/basic.example';
+import basicHtml from './examples/basic/basic.example.html';
+import * as basicTs from './examples/basic/basic.example.ts' with { loader: 'text' };
+import { DialogFormExample } from './examples/form/form.example';
+import * as formCss from './examples/form/form.example.css' with { loader: 'text' };
+import formHtml from './examples/form/form.example.html';
+import * as formTs from './examples/form/form.example.ts' with { loader: 'text' };
+import { DialogDynamicExample } from './examples/dynamic/dynamic.example';
+import dynamicHtml from './examples/dynamic/dynamic.example.html';
+import * as dynamicTs from './examples/dynamic/dynamic.example.ts' with { loader: 'text' };
 
 @Component({
   selector: 'pg-dialog-page',
   imports: [
     Badge,
-    DialogConfirmationExample,
-    DialogControlledExample,
-    DialogRequiredExample,
-    DialogWorkspaceExample,
+    DialogAdvancedExample,
+    DialogBasicExample,
+    DialogDynamicExample,
+    DialogFormExample,
     ExampleCode,
     ExamplePreview,
   ],
@@ -31,10 +33,10 @@ import * as workspaceTs from './examples/workspace/workspace.example.ts' with { 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogPage {
-  protected readonly examples: Readonly<Record<'confirmation' | 'controlled' | 'required' | 'workspace', ExampleSource>> = {
-    confirmation: { html: confirmationHtml, typescript: textSource(confirmationTs) },
-    controlled: { html: controlledHtml, typescript: textSource(controlledTs) },
-    required: { html: requiredHtml, typescript: textSource(requiredTs) },
-    workspace: { html: workspaceHtml, typescript: textSource(workspaceTs) },
+  protected readonly examples: Readonly<Record<'advanced' | 'basic' | 'dynamic' | 'form', ExampleSource>> = {
+    basic: { html: basicHtml, typescript: textSource(basicTs) },
+    advanced: { css: textSource(advancedCss), html: advancedHtml, typescript: textSource(advancedTs) },
+    form: { css: textSource(formCss), html: formHtml, typescript: textSource(formTs) },
+    dynamic: { html: dynamicHtml, typescript: textSource(dynamicTs) },
   };
 }

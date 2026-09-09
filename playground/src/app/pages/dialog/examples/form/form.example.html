@@ -1,0 +1,56 @@
+<div class="flex flex-wrap items-center gap-3">
+  <button suiButton type="button" [suiDialogTrigger]="bookingDialog">Reserve a table</button>
+  <span class="text-sm text-base-content/60">{{ result() }}</span>
+</div>
+
+<sui-dialog
+  #bookingDialog="suiDialog"
+  class="booking-dialog"
+  ariaLabelledby="booking-dialog-title"
+  [(open)]="open"
+  (closed)="record($event)">
+  <header suiDialogHeader>
+    <h2 id="booking-dialog-title" class="text-xl font-semibold">Table reservation</h2>
+  </header>
+
+  <form suiDialogBody class="grid gap-5">
+    <p class="text-base-content/70">Tell us when you’re coming and how we can prepare.</p>
+    <fieldset suiFieldset class="grid gap-4">
+      <legend suiFieldsetLegend>Contact and visit</legend>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <label suiLabel class="grid gap-2">
+          Name
+          <input suiInput fluid name="name" autocomplete="name" />
+        </label>
+        <label suiLabel class="grid gap-2">
+          Email
+          <input suiInput fluid name="email" type="email" autocomplete="email" />
+        </label>
+        <label suiLabel class="grid gap-2">
+          Date
+          <input suiInput fluid name="date" type="date" />
+        </label>
+        <label suiLabel class="grid gap-2">
+          Guests
+          <input suiInput fluid name="guests" type="number" min="1" value="2" />
+        </label>
+      </div>
+    </fieldset>
+
+    <label suiLabel class="grid gap-2">
+      Notes
+      <textarea suiTextarea fluid name="notes" rows="3"></textarea>
+    </label>
+    <label suiLabel class="flex items-center gap-2">
+      <input suiCheckbox type="checkbox" />
+      Counter seating is okay
+    </label>
+  </form>
+
+  <div suiDialogFooter>
+    <button suiButton type="button" severity="neutral" variant="outlined" [suiDialogClose]="bookingDialog">
+      Cancel
+    </button>
+    <button suiButton type="button" [suiDialogClose]="bookingDialog" suiDialogCloseValue="reserve">Reserve</button>
+  </div>
+</sui-dialog>

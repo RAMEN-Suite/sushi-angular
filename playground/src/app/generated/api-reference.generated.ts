@@ -21,8 +21,10 @@ export const apiReference: Readonly<{
   readonly ContextMenuTrigger: ApiReferenceData;
   readonly DataView: ApiReferenceData;
   readonly Dialog: ApiReferenceData;
+  readonly DialogBody: ApiReferenceData;
   readonly DialogClose: ApiReferenceData;
-  readonly DialogDragHandle: ApiReferenceData;
+  readonly DialogFooter: ApiReferenceData;
+  readonly DialogHeader: ApiReferenceData;
   readonly DialogTrigger: ApiReferenceData;
   readonly Divider: ApiReferenceData;
   readonly Drawer: ApiReferenceData;
@@ -2250,7 +2252,7 @@ export const apiReference: Readonly<{
   Dialog: {
     className: 'Dialog',
     declaration: 'Dialog',
-    selector: 'dialog[suiDialog]',
+    selector: 'sui-dialog',
     description: 'Adds controlled modal behavior to the native dialog element.',
     members: [
       {
@@ -2289,11 +2291,39 @@ export const apiReference: Readonly<{
         description: 'Places the Dialog at a viewport edge or corner.',
       },
       {
+        name: 'ariaLabel',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'Accessible name used when no visible heading labels the Dialog.',
+      },
+      {
+        name: 'ariaLabelledby',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'ID of the visible element that labels the Dialog.',
+      },
+      {
+        name: 'ariaDescribedby',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'ID of the element that describes the Dialog.',
+      },
+      {
         name: 'draggable',
         kind: 'input',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Enables dragging. Add `suiDialogDragHandle` to the intended handle.',
+        description: 'Enables dragging from the Dialog header.',
+      },
+      {
+        name: 'constrainToViewport',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Keeps a draggable Dialog inside the viewport. Disable only when off-screen placement is intentional.',
       },
       {
         name: 'resizable',
@@ -2303,13 +2333,6 @@ export const apiReference: Readonly<{
         description: 'Enables native pointer resizing from the bottom-right corner.',
       },
       {
-        name: 'maximized',
-        kind: 'model',
-        type: 'boolean',
-        defaultValue: 'false',
-        description: 'Controls the maximized viewport state.',
-      },
-      {
         name: 'closed',
         kind: 'output',
         type: 'DialogCloseEvent',
@@ -2317,11 +2340,11 @@ export const apiReference: Readonly<{
         description: 'Emits after the native Dialog closes.',
       },
       {
-        name: 'showModal',
+        name: 'show',
         kind: 'method',
         type: '(restoreTarget?: HTMLElement) => void',
         defaultValue: null,
-        description: 'Opens the Dialog modally and remembers where focus should return.',
+        description: 'Opens the Dialog and remembers where focus should return.',
       },
       {
         name: 'close',
@@ -2335,14 +2358,7 @@ export const apiReference: Readonly<{
         kind: 'method',
         type: '(restoreTarget?: HTMLElement) => void',
         defaultValue: null,
-        description: 'Toggles the modal Dialog.',
-      },
-      {
-        name: 'toggleMaximize',
-        kind: 'method',
-        type: '() => void',
-        defaultValue: null,
-        description: 'Toggles the maximized state and resets a previous drag offset.',
+        description: 'Toggles the Dialog.',
       },
     ],
     templates: [],
@@ -2397,10 +2413,46 @@ export const apiReference: Readonly<{
         description: 'Inner spacing of the Dialog surface.',
       },
       {
+        name: '--sui-dialog-background',
+        defaultValue: 'var(--color-base-100)',
+        exampleValue: null,
+        description: 'Background color of the Dialog surface.',
+      },
+      {
+        name: '--sui-dialog-color',
+        defaultValue: 'var(--color-base-content)',
+        exampleValue: null,
+        description: 'Text color of the Dialog surface.',
+      },
+      {
         name: '--sui-dialog-radius',
         defaultValue: 'var(--radius-box)',
         exampleValue: 'var(--radius-field)',
         description: 'Corner radius of the Dialog surface.',
+      },
+      {
+        name: '--sui-dialog-border-width',
+        defaultValue: 'var(--border)',
+        exampleValue: null,
+        description: 'Width of the border around the Dialog surface.',
+      },
+      {
+        name: '--sui-dialog-border-color',
+        defaultValue: 'var(--color-base-300)',
+        exampleValue: null,
+        description: 'Color of the border around the Dialog surface.',
+      },
+      {
+        name: '--sui-dialog-shadow',
+        defaultValue: '0 0.75rem 2rem rgb(0 0 0 / 12%)',
+        exampleValue: null,
+        description: 'Subtle shadow separating a floating Dialog from surrounding content.',
+      },
+      {
+        name: '--sui-dialog-z-index',
+        defaultValue: '1000',
+        exampleValue: null,
+        description: 'Stack level used by non-modal Dialogs.',
       },
       {
         name: '--sui-dialog-backdrop-color',
@@ -2408,7 +2460,59 @@ export const apiReference: Readonly<{
         exampleValue: 'rgb(0 0 0 / 40%)',
         description: 'Color of the native modal backdrop.',
       },
+      {
+        name: '--sui-dialog-viewport-gap',
+        defaultValue: '1rem',
+        exampleValue: null,
+        description: 'Minimum gap between the Dialog and viewport edges.',
+      },
+      {
+        name: '--sui-dialog-resize-min-width',
+        defaultValue: '18rem',
+        exampleValue: null,
+        description: 'Minimum width available during native resizing.',
+      },
+      {
+        name: '--sui-dialog-resize-min-height',
+        defaultValue: '10rem',
+        exampleValue: null,
+        description: 'Minimum height available during native resizing.',
+      },
+      {
+        name: '--sui-dialog-header-background',
+        defaultValue: 'var(--color-base-200)',
+        exampleValue: null,
+        description: 'Background of the default Dialog header.',
+      },
+      {
+        name: '--sui-dialog-header-color',
+        defaultValue: 'var(--sui-dialog-color)',
+        exampleValue: null,
+        description: 'Text and icon color of a neutral Dialog header.',
+      },
+      {
+        name: '--sui-dialog-header-padding',
+        defaultValue: '1rem 1.25rem',
+        exampleValue: null,
+        description: 'Spacing inside the Dialog header.',
+      },
+      {
+        name: '--sui-dialog-footer-padding',
+        defaultValue: '1rem 1.25rem',
+        exampleValue: null,
+        description: 'Spacing inside the Dialog footer.',
+      },
     ],
+  },
+  DialogBody: {
+    className: 'DialogBody',
+    declaration: 'DialogBody',
+    selector: '[suiDialogBody]',
+    description: 'Marks the scrollable content region of a structured Dialog.',
+    members: [],
+    templates: [],
+    types: [],
+    styles: [],
   },
   DialogClose: {
     className: 'DialogClose',
@@ -2435,14 +2539,41 @@ export const apiReference: Readonly<{
     types: [],
     styles: [],
   },
-  DialogDragHandle: {
-    className: 'DialogDragHandle',
-    declaration: 'DialogDragHandle',
-    selector: '[suiDialogDragHandle]',
-    description: 'Marks the region from which a draggable Dialog can be moved.',
+  DialogFooter: {
+    className: 'DialogFooter',
+    declaration: 'DialogFooter',
+    selector: '[suiDialogFooter]',
+    description: 'Marks the action region below a structured Dialog body.',
     members: [],
     templates: [],
     types: [],
+    styles: [],
+  },
+  DialogHeader: {
+    className: 'DialogHeader',
+    declaration: 'DialogHeader',
+    selector: 'header[suiDialogHeader]',
+    description: 'Marks the title and drag region of a structured Dialog.',
+    members: [
+      {
+        name: 'severity',
+        kind: 'input',
+        type: 'ThemeSeverity | null',
+        defaultValue: 'null',
+        description: 'Applies a semantic header color. Omit it to use the neutral header tokens.',
+      },
+    ],
+    templates: [],
+    types: [
+      {
+        name: 'ThemeSeverity',
+        kind: 'type',
+        declaration:
+          "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
+        description: 'Shared semantic color names provided by the theme.',
+        members: [],
+      },
+    ],
     styles: [],
   },
   DialogTrigger: {
@@ -2595,11 +2726,11 @@ export const apiReference: Readonly<{
         description: 'Controls the Drawer panel width.',
       },
       {
-        name: 'responsiveAt',
+        name: 'persistentAt',
         kind: 'input',
-        type: 'DrawerResponsiveAt | null',
+        type: 'DrawerPersistentAt | null',
         defaultValue: 'null',
-        description: 'Makes the side panel persistent at and above a viewport breakpoint.',
+        description: 'Makes the panel persistent at and above a viewport breakpoint.',
       },
       {
         name: 'closed',
@@ -2647,17 +2778,17 @@ export const apiReference: Readonly<{
         members: [],
       },
       {
+        name: 'DrawerPersistentAt',
+        kind: 'type',
+        declaration: "type DrawerPersistentAt = 'sm' | 'md' | 'lg' | 'xl';",
+        description: 'Viewport width at which a Drawer becomes a persistent panel.',
+        members: [],
+      },
+      {
         name: 'DrawerPlacement',
         kind: 'type',
         declaration: "type DrawerPlacement = 'start' | 'end';",
         description: 'Edge from which a Drawer enters the viewport.',
-        members: [],
-      },
-      {
-        name: 'DrawerResponsiveAt',
-        kind: 'type',
-        declaration: "type DrawerResponsiveAt = 'sm' | 'md' | 'lg' | 'xl';",
-        description: 'Viewport width at which a Drawer becomes a persistent sidebar.',
         members: [],
       },
       {
@@ -2705,7 +2836,7 @@ export const apiReference: Readonly<{
     className: 'DrawerContent',
     declaration: 'DrawerContent',
     selector: '[suiDrawerContent]',
-    description: 'Marks the optional main content area used by a persistent responsive Drawer layout.',
+    description: 'Marks the optional main content area arranged beside a persistent Drawer panel.',
     members: [],
     templates: [],
     types: [],
@@ -6695,7 +6826,20 @@ export const apiReference: Readonly<{
         members: [],
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-pagination-action-color',
+        defaultValue: 'color-mix(in oklab, var(--color-base-content) 65%, transparent)',
+        exampleValue: 'color-mix(in oklab, var(--color-base-content) 75%, transparent)',
+        description: 'Foreground color of inactive page and navigation actions.',
+      },
+      {
+        name: '--sui-pagination-hover-mix',
+        defaultValue: '10%',
+        exampleValue: '15%',
+        description: 'Semantic color proportion used by the soft hover background.',
+      },
+    ],
   },
   Progress: {
     className: 'Progress',
@@ -8589,18 +8733,18 @@ export const apiReference: Readonly<{
         description: 'Selects tabs on focus or waits for explicit activation.',
       },
       {
-        name: 'focusMode',
-        kind: 'input',
-        type: 'TabsFocusMode',
-        defaultValue: "'roving'",
-        description: 'Chooses roving tabindex or active-descendant focus management.',
-      },
-      {
         name: 'ariaLabel',
         kind: 'input',
-        type: 'string',
+        type: 'string | null',
         defaultValue: "'Tabs'",
-        description: 'Provides the accessible name of the tab list.',
+        description: 'Provides an accessible name when the tab list has no visible heading.',
+      },
+      {
+        name: 'ariaLabelledby',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'References a visible heading that names the tab list.',
       },
       {
         name: 'wrap',
@@ -8613,8 +8757,8 @@ export const apiReference: Readonly<{
         name: 'softDisabled',
         kind: 'input',
         type: 'boolean',
-        defaultValue: 'true',
-        description: 'Allows disabled tabs to receive focus without being activated.',
+        defaultValue: 'false',
+        description: 'Keeps disabled tabs in the arrow-key sequence while still preventing activation.',
       },
       {
         name: 'disabled',
@@ -8655,8 +8799,8 @@ export const apiReference: Readonly<{
             name: 'preserveContent',
             kind: 'input',
             type: 'boolean',
-            defaultValue: 'true',
-            description: 'Keeps an inactive panel instantiated when enabled.',
+            defaultValue: 'false',
+            description: 'Keeps the panel instantiated after its first activation.',
           },
         ],
       },
@@ -8674,13 +8818,6 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type Orientation = 'horizontal' | 'vertical';",
         description: 'Supported layout directions.',
-        members: [],
-      },
-      {
-        name: 'TabsFocusMode',
-        kind: 'type',
-        declaration: "type TabsFocusMode = 'roving' | 'activedescendant';",
-        description: 'Keyboard focus strategy used by the tab list.',
         members: [],
       },
       {
@@ -8726,7 +8863,32 @@ export const apiReference: Readonly<{
         members: [],
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-tabs-border-color',
+        defaultValue: 'var(--color-base-300)',
+        exampleValue: null,
+        description: 'Divider and panel border color.',
+      },
+      {
+        name: '--sui-tabs-panel-background',
+        defaultValue: 'var(--color-base-100)',
+        exampleValue: null,
+        description: 'Background of a lifted tab panel.',
+      },
+      {
+        name: '--sui-tabs-panel-padding',
+        defaultValue: '1rem',
+        exampleValue: null,
+        description: 'Space inside each tab panel.',
+      },
+      {
+        name: '--sui-tabs-disabled-opacity',
+        defaultValue: '0.5',
+        exampleValue: null,
+        description: 'Opacity used for disabled tabs.',
+      },
+    ],
   },
   Textarea: {
     className: 'Textarea',

@@ -213,7 +213,7 @@ function readMethodType(method: ts.MethodDeclaration): string {
 
 function readDeclaredMembers(node: ts.ClassDeclaration): ApiMember[] {
   return node.members.flatMap((member: ts.ClassElement): ApiMember[] => {
-    if (!member.name || !isPublic(member)) return [];
+    if (!member.name || !isPublic(member) || isInternal(member)) return [];
     const name: string = member.name.getText();
 
     if (ts.isPropertyDeclaration(member)) {

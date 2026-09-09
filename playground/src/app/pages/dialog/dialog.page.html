@@ -11,38 +11,45 @@
   </section>
   <section class="space-y-6">
     <div class="space-y-2">
-      <h2 class="text-2xl font-bold tracking-tight">Confirmation</h2>
-      <p class="text-base-content/60">Open a native modal from a button and return a value from its actions.</p>
+      <h2 class="text-2xl font-bold tracking-tight">Basic modal</h2>
+      <p class="text-base-content/60">Open a native modal, close it from an action, and restore focus to its trigger.</p>
     </div>
-    <pg-example-code [html]="examples.confirmation.html" [typescript]="examples.confirmation.typescript"
-      ><ng-template pgExamplePreview><pg-dialog-confirmation-example /></ng-template
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
+      ><ng-template pgExamplePreview><pg-dialog-basic-example /></ng-template
     ></pg-example-code>
   </section>
   <section class="space-y-6">
     <div class="space-y-2">
-      <h2 class="text-2xl font-bold tracking-tight">Desktop window behavior</h2>
-      <p class="text-base-content/60">Opt into positioning, drag, resize, and maximize without changing the basic API.</p>
+      <h2 class="text-2xl font-bold tracking-tight">Movable workspace</h2>
+      <p class="text-base-content/60">
+        Combine constrained dragging, resizing, explicit dismissal, and a non-modal surface that leaves the page scrollable. Use
+        <code>position</code> to start in the center, at an edge, or in a corner. This example starts vertically centered at the right edge
+        and can then be moved from its header.
+      </p>
     </div>
-    <pg-example-code [html]="examples.workspace.html" [typescript]="examples.workspace.typescript"
-      ><ng-template pgExamplePreview><pg-dialog-workspace-example /></ng-template
+    <pg-example-code [css]="examples.advanced.css" [html]="examples.advanced.html" [typescript]="examples.advanced.typescript"
+      ><ng-template pgExamplePreview><pg-dialog-advanced-example /></ng-template
     ></pg-example-code>
   </section>
   <section class="space-y-6">
     <div class="space-y-2">
-      <h2 class="text-2xl font-bold tracking-tight">Controlled state</h2>
-      <p class="text-base-content/60">Bind <code>open</code> when application state controls the modal task.</p>
+      <h2 class="text-2xl font-bold tracking-tight">Form dialog</h2>
+      <p class="text-base-content/60">Use the same controlled state with a larger, structured form.</p>
     </div>
-    <pg-example-code [html]="examples.controlled.html" [typescript]="examples.controlled.typescript"
-      ><ng-template pgExamplePreview><pg-dialog-controlled-example /></ng-template
+    <pg-example-code [css]="examples.form.css" [html]="examples.form.html" [typescript]="examples.form.typescript"
+      ><ng-template pgExamplePreview><pg-dialog-form-example /></ng-template
     ></pg-example-code>
   </section>
   <section class="space-y-6">
     <div class="space-y-2">
-      <h2 class="text-2xl font-bold tracking-tight">Required action</h2>
-      <p class="text-base-content/60">Disable implicit dismissal only when leaving the task would be invalid.</p>
+      <h2 class="text-2xl font-bold tracking-tight">Dynamic dialog with Angular CDK</h2>
+      <p class="text-base-content/60">
+        Use CDK Dialog directly when content must be created from application logic. The SUSHI panel class applies the same surface and
+        tokens without adding another service API.
+      </p>
     </div>
-    <pg-example-code [html]="examples.required.html" [typescript]="examples.required.typescript"
-      ><ng-template pgExamplePreview><pg-dialog-required-example /></ng-template
-    ></pg-example-code>
+    <pg-example-code [html]="examples.dynamic.html" [typescript]="examples.dynamic.typescript">
+      <ng-template pgExamplePreview><pg-dialog-dynamic-example /></ng-template>
+    </pg-example-code>
   </section>
 </main>

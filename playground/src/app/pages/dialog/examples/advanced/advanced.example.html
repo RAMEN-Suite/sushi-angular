@@ -1,0 +1,21 @@
+<button suiButton type="button" variant="outlined" [suiDialogTrigger]="prepDialog">Open prep board</button>
+
+<sui-dialog
+  #prepDialog="suiDialog"
+  class="prep-dialog"
+  ariaLabelledby="prep-dialog-title"
+  draggable
+  resizable
+  position="right"
+  [modal]="false"
+  [closeOnBackdrop]="false"
+  [closeOnEscape]="false">
+  <header suiDialogHeader>
+    <h2 id="prep-dialog-title" class="text-lg font-semibold">Prep board</h2>
+  </header>
+  <div suiDialogBody>
+    <p class="min-h-32 text-base-content/70">
+      Drag the header or resize from the lower corner. Only Close dismisses this task.
+    </p>
+  </div>
+</sui-dialog>

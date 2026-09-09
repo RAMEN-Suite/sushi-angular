@@ -1,35 +1,41 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { CdkDrag } from '@angular/cdk/drag-drop';
+import { By } from '@angular/platform-browser';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { DialogClose } from '../dialog-close.directive';
-import { DialogDragHandle } from '../dialog-drag-handle.directive';
+import { DialogHeader } from '../dialog-header.directive';
+import { DialogBody, DialogFooter } from '../dialog-slots.directive';
 import { DialogTrigger } from '../dialog-trigger.directive';
-import { Dialog } from '../dialog.directive';
+import { Dialog } from '../dialog.component';
 import { DialogCloseEvent } from '../dialog.interfaces';
 
 @Component({
-  imports: [Dialog, DialogClose, DialogDragHandle, DialogTrigger],
+  imports: [Dialog, DialogBody, DialogClose, DialogFooter, DialogHeader, DialogTrigger],
   template: `
     <button data-trigger [suiDialogTrigger]="dialog" [disabled]="triggerDisabled()">Open dialog</button>
-    <dialog
-      suiDialog
+    <sui-dialog
       #dialog="suiDialog"
-      aria-labelledby="dialog-title"
+      ariaLabelledby="dialog-title"
       [closeOnEscape]="dismissible()"
       [closeOnBackdrop]="dismissible()"
       [modal]="modal()"
       [position]="position()"
       [draggable]="draggable()"
+      [constrainToViewport]="constrainToViewport()"
       [resizable]="resizable()"
       [(open)]="open"
       (closed)="closed.push($event)"
     >
-      <h2 id="dialog-title" suiDialogDragHandle>Delete project?</h2>
-      <button data-cancel [suiDialogClose]="dialog">Cancel</button>
-      <button data-confirm [suiDialogClose]="dialog" suiDialogCloseValue="confirmed">Delete</button>
-    </dialog>
+      <header suiDialogHeader><h2 id="dialog-title">Delete project?</h2></header>
+      <div suiDialogBody>Dialog content</div>
+      <div suiDialogFooter>
+        <button data-cancel [suiDialogClose]="dialog">Cancel</button>
+        <button data-confirm [suiDialogClose]="dialog" suiDialogCloseValue="confirmed">Delete</button>
+      </div>
+    </sui-dialog>
   `,
 })
 class DialogHost {
@@ -38,6 +44,7 @@ class DialogHost {
   public readonly triggerDisabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly modal: WritableSignal<boolean> = signal<boolean>(true);
   public readonly draggable: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly constrainToViewport: WritableSignal<boolean> = signal<boolean>(true);
   public readonly resizable: WritableSignal<boolean> = signal<boolean>(false);
   public readonly position: WritableSignal<'bottom-right' | 'center'> = signal<'bottom-right' | 'center'>('center');
   public readonly closed: DialogCloseEvent[] = [];
@@ -107,12 +114,50 @@ describe('Dialog dismissal', (): void => {
     fixture.componentInstance.open.set(true);
     fixture.detectChanges();
 
-    dialog.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    vi.spyOn(dialog, 'getBoundingClientRect').mockReturnValue({
+      bottom: 300,
+      height: 200,
+      left: 100,
+      right: 400,
+      top: 100,
+      width: 300,
+      x: 100,
+      y: 100,
+      toJSON: (): object => ({}),
+    });
+
+    dialog.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, clientX: 50, clientY: 50 }));
     fixture.detectChanges();
 
     expect(fixture.componentInstance.closed).toEqual([{ reason: 'backdrop', returnValue: '' }]);
   });
+});
 
+describe('Dialog pointer boundaries', (): void => {
+  it('does not treat the Dialog surface as its backdrop', (): void => {
+    const fixture: ComponentFixture<DialogHost> = render(DialogHost);
+    const dialog: HTMLDialogElement = query(fixture, 'dialog');
+    fixture.componentInstance.open.set(true);
+    fixture.detectChanges();
+    vi.spyOn(dialog, 'getBoundingClientRect').mockReturnValue({
+      bottom: 300,
+      height: 200,
+      left: 100,
+      right: 400,
+      top: 100,
+      width: 300,
+      x: 100,
+      y: 100,
+      toJSON: (): object => ({}),
+    });
+
+    dialog.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, clientX: 200, clientY: 200 }));
+    expect(dialog.open).toBe(true);
+    expect(fixture.componentInstance.closed).toEqual([]);
+  });
+});
+
+describe('Dialog required interaction', (): void => {
   it('prevents cancellation when dismissal is disabled', (): void => {
     const fixture: ComponentFixture<DialogHost> = render(DialogHost);
     const dialog: HTMLDialogElement = query(fixture, 'dialog');
@@ -129,6 +174,17 @@ describe('Dialog dismissal', (): void => {
 });
 
 describe('Dialog layout capabilities', (): void => {
+  it('enables header dragging only when requested', (): void => {
+    const fixture: ComponentFixture<DialogHost> = render(DialogHost);
+    const dialogDebugElement: DebugElement = fixture.debugElement.query(By.directive(CdkDrag));
+    const drag: CdkDrag = dialogDebugElement.injector.get(CdkDrag);
+
+    expect(drag.disabled).toBe(true);
+    fixture.componentInstance.draggable.set(true);
+    fixture.detectChanges();
+    expect(drag.disabled).toBe(false);
+  });
+
   it('supports non-modal opening and opt-in layout capabilities', (): void => {
     const fixture: ComponentFixture<DialogHost> = render(DialogHost);
     const dialog: HTMLDialogElement = query(fixture, 'dialog');
@@ -144,16 +200,28 @@ describe('Dialog layout capabilities', (): void => {
     expect(dialog.classList).toContain('sui-dialog--resizable');
   });
 
-  it('toggles maximized state through the public API', (): void => {
+  it('constrains dragging to the viewport by default and supports opting out', (): void => {
     const fixture: ComponentFixture<DialogHost> = render(DialogHost);
-    const dialogDebugElement: DebugElement = fixture.debugElement.children[1];
-    const directive: Dialog = dialogDebugElement.injector.get(Dialog);
+    const dialogDebugElement: DebugElement = fixture.debugElement.query(By.directive(CdkDrag));
+    const drag: CdkDrag = dialogDebugElement.injector.get(CdkDrag);
 
-    directive.toggleMaximize();
+    expect(drag.boundaryElement).toBe(document.documentElement);
+    fixture.componentInstance.constrainToViewport.set(false);
     fixture.detectChanges();
+    expect(drag.boundaryElement).toBe('');
+  });
+});
 
-    expect(directive.maximized()).toBe(true);
-    expect((dialogDebugElement.nativeElement as HTMLDialogElement).classList).toContain('sui-dialog--maximized');
+describe('Dialog header', (): void => {
+  it('provides a default close action', (): void => {
+    const fixture: ComponentFixture<DialogHost> = render(DialogHost);
+    fixture.componentInstance.open.set(true);
+    fixture.detectChanges();
+    const dialog: HTMLDialogElement = query(fixture, 'dialog');
+
+    (query(fixture, '[aria-label="Close"]') as HTMLButtonElement).click();
+    fixture.detectChanges();
+    expect(dialog.open).toBe(false);
   });
 });
 

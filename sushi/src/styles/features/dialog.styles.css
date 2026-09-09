@@ -1,5 +1,10 @@
 @layer components {
+  .sui-dialog-host,
   .sui-dialog {
+    -webkit-user-drag: none;
+  }
+
+  :where(.sui-dialog, .sui-dynamic-dialog) {
     /**
      * Preferred width of a Dialog before viewport constraints apply.
      * @example 36rem
@@ -10,86 +15,285 @@
      * @example 2rem
      */
     --sui-dialog-padding: 1.5rem;
+    /** Background color of the Dialog surface. */
+    --sui-dialog-background: var(--color-base-100);
+    /** Text color of the Dialog surface. */
+    --sui-dialog-color: var(--color-base-content);
     /**
      * Corner radius of the Dialog surface.
      * @example var(--radius-field)
      */
     --sui-dialog-radius: var(--radius-box);
+    /** Width of the border around the Dialog surface. */
+    --sui-dialog-border-width: var(--border);
+    /** Color of the border around the Dialog surface. */
+    --sui-dialog-border-color: var(--color-base-300);
+    /** Subtle shadow separating a floating Dialog from surrounding content. */
+    --sui-dialog-shadow: 0 0.75rem 2rem rgb(0 0 0 / 12%);
+    /** Stack level used by non-modal Dialogs. */
+    --sui-dialog-z-index: 1000;
     /**
      * Color of the native modal backdrop.
      * @example rgb(0 0 0 / 40%)
      */
     --sui-dialog-backdrop-color: rgb(0 0 0 / 55%);
+    /** Minimum gap between the Dialog and viewport edges. */
+    --sui-dialog-viewport-gap: 1rem;
+    /** Minimum width available during native resizing. */
+    --sui-dialog-resize-min-width: 18rem;
+    /** Minimum height available during native resizing. */
+    --sui-dialog-resize-min-height: 10rem;
+    /** Background of the default Dialog header. */
+    --sui-dialog-header-background: var(--color-base-200);
+    /** Text and icon color of a neutral Dialog header. */
+    --sui-dialog-header-color: var(--sui-dialog-color);
+    /** Spacing inside the Dialog header. */
+    --sui-dialog-header-padding: 1rem 1.25rem;
+    /** Spacing inside the Dialog footer. */
+    --sui-dialog-footer-padding: 1rem 1.25rem;
+  }
 
+  .sui-dialog {
+    position: fixed;
+    z-index: var(--sui-dialog-z-index);
     inset: 0;
     margin: auto;
-    width: min(var(--sui-dialog-width), calc(100vw - 2rem));
-    max-width: calc(100vw - 2rem);
-    max-height: calc(100dvh - 2rem);
+    width: min(var(--sui-dialog-width), calc(100vw - 2 * var(--sui-dialog-viewport-gap)));
+    max-width: calc(100vw - 2 * var(--sui-dialog-viewport-gap));
+    max-height: calc(100dvh - 2 * var(--sui-dialog-viewport-gap));
+    box-sizing: border-box;
     padding: var(--sui-dialog-padding);
     overflow: auto;
-    color: var(--color-base-content);
-    background-color: var(--color-base-100);
-    border: 0;
+    color: var(--sui-dialog-color);
+    background-color: var(--sui-dialog-background);
+    border: var(--sui-dialog-border-width) solid var(--sui-dialog-border-color);
     border-radius: var(--sui-dialog-radius);
-    box-shadow: none;
+    box-shadow: var(--sui-dialog-shadow);
   }
 
   .sui-dialog[data-position='top'] {
-    margin: 1rem auto auto;
+    margin: var(--sui-dialog-viewport-gap) auto auto;
   }
 
   .sui-dialog[data-position='bottom'] {
-    margin: auto auto 1rem;
+    margin: auto auto var(--sui-dialog-viewport-gap);
   }
 
   .sui-dialog[data-position='left'] {
-    margin: auto auto auto 1rem;
+    margin: auto auto auto var(--sui-dialog-viewport-gap);
   }
 
   .sui-dialog[data-position='right'] {
-    margin: auto 1rem auto auto;
+    margin: auto var(--sui-dialog-viewport-gap) auto auto;
   }
 
   .sui-dialog[data-position='top-left'] {
-    margin: 1rem auto auto 1rem;
+    margin: var(--sui-dialog-viewport-gap) auto auto var(--sui-dialog-viewport-gap);
   }
 
   .sui-dialog[data-position='top-right'] {
-    margin: 1rem 1rem auto auto;
+    margin: var(--sui-dialog-viewport-gap) var(--sui-dialog-viewport-gap) auto auto;
   }
 
   .sui-dialog[data-position='bottom-left'] {
-    margin: auto auto 1rem 1rem;
+    margin: auto auto var(--sui-dialog-viewport-gap) var(--sui-dialog-viewport-gap);
   }
 
   .sui-dialog[data-position='bottom-right'] {
-    margin: auto 1rem 1rem auto;
+    margin: auto var(--sui-dialog-viewport-gap) var(--sui-dialog-viewport-gap) auto;
   }
 
   .sui-dialog--resizable {
-    min-width: min(18rem, calc(100vw - 2rem));
-    min-height: 10rem;
+    min-width: min(var(--sui-dialog-resize-min-width), calc(100vw - 2 * var(--sui-dialog-viewport-gap)));
+    min-height: var(--sui-dialog-resize-min-height);
     overflow: auto;
     resize: both;
   }
 
-  .sui-dialog--maximized {
-    width: calc(100vw - 2rem);
-    height: calc(100dvh - 2rem);
-    max-width: none;
-    max-height: none;
-    margin: auto;
-    overflow: auto;
-    resize: none;
+  .sui-dialog[open]:has(.sui-dialog-header, > .sui-dialog-body, > .sui-dialog-footer) {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    padding: 0;
+    overflow: hidden;
   }
 
-  .sui-dialog-drag-handle {
+  .sui-dialog-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+    padding: var(--sui-dialog-header-padding);
+    padding-inline-end: 4rem;
+    color: var(--sui-dialog-header-color);
+    background: var(--sui-dialog-header-background);
+    border-bottom: var(--sui-dialog-border-width) solid var(--sui-dialog-border-color);
+  }
+
+  .sui-dialog-drag-region {
+    min-width: 0;
+  }
+
+  .sui-dialog[data-draggable='true'] > .sui-dialog-drag-region {
     cursor: move;
     touch-action: none;
   }
 
+  .sui-dialog-header[data-severity='primary'] {
+    --sui-dialog-header-background: var(--color-primary);
+    --sui-dialog-header-color: var(--color-primary-content);
+  }
+
+  .sui-dialog-header[data-severity='secondary'] {
+    --sui-dialog-header-background: var(--color-secondary);
+    --sui-dialog-header-color: var(--color-secondary-content);
+  }
+
+  .sui-dialog-header[data-severity='accent'] {
+    --sui-dialog-header-background: var(--color-accent);
+    --sui-dialog-header-color: var(--color-accent-content);
+  }
+
+  .sui-dialog-header[data-severity='neutral'] {
+    --sui-dialog-header-background: var(--color-neutral);
+    --sui-dialog-header-color: var(--color-neutral-content);
+  }
+
+  .sui-dialog-header[data-severity='info'] {
+    --sui-dialog-header-background: var(--color-info);
+    --sui-dialog-header-color: var(--color-info-content);
+  }
+
+  .sui-dialog-header[data-severity='success'] {
+    --sui-dialog-header-background: var(--color-success);
+    --sui-dialog-header-color: var(--color-success-content);
+  }
+
+  .sui-dialog-header[data-severity='warning'] {
+    --sui-dialog-header-background: var(--color-warning);
+    --sui-dialog-header-color: var(--color-warning-content);
+  }
+
+  .sui-dialog-header[data-severity='error'] {
+    --sui-dialog-header-background: var(--color-error);
+    --sui-dialog-header-color: var(--color-error-content);
+  }
+
+  .sui-dialog-header__content {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .sui-dialog-header__actions {
+    position: absolute;
+    z-index: 1;
+    top: 0.75rem;
+    right: 1rem;
+    display: flex;
+    flex: none;
+    gap: 0.25rem;
+  }
+
+  .sui-dialog:has(.sui-dialog-header[data-severity='primary']) > .sui-dialog-header__actions {
+    color: var(--color-primary-content);
+  }
+
+  .sui-dialog:has(.sui-dialog-header[data-severity='secondary']) > .sui-dialog-header__actions {
+    color: var(--color-secondary-content);
+  }
+
+  .sui-dialog:has(.sui-dialog-header[data-severity='accent']) > .sui-dialog-header__actions {
+    color: var(--color-accent-content);
+  }
+
+  .sui-dialog:has(.sui-dialog-header[data-severity='neutral']) > .sui-dialog-header__actions {
+    color: var(--color-neutral-content);
+  }
+
+  .sui-dialog:has(.sui-dialog-header[data-severity='info']) > .sui-dialog-header__actions {
+    color: var(--color-info-content);
+  }
+
+  .sui-dialog:has(.sui-dialog-header[data-severity='success']) > .sui-dialog-header__actions {
+    color: var(--color-success-content);
+  }
+
+  .sui-dialog:has(.sui-dialog-header[data-severity='warning']) > .sui-dialog-header__actions {
+    color: var(--color-warning-content);
+  }
+
+  .sui-dialog:has(.sui-dialog-header[data-severity='error']) > .sui-dialog-header__actions {
+    color: var(--color-error-content);
+  }
+
+  .sui-dialog-header__action {
+    display: inline-grid;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius-field);
+    place-items: center;
+  }
+
+  .sui-dialog-header__action:hover {
+    background: color-mix(in oklab, currentColor 12%, transparent);
+  }
+
+  .sui-dialog-header__action:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  .sui-dialog-header__action svg {
+    width: 1.125rem;
+    height: 1.125rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+
+  .sui-dialog-body {
+    min-height: 0;
+    padding: var(--sui-dialog-padding);
+    overflow: auto;
+  }
+
+  .sui-dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: var(--sui-dialog-footer-padding);
+    border-top: var(--sui-dialog-border-width) solid var(--sui-dialog-border-color);
+  }
+
   .sui-dialog::backdrop {
     background-color: var(--sui-dialog-backdrop-color);
+  }
+
+  .sui-dynamic-dialog .cdk-dialog-container {
+    width: 100%;
+    max-height: inherit;
+    padding: var(--sui-dialog-padding);
+    overflow: auto;
+    color: var(--sui-dialog-color);
+    background-color: var(--sui-dialog-background);
+    border: var(--sui-dialog-border-width) solid var(--sui-dialog-border-color);
+    border-radius: var(--sui-dialog-radius);
+    box-shadow: var(--sui-dialog-shadow);
+  }
+
+  .sui-dynamic-dialog {
+    width: min(var(--sui-dialog-width), calc(100vw - 2 * var(--sui-dialog-viewport-gap)));
+    max-width: calc(100vw - 2 * var(--sui-dialog-viewport-gap));
+    max-height: calc(100dvh - 2 * var(--sui-dialog-viewport-gap));
+  }
+
+  .sui-dialog-backdrop {
+    background-color: var(--sui-dialog-backdrop-color, rgb(0 0 0 / 55%));
   }
 }

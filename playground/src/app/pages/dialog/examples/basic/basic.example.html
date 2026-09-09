@@ -1,0 +1,8 @@
+<button suiButton type="button" [suiDialogTrigger]="menuDialog">View today’s menu</button>
+
+<sui-dialog #menuDialog="suiDialog" ariaLabelledby="menu-dialog-title">
+  <header suiDialogHeader><h2 id="menu-dialog-title" class="text-lg font-semibold">Today’s menu</h2></header>
+  <div suiDialogBody>
+    <p class="text-base-content/70">Salmon nigiri, miso ramen, and matcha mochi are available until 22:00.</p>
+  </div>
+</sui-dialog>
