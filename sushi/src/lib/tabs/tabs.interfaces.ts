@@ -12,5 +12,3 @@ export type TabsOrientation = Orientation;
 export type TabsPlacement = 'top' | 'bottom';
 /** Determines whether focus or explicit activation selects a tab. */
 export type TabsSelectionMode = 'follow' | 'explicit';
-/** Keyboard focus strategy used by the tab list. */
-export type TabsFocusMode = 'roving' | 'activedescendant';

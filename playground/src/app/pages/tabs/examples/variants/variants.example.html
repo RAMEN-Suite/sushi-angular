@@ -1,0 +1,11 @@
+<div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+  @for (variant of variants; track variant) {
+    <div class="min-w-0">
+      <p class="mb-2 text-sm text-base-content/60">{{ variant }}</p>
+      <sui-tabs [(value)]="tab" [variant]="variant" size="sm" [ariaLabel]="variant + ' tabs'">
+        <ng-template suiTab value="menu" label="Menu">Lunch menu</ng-template>
+        <ng-template suiTab value="orders" label="Orders">Open orders</ng-template>
+      </sui-tabs>
+    </div>
+  }
+</div>

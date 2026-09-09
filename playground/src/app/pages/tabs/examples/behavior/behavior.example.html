@@ -5,9 +5,7 @@
   variant="border"
   size="sm"
   selectionMode="explicit"
-  focusMode="roving"
   [wrap]="false"
-  [softDisabled]="false"
   ariaLabel="Project settings">
   <ng-template suiTab value="general" label="General">
     <h3 class="font-semibold">General settings</h3>
@@ -17,8 +15,8 @@
     <h3 class="font-semibold">Team access</h3>
     <p class="mt-1 text-sm text-base-content/60">Review who can edit and publish this project.</p>
   </ng-template>
-  <ng-template suiTab value="advanced" label="Advanced" [preserveContent]="false">
+  <ng-template suiTab value="advanced" label="Advanced" preserveContent>
     <h3 class="font-semibold">Advanced settings</h3>
-    <p class="mt-1 text-sm text-base-content/60">This panel is recreated whenever it becomes active.</p>
+    <p class="mt-1 text-sm text-base-content/60">This panel stays mounted after its first activation.</p>
   </ng-template>
 </sui-tabs>

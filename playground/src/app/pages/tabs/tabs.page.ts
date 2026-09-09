@@ -9,20 +9,20 @@ import { TabsBasicExample } from './examples/basic/basic.example';
 import behaviorHtml from './examples/behavior/behavior.example.html';
 import * as behaviorTs from './examples/behavior/behavior.example.ts' with { loader: 'text' };
 import { TabsBehaviorExample } from './examples/behavior/behavior.example';
-import workspaceHtml from './examples/workspace/workspace.example.html';
-import * as workspaceTs from './examples/workspace/workspace.example.ts' with { loader: 'text' };
-import { TabsWorkspaceExample } from './examples/workspace/workspace.example';
+import variantsHtml from './examples/variants/variants.example.html';
+import * as variantsTs from './examples/variants/variants.example.ts' with { loader: 'text' };
+import { TabsVariantsExample } from './examples/variants/variants.example';
 
 @Component({
   selector: 'pg-tabs-page',
-  imports: [Badge, ExampleCode, ExamplePreview, TabsBasicExample, TabsBehaviorExample, TabsWorkspaceExample],
+  imports: [Badge, ExampleCode, ExamplePreview, TabsBasicExample, TabsBehaviorExample, TabsVariantsExample],
   templateUrl: './tabs.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsPage {
-  protected readonly examples: Readonly<Record<'basic' | 'behavior' | 'workspace', ExampleSource>> = {
+  protected readonly examples: Readonly<Record<'basic' | 'behavior' | 'variants', ExampleSource>> = {
     basic: { html: basicHtml, typescript: textSource(basicTs) },
     behavior: { html: behaviorHtml, typescript: textSource(behaviorTs) },
-    workspace: { html: workspaceHtml, typescript: textSource(workspaceTs) },
+    variants: { html: variantsHtml, typescript: textSource(variantsTs) },
   };
 }

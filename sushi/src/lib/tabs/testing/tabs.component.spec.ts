@@ -4,31 +4,36 @@ import { describe, expect, it } from 'vitest';
 import { press, query, queryAll, render } from '../../../../testing/test-utils';
 import { Tab } from '../tab.directive';
 import { Tabs } from '../tabs.component';
-import type { TabsFocusMode, TabsOrientation, TabsSelectionMode, TabsValue } from '../tabs.interfaces';
+import type { TabsOrientation, TabsSelectionMode, TabsValue } from '../tabs.interfaces';
 
 @Component({
   imports: [Tab, Tabs],
   template: `
+    <h2 id="section-heading">Recipe sections</h2>
     <sui-tabs
-      ariaLabel="Recipe sections"
+      [ariaLabel]="ariaLabelledby() ? null : 'Recipe sections'"
+      [ariaLabelledby]="ariaLabelledby()"
       [disabled]="disabled()"
-      [focusMode]="focusMode()"
       [orientation]="orientation()"
       [selectionMode]="selectionMode()"
+      [softDisabled]="softDisabled()"
+      [wrap]="wrap()"
       [(value)]="value"
     >
       <ng-template suiTab value="overview" label="Overview"><p data-panel="overview">Summary</p></ng-template>
-      <ng-template suiTab value="steps" label="Steps"><p data-panel="steps">Instructions</p></ng-template>
+      <ng-template suiTab value="steps" label="Steps" preserveContent><p data-panel="steps">Instructions</p></ng-template>
       <ng-template suiTab value="history" label="History" disabled><p data-panel="history">Archive</p></ng-template>
     </sui-tabs>
   `,
 })
 class TabsHost {
+  public readonly ariaLabelledby: WritableSignal<string | null> = signal<string | null>(null);
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
-  public readonly focusMode: WritableSignal<TabsFocusMode> = signal<TabsFocusMode>('roving');
   public readonly orientation: WritableSignal<TabsOrientation> = signal<TabsOrientation>('horizontal');
   public readonly selectionMode: WritableSignal<TabsSelectionMode> = signal<TabsSelectionMode>('follow');
+  public readonly softDisabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly value: WritableSignal<TabsValue> = signal<TabsValue>('overview');
+  public readonly wrap: WritableSignal<boolean> = signal<boolean>(true);
 }
 
 describe('Tabs semantics and model', (): void => {
@@ -55,6 +60,31 @@ describe('Tabs semantics and model', (): void => {
     expect(fixture.componentInstance.value()).toBe('steps');
     expect(tabs[1].getAttribute('aria-selected')).toBe('true');
     expect(query(fixture, '[data-panel="steps"]').textContent).toBe('Instructions');
+  });
+
+  it('uses a visible label instead of a redundant aria-label', (): void => {
+    const fixture: ComponentFixture<TabsHost> = render(TabsHost);
+    fixture.componentInstance.ariaLabelledby.set('section-heading');
+    fixture.detectChanges();
+    const list: Element = query(fixture, '[role="tablist"]');
+
+    expect(list.getAttribute('aria-label')).toBeNull();
+    expect(list.getAttribute('aria-labelledby')).toBe('section-heading');
+  });
+});
+
+describe('Tabs panel lifecycle', (): void => {
+  it('destroys inactive content by default and preserves it on request', (): void => {
+    const fixture: ComponentFixture<TabsHost> = render(TabsHost);
+    const host: HTMLElement = fixture.nativeElement as HTMLElement;
+    const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
+    tabs[1].click();
+    fixture.detectChanges();
+
+    expect(host.querySelector('[data-panel="overview"]')).toBeNull();
+    tabs[0].click();
+    fixture.detectChanges();
+    expect(host.querySelector('[data-panel="steps"]')).not.toBeNull();
   });
 });
 
@@ -98,10 +128,36 @@ describe('Tabs keyboard behavior', (): void => {
   });
 });
 
-describe('Tabs disabled behavior', (): void => {
-  it('keeps an item-disabled tab focusable without activation', (): void => {
+describe('Tabs navigation boundaries', (): void => {
+  it('skips disabled tabs during arrow navigation', (): void => {
     const fixture: ComponentFixture<TabsHost> = render(TabsHost);
     const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
+    tabs[1].focus();
+    press(tabs[1], 'ArrowRight');
+    fixture.detectChanges();
+
+    expect(document.activeElement).not.toBe(tabs[2]);
+    expect(document.activeElement).toBe(tabs[1]);
+    expect(fixture.componentInstance.value()).toBe('steps');
+  });
+});
+
+describe('Tabs disabled behavior', (): void => {
+  it('hard-disables an item by default', (): void => {
+    const fixture: ComponentFixture<TabsHost> = render(TabsHost);
+    const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
+
+    expect(tabs[2].getAttribute('aria-disabled')).toBe('true');
+    expect(tabs[2].tabIndex).toBe(-1);
+    tabs[2].click();
+    expect(fixture.componentInstance.value()).toBe('overview');
+  });
+
+  it('supports discoverable soft-disabled tabs as an opt-in', (): void => {
+    const fixture: ComponentFixture<TabsHost> = render(TabsHost);
+    const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
+    fixture.componentInstance.softDisabled.set(true);
+    fixture.detectChanges();
     tabs[2].focus();
     tabs[2].click();
 
@@ -118,5 +174,6 @@ describe('Tabs disabled behavior', (): void => {
 
     expect(fixture.componentInstance.value()).toBe('overview');
     expect(query(fixture, '[role="tablist"]').getAttribute('aria-disabled')).toBe('true');
+    expect(tabs.every((tab: HTMLButtonElement): boolean => tab.getAttribute('aria-disabled') === 'true')).toBe(true);
   });
 });

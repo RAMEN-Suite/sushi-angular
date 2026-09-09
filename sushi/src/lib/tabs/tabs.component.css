@@ -1,0 +1,29 @@
+:host {
+  /** Divider and panel border color. */
+  --sui-tabs-border-color: var(--color-base-300);
+  /** Background of a lifted tab panel. */
+  --sui-tabs-panel-background: var(--color-base-100);
+  /** Space inside each tab panel. */
+  --sui-tabs-panel-padding: 1rem;
+  /** Opacity used for disabled tabs. */
+  --sui-tabs-disabled-opacity: 0.5;
+}
+
+.sui-tabs__list,
+.sui-tab-panel {
+  border-color: var(--sui-tabs-border-color);
+}
+
+.sui-tab-panel {
+  padding: var(--sui-tabs-panel-padding);
+}
+
+.sui-tab-panel.border {
+  background-color: var(--sui-tabs-panel-background);
+}
+
+.sui-tab[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: var(--sui-tabs-disabled-opacity);
+  pointer-events: auto;
+}

@@ -12,8 +12,8 @@ export class Tab {
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
-  /** Keeps an inactive panel instantiated when enabled. */
-  public readonly preserveContent: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, {
+  /** Keeps the panel instantiated after its first activation. */
+  public readonly preserveContent: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
 
