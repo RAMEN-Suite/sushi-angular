@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import servicesHtml from './examples/services/services.example.html';
 import * as servicesTs from './examples/services/services.example.ts' with { loader: 'text' };
@@ -11,7 +12,7 @@ import { StatusUsageExample } from './examples/usage/usage.example';
 
 @Component({
   selector: 'pg-status-page',
-  imports: [Badge, Card, CardTitle, ExampleCode, StatusServicesExample, StatusUsageExample],
+  imports: [Badge, ExampleCode, ExamplePreview, StatusServicesExample, StatusUsageExample],
   templateUrl: './status.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

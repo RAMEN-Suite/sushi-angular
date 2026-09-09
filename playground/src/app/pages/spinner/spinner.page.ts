@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import contextsHtml from './examples/contexts/contexts.example.html';
 import * as contextsTs from './examples/contexts/contexts.example.ts' with { loader: 'text' };
@@ -11,7 +12,7 @@ import { SpinnerUsageExample } from './examples/usage/usage.example';
 
 @Component({
   selector: 'pg-spinner-page',
-  imports: [Badge, Card, CardTitle, ExampleCode, SpinnerContextsExample, SpinnerUsageExample],
+  imports: [Badge, ExampleCode, ExamplePreview, SpinnerContextsExample, SpinnerUsageExample],
   templateUrl: './spinner.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

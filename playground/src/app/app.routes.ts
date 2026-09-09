@@ -223,6 +223,11 @@ export const routes: Routes = [
     title: 'List | SUSHI Playground',
   },
   {
+    path: 'mask',
+    loadComponent: () => import('./pages/mask/mask.page').then(({ MaskPage }) => MaskPage),
+    title: 'Mask | SUSHI Playground',
+  },
+  {
     path: 'listbox',
     loadComponent: () => import('./pages/listbox/listbox.page').then(({ ListboxPage }) => ListboxPage),
     title: 'Listbox | SUSHI Playground',
@@ -251,6 +256,11 @@ export const routes: Routes = [
     path: 'status',
     loadComponent: () => import('./pages/status/status.page').then(({ StatusPage }) => StatusPage),
     title: 'Status | SUSHI Playground',
+  },
+  {
+    path: 'toast',
+    loadComponent: () => import('./pages/toast/toast.page').then(({ ToastPage }) => ToastPage),
+    title: 'Toast | SUSHI Playground',
   },
   {
     path: 'tabs',

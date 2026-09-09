@@ -2,31 +2,40 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Indicator</h1>
-      <p class=" text-lg text-base-content/70">Position state, count, and action markers around another element.</p>
+      <p class="text-lg text-base-content/70">Attach badges, statuses, or actions to another element.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Indicator architecture">
       <span suiBadge variant="soft" size="sm">Directive</span>
     </div>
   </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Basic indicators</h2>
-    <p class="text-base-content/60">Use one concise marker for status, counts, or requirements without obscuring its target.</p>
-    <sui-card size="sm" class="mt-5"><pg-indicator-basic-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript" /></div>
-  </sui-card>
-  <sui-card>
-    <h2 suiCardTitle>Placement</h2>
-    <p class="text-base-content/60">
-      Choose one of nine anchor points. The numbered markers document placement rather than a recommended combined UI.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-indicator-positions-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.positions.html" [typescript]="examples.positions.typescript" /></div>
-  </sui-card>
-  <sui-card>
-    <h2 suiCardTitle>Card action</h2>
-    <p class="text-base-content/60">An overlapping action can connect directly to a surface when that relationship remains unambiguous.</p>
-    <sui-card size="sm" class="mt-5"><pg-indicator-usage-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Common indicators</h2>
+      <p class="text-base-content/60">The indicator controls placement; the projected SUSHI component controls appearance and meaning.</p>
+    </div>
+    <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript">
+      <ng-template pgExamplePreview><pg-indicator-basic-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Placement</h2>
+      <p class="text-base-content/60">Combine horizontal and vertical anchors to place an item at any edge or midpoint.</p>
+    </div>
+    <pg-example-code [html]="examples.positions.html" [typescript]="examples.positions.typescript">
+      <ng-template pgExamplePreview><pg-indicator-positions-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Attached action</h2>
+      <p class="text-base-content/60">Use an overlapping action only when its relationship to the target remains clear.</p>
+    </div>
+    <pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript">
+      <ng-template pgExamplePreview><pg-indicator-usage-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

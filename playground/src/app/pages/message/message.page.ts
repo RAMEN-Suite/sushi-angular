@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle } from '@ramen-suite/sushi';
+import { Badge } from '@ramen-suite/sushi';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
 import actionsHtml from './examples/actions/actions.example.html';
 import * as actionsTs from './examples/actions/actions.example.ts' with { loader: 'text' };
@@ -14,7 +15,7 @@ import { MessageVerticalExample } from './examples/vertical/vertical.example';
 
 @Component({
   selector: 'pg-message-page',
-  imports: [Badge, Card, CardTitle, ExampleCode, MessageActionsExample, MessageUsageExample, MessageVerticalExample],
+  imports: [Badge, ExampleCode, ExamplePreview, MessageActionsExample, MessageUsageExample, MessageVerticalExample],
   templateUrl: './message.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

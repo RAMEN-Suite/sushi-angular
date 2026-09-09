@@ -1,9 +1,23 @@
-.sui-progress--glow {
-  animation: sui-progress-glow 1.8s ease-in-out infinite;
-}
+@layer components {
+  .sui-progress {
+    /** Height of the progress track. */
+    --sui-progress-height: 0.5rem;
+    /** Corner radius of the progress track. */
+    --sui-progress-radius: var(--radius-field);
+    /** Duration of an optional progress animation. */
+    --sui-progress-animation-duration: 1.8s;
 
-.sui-progress--pulse {
-  animation: sui-progress-pulse 1.8s ease-in-out infinite;
+    height: var(--sui-progress-height);
+    border-radius: var(--sui-progress-radius);
+  }
+
+  .sui-progress--glow {
+    animation: sui-progress-glow var(--sui-progress-animation-duration) ease-in-out infinite;
+  }
+
+  .sui-progress--pulse {
+    animation: sui-progress-pulse var(--sui-progress-animation-duration) ease-in-out infinite;
+  }
 }
 
 @keyframes sui-progress-glow {

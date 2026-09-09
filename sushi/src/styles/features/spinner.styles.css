@@ -1,0 +1,8 @@
+@layer components {
+  .sui-spinner {
+    /** Color inherited by the loading animation. */
+    --sui-spinner-color: currentColor;
+
+    color: var(--sui-spinner-color);
+  }
+}

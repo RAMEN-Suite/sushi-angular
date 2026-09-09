@@ -2,7 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Progress</h1>
-      <p class=" text-lg text-base-content/70">Communicate determinate or indeterminate progress with native semantics.</p>
+      <p class="text-lg text-base-content/70">Show determinate or indeterminate progress with native semantics.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Progress architecture">
       <span suiBadge variant="soft" size="sm">Directive</span>
@@ -10,20 +10,23 @@
     </div>
   </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Progress states</h2>
-    <p class="text-base-content/60">Omit value for indeterminate work or provide value and max for measurable progress.</p>
-    <sui-card size="sm" class="mt-5"><pg-progress-usage-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Progress states</h2>
+      <p class="text-base-content/60">Omit <code>value</code> when progress is unknown; otherwise use the native value and maximum.</p>
+    </div>
+    <pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript">
+      <ng-template pgExamplePreview><pg-progress-usage-example /></ng-template>
+    </pg-example-code>
+  </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Active progress</h2>
-    <p class="text-base-content/60">
-      Use an indeterminate bar while progress is unknown, or update a determinate value as work advances. Optional motion respects
-      reduced-motion preferences.
-    </p>
-    <sui-card size="sm" class="mt-5"><pg-progress-animations-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.animations.html" [typescript]="examples.animations.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Optional motion</h2>
+      <p class="text-base-content/60">Use motion sparingly for active work; reduced-motion preferences are respected automatically.</p>
+    </div>
+    <pg-example-code [html]="examples.animations.html" [typescript]="examples.animations.typescript">
+      <ng-template pgExamplePreview><pg-progress-animations-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

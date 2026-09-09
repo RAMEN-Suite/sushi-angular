@@ -23,9 +23,11 @@ import { StatusAnimation, StatusSeverity, StatusSize } from './status.interfaces
 
     '[class.sui-status--ping]': 'animation() === "ping"',
     '[class.sui-status--bounce]': 'animation() === "bounce"',
+
+    '[attr.aria-hidden]': '"true"',
   },
 })
-/** Renders a compact visual state marker beside descriptive content. */
+/** Renders an assistive-technology-hidden state marker that must be paired with descriptive content. */
 export class Status {
   /** Applies a semantic theme color. */
   public readonly severity: InputSignal<StatusSeverity | null> = input<StatusSeverity | null>(null);

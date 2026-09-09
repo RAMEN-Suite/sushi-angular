@@ -2,7 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Status</h1>
-      <p class=" text-lg text-base-content/70">Pair a compact state marker with visible or assistive text.</p>
+      <p class="text-lg text-base-content/70">Pair a compact visual state marker with descriptive text.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Status architecture">
       <span suiBadge variant="soft" size="sm">Directive</span>
@@ -10,16 +10,23 @@
     </div>
   </section>
 
-  <sui-card
-    ><h2 suiCardTitle>States and sizes</h2>
-    <p class="text-base-content/60">Always pair the visual marker with text when the meaning is not already available elsewhere.</p>
-    <sui-card size="sm" class="mt-5"><pg-status-usage-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Service health</h2>
-    <p class="text-base-content/60">Use motion sparingly for ongoing work or a state that briefly needs attention.</p>
-    <sui-card size="sm" class="mt-5"><pg-status-services-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.services.html" [typescript]="examples.services.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">States and sizes</h2>
+      <p class="text-base-content/60">Always provide nearby text unless the state is already named by its surrounding content.</p>
+    </div>
+    <pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript">
+      <ng-template pgExamplePreview><pg-status-usage-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Service health</h2>
+      <p class="text-base-content/60">Reserve motion for ongoing work or a state that briefly requires attention.</p>
+    </div>
+    <pg-example-code [html]="examples.services.html" [typescript]="examples.services.typescript">
+      <ng-template pgExamplePreview><pg-status-services-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

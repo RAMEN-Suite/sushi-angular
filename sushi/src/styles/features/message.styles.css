@@ -1,0 +1,24 @@
+@layer components {
+  .sui-message {
+    /** Gap between message content regions. */
+    --sui-message-gap: 1rem;
+    /** Inner spacing of the message surface. */
+    --sui-message-padding: 1rem;
+    /** Corner radius of the message surface. */
+    --sui-message-radius: var(--radius-box);
+
+    gap: var(--sui-message-gap);
+    padding: var(--sui-message-padding);
+    border-radius: var(--sui-message-radius);
+  }
+
+  .sui-message-actions {
+    /** Gap between related message actions. */
+    --sui-message-action-gap: 0.5rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--sui-message-action-gap);
+  }
+}

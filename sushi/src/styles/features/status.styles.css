@@ -1,9 +1,18 @@
-.sui-status--ping {
-  animation: sui-status-ping 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-}
+@layer components {
+  .sui-status {
+    /** Duration of the optional ping animation. */
+    --sui-status-ping-duration: 1.8s;
+    /** Duration of the optional bounce animation. */
+    --sui-status-bounce-duration: 1.2s;
+  }
 
-.sui-status--bounce {
-  animation: sui-status-bounce 1.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  .sui-status--ping {
+    animation: sui-status-ping var(--sui-status-ping-duration) cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  .sui-status--bounce {
+    animation: sui-status-bounce var(--sui-status-bounce-duration) cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
 }
 
 @keyframes sui-status-ping {

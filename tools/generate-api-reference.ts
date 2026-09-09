@@ -53,7 +53,11 @@ const sharedStyleFiles: Readonly<Record<string, readonly string[]>> = {
 };
 const sharedStyleFilesByClass: Readonly<Record<string, readonly string[]>> = {
   Dialog: ['sushi/src/styles/features/dialog.styles.css'],
+  Message: ['sushi/src/styles/features/message.styles.css'],
   Navbar: ['sushi/src/styles/features/navbar.styles.css'],
+  Progress: ['sushi/src/styles/features/progress.styles.css'],
+  Spinner: ['sushi/src/styles/features/spinner.styles.css'],
+  Status: ['sushi/src/styles/features/status.styles.css'],
 };
 
 function findSourceFiles(folder: string): string[] {
@@ -97,6 +101,15 @@ function findSelector(node: ts.ClassDeclaration): string | null {
   return property && ts.isPropertyAssignment(property) && ts.isStringLiteralLike(property.initializer)
     ? property.initializer.text
     : null;
+}
+
+function isInjectable(node: ts.ClassDeclaration): boolean {
+  if (node.getSourceFile().fileName.includes('/internal/')) return false;
+  const decorators: readonly ts.Decorator[] = ts.canHaveDecorators(node) ? (ts.getDecorators(node) ?? []) : [];
+  return decorators.some(
+    (decorator: ts.Decorator): boolean =>
+      ts.isCallExpression(decorator.expression) && decorator.expression.expression.getText() === 'Injectable',
+  );
 }
 
 function findStyleFile(node: ts.ClassDeclaration): string | null {
@@ -345,7 +358,7 @@ function readTypeMembers(node: ApiTypeNode): readonly ApiTypeMember[] {
 }
 
 function readTypeDefinition(statement: ts.Statement): ApiTypeDefinition | null {
-  if (!isApiTypeNode(statement) || !isExported(statement)) return null;
+  if (!isApiTypeNode(statement) || !isExported(statement) || isInternal(statement)) return null;
 
   return {
     name: statement.name.text,
@@ -385,9 +398,9 @@ function collectApi(): CollectedApi {
 
       if (!ts.isClassDeclaration(statement) || !statement.name || isInternal(statement)) return;
       const selector: string | null = findSelector(statement);
-      if (!selector) return;
+      if (!selector && !isInjectable(statement)) return;
 
-      if (selector.startsWith('ng-template[')) {
+      if (selector?.startsWith('ng-template[')) {
         const markers: ApiTemplate[] = templates.get(folder) ?? [];
         markers.push({
           name: selector.slice('ng-template['.length, -1),
@@ -402,7 +415,7 @@ function collectApi(): CollectedApi {
       references.push({
         className: statement.name.text,
         declaration: readClassDeclaration(statement),
-        selector,
+        selector: selector ?? 'injectable',
         description: readJSDoc(statement),
         folder,
         members: readMembers(statement),

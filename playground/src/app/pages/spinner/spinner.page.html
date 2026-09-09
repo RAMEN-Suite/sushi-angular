@@ -2,7 +2,7 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Spinner</h1>
-      <p class=" text-lg text-base-content/70">Show ongoing work with a decorative animation and an accessible status message.</p>
+      <p class="text-lg text-base-content/70">Indicate ongoing work with a decorative loading animation.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Spinner architecture">
       <span suiBadge variant="soft" size="sm">Directive</span>
@@ -10,16 +10,23 @@
     </div>
   </section>
 
-  <sui-card
-    ><h2 suiCardTitle>Animations and sizes</h2>
-    <p class="text-base-content/60">Choose a simple motion and match its density to the surrounding content.</p>
-    <sui-card size="sm" class="mt-5"><pg-spinner-usage-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div
-  ></sui-card>
-  <sui-card
-    ><h2 suiCardTitle>Loading contexts</h2>
-    <p class="text-base-content/60">Combine decorative spinners with visible status text for regions, rows, and buttons.</p>
-    <sui-card size="sm" class="mt-5"><pg-spinner-contexts-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.contexts.html" [typescript]="examples.contexts.typescript" /></div
-  ></sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Animations and sizes</h2>
+      <p class="text-base-content/60">Choose the animation shape and size that fit the density of its surrounding content.</p>
+    </div>
+    <pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript">
+      <ng-template pgExamplePreview><pg-spinner-usage-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Loading contexts</h2>
+      <p class="text-base-content/60">Pair the decorative spinner with visible status text for regions, rows, and buttons.</p>
+    </div>
+    <pg-example-code [html]="examples.contexts.html" [typescript]="examples.contexts.typescript">
+      <ng-template pgExamplePreview><pg-spinner-contexts-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

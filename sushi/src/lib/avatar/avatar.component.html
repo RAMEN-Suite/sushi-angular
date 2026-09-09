@@ -1,4 +1,6 @@
 <div
+  [suiMask]="maskShape()"
+  [maskHalf]="maskHalf()"
   [class.bg-inherit]="!placeholder()"
   [class.text-inherit]="!placeholder()"
   [class.bg-neutral]="placeholder()"
@@ -11,24 +13,6 @@
   [class.rounded-none]="shape() === 'square'"
   [class.rounded-xl]="shape() === 'rounded'"
   [class.rounded-full]="shape() === 'circle'"
-  [class.mask]="isMask()"
-  [class.mask-squircle]="shape() === 'squircle'"
-  [class.mask-heart]="shape() === 'heart'"
-  [class.mask-hexagon]="shape() === 'hexagon'"
-  [class.mask-hexagon-2]="shape() === 'hexagon-2'"
-  [class.mask-decagon]="shape() === 'decagon'"
-  [class.mask-pentagon]="shape() === 'pentagon'"
-  [class.mask-diamond]="shape() === 'diamond'"
-  [class.mask-square]="shape() === 'mask-square'"
-  [class.mask-circle]="shape() === 'mask-circle'"
-  [class.mask-star]="shape() === 'star'"
-  [class.mask-star-2]="shape() === 'star-2'"
-  [class.mask-triangle]="shape() === 'triangle'"
-  [class.mask-triangle-2]="shape() === 'triangle-2'"
-  [class.mask-triangle-3]="shape() === 'triangle-3'"
-  [class.mask-triangle-4]="shape() === 'triangle-4'"
-  [class.mask-half-1]="maskHalf() === 'first'"
-  [class.mask-half-2]="maskHalf() === 'second'"
 >
   <ng-content />
 </div>

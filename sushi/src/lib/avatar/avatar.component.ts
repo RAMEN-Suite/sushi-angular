@@ -9,9 +9,11 @@ import {
   Signal,
 } from '@angular/core';
 import { AvatarMaskHalf, AvatarShape, AvatarSize, AvatarStatus } from './avatar.interfaces';
+import { Mask, MaskShape } from '../mask';
 
 @Component({
   selector: 'sui-avatar',
+  imports: [Mask],
   templateUrl: './avatar.component.html',
   host: {
     class: 'avatar sui-avatar',
@@ -36,5 +38,11 @@ export class Avatar {
     transform: booleanAttribute,
   });
 
-  protected readonly isMask: Signal<boolean> = computed((): boolean => !['square', 'rounded', 'circle'].includes(this.shape()));
+  protected readonly maskShape: Signal<MaskShape | null> = computed((): MaskShape | null => {
+    const shape: AvatarShape = this.shape();
+    if (shape === 'square' || shape === 'rounded' || shape === 'circle') return null;
+    if (shape === 'mask-square') return 'square';
+    if (shape === 'mask-circle') return 'circle';
+    return shape;
+  });
 }

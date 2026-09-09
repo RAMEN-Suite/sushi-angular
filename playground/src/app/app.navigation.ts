@@ -188,6 +188,10 @@ export const navigation: readonly NavigationGroup[] = [
         label: 'Status',
         path: '/status',
       },
+      {
+        label: 'Toast',
+        path: '/toast',
+      },
     ],
   },
   {
@@ -212,6 +216,10 @@ export const navigation: readonly NavigationGroup[] = [
       {
         label: 'List',
         path: '/list',
+      },
+      {
+        label: 'Mask',
+        path: '/mask',
       },
       {
         label: 'Table',

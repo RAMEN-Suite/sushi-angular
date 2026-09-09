@@ -22,7 +22,7 @@ import { SpinnerSize, SpinnerType } from './spinner.interfaces';
     '[attr.aria-hidden]': '"true"',
   },
 })
-/** Renders a decorative loading animation that inherits the current text color. */
+/** Renders an assistive-technology-hidden loading animation that must be paired with accessible status text. */
 export class Spinner {
   /** Selects the loading animation. */
   public readonly type: InputSignal<SpinnerType> = input<SpinnerType>('spinner');

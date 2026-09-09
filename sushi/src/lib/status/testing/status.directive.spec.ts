@@ -14,6 +14,7 @@ describe('Status', (): void => {
     expect(status.classList).toContain('status-success');
     expect(status.classList).toContain('status-sm');
     expect(status.classList).toContain('sui-status--ping');
+    expect(status.getAttribute('aria-hidden')).toBe('true');
     expect(status.hasAttribute('aria-label')).toBe(false);
   });
 });

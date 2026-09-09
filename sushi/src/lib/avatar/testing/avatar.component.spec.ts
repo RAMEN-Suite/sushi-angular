@@ -10,7 +10,7 @@ import type { AvatarShape, AvatarSize, AvatarStatus } from '../avatar.interfaces
   imports: [Avatar, AvatarGroup],
   template: `
     <div suiAvatarGroup>
-      <sui-avatar [size]="size()" [shape]="shape()" [status]="status()" [placeholder]="placeholder()">
+      <sui-avatar [size]="size()" [shape]="shape()" [maskHalf]="maskHalf()" [status]="status()" [placeholder]="placeholder()">
         <span>AB</span>
       </sui-avatar>
     </div>
@@ -19,6 +19,7 @@ import type { AvatarShape, AvatarSize, AvatarStatus } from '../avatar.interfaces
 class AvatarHost {
   public readonly size: WritableSignal<AvatarSize> = signal<AvatarSize>('md');
   public readonly shape: WritableSignal<AvatarShape> = signal<AvatarShape>('rounded');
+  public readonly maskHalf: WritableSignal<'first' | 'second' | null> = signal(null);
   public readonly status: WritableSignal<AvatarStatus | null> = signal<AvatarStatus | null>(null);
   public readonly placeholder: WritableSignal<boolean> = signal<boolean>(false);
 }
@@ -45,5 +46,17 @@ describe('Avatar', (): void => {
     expect(query(fixture, 'sui-avatar > div').classList).toContain('rounded-full');
     expect(query(fixture, 'sui-avatar > div').classList).toContain('bg-neutral');
     expect(query(fixture, 'sui-avatar > div').classList).toContain('text-neutral-content');
+  });
+
+  it('composes decorative shapes through the shared mask behavior', (): void => {
+    const fixture: ComponentFixture<AvatarHost> = render(AvatarHost);
+    fixture.componentInstance.shape.set('star');
+    fixture.componentInstance.maskHalf.set('second');
+    fixture.detectChanges();
+
+    const content: Element = query(fixture, 'sui-avatar > div');
+    expect(content.classList).toContain('mask');
+    expect(content.classList).toContain('mask-star');
+    expect(content.classList).toContain('mask-half-2');
   });
 });

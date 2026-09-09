@@ -1,0 +1,34 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Toast</h1>
+      <p class="text-lg text-base-content/70">Show brief application feedback from a shared notification outlet.</p>
+    </div>
+    <div class="flex flex-wrap gap-2" aria-label="Toast architecture">
+      <span suiBadge variant="soft" size="sm">Component</span>
+    </div>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Application notifications</h2>
+      <p class="text-base-content/60">Place one outlet in the application shell, then inject the service wherever feedback originates.</p>
+    </div>
+    <pg-example-code [html]="example.html" [typescript]="example.typescript">
+      <ng-template pgExamplePreview><pg-toast-usage-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Custom content</h2>
+      <p class="text-base-content/60">
+        Register templates by name and select one with <code>template</code> when calling <code>show()</code>. The three triggers use the
+        standard layout, <code>sync</code>, and <code>order</code> from the same outlet.
+      </p>
+    </div>
+    <pg-example-code [html]="customExample.html" [typescript]="customExample.typescript">
+      <ng-template pgExamplePreview><pg-toast-custom-example /></ng-template>
+    </pg-example-code>
+  </section>
+</main>

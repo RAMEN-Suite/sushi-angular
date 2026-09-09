@@ -1,0 +1,64 @@
+<section
+  class="toast sui-toast"
+  [class.toast-start]="horizontal() === 'start'"
+  [class.toast-center]="horizontal() === 'center'"
+  [class.toast-end]="horizontal() === 'end'"
+  [class.toast-top]="vertical() === 'top'"
+  [class.toast-middle]="vertical() === 'middle'"
+  [class.toast-bottom]="vertical() === 'bottom'"
+  [attr.aria-label]="ariaLabel()"
+>
+  @for (item of visibleToasts(); track item.id) {
+    <div
+      suiMessage
+      class="sui-toast__item"
+      [class.sui-toast__item--with-actions]="item.action"
+      [severity]="item.severity"
+      [variant]="item.variant"
+      [attr.role]="item.severity === 'error' || item.severity === 'warning' ? 'alert' : 'status'"
+      aria-atomic="true"
+      (pointerenter)="service.pause(item.id)"
+      (pointerleave)="service.resume(item.id)"
+      (focusin)="service.pause(item.id)"
+      (focusout)="service.resume(item.id)"
+    >
+      @if (contentTemplate(item); as template) {
+        <div class="sui-toast__custom">
+          <ng-container [ngTemplateOutlet]="template.template" [ngTemplateOutletContext]="templateContext(item)" />
+        </div>
+      } @else {
+        <svg class="sui-toast__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path [attr.d]="iconPath(item)" />
+        </svg>
+
+        <div class="sui-toast__content">
+          @if (item.title) {
+            <strong>{{ item.title }}</strong>
+          }
+          <span>{{ item.message }}</span>
+        </div>
+
+        @if (item.dismissible) {
+          <button
+            suiButton
+            type="button"
+            size="sm"
+            [severity]="buttonSeverity(item)"
+            variant="text"
+            [attr.aria-label]="'Dismiss ' + item.message"
+            (click)="service.dismiss(item.id)"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+          </button>
+        }
+        @if (item.action) {
+          <div class="sui-toast__actions">
+            <button suiButton type="button" size="sm" [severity]="buttonSeverity(item)" variant="outlined" (click)="handleAction(item)">
+              {{ item.action.label }}
+            </button>
+          </div>
+        }
+      }
+    </div>
+  }
+</section>

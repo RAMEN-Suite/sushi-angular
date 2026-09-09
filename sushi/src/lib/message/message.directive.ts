@@ -20,10 +20,10 @@ import { MessageOrientation, MessageSeverity, MessageVariant } from './message.i
 })
 /** Presents contextual feedback with optional semantic color and layout. */
 export class Message {
-  /** Applies a semantic feedback color. */
+  /** Applies a semantic feedback color. Omit it for a neutral message. */
   public readonly severity: InputSignal<MessageSeverity | null> = input<MessageSeverity | null>(null);
-  /** Changes the visual treatment of the message. */
+  /** Changes the visual treatment of the message. Omit it for the filled default. */
   public readonly variant: InputSignal<MessageVariant | null> = input<MessageVariant | null>(null);
-  /** Arranges content and actions horizontally or vertically. */
+  /** Forces a horizontal or vertical layout. Omit it for the responsive default. */
   public readonly orientation: InputSignal<MessageOrientation | null> = input<MessageOrientation | null>(null);
 }

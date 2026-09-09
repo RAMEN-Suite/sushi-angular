@@ -1,0 +1,31 @@
+<div class="flex flex-wrap gap-3">
+  <button suiButton type="button" severity="neutral" variant="outlined" (click)="showStandard()">Standard</button>
+  <button suiButton type="button" severity="info" variant="outlined" (click)="showSync()">Sync template</button>
+  <button suiButton type="button" severity="success" variant="outlined" (click)="showOrder()">Order template</button>
+</div>
+
+<sui-toast horizontal="end" vertical="bottom">
+  <ng-template suiToastContent="sync" let-toast let-dismiss="dismiss">
+    <div class="grid gap-3">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <strong>{{ toast.title }}</strong>
+          <p>{{ toast.message }}</p>
+        </div>
+        <span suiBadge severity="info" variant="soft">Sync</span>
+      </div>
+      <button suiButton type="button" size="sm" severity="info" variant="outlined" (click)="dismiss()">Got it</button>
+    </div>
+  </ng-template>
+
+  <ng-template suiToastContent="order" let-toast let-dismiss="dismiss">
+    <div class="flex items-center gap-3">
+      <span suiStatus severity="success"></span>
+      <div class="min-w-0 flex-1">
+        <strong class="block">{{ toast.title }}</strong>
+        <span>{{ toast.message }}</span>
+      </div>
+      <button suiButton type="button" size="sm" severity="success" variant="text" (click)="dismiss()">Close</button>
+    </div>
+  </ng-template>
+</sui-toast>

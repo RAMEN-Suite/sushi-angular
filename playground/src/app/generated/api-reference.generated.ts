@@ -54,6 +54,7 @@ export const apiReference: Readonly<{
   readonly Label: ApiReferenceData;
   readonly List: ApiReferenceData;
   readonly Listbox: ApiReferenceData;
+  readonly Mask: ApiReferenceData;
   readonly Menu: ApiReferenceData;
   readonly MenuTrigger: ApiReferenceData;
   readonly Message: ApiReferenceData;
@@ -78,6 +79,8 @@ export const apiReference: Readonly<{
   readonly Table: ApiReferenceData;
   readonly Tabs: ApiReferenceData;
   readonly Textarea: ApiReferenceData;
+  readonly Toast: ApiReferenceData;
+  readonly ToastService: ApiReferenceData;
   readonly Toggle: ApiReferenceData;
   readonly ToggleButton: ApiReferenceData;
 }> = {
@@ -825,7 +828,7 @@ export const apiReference: Readonly<{
       {
         name: 'AvatarMaskHalf',
         kind: 'type',
-        declaration: "type AvatarMaskHalf = 'first' | 'second';",
+        declaration: 'type AvatarMaskHalf = MaskHalf;',
         description: 'Half retained by half-mask avatar shapes.',
         members: [],
       },
@@ -833,7 +836,7 @@ export const apiReference: Readonly<{
         name: 'AvatarShape',
         kind: 'type',
         declaration:
-          "type AvatarShape = | 'square'\n  | 'rounded'\n  | 'circle'\n  | 'squircle'\n  | 'heart'\n  | 'hexagon'\n  | 'hexagon-2'\n  | 'decagon'\n  | 'pentagon'\n  | 'diamond'\n  | 'mask-square'\n  | 'mask-circle'\n  | 'star'\n  | 'star-2'\n  | 'triangle'\n  | 'triangle-2'\n  | 'triangle-3'\n  | 'triangle-4';",
+          "type AvatarShape = 'square' | 'rounded' | 'circle' | Exclude<MaskShape, 'square' | 'circle'> | 'mask-square' | 'mask-circle';",
         description: 'Built-in shapes and masks available to avatars.',
         members: [],
       },
@@ -856,6 +859,21 @@ export const apiReference: Readonly<{
         kind: 'type',
         declaration: "type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';",
         description: 'Shared size scale used by visual components.',
+        members: [],
+      },
+      {
+        name: 'MaskHalf',
+        kind: 'type',
+        declaration: "type MaskHalf = 'first' | 'second';",
+        description: 'Portion retained when a mask is split into halves.',
+        members: [],
+      },
+      {
+        name: 'MaskShape',
+        kind: 'type',
+        declaration:
+          "type MaskShape = | 'squircle'\n  | 'heart'\n  | 'hexagon'\n  | 'hexagon-2'\n  | 'decagon'\n  | 'pentagon'\n  | 'diamond'\n  | 'square'\n  | 'circle'\n  | 'star'\n  | 'star-2'\n  | 'triangle'\n  | 'triangle-2'\n  | 'triangle-3'\n  | 'triangle-4';",
+        description: 'Built-in shapes available to masked content.',
         members: [],
       },
     ],
@@ -4692,6 +4710,47 @@ export const apiReference: Readonly<{
       },
     ],
   },
+  Mask: {
+    className: 'Mask',
+    declaration: 'Mask',
+    selector: '[suiMask]',
+    description: 'Crops an image or other element to a built-in shape.',
+    members: [
+      {
+        name: 'suiMask',
+        kind: 'input',
+        type: 'MaskShape | null',
+        defaultValue: 'required',
+        description: 'Shape applied to the host element. Pass null to remove masking.',
+      },
+      {
+        name: 'maskHalf',
+        kind: 'input',
+        type: 'MaskHalf | null',
+        defaultValue: 'null',
+        description: 'Optionally retains only the first or second half of the selected shape.',
+      },
+    ],
+    templates: [],
+    types: [
+      {
+        name: 'MaskHalf',
+        kind: 'type',
+        declaration: "type MaskHalf = 'first' | 'second';",
+        description: 'Portion retained when a mask is split into halves.',
+        members: [],
+      },
+      {
+        name: 'MaskShape',
+        kind: 'type',
+        declaration:
+          "type MaskShape = | 'squircle'\n  | 'heart'\n  | 'hexagon'\n  | 'hexagon-2'\n  | 'decagon'\n  | 'pentagon'\n  | 'diamond'\n  | 'square'\n  | 'circle'\n  | 'star'\n  | 'star-2'\n  | 'triangle'\n  | 'triangle-2'\n  | 'triangle-3'\n  | 'triangle-4';",
+        description: 'Built-in shapes available to masked content.',
+        members: [],
+      },
+    ],
+    styles: [],
+  },
   Menu: {
     className: 'Menu',
     declaration: 'Menu<I extends MenuItem = MenuItem>',
@@ -5085,21 +5144,21 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'MessageSeverity | null',
         defaultValue: 'null',
-        description: 'Applies a semantic feedback color.',
+        description: 'Applies a semantic feedback color. Omit it for a neutral message.',
       },
       {
         name: 'variant',
         kind: 'input',
         type: 'MessageVariant | null',
         defaultValue: 'null',
-        description: 'Changes the visual treatment of the message.',
+        description: 'Changes the visual treatment of the message. Omit it for the filled default.',
       },
       {
         name: 'orientation',
         kind: 'input',
         type: 'MessageOrientation | null',
         defaultValue: 'null',
-        description: 'Arranges content and actions horizontally or vertically.',
+        description: 'Forces a horizontal or vertical layout. Omit it for the responsive default.',
       },
     ],
     templates: [],
@@ -5133,7 +5192,32 @@ export const apiReference: Readonly<{
         members: [],
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-message-gap',
+        defaultValue: '1rem',
+        exampleValue: null,
+        description: 'Gap between message content regions.',
+      },
+      {
+        name: '--sui-message-padding',
+        defaultValue: '1rem',
+        exampleValue: null,
+        description: 'Inner spacing of the message surface.',
+      },
+      {
+        name: '--sui-message-radius',
+        defaultValue: 'var(--radius-box)',
+        exampleValue: null,
+        description: 'Corner radius of the message surface.',
+      },
+      {
+        name: '--sui-message-action-gap',
+        defaultValue: '0.5rem',
+        exampleValue: null,
+        description: 'Gap between related message actions.',
+      },
+    ],
   },
   MessageActions: {
     className: 'MessageActions',
@@ -6887,7 +6971,26 @@ export const apiReference: Readonly<{
         members: [],
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-progress-height',
+        defaultValue: '0.5rem',
+        exampleValue: null,
+        description: 'Height of the progress track.',
+      },
+      {
+        name: '--sui-progress-radius',
+        defaultValue: 'var(--radius-field)',
+        exampleValue: null,
+        description: 'Corner radius of the progress track.',
+      },
+      {
+        name: '--sui-progress-animation-duration',
+        defaultValue: '1.8s',
+        exampleValue: null,
+        description: 'Duration of an optional progress animation.',
+      },
+    ],
   },
   Radio: {
     className: 'Radio',
@@ -8148,7 +8251,7 @@ export const apiReference: Readonly<{
     className: 'Spinner',
     declaration: 'Spinner',
     selector: 'span[suiSpinner]',
-    description: 'Renders a decorative loading animation that inherits the current text color.',
+    description: 'Renders an assistive-technology-hidden loading animation that must be paired with accessible status text.',
     members: [
       {
         name: 'type',
@@ -8189,13 +8292,20 @@ export const apiReference: Readonly<{
         members: [],
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-spinner-color',
+        defaultValue: 'currentColor',
+        exampleValue: null,
+        description: 'Color inherited by the loading animation.',
+      },
+    ],
   },
   Status: {
     className: 'Status',
     declaration: 'Status',
     selector: 'span[suiStatus]',
-    description: 'Renders a compact visual state marker beside descriptive content.',
+    description: 'Renders an assistive-technology-hidden state marker that must be paired with descriptive content.',
     members: [
       {
         name: 'severity',
@@ -8258,7 +8368,20 @@ export const apiReference: Readonly<{
         members: [],
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-status-ping-duration',
+        defaultValue: '1.8s',
+        exampleValue: null,
+        description: 'Duration of the optional ping animation.',
+      },
+      {
+        name: '--sui-status-bounce-duration',
+        defaultValue: '1.2s',
+        exampleValue: null,
+        description: 'Duration of the optional bounce animation.',
+      },
+    ],
   },
   Table: {
     className: 'Table',
@@ -8997,6 +9120,407 @@ export const apiReference: Readonly<{
           "type ThemeSeverity = 'primary' | 'secondary' | 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'error';",
         description: 'Shared semantic color names provided by the theme.',
         members: [],
+      },
+    ],
+    styles: [],
+  },
+  Toast: {
+    className: 'Toast',
+    declaration: 'Toast',
+    selector: 'sui-toast',
+    description: 'Renders the queue managed by ToastService at a viewport edge or corner.',
+    members: [
+      {
+        name: 'horizontal',
+        kind: 'input',
+        type: 'ToastHorizontalPosition',
+        defaultValue: "'end'",
+        description: 'Horizontal alignment of the Toast stack.',
+      },
+      {
+        name: 'vertical',
+        kind: 'input',
+        type: 'ToastVerticalPosition',
+        defaultValue: "'bottom'",
+        description: 'Vertical alignment of the Toast stack.',
+      },
+      {
+        name: 'maxVisible',
+        kind: 'input',
+        type: 'number',
+        defaultValue: '5',
+        description: 'Maximum number of recent Toasts rendered at once.',
+      },
+      {
+        name: 'ariaLabel',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "'Notifications'",
+        description: 'Accessible name of the notification region.',
+      },
+    ],
+    templates: [
+      {
+        name: 'suiToastContent',
+        context: 'ToastTemplateContext',
+        description: 'Registers named custom content that can be selected for individual Toasts.',
+        members: [
+          {
+            name: 'suiToastContent',
+            kind: 'input',
+            type: 'string',
+            defaultValue: 'required',
+            description: 'Name referenced by ToastOptions.template.',
+          },
+        ],
+      },
+    ],
+    types: [
+      {
+        name: 'MessageSeverity',
+        kind: 'type',
+        declaration: "type MessageSeverity = 'info' | 'success' | 'warning' | 'error';",
+        description: 'Semantic feedback colors available to messages.',
+        members: [],
+      },
+      {
+        name: 'MessageVariant',
+        kind: 'type',
+        declaration: "type MessageVariant = 'soft' | 'outlined' | 'dash';",
+        description: 'Visual treatments available to messages.',
+        members: [],
+      },
+      {
+        name: 'ToastAction',
+        kind: 'interface',
+        declaration:
+          'interface ToastAction {\n  readonly label: string;\n  readonly run: () => void;\n  readonly dismiss?: boolean;\n}',
+        description: 'Optional action displayed inside a Toast.',
+        members: [
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: 'Visible action label.',
+          },
+          {
+            name: 'run',
+            type: '() => void',
+            optional: false,
+            description: 'Runs when the action is activated.',
+          },
+          {
+            name: 'dismiss',
+            type: 'boolean',
+            optional: true,
+            description: 'Controls whether activating the action dismisses the Toast.',
+          },
+        ],
+      },
+      {
+        name: 'ToastHorizontalPosition',
+        kind: 'type',
+        declaration: "type ToastHorizontalPosition = 'start' | 'center' | 'end';",
+        description: 'Horizontal placement of a Toast outlet.',
+        members: [],
+      },
+      {
+        name: 'ToastOptions',
+        kind: 'interface',
+        declaration:
+          'interface ToastOptions {\n  readonly message: string;\n  readonly title?: string;\n  readonly severity?: MessageSeverity | null;\n  readonly variant?: MessageVariant | null;\n  readonly duration?: number;\n  readonly dismissible?: boolean;\n  readonly action?: ToastAction;\n  readonly template?: string;\n}',
+        description: 'Configuration accepted by ToastService.show.',
+        members: [
+          {
+            name: 'message',
+            type: 'string',
+            optional: false,
+            description: 'Main Toast message.',
+          },
+          {
+            name: 'title',
+            type: 'string',
+            optional: true,
+            description: 'Optional short heading.',
+          },
+          {
+            name: 'severity',
+            type: 'MessageSeverity | null',
+            optional: true,
+            description: 'Semantic feedback color.',
+          },
+          {
+            name: 'variant',
+            type: 'MessageVariant | null',
+            optional: true,
+            description: 'Visual treatment inherited from Message.',
+          },
+          {
+            name: 'duration',
+            type: 'number',
+            optional: true,
+            description: 'Time in milliseconds before dismissal. Use zero to keep the Toast open.',
+          },
+          {
+            name: 'dismissible',
+            type: 'boolean',
+            optional: true,
+            description: 'Shows the built-in close action.',
+          },
+          {
+            name: 'action',
+            type: 'ToastAction',
+            optional: true,
+            description: 'Optional contextual action.',
+          },
+          {
+            name: 'template',
+            type: 'string',
+            optional: true,
+            description: 'Selects a named custom content template from the Toast outlet.',
+          },
+        ],
+      },
+      {
+        name: 'ToastTemplateContext',
+        kind: 'interface',
+        declaration:
+          'interface ToastTemplateContext {\n  readonly $implicit: ToastTemplateValue;\n  readonly dismiss: () => void;\n  readonly runAction: () => void;\n}',
+        description: 'Values available inside a custom Toast content template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'ToastTemplateValue',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'dismiss',
+            type: '() => void',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'runAction',
+            type: '() => void',
+            optional: false,
+            description: '',
+          },
+        ],
+      },
+      {
+        name: 'ToastTemplateValue',
+        kind: 'interface',
+        declaration:
+          'interface ToastTemplateValue {\n  readonly id: string;\n  readonly message: string;\n  readonly title: string | null;\n  readonly severity: MessageSeverity | null;\n  readonly variant: MessageVariant | null;\n  readonly duration: number;\n  readonly dismissible: boolean;\n  readonly action: ToastAction | null;\n  readonly template: string | null;\n}',
+        description: 'Read-only Toast data exposed to a custom content template.',
+        members: [
+          {
+            name: 'id',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'message',
+            type: 'string',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'title',
+            type: 'string | null',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'severity',
+            type: 'MessageSeverity | null',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'variant',
+            type: 'MessageVariant | null',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'duration',
+            type: 'number',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'dismissible',
+            type: 'boolean',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'action',
+            type: 'ToastAction | null',
+            optional: false,
+            description: '',
+          },
+          {
+            name: 'template',
+            type: 'string | null',
+            optional: false,
+            description: '',
+          },
+        ],
+      },
+      {
+        name: 'ToastVerticalPosition',
+        kind: 'type',
+        declaration: "type ToastVerticalPosition = 'top' | 'middle' | 'bottom';",
+        description: 'Vertical placement of a Toast outlet.',
+        members: [],
+      },
+    ],
+    styles: [
+      {
+        name: '--sui-toast-z-index',
+        defaultValue: '1100',
+        exampleValue: null,
+        description: 'Stack level of Toast notifications.',
+      },
+      {
+        name: '--sui-toast-width',
+        defaultValue: '24rem',
+        exampleValue: null,
+        description: 'Maximum width of one Toast.',
+      },
+    ],
+  },
+  ToastService: {
+    className: 'ToastService',
+    declaration: 'ToastService',
+    selector: 'injectable',
+    description: 'Manages transient messages rendered by a Toast outlet.',
+    members: [
+      {
+        name: 'show',
+        kind: 'method',
+        type: '(options: ToastOptions) => string',
+        defaultValue: null,
+        description: 'Adds a Toast and returns its generated ID.',
+      },
+      {
+        name: 'dismiss',
+        kind: 'method',
+        type: '(id: string) => void',
+        defaultValue: null,
+        description: 'Removes one Toast from the queue.',
+      },
+      {
+        name: 'clear',
+        kind: 'method',
+        type: '() => void',
+        defaultValue: null,
+        description: 'Removes every Toast and cancels pending timers.',
+      },
+    ],
+    templates: [],
+    types: [
+      {
+        name: 'MessageSeverity',
+        kind: 'type',
+        declaration: "type MessageSeverity = 'info' | 'success' | 'warning' | 'error';",
+        description: 'Semantic feedback colors available to messages.',
+        members: [],
+      },
+      {
+        name: 'MessageVariant',
+        kind: 'type',
+        declaration: "type MessageVariant = 'soft' | 'outlined' | 'dash';",
+        description: 'Visual treatments available to messages.',
+        members: [],
+      },
+      {
+        name: 'ToastAction',
+        kind: 'interface',
+        declaration:
+          'interface ToastAction {\n  readonly label: string;\n  readonly run: () => void;\n  readonly dismiss?: boolean;\n}',
+        description: 'Optional action displayed inside a Toast.',
+        members: [
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: 'Visible action label.',
+          },
+          {
+            name: 'run',
+            type: '() => void',
+            optional: false,
+            description: 'Runs when the action is activated.',
+          },
+          {
+            name: 'dismiss',
+            type: 'boolean',
+            optional: true,
+            description: 'Controls whether activating the action dismisses the Toast.',
+          },
+        ],
+      },
+      {
+        name: 'ToastOptions',
+        kind: 'interface',
+        declaration:
+          'interface ToastOptions {\n  readonly message: string;\n  readonly title?: string;\n  readonly severity?: MessageSeverity | null;\n  readonly variant?: MessageVariant | null;\n  readonly duration?: number;\n  readonly dismissible?: boolean;\n  readonly action?: ToastAction;\n  readonly template?: string;\n}',
+        description: 'Configuration accepted by ToastService.show.',
+        members: [
+          {
+            name: 'message',
+            type: 'string',
+            optional: false,
+            description: 'Main Toast message.',
+          },
+          {
+            name: 'title',
+            type: 'string',
+            optional: true,
+            description: 'Optional short heading.',
+          },
+          {
+            name: 'severity',
+            type: 'MessageSeverity | null',
+            optional: true,
+            description: 'Semantic feedback color.',
+          },
+          {
+            name: 'variant',
+            type: 'MessageVariant | null',
+            optional: true,
+            description: 'Visual treatment inherited from Message.',
+          },
+          {
+            name: 'duration',
+            type: 'number',
+            optional: true,
+            description: 'Time in milliseconds before dismissal. Use zero to keep the Toast open.',
+          },
+          {
+            name: 'dismissible',
+            type: 'boolean',
+            optional: true,
+            description: 'Shows the built-in close action.',
+          },
+          {
+            name: 'action',
+            type: 'ToastAction',
+            optional: true,
+            description: 'Optional contextual action.',
+          },
+          {
+            name: 'template',
+            type: 'string',
+            optional: true,
+            description: 'Selects a named custom content template from the Toast outlet.',
+          },
+        ],
       },
     ],
     styles: [],

@@ -2,29 +2,40 @@
   <section class="grid gap-4 py-2">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Message</h1>
-      <p class=" text-lg text-base-content/70">Communicate contextual information, outcomes, and recoverable problems.</p>
+      <p class="text-lg text-base-content/70">Present contextual information, outcomes, and recoverable problems.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Message architecture">
       <span suiBadge variant="soft" size="sm">Directive</span>
     </div>
   </section>
 
-  <sui-card>
-    <h2 suiCardTitle>Basic feedback</h2>
-    <p class="text-base-content/60">Pair a concise message with an icon and the semantic severity that matches its meaning.</p>
-    <sui-card size="sm" class="mt-5"><pg-message-usage-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript" /></div>
-  </sui-card>
-  <sui-card>
-    <h2 suiCardTitle>Updates and recovery</h2>
-    <p class="text-base-content/60">Keep supporting copy and related actions inside one responsive feedback surface.</p>
-    <sui-card size="sm" class="mt-5"><pg-message-actions-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.actions.html" [typescript]="examples.actions.typescript" /></div>
-  </sui-card>
-  <sui-card>
-    <h2 suiCardTitle>Vertical message</h2>
-    <p class="text-base-content/60">Stack the icon, supporting copy, and actions when a compact horizontal row would feel crowded.</p>
-    <sui-card size="sm" class="mt-5"><pg-message-vertical-example /></sui-card>
-    <div class="mt-6"><pg-example-code [html]="examples.vertical.html" [typescript]="examples.vertical.typescript" /></div>
-  </sui-card>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Semantic feedback</h2>
+      <p class="text-base-content/60">Choose severity from the meaning and set status or alert semantics according to urgency.</p>
+    </div>
+    <pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript">
+      <ng-template pgExamplePreview><pg-message-usage-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Messages with actions</h2>
+      <p class="text-base-content/60">Keep recovery actions close to their message without prescribing the surrounding page layout.</p>
+    </div>
+    <pg-example-code [html]="examples.actions.html" [typescript]="examples.actions.typescript">
+      <ng-template pgExamplePreview><pg-message-actions-example /></ng-template>
+    </pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Vertical layout</h2>
+      <p class="text-base-content/60">Stack content explicitly when a horizontal message would become crowded.</p>
+    </div>
+    <pg-example-code [html]="examples.vertical.html" [typescript]="examples.vertical.typescript">
+      <ng-template pgExamplePreview><pg-message-vertical-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>
