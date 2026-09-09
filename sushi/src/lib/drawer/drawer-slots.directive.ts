@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({ selector: '[suiDrawerContent]' })
-/** Marks the optional main content area used by a persistent responsive Drawer layout. */
+/** Marks the optional main content area arranged beside a persistent Drawer panel. */
 export class DrawerContent {}
 
 @Directive({ selector: '[suiDrawerHeader]' })

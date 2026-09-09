@@ -49,7 +49,7 @@
   <sui-drawer
     #sidebarDrawer="suiDrawer"
     class="h-[calc(34rem-4rem)] overflow-hidden"
-    responsiveAt="lg"
+    persistentAt="lg"
     size="sm"
     ariaLabel="Workspace navigation"
     [style.--sui-drawer-width]="sidebarCollapsed() ? '4.5rem' : '20rem'">
@@ -89,14 +89,6 @@
       [(collapsed)]="sidebarCollapsed"
       ariaLabel="SUSHI workspace"
       (valueChange)="sidebarDrawer.close()">
-      <div suiSidebarHeader class="flex min-h-16 items-center justify-center gap-3 px-3">
-        <svg lucideSoup class="size-5 shrink-0 text-primary" aria-hidden="true"></svg>
-        <span class="min-w-0" [class.sr-only]="sidebarCollapsed()">
-          <strong class="block truncate leading-tight">SUSHI KIT</strong>
-          <span class="block truncate text-xs text-base-content/60">Workspace</span>
-        </span>
-      </div>
-
       <ng-template [suiSidebarItem]="groups" let-item let-collapsed="collapsed">
         <span class="flex min-w-0 flex-1 items-center gap-2.5" [class.justify-center]="collapsed">
           <svg [lucideIcon]="item.icon" class="size-4 shrink-0" aria-hidden="true"></svg>

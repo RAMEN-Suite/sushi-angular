@@ -45,7 +45,7 @@ export class AppNavbar {
 
 <!-- app-layout.component.html -->
 <app-navbar />
-<sui-drawer responsiveAt="lg" [(open)]="navigation.drawerOpen">
+<sui-drawer persistentAt="lg" [(open)]="navigation.drawerOpen">
   <main suiDrawerContent>…</main>
   <sui-sidebar
     [groups]="groups"

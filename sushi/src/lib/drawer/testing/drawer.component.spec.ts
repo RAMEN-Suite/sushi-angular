@@ -5,7 +5,7 @@ import { query } from '../../../../testing/test-utils';
 import { render } from '../../../../testing/test-utils';
 import { DrawerClose } from '../drawer-close.directive';
 import { Drawer } from '../drawer.component';
-import { DrawerCloseReason, DrawerPlacement, DrawerResponsiveAt, DrawerSize } from '../drawer.interfaces';
+import { DrawerCloseReason, DrawerPersistentAt, DrawerPlacement, DrawerSize } from '../drawer.interfaces';
 import { DrawerFooter, DrawerHeader } from '../drawer-slots.directive';
 import { DrawerTrigger } from '../drawer-trigger.directive';
 
@@ -20,7 +20,7 @@ import { DrawerTrigger } from '../drawer-trigger.directive';
       ariaDescribedby="drawer-description"
       [dismissible]="dismissible()"
       [placement]="placement()"
-      [responsiveAt]="responsiveAt()"
+      [persistentAt]="persistentAt()"
       [size]="size()"
       [(open)]="open"
       (closed)="closeReasons.push($event)"
@@ -40,7 +40,7 @@ class DrawerHost {
   public readonly dismissible: WritableSignal<boolean> = signal(true);
   public readonly placement: WritableSignal<DrawerPlacement> = signal('start');
   public readonly size: WritableSignal<DrawerSize> = signal('md');
-  public readonly responsiveAt: WritableSignal<DrawerResponsiveAt | null> = signal(null);
+  public readonly persistentAt: WritableSignal<DrawerPersistentAt | null> = signal(null);
   public readonly triggerDisabled: WritableSignal<boolean> = signal(false);
   public readonly projectHeader: WritableSignal<boolean> = signal(true);
   public readonly projectFooter: WritableSignal<boolean> = signal(true);
@@ -160,7 +160,7 @@ describe('Drawer variants', (): void => {
 
   it('applies the DaisyUI responsive open variant at the selected breakpoint', (): void => {
     const fixture: ComponentFixture<DrawerHost> = render(DrawerHost);
-    fixture.componentInstance.responsiveAt.set('lg');
+    fixture.componentInstance.persistentAt.set('lg');
     fixture.detectChanges();
 
     expect(query(fixture, 'sui-drawer').classList).toContain('lg:drawer-open');

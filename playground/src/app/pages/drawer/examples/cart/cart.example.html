@@ -42,7 +42,18 @@
             <strong class="block">{{ item.name }}</strong>
             <small class="text-base-content/60">{{ item.detail }}</small>
           </div>
-          <span class="justify-self-end font-medium tabular-nums">€{{ item.price }}</span>
+          <button
+            suiButton
+            type="button"
+            size="xs"
+            shape="square"
+            severity="neutral"
+            variant="text"
+            class="justify-self-end self-start"
+            [attr.aria-label]="'Remove ' + item.name"
+            (click)="removeItem(item.id)">
+            <svg lucideTrash2 class="size-3" aria-hidden="true"></svg>
+          </button>
           <div class="flex items-end gap-2 self-end">
             <button
               suiButton
@@ -69,18 +80,7 @@
               <svg lucidePlus class="size-3" aria-hidden="true"></svg>
             </button>
           </div>
-          <button
-            suiButton
-            type="button"
-            size="xs"
-            shape="square"
-            severity="neutral"
-            variant="text"
-            class="self-end justify-self-end"
-            [attr.aria-label]="'Remove ' + item.name"
-            (click)="removeItem(item.id)">
-            <svg lucideTrash2 class="size-3" aria-hidden="true"></svg>
-          </button>
+          <span class="self-end justify-self-end font-medium tabular-nums">€{{ item.price * item.quantity }}</span>
         </div>
       </ng-template>
     </sui-list>

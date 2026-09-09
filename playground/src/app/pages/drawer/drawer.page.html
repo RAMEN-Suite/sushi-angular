@@ -11,20 +11,59 @@
   </section>
   <section class="space-y-6">
     <div class="space-y-2">
-      <h2 class="text-2xl font-bold tracking-tight">Navigation drawer</h2>
-      <p class="text-base-content/60">Place a styled Sidebar inside the headless Drawer; unmarked content becomes the panel body.</p>
-    </div>
-    <pg-example-code [html]="examples.navigation.html" [typescript]="examples.navigation.typescript"
-      ><ng-template pgExamplePreview><pg-drawer-navigation-example /></ng-template
-    ></pg-example-code>
-  </section>
-  <section class="space-y-6">
-    <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Cart summary</h2>
       <p class="text-base-content/60">Use an end Drawer for supporting tasks that should not replace the current page.</p>
     </div>
     <pg-example-code [html]="examples.cart.html" [typescript]="examples.cart.typescript"
       ><ng-template pgExamplePreview><pg-drawer-cart-example /></ng-template
     ></pg-example-code>
+  </section>
+
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Use a Drawer</h2>
+      <p class="text-base-content/60">Connect a trigger, project the panel content, and add explicit close actions where needed.</p>
+    </div>
+
+    <ol class="divide-y divide-base-300 border-y border-base-300">
+      <li class="grid gap-4 py-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-8">
+        <div>
+          <span suiBadge size="sm" variant="soft">1 · Connect</span>
+          <h3 class="mt-3 font-semibold">Reference the Drawer</h3>
+          <p class="mt-1 text-sm text-base-content/60">The trigger handles open state, labeling, and focus restoration.</p>
+        </div>
+        <sui-code>
+          @for (line of triggerLines; track $index) {
+            <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
+          }
+        </sui-code>
+      </li>
+
+      <li class="grid gap-4 py-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-8">
+        <div>
+          <span suiBadge size="sm" variant="soft">2 · Compose</span>
+          <h3 class="mt-3 font-semibold">Project the content</h3>
+          <p class="mt-1 text-sm text-base-content/60">Unmarked content scrolls; header and footer remain fixed.</p>
+        </div>
+        <sui-code>
+          @for (line of contentLines; track $index) {
+            <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
+          }
+        </sui-code>
+      </li>
+
+      <li class="grid gap-4 py-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-8">
+        <div>
+          <span suiBadge size="sm" variant="soft">3 · Control</span>
+          <h3 class="mt-3 font-semibold">Close or bind it</h3>
+          <p class="mt-1 text-sm text-base-content/60">Use a close action inside or two-way bind state outside.</p>
+        </div>
+        <sui-code>
+          @for (line of controlLines; track $index) {
+            <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
+          }
+        </sui-code>
+      </li>
+    </ol>
   </section>
 </main>

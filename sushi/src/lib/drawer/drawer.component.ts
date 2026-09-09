@@ -19,12 +19,12 @@ import {
   Signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { DrawerCloseReason, DrawerPlacement, DrawerResponsiveAt, DrawerSize } from './drawer.interfaces';
+import { DrawerCloseReason, DrawerPersistentAt, DrawerPlacement, DrawerSize } from './drawer.interfaces';
 import { DrawerFooter, DrawerHeader } from './drawer-slots.directive';
 
 let nextDrawerId: number = 0;
 
-const DRAWER_BREAKPOINTS: Readonly<Record<DrawerResponsiveAt, string>> = {
+const DRAWER_BREAKPOINTS: Readonly<Record<DrawerPersistentAt, string>> = {
   sm: '(min-width: 40rem)',
   md: '(min-width: 48rem)',
   lg: '(min-width: 64rem)',
@@ -45,10 +45,10 @@ const DRAWER_BREAKPOINTS: Readonly<Record<DrawerResponsiveAt, string>> = {
     '[class.sui-drawer--md]': 'size() === "md"',
     '[class.sui-drawer--lg]': 'size() === "lg"',
     '[class.sui-drawer--persistent]': 'persistent()',
-    '[class.sm:drawer-open]': 'responsiveAt() === "sm"',
-    '[class.md:drawer-open]': 'responsiveAt() === "md"',
-    '[class.lg:drawer-open]': 'responsiveAt() === "lg"',
-    '[class.xl:drawer-open]': 'responsiveAt() === "xl"',
+    '[class.sm:drawer-open]': 'persistentAt() === "sm"',
+    '[class.md:drawer-open]': 'persistentAt() === "md"',
+    '[class.lg:drawer-open]': 'persistentAt() === "lg"',
+    '[class.xl:drawer-open]': 'persistentAt() === "xl"',
     '(document:keydown.escape)': 'handleCancel($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -69,8 +69,8 @@ export class Drawer {
   public readonly placement: InputSignal<DrawerPlacement> = input<DrawerPlacement>('start');
   /** Controls the Drawer panel width. */
   public readonly size: InputSignal<DrawerSize> = input<DrawerSize>('md');
-  /** Makes the side panel persistent at and above a viewport breakpoint. */
-  public readonly responsiveAt: InputSignal<DrawerResponsiveAt | null> = input<DrawerResponsiveAt | null>(null);
+  /** Makes the panel persistent at and above a viewport breakpoint. */
+  public readonly persistentAt: InputSignal<DrawerPersistentAt | null> = input<DrawerPersistentAt | null>(null);
 
   /** Emits when the Drawer requests to close. */
   public readonly closed: OutputEmitterRef<DrawerCloseReason> = output<DrawerCloseReason>();
@@ -84,7 +84,7 @@ export class Drawer {
   protected readonly toggleId: string = `${this.drawerId}-toggle`;
 
   protected readonly persistent: Signal<boolean> = computed((): boolean => {
-    const breakpoint: DrawerResponsiveAt | null = this.responsiveAt();
+    const breakpoint: DrawerPersistentAt | null = this.persistentAt();
     return breakpoint !== null && this.viewport().breakpoints[DRAWER_BREAKPOINTS[breakpoint]];
   });
   protected readonly modalOpen: Signal<boolean> = computed((): boolean => this.open() && !this.persistent());

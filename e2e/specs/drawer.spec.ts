@@ -9,10 +9,10 @@ interface BoxGeometry {
 
 test('Drawer behaves as a modal and restores focus after Escape', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/drawer');
-  const trigger: Locator = page.getByRole('button', { name: 'Open navigation' });
+  const trigger: Locator = page.getByRole('button', { name: /Cart/ });
   await trigger.click();
 
-  const drawer: Locator = page.getByRole('dialog', { name: 'Workspace navigation' });
+  const drawer: Locator = page.getByRole('dialog', { name: 'Your cart' });
   await expect(drawer).toBeVisible();
   await expect(trigger).toHaveAttribute('aria-expanded', 'true');
   await expect(drawer).toHaveAttribute('aria-modal', 'true');
@@ -31,7 +31,7 @@ test('Drawer behaves as a modal and restores focus after Escape', async ({ page 
 
   await trigger.click();
   await expect(drawer).toBeVisible();
-  await drawer.getByRole('button', { name: 'Close navigation' }).click();
+  await drawer.getByRole('button', { name: 'Close cart' }).click();
   await expect(drawer).toBeHidden();
   await expect(trigger).toBeFocused();
 });
@@ -82,13 +82,13 @@ test('responsive Drawers use one Sidebar as an overlay and persistent desktop la
 test('small Drawers fill narrow viewports without horizontal overflow', async ({ page }: { page: Page }): Promise<void> => {
   await page.setViewportSize({ width: 360, height: 640 });
   await page.goto('/drawer');
-  await page.getByRole('button', { name: 'Open navigation' }).click();
-  const panel: Locator = page.getByRole('dialog', { name: 'Workspace navigation' });
+  await page.getByRole('button', { name: /Cart/ }).click();
+  const panel: Locator = page.getByRole('dialog', { name: 'Your cart' });
   await expect
     .poll(async (): Promise<{ readonly width: number; readonly x: number } | null> => {
       const box: BoxGeometry | null = await panel.boundingBox();
       return box === null ? null : { width: box.width, x: box.x };
     })
-    .toEqual({ width: 320, x: 0 });
+    .toEqual({ width: 360, x: 0 });
   expect(await page.evaluate((): boolean => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
