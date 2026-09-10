@@ -1,0 +1,42 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Popover</h1>
+      <p class="text-lg text-base-content/70">Show a small amount of contextual content and a few related actions beside a trigger.</p>
+    </div>
+    <div class="flex gap-2">
+      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Angular CDK</span
+      ><span suiBadge variant="soft" size="sm">Projected content</span>
+    </div>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Context sharing</h2>
+      <p class="text-base-content/60">
+        Use a Popover for compact context such as sharing, details, or lightweight selection. Use Tooltip for plain help, Menu for commands,
+        and Dialog for larger tasks.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript"
+      ><ng-template pgExamplePreview><pg-popover-usage-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Lightweight selection</h2>
+      <p class="text-base-content/60">Complete a short, contextual choice without interrupting the current task.</p>
+    </div>
+    <pg-example-code [html]="examples.selection.html" [typescript]="examples.selection.typescript"
+      ><ng-template pgExamplePreview><pg-popover-selection-example /></ng-template
+    ></pg-example-code>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Separate target</h2>
+      <p class="text-base-content/60">Anchor supporting details to the item they describe, even when another action opens them.</p>
+    </div>
+    <pg-example-code [html]="examples.target.html" [typescript]="examples.target.typescript"
+      ><ng-template pgExamplePreview><pg-popover-target-example /></ng-template
+    ></pg-example-code>
+  </section>
+</main>

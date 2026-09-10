@@ -1,0 +1,143 @@
+@layer components {
+  .sui-gallery {
+    /** Surface behind the large image. */
+    --sui-gallery-background: var(--color-base-200);
+    /** Border color around the Gallery. */
+    --sui-gallery-border-color: var(--color-base-300);
+    /** Color used by the selected thumbnail and focus indicators. */
+    --sui-gallery-selection-color: var(--color-primary);
+    /** Height of the large image stage. */
+    --sui-gallery-stage-height: clamp(20rem, 58vw, 34rem);
+    /** Width and height of one thumbnail. */
+    --sui-gallery-thumbnail-size: 4.75rem;
+    /** Space between Gallery regions and thumbnails. */
+    --sui-gallery-gap: 0.75rem;
+    /** Corner radius of the Gallery surface. */
+    --sui-gallery-radius: var(--radius-box);
+
+    display: grid;
+    gap: var(--sui-gallery-gap);
+    width: 100%;
+    margin: 0;
+    outline: none;
+  }
+
+  .sui-gallery:focus-visible {
+    outline: 2px solid var(--sui-gallery-selection-color);
+    outline-offset: 4px;
+  }
+
+  .sui-gallery__stage {
+    position: relative;
+    min-height: var(--sui-gallery-stage-height);
+    overflow: hidden;
+    background: var(--sui-gallery-background);
+    border: 1px solid var(--sui-gallery-border-color);
+    border-radius: var(--sui-gallery-radius);
+  }
+
+  .sui-gallery__image {
+    display: grid;
+    width: 100%;
+    height: var(--sui-gallery-stage-height);
+    padding: 0;
+    overflow: hidden;
+    background: transparent;
+    place-items: center;
+  }
+
+  .sui-gallery__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sui-gallery__previous svg,
+  .sui-gallery__next svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .sui-gallery__previous,
+  .sui-gallery__next {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    background: color-mix(in oklab, var(--color-base-100) 90%, transparent);
+    transform: translateY(-50%);
+  }
+
+  .sui-gallery__previous {
+    left: 1rem;
+  }
+  .sui-gallery__next {
+    right: 1rem;
+  }
+
+  .sui-gallery__meta {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 2.5rem 1rem 1rem;
+    color: white;
+    pointer-events: none;
+    background: linear-gradient(transparent, rgb(0 0 0 / 72%));
+  }
+
+  .sui-gallery__meta figcaption {
+    font-weight: 600;
+  }
+  .sui-gallery__meta span {
+    flex: none;
+    font-size: 0.875rem;
+  }
+
+  .sui-gallery__empty {
+    display: grid;
+    min-height: var(--sui-gallery-stage-height);
+    color: color-mix(in oklab, var(--color-base-content) 60%, transparent);
+    place-items: center;
+  }
+
+  .sui-gallery__thumbnails {
+    display: flex;
+    gap: var(--sui-gallery-gap);
+    padding: 0.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+  }
+
+  .sui-gallery__thumbnails button {
+    flex: 0 0 var(--sui-gallery-thumbnail-size);
+    width: var(--sui-gallery-thumbnail-size);
+    height: var(--sui-gallery-thumbnail-size);
+    padding: 0.2rem;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--sui-gallery-background);
+    border: 2px solid transparent;
+    border-radius: var(--radius-field);
+    scroll-snap-align: start;
+  }
+
+  .sui-gallery__thumbnails button:focus-visible {
+    outline: 2px solid var(--sui-gallery-selection-color);
+    outline-offset: 2px;
+  }
+
+  .sui-gallery__thumbnails .sui-gallery__thumbnail--active {
+    border-color: var(--sui-gallery-selection-color);
+  }
+
+  .sui-gallery__thumbnails img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: calc(var(--radius-field) - 0.2rem);
+  }
+}

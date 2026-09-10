@@ -18,6 +18,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { LucideX } from '@lucide/angular';
 import { Subscription } from 'rxjs';
 import { DialogCloseEvent, DialogCloseReason, DialogPosition } from './dialog.interfaces';
 
@@ -26,7 +27,7 @@ let nextDialogId: number = 0;
 @Component({
   selector: 'sui-dialog',
   exportAs: 'suiDialog',
-  imports: [CdkDrag, CdkDragHandle],
+  imports: [CdkDrag, CdkDragHandle, LucideX],
   host: {
     class: 'sui-dialog-host',
     '[attr.draggable]': 'null',
@@ -53,7 +54,7 @@ let nextDialogId: number = 0;
       <ng-content select="[suiDialogFooter]" />
       <div class="sui-dialog-header__actions">
         <button type="button" class="sui-dialog-header__action" aria-label="Close" (click)="close('', 'close')">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+          <svg lucideX aria-hidden="true"></svg>
         </button>
       </div>
     </dialog>

@@ -1,0 +1,30 @@
+:host {
+  /** Text color of non-current Breadcrumb destinations. */
+  --sui-breadcrumb-color: color-mix(in oklab, var(--color-base-content) 65%, transparent);
+  /** Text color of the current Breadcrumb destination. */
+  --sui-breadcrumb-current-color: var(--color-base-content);
+}
+
+a {
+  padding: 0.125rem 0.25rem;
+  color: var(--sui-breadcrumb-color);
+  border-radius: var(--radius-field);
+  text-underline-offset: 0.2em;
+}
+a:hover {
+  color: var(--sui-breadcrumb-current-color);
+}
+a:focus-visible {
+  border-radius: var(--radius-field);
+  outline: var(--sui-focus-ring-width) solid currentColor;
+  outline-offset: var(--sui-focus-ring-offset);
+}
+[aria-current='page'] {
+  color: var(--sui-breadcrumb-current-color);
+  cursor: default;
+  font-weight: 600;
+}
+
+nav {
+  padding: calc(var(--sui-focus-ring-offset) + var(--sui-focus-ring-width));
+}

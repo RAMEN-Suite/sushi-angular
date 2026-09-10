@@ -10,6 +10,8 @@ import {
   InputSignalWithTransform,
   Signal,
 } from '@angular/core';
+import { LucideCircleCheck, LucideCircleX, LucideDynamicIcon, LucideInfo, LucideTriangleAlert, LucideX } from '@lucide/angular';
+import type { LucideIconData } from '@lucide/angular';
 import { Button } from '../button';
 import { Message, MessageSeverity } from '../message';
 import { positiveInteger } from '../number.transforms';
@@ -17,17 +19,17 @@ import { ToastHorizontalPosition, ToastItem, ToastTemplateContext, ToastVertical
 import { ToastService } from './toast.service';
 import { ToastContentTemplate } from './toast.templates';
 
-const TOAST_ICON_PATHS: Readonly<Record<MessageSeverity | 'neutral', string>> = {
-  neutral: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-6v-4m0-4h.01',
-  info: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-6v-4m0-4h.01',
-  success: 'M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4 12 14.01l-3-3',
-  warning: 'M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0ZM12 9v4m0 4h.01',
-  error: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm3-13-6 6m0-6 6 6',
+const TOAST_ICONS: Readonly<Record<MessageSeverity | 'neutral', LucideIconData>> = {
+  neutral: LucideInfo.icon,
+  info: LucideInfo.icon,
+  success: LucideCircleCheck.icon,
+  warning: LucideTriangleAlert.icon,
+  error: LucideCircleX.icon,
 };
 
 @Component({
   selector: 'sui-toast',
-  imports: [Button, Message, NgTemplateOutlet],
+  imports: [Button, LucideDynamicIcon, LucideX, Message, NgTemplateOutlet],
   templateUrl: './toast.component.html',
   styleUrl: './toast.component.css',
   host: { class: 'sui-toast-host' },
@@ -59,8 +61,8 @@ export class Toast {
     return item.severity ?? 'neutral';
   }
 
-  protected iconPath(item: ToastItem): string {
-    return TOAST_ICON_PATHS[item.severity ?? 'neutral'];
+  protected icon(item: ToastItem): LucideIconData {
+    return TOAST_ICONS[item.severity ?? 'neutral'];
   }
 
   protected contentTemplate(item: ToastItem): ToastContentTemplate | undefined {

@@ -111,6 +111,13 @@
   flex: none;
 }
 
+.sui-navbar--horizontal.sui-navbar--menu-center[data-collapsible='false'] > sui-navbar-menu {
+  position: absolute;
+  left: 50%;
+  margin-inline-start: 0;
+  transform: translateX(-50%);
+}
+
 .sui-navbar__links--responsive {
   flex-direction: column;
 }

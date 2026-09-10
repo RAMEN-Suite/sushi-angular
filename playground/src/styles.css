@@ -1,5 +1,13 @@
 @import 'tailwindcss';
 
+@media (min-width: 64rem) {
+  .pg-documentation-navbar .sui-navbar--horizontal.sui-navbar--menu-center[data-collapsible='false'] > sui-navbar-menu {
+    position: static;
+    margin-inline-start: 0;
+    transform: none;
+  }
+}
+
 .sui-code .hljs-comment,
 .sui-code .hljs-quote {
   color: var(--sui-code-syntax-comment);

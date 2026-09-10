@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input, InputSignal, Signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, inject, input, InputSignal, Signal } from '@angular/core';
 import { Badge, List, ListItemTemplate, Table, TableCellTemplate, TableColumn } from '@ramen-suite/sushi';
 import type {
   ApiMember,
@@ -70,7 +70,7 @@ const typeMemberColumns: readonly TableColumn<ApiTypeMember>[] = [
 
 @Component({
   selector: 'pg-api-reference',
-  imports: [Badge, List, ListItemTemplate, RouterLink, Table, TableCellTemplate],
+  imports: [Badge, List, ListItemTemplate, Table, TableCellTemplate],
   templateUrl: './api-reference.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -100,6 +100,9 @@ export class ApiReference {
       ...api.templates.flatMap((template: ApiTemplate): readonly string[] =>
         template.members.map((member: ApiMember): string => member.type),
       ),
+      ...api.types.flatMap((type: ApiTypeDefinition): readonly string[] =>
+        type.members.map((member: ApiTypeMember): string => member.type),
+      ),
     ];
 
     return new Map<string, readonly ApiTypePart[]>(
@@ -107,8 +110,18 @@ export class ApiReference {
     );
   });
 
+  private readonly document: Document = inject(DOCUMENT);
+
   protected typeId(name: string): string {
     return `api-${this.api().className}-type-${name}`;
+  }
+
+  protected navigateToType(event: MouseEvent, name: string): void {
+    event.preventDefault();
+    const target: HTMLElement | null = this.document.getElementById(this.typeId(name));
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    target.focus({ preventScroll: true });
   }
 
   private splitType(value: string, names: ReadonlySet<string>): readonly ApiTypePart[] {

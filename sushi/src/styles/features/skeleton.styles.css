@@ -1,0 +1,16 @@
+.sui-skeleton {
+  /** Base background of a Skeleton placeholder. */
+  --sui-skeleton-background: var(--color-base-300);
+
+  background-color: var(--sui-skeleton-background);
+}
+
+.sui-skeleton--static {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sui-skeleton {
+    animation: none;
+  }
+}

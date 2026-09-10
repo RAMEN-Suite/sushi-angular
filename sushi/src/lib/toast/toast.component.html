@@ -27,9 +27,7 @@
           <ng-container [ngTemplateOutlet]="template.template" [ngTemplateOutletContext]="templateContext(item)" />
         </div>
       } @else {
-        <svg class="sui-toast__icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path [attr.d]="iconPath(item)" />
-        </svg>
+        <svg class="sui-toast__icon" [lucideIcon]="icon(item)" aria-hidden="true"></svg>
 
         <div class="sui-toast__content">
           @if (item.title) {
@@ -48,7 +46,7 @@
             [attr.aria-label]="'Dismiss ' + item.message"
             (click)="service.dismiss(item.id)"
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+            <svg lucideX aria-hidden="true"></svg>
           </button>
         }
         @if (item.action) {

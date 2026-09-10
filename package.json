@@ -33,6 +33,7 @@
     "@lucide/angular": "^1.31.0",
     "@tailwindcss/postcss": "^4.3.3",
     "daisyui": "^5.7.16",
+    "photoswipe": "^5.4.4",
     "postcss": "^8.5.26",
     "rxjs": "~7.8.2",
     "tailwindcss": "^4.3.3",

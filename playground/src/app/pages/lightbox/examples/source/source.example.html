@@ -1,0 +1,5 @@
+<div class="flex justify-center">
+  <button suiButton type="button" variant="outlined" (click)="viewer.show()">Open image programmatically</button>
+</div>
+
+<sui-lightbox #viewer="suiLightbox" [image]="image" />

@@ -1,0 +1,22 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Breadcrumb</h1>
+      <p class="text-lg text-base-content/70">Show the current page within a navigable hierarchy.</p>
+    </div>
+    <div class="flex gap-2">
+      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Templates</span>
+    </div>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Paths and custom labels</h2>
+      <p class="text-base-content/60">
+        Breadcrumbs remain horizontal and scroll on narrow screens. Use router links for application destinations and hrefs for documents.
+      </p>
+    </div>
+    <pg-example-code [html]="example.html" [typescript]="example.typescript"
+      ><ng-template pgExamplePreview><pg-breadcrumb-usage-example /></ng-template
+    ></pg-example-code>
+  </section>
+</main>

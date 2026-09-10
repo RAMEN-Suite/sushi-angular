@@ -8,6 +8,7 @@ export const apiReference: Readonly<{
   readonly Avatar: ApiReferenceData;
   readonly AvatarGroup: ApiReferenceData;
   readonly Badge: ApiReferenceData;
+  readonly Breadcrumb: ApiReferenceData;
   readonly Button: ApiReferenceData;
   readonly Card: ApiReferenceData;
   readonly CardActions: ApiReferenceData;
@@ -39,6 +40,7 @@ export const apiReference: Readonly<{
   readonly FieldsetToggle: ApiReferenceData;
   readonly FileDrop: ApiReferenceData;
   readonly FileInput: ApiReferenceData;
+  readonly Gallery: ApiReferenceData;
   readonly Indicator: ApiReferenceData;
   readonly IndicatorItem: ApiReferenceData;
   readonly Input: ApiReferenceData;
@@ -52,6 +54,8 @@ export const apiReference: Readonly<{
   readonly JoinItem: ApiReferenceData;
   readonly Kbd: ApiReferenceData;
   readonly Label: ApiReferenceData;
+  readonly Lightbox: ApiReferenceData;
+  readonly LightboxTrigger: ApiReferenceData;
   readonly List: ApiReferenceData;
   readonly Listbox: ApiReferenceData;
   readonly Mask: ApiReferenceData;
@@ -66,6 +70,9 @@ export const apiReference: Readonly<{
   readonly NavbarContent: ApiReferenceData;
   readonly OrderList: ApiReferenceData;
   readonly Pagination: ApiReferenceData;
+  readonly Popover: ApiReferenceData;
+  readonly PopoverClose: ApiReferenceData;
+  readonly PopoverTrigger: ApiReferenceData;
   readonly Progress: ApiReferenceData;
   readonly Radio: ApiReferenceData;
   readonly Range: ApiReferenceData;
@@ -74,6 +81,7 @@ export const apiReference: Readonly<{
   readonly Sidebar: ApiReferenceData;
   readonly SidebarFooter: ApiReferenceData;
   readonly SidebarHeader: ApiReferenceData;
+  readonly Skeleton: ApiReferenceData;
   readonly Spinner: ApiReferenceData;
   readonly Status: ApiReferenceData;
   readonly Table: ApiReferenceData;
@@ -83,6 +91,8 @@ export const apiReference: Readonly<{
   readonly ToastService: ApiReferenceData;
   readonly Toggle: ApiReferenceData;
   readonly ToggleButton: ApiReferenceData;
+  readonly Tooltip: ApiReferenceData;
+  readonly TooltipSurface: ApiReferenceData;
 }> = {
   Accordion: {
     className: 'Accordion',
@@ -976,6 +986,124 @@ export const apiReference: Readonly<{
       },
     ],
     styles: [],
+  },
+  Breadcrumb: {
+    className: 'Breadcrumb',
+    declaration: 'Breadcrumb<T = string>',
+    selector: 'sui-breadcrumb',
+    description: 'Renders the hierarchical path to the current page as native navigation links.',
+    members: [
+      {
+        name: 'items',
+        kind: 'input',
+        type: 'readonly BreadcrumbItem<T>[]',
+        defaultValue: 'required',
+        description: 'Ordered destinations from the broadest level to the current page.',
+      },
+      {
+        name: 'ariaLabel',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "'Breadcrumb'",
+        description: 'Accessible name of the navigation landmark.',
+      },
+    ],
+    templates: [
+      {
+        name: 'suiBreadcrumbItem',
+        context: 'BreadcrumbItemContext<unknown>',
+        description: 'Replaces each Breadcrumb label while preserving navigation semantics.',
+        members: [],
+      },
+    ],
+    types: [
+      {
+        name: 'BreadcrumbItem',
+        kind: 'interface',
+        declaration:
+          'interface BreadcrumbItem<T = string> {\n  readonly value: T;\n  readonly label: string;\n  readonly routerLink?: string | readonly string[];\n  readonly href?: string;\n  readonly current?: boolean;\n}',
+        description: 'One destination in a Breadcrumb trail.',
+        members: [
+          {
+            name: 'value',
+            type: 'T',
+            optional: false,
+            description: 'Consumer value exposed to templates and selection logic.',
+          },
+          {
+            name: 'label',
+            type: 'string',
+            optional: false,
+            description: 'Visible destination label.',
+          },
+          {
+            name: 'routerLink',
+            type: 'string | readonly string[]',
+            optional: true,
+            description: 'Angular Router destination for application navigation.',
+          },
+          {
+            name: 'href',
+            type: 'string',
+            optional: true,
+            description: 'Native URL for document or external navigation.',
+          },
+          {
+            name: 'current',
+            type: 'boolean',
+            optional: true,
+            description: 'Marks the item as the current page. The last item is current by default.',
+          },
+        ],
+      },
+      {
+        name: 'BreadcrumbItemContext',
+        kind: 'interface',
+        declaration:
+          'interface BreadcrumbItemContext<T> {\n  readonly $implicit: BreadcrumbItem<T>;\n  readonly item: BreadcrumbItem<T>;\n  readonly index: number;\n  readonly current: boolean;\n}',
+        description: 'Data exposed to a custom Breadcrumb item template.',
+        members: [
+          {
+            name: '$implicit',
+            type: 'BreadcrumbItem<T>',
+            optional: false,
+            description: 'Current item, available as the implicit template value.',
+          },
+          {
+            name: 'item',
+            type: 'BreadcrumbItem<T>',
+            optional: false,
+            description: 'Current item.',
+          },
+          {
+            name: 'index',
+            type: 'number',
+            optional: false,
+            description: 'Zero-based position in the trail.',
+          },
+          {
+            name: 'current',
+            type: 'boolean',
+            optional: false,
+            description: 'Whether this item represents the current page.',
+          },
+        ],
+      },
+    ],
+    styles: [
+      {
+        name: '--sui-breadcrumb-color',
+        defaultValue: 'color-mix(in oklab, var(--color-base-content) 65%, transparent)',
+        exampleValue: null,
+        description: 'Text color of non-current Breadcrumb destinations.',
+      },
+      {
+        name: '--sui-breadcrumb-current-color',
+        defaultValue: 'var(--color-base-content)',
+        exampleValue: null,
+        description: 'Text color of the current Breadcrumb destination.',
+      },
+    ],
   },
   Button: {
     className: 'Button',
@@ -3392,6 +3520,216 @@ export const apiReference: Readonly<{
     ],
     styles: [],
   },
+  Gallery: {
+    className: 'Gallery',
+    declaration: 'Gallery<I extends GalleryImage = GalleryImage>',
+    selector: 'sui-gallery',
+    description: 'Browses an image collection with a large stage and accessible thumbnail navigation.',
+    members: [
+      {
+        name: 'images',
+        kind: 'input',
+        type: 'readonly I[]',
+        defaultValue: 'required',
+        description: 'Images available in the Gallery.',
+      },
+      {
+        name: 'activeIndex',
+        kind: 'model',
+        type: 'number',
+        defaultValue: '0',
+        description: 'Controls and reports the selected image index.',
+      },
+      {
+        name: 'showNavigation',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Shows previous and next actions over the stage.',
+      },
+      {
+        name: 'showThumbnails',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Shows the thumbnail strip below the stage.',
+      },
+      {
+        name: 'showCounter',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Shows the current and total image count.',
+      },
+      {
+        name: 'wrap',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Wraps navigation from the last image to the first and vice versa.',
+      },
+      {
+        name: 'ariaLabel',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "'Image gallery'",
+        description: 'Accessible name for the Gallery region.',
+      },
+      {
+        name: 'thumbnailLabel',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "'Choose image'",
+        description: 'Accessible label for the thumbnail list.',
+      },
+      {
+        name: 'previousLabel',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "'Previous image'",
+        description: 'Accessible label for the previous action.',
+      },
+      {
+        name: 'nextLabel',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "'Next image'",
+        description: 'Accessible label for the next action.',
+      },
+      {
+        name: 'emptyLabel',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "'No images available'",
+        description: 'Text displayed when no images are available.',
+      },
+      {
+        name: 'select',
+        kind: 'method',
+        type: '(index: number) => void',
+        defaultValue: null,
+        description: 'Selects an image by index.',
+      },
+      {
+        name: 'next',
+        kind: 'method',
+        type: '() => void',
+        defaultValue: null,
+        description: 'Selects the next image.',
+      },
+      {
+        name: 'previous',
+        kind: 'method',
+        type: '() => void',
+        defaultValue: null,
+        description: 'Selects the previous image.',
+      },
+    ],
+    templates: [],
+    types: [
+      {
+        name: 'GalleryImage',
+        kind: 'interface',
+        declaration:
+          'interface GalleryImage<T = string> {\n  readonly value: T;\n  readonly src: string;\n  readonly width: number;\n  readonly height: number;\n  readonly alt: string;\n  readonly caption?: string;\n  readonly thumbnailSrc?: string;\n  readonly srcset?: string;\n}',
+        description: 'One image shared by Gallery and Lightbox.',
+        members: [
+          {
+            name: 'value',
+            type: 'T',
+            optional: false,
+            description: 'Stable consumer value associated with the image.',
+          },
+          {
+            name: 'src',
+            type: 'string',
+            optional: false,
+            description: 'Full-size image source URL.',
+          },
+          {
+            name: 'width',
+            type: 'number',
+            optional: false,
+            description: 'Intrinsic full-size image width in pixels.',
+          },
+          {
+            name: 'height',
+            type: 'number',
+            optional: false,
+            description: 'Intrinsic full-size image height in pixels.',
+          },
+          {
+            name: 'alt',
+            type: 'string',
+            optional: false,
+            description: 'Alternative text describing the image.',
+          },
+          {
+            name: 'caption',
+            type: 'string',
+            optional: true,
+            description: 'Optional caption displayed with the image.',
+          },
+          {
+            name: 'thumbnailSrc',
+            type: 'string',
+            optional: true,
+            description: 'Optional smaller source used by Gallery thumbnails and Lightbox transitions.',
+          },
+          {
+            name: 'srcset',
+            type: 'string',
+            optional: true,
+            description: 'Optional responsive source candidates used by the Lightbox.',
+          },
+        ],
+      },
+    ],
+    styles: [
+      {
+        name: '--sui-gallery-background',
+        defaultValue: 'var(--color-base-200)',
+        exampleValue: null,
+        description: 'Surface behind the large image.',
+      },
+      {
+        name: '--sui-gallery-border-color',
+        defaultValue: 'var(--color-base-300)',
+        exampleValue: null,
+        description: 'Border color around the Gallery.',
+      },
+      {
+        name: '--sui-gallery-selection-color',
+        defaultValue: 'var(--color-primary)',
+        exampleValue: null,
+        description: 'Color used by the selected thumbnail and focus indicators.',
+      },
+      {
+        name: '--sui-gallery-stage-height',
+        defaultValue: 'clamp(20rem, 58vw, 34rem)',
+        exampleValue: null,
+        description: 'Height of the large image stage.',
+      },
+      {
+        name: '--sui-gallery-thumbnail-size',
+        defaultValue: '4.75rem',
+        exampleValue: null,
+        description: 'Width and height of one thumbnail.',
+      },
+      {
+        name: '--sui-gallery-gap',
+        defaultValue: '0.75rem',
+        exampleValue: null,
+        description: 'Space between Gallery regions and thumbnails.',
+      },
+      {
+        name: '--sui-gallery-radius',
+        defaultValue: 'var(--radius-box)',
+        exampleValue: null,
+        description: 'Corner radius of the Gallery surface.',
+      },
+    ],
+  },
   Indicator: {
     className: 'Indicator',
     declaration: 'Indicator',
@@ -4190,6 +4528,126 @@ export const apiReference: Readonly<{
         type: 'boolean',
         defaultValue: 'false',
         description: 'Floats a native label above its wrapped control on focus or when a value is present.',
+      },
+    ],
+    templates: [],
+    types: [],
+    styles: [],
+  },
+  Lightbox: {
+    className: 'Lightbox',
+    declaration: 'Lightbox<I extends GalleryImage = GalleryImage>',
+    selector: 'sui-lightbox',
+    description: 'Opens Gallery images in a zoomable, gesture-enabled full-screen viewer powered by PhotoSwipe.',
+    members: [
+      {
+        name: 'open',
+        kind: 'model',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Controls and reports whether the Lightbox is open.',
+      },
+      {
+        name: 'image',
+        kind: 'input',
+        type: 'I',
+        defaultValue: 'required',
+        description: 'Image displayed in the viewer. Width and height provide stable zoom geometry.',
+      },
+      {
+        name: 'ariaLabel',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "'Image viewer'",
+        description: 'Accessible name for the modal viewer.',
+      },
+      {
+        name: 'description',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'Optional visible description. Defaults to the image caption.',
+      },
+      {
+        name: 'zoom',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Shows the zoom control and allows zoom interactions.',
+      },
+      {
+        name: 'wheelToZoom',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Lets a mouse wheel zoom the active image without requiring a modifier key.',
+      },
+      {
+        name: 'show',
+        kind: 'method',
+        type: '() => void',
+        defaultValue: null,
+        description: 'Opens the Lightbox.',
+      },
+      {
+        name: 'close',
+        kind: 'method',
+        type: '() => void',
+        defaultValue: null,
+        description: 'Closes the Lightbox and restores focus to the previously active element.',
+      },
+    ],
+    templates: [],
+    types: [],
+    styles: [],
+  },
+  LightboxTrigger: {
+    className: 'LightboxTrigger',
+    declaration: 'LightboxTrigger<I extends GalleryImage = GalleryImage>',
+    selector: 'img[suiLightbox]',
+    description: 'Opens one native image in a Lightbox.',
+    members: [
+      {
+        name: 'suiLightbox',
+        kind: 'input',
+        type: "I | ''",
+        defaultValue: "''",
+        description: 'Optional image metadata. Omit the value to open the native image source directly.',
+      },
+      {
+        name: 'zoom',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Shows the zoom control and allows zoom interactions.',
+      },
+      {
+        name: 'wheelToZoom',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Lets a mouse wheel zoom the active image without requiring a modifier key.',
+      },
+      {
+        name: 'ariaLabel',
+        kind: 'input',
+        type: 'string',
+        defaultValue: "'Image viewer'",
+        description: 'Accessible name for the modal viewer.',
+      },
+      {
+        name: 'description',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'Optional visible description. Defaults to the metadata caption.',
+      },
+      {
+        name: 'show',
+        kind: 'method',
+        type: '() => void',
+        defaultValue: null,
+        description: 'Opens the configured image.',
       },
     ],
     templates: [],
@@ -7010,6 +7468,207 @@ export const apiReference: Readonly<{
       },
     ],
   },
+  Popover: {
+    className: 'Popover',
+    declaration: 'Popover',
+    selector: 'sui-popover',
+    description: 'Displays projected supporting content beside a trigger without blocking the page.',
+    members: [
+      {
+        name: 'open',
+        kind: 'model',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Controls and reports whether the Popover is visible.',
+      },
+      {
+        name: 'placement',
+        kind: 'input',
+        type: 'PopoverPlacement',
+        defaultValue: "'bottom'",
+        description: 'Preferred side relative to the trigger, with automatic fallback.',
+      },
+      {
+        name: 'offset',
+        kind: 'input',
+        type: 'number',
+        defaultValue: '10',
+        description: 'Space in pixels between the trigger and the Popover surface.',
+      },
+      {
+        name: 'ariaLabel',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'Accessible name for the Popover surface.',
+      },
+      {
+        name: 'ariaLabelledby',
+        kind: 'input',
+        type: 'string | null',
+        defaultValue: 'null',
+        description: 'ID of the visible element that labels the Popover.',
+      },
+      {
+        name: 'dismissible',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Allows pointer interaction outside the Popover to close it.',
+      },
+      {
+        name: 'closeOnEscape',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Allows Escape to close the Popover independently of outside dismissal.',
+      },
+      {
+        name: 'showCloseButton',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Displays a close action in the top-right corner.',
+      },
+      {
+        name: 'autoFocus',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Moves focus to the Popover surface when it opens.',
+      },
+      {
+        name: 'show',
+        kind: 'method',
+        type: '(origin: HTMLElement) => void',
+        defaultValue: null,
+        description: 'Opens the Popover beside an element.',
+      },
+      {
+        name: 'hide',
+        kind: 'method',
+        type: '(restoreFocus: boolean = false) => void',
+        defaultValue: null,
+        description: 'Closes the Popover and optionally restores trigger focus.',
+      },
+      {
+        name: 'toggle',
+        kind: 'method',
+        type: '(origin: HTMLElement) => void',
+        defaultValue: null,
+        description: 'Toggles the Popover beside an element.',
+      },
+    ],
+    templates: [],
+    types: [
+      {
+        name: 'PopoverPlacement',
+        kind: 'type',
+        declaration: "type PopoverPlacement = 'top' | 'right' | 'bottom' | 'left';",
+        description: 'Preferred side of a Popover relative to its trigger.',
+        members: [],
+      },
+    ],
+    styles: [
+      {
+        name: '--sui-popover-background',
+        defaultValue: 'var(--color-base-100)',
+        exampleValue: null,
+        description: 'Background of the Popover surface.',
+      },
+      {
+        name: '--sui-popover-color',
+        defaultValue: 'var(--color-base-content)',
+        exampleValue: null,
+        description: 'Text color inside the Popover.',
+      },
+      {
+        name: '--sui-popover-border-color',
+        defaultValue: 'color-mix(in oklab, var(--color-base-content) 14%, transparent)',
+        exampleValue: null,
+        description: 'Border color around the Popover.',
+      },
+      {
+        name: '--sui-popover-border-width',
+        defaultValue: '1px',
+        exampleValue: null,
+        description: 'Border width around the Popover and its arrow.',
+      },
+      {
+        name: '--sui-popover-radius',
+        defaultValue: 'var(--radius-box)',
+        exampleValue: null,
+        description: 'Corner radius of the Popover.',
+      },
+      {
+        name: '--sui-popover-shadow',
+        defaultValue: '0 0.75rem 2rem rgb(0 0 0 / 12%)',
+        exampleValue: null,
+        description: 'Subtle shadow separating the Popover from surrounding content.',
+      },
+      {
+        name: '--sui-popover-padding',
+        defaultValue: '1.125rem',
+        exampleValue: null,
+        description: 'Inner spacing of the Popover surface.',
+      },
+      {
+        name: '--sui-popover-min-width',
+        defaultValue: '12rem',
+        exampleValue: null,
+        description: 'Minimum width of the Popover surface.',
+      },
+      {
+        name: '--sui-popover-max-width',
+        defaultValue: 'min(24rem, calc(100vw - 1rem))',
+        exampleValue: null,
+        description: 'Maximum width of the Popover surface.',
+      },
+    ],
+  },
+  PopoverClose: {
+    className: 'PopoverClose',
+    declaration: 'PopoverClose',
+    selector: 'button[suiPopoverClose]',
+    description: 'Closes a Popover from a native button.',
+    members: [
+      {
+        name: 'popover',
+        kind: 'input',
+        type: 'Popover',
+        defaultValue: 'required',
+        description: 'Popover closed by this button.',
+      },
+    ],
+    templates: [],
+    types: [],
+    styles: [],
+  },
+  PopoverTrigger: {
+    className: 'PopoverTrigger',
+    declaration: 'PopoverTrigger',
+    selector: 'button[suiPopoverTrigger]',
+    description: 'Opens a Popover from a native button.',
+    members: [
+      {
+        name: 'popover',
+        kind: 'input',
+        type: 'Popover',
+        defaultValue: 'required',
+        description: 'Popover controlled by this button.',
+      },
+      {
+        name: 'disabled',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Prevents activation while keeping the action discoverable.',
+      },
+    ],
+    templates: [],
+    types: [],
+    styles: [],
+  },
   Progress: {
     className: 'Progress',
     declaration: 'Progress',
@@ -8331,6 +8990,46 @@ export const apiReference: Readonly<{
     templates: [],
     types: [],
     styles: [],
+  },
+  Skeleton: {
+    className: 'Skeleton',
+    declaration: 'Skeleton',
+    selector: '[suiSkeleton]',
+    description: 'Marks a non-interactive placeholder for content that is still loading.',
+    members: [
+      {
+        name: 'variant',
+        kind: 'input',
+        type: 'SkeletonVariant',
+        defaultValue: "'block'",
+        description: 'Selects a block placeholder or animated placeholder text.',
+      },
+      {
+        name: 'animated',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'true',
+        description: 'Enables the loading animation. Disable it when motion would distract from the surrounding task.',
+      },
+    ],
+    templates: [],
+    types: [
+      {
+        name: 'SkeletonVariant',
+        kind: 'type',
+        declaration: "type SkeletonVariant = 'block' | 'text';",
+        description: 'Visual treatment used by a Skeleton placeholder.',
+        members: [],
+      },
+    ],
+    styles: [
+      {
+        name: '--sui-skeleton-background',
+        defaultValue: 'var(--color-base-300)',
+        exampleValue: null,
+        description: 'Base background of a Skeleton placeholder.',
+      },
+    ],
   },
   Spinner: {
     className: 'Spinner',
@@ -9945,6 +10644,128 @@ export const apiReference: Readonly<{
         members: [],
       },
     ],
+    styles: [],
+  },
+  Tooltip: {
+    className: 'Tooltip',
+    declaration: 'Tooltip',
+    selector: '[suiTooltip]',
+    description: 'Adds accessible hover and focus help to an element.',
+    members: [
+      {
+        name: 'text',
+        kind: 'input',
+        type: 'string',
+        defaultValue: 'required',
+        description: 'Plain-text content displayed by the Tooltip.',
+      },
+      {
+        name: 'placement',
+        kind: 'input',
+        type: 'TooltipPlacement',
+        defaultValue: "'top'",
+        description: 'Preferred side of the target, with automatic viewport fallback.',
+      },
+      {
+        name: 'offset',
+        kind: 'input',
+        type: 'number',
+        defaultValue: '6',
+        description: 'Space in pixels between the target and Tooltip.',
+      },
+      {
+        name: 'disabled',
+        kind: 'input',
+        type: 'boolean',
+        defaultValue: 'false',
+        description: 'Prevents the Tooltip from opening.',
+      },
+      {
+        name: 'showDelay',
+        kind: 'input',
+        type: 'number',
+        defaultValue: '300',
+        description: 'Delay in milliseconds before the Tooltip appears.',
+      },
+      {
+        name: 'hideDelay',
+        kind: 'input',
+        type: 'number',
+        defaultValue: '100',
+        description: 'Delay in milliseconds before the Tooltip disappears.',
+      },
+      {
+        name: 'show',
+        kind: 'method',
+        type: '() => void',
+        defaultValue: null,
+        description: 'Shows the Tooltip immediately.',
+      },
+      {
+        name: 'hide',
+        kind: 'method',
+        type: '() => void',
+        defaultValue: null,
+        description: 'Hides the Tooltip immediately.',
+      },
+    ],
+    templates: [],
+    types: [
+      {
+        name: 'TooltipPlacement',
+        kind: 'type',
+        declaration: "type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';",
+        description: 'Preferred side of a Tooltip relative to its target.',
+        members: [],
+      },
+    ],
+    styles: [
+      {
+        name: '--sui-tooltip-background',
+        defaultValue: 'var(--color-neutral)',
+        exampleValue: null,
+        description: 'Background of the Tooltip.',
+      },
+      {
+        name: '--sui-tooltip-color',
+        defaultValue: 'var(--color-neutral-content)',
+        exampleValue: null,
+        description: 'Text color of the Tooltip.',
+      },
+      {
+        name: '--sui-tooltip-max-width',
+        defaultValue: '18rem',
+        exampleValue: null,
+        description: 'Maximum inline size of the Tooltip.',
+      },
+      {
+        name: '--sui-tooltip-padding',
+        defaultValue: '0.375rem 0.625rem',
+        exampleValue: null,
+        description: 'Inner spacing of the Tooltip.',
+      },
+      {
+        name: '--sui-tooltip-radius',
+        defaultValue: 'var(--radius-field)',
+        exampleValue: null,
+        description: 'Corner radius of the Tooltip.',
+      },
+      {
+        name: '--sui-tooltip-font-size',
+        defaultValue: '0.75rem',
+        exampleValue: null,
+        description: 'Font size of the Tooltip text.',
+      },
+    ],
+  },
+  TooltipSurface: {
+    className: 'TooltipSurface',
+    declaration: 'TooltipSurface',
+    selector: 'sui-tooltip-surface',
+    description: '@internal',
+    members: [],
+    templates: [],
+    types: [],
     styles: [],
   },
 } as const;

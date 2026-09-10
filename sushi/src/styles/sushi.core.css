@@ -7,6 +7,7 @@
 @import './features/input-group.styles.css';
 @import './features/input.styles.css';
 @import './features/join.styles.css';
+@import './features/lightbox.styles.css';
 @import './features/kbd.styles.css';
 @import './features/label.styles.css';
 @import './features/message.styles.css';
@@ -16,6 +17,8 @@
 @import './features/selection.styles.css';
 @import './features/sidebar.styles.css';
 @import './features/select-button.styles.css';
+@import './features/skeleton.styles.css';
+@import './features/tooltip.styles.css';
 @import './features/spinner.styles.css';
 @import './features/status.styles.css';
 @import './features/tabs.styles.css';

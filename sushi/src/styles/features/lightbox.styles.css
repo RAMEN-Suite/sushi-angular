@@ -1,0 +1,57 @@
+@import 'photoswipe/style.css' layer(components);
+
+@layer components {
+  .sui-lightbox-trigger {
+    cursor: zoom-in;
+  }
+
+  .sui-lightbox-trigger:focus-visible {
+    border-radius: var(--radius-field);
+    outline: var(--sui-focus-ring-width) solid currentColor;
+    outline-offset: var(--sui-focus-ring-offset);
+  }
+
+  .sui-lightbox {
+    /** Lightbox backdrop color, including its desired opacity. */
+    --sui-lightbox-background: rgb(11 11 15 / 96%);
+    /** Lightbox control and caption color. */
+    --sui-lightbox-color: white;
+    /** Background behind Lightbox controls. */
+    --sui-lightbox-control-background: rgb(255 255 255 / 10%);
+    /** Corner radius of Lightbox controls. */
+    --sui-lightbox-control-radius: var(--radius-field);
+    /** Maximum caption width. */
+    --sui-lightbox-caption-width: 48rem;
+
+    --pswp-bg: var(--sui-lightbox-background);
+    --pswp-icon-color: var(--sui-lightbox-color);
+    --pswp-icon-color-secondary: var(--sui-lightbox-background);
+    --pswp-error-text-color: var(--sui-lightbox-color);
+  }
+
+  .sui-lightbox .pswp__button {
+    margin: 0.5rem;
+    background-color: var(--sui-lightbox-control-background);
+    border-radius: var(--sui-lightbox-control-radius);
+  }
+
+  .sui-lightbox .pswp__counter {
+    margin: 0.75rem;
+    color: var(--sui-lightbox-color);
+    text-shadow: none;
+  }
+
+  .sui-lightbox .pswp__caption {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    max-width: var(--sui-lightbox-caption-width);
+    padding: 0.75rem 1rem;
+    margin-inline: auto;
+    color: var(--sui-lightbox-color);
+    text-align: center;
+    background: var(--sui-lightbox-control-background);
+    border-radius: var(--sui-lightbox-control-radius);
+  }
+}

@@ -1,0 +1,18 @@
+<div class="flex flex-wrap items-center gap-3">
+  <button suiButton type="button" variant="outlined" (click)="details.toggle(product)">
+    <svg lucideInfo class="size-4" aria-hidden="true"></svg>
+    Show details
+  </button>
+  <button #product suiButton type="button" severity="neutral" variant="soft" (click)="details.toggle(product)">
+    <span>Salmon nigiri</span>
+    <span class="text-base-content/60">€12</span>
+  </button>
+</div>
+<sui-popover #details ariaLabel="Product details" placement="top">
+  <div class="grid w-64 gap-2">
+    <strong>Salmon nigiri</strong>
+    <p class="text-sm leading-relaxed text-base-content/60">
+      Six pieces with sustainably sourced salmon and seasoned rice.
+    </p>
+  </div>
+</sui-popover>

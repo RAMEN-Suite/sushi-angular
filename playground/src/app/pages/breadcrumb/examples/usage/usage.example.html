@@ -1,0 +1,14 @@
+<div class="grid gap-5">
+  <sui-breadcrumb [items]="path" />
+
+  <sui-breadcrumb [items]="path" ariaLabel="Store location">
+    <ng-template suiBreadcrumbItem let-item let-index="index">
+      @if (index === 0) {
+        <svg lucideHouse class="size-4" aria-hidden="true"></svg>
+        <span class="sr-only">{{ item.label }}</span>
+      } @else {
+        {{ item.label }}
+      }
+    </ng-template>
+  </sui-breadcrumb>
+</div>

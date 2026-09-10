@@ -59,13 +59,15 @@ const sharedStyleFilesByClass: Readonly<Record<string, readonly string[]>> = {
   Navbar: ['sushi/src/styles/features/navbar.styles.css'],
   Progress: ['sushi/src/styles/features/progress.styles.css'],
   Spinner: ['sushi/src/styles/features/spinner.styles.css'],
+  Skeleton: ['sushi/src/styles/features/skeleton.styles.css'],
   Status: ['sushi/src/styles/features/status.styles.css'],
+  Tooltip: ['sushi/src/styles/features/tooltip.styles.css'],
 };
 
 function findSourceFiles(folder: string): string[] {
   return readdirSync(folder, { withFileTypes: true }).flatMap((entry: Dirent): string[] => {
     const file: string = join(folder, entry.name);
-    if (entry.isDirectory()) return findSourceFiles(file);
+    if (entry.isDirectory()) return entry.name === 'internal' ? [] : findSourceFiles(file);
     return extname(file) === '.ts' && !file.endsWith('.spec.ts') ? [file] : [];
   });
 }

@@ -36,13 +36,17 @@ Build these in dependency order so later components reuse established behavior a
 ## Overlays and navigation
 
 - [x] `suiDialog`
-- [ ] `suiPopover`
-- [ ] `suiTooltip`
+- [x] `suiPopover`
+- [x] `suiTooltip`
 - [x] `suiContextMenuTrigger`
-- [ ] `suiBreadcrumb`
-- [ ] `suiSteps`
+- [x] `suiBreadcrumb`
 
 ## Supporting primitives
 
 - [x] `suiChip`
-- [ ] `suiSkeleton`
+- [x] `suiSkeleton`
+
+## Extras
+
+- [x] `suiLightbox`
+- [x] `suiGallery`

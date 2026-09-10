@@ -277,6 +277,36 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/toggle-button/toggle-button.page').then(({ ToggleButtonPage }) => ToggleButtonPage),
     title: 'Toggle Button | SUSHI Playground',
   },
+  {
+    path: 'breadcrumb',
+    loadComponent: () => import('./pages/breadcrumb/breadcrumb.page').then(({ BreadcrumbPage }) => BreadcrumbPage),
+    title: 'Breadcrumb | SUSHI Playground',
+  },
+  {
+    path: 'popover',
+    loadComponent: () => import('./pages/popover/popover.page').then(({ PopoverPage }) => PopoverPage),
+    title: 'Popover | SUSHI Playground',
+  },
+  {
+    path: 'tooltip',
+    loadComponent: () => import('./pages/tooltip/tooltip.page').then(({ TooltipPage }) => TooltipPage),
+    title: 'Tooltip | SUSHI Playground',
+  },
+  {
+    path: 'skeleton',
+    loadComponent: () => import('./pages/skeleton/skeleton.page').then(({ SkeletonPage }) => SkeletonPage),
+    title: 'Skeleton | SUSHI Playground',
+  },
+  {
+    path: 'gallery',
+    loadComponent: () => import('./pages/gallery/gallery.page').then(({ GalleryPage }) => GalleryPage),
+    title: 'Gallery | SUSHI Playground',
+  },
+  {
+    path: 'lightbox',
+    loadComponent: () => import('./pages/lightbox/lightbox.page').then(({ LightboxPage }) => LightboxPage),
+    title: 'Lightbox | SUSHI Playground',
+  },
   ...apiRoutes,
   ...stylingRoutes,
   {

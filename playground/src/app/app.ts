@@ -1,5 +1,6 @@
 import { DOCUMENT, Location } from '@angular/common';
 import {
+  afterRenderEffect,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -119,13 +120,22 @@ export class App {
   protected readonly currentPath: Signal<string> = computed((): string => this.currentUrl().split(/[?#]/, 1)[0] || '/');
   protected readonly theme: WritableSignal<PlaygroundTheme> = signal<PlaygroundTheme>(this.getInitialTheme());
 
+  public constructor() {
+    afterRenderEffect({
+      write: (): void => {
+        this.currentUrl();
+        this.document.defaultView?.requestAnimationFrame((): void => this.scrollContentToTop());
+      },
+    });
+  }
+
   protected toggleTheme(): void {
     const nextTheme: PlaygroundTheme = this.theme() === 'sushi' ? 'sushi-dark' : 'sushi';
     this.theme.set(nextTheme);
     this.document.documentElement.dataset['theme'] = nextTheme;
   }
 
-  protected scrollContentToTop(): void {
+  private scrollContentToTop(): void {
     const element: HTMLElement | undefined = this.contentScroll()?.nativeElement;
     if (!element) return;
     element.scrollTo({ top: 0, left: 0 });

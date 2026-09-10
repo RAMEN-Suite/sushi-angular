@@ -1,0 +1,22 @@
+<nav class="breadcrumbs" [attr.aria-label]="ariaLabel()">
+  <ol>
+    @for (item of items(); track item.value; let index = $index) {
+      <li>
+        @if (isCurrent(item, index)) {
+          <span aria-current="page"
+            ><ng-container [ngTemplateOutlet]="itemTemplate() ?? label" [ngTemplateOutletContext]="context(item, index)"
+          /></span>
+        } @else if (item.routerLink) {
+          <a [routerLink]="item.routerLink"
+            ><ng-container [ngTemplateOutlet]="itemTemplate() ?? label" [ngTemplateOutletContext]="context(item, index)"
+          /></a>
+        } @else {
+          <a [href]="item.href"
+            ><ng-container [ngTemplateOutlet]="itemTemplate() ?? label" [ngTemplateOutletContext]="context(item, index)"
+          /></a>
+        }
+        <ng-template #label>{{ item.label }}</ng-template>
+      </li>
+    }
+  </ol>
+</nav>

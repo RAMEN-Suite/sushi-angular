@@ -154,6 +154,10 @@ export const navigation: readonly NavigationGroup[] = [
         label: 'Tabs',
         path: '/tabs',
       },
+      {
+        label: 'Breadcrumb',
+        path: '/breadcrumb',
+      },
     ],
   },
   {
@@ -162,6 +166,18 @@ export const navigation: readonly NavigationGroup[] = [
       {
         label: 'Dialog',
         path: '/dialog',
+      },
+      {
+        label: 'Popover',
+        path: '/popover',
+      },
+      {
+        label: 'Tooltip',
+        path: '/tooltip',
+      },
+      {
+        label: 'Lightbox',
+        path: '/lightbox',
       },
     ],
   },
@@ -187,6 +203,10 @@ export const navigation: readonly NavigationGroup[] = [
       {
         label: 'Status',
         path: '/status',
+      },
+      {
+        label: 'Skeleton',
+        path: '/skeleton',
       },
       {
         label: 'Toast',
@@ -224,6 +244,10 @@ export const navigation: readonly NavigationGroup[] = [
       {
         label: 'Table',
         path: '/table',
+      },
+      {
+        label: 'Gallery',
+        path: '/gallery',
       },
     ],
   },

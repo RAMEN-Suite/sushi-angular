@@ -1,0 +1,34 @@
+<button suiButton variant="outlined" [suiPopoverTrigger]="share">
+  <svg lucideShare2 class="size-4" aria-hidden="true"></svg>
+  Share menu
+</button>
+<sui-popover #share ariaLabelledby="share-title" showCloseButton>
+  <div class="grid w-80 gap-4">
+    <div class="grid gap-1">
+      <h3 id="share-title" class="font-semibold">Share this menu</h3>
+      <p class="text-sm text-base-content/60">Anyone with the link can view it.</p>
+    </div>
+    <div suiInputGroup class="w-full">
+      <input
+        suiInput
+        suiJoinItem
+        readonly
+        class="min-w-0 flex-1"
+        value="sushi.example/menu/spring"
+        aria-label="Share link" />
+      <button suiButton suiJoinItem type="button" severity="neutral" variant="outlined" aria-label="Copy share link">
+        <svg lucideCopy class="size-4" aria-hidden="true"></svg>
+      </button>
+    </div>
+    <div class="flex gap-2">
+      <button suiButton type="button" size="sm" severity="neutral" variant="soft">
+        <svg lucideMail class="size-4" aria-hidden="true"></svg>
+        Email
+      </button>
+      <button suiButton type="button" size="sm" severity="neutral" variant="soft">
+        <svg lucideMessageCircle class="size-4" aria-hidden="true"></svg>
+        Message
+      </button>
+    </div>
+  </div>
+</sui-popover>

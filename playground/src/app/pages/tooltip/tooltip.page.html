@@ -1,0 +1,22 @@
+<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
+  <section class="grid gap-4 py-2">
+    <div class="space-y-3">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Tooltip</h1>
+      <p class="text-lg text-base-content/70">Add brief plain-text help on hover and keyboard focus.</p>
+    </div>
+    <div class="flex gap-2">
+      <span suiBadge variant="soft" size="sm">Directive</span><span suiBadge variant="soft" size="sm">Angular CDK</span>
+    </div>
+  </section>
+  <section class="space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Placement</h2>
+      <p class="text-base-content/60">
+        Place short supplementary text on any side of its target. The Tooltip automatically falls back when space runs out.
+      </p>
+    </div>
+    <pg-example-code [html]="example.html" [typescript]="example.typescript"
+      ><ng-template pgExamplePreview><pg-tooltip-usage-example /></ng-template
+    ></pg-example-code>
+  </section>
+</main>
