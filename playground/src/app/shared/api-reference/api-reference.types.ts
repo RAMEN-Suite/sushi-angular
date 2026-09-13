@@ -22,14 +22,22 @@ export interface ApiTypeMember {
   readonly description: string;
 }
 
+export interface ApiTypeParameter {
+  readonly name: string;
+  readonly constraint: string | null;
+  readonly defaultValue: string | null;
+}
+
 export type ApiTypeKind = 'interface' | 'type' | 'enum';
 
 export interface ApiTypeDefinition {
   readonly name: string;
   readonly kind: ApiTypeKind;
+  readonly source: 'library' | 'platform';
   readonly declaration: string;
   readonly description: string;
   readonly members: readonly ApiTypeMember[];
+  readonly typeParameters: readonly ApiTypeParameter[];
 }
 
 export interface ApiStyleProperty {
@@ -46,6 +54,7 @@ export interface ApiReferenceData {
   readonly description: string;
   readonly members: readonly ApiMember[];
   readonly templates: readonly ApiTemplate[];
+  readonly typeParameters: readonly ApiTypeParameter[];
   readonly types: readonly ApiTypeDefinition[];
   readonly styles: readonly ApiStyleProperty[];
 }

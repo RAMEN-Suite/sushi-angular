@@ -1,4 +1,6 @@
 export type { ComponentSize, Orientation, SelectionValue, ThemeSeverity } from './lib/sushi.types';
+export type { FormControlSeverity, FormControlSize } from './lib/form-control';
+export type { SelectionCompareWith, SelectionFilter, SelectionFilterContext, SelectionOption } from './lib/selection';
 export * from './lib/accordion';
 export * from './lib/auto-focus';
 export * from './lib/autocomplete';

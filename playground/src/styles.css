@@ -1,9 +1,27 @@
 @import 'tailwindcss';
 
+@keyframes pg-api-target-highlight {
+  0% {
+    outline-color: color-mix(in oklab, var(--color-primary) 85%, transparent);
+    background-color: color-mix(in oklab, var(--color-primary) 14%, transparent);
+  }
+  100% {
+    outline-color: transparent;
+    background-color: transparent;
+  }
+}
+
+.pg-api-target-highlight {
+  outline: 2px solid transparent;
+  outline-offset: 0.25rem;
+  border-radius: var(--radius-box);
+  animation: pg-api-target-highlight 1.6s ease-out;
+}
+
 @media (min-width: 64rem) {
   .pg-documentation-navbar .sui-navbar--horizontal.sui-navbar--menu-center[data-collapsible='false'] > sui-navbar-menu {
     position: static;
-    margin-inline-start: 0;
+    margin-inline-start: -1.25rem;
     transform: none;
   }
 }

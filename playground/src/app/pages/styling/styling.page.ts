@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, InputSignal, Signal } from '@angular/core';
 import { Badge, Card, CardTitle, Code, CodeLine, Table, TableCellTemplate, TableColumn } from '@ramen-suite/sushi';
-import { apiReferences } from '../../shared/api-reference/api-reference.registry';
+import { apiReferences } from '../../generated/api-reference.generated';
 import type { ApiMember, ApiReferenceData, ApiStyleProperty, ApiTemplate } from '../../shared/api-reference/api-reference.types';
 
 interface StyleReference extends ApiReferenceData {

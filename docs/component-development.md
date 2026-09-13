@@ -60,6 +60,21 @@ Add a playground page with:
 - raw SUSHI appearance by default, with utilities used primarily for layout plus restrained typography and color where they clarify example content;
 - generated API and Styling pages.
 
+The API generator loads `sushi/tsconfig.lib.json` and follows the symbols exported by `sushi/src/public-api.ts`. It reads
+Angular declarations, signal members, public methods, interfaces, template markers, and referenced types through the
+TypeScript compiler API. Non-exported implementation details are ignored. Documentation routes normally follow the
+feature folder; a matching playground page name takes precedence for independently documented declarations (for
+example, `FileDrop` maps to `file-drop`). No API registry entry is required.
+
+CSS is parsed with PostCSS. Global `features/<name>.styles.css` tokens are associated with the matching documentation
+route automatically. A shared style family can declare its consumers once at the top of the CSS file, for example:
+
+```css
+/* @sui-docs autocomplete listbox multi-select order-list select */
+```
+
+The generator fails when a public declaration, member, template, type, or style token has no description.
+
 ## 5. Test public behavior
 
 Place Vitest specs in the feature's `testing/` folder. Use a standalone host and cover applicable states, bindings, projection, models, outputs, keyboard behavior, focus, and ARIA.

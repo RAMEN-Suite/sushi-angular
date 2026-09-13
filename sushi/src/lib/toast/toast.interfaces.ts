@@ -38,21 +38,33 @@ export interface ToastOptions {
 
 /** Read-only Toast data exposed to a custom content template. */
 export interface ToastTemplateValue {
+  /** Stable identifier assigned to the Toast instance. */
   readonly id: string;
+  /** Main Toast message. */
   readonly message: string;
+  /** Optional Toast heading. */
   readonly title: string | null;
+  /** Semantic feedback color. */
   readonly severity: MessageSeverity | null;
+  /** Visual treatment inherited from Message. */
   readonly variant: MessageVariant | null;
+  /** Time in milliseconds before automatic dismissal. */
   readonly duration: number;
+  /** Whether the built-in close action is available. */
   readonly dismissible: boolean;
+  /** Optional contextual action. */
   readonly action: ToastAction | null;
+  /** Name of the custom content template used by the Toast. */
   readonly template: string | null;
 }
 
 /** Values available inside a custom Toast content template. */
 export interface ToastTemplateContext {
+  /** Current Toast data, available as the implicit template value. */
   readonly $implicit: ToastTemplateValue;
+  /** Dismisses the current Toast. */
   readonly dismiss: () => void;
+  /** Runs the configured action and applies its dismissal behavior. */
   readonly runAction: () => void;
 }
 

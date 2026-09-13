@@ -12,8 +12,12 @@ export type OrderListFilterContext = SelectionFilterContext;
 
 /** Context exposed to the order-list item template. */
 export interface OrderListItemContext<I extends OrderListOption = OrderListOption> {
+  /** Current item, available as the implicit template value. */
   readonly $implicit: I;
+  /** Current item. */
   readonly option: I;
+  /** Zero-based position in the ordered collection. */
   readonly index: number;
+  /** Whether the item is selected for reordering. */
   readonly selected: boolean;
 }

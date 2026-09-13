@@ -1,14 +1,32 @@
 <main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
   @if (api(); as references) {
     <section class="space-y-3 py-2">
-      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">{{ name() }} API reference</h1>
+      <p class="text-sm font-medium text-primary">Interface</p>
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">{{ name() }}</h1>
       <p class="text-lg text-base-content/70">
-        Generated from the public Angular API. Descriptions and type information come directly from the source.
+        Public Angular API, template contexts, and types generated directly from the package source.
       </p>
     </section>
 
+    @if (references.length > 1) {
+      <nav class="flex flex-wrap items-center gap-2" aria-label="Components on this page">
+        @for (reference of references; track reference.className) {
+          <a
+            suiButton
+            size="sm"
+            severity="primary"
+            variant="soft"
+            [href]="fragmentHref(reference)"
+            (click)="navigateToReference($event, reference)"
+          >
+            {{ reference.className }}
+          </a>
+        }
+      </nav>
+    }
+
     @for (reference of references; track reference.className) {
-      <sui-card>
+      <sui-card class="block scroll-mt-24" [id]="referenceId(reference)" tabindex="-1">
         <pg-api-reference [api]="reference" />
       </sui-card>
     }

@@ -1,16 +1,65 @@
-<div class="grid gap-6">
-  <div class="flex flex-wrap items-center gap-2">
-    <code suiBadge severity="neutral" variant="soft" size="sm">{{ api().selector }}</code>
-    <code class="text-sm text-base-content/70">{{ api().declaration }}</code>
-  </div>
+<div class="grid gap-8">
+  <header class="grid gap-4">
+    <div class="flex flex-wrap items-start justify-between gap-3">
+      <div class="grid gap-2">
+        <code class="text-xl font-semibold text-base-content">
+          <ng-container [ngTemplateOutlet]="linkedTypeValue" [ngTemplateOutletContext]="{ $implicit: api().declaration }" />
+        </code>
+        <p class="text-base-content/70">
+          {{ api().description || 'Public API exposed by ' + api().selector + '.' }}
+        </p>
+      </div>
+      <code suiBadge severity="neutral" variant="soft" size="sm">{{ api().selector }}</code>
+    </div>
+  </header>
 
-  <p class="text-base-content/70">
-    {{ api().description || 'Public API exposed by ' + api().selector + '.' }}
-  </p>
+  @if (api().typeParameters.length > 0) {
+    <section class="grid gap-3" [attr.aria-labelledby]="sectionId('type-parameters')">
+      <div class="flex items-baseline gap-2">
+        <h3 class="scroll-mt-24 text-lg font-semibold" [id]="sectionId('type-parameters')" tabindex="-1">Type parameters</h3>
+        <span class="text-sm tabular-nums text-base-content/50">{{ api().typeParameters.length }}</span>
+      </div>
+      <sui-table size="sm" [columns]="typeParameterColumns" [rows]="api().typeParameters">
+        <ng-template suiTableCell let-parameter="row" let-column="column">
+          @switch (column.key) {
+            @case ('name') {
+              <code
+                class="inline-flex rounded-field bg-primary/10 px-2 py-1 font-semibold text-primary"
+                [id]="typeParameterId(parameter.name)"
+                tabindex="-1"
+                >{{ parameter.name }}</code
+              >
+            }
+            @case ('constraint') {
+              <code class="text-sm">
+                @if (parameter.constraint) {
+                  <ng-container [ngTemplateOutlet]="linkedTypeValue" [ngTemplateOutletContext]="{ $implicit: parameter.constraint }" />
+                } @else {
+                  —
+                }
+              </code>
+            }
+            @default {
+              <code class="text-sm">
+                @if (parameter.defaultValue) {
+                  <ng-container [ngTemplateOutlet]="linkedTypeValue" [ngTemplateOutletContext]="{ $implicit: parameter.defaultValue }" />
+                } @else {
+                  —
+                }
+              </code>
+            }
+          }
+        </ng-template>
+      </sui-table>
+    </section>
+  }
 
   @for (group of groups(); track group.kind) {
-    <section class="grid gap-3" [attr.aria-labelledby]="'api-' + api().className + '-' + group.kind">
-      <h3 class="text-lg font-semibold" [id]="'api-' + api().className + '-' + group.kind">{{ group.label }}</h3>
+    <section class="grid scroll-mt-24 gap-3" [attr.aria-labelledby]="sectionId(group.kind)">
+      <div class="flex items-baseline gap-2">
+        <h3 class="scroll-mt-24 text-lg font-semibold" [id]="sectionId(group.kind)" tabindex="-1">{{ group.label }}</h3>
+        <span class="text-sm tabular-nums text-base-content/50">{{ group.members.length }}</span>
+      </div>
       <sui-table size="sm" [columns]="memberColumns" [rows]="group.members">
         <ng-template suiTableCell let-member="row" let-column="column">
           @switch (column.key) {
@@ -19,18 +68,7 @@
             }
             @case ('type') {
               <code class="whitespace-nowrap text-sm">
-                @for (part of typeParts().get(member.type); track $index) {
-                  @if (part.reference) {
-                    <a
-                      class="link link-hover font-semibold"
-                      [href]="'#' + typeId(part.reference)"
-                      (click)="navigateToType($event, part.reference)"
-                      >{{ part.text }}</a
-                    >
-                  } @else {
-                    {{ part.text }}
-                  }
-                }
+                <ng-container [ngTemplateOutlet]="linkedTypeValue" [ngTemplateOutletContext]="{ $implicit: member.type }" />
               </code>
             }
             @case ('default') {
@@ -45,9 +83,12 @@
     </section>
   }
 
-  <section class="grid gap-3" [attr.aria-labelledby]="'api-' + api().className + '-templates'">
-    <h3 class="text-lg font-semibold" [id]="'api-' + api().className + '-templates'">Templates</h3>
-    @if (api().templates.length > 0) {
+  @if (api().templates.length > 0) {
+    <section class="grid scroll-mt-24 gap-3" [attr.aria-labelledby]="sectionId('templates')">
+      <div class="flex items-baseline gap-2">
+        <h3 class="scroll-mt-24 text-lg font-semibold" [id]="sectionId('templates')" tabindex="-1">Templates</h3>
+        <span class="text-sm tabular-nums text-base-content/50">{{ api().templates.length }}</span>
+      </div>
       <sui-table size="sm" [columns]="templateColumns" [rows]="api().templates">
         <ng-template suiTableCell let-template="row" let-column="column">
           @switch (column.key) {
@@ -56,18 +97,7 @@
             }
             @case ('context') {
               <code class="text-sm">
-                @for (part of typeParts().get(template.context); track $index) {
-                  @if (part.reference) {
-                    <a
-                      class="link link-hover font-semibold"
-                      [href]="'#' + typeId(part.reference)"
-                      (click)="navigateToType($event, part.reference)"
-                      >{{ part.text }}</a
-                    >
-                  } @else {
-                    {{ part.text }}
-                  }
-                }
+                <ng-container [ngTemplateOutlet]="linkedTypeValue" [ngTemplateOutletContext]="{ $implicit: template.context }" />
               </code>
             }
             @case ('inputs') {
@@ -76,8 +106,10 @@
                   <ng-template suiListItem let-member>
                     <span class="flex flex-wrap items-baseline gap-x-2 text-sm">
                       <code class="font-semibold">{{ member.name }}</code>
-                      <code class="text-base-content/60">{{ member.type }}</code>
-                      @if (member.defaultValue) {
+                      <code class="text-base-content/60">
+                        <ng-container [ngTemplateOutlet]="linkedTypeValue" [ngTemplateOutletContext]="{ $implicit: member.type }" />
+                      </code>
+                      @if (hasExplicitDefault(member)) {
                         <span class="text-base-content/50">({{ member.defaultValue }})</span>
                       }
                     </span>
@@ -93,26 +125,99 @@
           }
         </ng-template>
       </sui-table>
-    } @else {
-      <p class="text-sm text-base-content/60">No component templates. Native element content and attributes remain available.</p>
-    }
-  </section>
+    </section>
+  }
 
   @if (api().types.length > 0) {
-    <section class="grid gap-3" [attr.aria-labelledby]="'api-' + api().className + '-types'">
-      <h3 class="text-lg font-semibold" [id]="'api-' + api().className + '-types'">Types</h3>
-      <div class="grid gap-4">
-        @for (type of api().types; track type.name) {
-          <article class="grid scroll-mt-20 gap-3 rounded-box border border-base-300 p-4" [id]="typeId(type.name)" tabindex="-1">
-            <div class="flex flex-wrap items-center gap-2">
-              <code class="font-semibold">{{ type.name }}</code>
-              <span suiBadge severity="neutral" variant="soft" size="xs">{{ type.kind }}</span>
-            </div>
-            @if (type.description) {
-              <p class="text-sm text-base-content/70">{{ type.description }}</p>
+    <section class="grid scroll-mt-24 gap-3" [attr.aria-labelledby]="sectionId('types')">
+      <div class="flex items-baseline gap-2">
+        <h3 class="scroll-mt-24 text-lg font-semibold" [id]="sectionId('types')" tabindex="-1">Types</h3>
+        <span class="text-sm tabular-nums text-base-content/50">{{ api().types.length }}</span>
+      </div>
+      <sui-table size="sm" [columns]="typeColumns" [rows]="api().types">
+        <ng-template suiTableCell let-type="row" let-column="column">
+          @switch (column.key) {
+            @case ('name') {
+              <span
+                class="inline-flex"
+                [id]="!showsTypeDetails(type) ? typeId(type.name) : null"
+                [attr.tabindex]="!showsTypeDetails(type) ? -1 : null"
+              >
+                <a
+                  class="link link-hover font-mono font-semibold"
+                  [href]="fragmentHref(typeId(type.name))"
+                  (click)="navigateTo($event, typeId(type.name))"
+                  >{{ type.name }}</a
+                >
+                @if (!showsTypeDetails(type) && type.typeParameters.length > 0) {
+                  <span class="font-mono">&lt;</span>
+                  @for (parameter of type.typeParameters; track parameter.name; let last = $last) {
+                    <span
+                      class="rounded-field bg-primary/10 px-1.5 py-0.5 font-mono text-primary"
+                      [id]="typeDefinitionParameterId(type, parameter.name)"
+                      tabindex="-1"
+                      >{{ parameter.name }}</span
+                    >
+                    @if (!last) {
+                      <span class="font-mono">, </span>
+                    }
+                  }
+                  <span class="font-mono">&gt;</span>
+                }
+              </span>
             }
-            <pre class="overflow-x-auto rounded-field bg-base-200 p-3 text-sm"><code>{{ type.declaration }}</code></pre>
-            @if (type.members.length > 0) {
+            @case ('kind') {
+              <span suiBadge [severity]="typeSeverity(type.kind)" variant="soft" size="xs">{{ type.kind }}</span>
+            }
+            @case ('definition') {
+              @if (type.kind === 'interface' || type.source === 'platform') {
+                <span class="text-base-content/50">{{ typeDefinition(type) }}</span>
+              } @else {
+                <span class="font-mono text-sm text-base-content/80">
+                  <ng-container
+                    [ngTemplateOutlet]="linkedTypeValue"
+                    [ngTemplateOutletContext]="{ $implicit: typeDefinition(type), owner: type, excluded: type.name }"
+                  />
+                </span>
+              }
+            }
+            @default {
+              <span class="text-base-content/70">{{ type.description || '—' }}</span>
+            }
+          }
+        </ng-template>
+      </sui-table>
+      <div class="mt-4 grid gap-6">
+        @for (type of api().types; track type.name) {
+          @if (showsTypeDetails(type)) {
+            <article class="grid scroll-mt-20 gap-3 rounded-box border border-base-300 p-4" [id]="typeId(type.name)" tabindex="-1">
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="font-semibold">
+                  @for (part of typeParts().get(typeSignature(type)); track $index) {
+                    @if (part.reference && isOwnTypeParameter(part.reference, type)) {
+                      <span
+                        class="rounded-field bg-primary/10 px-1.5 py-0.5 text-primary"
+                        [id]="typeDefinitionParameterId(type, part.reference)"
+                        tabindex="-1"
+                        >{{ part.text }}</span
+                      >
+                    } @else if (part.reference && part.reference !== type.name) {
+                      <a
+                        class="link link-hover"
+                        [href]="fragmentHref(typePartReferenceId(part.reference, type))"
+                        (click)="navigateTo($event, typePartReferenceId(part.reference, type))"
+                        >{{ part.text }}</a
+                      >
+                    } @else {
+                      {{ part.text }}
+                    }
+                  }
+                </span>
+                <span suiBadge [severity]="typeSeverity(type.kind)" variant="soft" size="xs">{{ type.kind }}</span>
+              </div>
+              @if (type.description) {
+                <p class="text-sm text-base-content/70">{{ type.description }}</p>
+              }
               <sui-table size="sm" [columns]="typeMemberColumns" [rows]="type.members">
                 <ng-template suiTableCell let-member="row" let-column="column">
                   @switch (column.key) {
@@ -121,30 +226,33 @@
                     }
                     @case ('type') {
                       <code class="text-sm">
-                        @for (part of typeParts().get(member.type); track $index) {
-                          @if (part.reference) {
-                            <a
-                              class="link link-hover font-semibold"
-                              [href]="'#' + typeId(part.reference)"
-                              (click)="navigateToType($event, part.reference)"
-                              >{{ part.text }}</a
-                            >
-                          } @else {
-                            {{ part.text }}
-                          }
-                        }
+                        <ng-container
+                          [ngTemplateOutlet]="linkedTypeValue"
+                          [ngTemplateOutletContext]="{ $implicit: member.type, owner: type }"
+                        />
                       </code>
                     }
                     @default {
-                      <span class="text-base-content/70">{{ member.description }}</span>
+                      <span class="text-base-content/70">{{ member.description || '—' }}</span>
                     }
                   }
                 </ng-template>
               </sui-table>
-            }
-          </article>
+            </article>
+          }
         }
       </div>
     </section>
   }
 </div>
+
+<ng-template #linkedTypeValue let-value let-owner="owner" let-excluded="excluded">
+  @for (part of typeParts().get(value); track $index) {
+    @if (part.reference && part.reference !== excluded) {
+      @let target = owner ? typePartReferenceId(part.reference, owner) : typeReferenceId(part.reference);
+      <a class="link link-hover font-semibold" [href]="fragmentHref(target)" (click)="navigateTo($event, target)">{{ part.text }}</a>
+    } @else {
+      {{ part.text }}
+    }
+  }
+</ng-template>

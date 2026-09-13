@@ -8,5 +8,5 @@
     "tsBuildInfoFile": "../.angular/cache/tools.tsbuildinfo",
     "types": ["node"]
   },
-  "include": ["*.ts"]
+  "include": ["**/*.ts"]
 }

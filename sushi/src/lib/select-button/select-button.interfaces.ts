@@ -7,10 +7,15 @@ export type SelectButtonOption = SelectionOption;
 
 /** Context exposed to a select-button option template. */
 export interface SelectButtonOptionContext {
+  /** Current option, available as the implicit template value. */
   readonly $implicit: SelectButtonOption;
+  /** Current select-button option. */
   readonly option: SelectButtonOption;
+  /** Whether the option is selected. */
   readonly selected: boolean;
+  /** Whether the option cannot be selected. */
   readonly disabled: boolean;
+  /** Zero-based position in the option group. */
   readonly index: number;
 }
 
