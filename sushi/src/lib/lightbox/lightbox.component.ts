@@ -17,6 +17,7 @@ import {
 import type PhotoSwipe from 'photoswipe';
 import type { SlideData } from 'photoswipe';
 import { GalleryImage } from '../gallery';
+import { LIGHTBOX_LOADER, LightboxLoader } from './internal/lightbox-loader.token';
 
 /** Opens Gallery images in a zoomable, gesture-enabled full-screen viewer powered by PhotoSwipe. */
 @Component({ selector: 'sui-lightbox', exportAs: 'suiLightbox', template: '', changeDetection: ChangeDetectionStrategy.OnPush })
@@ -25,6 +26,10 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
   public readonly open: ModelSignal<boolean> = model<boolean>(false);
   /** Image displayed in the viewer. Width and height provide stable zoom geometry. */
   public readonly image: InputSignal<I> = input.required<I>();
+  /** Optional image collection used for Gallery-style previous and next navigation. */
+  public readonly images: InputSignal<readonly I[] | null> = input<readonly I[] | null>(null);
+  /** Controls and reports the active image when a collection is provided. */
+  public readonly activeIndex: ModelSignal<number> = model<number>(0);
   /** Accessible name for the modal viewer. */
   public readonly ariaLabel: InputSignal<string> = input<string>('Image viewer');
   /** Optional visible description. Defaults to the image caption. */
@@ -37,6 +42,7 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
   private readonly zone: NgZone = inject(NgZone);
   private readonly platformId: object = inject(PLATFORM_ID);
+  private readonly loadViewer: LightboxLoader = inject(LIGHTBOX_LOADER);
   private instance: PhotoSwipe | null = null;
   private launching: boolean = false;
 
@@ -59,6 +65,8 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
   private syncState(): void {
     const shouldOpen: boolean = this.open();
     this.image();
+    this.images();
+    this.activeIndex();
     this.description();
     this.zoom();
     this.wheelToZoom();
@@ -68,16 +76,15 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
   }
 
   private async launch(): Promise<void> {
-    const image: I = this.image();
     this.launching = true;
-    const { default: PhotoSwipeConstructor } = await import('photoswipe');
+    const PhotoSwipeConstructor: typeof PhotoSwipe = await this.loadViewer();
     if (!this.open() || this.destroyRef.destroyed) {
       this.launching = false;
       return;
     }
 
     this.zone.runOutsideAngular((): void => {
-      const viewer: PhotoSwipe = this.createViewer(PhotoSwipeConstructor, image);
+      const viewer: PhotoSwipe = this.createViewer(PhotoSwipeConstructor);
       this.configureViewer(viewer);
       this.instance = viewer;
       this.launching = false;
@@ -85,24 +92,27 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
     });
   }
 
-  private createViewer(PhotoSwipeConstructor: typeof PhotoSwipe, image: I): PhotoSwipe {
+  private createViewer(PhotoSwipeConstructor: typeof PhotoSwipe): PhotoSwipe {
+    const configuredImages: readonly I[] | null = this.images();
+    const images: readonly I[] = configuredImages?.length ? configuredImages : [this.image()];
+    const index: number = Math.max(0, Math.min(this.activeIndex(), images.length - 1));
+    const grouped: boolean = images.length > 1;
+
     return new PhotoSwipeConstructor({
-      dataSource: [
-        {
-          src: image.src,
-          width: image.width,
-          height: image.height,
-          srcset: image.srcset,
-          msrc: image.thumbnailSrc,
-          alt: image.alt,
-          caption: this.description() ?? image.caption,
-        } satisfies SlideData,
-      ],
-      index: 0,
+      dataSource: images.map((image: I): SlideData => ({
+        src: image.src,
+        width: image.width,
+        height: image.height,
+        srcset: image.srcset,
+        msrc: image.thumbnailSrc,
+        alt: image.alt,
+        caption: grouped ? image.caption : (this.description() ?? image.caption),
+      })),
+      index,
       loop: false,
-      arrowPrev: false,
-      arrowNext: false,
-      counter: false,
+      arrowPrev: grouped,
+      arrowNext: grouped,
+      counter: grouped,
       zoom: this.zoom(),
       wheelToZoom: this.zoom() && this.wheelToZoom(),
       ...(this.zoom()
@@ -117,6 +127,7 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
   private configureViewer(viewer: PhotoSwipe): void {
     viewer.on('afterInit', (): void => viewer.element?.setAttribute('aria-label', this.ariaLabel()));
     viewer.on('uiRegister', (): void => this.registerCaption(viewer));
+    viewer.on('change', (): void => this.zone.run((): void => this.activeIndex.set(viewer.currIndex)));
     viewer.on('close', (): void => this.zone.run((): void => this.open.set(false)));
     viewer.on('destroy', (): void => {
       if (this.instance === viewer) this.instance = null;

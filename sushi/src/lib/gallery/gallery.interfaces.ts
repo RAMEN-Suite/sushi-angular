@@ -1,3 +1,6 @@
+/** How an image is fitted into the fixed Gallery stage. */
+export type GalleryFit = 'cover' | 'contain';
+
 /** One image shared by Gallery and Lightbox. */
 export interface GalleryImage<T = string> {
   /** Stable consumer value associated with the image. */

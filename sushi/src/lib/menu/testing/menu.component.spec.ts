@@ -39,12 +39,13 @@ class InlineMenuHost {
 @Component({
   imports: [ContextMenuTrigger, Menu, MenuTrigger],
   template: `
-    <button data-trigger [suiMenuTrigger]="menu">Actions</button>
-    <div data-context tabindex="0" [suiContextMenuTrigger]="menu">Document</div>
+    <button data-trigger [suiMenuTrigger]="menu" [disabled]="triggerDisabled()">Actions</button>
+    <div data-context tabindex="0" [suiContextMenuTrigger]="menu" [disabled]="triggerDisabled()">Document</div>
     <sui-menu #menu popup ariaLabel="Popup actions" [items]="items" (itemSelected)="selected.push($event)" />
   `,
 })
 class PopupMenuHost {
+  public readonly triggerDisabled: WritableSignal<boolean> = signal(false);
   public readonly menu: Signal<Menu> = viewChild.required(Menu);
   public readonly items: readonly MenuItem[] = [
     { label: 'Rename', value: 'rename' },
@@ -114,7 +115,7 @@ describe('Menu inline semantics', (): void => {
   });
 });
 
-describe('Menu popup triggers', (): void => {
+describe('Menu popup button trigger', (): void => {
   it('opens from a button, focuses its first action, selects, and restores focus', async (): Promise<void> => {
     const fixture: ComponentFixture<PopupMenuHost> = render(PopupMenuHost);
     const trigger: HTMLButtonElement = query(fixture, 'button');
@@ -133,6 +134,25 @@ describe('Menu popup triggers', (): void => {
     expect(document.activeElement).toBe(trigger);
   });
 
+  it('opens from ArrowDown and prevents disabled triggers from opening', async (): Promise<void> => {
+    const fixture: ComponentFixture<PopupMenuHost> = render(PopupMenuHost);
+    const trigger: HTMLButtonElement = query(fixture, '[data-trigger]') as HTMLButtonElement;
+
+    press(trigger, 'ArrowDown');
+    await fixture.whenStable();
+    expect(fixture.componentInstance.menu().isOpen()).toBe(true);
+
+    fixture.componentInstance.menu().close();
+    fixture.componentInstance.triggerDisabled.set(true);
+    fixture.detectChanges();
+    trigger.click();
+
+    expect(trigger.getAttribute('aria-disabled')).toBe('true');
+    expect(fixture.componentInstance.menu().isOpen()).toBe(false);
+  });
+});
+
+describe('Menu context trigger', (): void => {
   it('opens from the keyboard context-menu gesture and closes with Escape', async (): Promise<void> => {
     const fixture: ComponentFixture<PopupMenuHost> = render(PopupMenuHost);
     const context: HTMLElement = query(fixture, '[data-context]') as HTMLElement;
@@ -147,5 +167,17 @@ describe('Menu popup triggers', (): void => {
     fixture.detectChanges();
     expect(fixture.componentInstance.menu().isOpen()).toBe(false);
     expect(document.activeElement).toBe(context);
+  });
+
+  it('opens from a pointer context-menu gesture', async (): Promise<void> => {
+    const fixture: ComponentFixture<PopupMenuHost> = render(PopupMenuHost);
+    const context: HTMLElement = query(fixture, '[data-context]') as HTMLElement;
+    const event: MouseEvent = new MouseEvent('contextmenu', { bubbles: true, cancelable: true, clientX: 40, clientY: 60 });
+
+    context.dispatchEvent(event);
+    await fixture.whenStable();
+
+    expect(event.defaultPrevented).toBe(true);
+    expect(fixture.componentInstance.menu().isOpen()).toBe(true);
   });
 });

@@ -57,7 +57,7 @@ class SidebarHost {
         { label: 'Reports', value: 'reports', items: [{ label: 'Activity reports', value: 'activity-reports' }] },
       ],
     },
-    { label: 'Administration', items: [{ label: 'Settings', value: 'settings' }] },
+    { label: 'Administration', items: [{ label: 'Settings', value: 'settings', disabled: true }] },
     { label: 'Empty', items: [] },
   ];
 }
@@ -100,6 +100,21 @@ describe('Sidebar', (): void => {
     expect(fixture.componentInstance.selected).toEqual(['activity']);
     expect(fixture.componentInstance.active()).toBe('activity');
     expect(activity.getAttribute('aria-current')).toBe('page');
+  });
+});
+
+describe('Sidebar disabled state', (): void => {
+  it('keeps disabled destinations focusable without selecting them', (): void => {
+    const fixture: ComponentFixture<SidebarHost> = render(SidebarHost);
+    const settings: HTMLButtonElement | null = query(fixture, '[data-item="settings"]').closest('button');
+    if (!settings) throw new Error('Expected the disabled Sidebar item inside a button.');
+    settings.focus();
+    settings.click();
+
+    expect(settings.getAttribute('aria-disabled')).toBe('true');
+    expect(document.activeElement).toBe(settings);
+    expect(fixture.componentInstance.active()).toBe('overview');
+    expect(fixture.componentInstance.selected).toEqual([]);
   });
 });
 

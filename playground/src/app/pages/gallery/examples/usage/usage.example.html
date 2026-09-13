@@ -1,3 +1,16 @@
-<div class="mx-auto max-w-3xl">
-  <sui-gallery [images]="images" />
+<div class="mx-auto max-w-2xl">
+  <sui-gallery
+    [images]="images"
+    [activeIndex]="activeIndex()"
+    (activeIndexChange)="activeIndex.set($event)"
+    (imageActivated)="viewer.show()"
+    [style.--sui-gallery-stage-height]="'24rem'"
+    [style.--sui-gallery-thumbnail-size]="'6rem'" />
 </div>
+
+<sui-lightbox
+  #viewer="suiLightbox"
+  [image]="activeImage()"
+  [images]="images"
+  [activeIndex]="activeIndex()"
+  (activeIndexChange)="activeIndex.set($event)" />

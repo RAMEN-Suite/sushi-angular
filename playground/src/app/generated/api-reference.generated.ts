@@ -4951,6 +4951,20 @@ export const apiReference: Readonly<{
         description: 'Wraps navigation from the last image to the first and vice versa.',
       },
       {
+        name: 'fit',
+        kind: 'input',
+        type: 'GalleryFit',
+        defaultValue: "'cover'",
+        description: 'Controls whether images fill the stage or remain completely visible.',
+      },
+      {
+        name: 'imageActivated',
+        kind: 'output',
+        type: 'I',
+        defaultValue: null,
+        description: 'Emits the current image when its large preview is activated.',
+      },
+      {
         name: 'ariaLabel',
         kind: 'input',
         type: 'string',
@@ -5016,6 +5030,15 @@ export const apiReference: Readonly<{
       },
     ],
     types: [
+      {
+        name: 'GalleryFit',
+        kind: 'type',
+        source: 'library',
+        declaration: "type GalleryFit = 'cover' | 'contain';",
+        description: 'How an image is fitted into the fixed Gallery stage.',
+        members: [],
+        typeParameters: [],
+      },
       {
         name: 'GalleryImage',
         kind: 'interface',
@@ -5978,6 +6001,20 @@ export const apiReference: Readonly<{
         type: 'I',
         defaultValue: 'required',
         description: 'Image displayed in the viewer. Width and height provide stable zoom geometry.',
+      },
+      {
+        name: 'images',
+        kind: 'input',
+        type: 'readonly I[] | null',
+        defaultValue: 'null',
+        description: 'Optional image collection used for Gallery-style previous and next navigation.',
+      },
+      {
+        name: 'activeIndex',
+        kind: 'model',
+        type: 'number',
+        defaultValue: '0',
+        description: 'Controls and reports the active image when a collection is provided.',
       },
       {
         name: 'ariaLabel',

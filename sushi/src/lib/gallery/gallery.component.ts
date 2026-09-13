@@ -1,18 +1,23 @@
 import {
+  afterRenderEffect,
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
   input,
   InputSignal,
   InputSignalWithTransform,
   model,
   ModelSignal,
+  output,
+  OutputEmitterRef,
   Signal,
+  viewChildren,
 } from '@angular/core';
 import { LucideChevronLeft, LucideChevronRight } from '@lucide/angular';
 import { Button } from '../button';
-import { GalleryImage } from './gallery.interfaces';
+import { GalleryFit, GalleryImage } from './gallery.interfaces';
 
 /** Browses an image collection with a large stage and accessible thumbnail navigation. */
 @Component({
@@ -22,16 +27,22 @@ import { GalleryImage } from './gallery.interfaces';
     <figure
       class="sui-gallery"
       role="region"
-      tabindex="0"
       [attr.aria-label]="ariaLabel()"
+      [attr.data-fit]="fit()"
       (keydown.arrowLeft)="previous()"
       (keydown.arrowRight)="next()"
     >
       <div class="sui-gallery__stage">
         @if (selected(); as image) {
-          <div class="sui-gallery__image">
-            <img [src]="image.src" [attr.srcset]="image.srcset ?? null" [alt]="image.alt" />
-          </div>
+          <button type="button" class="sui-gallery__image" (click)="imageActivated.emit(image)">
+            <img
+              [src]="image.src"
+              [attr.srcset]="image.srcset ?? null"
+              [width]="image.width"
+              [height]="image.height"
+              [alt]="image.alt"
+            />
+          </button>
           @if (showNavigation() && images().length > 1) {
             <button
               suiButton
@@ -61,7 +72,7 @@ import { GalleryImage } from './gallery.interfaces';
           <div class="sui-gallery__meta">
             <figcaption>{{ image.caption ?? image.alt }}</figcaption>
             @if (showCounter()) {
-              <span>{{ activeIndex() + 1 }} / {{ images().length }}</span>
+              <span>{{ selectedIndex() + 1 }} / {{ images().length }}</span>
             }
           </div>
         } @else {
@@ -73,13 +84,15 @@ import { GalleryImage } from './gallery.interfaces';
         <div class="sui-gallery__thumbnails" role="group" [attr.aria-label]="thumbnailLabel()">
           @for (image of images(); track image.value; let index = $index) {
             <button
+              #thumbnail
               type="button"
-              [class.sui-gallery__thumbnail--active]="index === activeIndex()"
-              [attr.aria-current]="index === activeIndex() ? 'true' : null"
+              [tabIndex]="index === selectedIndex() ? 0 : -1"
+              [class.sui-gallery__thumbnail--active]="index === selectedIndex()"
+              [attr.aria-current]="index === selectedIndex() ? 'true' : null"
               [attr.aria-label]="image.alt"
               (click)="select(index)"
             >
-              <img [src]="image.thumbnailSrc ?? image.src" alt="" />
+              <img [src]="image.thumbnailSrc ?? image.src" [width]="image.width" [height]="image.height" alt="" />
             </button>
           }
         </div>
@@ -102,6 +115,10 @@ export class Gallery<I extends GalleryImage = GalleryImage> {
   public readonly showCounter: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Wraps navigation from the last image to the first and vice versa. */
   public readonly wrap: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
+  /** Controls whether images fill the stage or remain completely visible. */
+  public readonly fit: InputSignal<GalleryFit> = input<GalleryFit>('cover');
+  /** Emits the current image when its large preview is activated. */
+  public readonly imageActivated: OutputEmitterRef<I> = output<I>();
   /** Accessible name for the Gallery region. */
   public readonly ariaLabel: InputSignal<string> = input<string>('Image gallery');
   /** Accessible label for the thumbnail list. */
@@ -112,9 +129,26 @@ export class Gallery<I extends GalleryImage = GalleryImage> {
   public readonly nextLabel: InputSignal<string> = input<string>('Next image');
   /** Text displayed when no images are available. */
   public readonly emptyLabel: InputSignal<string> = input<string>('No images available');
-  protected readonly selected: Signal<I | undefined> = computed(
-    (): I | undefined => this.images()[this.clamp(this.activeIndex())],
-  );
+  protected readonly selectedIndex: Signal<number> = computed((): number => this.clamp(this.activeIndex()));
+  protected readonly selected: Signal<I | undefined> = computed((): I | undefined => this.images()[this.selectedIndex()]);
+
+  private readonly thumbnails: Signal<readonly ElementRef<HTMLButtonElement>[]> =
+    viewChildren<ElementRef<HTMLButtonElement>>('thumbnail');
+
+  public constructor() {
+    afterRenderEffect({
+      write: (): void => {
+        const thumbnails: readonly ElementRef<HTMLButtonElement>[] = this.thumbnails();
+        const activeThumbnail: HTMLButtonElement | undefined = thumbnails.at(this.selectedIndex())?.nativeElement;
+        const thumbnailHadFocus: boolean = thumbnails.some(
+          (thumbnail: ElementRef<HTMLButtonElement>): boolean => thumbnail.nativeElement === document.activeElement,
+        );
+
+        if (thumbnailHadFocus) activeThumbnail?.focus({ preventScroll: true });
+        activeThumbnail?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+      },
+    });
+  }
 
   /** Selects an image by index. */
   public select(index: number): void {
