@@ -4,10 +4,9 @@ const isCi: boolean = Boolean(process.env['CI']);
 
 export default defineConfig({
   testDir: './specs',
-  fullyParallel: true,
   forbidOnly: isCi,
   retries: isCi ? 2 : 0,
-  workers: isCi ? 1 : undefined,
+  workers: 1,
   reporter: [['list'], ['html', { outputFolder: '../playwright-report', open: 'never' }]],
   use: {
     baseURL: 'http://127.0.0.1:4201',
