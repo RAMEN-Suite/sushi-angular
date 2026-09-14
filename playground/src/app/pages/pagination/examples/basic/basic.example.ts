@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, signal, Signal, WritableSignal } from '@angular/core';
-import { Badge, Card, CardTitle, Divider, List, ListItemTemplate, Pagination } from '@ramen-suite/sushi';
+import { Badge, Card, CardTitle, Divider, List, ListItemTemplate, Pagination } from '@sushi-kit/angular';
 
 interface Release {
   readonly code: string;

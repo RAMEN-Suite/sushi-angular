@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Badge, Button, Status, Toast, ToastContentTemplate, ToastService } from '@ramen-suite/sushi';
+import { Badge, Button, Status, Toast, ToastContentTemplate, ToastService } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-toast-custom-example',

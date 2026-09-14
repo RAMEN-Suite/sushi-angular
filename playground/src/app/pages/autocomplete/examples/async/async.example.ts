@@ -7,7 +7,7 @@ import {
   AutocompleteOption,
   Label,
   Spinner,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-autocomplete-async-example',

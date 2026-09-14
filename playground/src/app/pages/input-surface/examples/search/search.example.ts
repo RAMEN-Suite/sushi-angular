@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
 import { LucideSearch } from '@lucide/angular';
-import { Button, InputSurface, InputSurfaceControl, Join, JoinItem, Kbd, Label } from '@ramen-suite/sushi';
+import { Button, InputSurface, InputSurfaceControl, Join, JoinItem, Kbd, Label } from '@sushi-kit/angular';
 
 interface SearchModel {
   query: string;

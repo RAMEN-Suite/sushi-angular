@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Chip } from '@ramen-suite/sushi';
+import { Chip } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-chip-image-example',

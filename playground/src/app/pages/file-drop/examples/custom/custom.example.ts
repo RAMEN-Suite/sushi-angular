@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
 import { LucideFileText, LucideUpload } from '@lucide/angular';
-import { FileDrop, FileDropContentTemplate, FileDropItemTemplate } from '@ramen-suite/sushi';
+import { FileDrop, FileDropContentTemplate, FileDropItemTemplate } from '@sushi-kit/angular';
 
 interface ImagesModel {
   files: readonly File[];

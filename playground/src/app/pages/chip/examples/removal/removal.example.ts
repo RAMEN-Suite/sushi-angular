@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Button, Chip } from '@ramen-suite/sushi';
+import { Button, Chip } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-chip-removal-example',

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Avatar, AvatarShape, AvatarSize } from '@ramen-suite/sushi';
+import { Avatar, AvatarShape, AvatarSize } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-avatar-usage-example',

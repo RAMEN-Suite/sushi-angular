@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideMessageCircleQuestionMark } from '@lucide/angular';
-import { Button, Message, MessageActions } from '@ramen-suite/sushi';
+import { Button, Message, MessageActions } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-message-vertical-example',

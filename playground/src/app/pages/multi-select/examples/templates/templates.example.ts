@@ -18,7 +18,7 @@ import {
   MultiSelectModelValue,
   MultiSelectOption,
   Spinner,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-multi-select-templates-example',

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Navbar, NavbarItem } from '@ramen-suite/sushi';
+import { Navbar, NavbarItem } from '@sushi-kit/angular';
 
 type ProjectView = 'Board' | 'Timeline' | 'Reports';
 type SettingsPage = 'Profile' | 'Notifications' | 'Security';

@@ -10,7 +10,7 @@ import {
   ListboxItemTemplate,
   ListboxModelValue,
   ListboxOption,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 interface ReviewerOption extends ListboxOption {
   readonly role: string;

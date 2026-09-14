@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Label, OrderList, OrderListOption } from '@ramen-suite/sushi';
+import { Label, OrderList, OrderListOption } from '@sushi-kit/angular';
 
 interface WorkflowForm {
   steps: readonly OrderListOption[];

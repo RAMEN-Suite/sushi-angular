@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Label, Range } from '@ramen-suite/sushi';
+import { Label, Range } from '@sushi-kit/angular';
 
 interface MixerModel {
   music: number;

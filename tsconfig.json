@@ -13,7 +13,7 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "@ramen-suite/sushi": ["./sushi/src/public-api.ts"]
+      "@sushi-kit/angular": ["./sushi/src/public-api.ts"]
     }
   },
   "angularCompilerOptions": {

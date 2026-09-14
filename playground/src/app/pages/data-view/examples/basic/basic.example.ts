@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, DataView, DataViewItemTemplate } from '@ramen-suite/sushi';
+import { Badge, Card, DataView, DataViewItemTemplate } from '@sushi-kit/angular';
 import { LucideCircleCheck, LucideGitPullRequest, LucidePackage } from '@lucide/angular';
 
 interface Activity {

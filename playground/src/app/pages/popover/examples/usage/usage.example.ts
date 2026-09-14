@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideCopy, LucideMail, LucideMessageCircle, LucideShare2 } from '@lucide/angular';
-import { Button, Input, InputGroup, JoinItem, Popover, PopoverTrigger } from '@ramen-suite/sushi';
+import { Button, Input, InputGroup, JoinItem, Popover, PopoverTrigger } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-popover-usage-example',

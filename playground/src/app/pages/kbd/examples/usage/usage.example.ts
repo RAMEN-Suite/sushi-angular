@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Kbd, KbdSize } from '@ramen-suite/sushi';
+import { Kbd, KbdSize } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-kbd-usage-example',

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Card, Label, Listbox, ListboxEmptyTemplate, ListboxOption } from '@ramen-suite/sushi';
+import { Card, Label, Listbox, ListboxEmptyTemplate, ListboxOption } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-listbox-states-example',

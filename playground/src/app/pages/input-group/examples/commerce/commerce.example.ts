@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Button, Input, InputGroup, InputGroupAddon, JoinItem, Select, SelectOption } from '@ramen-suite/sushi';
+import { Button, Input, InputGroup, InputGroupAddon, JoinItem, Select, SelectOption } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-input-group-commerce-example',

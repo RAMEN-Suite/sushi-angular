@@ -9,7 +9,7 @@ import {
   DataViewItemTemplate,
   DataViewLoadingTemplate,
   Spinner,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 interface Deployment {
   readonly id: number;

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideHouse } from '@lucide/angular';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbItemTemplate } from '@ramen-suite/sushi';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbItemTemplate } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-breadcrumb-usage-example',

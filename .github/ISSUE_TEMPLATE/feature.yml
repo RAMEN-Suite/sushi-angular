@@ -1,0 +1,30 @@
+name: Component or API proposal
+description: Propose a new consumer capability or a change to an existing contract.
+title: '[Proposal]: '
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Consumer problem
+      description: Describe the workflow or limitation without prescribing the implementation first.
+    validations:
+      required: true
+  - type: textarea
+    id: api
+    attributes:
+      label: Suggested consumer API
+      description: Include the shortest realistic usage example when possible.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Required behavior
+      description: Include accessibility, keyboard, responsive, theming, and compatibility considerations.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

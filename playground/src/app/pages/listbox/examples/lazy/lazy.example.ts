@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Badge, Label, Listbox, ListboxFooterTemplate, ListboxHeaderTemplate, ListboxOption } from '@ramen-suite/sushi';
+import { Badge, Label, Listbox, ListboxFooterTemplate, ListboxHeaderTemplate, ListboxOption } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-listbox-lazy-example',

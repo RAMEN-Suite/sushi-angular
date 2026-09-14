@@ -12,7 +12,7 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { Code, CodeLine, Tab, Tabs, TabsValue } from '@ramen-suite/sushi';
+import { Code, CodeLine, Tab, Tabs, TabsValue } from '@sushi-kit/angular';
 import { highlightLines } from './example-highlighter';
 import { ExamplePreview } from './example-preview.directive';
 

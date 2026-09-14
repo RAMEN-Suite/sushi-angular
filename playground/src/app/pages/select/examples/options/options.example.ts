@@ -11,7 +11,7 @@ import {
   SelectOption,
   SelectSelectedItemTemplate,
   SelectValue,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 interface Country extends SelectOption {
   readonly code: string;

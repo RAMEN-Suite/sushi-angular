@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Pagination, PaginationSeverity, PaginationSize, PaginationVariant } from '@ramen-suite/sushi';
+import { Pagination, PaginationSeverity, PaginationSize, PaginationVariant } from '@sushi-kit/angular';
 
 interface PaginationStyle {
   readonly label: string;

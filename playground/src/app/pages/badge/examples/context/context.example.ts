@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Button, Card, List, ListItemTemplate, ThemeSeverity } from '@ramen-suite/sushi';
+import { Badge, Button, Card, List, ListItemTemplate, ThemeSeverity } from '@sushi-kit/angular';
 
 interface Environment {
   readonly name: string;

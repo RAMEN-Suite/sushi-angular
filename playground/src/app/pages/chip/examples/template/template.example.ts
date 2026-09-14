@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideCircleX, LucidePalette } from '@lucide/angular';
-import { Chip, ChipContentTemplate, ChipRemoveIconTemplate } from '@ramen-suite/sushi';
+import { Chip, ChipContentTemplate, ChipRemoveIconTemplate } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-chip-template-example',

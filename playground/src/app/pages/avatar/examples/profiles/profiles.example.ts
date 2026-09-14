@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Avatar, AvatarGroup, Card } from '@ramen-suite/sushi';
+import { Avatar, AvatarGroup, Card } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-avatar-profiles-example',

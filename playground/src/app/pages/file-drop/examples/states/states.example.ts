@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FileDrop } from '@ramen-suite/sushi';
+import { FileDrop } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-file-drop-states-example',

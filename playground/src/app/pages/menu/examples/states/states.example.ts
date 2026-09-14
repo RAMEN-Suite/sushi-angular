@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Label, Menu, MenuEntry } from '@ramen-suite/sushi';
+import { Label, Menu, MenuEntry } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-menu-states-example',

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, InputNumber, Label } from '@ramen-suite/sushi';
+import { Button, InputNumber, Label } from '@sushi-kit/angular';
 
 interface BudgetModel {
   amount: number | null;

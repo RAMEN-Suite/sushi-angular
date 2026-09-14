@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideCircleCheck, LucideCircleX, LucideInfo, LucideTriangleAlert } from '@lucide/angular';
-import { Message } from '@ramen-suite/sushi';
+import { Message } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-message-usage-example',

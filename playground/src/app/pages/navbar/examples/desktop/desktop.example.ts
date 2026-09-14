@@ -23,7 +23,7 @@ import {
   NavbarAction,
   NavbarBrand,
   NavbarContent,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 type Workspace = 'Research' | 'Editorial' | 'Archive';
 type WorkspaceDocument = 'Corpus review' | 'Annotation map' | 'Source graph';

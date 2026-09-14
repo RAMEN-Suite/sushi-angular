@@ -7,7 +7,7 @@ import {
   AccordionItemData,
   Badge,
   Status,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 import { LucideMinus, LucidePlus } from '@lucide/angular';
 
 @Component({

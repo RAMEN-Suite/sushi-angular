@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { LucideChevronDown } from '@lucide/angular';
-import { Button, Menu, MenuEntry, MenuTrigger, MenuValue } from '@ramen-suite/sushi';
+import { Button, Menu, MenuEntry, MenuTrigger, MenuValue } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-menu-submenu-example',

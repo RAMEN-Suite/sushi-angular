@@ -14,7 +14,7 @@ import {
   SidebarFooter,
   SidebarGroup,
   Toggle,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-overview-invite-example',

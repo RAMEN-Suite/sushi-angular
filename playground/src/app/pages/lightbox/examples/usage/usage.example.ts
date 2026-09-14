@@ -1,6 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LightboxTrigger } from '@ramen-suite/sushi';
+import { LightboxTrigger } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-lightbox-usage-example',

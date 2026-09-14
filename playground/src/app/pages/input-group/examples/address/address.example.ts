@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Input, InputGroup, InputGroupAddon, JoinItem } from '@ramen-suite/sushi';
+import { Input, InputGroup, InputGroupAddon, JoinItem } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-input-group-address-example',

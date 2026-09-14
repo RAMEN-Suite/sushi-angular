@@ -1,0 +1,9 @@
+@if (document.isLoading()) {
+  <div class="flex min-h-48 items-center justify-center" role="status" aria-label="Loading contributor documentation">
+    <span suiSpinner size="lg"></span>
+  </div>
+} @else if (document.error()) {
+  <p class="rounded-box border border-error/30 bg-error/10 p-4 text-error">The contributor documentation could not be loaded.</p>
+} @else {
+  <article class="pg-markdown" [innerHTML]="document.value()"></article>
+}

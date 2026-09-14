@@ -30,7 +30,7 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarItemTemplate,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 type WorkspacePage =
   'Overview' | 'Projects' | 'All projects' | 'Archived projects' | 'Analytics' | 'Team' | 'Notifications' | 'Settings' | 'Help';

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Button, Dialog, DialogBody, DialogHeader, DialogTrigger } from '@ramen-suite/sushi';
+import { Button, Dialog, DialogBody, DialogHeader, DialogTrigger } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-dialog-basic-example',

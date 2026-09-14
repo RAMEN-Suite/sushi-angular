@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideCommand } from '@lucide/angular';
-import { Card, CardTitle, Divider, Kbd, List, ListItemTemplate } from '@ramen-suite/sushi';
+import { Card, CardTitle, Divider, Kbd, List, ListItemTemplate } from '@sushi-kit/angular';
 
 interface Shortcut {
   readonly keys: readonly string[];

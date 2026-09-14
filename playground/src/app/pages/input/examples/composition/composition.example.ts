@@ -11,7 +11,7 @@ import {
   JoinItem,
   Kbd,
   Label,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-input-composition-example',

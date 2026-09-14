@@ -42,7 +42,7 @@ import {
   Sidebar,
   SidebarGroupTemplate,
   SidebarHeader,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 import { filter, map } from 'rxjs';
 import { apiNavigation, sidebarNavigation } from './app.navigation';
 import type { NavigationItem, SidebarNavigationGroup } from './app.navigation';

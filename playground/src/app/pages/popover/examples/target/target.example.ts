@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideInfo } from '@lucide/angular';
-import { Button, Popover } from '@ramen-suite/sushi';
+import { Button, Popover } from '@sushi-kit/angular';
 @Component({
   selector: 'pg-popover-target-example',
   imports: [Button, LucideInfo, Popover],

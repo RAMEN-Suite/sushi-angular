@@ -9,6 +9,16 @@
       "input": "src/styles",
       "glob": "**/*.css",
       "output": "."
+    },
+    {
+      "input": ".",
+      "glob": "README.md",
+      "output": "."
+    },
+    {
+      "input": ".",
+      "glob": "LICENSE",
+      "output": "."
     }
   ]
 }

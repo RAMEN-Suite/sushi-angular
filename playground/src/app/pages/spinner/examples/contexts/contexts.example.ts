@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Button, Card, CardTitle, List, ListItemTemplate, Spinner, SpinnerType } from '@ramen-suite/sushi';
+import { Button, Card, CardTitle, List, ListItemTemplate, Spinner, SpinnerType } from '@sushi-kit/angular';
 
 interface Activity {
   readonly label: string;

@@ -10,7 +10,7 @@ import {
   NavbarItem,
   NavbarItemTemplate,
   Status,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 type ConsolePage = 'Workspace' | 'Tasks' | 'Runs' | 'Settings';
 

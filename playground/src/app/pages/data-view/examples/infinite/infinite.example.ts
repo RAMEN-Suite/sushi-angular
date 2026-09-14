@@ -8,7 +8,7 @@ import {
   DataViewItemTemplate,
   DataViewLoadMoreTemplate,
   Spinner,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 import { LucideArrowRight } from '@lucide/angular';
 
 interface Resource {

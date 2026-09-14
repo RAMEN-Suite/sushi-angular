@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Mask, MaskShape } from '@ramen-suite/sushi';
+import { Mask, MaskShape } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-mask-gallery-example',

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField, required } from '@angular/forms/signals';
-import { Button, Join, JoinItem, Label, Select, SelectModelValue, SelectOption } from '@ramen-suite/sushi';
+import { Button, Join, JoinItem, Label, Select, SelectModelValue, SelectOption } from '@sushi-kit/angular';
 
 interface ColorForm {
   color: SelectModelValue;

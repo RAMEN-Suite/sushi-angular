@@ -10,7 +10,7 @@ import {
   AutocompletePrefixTemplate,
   AutocompleteValue,
   Label,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 interface DestinationValue {
   readonly id: string;

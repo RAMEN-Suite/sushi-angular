@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Accordion, AccordionItem } from '@ramen-suite/sushi';
+import { Accordion, AccordionItem } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-accordion-sizes-example',

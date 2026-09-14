@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Fieldset, FieldsetLegend, Label, Range } from '@ramen-suite/sushi';
+import { Badge, Fieldset, FieldsetLegend, Label, Range } from '@sushi-kit/angular';
 
 type RangeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 type RangeColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';

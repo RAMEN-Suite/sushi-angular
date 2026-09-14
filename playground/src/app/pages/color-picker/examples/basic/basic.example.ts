@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, ColorPicker, JoinItem, Label } from '@ramen-suite/sushi';
+import { Button, ColorPicker, JoinItem, Label } from '@sushi-kit/angular';
 
 interface ColorModel {
   color: string;

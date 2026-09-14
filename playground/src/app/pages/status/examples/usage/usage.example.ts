@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Status } from '@ramen-suite/sushi';
+import { Status } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-status-usage-example',

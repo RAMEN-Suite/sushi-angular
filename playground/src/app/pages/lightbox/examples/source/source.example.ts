@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Button, GalleryImage, Lightbox } from '@ramen-suite/sushi';
+import { Button, GalleryImage, Lightbox } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-lightbox-source-example',

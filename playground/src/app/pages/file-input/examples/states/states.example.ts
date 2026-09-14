@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FileInput, Label } from '@ramen-suite/sushi';
+import { FileInput, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-file-input-states-example',

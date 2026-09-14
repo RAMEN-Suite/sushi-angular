@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Button, Tooltip } from '@ramen-suite/sushi';
+import { Button, Tooltip } from '@sushi-kit/angular';
 @Component({
   selector: 'pg-tooltip-usage-example',
   imports: [Button, Tooltip],

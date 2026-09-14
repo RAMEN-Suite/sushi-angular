@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideCalendarDays, LucidePanelsTopLeft, LucideUsers } from '@lucide/angular';
-import { Badge, Button, Card, CardActions, CardMedia, CardTitle, Progress } from '@ramen-suite/sushi';
+import { Badge, Button, Card, CardActions, CardMedia, CardTitle, Progress } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-card-content-example',

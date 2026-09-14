@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Table, TableColumn } from '@ramen-suite/sushi';
+import { Table, TableColumn } from '@sushi-kit/angular';
 
 interface Product {
   readonly code: string;

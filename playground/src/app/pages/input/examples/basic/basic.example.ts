@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField, required, SchemaPathTree } from '@angular/forms/signals';
-import { Button, Input, Join, JoinItem, Label } from '@ramen-suite/sushi';
+import { Button, Input, Join, JoinItem, Label } from '@sushi-kit/angular';
 
 interface InputModel {
   name: string;

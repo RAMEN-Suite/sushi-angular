@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, Input, Label } from '@ramen-suite/sushi';
+import { Badge, Card, Input, Label } from '@sushi-kit/angular';
 
 interface NativeType {
   label: string;

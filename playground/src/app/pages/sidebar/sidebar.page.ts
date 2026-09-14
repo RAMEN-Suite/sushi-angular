@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Code, CodeLine } from '@ramen-suite/sushi';
+import { Badge, Code, CodeLine } from '@sushi-kit/angular';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';

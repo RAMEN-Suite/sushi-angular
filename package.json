@@ -1,5 +1,5 @@
 {
-  "name": "sushi",
+  "name": "sushi-kit",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -9,11 +9,13 @@
     "test:tools": "vitest run tools/**/*.spec.ts",
     "test:e2e": "playwright test --config e2e/playwright.config.ts",
     "test:e2e:ui": "playwright test --config e2e/playwright.config.ts --ui",
+    "verify": "npm run lint && npm run format && npm run test:coverage && npm run test:tools && npm run test:e2e && npm run build:playground && npm run package:check",
     "lint": "ng lint && eslint \"tools/**/*.ts\" \"e2e/**/*.ts\"",
     "generate:api": "node --import tsx tools/generate-api-reference.ts",
     "prestart:playground": "npm run generate:api",
     "start:playground": "ng serve playground",
     "build:sushi": "ng build sushi",
+    "package:check": "npm run build:sushi && npm pack ./dist/sushi --dry-run --cache .cache/npm",
     "prebuild:playground": "npm run generate:api",
     "build:playground": "ng build playground",
     "format": "prettier --check playground sushi e2e",
@@ -34,6 +36,7 @@
     "@lucide/angular": "^1.31.0",
     "@tailwindcss/postcss": "^4.3.3",
     "daisyui": "^5.7.16",
+    "marked": "^16.4.2",
     "photoswipe": "^5.4.4",
     "postcss": "^8.5.26",
     "rxjs": "~7.8.2",

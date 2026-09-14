@@ -9,7 +9,7 @@ import {
   NavbarAction,
   NavbarBrand,
   NavbarContent,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-navbar-websites-example',

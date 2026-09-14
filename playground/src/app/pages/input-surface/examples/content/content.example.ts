@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, InputSurface, InputSurfaceControl, Label } from '@ramen-suite/sushi';
+import { Badge, InputSurface, InputSurfaceControl, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-input-surface-content-example',

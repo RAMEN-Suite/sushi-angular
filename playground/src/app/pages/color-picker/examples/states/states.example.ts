@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ColorPicker, Label } from '@ramen-suite/sushi';
+import { ColorPicker, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-color-picker-states-example',

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Tab, Tabs, TabsValue } from '@ramen-suite/sushi';
+import { Tab, Tabs, TabsValue } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-tabs-basic-example',

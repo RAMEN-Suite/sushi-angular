@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { LucideChevronDown, LucideChevronUp } from '@lucide/angular';
-import { Button, Input, Join, JoinItem } from '@ramen-suite/sushi';
+import { Button, Input, Join, JoinItem } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-join-nested-example',

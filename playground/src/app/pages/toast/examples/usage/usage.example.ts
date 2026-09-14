@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Button, Toast, ToastService } from '@ramen-suite/sushi';
+import { Button, Toast, ToastService } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-toast-usage-example',

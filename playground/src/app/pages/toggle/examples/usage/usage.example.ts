@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, Card, Label, Toggle } from '@ramen-suite/sushi';
+import { Button, Card, Label, Toggle } from '@sushi-kit/angular';
 
 interface NotificationForm {
   notifications: boolean;

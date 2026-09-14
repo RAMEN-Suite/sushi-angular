@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, signal, Signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Input, Label, Pagination, Table, TableColumn, TableSort } from '@ramen-suite/sushi';
+import { Input, Label, Pagination, Table, TableColumn, TableSort } from '@sushi-kit/angular';
 
 interface InvoiceFilters {
   query: string;

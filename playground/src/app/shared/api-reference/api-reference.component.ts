@@ -1,6 +1,6 @@
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, InputSignal, Signal } from '@angular/core';
-import { Badge, List, ListItemTemplate, Table, TableCellTemplate, TableColumn } from '@ramen-suite/sushi';
+import { Badge, List, ListItemTemplate, Table, TableCellTemplate, TableColumn } from '@sushi-kit/angular';
 import type {
   ApiMember,
   ApiMemberKind,

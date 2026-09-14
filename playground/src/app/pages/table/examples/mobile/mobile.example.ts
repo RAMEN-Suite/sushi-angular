@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Table, TableCellTemplate, TableColumn } from '@ramen-suite/sushi';
+import { Badge, Table, TableCellTemplate, TableColumn } from '@sushi-kit/angular';
 
 type ReleaseState = 'Ready' | 'Review' | 'Blocked';
 

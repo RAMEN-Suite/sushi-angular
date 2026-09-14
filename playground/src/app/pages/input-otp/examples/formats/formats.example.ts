@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Card, InputOtp, Label } from '@ramen-suite/sushi';
+import { Card, InputOtp, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-input-otp-formats-example',

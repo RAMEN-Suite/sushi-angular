@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Badge, Button, Progress } from '@ramen-suite/sushi';
+import { Badge, Button, Progress } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-progress-animations-example',

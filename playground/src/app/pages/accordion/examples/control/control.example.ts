@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Accordion, AccordionItem, Button } from '@ramen-suite/sushi';
+import { Accordion, AccordionItem, Button } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-accordion-control-example',

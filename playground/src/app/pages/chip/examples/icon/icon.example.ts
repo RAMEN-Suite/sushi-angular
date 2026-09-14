@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideApple, LucideCode, LucideSparkles } from '@lucide/angular';
-import { Chip } from '@ramen-suite/sushi';
+import { Chip } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-chip-icon-example',

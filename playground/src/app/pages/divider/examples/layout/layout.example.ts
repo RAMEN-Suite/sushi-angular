@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Card, Divider } from '@ramen-suite/sushi';
+import { Card, Divider } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-divider-layout-example',

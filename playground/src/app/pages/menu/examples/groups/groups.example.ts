@@ -11,7 +11,7 @@ import {
   MenuItemTemplate,
   MenuStartTemplate,
   MenuValue,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 type WorkspaceAction = 'profile' | 'settings' | 'help' | 'sign-out';
 

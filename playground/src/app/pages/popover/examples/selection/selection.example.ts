@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { LucideChefHat } from '@lucide/angular';
-import { Button, Popover, PopoverTrigger } from '@ramen-suite/sushi';
+import { Button, Popover, PopoverTrigger } from '@sushi-kit/angular';
 
 interface Member {
   readonly name: string;

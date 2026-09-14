@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideSearch } from '@lucide/angular';
-import { Button, InputSurface, InputSurfaceControl, Join, JoinItem } from '@ramen-suite/sushi';
+import { Button, InputSurface, InputSurfaceControl, Join, JoinItem } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-join-actions-example',

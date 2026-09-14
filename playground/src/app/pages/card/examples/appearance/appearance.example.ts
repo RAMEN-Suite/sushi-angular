@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Card, CardSize, CardTitle, CardVariant } from '@ramen-suite/sushi';
+import { Card, CardSize, CardTitle, CardVariant } from '@sushi-kit/angular';
 
 interface CardPreview {
   readonly size: CardSize;

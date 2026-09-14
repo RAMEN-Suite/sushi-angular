@@ -18,6 +18,7 @@ yarn-error.log
 
 # IDEs and editors
 .angular
+.cache
 .idea/
 .vscode/
 .project

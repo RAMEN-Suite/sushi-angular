@@ -1,4 +1,4 @@
-import type { NavbarItem, SidebarGroup } from '@ramen-suite/sushi';
+import type { NavbarItem, SidebarGroup } from '@sushi-kit/angular';
 
 export interface NavigationItem {
   readonly label: string;

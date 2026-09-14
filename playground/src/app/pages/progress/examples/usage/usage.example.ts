@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Button, Progress } from '@ramen-suite/sushi';
+import { Button, Progress } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-progress-usage-example',

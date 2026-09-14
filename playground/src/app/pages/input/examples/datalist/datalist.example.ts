@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Input, Label } from '@ramen-suite/sushi';
+import { Input, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-input-datalist-example',

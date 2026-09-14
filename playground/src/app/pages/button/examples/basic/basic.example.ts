@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Button } from '@ramen-suite/sushi';
+import { Button } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-button-basic-example',

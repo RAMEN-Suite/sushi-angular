@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, BadgeSeverity, BadgeSize, BadgeVariant } from '@ramen-suite/sushi';
+import { Badge, BadgeSeverity, BadgeSize, BadgeVariant } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-badge-usage-example',

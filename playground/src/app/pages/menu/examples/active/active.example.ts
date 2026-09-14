@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, Signal, signal, WritableSignal } from '@angular/core';
 import { LucideColumns2, LucideEye, LucidePanelLeft } from '@lucide/angular';
-import { Label, Menu, MenuEntry, MenuItem, MenuItemTemplate } from '@ramen-suite/sushi';
+import { Label, Menu, MenuEntry, MenuItem, MenuItemTemplate } from '@sushi-kit/angular';
 
 type View = 'editor' | 'preview' | 'split';
 

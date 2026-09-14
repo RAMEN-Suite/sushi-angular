@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Button, Divider, Fieldset, FieldsetContent, FieldsetLegend, FieldsetToggle, Input, Label } from '@ramen-suite/sushi';
+import { Button, Divider, Fieldset, FieldsetContent, FieldsetLegend, FieldsetToggle, Input, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-fieldset-controlled-example',

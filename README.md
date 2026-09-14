@@ -1,52 +1,66 @@
-# SUSHI
+# SUSHI KIT
 
-An Angular 22+ component library built around native semantics, typed signal APIs, accessible interaction patterns, and copyable documentation examples.
+Accessible, themeable Angular components with typed signal APIs. SUSHI KIT favors native HTML semantics and composes Angular Aria, the Angular CDK, DaisyUI, and Tailwind CSS where they provide established behavior or styling primitives.
 
-## Development
+## Install
 
-- [Component development](docs/component-development.md)
-- [Engineering guidelines](GUIDELINES.md)
-- `npm test` runs the library unit suite.
-- `npm run test:coverage` enforces the project coverage gates.
-- `npm run test:e2e` verifies browser-only interaction and layout contracts.
+SUSHI KIT currently targets Angular 22.
 
-## Component roadmap
+```bash
+npm install @sushi-kit/angular
+```
 
-## Structure and collections
+Import the global stylesheet once in the application's main stylesheet:
 
-Build these in dependency order so later components reuse established behavior and layouts.
+```css
+@import '@sushi-kit/angular/sushi.css';
+```
 
-- [x] `suiAccordion`
-- [x] `suiList`
-- [x] `suiListbox`
-- [x] `suiOrderList`
-- [x] `suiMenu`
-- [x] `suiPagination`
-- [x] `suiTable`
-- [x] `suiDataView`
+## Use a component
 
-## Application navigation
+Public declarations are standalone and can be imported where they are used:
 
-- [x] `sui-navbar`
-- [x] `suiSidebar`
-- [x] `suiDrawer`
+```ts
+import { Component } from '@angular/core';
+import { Button } from '@sushi-kit/angular';
 
-`suiSidebar` owns persistent application navigation. `suiDrawer` owns the responsive overlay and disclosure behavior; it may contain a sidebar but does not replace it.
+@Component({
+  selector: 'app-checkout',
+  imports: [Button],
+  template: `<button suiButton severity="primary">Place order</button>`,
+})
+export class Checkout {}
+```
 
-## Overlays and navigation
+The library includes form controls, navigation, overlays, feedback, data display, layout utilities, image presentation, generated API references, and documented CSS tokens. Browse the local playground for complete examples and consumer API documentation.
 
-- [x] `suiDialog`
-- [x] `suiPopover`
-- [x] `suiTooltip`
-- [x] `suiContextMenuTrigger`
-- [x] `suiBreadcrumb`
+## Develop locally
 
-## Supporting primitives
+```bash
+npm install
+npm run start:playground
+```
 
-- [x] `suiChip`
-- [x] `suiSkeleton`
+The reusable library lives in `sushi/`; the documentation application lives in `playground/`. Keep playground and documentation tooling outside the published package boundary.
 
-## Extras
+Use `npm test` for quick unit feedback. Before handing off a change, run the complete repository gate:
 
-- [x] `suiLightbox`
-- [x] `suiGallery`
+```bash
+npm run verify
+```
+
+## Contribute
+
+- [Contribution workflow](CONTRIBUTING.md)
+- [Create or change a component](docs/component-development.md)
+- [Coding conventions](docs/coding-conventions.md)
+- [Testing conventions](docs/testing-conventions.md)
+- [AI conventions](docs/ai-conventions.md)
+- [Code of conduct](CODE_OF_CONDUCT.md)
+- [Security policy](SECURITY.md)
+
+Issues and pull requests should describe the consumer-visible problem, accessibility implications, and any public API, theming, dependency, or package changes.
+
+## License
+
+SUSHI KIT is available under the [MIT License](LICENSE). Third-party software remains subject to its respective license terms.

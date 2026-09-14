@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideDownload, LucideSearch, LucideSettings, LucideTrash2 } from '@lucide/angular';
-import { Button } from '@ramen-suite/sushi';
+import { Button } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-icon-usage-example',

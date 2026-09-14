@@ -10,7 +10,7 @@ import {
   DrawerTrigger,
   List,
   ListItemTemplate,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 interface CartItem {
   readonly id: number;

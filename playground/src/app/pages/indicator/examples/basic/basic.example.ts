@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Avatar, Badge, Button, Indicator, IndicatorItem, Input, Status } from '@ramen-suite/sushi';
+import { Avatar, Badge, Button, Indicator, IndicatorItem, Input, Status } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-indicator-basic-example',

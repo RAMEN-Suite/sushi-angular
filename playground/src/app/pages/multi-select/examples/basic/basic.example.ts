@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField, minLength } from '@angular/forms/signals';
-import { Button, Join, JoinItem, Label, MultiSelect, MultiSelectModelValue, MultiSelectOption } from '@ramen-suite/sushi';
+import { Button, Join, JoinItem, Label, MultiSelect, MultiSelectModelValue, MultiSelectOption } from '@sushi-kit/angular';
 
 interface LabelForm {
   labels: MultiSelectModelValue;

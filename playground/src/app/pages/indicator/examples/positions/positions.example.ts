@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Indicator, IndicatorHorizontalPosition, IndicatorItem, IndicatorVerticalPosition } from '@ramen-suite/sushi';
+import { Badge, Indicator, IndicatorHorizontalPosition, IndicatorItem, IndicatorVerticalPosition } from '@sushi-kit/angular';
 
 interface Position {
   readonly horizontal: IndicatorHorizontalPosition;

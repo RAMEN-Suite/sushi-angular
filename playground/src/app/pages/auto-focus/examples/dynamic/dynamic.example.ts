@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { AutoFocus, Button, Input, Join, JoinItem } from '@ramen-suite/sushi';
+import { AutoFocus, Button, Input, Join, JoinItem } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-auto-focus-dynamic-example',

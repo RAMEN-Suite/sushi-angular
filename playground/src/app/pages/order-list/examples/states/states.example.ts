@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { OrderList, OrderListOption } from '@ramen-suite/sushi';
+import { OrderList, OrderListOption } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-order-list-states-example',

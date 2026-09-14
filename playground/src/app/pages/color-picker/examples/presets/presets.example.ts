@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideCheck } from '@lucide/angular';
-import { ColorPicker, ColorPickerPreset, ColorPickerPresetTemplate, Label } from '@ramen-suite/sushi';
+import { ColorPicker, ColorPickerPreset, ColorPickerPresetTemplate, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-color-picker-presets-example',

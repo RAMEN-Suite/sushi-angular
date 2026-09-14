@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, Card, Fieldset, FieldsetContent, FieldsetLegend, Label, Radio } from '@ramen-suite/sushi';
+import { Button, Card, Fieldset, FieldsetContent, FieldsetLegend, Label, Radio } from '@sushi-kit/angular';
 
 interface PlanForm {
   plan: string;

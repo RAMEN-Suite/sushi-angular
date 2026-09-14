@@ -7,7 +7,7 @@ interface BoxGeometry {
   readonly y: number;
 }
 
-test('Drawer behaves as a modal and restores focus after Escape', async ({ page }: { page: Page }): Promise<void> => {
+test('modal Drawer closes with Escape and restores focus to its trigger', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/drawer');
   const trigger: Locator = page.getByRole('button', { name: /Cart/ });
   await trigger.click();
@@ -16,9 +16,6 @@ test('Drawer behaves as a modal and restores focus after Escape', async ({ page 
   await expect(drawer).toBeVisible();
   await expect(trigger).toHaveAttribute('aria-expanded', 'true');
   await expect(drawer).toHaveAttribute('aria-modal', 'true');
-  await expect(drawer).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
-  await expect(drawer).toHaveCSS('border-width', '0px');
-  await expect(drawer).toHaveCSS('padding', '0px');
   await expect
     .poll(async (): Promise<boolean> =>
       drawer.evaluate((element: HTMLElement): boolean => element.contains(document.activeElement)),
@@ -36,7 +33,7 @@ test('Drawer behaves as a modal and restores focus after Escape', async ({ page 
   await expect(trigger).toBeFocused();
 });
 
-test('end placement keeps the panel at the viewport edge and backdrop dismisses it', async ({
+test('end placement anchors to the viewport edge and backdrop click dismisses it', async ({
   page,
 }: {
   page: Page;

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, Label, Listbox, ListboxModelValue, ListboxOption } from '@ramen-suite/sushi';
+import { Button, Label, Listbox, ListboxModelValue, ListboxOption } from '@sushi-kit/angular';
 
 interface WorkspaceForm {
   workspace: ListboxModelValue;

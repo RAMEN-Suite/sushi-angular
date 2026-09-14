@@ -10,7 +10,7 @@ import {
   TableHeaderTemplate,
   TableLoadingTemplate,
   TableRowTemplate,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 type StockState = 'Healthy' | 'Low';
 

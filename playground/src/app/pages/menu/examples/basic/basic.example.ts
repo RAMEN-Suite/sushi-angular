@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Label, Menu, MenuEntry, MenuValue } from '@ramen-suite/sushi';
+import { Label, Menu, MenuEntry, MenuValue } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-menu-basic-example',

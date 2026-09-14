@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { InputOtp, Label } from '@ramen-suite/sushi';
+import { InputOtp, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-input-otp-states-example',

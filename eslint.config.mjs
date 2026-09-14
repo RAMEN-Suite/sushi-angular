@@ -21,13 +21,13 @@ export default defineConfig(
         {
           paths: [
             {
-              name: '@ramen-suite/sushi',
+              name: '@sushi-kit/angular',
               message: 'Do not import from the package barrel inside the library. Use relative imports instead.',
             },
           ],
           patterns: [
             {
-              group: ['@ramen-suite/sushi/*'],
+              group: ['@sushi-kit/angular/*'],
               message: 'Do not import from the package barrel inside the library. Use relative imports instead.',
             },
           ],

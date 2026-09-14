@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Skeleton } from '@ramen-suite/sushi';
+import { Skeleton } from '@sushi-kit/angular';
 @Component({
   selector: 'pg-skeleton-usage-example',
   imports: [Skeleton],

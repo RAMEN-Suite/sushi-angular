@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Avatar, Button, Card, List, ListItemTemplate } from '@ramen-suite/sushi';
+import { Avatar, Button, Card, List, ListItemTemplate } from '@sushi-kit/angular';
 import { LucideEllipsis, LucideMail } from '@lucide/angular';
 
 interface Member {

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { LucideChevronRight } from '@lucide/angular';
-import { Button, Fieldset, FieldsetContent, FieldsetLegend, FieldsetToggle, Input, Label } from '@ramen-suite/sushi';
+import { Button, Fieldset, FieldsetContent, FieldsetLegend, FieldsetToggle, Input, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-fieldset-toggles-example',

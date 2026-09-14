@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, Signal, signal, WritableSignal } from '@angular/core';
-import { Gallery, GalleryImage, Lightbox } from '@ramen-suite/sushi';
+import { Gallery, GalleryImage, Lightbox } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-gallery-usage-example',

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, signal, Signal, viewChild, WritableSignal } from '@angular/core';
-import { Button, Fieldset, FieldsetLegend, FileInput, Label } from '@ramen-suite/sushi';
+import { Button, Fieldset, FieldsetLegend, FileInput, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-file-input-native-example',

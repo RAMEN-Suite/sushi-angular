@@ -4,7 +4,7 @@
       <div class="grid gap-8 py-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(19rem,0.8fr)] lg:items-center lg:py-8">
         <div class="space-y-4">
           <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary">Angular component library</p>
-          <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">SUSHI for Angular</h1>
+          <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">SUSHI KIT for Angular</h1>
           <p class="text-xl font-medium sm:text-2xl">Build consistent interfaces from composable components.</p>
           <p class="leading-relaxed text-base-content/65">Accessible behavior, typed APIs, and flexible theme tokens are included.</p>
         </div>
@@ -49,6 +49,23 @@
           </sui-code>
         </div>
       </ng-template>
+    </sui-tabs>
+  </section>
+
+  <section id="contributing" class="scroll-mt-24 space-y-6">
+    <div class="max-w-2xl space-y-2">
+      <h2 class="text-3xl font-bold tracking-tight">Build SUSHI KIT with us</h2>
+      <p class="text-base-content/65">The contributor documentation below is loaded directly from the repository.</p>
+    </div>
+
+    <sui-tabs [(value)]="guideTab" ariaLabel="Contributor documentation" variant="lift">
+      @for (guide of guides; track guide.source) {
+        <ng-template suiTab [value]="guide.value" [label]="guide.label">
+          <div class="p-5 sm:p-8">
+            <pg-markdown-document [source]="guide.source" (documentLink)="openGuide($event)" />
+          </div>
+        </ng-template>
+      }
     </sui-tabs>
   </section>
 </main>

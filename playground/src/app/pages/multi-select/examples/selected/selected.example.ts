@@ -10,7 +10,7 @@ import {
   MultiSelectOption,
   MultiSelectSelectedItemsTemplate,
   MultiSelectValue,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-multi-select-selected-example',

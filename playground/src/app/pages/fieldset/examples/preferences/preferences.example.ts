@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Button, Checkbox, Divider, Fieldset, FieldsetLegend, Input, Label } from '@ramen-suite/sushi';
+import { Button, Checkbox, Divider, Fieldset, FieldsetLegend, Input, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-fieldset-preferences-example',

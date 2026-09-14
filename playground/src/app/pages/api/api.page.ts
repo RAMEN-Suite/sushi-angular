@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, InputSignal, Signal } from '@angular/core';
-import { Button, Card } from '@ramen-suite/sushi';
+import { Button, Card } from '@sushi-kit/angular';
 import { ApiReference } from '../../shared/api-reference/api-reference.component';
 import { apiFragmentHref, navigateToApiTarget } from '../../shared/api-reference/api-reference-navigation';
 import { apiReferences } from '../../generated/api-reference.generated';

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, Card, Checkbox, Label } from '@ramen-suite/sushi';
+import { Button, Card, Checkbox, Label } from '@sushi-kit/angular';
 
 interface Preferences {
   accepted: boolean;

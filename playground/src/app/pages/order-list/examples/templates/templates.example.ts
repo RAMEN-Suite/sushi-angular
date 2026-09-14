@@ -12,7 +12,7 @@ import {
   OrderListItemTemplate,
   OrderListOption,
   OrderListValue,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 interface BacklogItem extends OrderListOption {
   readonly area: string;

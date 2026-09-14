@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Code, CodeLine } from '@ramen-suite/sushi';
+import { Code, CodeLine } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-code-basic-example',

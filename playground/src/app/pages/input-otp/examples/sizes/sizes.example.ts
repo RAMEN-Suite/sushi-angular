@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Fieldset, FieldsetLegend, InputOtp, Label } from '@ramen-suite/sushi';
+import { Badge, Fieldset, FieldsetLegend, InputOtp, Label } from '@sushi-kit/angular';
 
 type ControlSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Button, Spinner } from '@ramen-suite/sushi';
+import { Button, Spinner } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-button-states-example',

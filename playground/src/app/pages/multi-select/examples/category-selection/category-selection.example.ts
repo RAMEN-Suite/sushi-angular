@@ -13,7 +13,7 @@ import {
   MultiSelectOption,
   MultiSelectValue,
   Progress,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 interface Permission extends MultiSelectOption {
   readonly description: string;

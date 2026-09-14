@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { InputNumber, Label } from '@ramen-suite/sushi';
+import { InputNumber, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-input-number-states-example',

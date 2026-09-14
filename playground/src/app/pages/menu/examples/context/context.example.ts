@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Card, ContextMenuTrigger, Kbd, Menu, MenuEntry, MenuValue } from '@ramen-suite/sushi';
+import { Card, ContextMenuTrigger, Kbd, Menu, MenuEntry, MenuValue } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-menu-context-example',

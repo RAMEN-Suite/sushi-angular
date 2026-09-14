@@ -70,3 +70,69 @@
 .sui-code .hljs-template-variable {
   color: var(--sui-code-syntax-expression);
 }
+
+.pg-markdown {
+  max-width: 78ch;
+  color: color-mix(in oklab, var(--color-base-content) 82%, transparent);
+  line-height: 1.7;
+}
+
+.pg-markdown > * + * {
+  margin-top: 1rem;
+}
+
+.pg-markdown h1,
+.pg-markdown h2,
+.pg-markdown h3 {
+  color: var(--color-base-content);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.pg-markdown h1 {
+  font-size: 2rem;
+}
+
+.pg-markdown h2 {
+  margin-top: 2.25rem;
+  font-size: 1.45rem;
+}
+
+.pg-markdown h3 {
+  margin-top: 1.75rem;
+  font-size: 1.15rem;
+}
+
+.pg-markdown ul,
+.pg-markdown ol {
+  padding-inline-start: 1.5rem;
+}
+
+.pg-markdown ul {
+  list-style: disc;
+}
+
+.pg-markdown ol {
+  list-style: decimal;
+}
+
+.pg-markdown a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.pg-markdown :not(pre) > code {
+  border-radius: var(--radius-field);
+  background: var(--color-base-200);
+  padding: 0.15rem 0.35rem;
+  color: var(--color-base-content);
+}
+
+.pg-markdown pre {
+  overflow-x: auto;
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-box);
+  background: var(--color-base-200);
+  padding: 1rem;
+}

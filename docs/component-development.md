@@ -1,6 +1,6 @@
 # Component development
 
-Use this workflow for every public SUSHI feature. The detailed rules remain in [GUIDELINES.md](../GUIDELINES.md).
+Use this workflow for every public SUSHI KIT feature. Apply the [coding conventions](coding-conventions.md) while implementing and the [testing conventions](testing-conventions.md) while verifying it.
 
 ## 1. Define the contract
 
@@ -32,6 +32,67 @@ sushi/src/lib/<feature>/
 - Omit empty HTML, CSS, interfaces, or template files.
 - Move private renderers, state, and interaction helpers to `internal/` only when the main declaration becomes hard to scan.
 - Export the public API from the feature `index.ts`, then from `sushi/src/public-api.ts`.
+
+### Small example: `sui-note`
+
+Start with the consumer contract: a note displays projected content, has a configurable tone, and exposes no state or events. Native `<aside>` semantics are sufficient, so the component only owns its reusable surface and theming contract.
+
+Create `sushi/src/lib/note/note.component.ts`:
+
+```ts
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+
+/** Visual tone available for a note. */
+export type NoteTone = 'neutral' | 'info';
+
+/** Displays short supplementary information. */
+@Component({
+  selector: 'sui-note',
+  templateUrl: './note.component.html',
+  styleUrl: './note.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class Note {
+  /** Controls the semantic color treatment. */
+  readonly tone = input<NoteTone>('neutral');
+}
+```
+
+Use semantic markup in `note.component.html`:
+
+```html
+<aside class="sui-note" [attr.data-tone]="tone()">
+  <ng-content />
+</aside>
+```
+
+Keep the stable visual roles configurable in `note.component.css`:
+
+```css
+:host {
+  /** Background color of the note surface. */
+  --sui-note-background: var(--color-base-200);
+
+  /** Foreground color of the note content. */
+  --sui-note-color: var(--color-base-content);
+}
+
+.sui-note {
+  padding: 1rem;
+  color: var(--sui-note-color);
+  background: var(--sui-note-background);
+  border-radius: var(--radius-box);
+}
+
+.sui-note[data-tone='info'] {
+  --sui-note-background: var(--color-info);
+  --sui-note-color: var(--color-info-content);
+}
+```
+
+Test the public contract through a host in `testing/note.component.spec.ts`: render projected content, verify the default and configured tone, and confirm the `<aside>` semantics. Do not test that Angular can merely construct `Note` or duplicate every CSS declaration in assertions.
+
+Finally, export `Note` and `NoteTone` from `note/index.ts` and `sushi/src/public-api.ts`, add source JSDoc and a copyable playground example, run `npm run generate:api`, then finish with `npm run verify`. This example is intentionally small; add templates, outputs, internal helpers, or E2E coverage only when the public behavior requires them.
 
 ## 3. Implement the feature
 
@@ -81,6 +142,12 @@ Place Vitest specs in the feature's `testing/` folder. Use a standalone host and
 
 Use Playwright only for browser-dependent Library behavior such as layout, scrolling, overlays, responsive changes, and rendered focus continuity. The playground may host the fixture, but assertions must target a SUSHI component's public behavior. Do not test documentation tabs, preview styling, marketing copy, or the playground shell. Coverage thresholds prevent regressions; they do not replace meaningful assertions.
 
+## 6. Verify the package boundary
+
+- Confirm the feature is exported only through its public feature barrel and `public-api.ts`.
+- Keep private renderers, test helpers, playground examples, and documentation tooling out of the public exports.
+- Run `npm run package:check` and inspect the listed tarball files when adding dependencies, assets, entry points, or global styles.
+
 ## Definition of done
 
 - Public API and exports are intentional and documented.
@@ -90,11 +157,5 @@ Use Playwright only for browser-dependent Library behavior such as layout, scrol
 - The repository checks pass:
 
 ```bash
-npm run lint
-npm test
-npm run test:coverage
-npm run test:e2e
-npm run build:sushi
-npm run build:playground
-npm run format
+npm run verify
 ```

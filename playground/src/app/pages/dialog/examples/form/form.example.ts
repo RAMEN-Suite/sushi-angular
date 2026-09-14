@@ -14,7 +14,7 @@ import {
   Input,
   Label,
   Textarea,
-} from '@ramen-suite/sushi';
+} from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-dialog-form-example',

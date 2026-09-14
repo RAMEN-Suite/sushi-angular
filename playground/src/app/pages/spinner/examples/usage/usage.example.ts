@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Spinner, SpinnerSize, SpinnerType } from '@ramen-suite/sushi';
+import { Spinner, SpinnerSize, SpinnerType } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-spinner-usage-example',

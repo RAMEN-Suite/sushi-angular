@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Fieldset, FieldsetLegend, Label, Textarea, TextareaSeverity, TextareaSize } from '@ramen-suite/sushi';
+import { Badge, Fieldset, FieldsetLegend, Label, Textarea, TextareaSeverity, TextareaSize } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-textarea-appearance-example',

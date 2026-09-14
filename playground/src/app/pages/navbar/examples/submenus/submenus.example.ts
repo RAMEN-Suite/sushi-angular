@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { LucideBox } from '@lucide/angular';
-import { Navbar, NavbarBrand, NavbarItem } from '@ramen-suite/sushi';
+import { Navbar, NavbarBrand, NavbarItem } from '@sushi-kit/angular';
 
 type Destination = 'Products' | 'Analytics' | 'Automation' | 'Resources' | 'Documentation' | 'Changelog' | 'Pricing';
 

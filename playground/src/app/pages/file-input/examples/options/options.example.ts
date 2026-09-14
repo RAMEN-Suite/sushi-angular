@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Fieldset, FieldsetLegend, FileInput, FileInputSeverity, FileInputSize, Label } from '@ramen-suite/sushi';
+import { Badge, Fieldset, FieldsetLegend, FileInput, FileInputSeverity, FileInputSize, Label } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-file-input-options-example',

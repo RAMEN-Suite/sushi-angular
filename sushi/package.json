@@ -1,6 +1,26 @@
 {
-  "name": "@ramen-suite/sushi",
+  "name": "@sushi-kit/angular",
   "version": "0.0.1",
+  "description": "Accessible, themeable Angular components built with signals, Angular Aria, and the CDK.",
+  "keywords": [
+    "angular",
+    "components",
+    "design-system",
+    "accessibility",
+    "ui"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebenns/SUSHI.git"
+  },
+  "homepage": "https://github.com/sebenns/SUSHI#readme",
+  "bugs": {
+    "url": "https://github.com/sebenns/SUSHI/issues"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
   "exports": {
     "./sushi.css": "./sushi.css"
   },

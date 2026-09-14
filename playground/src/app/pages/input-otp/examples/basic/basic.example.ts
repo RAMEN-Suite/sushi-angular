@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, InputOtp, Label } from '@ramen-suite/sushi';
+import { Button, InputOtp, Label } from '@sushi-kit/angular';
 
 interface OtpModel {
   code: string;

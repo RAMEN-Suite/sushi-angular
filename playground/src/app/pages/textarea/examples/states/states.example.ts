@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Fieldset, FieldsetLegend, Label, Textarea } from '@ramen-suite/sushi';
+import { Fieldset, FieldsetLegend, Label, Textarea } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-textarea-states-example',

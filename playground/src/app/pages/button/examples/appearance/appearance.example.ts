@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideEllipsis, LucidePlus } from '@lucide/angular';
-import { Button, ButtonSeverity, ButtonSize, ButtonVariant } from '@ramen-suite/sushi';
+import { Button, ButtonSeverity, ButtonSize, ButtonVariant } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-button-appearance-example',

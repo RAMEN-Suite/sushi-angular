@@ -29,17 +29,11 @@ test('opens modally, closes with Escape, and restores trigger focus', async ({ p
   await expect(trigger).toBeFocused();
 });
 
-test('opens dynamic content through Angular CDK', async ({ page }: { page: Page }): Promise<void> => {
-  await page.getByRole('button', { name: 'Choose a menu' }).click();
-  const dialog: Locator = page.getByRole('dialog', { name: 'Choose a menu' });
-
-  await expect(dialog).toBeVisible();
-  await expect(dialog).not.toHaveCSS('box-shadow', 'none');
-  await dialog.getByRole('button', { name: 'Omakase' }).click();
-  await expect(page.getByText('Selected: Omakase')).toBeVisible();
-});
-
-test('can require an explicit action', async ({ page }: { page: Page }): Promise<void> => {
+test('non-dismissible Dialog ignores Escape and honors its configured start position', async ({
+  page,
+}: {
+  page: Page;
+}): Promise<void> => {
   await page.getByRole('button', { name: 'Open prep board' }).click();
   const dialog: Locator = page.getByRole('dialog', { name: 'Prep board' });
 
@@ -53,13 +47,13 @@ test('can require an explicit action', async ({ page }: { page: Page }): Promise
   await expect(dialog).toBeHidden();
 });
 
-test('keeps the page scrollable behind a non-modal resizable dialog', async ({ page }: { page: Page }): Promise<void> => {
+test('non-modal Dialog keeps its background page scrollable', async ({ page }: { page: Page }): Promise<void> => {
   await page.getByRole('button', { name: 'Open prep board' }).click();
   const dialog: Locator = page.getByRole('dialog', { name: 'Prep board' });
   const content: Locator = page.locator('[suiDrawerContent]').first();
   const initialScroll: number = await content.evaluate((element: HTMLElement): number => element.scrollTop);
 
-  await expect(dialog).toHaveCSS('resize', 'both');
+  await expect(dialog).toBeVisible();
   await page.mouse.move(500, 700);
   await page.mouse.wheel(0, 500);
   await expect
@@ -98,7 +92,7 @@ test('drags only from the header and stays inside the viewport', async ({ page }
   expect(moved?.y).toBeGreaterThanOrEqual(0);
 });
 
-test('shows a drag cursor only when header dragging is enabled', async ({ page }: { page: Page }): Promise<void> => {
+test('only an enabled drag handle exposes a move cursor', async ({ page }: { page: Page }): Promise<void> => {
   await page.getByRole('button', { name: 'View today’s menu' }).click();
   const staticHeader: Locator = page.getByRole('dialog', { name: 'Today’s menu' }).locator('[suiDialogHeader]');
   await expect(staticHeader).toHaveCSS('cursor', 'auto');

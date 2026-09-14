@@ -1,6 +1,6 @@
 import { Dialog as CdkDialog, DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, inject, signal, WritableSignal } from '@angular/core';
-import { Button } from '@ramen-suite/sushi';
+import { Button } from '@sushi-kit/angular';
 
 interface MenuDialogData {
   readonly menus: readonly string[];

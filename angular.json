@@ -87,6 +87,21 @@
               {
                 "glob": "**/*",
                 "input": "playground/public"
+              },
+              {
+                "glob": "CONTRIBUTING.md",
+                "input": ".",
+                "output": "repository-docs"
+              },
+              {
+                "glob": "GUIDELINES.md",
+                "input": ".",
+                "output": "repository-docs"
+              },
+              {
+                "glob": "*.md",
+                "input": "docs",
+                "output": "repository-docs"
               }
             ],
             "styles": ["sushi/src/styles/sushi.css", "playground/src/styles.css"]

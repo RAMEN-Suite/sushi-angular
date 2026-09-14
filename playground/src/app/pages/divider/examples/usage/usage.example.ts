@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Divider } from '@ramen-suite/sushi';
+import { Divider } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-divider-usage-example',
