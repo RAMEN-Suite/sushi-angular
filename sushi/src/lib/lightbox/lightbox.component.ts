@@ -135,14 +135,18 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
   }
 
   private registerCaption(viewer: PhotoSwipe): void {
+    const configuredImages: readonly I[] | null = this.images();
+    const images: readonly I[] = configuredImages?.length ? configuredImages : [this.image()];
+    const grouped: boolean = images.length > 1;
+
     viewer.ui?.registerElement({
       name: 'caption',
       order: 9,
       appendTo: 'root',
       onInit: (element: HTMLElement, pswp: PhotoSwipe): void => {
         const update: () => void = (): void => {
-          const caption: unknown = pswp.currSlide?.data['caption'];
-          element.textContent = typeof caption === 'string' ? caption : '';
+          const image: I = images[pswp.currIndex];
+          element.textContent = grouped ? (image.caption ?? '') : (this.description() ?? image.caption ?? '');
           element.hidden = element.textContent.length === 0;
         };
         pswp.on('change', update);

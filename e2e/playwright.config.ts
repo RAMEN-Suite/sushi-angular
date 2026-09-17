@@ -18,9 +18,13 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
   ],
   webServer: {
-    command: 'npm run start:playground -- --host 127.0.0.1 --port 4201',
+    command: 'npm start -- --host 127.0.0.1 --port 4201',
     url: 'http://127.0.0.1:4201',
     reuseExistingServer: !isCi,
     timeout: 120_000,

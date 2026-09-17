@@ -7,11 +7,17 @@
   align-items: center;
   gap: 0.75rem;
   box-sizing: border-box;
+  cursor: grabbing;
   padding: 0.75rem 1rem;
   color: var(--color-base-content);
   background: var(--color-base-100);
   border: 1px solid var(--color-base-300);
   border-radius: var(--radius-field);
+}
+
+.cdk-drop-list-dragging,
+.cdk-drop-list-dragging .sui-order-list-row {
+  cursor: grabbing;
 }
 
 .cdk-drag-preview.sui-order-list-row .list-col-grow {
