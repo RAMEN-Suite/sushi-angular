@@ -23,6 +23,87 @@ export const routes: Routes = [
     title: 'SUSHI KIT Playground',
   },
   {
+    path: 'getting-started',
+    loadComponent: () => import('./pages/contributor/contributor.page').then(({ ContributorPage }) => ContributorPage),
+    title: 'Getting started | SUSHI KIT Playground',
+    data: {
+      title: 'Getting started',
+      description: 'Install SUSHI KIT, load its styles, and render your first component.',
+      source: '/repository-docs/getting-started.md',
+    },
+  },
+  {
+    path: 'styling-and-themes',
+    loadComponent: () => import('./pages/contributor/contributor.page').then(({ ContributorPage }) => ContributorPage),
+    title: 'Styling and themes | SUSHI KIT Playground',
+    data: {
+      title: 'Styling and themes',
+      description: 'Use theme values, component tokens, and Tailwind utilities without coupling component logic to styling.',
+      source: '/repository-docs/styling-and-themes.md',
+      themeTokens: true,
+    },
+  },
+  {
+    path: 'contribute',
+    loadComponent: () => import('./pages/contributor/contributor.page').then(({ ContributorPage }) => ContributorPage),
+    title: 'Contributing | SUSHI KIT Playground',
+    data: {
+      title: 'Contributing to SUSHI KIT',
+      description: 'Set up the repository, choose a change, and prepare it for review.',
+      source: '/repository-docs/CONTRIBUTING.md',
+    },
+  },
+  {
+    path: 'contribute/components',
+    loadComponent: () => import('./pages/contributor/contributor.page').then(({ ContributorPage }) => ContributorPage),
+    title: 'Build a component | SUSHI KIT Playground',
+    data: {
+      title: 'Build a component',
+      description: 'Follow the library structure from public API and accessibility through examples and documentation.',
+      source: '/repository-docs/component-development.md',
+    },
+  },
+  {
+    path: 'contribute/styles',
+    loadComponent: () => import('./pages/contributor/contributor.page').then(({ ContributorPage }) => ContributorPage),
+    title: 'Component styling | SUSHI KIT Playground',
+    data: {
+      title: 'Component styling',
+      description: 'Place component styles, document public tokens, and update the library style build.',
+      source: '/repository-docs/component-styling.md',
+    },
+  },
+  {
+    path: 'contribute/code',
+    loadComponent: () => import('./pages/contributor/contributor.page').then(({ ContributorPage }) => ContributorPage),
+    title: 'Coding conventions | SUSHI KIT Playground',
+    data: {
+      title: 'Coding conventions',
+      description: 'Write Angular code that stays typed, readable, and approachable for the next contributor.',
+      source: '/repository-docs/coding-conventions.md',
+    },
+  },
+  {
+    path: 'contribute/testing',
+    loadComponent: () => import('./pages/contributor/contributor.page').then(({ ContributorPage }) => ContributorPage),
+    title: 'Testing conventions | SUSHI KIT Playground',
+    data: {
+      title: 'Testing conventions',
+      description: 'Test meaningful consumer behavior at the smallest reliable level.',
+      source: '/repository-docs/testing-conventions.md',
+    },
+  },
+  {
+    path: 'contribute/ai',
+    loadComponent: () => import('./pages/contributor/contributor.page').then(({ ContributorPage }) => ContributorPage),
+    title: 'AI conventions | SUSHI KIT Playground',
+    data: {
+      title: 'AI conventions',
+      description: 'Use AI assistance transparently while keeping every contribution reviewable and accountable.',
+      source: '/repository-docs/ai-conventions.md',
+    },
+  },
+  {
     path: 'accordion',
     loadComponent: () => import('./pages/accordion/accordion.page').then(({ AccordionPage }) => AccordionPage),
     title: 'Accordion | SUSHI KIT Playground',

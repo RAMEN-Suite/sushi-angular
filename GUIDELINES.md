@@ -3,6 +3,7 @@
 The project conventions are split by task so contributors can find the binding rules quickly:
 
 - [Create or change a component](docs/component-development.md)
+- [Component styling](docs/component-styling.md)
 - [Coding conventions](docs/coding-conventions.md)
 - [Testing conventions](docs/testing-conventions.md)
 - [AI conventions](docs/ai-conventions.md)

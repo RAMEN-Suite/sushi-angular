@@ -11584,7 +11584,7 @@ export const apiReference: Readonly<{
         kind: 'interface',
         source: 'library',
         declaration:
-          'interface SidebarGroup<I extends NavbarItem = NavbarItem> {\n  readonly label: string;\n  readonly heading?: string | null;\n  readonly items: readonly I[];\n}',
+          'interface SidebarGroup<I extends NavbarItem = NavbarItem> {\n  readonly label: string;\n  readonly dividerBefore?: boolean;\n  readonly heading?: string | null;\n  readonly items: readonly I[];\n}',
         description: 'Labeled destination group rendered by a Sidebar.',
         members: [
           {
@@ -11592,6 +11592,12 @@ export const apiReference: Readonly<{
             type: 'string',
             optional: false,
             description: 'Accessible group label and default visible heading. Keep labels unique within one Sidebar.',
+          },
+          {
+            name: 'dividerBefore',
+            type: 'boolean',
+            optional: true,
+            description: 'Draws a separator before this group. Use it to divide navigation regions.',
           },
           {
             name: 'heading',

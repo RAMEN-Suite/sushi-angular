@@ -6,12 +6,14 @@ export interface NavigationItem {
 }
 
 export interface NavigationGroup {
+  readonly dividerBefore?: boolean;
   readonly label: string;
   readonly items: readonly NavigationItem[];
 }
 
 export const navigation: readonly NavigationGroup[] = [
   {
+    dividerBefore: true,
     label: 'Inputs',
     items: [
       {
@@ -299,8 +301,24 @@ export type SidebarNavigationGroup = SidebarGroup<NavbarItem<string>>;
 
 export const overviewNavigation: readonly NavbarItem<string>[] = [{ label: 'Overview', value: '/', routerLink: '/' }];
 
+export const generalNavigation: readonly NavbarItem<string>[] = [
+  ...overviewNavigation,
+  { label: 'Getting started', value: '/getting-started', routerLink: '/getting-started' },
+  { label: 'Styling & themes', value: '/styling-and-themes', routerLink: '/styling-and-themes' },
+];
+
+export const contributorNavigation: readonly NavbarItem<string>[] = [
+  { label: 'Contribution guide', value: '/contribute', routerLink: '/contribute' },
+  { label: 'Component workflow', value: '/contribute/components', routerLink: '/contribute/components' },
+  { label: 'Component styling', value: '/contribute/styles', routerLink: '/contribute/styles' },
+  { label: 'Code standards', value: '/contribute/code', routerLink: '/contribute/code' },
+  { label: 'Testing standards', value: '/contribute/testing', routerLink: '/contribute/testing' },
+  { label: 'Responsible AI', value: '/contribute/ai', routerLink: '/contribute/ai' },
+];
+
 export const navbarNavigation: readonly SidebarNavigationGroup[] = navigation.map(
   (group: NavigationGroup): SidebarNavigationGroup => ({
+    dividerBefore: group.dividerBefore,
     label: group.label,
     items: group.items.map((item: NavigationItem): NavbarItem<string> => ({
       label: item.label,
@@ -311,12 +329,14 @@ export const navbarNavigation: readonly SidebarNavigationGroup[] = navigation.ma
 );
 
 export const sidebarNavigation: readonly SidebarNavigationGroup[] = [
-  { label: 'General', items: overviewNavigation },
+  { label: 'General', items: generalNavigation },
+  { label: 'Contribute', items: contributorNavigation },
   ...navbarNavigation,
 ];
 
 export const mobileNavigation: readonly NavbarItem<string>[] = [
-  ...overviewNavigation,
+  ...generalNavigation,
+  { label: 'Contribute', value: 'group:Contribute', items: contributorNavigation },
   ...navbarNavigation.map((group: SidebarNavigationGroup): NavbarItem<string> => ({
     label: group.label,
     value: `group:${group.label}`,

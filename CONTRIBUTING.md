@@ -1,52 +1,52 @@
 # Contributing to SUSHI KIT
 
-Thank you for improving SUSHI KIT. Changes should preserve a small, accessible consumer API and remain easy for another developer to continue.
-
-## Start here
-
-1. Read the [component workflow](docs/component-development.md).
-2. Follow the [coding conventions](docs/coding-conventions.md).
-3. Select tests using the [testing conventions](docs/testing-conventions.md).
-4. If AI assists the change, follow the [AI conventions](docs/ai-conventions.md).
-
-## Development setup
+## Start the repository
 
 ```bash
 npm install
-npm run start:playground
+npm start
 ```
 
-The library source lives in `sushi/`. The documentation application lives in `playground/`. Do not import playground code into the published library.
+`sushi/` is the published Angular library. `playground/` contains examples and generated documentation. `tools/` contains repository-only generators and build checks.
+
+## Choose the relevant guide
+
+| Task                        | Guide                                               |
+| --------------------------- | --------------------------------------------------- |
+| Add or change a component   | [Component workflow](docs/component-development.md) |
+| Add tokens or shared styles | [Component styling](docs/component-styling.md)      |
+| Write library code          | [Coding standards](docs/coding-conventions.md)      |
+| Select and write tests      | [Testing standards](docs/testing-conventions.md)    |
+| Use AI assistance           | [AI conventions](docs/ai-conventions.md)            |
 
 ## Change workflow
 
-1. Define the consumer-visible behavior before editing code.
-2. Make the smallest cohesive implementation and documentation change.
-3. Add or update focused unit tests for logic and DOM semantics.
-4. Add E2E coverage only when a real browser is required.
-5. Regenerate API documentation and inspect the affected examples.
-6. Run the complete verification before requesting review.
+1. Define the consumer-visible behavior.
+2. Change implementation, source documentation, examples, and tests together.
+3. Run the narrowest relevant checks while editing.
+4. Regenerate the API reference and inspect the affected playground pages.
+5. Run the repository gate before review.
 
 ```bash
 npm run verify
 ```
 
-During iteration, run the smallest relevant check first:
+Useful focused commands:
 
-- `npm test` runs the library and documentation-tool unit tests once without coverage.
-- `npm run test:watch` reruns library unit tests while editing.
-- `npm run test:e2e:ui` opens Playwright's interactive runner for browser-dependent behavior.
-- `npm run verify` is the release-quality handoff gate. It checks formatting and linting, runs unit tests with coverage plus tooling tests, runs E2E tests, builds the playground and library, and inspects the npm package.
+| Command                 | Use                                                |
+| ----------------------- | -------------------------------------------------- |
+| `npm test`              | Unit tests for the library and documentation tools |
+| `npm run test:watch`    | Library unit tests while editing                   |
+| `npm run test:e2e:ui`   | Interactive browser tests                          |
+| `npm run generate:api`  | Regenerate Interface and Theming data              |
+| `npm run package:check` | Build and inspect the publishable package          |
 
-The full verification deliberately avoids redundant commands: the playground build regenerates the API through its pre-hook, while `package:check` builds the library before inspecting the package.
+## Review checklist
 
-## Pull requests
+- Explain the consumer problem and the resulting behavior.
+- Call out public API, accessibility, theming, dependency, and bundle changes.
+- Include screenshots when visual behavior changes.
+- Keep unrelated refactors out of the change.
+- Do not commit generated reports, coverage, build output, or local configuration.
 
-- Explain the consumer problem and the resulting public behavior.
-- Call out public API, accessibility, theming, dependency, or bundle changes explicitly.
-- Link the issue when one exists.
-- Include screenshots only when visual behavior changed.
-- Keep unrelated refactors out of the same pull request.
-- Never commit generated test reports, coverage, build output, or local configuration.
-
-By contributing, you agree that your contribution is licensed under this repository's MIT license.
+Contributions are licensed under the repository's MIT license.

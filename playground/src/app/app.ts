@@ -15,6 +15,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import {
   LucideHouse,
+  LucideGitPullRequest,
   LucideListChecks,
   LucideMenu,
   LucideMessageCircle,
@@ -58,6 +59,7 @@ type PlaygroundTheme = 'sushi' | 'sushi-dark';
     DrawerContent,
     DrawerTrigger,
     LucideHouse,
+    LucideGitPullRequest,
     LucideListChecks,
     LucideMenu,
     LucideMessageCircle,
@@ -86,6 +88,8 @@ type PlaygroundTheme = 'sushi' | 'sushi-dark';
 export class App {
   protected readonly sidebar: readonly SidebarNavigationGroup[] = sidebarNavigation;
   protected readonly activePath: Signal<string> = computed((): string => {
+    if (this.currentPath().startsWith('/contribute/')) return this.currentPath();
+
     const segment: string | undefined = this.currentPath()
       .split('/')
       .find((value: string): boolean => value.length > 0);

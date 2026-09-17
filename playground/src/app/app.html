@@ -67,8 +67,8 @@
     ariaLabel="Component library"
     (valueChange)="libraryDrawer.close()"
   >
-    <div suiSidebarHeader class="flex items-center gap-3">
-      <span class="sushi-kit-logo size-10 shrink-0" aria-hidden="true"></span>
+    <div suiSidebarHeader class="flex items-center gap-3 pl-3">
+      <img src="/sushi-logo.svg?v=salmon-maki" alt="" class="size-10 shrink-0" />
       <span class="min-w-0 flex-1">
         <strong class="block truncate leading-tight">SUSHI KIT</strong>
         <span class="block truncate text-xs leading-tight text-base-content/50">Component Playground</span>
@@ -92,6 +92,9 @@
       @switch (group.label) {
         @case ('General') {
           <svg lucideHouse class="size-3.5" aria-hidden="true"></svg>
+        }
+        @case ('Contribute') {
+          <svg lucideGitPullRequest class="size-3.5" aria-hidden="true"></svg>
         }
         @case ('Inputs') {
           <svg lucideTextCursorInput class="size-3.5" aria-hidden="true"></svg>

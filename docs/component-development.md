@@ -1,43 +1,52 @@
-# Component development
+# Build a component
 
-Use this workflow for every public SUSHI KIT feature. Apply the [coding conventions](coding-conventions.md) while implementing and the [testing conventions](testing-conventions.md) while verifying it.
+This page lists every repository change required for a public component. Use the [coding standards](coding-conventions.md), [component styling](component-styling.md), and [testing standards](testing-conventions.md) for the detailed rules.
+
+## Workflow
+
+| Step | Change                  | Required result                                                                          |
+| ---- | ----------------------- | ---------------------------------------------------------------------------------------- |
+| 1    | Define the contract     | Element type, states, keyboard behavior, ARIA, content model, and styling API are known. |
+| 2    | Add the library source  | The feature works through its public Angular API.                                        |
+| 3    | Export it               | Consumers can import it from `@sushi-kit/angular`.                                       |
+| 4    | Add playground examples | Common use and important variations are visible and copyable.                            |
+| 5    | Register the page       | The example, Interface, and Theming routes are reachable.                                |
+| 6    | Add tests               | Unit tests cover logic and semantics; E2E covers browser-only behavior.                  |
+| 7    | Generate and verify     | Generated docs, builds, tests, and package contents agree.                               |
 
 ## 1. Define the contract
 
-Before coding:
+Answer these questions before creating files:
 
-- Reuse an existing SUSHI feature when it already owns the behavior.
-- Prefer native HTML, then a directive, then a component.
-- List the supported states, keyboard behavior, semantics, and responsive behavior.
-- Keep the public API small, typed, and independent of DaisyUI and Tailwind.
+- Can native HTML provide the behavior?
+- Is a directive sufficient, or does the feature own markup?
+- Which states, bindings, events, templates, and public methods does a consumer need?
+- What are the keyboard, focus, pointer, touch, and screen-reader rules?
+- Which visual roles need tokens?
+- Does Angular Aria or CDK already implement the interaction pattern?
 
-Use projection for content rendered once and typed template markers for repeated or contextual content.
+Do not expose DaisyUI classes, Tailwind classes, internal elements, or implementation state.
 
-## 2. Create only the files you need
+## 2. Add the library source
+
+Create `sushi/src/lib/<feature>/`. Start flat and add only files used by the feature:
 
 ```text
 sushi/src/lib/<feature>/
 ├── index.ts
-├── <feature>.directive.ts | <feature>.component.ts
+├── <feature>.component.ts
 ├── <feature>.component.html
 ├── <feature>.component.css
 ├── <feature>.interfaces.ts
 ├── <feature>.templates.ts
-├── internal/                         # private implementation details
+├── internal/
 └── testing/
     └── <feature>.component.spec.ts
 ```
 
-- Keep small features flat.
-- Omit empty HTML, CSS, interfaces, or template files.
-- Move private renderers, state, and interaction helpers to `internal/` only when the main declaration becomes hard to scan.
-- Export the public API from the feature `index.ts`, then from `sushi/src/public-api.ts`.
+Use a directive instead of a component when native markup should remain in consumer control. Omit empty HTML, CSS, interface, and template files. Use `internal/` only for a separate private responsibility.
 
-### Small example: `sui-note`
-
-Start with the consumer contract: a note displays projected content, has a configurable tone, and exposes no state or events. Native `<aside>` semantics are sufficient, so the component only owns its reusable surface and theming contract.
-
-Create `sushi/src/lib/note/note.component.ts`:
+A minimal component follows this shape:
 
 ```ts
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
@@ -45,7 +54,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 /** Visual tone available for a note. */
 export type NoteTone = 'neutral' | 'info';
 
-/** Displays short supplementary information. */
+/** Displays supplementary information. */
 @Component({
   selector: 'sui-note',
   templateUrl: './note.component.html',
@@ -58,104 +67,156 @@ export class Note {
 }
 ```
 
-Use semantic markup in `note.component.html`:
-
 ```html
 <aside class="sui-note" [attr.data-tone]="tone()">
   <ng-content />
 </aside>
 ```
 
-Keep the stable visual roles configurable in `note.component.css`:
+Document every public declaration and member in its source. Describe consumer behavior, not TypeScript syntax.
 
-```css
-:host {
-  /** Background color of the note surface. */
-  --sui-note-background: var(--color-base-200);
+## 3. Export it
 
-  /** Foreground color of the note content. */
-  --sui-note-color: var(--color-base-content);
-}
+Export the public declarations from the feature barrel:
 
-.sui-note {
-  padding: 1rem;
-  color: var(--sui-note-color);
-  background: var(--sui-note-background);
-  border-radius: var(--radius-box);
-}
+```ts
+// sushi/src/lib/note/index.ts
+export * from './note.component';
+```
 
-.sui-note[data-tone='info'] {
-  --sui-note-background: var(--color-info);
-  --sui-note-color: var(--color-info-content);
+Then export the feature from the package entry point:
+
+```ts
+// sushi/src/public-api.ts
+export * from './lib/note';
+```
+
+Do not export tests, examples, or anything under `internal/`.
+
+## 4. Add playground examples
+
+Create this structure:
+
+```text
+playground/src/app/pages/<feature>/
+├── <feature>.page.ts
+├── <feature>.page.html
+└── examples/
+    └── basic/
+        ├── basic.example.ts
+        ├── basic.example.html
+        └── basic.example.css       # only when the example needs CSS
+```
+
+Each example is a standalone Angular component that imports the public API from `@sushi-kit/angular`. The page imports the same source files as text and passes them to `pg-example-code`. See `playground/src/app/pages/button/` for the smallest complete reference.
+
+The page wiring for one example is:
+
+```ts
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ExampleCode } from '../../shared/example-code/example-code.component';
+import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
+import { ExampleSource, textSource } from '../../shared/example-code/example-source';
+import basicHtml from './examples/basic/basic.example.html';
+import * as basicTs from './examples/basic/basic.example.ts' with { loader: 'text' };
+import { NoteBasicExample } from './examples/basic/basic.example';
+
+@Component({
+  selector: 'pg-note-page',
+  imports: [ExampleCode, ExamplePreview, NoteBasicExample],
+  templateUrl: './note.page.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class NotePage {
+  protected readonly basic: ExampleSource = {
+    html: basicHtml,
+    typescript: textSource(basicTs),
+  };
 }
 ```
 
-Test the public contract through a host in `testing/note.component.spec.ts`: render projected content, verify the default and configured tone, and confirm the `<aside>` semantics. Do not test that Angular can merely construct `Note` or duplicate every CSS declaration in assertions.
-
-Finally, export `Note` and `NoteTone` from `note/index.ts` and `sushi/src/public-api.ts`, add source JSDoc and a copyable playground example, run `npm run generate:api`, then finish with `npm run verify`. This example is intentionally small; add templates, outputs, internal helpers, or E2E coverage only when the public behavior requires them.
-
-## 3. Implement the feature
-
-- Use typed signal APIs and `ChangeDetectionStrategy.OnPush`.
-- Preserve native attributes and semantics.
-- Use Angular Aria or CDK for established interaction and overlay patterns.
-- Keep derived state computed and template handlers short.
-- Reuse SUSHI first, then DaisyUI, Tailwind, and narrowly scoped feature CSS.
-- Expose styling only through documented inputs, templates, or `--sui-*` properties.
-- Keep behavior-only composition primitives visually headless when another SUSHI component supplies the surface.
-- Place visual defaults in the CSS `components` layer when consumer utility classes are part of the supported override contract.
-- Project ordinary body content without a marker; reserve slot directives for genuinely distinct regions.
-
-Prefer clear names and small cohesive changes. Extract code when it has a separate responsibility, not merely to reduce line counts.
-
-## 4. Document usage
-
-Document every public declaration, input, output, type, and template marker at its source. Describe its effect for consumers rather than repeating its name.
-
-Add a playground page with:
-
-- short examples backed by the same HTML, TypeScript, and optional CSS files shown as source;
-- a CSS source tab whenever an example owns a stylesheet;
-- relevant states, responsive behavior, and customization;
-- SUSHI components for composed controls, collections, surfaces, and feedback;
-- raw SUSHI appearance by default, with utilities used primarily for layout plus restrained typography and color where they clarify example content;
-- generated API and Styling pages.
-
-The API generator loads `sushi/tsconfig.lib.json` and follows the symbols exported by `sushi/src/public-api.ts`. It reads
-Angular declarations, signal members, public methods, interfaces, template markers, and referenced types through the
-TypeScript compiler API. Non-exported implementation details are ignored. Documentation routes normally follow the
-feature folder; a matching playground page name takes precedence for independently documented declarations (for
-example, `FileDrop` maps to `file-drop`). No API registry entry is required.
-
-CSS is parsed with PostCSS. Global `features/<name>.styles.css` tokens are associated with the matching documentation
-route automatically. A shared style family can declare its consumers once at the top of the CSS file, for example:
-
-```css
-/* @sui-docs autocomplete listbox multi-select order-list select */
+```html
+<pg-example-code [html]="basic.html" [typescript]="basic.typescript">
+  <ng-template pgExamplePreview>
+    <pg-note-basic-example />
+  </ng-template>
+</pg-example-code>
 ```
 
-The generator fails when a public declaration, member, template, type, or style token has no description.
+When an example owns CSS, import it with the same text loader and set `css: textSource(basicCss)`. The source viewer adds the CSS tab.
 
-## 5. Test public behavior
+Examples should cover:
 
-Place Vitest specs in the feature's `testing/` folder. Use a standalone host and cover applicable states, bindings, projection, models, outputs, keyboard behavior, focus, and ARIA.
+1. the common use first;
+2. meaningful API variations;
+3. a complex or responsive case only when it teaches another contract.
 
-Use Playwright only for browser-dependent Library behavior such as layout, scrolling, overlays, responsive changes, and rendered focus continuity. The playground may host the fixture, but assertions must target a SUSHI component's public behavior. Do not test documentation tabs, preview styling, marketing copy, or the playground shell. Coverage thresholds prevent regressions; they do not replace meaningful assertions.
+Keep sample data short. Use SUSHI components for controls and feedback. Use utilities for page layout, not to reach into component internals.
 
-## 6. Verify the package boundary
+## 5. Register the documentation
 
-- Confirm the feature is exported only through its public feature barrel and `public-api.ts`.
-- Keep private renderers, test helpers, playground examples, and documentation tooling out of the public exports.
-- Run `npm run package:check` and inspect the listed tarball files when adding dependencies, assets, entry points, or global styles.
+Add the component page route to `playground/src/app/app.routes.ts`:
 
-## Definition of done
+```ts
+{
+  path: 'note',
+  loadComponent: () => import('./pages/note/note.page').then(({ NotePage }) => NotePage),
+  title: 'Note | SUSHI KIT Playground',
+},
+```
 
-- Public API and exports are intentional and documented.
-- Examples are complete, copyable, responsive, and use SUSHI primitives.
-- Keyboard, pointer, focus, disabled states, long content, and both themes work.
-- Unit tests cover public logic; Playwright covers required browser behavior.
-- The repository checks pass:
+Add its label and path to the correct group in `playground/src/app/app.navigation.ts`:
+
+```ts
+{
+  label: 'Note',
+  path: '/note',
+},
+```
+
+That navigation entry also creates `/note/api` and `/note/styling`. Do not add separate API or Styling routes.
+
+The documentation generator follows exports from `sushi/src/public-api.ts` and reads TypeScript and CSS directly:
+
+```text
+public source + JSDoc ──> npm run generate:api ──> /<feature>/api
+documented --sui-* CSS ─> npm run generate:api ──> /<feature>/styling
+```
+
+The feature folder and playground page normally determine the documentation route. No manual API registry is required.
+
+## 6. Add the right tests
+
+Write unit tests in `sushi/src/lib/<feature>/testing/`. Render a host and test the public contract through bindings and the DOM.
+
+Add Playwright coverage only for behavior that requires a real browser, such as geometry, scrolling, responsive layout, native focus, pointer drag, resize, or overlay placement.
+
+Do not test that Angular constructs the class, documentation page markup, or every CSS declaration. See [testing standards](testing-conventions.md).
+
+## 7. Generate and verify
+
+While developing:
+
+```bash
+npm run generate:api
+npm test
+npm start
+```
+
+Before review:
 
 ```bash
 npm run verify
 ```
+
+Inspect the component's Examples, Interface, and Theming pages in both themes. Run `npm run package:check` separately when changing exports, dependencies, assets, entry points, or global styles; `npm run verify` already includes it.
+
+## Completion checklist
+
+- The public API contains only consumer concepts and has JSDoc.
+- Native semantics, keyboard behavior, focus, disabled states, and ARIA are correct.
+- Examples use only public APIs and show the important states.
+- Public visual roles have documented tokens.
+- Unit tests cover logic and semantics; E2E exists only for browser contracts.
+- The feature is exported, routed, listed in navigation, and generated docs are current.
+- `npm run verify` passes.

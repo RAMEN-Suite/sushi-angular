@@ -1,5 +1,3 @@
-@import 'tailwindcss';
-
 @keyframes pg-api-target-highlight {
   0% {
     outline-color: color-mix(in oklab, var(--color-primary) 85%, transparent);
@@ -72,12 +70,20 @@
 }
 
 .pg-markdown {
-  max-width: 78ch;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   color: color-mix(in oklab, var(--color-base-content) 82%, transparent);
   line-height: 1.7;
 }
 
-.pg-markdown > * + * {
+.pg-markdown > sui-code {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.pg-markdown > * + *,
+.pg-markdown__prose > * + * {
   margin-top: 1rem;
 }
 
@@ -127,12 +133,4 @@
   background: var(--color-base-200);
   padding: 0.15rem 0.35rem;
   color: var(--color-base-content);
-}
-
-.pg-markdown pre {
-  overflow-x: auto;
-  border: 1px solid var(--color-base-300);
-  border-radius: var(--radius-box);
-  background: var(--color-base-200);
-  padding: 1rem;
 }

@@ -7,6 +7,8 @@ export type SidebarSize = 'sm' | 'md' | 'lg';
 export interface SidebarGroup<I extends NavbarItem = NavbarItem> {
   /** Accessible group label and default visible heading. Keep labels unique within one Sidebar. */
   readonly label: string;
+  /** Draws a separator before this group. Use it to divide navigation regions. */
+  readonly dividerBefore?: boolean;
   /** Optional visible heading override. Set `null` to keep only the accessible label. */
   readonly heading?: string | null;
   /** Destinations rendered through the Navbar item model. */

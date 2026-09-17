@@ -1,9 +1,3 @@
 :host {
   display: block;
 }
-
-.sushi-kit-logo {
-  display: inline-block;
-  background-color: currentColor;
-  mask: url('/sushi-logo.svg') center / contain no-repeat;
-}

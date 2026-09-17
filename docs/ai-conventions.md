@@ -14,11 +14,11 @@ AI may assist development, but the contributor remains responsible for every cha
 
 ## Generated code and tests
 
-- Do not generate broad boilerplate that hides the component's core behavior.
+- Do not generate boilerplate that hides the component's behavior.
 - Do not create tests merely to increase coverage.
 - Do not weaken assertions, thresholds, accessibility, typing, or lint rules to make checks pass.
 - Do not hardcode documentation metadata that can be derived from TypeScript or CSS sources.
-- Explain non-obvious architectural decisions in the source or contribution, not in transient chat history.
+- Record architectural decisions in the source or contribution, not only in chat history.
 
 ## Handoff
 

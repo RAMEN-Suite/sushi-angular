@@ -6,7 +6,13 @@
 
 <div class="sui-sidebar__body">
   @for (group of renderedGroups(); track group.label) {
-    <section class="sui-sidebar__group">
+    <section
+      class="sui-sidebar__group"
+      [class.border-t]="group.dividerBefore"
+      [class.border-base-300]="group.dividerBefore"
+      [class.pt-4]="group.dividerBefore"
+      [attr.data-divider-before]="group.dividerBefore ? '' : null"
+    >
       @if (group.heading !== null && (groupTemplate() || !collapsed())) {
         <div class="menu-title sui-sidebar__group-label" [class.justify-center]="collapsed()" [class.px-0]="collapsed()">
           @if (groupTemplate(); as template) {

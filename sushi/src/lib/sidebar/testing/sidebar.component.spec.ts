@@ -57,7 +57,7 @@ class SidebarHost {
         { label: 'Reports', value: 'reports', items: [{ label: 'Activity reports', value: 'activity-reports' }] },
       ],
     },
-    { label: 'Administration', items: [{ label: 'Settings', value: 'settings', disabled: true }] },
+    { label: 'Administration', dividerBefore: true, items: [{ label: 'Settings', value: 'settings', disabled: true }] },
     { label: 'Empty', items: [] },
   ];
 }
@@ -76,6 +76,9 @@ describe('Sidebar', (): void => {
     expect(query(fixture, '[data-footer]').textContent).toContain('Signed in');
     expect(queryAll(fixture, 'nav')).toHaveLength(2);
     expect(query(fixture, '[data-drawer-group="Workspace"]')).toBeDefined();
+    expect(query(fixture, '[data-drawer-group="Administration"]').closest('section')?.hasAttribute('data-divider-before')).toBe(
+      true,
+    );
   });
 
   it('forwards item, group, and nesting context to the custom template', (): void => {

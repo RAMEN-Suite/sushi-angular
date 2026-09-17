@@ -51,21 +51,4 @@
       </ng-template>
     </sui-tabs>
   </section>
-
-  <section id="contributing" class="scroll-mt-24 space-y-6">
-    <div class="max-w-2xl space-y-2">
-      <h2 class="text-3xl font-bold tracking-tight">Build SUSHI KIT with us</h2>
-      <p class="text-base-content/65">The contributor documentation below is loaded directly from the repository.</p>
-    </div>
-
-    <sui-tabs [(value)]="guideTab" ariaLabel="Contributor documentation" variant="lift">
-      @for (guide of guides; track guide.source) {
-        <ng-template suiTab [value]="guide.value" [label]="guide.label">
-          <div class="p-5 sm:p-8">
-            <pg-markdown-document [source]="guide.source" (documentLink)="openGuide($event)" />
-          </div>
-        </ng-template>
-      }
-    </sui-tabs>
-  </section>
 </main>

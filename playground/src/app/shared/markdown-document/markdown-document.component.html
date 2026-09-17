@@ -5,5 +5,30 @@
 } @else if (document.error()) {
   <p class="rounded-box border border-error/30 bg-error/10 p-4 text-error">The contributor documentation could not be loaded.</p>
 } @else {
-  <article class="pg-markdown" [innerHTML]="document.value()"></article>
+  <article class="pg-markdown">
+    @for (block of document.value(); track $index) {
+      @switch (block.kind) {
+        @case ('html') {
+          <div class="pg-markdown__prose" [innerHTML]="block.html"></div>
+        }
+        @case ('code') {
+          <sui-code buttonAriaLabel="Copy code example">
+            @for (line of block.lines; track $index) {
+              <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
+            }
+          </sui-code>
+        }
+        @case ('table') {
+          <sui-table size="sm" showGridlines [rowHover]="false" [rows]="block.rows" [columns]="block.columns">
+            <ng-template suiTableHeader let-column>
+              <span [innerHTML]="column.header"></span>
+            </ng-template>
+            <ng-template suiTableCell let-value>
+              <span [innerHTML]="value"></span>
+            </ng-template>
+          </sui-table>
+        }
+      }
+    }
+  </article>
 }

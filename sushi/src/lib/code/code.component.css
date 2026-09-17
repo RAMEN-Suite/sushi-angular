@@ -40,6 +40,9 @@
   color: var(--sui-code-content);
   background-color: var(--sui-code-bg);
   border: var(--border) solid var(--sui-code-border);
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   overflow-x: hidden;
 }
 

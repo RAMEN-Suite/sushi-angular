@@ -1,55 +1,58 @@
-# Coding conventions
+# Coding standards
 
-## Design principles
+## Component design
 
 - Prefer native HTML, then a directive, then a component.
-- Reuse an existing SUSHI KIT feature before creating parallel behavior.
-- Keep the public API independent of DaisyUI and Tailwind.
-- Build mobile-first and preserve keyboard, pointer, touch, screen-reader, zoom, and translated-text behavior.
-- Expose only stable consumer concepts as inputs, outputs, templates, methods, or CSS tokens.
+- Reuse an existing SUSHI feature before adding parallel behavior.
+- Keep public APIs independent of DaisyUI and Tailwind.
+- Support keyboard, pointer, touch, screen readers, zoom, narrow viewports, and translated text.
+- Expose only stable consumer concepts as inputs, models, outputs, templates, methods, or CSS tokens.
 
 ## Angular
 
-- Use Angular signal APIs: `input`, `model`, `output`, `signal`, `computed`, content queries, and view queries.
+- Use signal APIs: `input`, `model`, `output`, `signal`, `computed`, and signal queries.
 - Use `inject()` and `ChangeDetectionStrategy.OnPush`.
 - Use Signal Forms for form controls; do not add CVA, `FormsModule`, or Reactive Forms.
-- Prefer Angular Aria for established interaction patterns and CDK for overlays, focus, portals, drag/drop, and virtual scrolling.
-- Derive state with `computed`; use effects only for genuine synchronization with an external system.
-- Keep templates declarative, handlers short, and branches shallow through early returns.
-- Type public contracts and named variables explicitly. Do not introduce `any`.
+- Prefer Angular Aria for interaction patterns and CDK for overlays, focus, portals, drag/drop, and virtual scrolling.
+- Derive state with `computed`. Use an effect only to synchronize with an external system.
+- Keep templates declarative and use early returns to keep branches shallow.
+- Type public contracts and named variables. Do not introduce `any`.
 
-Class members follow this order: models, inputs, outputs, queries, template state, derived state, private state and injections, lifecycle, public methods, protected handlers, private helpers.
+Order class members as follows:
 
-## Files and naming
+1. models, inputs, and outputs;
+2. content and view queries;
+3. template and derived state;
+4. private state and injected dependencies;
+5. lifecycle methods;
+6. public methods;
+7. protected handlers;
+8. private helpers.
 
-- Organize code by feature under `sushi/src/lib/<feature>`.
-- Keep one primary declaration per file and local tests under `testing/`.
-- Put private implementation details in `internal/` only when they represent a separate responsibility.
-- Never export an `internal/` declaration.
-- Export the public contract through the feature `index.ts`, then `sushi/src/public-api.ts`.
-- Components use kebab-case selectors; directives use camelCase attributes.
-- Public classes do not use a `Sui` prefix. Boolean inputs use positive names.
+## Files and names
 
-## Consumer API and documentation
+- Organize source by feature under `sushi/src/lib/<feature>/`.
+- Keep one primary declaration per file and specs under `testing/`.
+- Put code in `internal/` only when it has a separate private responsibility.
+- Export public declarations through the feature `index.ts` and `sushi/src/public-api.ts`.
+- Never export `internal/` declarations.
+- Use kebab-case component selectors and camelCase directive attributes.
+- Do not prefix public classes with `Sui`. Use positive names for boolean inputs.
 
-- Optimize the common case for short, unsurprising markup.
+## Public API and documentation
+
 - Prefer projection for content rendered once and typed templates for repeated or contextual content.
-- Every public declaration, member, template context, and type owned by this project requires consumer-facing JSDoc.
-- Examples must use the public API without querying or restyling component internals.
-- API references are generated from source; do not maintain parallel handwritten API tables.
+- Add consumer-facing JSDoc to every project-owned public declaration, member, template context, and type.
+- Describe behavior, defaults, units, and constraints. Do not repeat the symbol name.
+- Use only public APIs in examples.
+- Do not maintain handwritten API tables; the generator reads TypeScript and CSS source.
 
-## CSS and theming
+## Readability
 
-- Prefer SUSHI KIT components, DaisyUI primitives, Tailwind layout utilities, then narrowly scoped feature CSS.
-- Component-owned styles stay beside the component. Global `.sui-*` styles are reserved for consumer-owned or shared DOM.
-- Public custom properties use `--sui-feature-role` and require an adjacent description.
-- Tokens describe stable visual roles, not current implementation selectors.
-- Avoid `!important`, broad selectors, duplicated theme colors, and fixed positioning when the CDK owns placement.
-- Respect `prefers-reduced-motion`.
+- Give each function one responsibility and keep it readable without tracing several nested branches.
+- Separate completed steps with blank lines.
+- Extract code when the extracted unit has a clear name and responsibility.
+- Use comments for constraints and decisions, not for obvious syntax.
+- Prefer direct control flow over generic helpers used once.
 
-## Maintainability
-
-- A function should perform one readable task and normally remain below 40 meaningful lines.
-- Use semantic blank lines between completed steps.
-- Extract a concern because it has a clear responsibility, not to satisfy an arbitrary line count.
-- Comments explain constraints and decisions; they do not narrate obvious syntax.
+See [Component styling](component-styling.md) for CSS placement and token rules.

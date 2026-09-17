@@ -1,10 +1,13 @@
 import type { HLJSApi, Language, LanguageFn, Mode } from 'highlight.js';
 import highlighter from 'highlight.js/lib/core';
+import bash from 'highlight.js/lib/languages/bash';
 import css from 'highlight.js/lib/languages/css';
 import html from 'highlight.js/lib/languages/xml';
+import json from 'highlight.js/lib/languages/json';
+import plaintext from 'highlight.js/lib/languages/plaintext';
 import typescript from 'highlight.js/lib/languages/typescript';
 
-type CodeLanguage = 'css' | 'html' | 'typescript';
+export type CodeLanguage = 'bash' | 'css' | 'html' | 'json' | 'text' | 'typescript';
 
 const angularHtml: LanguageFn = (api: HLJSApi): Language => {
   const language: Language = html(api);
@@ -18,7 +21,10 @@ const angularHtml: LanguageFn = (api: HLJSApi): Language => {
 };
 
 highlighter.registerLanguage('html', angularHtml);
+highlighter.registerLanguage('json', json);
+highlighter.registerLanguage('bash', bash);
 highlighter.registerLanguage('css', css);
+highlighter.registerLanguage('text', plaintext);
 highlighter.registerLanguage('typescript', typescript);
 
 export const highlightLines: (source: string, language: CodeLanguage) => readonly string[] = (
