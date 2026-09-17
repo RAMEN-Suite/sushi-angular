@@ -34,7 +34,7 @@ import { GalleryFit, GalleryImage } from './gallery.interfaces';
     >
       <div class="sui-gallery__stage">
         @if (selected(); as image) {
-          <button type="button" class="sui-gallery__image" (click)="imageActivated.emit(image)">
+          <button type="button" class="sui-gallery__image" (click)="activateImage($event, image)">
             <img
               [src]="image.src"
               [attr.srcset]="image.srcset ?? null"
@@ -163,6 +163,11 @@ export class Gallery<I extends GalleryImage = GalleryImage> {
   /** Selects the previous image. */
   public previous(): void {
     this.move(-1);
+  }
+
+  protected activateImage(event: MouseEvent, image: I): void {
+    (event.currentTarget as HTMLButtonElement).focus({ preventScroll: true });
+    this.imageActivated.emit(image);
   }
 
   private move(step: number): void {

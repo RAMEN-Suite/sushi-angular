@@ -45,6 +45,7 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
   private readonly loadViewer: LightboxLoader = inject(LIGHTBOX_LOADER);
   private instance: PhotoSwipe | null = null;
   private launching: boolean = false;
+  private restoreTarget: HTMLElement | null = null;
 
   public constructor() {
     afterRenderEffect({ write: (): void => this.syncState() });
@@ -77,6 +78,7 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
 
   private async launch(): Promise<void> {
     this.launching = true;
+    this.restoreTarget = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const PhotoSwipeConstructor: typeof PhotoSwipe = await this.loadViewer();
     if (!this.open() || this.destroyRef.destroyed) {
       this.launching = false;
@@ -131,6 +133,7 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
     viewer.on('close', (): void => this.zone.run((): void => this.open.set(false)));
     viewer.on('destroy', (): void => {
       if (this.instance === viewer) this.instance = null;
+      this.restoreFocus();
     });
   }
 
@@ -158,5 +161,11 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
   private destroy(): void {
     this.instance?.destroy();
     this.instance = null;
+  }
+
+  private restoreFocus(): void {
+    const target: HTMLElement | null = this.restoreTarget;
+    this.restoreTarget = null;
+    if (target?.isConnected) target.focus({ preventScroll: true });
   }
 }

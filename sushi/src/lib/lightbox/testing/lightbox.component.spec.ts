@@ -58,7 +58,10 @@ const loadViewer: LightboxLoader = (): Promise<typeof PhotoSwipe> =>
 @Component({
   imports: [Lightbox],
   providers: [{ provide: LIGHTBOX_LOADER, useValue: loadViewer }],
-  template: `<sui-lightbox [image]="images[0]" [images]="images" [(activeIndex)]="activeIndex" [(open)]="open" />`,
+  template: `
+    <button type="button">Open viewer</button>
+    <sui-lightbox [image]="images[0]" [images]="images" [(activeIndex)]="activeIndex" [(open)]="open" />
+  `,
 })
 class Host {
   public readonly activeIndex: WritableSignal<number> = signal(1);
@@ -83,7 +86,7 @@ class TriggerHost {}
 describe('Lightbox', (): void => {
   it('opens a collection at its active image with navigation controls', async (): Promise<void> => {
     const fixture: ComponentFixture<Host> = render(Host);
-    const instance: Lightbox = fixture.debugElement.children[0].componentInstance as Lightbox;
+    const instance: Lightbox = fixture.debugElement.query(By.directive(Lightbox)).componentInstance as Lightbox;
     instance.show();
     fixture.detectChanges();
     await fixture.whenStable();
@@ -104,13 +107,32 @@ describe('Lightbox', (): void => {
 
   it('closes through its two-way visibility contract', async (): Promise<void> => {
     const fixture: ComponentFixture<Host> = render(Host);
-    const instance: Lightbox = fixture.debugElement.children[0].componentInstance as Lightbox;
+    const instance: Lightbox = fixture.debugElement.query(By.directive(Lightbox)).componentInstance as Lightbox;
     instance.show();
     fixture.detectChanges();
     await fixture.whenStable();
 
     instance.close();
     expect(fixture.componentInstance.open()).toBe(false);
+  });
+});
+
+describe('Lightbox focus management', (): void => {
+  it('restores focus after the viewer is destroyed', async (): Promise<void> => {
+    const fixture: ComponentFixture<Host> = render(Host);
+    const trigger: HTMLButtonElement = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
+    const instance: Lightbox = fixture.debugElement.query(By.directive(Lightbox)).componentInstance as Lightbox;
+    trigger.focus();
+
+    instance.show();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const viewer: PhotoSwipeStub | null = PhotoSwipeStub.latest;
+    if (!viewer) throw new Error('Expected the Lightbox viewer to be created.');
+    viewer.destroy();
+
+    expect(trigger).toBe(document.activeElement);
   });
 });
 

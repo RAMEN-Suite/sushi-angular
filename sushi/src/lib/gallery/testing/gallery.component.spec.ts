@@ -46,11 +46,15 @@ describe('Gallery', (): void => {
     fixture.componentInstance.active.set(1);
     fixture.detectChanges();
 
-    (query(fixture, '.sui-gallery__image') as HTMLButtonElement).click();
+    const image: HTMLButtonElement = query(fixture, '.sui-gallery__image') as HTMLButtonElement;
+    image.click();
 
     expect(fixture.componentInstance.activated).toEqual([fixture.componentInstance.images()[1]]);
+    expect(document.activeElement).toBe(image);
   });
+});
 
+describe('Gallery keyboard navigation', (): void => {
   it('supports keyboard navigation and optional wrapping', (): void => {
     const fixture: ComponentFixture<Host> = render(Host);
     const gallery: HTMLElement = query(fixture, '.sui-gallery') as HTMLElement;
