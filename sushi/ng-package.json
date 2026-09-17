@@ -6,8 +6,8 @@
   },
   "assets": [
     {
-      "input": "src/styles",
-      "glob": "**/*.css",
+      "input": "generated",
+      "glob": "styles.css",
       "output": "."
     },
     {

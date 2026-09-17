@@ -2,6 +2,7 @@
 
 # Compiled output
 dist
+sushi/generated
 tmp
 out-tsc
 bazel-out

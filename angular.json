@@ -94,17 +94,12 @@
                 "output": "repository-docs"
               },
               {
-                "glob": "GUIDELINES.md",
-                "input": ".",
-                "output": "repository-docs"
-              },
-              {
                 "glob": "*.md",
                 "input": "docs",
                 "output": "repository-docs"
               }
             ],
-            "styles": ["sushi/src/styles/sushi.css", "playground/src/styles.css"]
+            "styles": ["playground/src/playground.source.css"]
           },
           "configurations": {
             "production": {
@@ -121,6 +116,12 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "package": {
+              "tsConfig": "playground/tsconfig.package.json",
+              "styles": ["playground/src/package-styles.css", "playground/src/styles.css"],
+              "outputPath": "dist/package-smoke",
+              "outputHashing": "none"
             }
           },
           "defaultConfiguration": "production"

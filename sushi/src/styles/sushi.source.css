@@ -1,0 +1,23 @@
+@layer theme, base, components, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+
+@source '../lib';
+
+@import './sushi.themes.css';
+@import './sushi.core.css';
+
+@plugin "daisyui" {
+  themes:
+    sushi --default,
+    sushi-dark --prefersdark;
+
+  /* Keep this list aligned with the DaisyUI primitives used in sushi/src/lib. */
+  include:
+    alert, avatar, badge, breadcrumbs, button, card, checkbox, collapse, divider, drawer, fieldset,
+    fileinput, indicator, input, join, kbd, label, link, list, loading, mask, menu, modal, navbar,
+    mockup, otp, progress, properties, radio, radius, range, rootcolor, rootscrollgutter,
+    rootscrolllock, scrollbar, select, skeleton, status, svg, tab, table, textarea, toast, toggle,
+    tooltip;
+}
