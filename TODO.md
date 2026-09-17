@@ -1,10 +1,15 @@
-# Release preparation
+# Release tasks
 
-The component library, tests, and playground are the current project scope. The DevOps owner will define and implement the release process before the first npm publication.
-
-- Define the CI and deployment pipeline.
-- Choose the versioning and changelog strategy.
-- Generate and validate third-party license notices.
-- Configure npm publication for `@sushi-kit/angular`, including access, authentication, and provenance.
-- Confirm supported Node.js and package-manager versions for the release environment.
-- Run the complete repository verification and test the packed artifact in a clean Angular application.
+- [ ] Confirm publish access for the public npm scope `@sushi-kit`.
+- [ ] Choose the initial package version and npm dist-tag.
+- [ ] Define the versioning and changelog process.
+- [ ] Confirm the supported Node.js and npm versions.
+- [ ] Configure the CI and release workflow.
+- [ ] Run `npm run verify` from a clean checkout.
+- [ ] Install the packed package in a new Angular application and verify component imports, types, overlays, and `@sushi-kit/angular/styles.css`.
+- [ ] Generate and validate third-party license notices.
+- [ ] Configure npm authentication, public access, provenance, and release permissions.
+- [ ] Publish `@sushi-kit/angular` from the verified commit.
+- [ ] Create the matching Git tag and release.
+- [ ] Install the published version from npm and repeat the package smoke test.
+- [ ] Configure deployment for the playground documentation.
