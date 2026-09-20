@@ -35,4 +35,21 @@ test.describe('Order List browser behavior', (): void => {
       await page.mouse.up();
     }
   });
+
+  test('persists the new item order after a pointer drag', async ({ page }: { page: Page }): Promise<void> => {
+    const rows: Locator = page.locator('pg-order-list-drag-drop-example .cdk-drag');
+    await rows.first().scrollIntoViewIfNeeded();
+    const source: Bounds | null = await rows.first().boundingBox();
+    const target: Bounds | null = await rows.nth(2).boundingBox();
+    if (source === null || target === null) throw new Error('Expected source and target rows to have visible bounds.');
+
+    await page.mouse.move(source.x + source.width / 2, source.y + source.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(target.x + target.width / 2, target.y + target.height / 2, { steps: 12 });
+    await page.mouse.up();
+
+    await expect(rows.nth(0)).toContainText('Inception');
+    await expect(rows.nth(1)).toContainText('Interstellar');
+    await expect(rows.nth(2)).toContainText('The Shawshank Redemption');
+  });
 });

@@ -28,7 +28,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run build:playground && npm run preview:playground',
+    command: 'npm run preview:playground',
     url: 'http://127.0.0.1:4201',
     reuseExistingServer: !isCi,
     timeout: 120_000,
