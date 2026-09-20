@@ -9,7 +9,7 @@
   /** Default text color used by projected code. */
   --sui-code-content: var(--color-base-content);
   /** Border color around the code surface. */
-  --sui-code-border: color-mix(in oklab, var(--color-base-content) 14%, transparent);
+  --sui-code-border: var(--sui-color-border);
   /** Muted color used by prompts, line numbers, and window controls. */
   --sui-code-muted: color-mix(in oklab, var(--sui-code-content) 45%, transparent);
   /** Background of the default copy control. */

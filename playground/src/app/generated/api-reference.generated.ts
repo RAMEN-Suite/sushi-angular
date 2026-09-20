@@ -309,7 +309,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-accordion-border-color',
-        defaultValue: 'color-mix(in oklab, var(--color-base-content) 16%, transparent)',
+        defaultValue: 'var(--sui-color-border)',
         exampleValue: null,
         description: 'Border color separating Accordion items.',
       },
@@ -1195,7 +1195,7 @@ export const apiReference: Readonly<{
     styles: [
       {
         name: '--sui-breadcrumb-color',
-        defaultValue: 'color-mix(in oklab, var(--color-base-content) 65%, transparent)',
+        defaultValue: 'var(--sui-color-muted)',
         exampleValue: null,
         description: 'Text color of non-current Breadcrumb destinations.',
       },
@@ -1379,7 +1379,7 @@ export const apiReference: Readonly<{
     styles: [
       {
         name: '--sui-card-border-color',
-        defaultValue: 'color-mix(in oklab, var(--color-base-content) 16%, transparent)',
+        defaultValue: 'var(--sui-color-border)',
         exampleValue: null,
         description: 'Border color used by bordered and dashed Card variants.',
       },
@@ -1949,7 +1949,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-code-border',
-        defaultValue: 'color-mix(in oklab, var(--color-base-content) 14%, transparent)',
+        defaultValue: 'var(--sui-color-border)',
         exampleValue: null,
         description: 'Border color around the code surface.',
       },
@@ -3251,7 +3251,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-dialog-background',
-        defaultValue: 'var(--color-base-100)',
+        defaultValue: 'var(--sui-color-overlay)',
         exampleValue: null,
         description: 'Background color of the Dialog surface.',
       },
@@ -3281,7 +3281,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-dialog-shadow',
-        defaultValue: '0 0.75rem 2rem rgb(0 0 0 / 12%)',
+        defaultValue: 'var(--sui-shadow-overlay)',
         exampleValue: null,
         description: 'Subtle shadow separating a floating Dialog from surrounding content.',
       },
@@ -3365,7 +3365,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-dialog-background',
-        defaultValue: 'var(--color-base-100)',
+        defaultValue: 'var(--sui-color-overlay)',
         exampleValue: null,
         description: 'Background color of the Dialog surface.',
       },
@@ -3395,7 +3395,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-dialog-shadow',
-        defaultValue: '0 0.75rem 2rem rgb(0 0 0 / 12%)',
+        defaultValue: 'var(--sui-shadow-overlay)',
         exampleValue: null,
         description: 'Subtle shadow separating a floating Dialog from surrounding content.',
       },
@@ -3494,7 +3494,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-dialog-background',
-        defaultValue: 'var(--color-base-100)',
+        defaultValue: 'var(--sui-color-overlay)',
         exampleValue: null,
         description: 'Background color of the Dialog surface.',
       },
@@ -3524,7 +3524,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-dialog-shadow',
-        defaultValue: '0 0.75rem 2rem rgb(0 0 0 / 12%)',
+        defaultValue: 'var(--sui-shadow-overlay)',
         exampleValue: null,
         description: 'Subtle shadow separating a floating Dialog from surrounding content.',
       },
@@ -3608,7 +3608,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-dialog-background',
-        defaultValue: 'var(--color-base-100)',
+        defaultValue: 'var(--sui-color-overlay)',
         exampleValue: null,
         description: 'Background color of the Dialog surface.',
       },
@@ -3638,7 +3638,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-dialog-shadow',
-        defaultValue: '0 0.75rem 2rem rgb(0 0 0 / 12%)',
+        defaultValue: 'var(--sui-shadow-overlay)',
         exampleValue: null,
         description: 'Subtle shadow separating a floating Dialog from surrounding content.',
       },
@@ -3741,7 +3741,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-dialog-background',
-        defaultValue: 'var(--color-base-100)',
+        defaultValue: 'var(--sui-color-overlay)',
         exampleValue: null,
         description: 'Background color of the Dialog surface.',
       },
@@ -3771,7 +3771,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-dialog-shadow',
-        defaultValue: '0 0.75rem 2rem rgb(0 0 0 / 12%)',
+        defaultValue: 'var(--sui-shadow-overlay)',
         exampleValue: null,
         description: 'Subtle shadow separating a floating Dialog from surrounding content.',
       },
@@ -3870,7 +3870,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-dialog-background',
-        defaultValue: 'var(--color-base-100)',
+        defaultValue: 'var(--sui-color-overlay)',
         exampleValue: null,
         description: 'Background color of the Dialog surface.',
       },
@@ -3900,7 +3900,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-dialog-shadow',
-        defaultValue: '0 0.75rem 2rem rgb(0 0 0 / 12%)',
+        defaultValue: 'var(--sui-shadow-overlay)',
         exampleValue: null,
         description: 'Subtle shadow separating a floating Dialog from surrounding content.',
       },
@@ -6498,7 +6498,7 @@ export const apiReference: Readonly<{
     styles: [
       {
         name: '--sui-list-row-hover-background',
-        defaultValue: 'var(--color-base-200)',
+        defaultValue: 'var(--sui-color-hover)',
         exampleValue: null,
         description: 'Background used when a hover-enabled List row is pointed at.',
       },
@@ -8983,7 +8983,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-navbar-item-hover-background',
-        defaultValue: 'color-mix(in oklab, var(--color-base-200) 70%, transparent)',
+        defaultValue: 'var(--sui-color-hover)',
         exampleValue: null,
         description: 'Background of an enabled navigation item on hover.',
       },
@@ -9052,7 +9052,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-navbar-item-hover-background',
-        defaultValue: 'color-mix(in oklab, var(--color-base-200) 70%, transparent)',
+        defaultValue: 'var(--sui-color-hover)',
         exampleValue: null,
         description: 'Background of an enabled navigation item on hover.',
       },
@@ -9121,7 +9121,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-navbar-item-hover-background',
-        defaultValue: 'color-mix(in oklab, var(--color-base-200) 70%, transparent)',
+        defaultValue: 'var(--sui-color-hover)',
         exampleValue: null,
         description: 'Background of an enabled navigation item on hover.',
       },
@@ -9190,7 +9190,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-navbar-item-hover-background',
-        defaultValue: 'color-mix(in oklab, var(--color-base-200) 70%, transparent)',
+        defaultValue: 'var(--sui-color-hover)',
         exampleValue: null,
         description: 'Background of an enabled navigation item on hover.',
       },
@@ -9926,7 +9926,7 @@ export const apiReference: Readonly<{
     styles: [
       {
         name: '--sui-pagination-action-color',
-        defaultValue: 'color-mix(in oklab, var(--color-base-content) 65%, transparent)',
+        defaultValue: 'var(--sui-color-muted)',
         exampleValue: null,
         description:
           '* Foreground color of inactive page and navigation actions. * @example color-mix(in oklab, var(--color-base-content) 75%, transparent)',
@@ -10204,7 +10204,7 @@ export const apiReference: Readonly<{
     styles: [
       {
         name: '--sui-popover-background',
-        defaultValue: 'var(--color-base-100)',
+        defaultValue: 'var(--sui-color-overlay)',
         exampleValue: null,
         description: 'Background of the Popover surface.',
       },
@@ -10216,7 +10216,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-popover-border-color',
-        defaultValue: 'color-mix(in oklab, var(--color-base-content) 14%, transparent)',
+        defaultValue: 'var(--sui-color-border)',
         exampleValue: null,
         description: 'Border color around the Popover.',
       },
@@ -10234,7 +10234,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-popover-shadow',
-        defaultValue: '0 0.75rem 2rem rgb(0 0 0 / 12%)',
+        defaultValue: 'var(--sui-shadow-overlay)',
         exampleValue: null,
         description: 'Subtle shadow separating the Popover from surrounding content.',
       },
@@ -11718,7 +11718,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-sidebar-group-label-color',
-        defaultValue: 'color-mix(in oklab, var(--color-base-content) 45%, transparent)',
+        defaultValue: 'var(--sui-color-subtle)',
         exampleValue: null,
         description:
           '* Color of group headings. * @example color-mix(in oklab, var(--color-primary) 65%, var(--color-base-content))',
@@ -11745,7 +11745,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-sidebar-item-hover-background',
-        defaultValue: 'color-mix(in oklab, var(--color-base-200) 70%, transparent)',
+        defaultValue: 'var(--sui-color-hover)',
         exampleValue: null,
         description:
           '* Background of an enabled navigation item on hover. * @example color-mix(in oklab, var(--color-primary) 8%, transparent)',
@@ -12510,7 +12510,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-table-sort-hover-background',
-        defaultValue: 'color-mix(in oklab, var(--color-base-content) 7%, transparent)',
+        defaultValue: 'var(--sui-color-hover)',
         exampleValue: null,
         description: 'Background used by sortable heading actions on hover and press.',
       },
@@ -12733,7 +12733,7 @@ export const apiReference: Readonly<{
       },
       {
         name: '--sui-tabs-disabled-opacity',
-        defaultValue: '0.5',
+        defaultValue: 'var(--sui-disabled-opacity)',
         exampleValue: null,
         description: 'Opacity used for disabled tabs.',
       },

@@ -4,6 +4,7 @@
 }
 
 :is(.btn, .input, .file-input, .select, .textarea, .checkbox, .radio, .toggle, .range, .tab, .kbd):is(:focus, :focus-visible, :focus-within) {
+  outline-color: var(--sui-focus-ring-color);
   outline-width: var(--sui-focus-ring-width);
   outline-offset: var(--sui-focus-ring-offset);
 }

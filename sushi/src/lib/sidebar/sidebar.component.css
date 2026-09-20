@@ -21,7 +21,7 @@
      * Color of group headings.
      * @example color-mix(in oklab, var(--color-primary) 65%, var(--color-base-content))
      */
-    --sui-sidebar-group-label-color: color-mix(in oklab, var(--color-base-content) 45%, transparent);
+    --sui-sidebar-group-label-color: var(--sui-color-subtle);
     /**
      * Color of the scroll thumb in the navigation region.
      * @example color-mix(in oklab, var(--color-base-content) 32%, transparent)
@@ -41,7 +41,7 @@
      * Background of an enabled navigation item on hover.
      * @example color-mix(in oklab, var(--color-primary) 8%, transparent)
      */
-    --sui-sidebar-item-hover-background: color-mix(in oklab, var(--color-base-200) 70%, transparent);
+    --sui-sidebar-item-hover-background: var(--sui-color-hover);
     /**
      * Text color of an enabled navigation item on hover.
      * @example var(--color-base-content)

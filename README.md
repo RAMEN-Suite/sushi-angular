@@ -62,6 +62,7 @@ Shared colors, radii, density, and effects use semantic CSS properties. Componen
 The playground is both the visual documentation and the source-level integration application:
 
 ```bash
+nvm use
 npm install
 npm start
 ```

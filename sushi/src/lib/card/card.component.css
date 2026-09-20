@@ -62,5 +62,5 @@
 }
 :where(.sui-card) {
   /** Border color used by bordered and dashed Card variants. */
-  --sui-card-border-color: color-mix(in oklab, var(--color-base-content) 16%, transparent);
+  --sui-card-border-color: var(--sui-color-border);
 }

@@ -1,6 +1,6 @@
 :host {
   /** Background used when a hover-enabled List row is pointed at. */
-  --sui-list-row-hover-background: var(--color-base-200);
+  --sui-list-row-hover-background: var(--sui-color-hover);
 }
 
 .sui-list--xs .list-row {

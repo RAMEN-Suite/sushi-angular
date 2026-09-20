@@ -35,6 +35,15 @@ The generator places documented `--sui-*` properties on the feature's Theming pa
 /* @sui-docs autocomplete listbox multi-select order-list select */
 ```
 
+The global theme reference is generated from `sushi.themes.css`. Document every token in the light theme and define the same token in the dark theme:
+
+```css
+/** @group Brand | Primary actions and selection. */
+--color-primary: #7a0712;
+```
+
+`npm run generate:api` reads both themes, produces the Light and Dark columns, and fails when documentation or the matching dark value is missing.
+
 ## DaisyUI and Tailwind
 
 Library styles are authored in `sushi/src/styles/sushi.source.css`. It imports Tailwind utilities, the SUSHI themes and core styles, and the DaisyUI primitives used by the library.

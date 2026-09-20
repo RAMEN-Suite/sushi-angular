@@ -10,7 +10,7 @@
   /** Background used by a hovered pinned cell in a striped row. */
   --sui-table-zebra-hover-background: var(--color-base-300);
   /** Background used by sortable heading actions on hover and press. */
-  --sui-table-sort-hover-background: color-mix(in oklab, var(--color-base-content) 7%, transparent);
+  --sui-table-sort-hover-background: var(--sui-color-hover);
 }
 
 .sui-table__sort {

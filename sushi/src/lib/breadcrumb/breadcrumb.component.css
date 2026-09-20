@@ -1,6 +1,6 @@
 :host {
   /** Text color of non-current Breadcrumb destinations. */
-  --sui-breadcrumb-color: color-mix(in oklab, var(--color-base-content) 65%, transparent);
+  --sui-breadcrumb-color: var(--sui-color-muted);
   /** Text color of the current Breadcrumb destination. */
   --sui-breadcrumb-current-color: var(--color-base-content);
 }

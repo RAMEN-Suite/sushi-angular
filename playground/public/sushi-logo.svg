@@ -1,59 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title description">
-  <title id="title">SUSHI KIT salmon maki</title>
-  <desc id="description">A salmon-topped maki roll with a dark nori wrap.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-labelledby="title desc">
+  <title id="title">Sushi Kit logo</title>
+  <desc id="desc">Abstract nigiri mark formed by a salmon upper shape and a dark nori lower shape.</desc>
 
-  <defs>
-    <linearGradient id="nori" x1="42" y1="46" x2="218" y2="220" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#252b31" />
-      <stop offset="0.48" stop-color="#11161b" />
-      <stop offset="1" stop-color="#05080b" />
-    </linearGradient>
-    <linearGradient id="rim" x1="128" y1="33" x2="128" y2="146" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#ffffff" />
-      <stop offset="1" stop-color="#e7e9eb" />
-    </linearGradient>
-    <radialGradient id="rice" cx="0" cy="0" r="1" gradientTransform="translate(128 84) rotate(90) scale(55 91)" gradientUnits="userSpaceOnUse">
-      <stop offset="0.72" stop-color="#ffffff" />
-      <stop offset="1" stop-color="#f4f5f6" />
-    </radialGradient>
-    <linearGradient id="salmon" x1="74" y1="56" x2="176" y2="125" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#ff6b3f" />
-      <stop offset="0.52" stop-color="#ff4f35" />
-      <stop offset="1" stop-color="#ff372c" />
-    </linearGradient>
-    <linearGradient id="salmonLight" x1="80" y1="63" x2="170" y2="118" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#ff8a57" stop-opacity="0.62" />
-      <stop offset="1" stop-color="#ff5a3e" stop-opacity="0" />
-    </linearGradient>
-    <linearGradient id="sideLight" x1="187" y1="134" x2="216" y2="203" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#626a74" stop-opacity="0.7" />
-      <stop offset="1" stop-color="#333a43" stop-opacity="0.9" />
-    </linearGradient>
-    <clipPath id="salmonClip">
-      <ellipse cx="128" cy="86" rx="68" ry="35" />
-    </clipPath>
-  </defs>
-
-  <path
-    fill="url(#nori)"
-    d="M22 91C22 49 69 25 128 25s106 24 106 66v79c0 39-47 63-106 63S22 209 22 170V91Z"
-  />
-  <path
-    fill="url(#sideLight)"
-    d="M199 139c0-5 3-9 7-12 9-6 16-13 22-21 3-4 7-2 7 3v55c0 25-15 42-32 52-4 2-8-1-8-6v-62c0-4 1-7 4-9Z"
-  />
-
-  <ellipse cx="128" cy="88" rx="106" ry="63" fill="url(#nori)" />
-  <ellipse cx="128" cy="88" rx="96" ry="54" fill="url(#rim)" />
-  <ellipse cx="128" cy="87" rx="90" ry="49" fill="url(#rice)" />
-
-  <g clip-path="url(#salmonClip)">
-    <ellipse cx="128" cy="86" rx="68" ry="35" fill="url(#salmon)" />
-    <path fill="url(#salmonLight)" d="M49 88C86 78 115 57 147 40l51 7-25 34c-37 27-76 42-116 48L49 88Z" />
-    <path d="M61 105c30-8 43-22 56-36 9-10 19-19 32-27" fill="none" stroke="#fff" stroke-width="6" />
-    <path d="M82 125c37-17 56-36 72-56 8-10 17-20 29-29" fill="none" stroke="#fff" stroke-width="7" />
-    <path d="M132 130c31-18 48-38 59-58 5-9 9-18 12-27" fill="none" stroke="#fff" stroke-width="6" />
+  <g transform="translate(-150 -118)">
+    <path
+      fill="#F27663"
+      d="M196 443C194 356 278 282 381 245C486 207 606 214 692 245C756 268 789 309 778 360C768 398 728 403 669 410C580 421 536 449 465 489C392 531 327 550 268 538C220 529 193 494 196 443Z"
+    />
+    <path
+      fill="#46504B"
+      d="M196 551C222 578 267 598 311 599C382 600 439 573 504 534C575 492 648 456 708 461C776 467 814 507 819 550C827 615 782 668 724 701C653 742 566 749 487 742C398 734 317 709 260 672C223 647 202 602 196 551Z"
+    />
   </g>
-
-  <ellipse cx="128" cy="88" rx="96" ry="54" fill="none" stroke="#ffffff" stroke-opacity="0.72" stroke-width="3" />
 </svg>

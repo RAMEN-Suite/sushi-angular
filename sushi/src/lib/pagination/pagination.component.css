@@ -3,7 +3,7 @@
    * Foreground color of inactive page and navigation actions.
    * @example color-mix(in oklab, var(--color-base-content) 75%, transparent)
    */
-  --sui-pagination-action-color: color-mix(in oklab, var(--color-base-content) 65%, transparent);
+  --sui-pagination-action-color: var(--sui-color-muted);
   /**
    * Semantic color proportion used by the soft hover background.
    * @example 15%

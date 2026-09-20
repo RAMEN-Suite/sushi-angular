@@ -1,9 +1,12 @@
 import { saveGeneratedApi } from './api-reference/generated-file';
 import { generateApiReference } from './api-reference/generator';
 import type { ApiReferenceGeneration } from './api-reference/generator';
+import { generateThemeTokenReference } from './theme-reference';
 
 const generation: ApiReferenceGeneration = generateApiReference();
 
-saveGeneratedApi(generation.data, generation.paths).catch((error: unknown): never => {
-  throw error;
-});
+Promise.all([saveGeneratedApi(generation.data, generation.paths), generateThemeTokenReference()]).catch(
+  (error: unknown): never => {
+    throw error;
+  },
+);

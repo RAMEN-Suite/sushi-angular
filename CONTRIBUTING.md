@@ -3,9 +3,12 @@
 ## Start the repository
 
 ```bash
+nvm use
 npm install
 npm start
 ```
+
+The repository pins its Node.js version in `.nvmrc` and its npm version in `package.json`.
 
 `sushi/` is the published Angular library. `playground/` contains examples and generated documentation. `tools/` contains repository-only generators and build checks.
 

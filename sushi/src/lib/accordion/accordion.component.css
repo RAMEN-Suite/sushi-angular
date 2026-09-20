@@ -2,7 +2,7 @@
   /** Background of each Accordion item. */
   --sui-accordion-background: var(--color-base-100);
   /** Border color separating Accordion items. */
-  --sui-accordion-border-color: color-mix(in oklab, var(--color-base-content) 16%, transparent);
+  --sui-accordion-border-color: var(--sui-color-border);
   /** Text color of expanded Accordion content. */
   --sui-accordion-content-color: color-mix(in oklab, currentColor 72%, transparent);
 }

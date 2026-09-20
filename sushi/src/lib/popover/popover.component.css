@@ -1,17 +1,17 @@
 @layer components {
   .sui-popover {
     /** Background of the Popover surface. */
-    --sui-popover-background: var(--color-base-100);
+    --sui-popover-background: var(--sui-color-overlay);
     /** Text color inside the Popover. */
     --sui-popover-color: var(--color-base-content);
     /** Border color around the Popover. */
-    --sui-popover-border-color: color-mix(in oklab, var(--color-base-content) 14%, transparent);
+    --sui-popover-border-color: var(--sui-color-border);
     /** Border width around the Popover and its arrow. */
     --sui-popover-border-width: 1px;
     /** Corner radius of the Popover. */
     --sui-popover-radius: var(--radius-box);
     /** Subtle shadow separating the Popover from surrounding content. */
-    --sui-popover-shadow: 0 0.75rem 2rem rgb(0 0 0 / 12%);
+    --sui-popover-shadow: var(--sui-shadow-overlay);
     /** Inner spacing of the Popover surface. */
     --sui-popover-padding: 1.125rem;
     /** Minimum width of the Popover surface. */

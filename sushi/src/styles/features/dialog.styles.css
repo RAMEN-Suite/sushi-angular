@@ -16,7 +16,7 @@
      */
     --sui-dialog-padding: 1.5rem;
     /** Background color of the Dialog surface. */
-    --sui-dialog-background: var(--color-base-100);
+    --sui-dialog-background: var(--sui-color-overlay);
     /** Text color of the Dialog surface. */
     --sui-dialog-color: var(--color-base-content);
     /**
@@ -29,7 +29,7 @@
     /** Color of the border around the Dialog surface. */
     --sui-dialog-border-color: var(--color-base-300);
     /** Subtle shadow separating a floating Dialog from surrounding content. */
-    --sui-dialog-shadow: 0 0.75rem 2rem rgb(0 0 0 / 12%);
+    --sui-dialog-shadow: var(--sui-shadow-overlay);
     /** Stack level used by non-modal Dialogs. */
     --sui-dialog-z-index: 1000;
     /**

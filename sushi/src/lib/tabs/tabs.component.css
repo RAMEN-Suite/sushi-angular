@@ -6,7 +6,7 @@
   /** Space inside each tab panel. */
   --sui-tabs-panel-padding: 1rem;
   /** Opacity used for disabled tabs. */
-  --sui-tabs-disabled-opacity: 0.5;
+  --sui-tabs-disabled-opacity: var(--sui-disabled-opacity);
 }
 
 .sui-tabs__list,
