@@ -140,6 +140,15 @@ describe('Select value and state', (): void => {
 });
 
 describe('Select interaction', (): void => {
+  it('focuses the combobox through its public method', (): void => {
+    const fixture: ComponentFixture<SelectHost> = render(SelectHost);
+    const combobox: Element = query(fixture, '[role="combobox"]');
+
+    fixture.componentInstance.control().focus();
+
+    expect(document.activeElement).toBe(combobox);
+  });
+
   it('hard-disables controls without opening', (): void => {
     const fixture: ComponentFixture<SelectHost> = render(SelectHost);
     const combobox: HTMLElement = query(fixture, 'div');
@@ -156,6 +165,20 @@ describe('Select interaction', (): void => {
     expect(document.querySelector('[role="listbox"]')).toBeNull();
   });
 
+  it('does not open while loading', async (): Promise<void> => {
+    const fixture: ComponentFixture<SelectHost> = render(SelectHost);
+    fixture.componentInstance.loading.set(true);
+    fixture.detectChanges();
+
+    query(fixture, '[role="combobox"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    await fixture.whenStable();
+
+    expect(document.querySelector('[role="listbox"]')).toBeNull();
+    expect(fixture.componentInstance.value()).toBe('shoyu');
+  });
+});
+
+describe('Select option selection', (): void => {
   it('opens options and selects an enabled item', async (): Promise<void> => {
     const fixture: ComponentFixture<SelectHost> = render(SelectHost);
     const combobox: HTMLElement = query(fixture, 'div');
@@ -170,6 +193,18 @@ describe('Select interaction', (): void => {
     fixture.detectChanges();
     expect(fixture.componentInstance.value()).toBe('miso');
     expect(fixture.componentInstance.touches).toBe(1);
+  });
+
+  it('keeps the selection when a disabled option is clicked', async (): Promise<void> => {
+    const fixture: ComponentFixture<SelectHost> = render(SelectHost);
+    query(fixture, '[role="combobox"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    await fixture.whenStable();
+
+    document.querySelectorAll<HTMLElement>('[role="option"]')[2].click();
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.value()).toBe('shoyu');
+    expect(fixture.componentInstance.touches).toBe(0);
   });
 });
 

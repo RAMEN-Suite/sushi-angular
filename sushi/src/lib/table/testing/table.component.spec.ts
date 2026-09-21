@@ -11,6 +11,7 @@ import {
   TableFooterTemplate,
   TableHeaderTemplate,
   TableLoadingTemplate,
+  TableRowTemplate,
 } from '../table.templates';
 
 const columns: readonly TableColumn<string>[] = [
@@ -54,6 +55,42 @@ class TableHost {
   public readonly columns: readonly TableColumn<string>[] = columns;
 }
 
+@Component({
+  imports: [Table],
+  template: `
+    <sui-table
+      caption="Inventory"
+      [columns]="columns()"
+      [rows]="rows()"
+      [loading]="loading()"
+      [stickyHeader]="true"
+      [pinFirstColumn]="true"
+    />
+  `,
+})
+class DefaultTableHost {
+  public readonly columns: WritableSignal<readonly TableColumn<string>[]> = signal<readonly TableColumn<string>[]>(columns);
+  public readonly rows: WritableSignal<readonly string[]> = signal<readonly string[]>(['Miso']);
+  public readonly loading: WritableSignal<boolean> = signal<boolean>(false);
+}
+
+@Component({
+  imports: [Table, TableRowTemplate],
+  template: `
+    <sui-table [columns]="columns" [rows]="rows">
+      <ng-template suiTableRow let-row let-rowIndex="rowIndex">
+        <tr>
+          <td [attr.data-row]="rowIndex">{{ row }}</td>
+        </tr>
+      </ng-template>
+    </sui-table>
+  `,
+})
+class RowTableHost {
+  public readonly columns: readonly TableColumn<string>[] = columns;
+  public readonly rows: readonly string[] = ['Miso', 'Shoyu'];
+}
+
 describe('Table native structure and templates', (): void => {
   it('renders accessible native table semantics and typed contexts', (): void => {
     const fixture: ComponentFixture<TableHost> = render(TableHost);
@@ -76,6 +113,24 @@ describe('Table native structure and templates', (): void => {
     expect(headings[0].getAttribute('aria-sort')).toBe('none');
     expect(headings[1].classList.contains('sui-table__cell--end')).toBe(true);
     expect(query(fixture, '[data-header="name"]').getAttribute('data-direction')).toBeNull();
+  });
+
+  it('renders the default caption, headers, and cell values without custom templates', (): void => {
+    const fixture: ComponentFixture<DefaultTableHost> = render(DefaultTableHost);
+
+    expect(query(fixture, 'caption').textContent.trim()).toBe('Inventory');
+    expect(query(fixture, 'thead th').textContent).toContain('Name');
+    expect(query(fixture, 'tbody th[scope="row"]').textContent.trim()).toBe('Miso');
+    expect(query(fixture, 'tbody td').textContent.trim()).toBe('4');
+    expect(query(fixture, 'table').classList).toContain('table-pin-cols');
+    expect(query(fixture, 'table').classList).toContain('table-pin-rows');
+  });
+
+  it('renders a custom row with its row index', (): void => {
+    const fixture: ComponentFixture<RowTableHost> = render(RowTableHost);
+
+    expect(query(fixture, '[data-row="1"]').textContent.trim()).toBe('Shoyu');
+    expect(queryAll(fixture, 'tbody tr')).toHaveLength(2);
   });
 });
 
@@ -131,5 +186,20 @@ describe('Table collection states', (): void => {
     expect(query(fixture, 'table').getAttribute('aria-busy')).toBe('true');
     expect(query(fixture, '[data-loading]').textContent).toBe('Loading recipes');
     expect(fixture.componentInstance.sort()).toBeNull();
+  });
+
+  it('announces default empty and loading states with at least one spanning column', (): void => {
+    const fixture: ComponentFixture<DefaultTableHost> = render(DefaultTableHost);
+    fixture.componentInstance.columns.set([]);
+    fixture.componentInstance.rows.set([]);
+    fixture.detectChanges();
+
+    expect(query(fixture, 'tbody td').getAttribute('colspan')).toBe('1');
+    expect(query(fixture, 'tbody').textContent).toContain('No records found');
+
+    fixture.componentInstance.loading.set(true);
+    fixture.detectChanges();
+    expect(query(fixture, '[role="status"]').textContent).toContain('Loading records');
+    expect(query(fixture, 'table').getAttribute('aria-busy')).toBe('true');
   });
 });

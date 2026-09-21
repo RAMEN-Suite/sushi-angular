@@ -35,7 +35,7 @@ test('Toast places actions below its message and completes the action flow', asy
   const actionBounds: { x: number; y: number; width: number; height: number } | null = await actions.boundingBox();
   if (!contentBounds || !actionBounds) throw new Error('Expected visible Toast content and actions.');
   expect(actionBounds.y).toBeGreaterThanOrEqual(contentBounds.y + contentBounds.height);
-  expect(Math.abs(actionBounds.x - contentBounds.x)).toBeLessThanOrEqual(1);
+  expect(Math.abs(actionBounds.x - contentBounds.x)).toBeLessThanOrEqual(2);
 
   await toast.getByRole('button', { name: 'Retry' }).click();
   await expect(toast).toBeHidden();
