@@ -1,4 +1,4 @@
-# SUSHI KIT
+# SUSHI KIT – Angular
 
 Accessible, themeable Angular components with typed signal APIs. SUSHI KIT keeps application state in Angular, preserves native HTML semantics, and uses Angular Aria and the CDK for established interaction patterns.
 
