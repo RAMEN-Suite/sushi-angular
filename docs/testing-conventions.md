@@ -17,6 +17,7 @@ Place specs in `sushi/src/lib/<feature>/testing/`.
 
 - Render a standalone host with realistic bindings and projected content.
 - Change host signals and interact through the DOM.
+- For signal inputs and models, change the host signal and assert the rendered result or two-way value. Use `await fixture.whenStable()` when rendering or effects are asynchronous.
 - Assert public values, events, accessible roles, names, states, focus, and template results.
 - Cover applicable defaults, configured behavior, disabled, readonly, loading, invalid, empty, keyboard, model, output, and reset behavior.
 - Do not call private or protected methods.
@@ -52,12 +53,13 @@ Rewrite or remove the test when an answer is unclear.
 
 ## Commands
 
-| Command                 | Scope                                     |
-| ----------------------- | ----------------------------------------- |
-| `npm test`              | Library and documentation-tool unit tests |
-| `npm run test:coverage` | Library units with coverage thresholds    |
-| `npm run test:tools`    | Documentation generator units             |
-| `npm run test:e2e`      | Browser contracts                         |
-| `npm run verify`        | Complete handoff gate                     |
+| Command                   | Scope                                                              |
+| ------------------------- | ------------------------------------------------------------------ |
+| `npm test`                | Library and documentation-tool unit tests                          |
+| `npm run test:coverage`   | Library units with coverage thresholds                             |
+| `npm run test:tools`      | Documentation generator units                                      |
+| `npm run test:e2e`        | Browser contracts                                                  |
+| `npm run package:install` | Install the packed tarball in an isolated Angular app and build it |
+| `npm run verify`          | Complete handoff gate                                              |
 
 References: [Angular component testing](https://angular.dev/guide/testing/components-basics), [Angular testing scenarios](https://angular.dev/guide/testing/components-scenarios), and [Playwright best practices](https://playwright.dev/docs/best-practices).

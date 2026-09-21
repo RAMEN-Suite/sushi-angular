@@ -6,7 +6,7 @@
 - [ ] Confirm the supported Node.js and npm versions.
 - [ ] Configure the CI and release workflow.
 - [ ] Run `npm run verify` from a clean checkout.
-- [ ] Install the packed package in a new Angular application and verify component imports, types, overlays, and `@sushi-kit/angular/styles.css`.
+- [ ] Run the isolated package-install smoke test in CI; extend it with browser checks for overlays before release.
 - [ ] Generate and validate third-party license notices.
 - [ ] Configure npm authentication, public access, provenance, and release permissions.
 - [ ] Publish `@sushi-kit/angular` from the verified commit.

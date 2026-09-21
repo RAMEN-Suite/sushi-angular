@@ -67,7 +67,7 @@ npm install
 npm start
 ```
 
-It contains copyable examples plus generated Interface and Theming references. `npm run package:check` additionally rebuilds that playground against `dist/sushi`, ensuring the examples compile against the built package instead of workspace source files.
+It contains copyable examples plus generated Interface and Theming references. `npm run package:check` builds the playground against the library output and installs the packed tarball in a separate minimal Angular app. This catches package exports, peer-dependency resolution, and stylesheet imports that source-based tests cannot catch.
 
 ## Repository checks
 
