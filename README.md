@@ -1,4 +1,4 @@
-# Sushi Angular
+# Sushi in Angular
 
 Sushi is the Angular component library in Ramen Suite, published as `@sushi-kit/angular`. It provides accessible, themeable components with typed signal APIs. Application state stays in Angular; interactions use native HTML semantics, Angular Aria, and the CDK.
 
