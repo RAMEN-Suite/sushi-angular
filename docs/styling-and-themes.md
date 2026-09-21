@@ -112,3 +112,5 @@ Tailwind is not needed to render Sushi components. Avoid utilities that depend o
 ## Built-in themes
 
 The `sushi` and `sushi-dark` themes define the complete theme contract. Override theme tokens for application-wide changes and component tokens for exceptions.
+
+In the light theme, colored roles use white content text. When replacing a role color, keep its `*-content` token legible against the new background.

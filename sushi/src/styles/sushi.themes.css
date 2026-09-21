@@ -26,9 +26,9 @@
   --color-secondary-content: #ffffff;
 
   /** @group Brand | Accent actions and details. */
-  --color-accent: #d39a2f;
+  --color-accent: #996400;
   /** @group Brand | Content on the accent color. */
-  --color-accent-content: #211600;
+  --color-accent-content: #ffffff;
 
   /** @group Brand | Neutral controls and surfaces. */
   --color-neutral: #3f3f46;
@@ -37,19 +37,19 @@
 
   /* Status */
   /** @group Feedback | Informational feedback. */
-  --color-info: #2f7fa8;
+  --color-info: #2d759b;
   /** @group Feedback | Content on the info color. */
-  --color-info-content: #000000;
+  --color-info-content: #ffffff;
 
   /** @group Feedback | Successful feedback. */
-  --color-success: #5f8f62;
+  --color-success: #46784b;
   /** @group Feedback | Content on the success color. */
-  --color-success-content: #101010;
+  --color-success-content: #ffffff;
 
   /** @group Feedback | Warning feedback. */
-  --color-warning: #d39a2f;
+  --color-warning: #996400;
   /** @group Feedback | Content on the warning color. */
-  --color-warning-content: #211600;
+  --color-warning-content: #ffffff;
 
   /** @group Feedback | Error and destructive feedback. */
   --color-error: #7a0712;
