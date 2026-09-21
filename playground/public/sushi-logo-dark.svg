@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-labelledby="title desc">
   <title id="title">Sushi Kit logo</title>
-  <desc id="desc">Abstract nigiri mark formed by a salmon upper shape and a dark nori lower shape.</desc>
+  <desc id="desc">Abstract nigiri mark formed by a red upper shape and a light nori lower shape.</desc>
 
   <g transform="translate(-150 -118)">
     <path
@@ -8,7 +8,7 @@
       d="M196 443C194 356 278 282 381 245C486 207 606 214 692 245C756 268 789 309 778 360C768 398 728 403 669 410C580 421 536 449 465 489C392 531 327 550 268 538C220 529 193 494 196 443Z"
     />
     <path
-      fill="#46504B"
+      fill="#A8B7AF"
       d="M196 551C222 578 267 598 311 599C382 600 439 573 504 534C575 492 648 456 708 461C776 467 814 507 819 550C827 615 782 668 724 701C653 742 566 749 487 742C398 734 317 709 260 672C223 647 202 602 196 551Z"
     />
   </g>
