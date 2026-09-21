@@ -51,6 +51,18 @@ A useful test answers all four questions:
 
 Rewrite or remove the test when an answer is unclear.
 
+## Test the npm package locally
+
+Run this from the repository root after `npm install`:
+
+```bash
+npm run package:check
+```
+
+This builds the library, checks the tarball contents, builds the Playground against the library output, then installs the tarball in a temporary Angular app and builds that app. The temporary app imports the public API and `@sushi-kit/angular/styles.css`; it does not use workspace source aliases. npm needs access to the registry when the dependencies are not cached. The temporary app is removed when the command finishes.
+
+To rerun only the isolated installation step, use `npm run package:install`. It requires a current library build in `dist/sushi`; run `npm run build:sushi` first after changing library code or styles. For the complete test suite, use `npm run verify`, which includes `package:check`.
+
 ## Commands
 
 | Command                   | Scope                                                              |
@@ -59,6 +71,7 @@ Rewrite or remove the test when an answer is unclear.
 | `npm run test:coverage`   | Library units with coverage thresholds                             |
 | `npm run test:tools`      | Documentation generator units                                      |
 | `npm run test:e2e`        | Browser contracts                                                  |
+| `npm run package:check`   | Build and check the package and both consumer builds               |
 | `npm run package:install` | Install the packed tarball in an isolated Angular app and build it |
 | `npm run verify`          | Complete handoff gate                                              |
 
