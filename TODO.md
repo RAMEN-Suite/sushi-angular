@@ -1,5 +1,6 @@
 # Release tasks
 
+- [ ] Transfer the repository to `ramen-suite/sushi-angular` and update local Git remotes.
 - [ ] Confirm publish access for the public npm scope `@sushi-kit`.
 - [ ] Choose the initial package version and npm dist-tag.
 - [ ] Define the versioning and changelog process.

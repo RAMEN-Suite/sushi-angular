@@ -46,7 +46,7 @@ The global theme reference is generated from `sushi.themes.css`. Document every 
 
 ## DaisyUI and Tailwind
 
-Library styles are authored in `sushi/src/styles/sushi.source.css`. It imports Tailwind utilities, the SUSHI themes and core styles, and the DaisyUI primitives used by the library.
+Library styles are authored in `sushi/src/styles/sushi.source.css`. It imports Tailwind utilities, the Sushi themes and core styles, and the DaisyUI primitives used by the library.
 
 When a component uses a DaisyUI primitive that is not already included, add its name to the `include` list in `sushi/src/styles/sushi.source.css`. Ordinary component and utility changes require no build configuration change.
 
@@ -54,7 +54,7 @@ The package build compiles this source into the published `styles.css`. The play
 
 ## Rules
 
-- Prefer a SUSHI component, then a DaisyUI primitive, then Tailwind utilities, then feature CSS.
+- Prefer a Sushi component, then a DaisyUI primitive, then Tailwind utilities, then feature CSS.
 - Keep the public API independent of DaisyUI and Tailwind class names.
 - Put consumer-layout utilities on consumer-owned elements.
 - Avoid `!important`, broad selectors, duplicated theme colors, and fixed overlay positioning.

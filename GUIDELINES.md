@@ -1,4 +1,4 @@
-# SUSHI KIT engineering guide
+# Sushi engineering guide
 
 The project conventions are split by task so contributors can find the binding rules quickly:
 

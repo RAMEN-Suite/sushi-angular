@@ -3,7 +3,7 @@
 ## Component design
 
 - Prefer native HTML, then a directive, then a component.
-- Reuse an existing SUSHI feature before adding parallel behavior.
+- Reuse an existing Sushi feature before adding parallel behavior.
 - Keep public APIs independent of DaisyUI and Tailwind.
 - Support keyboard, pointer, touch, screen readers, zoom, narrow viewports, and translated text.
 - Expose only stable consumer concepts as inputs, models, outputs, templates, methods, or CSS tokens.

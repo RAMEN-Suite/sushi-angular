@@ -151,7 +151,7 @@ Examples should cover:
 2. meaningful API variations;
 3. a complex or responsive case only when it teaches another contract.
 
-Keep sample data short. Use SUSHI components for controls and feedback. Use utilities for page layout, not to reach into component internals.
+Keep sample data short. Use Sushi components for controls and feedback. Use utilities for page layout, not to reach into component internals.
 
 ## 5. Register the documentation
 
@@ -161,7 +161,7 @@ Add the component page route to `playground/src/app/app.routes.ts`:
 {
   path: 'note',
   loadComponent: () => import('./pages/note/note.page').then(({ NotePage }) => NotePage),
-  title: 'Note | SUSHI KIT Playground',
+  title: 'Note | Sushi Playground',
 },
 ```
 

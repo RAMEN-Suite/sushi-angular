@@ -5,7 +5,7 @@ labels: [bug]
 body:
   - type: markdown
     attributes:
-      value: Thank you for helping improve SUSHI KIT. Please describe observable behavior rather than implementation guesses.
+      value: Thank you for helping improve Sushi. Please describe observable behavior rather than implementation guesses.
   - type: input
     id: component
     attributes:

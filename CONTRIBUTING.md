@@ -1,4 +1,4 @@
-# Contributing to SUSHI KIT
+# Contributing to Sushi
 
 ## Start the repository
 

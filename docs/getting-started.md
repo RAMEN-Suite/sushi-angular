@@ -1,6 +1,6 @@
 # Getting started
 
-SUSHI KIT requires Angular 22.
+Sushi requires Angular 22.
 
 ## 1. Install
 
@@ -36,7 +36,7 @@ Alternatively, add it before the application stylesheet in `angular.json`:
 }
 ```
 
-Choose one method. The consumer does not need a SUSHI-specific PostCSS configuration.
+Choose one method. The consumer does not need a Sushi-specific PostCSS configuration.
 
 ## 3. Use a component
 

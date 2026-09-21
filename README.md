@@ -1,13 +1,13 @@
-# SUSHI KIT – Angular
+# Sushi Angular
 
-Accessible, themeable Angular components with typed signal APIs. SUSHI KIT keeps application state in Angular, preserves native HTML semantics, and uses Angular Aria and the CDK for established interaction patterns.
+Sushi is the Angular component library in Ramen Suite, published as `@sushi-kit/angular`. It provides accessible, themeable components with typed signal APIs. Application state stays in Angular; interactions use native HTML semantics, Angular Aria, and the CDK.
 
 ## Requirements
 
 - Angular 22
 - A modern browser
 
-SUSHI KIT ships the compiled CSS required by its components.
+Sushi ships the compiled CSS required by its components.
 
 ## Install
 
@@ -25,7 +25,7 @@ Import the public stylesheet from the application's global `src/styles.css`:
 @import '@sushi-kit/angular/styles.css';
 ```
 
-No SUSHI-specific PostCSS or Tailwind configuration is required.
+No Sushi-specific PostCSS or Tailwind configuration is required.
 
 ## Use a component
 
@@ -43,7 +43,7 @@ import { Button } from '@sushi-kit/angular';
 export class Checkout {}
 ```
 
-SUSHI KIT includes form controls, navigation, overlays, feedback, data display, layout utilities, and image presentation. Consumer APIs use typed Angular inputs, models, outputs, projection, and template contexts rather than internal DOM access or styling hacks.
+Sushi includes form controls, navigation, overlays, feedback, data display, layout utilities, and image presentation. Consumer APIs use typed Angular inputs, models, outputs, projection, and template contexts rather than internal DOM access or styling hacks.
 
 ## Themes
 
@@ -94,4 +94,4 @@ The reusable library lives in `sushi/`; the documentation application lives in `
 
 ## License
 
-SUSHI KIT is available under the [MIT License](LICENSE). Third-party software remains subject to its respective license terms.
+Sushi is available under the [MIT License](LICENSE). Third-party software remains subject to its respective license terms.

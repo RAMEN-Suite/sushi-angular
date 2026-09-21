@@ -1,6 +1,6 @@
 # Styling and themes
 
-SUSHI KIT ships compiled component CSS and two themes. Its styling implementation builds on DaisyUI, but DaisyUI is not part of the SUSHI consumer API. The stylesheet does not include Tailwind's global Preflight reset.
+Sushi ships compiled component CSS and two themes. Its styling implementation builds on DaisyUI, but DaisyUI is not part of the Sushi consumer API. The stylesheet does not include Tailwind's global Preflight reset.
 
 ## Choose the right styling level
 
@@ -9,7 +9,7 @@ SUSHI KIT ships compiled component CSS and two themes. Its styling implementatio
 3. Change semantic theme tokens for an application-wide design decision.
 4. Use Tailwind utilities for consumer-owned layout and responsive composition.
 
-Do not target a SUSHI component's internal elements or classes.
+Do not target a Sushi component's internal elements or classes.
 
 ## Customize one component
 
@@ -29,7 +29,7 @@ Each component's Theming page lists its tokens. Set them on the component or a c
 
 ## Create a custom theme
 
-Override semantic tokens after importing the SUSHI stylesheet:
+Override semantic tokens after importing the Sushi stylesheet:
 
 ```css
 @import '@sushi-kit/angular/styles.css';
@@ -75,7 +75,7 @@ Use the DaisyUI color roles for the application palette. Every background color 
 | `--color-info`, `--color-success`, `--color-warning`, `--color-error` | Feedback states                                   |
 | `--*-content`                                                         | Accessible foreground for the corresponding color |
 
-SUSHI derives shared interaction and overlay styles from these semantic tokens. Override them when a theme needs a different treatment instead of changing several components:
+Sushi derives shared interaction and overlay styles from these semantic tokens. Override them when a theme needs a different treatment instead of changing several components:
 
 | Token                    | Purpose                       |
 | ------------------------ | ----------------------------- |
@@ -92,7 +92,7 @@ Component tokens remain the correct choice for a local exception. For example, `
 
 ## Tailwind recommendation
 
-Tailwind is the recommended way to compose application layout around SUSHI components. Install it when the application needs utilities:
+Tailwind is the recommended way to compose application layout around Sushi components. Install it when the application needs utilities:
 
 ```bash
 npm install --save-dev tailwindcss @tailwindcss/postcss postcss
@@ -107,7 +107,7 @@ Configure Tailwind for Angular, then use utilities for consumer-owned layout:
 </section>
 ```
 
-Tailwind is not needed to render SUSHI components. Avoid utilities that depend on a component's internal DOM.
+Tailwind is not needed to render Sushi components. Avoid utilities that depend on a component's internal DOM.
 
 ## Built-in themes
 

@@ -14,6 +14,6 @@ Generated suggestions never excuse harmful conduct or transfer responsibility aw
 
 ## Scope and enforcement
 
-These expectations apply in repository discussions, reviews, issues, and other spaces where someone represents SUSHI KIT.
+These expectations apply in repository discussions, reviews, issues, and other spaces where someone represents Sushi.
 
 Report conduct concerns privately to the repository owner through the contact options on the [maintainer's GitHub profile](https://github.com/sebenns). Do not open a public issue containing sensitive details. Maintainers may edit or remove content and temporarily or permanently restrict participation when necessary. Reports will be reviewed with discretion and without retaliation.
