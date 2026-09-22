@@ -20,7 +20,6 @@ jobs:
   zizmor:
     name: Run Zizmor
     runs-on: ubuntu-latest
-    if: github.head_ref != 'dev' && github.head_ref != 'main'
     permissions:
       security-events: write # required for uploading results to code scanning
       contents: read # only needed for private repos — needed to clone the repo
