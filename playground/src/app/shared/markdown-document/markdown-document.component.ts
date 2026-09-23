@@ -74,7 +74,8 @@ export class MarkdownDocument {
   protected readonly document: ResourceRef<readonly MarkdownBlock[] | undefined> = resource({
     params: (): string => this.source(),
     loader: async ({ params, abortSignal }): Promise<readonly MarkdownBlock[]> => {
-      const response: Response = await fetch(params, { signal: abortSignal });
+      const sourceUrl: URL = new URL(params.replace(/^\/+/, ''), document.baseURI);
+      const response: Response = await fetch(sourceUrl, { signal: abortSignal });
       if (!response.ok) throw new Error(`Could not load ${params}.`);
 
       return parseMarkdown(await response.text());
