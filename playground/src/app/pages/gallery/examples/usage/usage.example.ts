@@ -11,7 +11,7 @@ export class GalleryUsageExample {
   protected readonly images: readonly GalleryImage[] = [
     {
       value: 'sushi-board',
-      src: '/0.jpg',
+      src: '0.jpg',
       width: 1200,
       height: 800,
       alt: 'Assorted sushi rolls served around a ceramic teapot',
@@ -19,7 +19,7 @@ export class GalleryUsageExample {
     },
     {
       value: 'homemade-maki',
-      src: '/1.jpg',
+      src: '1.jpg',
       width: 1200,
       height: 800,
       alt: 'Homemade cucumber, pepper, and radish maki on a blue plate',
@@ -27,7 +27,7 @@ export class GalleryUsageExample {
     },
     {
       value: 'restaurant-rolls',
-      src: '/2.jpg',
+      src: '2.jpg',
       width: 1200,
       height: 800,
       alt: 'Colorful sushi rolls arranged on a dark slate board',
@@ -35,7 +35,7 @@ export class GalleryUsageExample {
     },
     {
       value: 'sushi-platter',
-      src: '/3.jpg',
+      src: '3.jpg',
       width: 1200,
       height: 800,
       alt: 'Salmon sashimi and assorted rolls on a large platter',
@@ -43,7 +43,7 @@ export class GalleryUsageExample {
     },
     {
       value: 'shoyu-ramen',
-      src: '/4.jpg',
+      src: '4.jpg',
       width: 1200,
       height: 800,
       alt: 'Shoyu ramen with chicken, egg, greens, and nori',
@@ -51,7 +51,7 @@ export class GalleryUsageExample {
     },
     {
       value: 'chicken-ramen',
-      src: '/5.jpg',
+      src: '5.jpg',
       width: 1200,
       height: 800,
       alt: 'Ramen with chicken, egg, bean sprouts, and spring onions',
@@ -59,7 +59,7 @@ export class GalleryUsageExample {
     },
     {
       value: 'spicy-ramen',
-      src: '/6.jpg',
+      src: '6.jpg',
       width: 1200,
       height: 800,
       alt: 'Spicy ramen topped with pork belly and sesame',
@@ -67,7 +67,7 @@ export class GalleryUsageExample {
     },
     {
       value: 'tantan-ramen',
-      src: '/7.jpg',
+      src: '7.jpg',
       width: 1200,
       height: 800,
       alt: 'Tantan ramen with peanuts, sesame, coriander, and pak choi',

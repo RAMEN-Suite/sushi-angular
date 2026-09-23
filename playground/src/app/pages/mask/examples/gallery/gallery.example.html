@@ -1,7 +1,7 @@
 <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
   @for (shape of shapes; track shape) {
     <figure class="grid justify-items-center gap-2">
-      <img class="size-28 object-cover" [suiMask]="shape" src="/sample-avatar.svg" [alt]="shape + ' mask'" />
+      <img class="size-28 object-cover" [suiMask]="shape" src="sample-avatar.svg" [alt]="shape + ' mask'" />
       <figcaption class="text-sm text-base-content/60">{{ shape }}</figcaption>
     </figure>
   }
@@ -12,12 +12,12 @@
     class="size-28 object-cover"
     suiMask="star"
     maskHalf="first"
-    src="/sample-avatar.svg"
+    src="sample-avatar.svg"
     alt="First half of a star mask" />
   <img
     class="size-28 object-cover"
     suiMask="star"
     maskHalf="second"
-    src="/sample-avatar.svg"
+    src="sample-avatar.svg"
     alt="Second half of a star mask" />
 </div>
