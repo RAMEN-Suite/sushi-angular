@@ -16,9 +16,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RAMEN-Suite/sushi-angular.git"
+    "url": "git+https://github.com/RAMEN-Suite/sushi-angular.git",
+    "directory": "sushi"
   },
-  "homepage": "https://github.com/RAMEN-Suite/sushi-angular#readme",
+  "homepage": "https://ramen-suite.github.io/sushi-angular/",
   "bugs": {
     "url": "https://github.com/RAMEN-Suite/sushi-angular/issues"
   },
@@ -26,7 +27,7 @@
     "access": "public",
     "provenance": true
   },
-  "sideEfjjkfects": [
+  "sideEffects": [
     "*.css"
   ],
   "exports": {
