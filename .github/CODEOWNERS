@@ -1,0 +1,14 @@
+* @sebenns
+
+/.github/ @sebenns @ramondevprivate
+/.github/codeql/ @ramondevprivate
+/.github/workflows/ @ramondevprivate
+/.npmrc @sebenns @ramondevprivate
+/.versionrc.json @ramondevprivate
+/package.json @sebenns @ramondevprivate
+/package-lock.json @sebenns @ramondevprivate
+/tools/ @sebenns
+
+/sushi/package.json @sebenns
+/sushi/ng-package.json @sebenns
+/SECURITY.md @sebenns

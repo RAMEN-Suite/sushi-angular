@@ -11,6 +11,11 @@
       "output": "."
     },
     {
+      "input": "generated",
+      "glob": "NOTICES.md",
+      "output": "."
+    },
+    {
       "input": ".",
       "glob": "README.md",
       "output": "."

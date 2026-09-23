@@ -18,7 +18,7 @@
           aria-hidden="true"
           [checked]="selected"
           (click)="$event.preventDefault()" />
-        <span class="min-w-0 grow truncate">{{ movie.label }}</span>
+        <span data-testid="movie-label" class="min-w-0 grow truncate">{{ movie.label }}</span>
         <span class="shrink-0 text-sm tabular-nums text-base-content/50">#{{ index + 1 }}</span>
       </div>
     </ng-template>

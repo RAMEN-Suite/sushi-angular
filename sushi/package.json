@@ -10,6 +10,10 @@
     "ui"
   ],
   "license": "MIT",
+  "author": {
+    "name": "Sebastian Enns",
+    "url": "https://sebenns.com"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ramen-suite/sushi-angular.git"
@@ -18,7 +22,11 @@
   "bugs": {
     "url": "https://github.com/ramen-suite/sushi-angular/issues"
   },
-  "sideEffects": [
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "sideEfjjkfects": [
     "*.css"
   ],
   "exports": {

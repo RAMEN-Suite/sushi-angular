@@ -4,6 +4,7 @@ const isCi: boolean = Boolean(process.env['CI']);
 
 export default defineConfig({
   testDir: './specs',
+  failOnFlakyTests: isCi,
   forbidOnly: isCi,
   retries: isCi ? 2 : 0,
   workers: 1,
