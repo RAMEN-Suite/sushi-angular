@@ -1,0 +1,255 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_as:
+        description: "Force a specific version, e.g. 1.0.0. Leave blank for automatic bump."
+        required: false
+        type: string
+      dry_run:
+        description: "Run everything without pushing, publishing or deploying."
+        required: false
+        default: false
+        type: boolean
+
+env:
+  PACKAGE_NAME: "@sushi-kit/angular"
+  PAGES_BASE_HREF: "/sushi-angular/"
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  guard:
+    name: Check branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Only release from main
+        run: |
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "::error::Releases must run on main, got $GITHUB_REF"
+            exit 1
+          fi
+
+  ci:
+    name: CI
+    needs: [guard]
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read # required for actions/checkout to fetch repo contents if this repo is private
+      security-events: write # required for uploading results to code scanning
+
+  release:
+    name: Version, build and tag
+    needs: [ci]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # commit the version bump, push the tag, create the GitHub release
+    outputs:
+      version: ${{ steps.bump.outputs.version }}
+      tarball: ${{ steps.pack.outputs.tarball }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+          persist-credentials: true # zizmor: ignore[artipacked] -- required for git push in a later step
+      - name: Setup Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Bump version and update changelog
+        id: bump
+        env:
+          RELEASE_AS: ${{ inputs.release_as }}
+        run: |
+          if [ -n "$RELEASE_AS" ]; then
+            npx commit-and-tag-version --release-as "$RELEASE_AS"
+          else
+            npx commit-and-tag-version
+          fi
+
+          VERSION=$(node -p "require('./sushi/package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+      - name: Build and check the package
+        run: npm run package:check
+      - name: Generate SBOM
+        run: npm sbom --sbom-format cyclonedx --omit dev > sbom.cdx.json
+      - name: Pack the tarball
+        id: pack
+        run: |
+          TARBALL=$(npm pack ./dist/sushi --pack-destination . --silent)
+          echo "tarball=$TARBALL" >> "$GITHUB_OUTPUT"
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: release-artifacts
+          path: |
+            ${{ steps.pack.outputs.tarball }}
+            sbom.cdx.json
+            dist/sushi/THIRD-PARTY-NOTICES.md
+          retention-days: 120
+      - name: Push commit and tag
+        if: ${{ !inputs.dry_run }}
+        env:
+          VERSION: ${{ steps.bump.outputs.version }}
+        run: |
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          git push origin "refs/tags/v$VERSION"
+      - name: Extract latest changelog section
+        run: |
+          awk '
+            /^#{2,3} \[?v?[0-9]+\.[0-9]+\.[0-9]+/ { c++; if (c==2) exit }
+            c==1 { print }
+          ' CHANGELOG.md > RELEASE_NOTES.md
+      - name: Create GitHub release
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.bump.outputs.version }}
+          TARBALL: ${{ steps.pack.outputs.tarball }}
+        run: |
+          gh release create "v${VERSION}" \
+            --title "v${VERSION}" \
+            --notes-file RELEASE_NOTES.md \
+            "$TARBALL" \
+            sbom.cdx.json \
+            dist/sushi/THIRD-PARTY-NOTICES.md
+
+  publish:
+    name: Stage on npm
+    needs: [release]
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read # required for actions/checkout to fetch repo contents if this repo is private
+      id-token: write # required for npm trusted publishing (OIDC)
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 26
+      - name: Check npm version # staged publishing needs npm 11.15 or newer
+        run: npm --version
+      - name: Download release artifacts
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: release-artifacts
+      - name: Stage the package
+        env:
+          TARBALL: ${{ needs.release.outputs.tarball }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            npm stage publish "$TARBALL" --dry-run
+            exit 0
+          fi
+
+          npm stage publish "$TARBALL"
+      - name: Write approval reminder
+        if: ${{ !inputs.dry_run }}
+        env:
+          VERSION: ${{ needs.release.outputs.version }}
+        run: |
+          {
+            echo "## 📦 Staged on npm"
+            echo ""
+            echo "\`$PACKAGE_NAME@$VERSION\` is staged and **not installable yet**."
+            echo ""
+            echo "Approve it with 2FA to publish it:"
+            echo ""
+            echo "- on npmjs.com, under **Staged Packages**"
+            echo "- or locally: \`npm stage list $PACKAGE_NAME\` then \`npm stage approve <stage-id>\`"
+            echo ""
+            echo "The verification job below waits for the version to appear on the registry."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  verify-published:
+    name: Verify the published package
+    needs: [release, publish]
+    if: ${{ !inputs.dry_run }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 120 # waits for the manual npm approval
+    permissions:
+      contents: read # required for actions/checkout to fetch repo contents if this repo is private
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: "v${{ needs.release.outputs.version }}"
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: .nvmrc
+      - name: Wait for the version to go live
+        env:
+          VERSION: ${{ needs.release.outputs.version }}
+        run: |
+          echo "Waiting for $PACKAGE_NAME@$VERSION to be approved and published."
+
+          until npm view "$PACKAGE_NAME@$VERSION" version --min-release-age=0 > /dev/null 2>&1; do
+            sleep 30
+          done
+
+          echo "$PACKAGE_NAME@$VERSION is live."
+      - name: Install from the registry and build
+        env:
+          VERSION: ${{ needs.release.outputs.version }}
+        run: bash tools/package-install-smoke.sh "$PACKAGE_NAME@$VERSION"
+      - name: Verify signature and provenance
+        env:
+          VERSION: ${{ needs.release.outputs.version }}
+        run: |
+          work=$(mktemp -d)
+          cd "$work"
+          npm init -y > /dev/null
+          npm install --package-lock=false --no-audit --no-fund --min-release-age=0 "$PACKAGE_NAME@$VERSION"
+          npm audit signatures
+
+  pages:
+    name: Deploy the playground
+    needs: [release]
+    if: ${{ !inputs.dry_run }}
+    runs-on: ubuntu-latest
+    environment: github-pages
+    permissions:
+      contents: read # required for actions/checkout to fetch repo contents if this repo is private
+      pages: write # required to deploy to GitHub Pages
+      id-token: write # required for actions/deploy-pages to verify the deployment origin
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: "v${{ needs.release.outputs.version }}"
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Build the playground
+        run: npm run build:playground -- --base-href "$PAGES_BASE_HREF"
+      - name: Add the SPA fallback
+        run: cp dist/playground/browser/index.html dist/playground/browser/404.html
+      - name: Upload the Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist/playground/browser
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
