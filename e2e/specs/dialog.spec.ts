@@ -103,7 +103,25 @@ test('only an enabled drag handle exposes a move cursor', async ({ page }: { pag
   await expect(draggableHeader).toHaveCSS('cursor', 'move');
 });
 
-test('resizes in place without moving the Dialog origin', async ({ page }: { page: Page }): Promise<void> => {
+test('enables native bidirectional resizing', async ({ page }: { page: Page }): Promise<void> => {
+  await page.getByRole('button', { name: 'Open prep board' }).click();
+  const dialog: Locator = page.getByRole('dialog', { name: 'Prep board' });
+
+  await expect(dialog).toHaveCSS('resize', 'both');
+});
+
+test('resizes in place without moving the Dialog origin', async ({
+  page,
+  browserName,
+}: {
+  page: Page;
+  browserName: 'chromium' | 'firefox' | 'webkit';
+}): Promise<void> => {
+  test.skip(
+    browserName === 'webkit' && process.platform === 'linux',
+    'Linux WebKit has no mouse target when its native resize control uses zero-width overlay scrollbars.',
+  );
+
   await page.getByRole('button', { name: 'Open prep board' }).click();
   const dialog: Locator = page.getByRole('dialog', { name: 'Prep board' });
   const header: Locator = dialog.locator('[suiDialogHeader]');
