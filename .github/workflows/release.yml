@@ -134,7 +134,7 @@ jobs:
             --notes-file RELEASE_NOTES.md \
             "$TARBALL" \
             sbom.cdx.json \
-            dist/sushi/THIRD-PARTY-NOTICES.md
+            dist/sushi/NOTICES.md
 
   publish:
     name: Stage on npm
