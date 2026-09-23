@@ -2,7 +2,7 @@
   <sui-list rowHover size="sm" [dividers]="false" [items]="members" ariaLabel="Project members">
     <ng-template suiListItem let-member>
       @if (member.image) {
-        <sui-avatar shape="circle" size="md" status="online"><img src="/sample-avatar.svg" alt="" /></sui-avatar>
+        <sui-avatar shape="circle" size="md" status="online"><img src="sample-avatar.svg" alt="" /></sui-avatar>
       } @else {
         <sui-avatar placeholder shape="circle" size="md">
           <span>{{ member.initials }}</span>
