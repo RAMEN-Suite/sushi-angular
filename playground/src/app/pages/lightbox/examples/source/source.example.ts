@@ -10,10 +10,10 @@ import { Button, GalleryImage, Lightbox } from '@sushi-kit/angular';
 export class LightboxSourceExample {
   protected readonly image: GalleryImage = {
     value: 'chef-selection',
-    src: '/sushi-gallery-boat.jpg',
-    width: 1536,
-    height: 1024,
-    alt: 'A chef selection of sushi rolls',
-    caption: 'Chef selection · 18 pieces',
+    src: '/3.jpg',
+    width: 1200,
+    height: 800,
+    alt: 'Salmon sashimi and assorted rolls on a large platter',
+    caption: 'Sushi and sashimi platter',
   };
 }
