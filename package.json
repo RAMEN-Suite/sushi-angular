@@ -10,7 +10,7 @@
     "generate:api": "node --import tsx tools/generate-api-reference.ts",
     "generate:notices": "node --import tsx tools/generate-third-party-notices.ts",
     "lint": "ng lint && eslint \"tools/**/*.ts\" \"e2e/**/*.ts\"",
-    "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --allowed-hosts npm --validate-https",
+    "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --allowed-hosts npm --validate-https && lockfile-lint --path tests/package-install/package-lock.json --type npm --allowed-hosts npm --validate-https",
     "ng": "ng",
     "package:check": "npm run build:sushi && npm run package:lint && npm pack ./dist/sushi --dry-run --cache .cache/npm && npm run package:smoke && npm run package:install",
     "package:install": "bash tools/package-install-smoke.sh",

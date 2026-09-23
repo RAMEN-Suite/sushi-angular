@@ -18,5 +18,6 @@ if [ -z "$spec" ]; then
 fi
 
 cd "$app_dir"
+npm ci --no-audit --no-fund --cache "$repo_dir/.cache/npm"
 npm install --package-lock=false --no-audit --no-fund --prefer-offline --cache "$repo_dir/.cache/npm" --min-release-age=0 "$spec"
 npm run build
