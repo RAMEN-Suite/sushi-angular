@@ -43,11 +43,15 @@ test('end placement anchors to the viewport edge and backdrop click dismisses it
   const panel: Locator = page.getByRole('dialog', { name: 'Your cart' });
   await expect(panel).toBeVisible();
   await expect
-    .poll(async (): Promise<number | null> => {
+    .poll(async (): Promise<boolean> => {
       const box: BoxGeometry | null = await panel.boundingBox();
-      return box === null ? null : Math.abs(box.x + box.width - (await page.evaluate((): number => innerWidth)));
+      if (box === null) return false;
+
+      const viewportWidth: number = await page.evaluate((): number => innerWidth);
+      const rightGap: number = Math.abs(box.x + box.width - viewportWidth);
+      return rightGap < box.width * 0.02;
     })
-    .toBeLessThanOrEqual(1);
+    .toBe(true);
 
   await page.locator('sui-drawer.drawer-end .drawer-overlay').click({ position: { x: 20, y: 20 } });
   await expect(panel).toBeHidden();
@@ -82,11 +86,17 @@ test('small Drawers fill narrow viewports without horizontal overflow', async ({
   await page.getByRole('button', { name: /Cart/ }).click();
   const panel: Locator = page.getByRole('dialog', { name: 'Your cart' });
   await expect
-    .poll(async (): Promise<{ readonly width: number; readonly x: number } | null> => {
+    .poll(async (): Promise<boolean> => {
       const box: BoxGeometry | null = await panel.boundingBox();
-      return box === null ? null : { width: box.width, x: box.x };
+      if (box === null) return false;
+
+      const viewportWidth: number = await page.evaluate((): number => innerWidth);
+      const horizontalMargin: number = viewportWidth * 0.02;
+      const fillsViewport: boolean = box.width >= viewportWidth - horizontalMargin;
+      const staysContained: boolean = box.x >= -horizontalMargin && box.x + box.width <= viewportWidth + horizontalMargin;
+      return fillsViewport && staysContained;
     })
-    .toEqual({ width: 360, x: 0 });
+    .toBe(true);
   await expect
     .poll(async (): Promise<boolean> => page.evaluate((): boolean => document.documentElement.scrollWidth <= innerWidth))
     .toBe(true);

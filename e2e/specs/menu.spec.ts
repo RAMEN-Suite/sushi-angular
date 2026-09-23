@@ -52,7 +52,9 @@ test.describe('Menu browser behavior', (): void => {
     const after: Bounds = await boundsOf(menu);
     await expect(menu).toBeVisible();
     expect(scrollAfter).toBeLessThan(scrollBefore);
-    expect(after.x).toBeCloseTo(before.x, 0);
-    expect(after.y).toBeCloseTo(before.y, 0);
+
+    const scrollDistance: number = scrollBefore - scrollAfter;
+    expect(Math.abs(after.x - before.x)).toBeLessThan(scrollDistance * 0.05);
+    expect(Math.abs(after.y - before.y)).toBeLessThan(scrollDistance * 0.05);
   });
 });

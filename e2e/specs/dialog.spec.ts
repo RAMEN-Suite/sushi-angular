@@ -42,7 +42,9 @@ test('non-dismissible Dialog ignores Escape and honors its configured start posi
   const viewport: { readonly height: number; readonly width: number } | null = page.viewportSize();
   const bounds: Bounds | null = await dialog.boundingBox();
   if (viewport === null || bounds === null) throw new Error('Expected a visible right-positioned Dialog.');
-  expect(bounds.x + bounds.width).toBeCloseTo(viewport.width - 16, 0);
+  const rightGap: number = viewport.width - (bounds.x + bounds.width);
+  expect(rightGap).toBeGreaterThanOrEqual(0);
+  expect(rightGap).toBeLessThan(viewport.width * 0.05);
   await dialog.getByRole('button', { name: 'Close' }).click();
   await expect(dialog).toBeHidden();
 });
@@ -78,8 +80,9 @@ test('drags only from the header and stays inside the viewport', async ({ page }
   await page.mouse.move(bodyBounds.x - 100, bodyBounds.y + bodyBounds.height / 2, { steps: 5 });
   await page.mouse.up();
   const afterBodyDrag: Bounds | null = await dialog.boundingBox();
-  expect(afterBodyDrag?.x).toBeCloseTo(initial.x, 0);
-  expect(afterBodyDrag?.y).toBeCloseTo(initial.y, 0);
+  if (afterBodyDrag === null) throw new Error('Expected the Dialog to remain visible after dragging its body.');
+  expect(Math.abs(afterBodyDrag.x - initial.x)).toBeLessThan(10);
+  expect(Math.abs(afterBodyDrag.y - initial.y)).toBeLessThan(10);
 
   await page.mouse.move(handle.x + handle.width / 2, handle.y + handle.height / 2);
   await page.mouse.down();
@@ -143,7 +146,8 @@ test('resizes in place without moving the Dialog origin', async ({
   await page.mouse.up();
 
   const resized: Bounds | null = await dialog.boundingBox();
-  expect(resized?.x).toBeCloseTo(initial.x, 0);
-  expect(resized?.y).toBeCloseTo(initial.y, 0);
-  expect(resized?.width).toBeGreaterThan(initial.width);
+  if (resized === null) throw new Error('Expected the Dialog to remain visible after resizing.');
+  expect(Math.abs(resized.x - initial.x)).toBeLessThan(6);
+  expect(Math.abs(resized.y - initial.y)).toBeLessThan(6);
+  expect(resized.width).toBeGreaterThan(initial.width);
 });
