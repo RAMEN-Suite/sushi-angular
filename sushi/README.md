@@ -1,6 +1,8 @@
-# Sushi
+# Sushi Angular
 
-The Angular component library in Ramen Suite, published as `@sushi-kit/angular`. Accessible, themeable Angular 22 components use typed signal APIs, Angular Aria, and the Angular CDK.
+Accessible, themeable Angular components for Ramen Suite, published as `@sushi-kit/angular`.
+
+[Documentation](https://ramen-suite.github.io/sushi-angular/) · [Source](https://github.com/ramen-suite/sushi-angular) · [Issues](https://github.com/ramen-suite/sushi-angular/issues)
 
 ## Install
 
@@ -8,15 +10,15 @@ The Angular component library in Ramen Suite, published as `@sushi-kit/angular`.
 npm install @sushi-kit/angular
 ```
 
-Import the package stylesheet once from the application's global stylesheet:
+Load the component styles once in the application's global stylesheet:
 
 ```css
 @import '@sushi-kit/angular/styles.css';
 ```
 
-The package includes the compiled CSS required by Sushi components.
-
 ## Use a component
+
+Sushi declarations are standalone. Import only what the consuming component uses:
 
 ```ts
 import { Component } from '@angular/core';
@@ -30,10 +32,21 @@ import { Button } from '@sushi-kit/angular';
 export class Checkout {}
 ```
 
-`sushi` is the default theme; `sushi-dark` follows the operating-system dark preference. An application can select either explicitly through `data-theme="sushi"` or `data-theme="sushi-dark"` on an ancestor.
+## Themes
 
-The repository's [styling and themes guide](https://github.com/ramen-suite/sushi-angular/blob/main/docs/styling-and-themes.md) explains theme tokens, component tokens, recommended Tailwind usage, and custom themes.
+`sushi` is the default light theme. Use `sushi-dark` for the dark theme:
 
-Complete examples, generated API references, theming tokens, and contribution guidance are available in the [Sushi repository](https://github.com/ramen-suite/sushi-angular).
+```html
+<html data-theme="sushi-dark"></html>
+```
 
-Sushi is released under the MIT License.
+Theme tokens, component APIs, and examples are documented in the [Sushi Playground](https://ramen-suite.github.io/sushi-angular/).
+
+## Requirements
+
+- Angular 22
+- A modern browser
+
+## License
+
+[MIT](https://github.com/ramen-suite/sushi-angular/blob/main/LICENSE)
