@@ -87,5 +87,7 @@ test('small Drawers fill narrow viewports without horizontal overflow', async ({
       return box === null ? null : { width: box.width, x: box.x };
     })
     .toEqual({ width: 360, x: 0 });
-  expect(await page.evaluate((): boolean => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await expect
+    .poll(async (): Promise<boolean> => page.evaluate((): boolean => document.documentElement.scrollWidth <= innerWidth))
+    .toBe(true);
 });
