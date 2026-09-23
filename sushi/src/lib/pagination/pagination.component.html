@@ -60,7 +60,7 @@
     </button>
 
     @if (showPageLinks() || showPageInput()) {
-      @for (item of displayedPages(); track item) {
+      @for (item of displayedPages(); track $index) {
         @if (item === currentPage() && showPageInput() && editingPage() && !disabled()) {
           <input
             #pageInput
