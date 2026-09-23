@@ -1,6 +1,6 @@
 {
   "name": "@sushi-kit/angular",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Accessible, themeable Angular components built with signals, Angular Aria, and the CDK.",
   "keywords": [
     "angular",

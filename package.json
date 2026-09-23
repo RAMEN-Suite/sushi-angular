@@ -1,6 +1,6 @@
 {
   "name": "sushi-angular",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "build:playground": "npm run generate:api && ng build playground",
     "build:styles": "node --import tsx tools/build-library-styles.ts",
