@@ -4,18 +4,18 @@ on:
   workflow_dispatch:
     inputs:
       release_as:
-        description: "Force a specific version, e.g. 1.0.0. Leave blank for automatic bump."
+        description: 'Force a specific version, e.g. 1.0.0. Leave blank for automatic bump.'
         required: false
         type: string
       dry_run:
-        description: "Run everything without pushing, publishing or deploying."
+        description: 'Run everything without pushing, publishing or deploying.'
         required: false
         default: false
         type: boolean
 
 env:
-  PACKAGE_NAME: "@sushi-kit/angular"
-  PAGES_BASE_HREF: "/sushi-angular/"
+  PACKAGE_NAME: '@sushi-kit/angular'
+  PAGES_BASE_HREF: '/sushi-angular/'
 
 concurrency:
   group: release
@@ -188,7 +188,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
-          ref: "v${{ needs.release.outputs.version }}"
+          ref: 'v${{ needs.release.outputs.version }}'
           persist-credentials: false
       - name: Setup Node
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
@@ -233,7 +233,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
-          ref: "v${{ needs.release.outputs.version }}"
+          ref: 'v${{ needs.release.outputs.version }}'
           persist-credentials: false
       - name: Setup Node
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
