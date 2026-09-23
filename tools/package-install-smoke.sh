@@ -17,6 +17,17 @@ if [ -z "$spec" ]; then
   spec="$smoke_dir/$tarball"
 fi
 
+peers=()
+while IFS= read -r name; do
+  [ -z "$name" ] && continue
+  version="$(node -p "require('$repo_dir/node_modules/$name/package.json').version")"
+  peers+=("$name@$version")
+done < <(node -p "Object.keys(require('$repo_dir/sushi/package.json').peerDependencies).join('\n')")
+
 cd "$app_dir"
-npm install --package-lock=false --no-audit --no-fund --prefer-offline --cache "$repo_dir/.cache/npm" --min-release-age=0 "$spec"
+
+npm_flags=(--package-lock=false --no-audit --no-fund --cache "$repo_dir/.cache/npm")
+npm install "${npm_flags[@]}" "${peers[@]}"
+npm install "${npm_flags[@]}" --min-release-age=0 "$spec"
+
 npm run build
