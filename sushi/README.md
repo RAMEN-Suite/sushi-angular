@@ -1,8 +1,6 @@
-# Sushi Angular
+# Sushi in Angular
 
 Accessible, themeable Angular components for Ramen Suite, published as `@sushi-kit/angular`.
-
-[Documentation](https://ramen-suite.github.io/sushi-angular/) · [Source](https://github.com/ramen-suite/sushi-angular) · [Issues](https://github.com/ramen-suite/sushi-angular/issues)
 
 ## Install
 
@@ -44,7 +42,7 @@ Theme tokens, component APIs, and examples are documented in the [Sushi Playgrou
 
 ## Requirements
 
-- Angular 22
+- Angular 22.x
 - A modern browser
 
 ## License
