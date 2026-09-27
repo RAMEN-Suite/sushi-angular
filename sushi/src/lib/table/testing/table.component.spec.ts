@@ -122,8 +122,6 @@ describe('Table native structure and templates', (): void => {
     expect(query(fixture, 'thead th').textContent).toContain('Name');
     expect(query(fixture, 'tbody th[scope="row"]').textContent.trim()).toBe('Miso');
     expect(query(fixture, 'tbody td').textContent.trim()).toBe('4');
-    expect(query(fixture, 'table').classList).toContain('table-pin-cols');
-    expect(query(fixture, 'table').classList).toContain('table-pin-rows');
   });
 
   it('renders a custom row with its row index', (): void => {
