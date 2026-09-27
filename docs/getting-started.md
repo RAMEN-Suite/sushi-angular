@@ -1,6 +1,6 @@
 # Getting started
 
-Sushi requires Angular 22.
+Sushi requires Angular 22.x.
 
 ## 1. Install
 

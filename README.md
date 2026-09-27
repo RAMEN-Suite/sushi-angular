@@ -4,7 +4,7 @@ Sushi is the Angular component library in Ramen Suite, published as `@sushi-kit/
 
 ## Requirements
 
-- Angular 22
+- Angular 22.x
 - A modern browser
 
 Sushi ships the compiled CSS required by its components.

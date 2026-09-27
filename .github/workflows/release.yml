@@ -107,7 +107,7 @@ jobs:
           path: |
             ${{ steps.pack.outputs.tarball }}
             sbom.cdx.json
-            dist/sushi/THIRD-PARTY-NOTICES.md
+            dist/sushi/NOTICES.md
           retention-days: 90
       - name: Push commit and tag
         if: ${{ !inputs.dry_run }}

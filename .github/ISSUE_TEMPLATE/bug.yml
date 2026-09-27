@@ -1,41 +1,30 @@
 name: Bug report
-description: Report reproducible behavior that differs from the documented component contract.
-title: '[Bug]: '
+description: Report a reproducible problem.
 labels: [bug]
 body:
-  - type: markdown
-    attributes:
-      value: Thank you for helping improve Sushi. Please describe observable behavior rather than implementation guesses.
   - type: input
-    id: component
+    id: version
     attributes:
-      label: Component and version
-      placeholder: 'Select, @sushi-kit/angular 0.0.1'
+      label: Version
+      placeholder: '@sushi-kit/angular 0.1.0'
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: Describe the actual and expected behavior.
     validations:
       required: true
   - type: textarea
     id: reproduction
     attributes:
-      label: Minimal reproduction
-      description: Provide a repository, StackBlitz, or concise markup and steps.
-    validations:
-      required: true
-  - type: textarea
-    id: expected
-    attributes:
-      label: Expected behavior
-    validations:
-      required: true
-  - type: textarea
-    id: actual
-    attributes:
-      label: Actual behavior
+      label: Reproduction
+      description: Provide a minimal example or clear steps.
     validations:
       required: true
   - type: textarea
     id: environment
     attributes:
       label: Environment
-      description: Angular version, browser, operating system, input method, and active theme when relevant.
-    validations:
-      required: true
+      description: Include the browser, operating system, or Angular version when relevant.
