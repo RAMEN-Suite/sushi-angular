@@ -1,7 +1,7 @@
-<sui-tabs ariaLabel="Example preview and source" variant="lift" [(value)]="activeTab">
+<sui-tabs ariaLabel="Example preview and source" variant="lift" style="--sui-tabs-panel-padding: 0" [(value)]="activeTab">
   @if (preview(); as previewTemplate) {
     <ng-template suiTab value="preview" label="Preview">
-      <div class="p-5 sm:p-6">
+      <div class="p-4 sm:p-6">
         <ng-container [ngTemplateOutlet]="previewTemplate" />
       </div>
     </ng-template>

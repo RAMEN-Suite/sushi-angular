@@ -27,6 +27,11 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
+    {
+      name: 'mobile-webkit',
+      testMatch: ['**/responsive-layout.spec.ts', '**/mobile-overlay.spec.ts'],
+      use: { ...devices['iPhone 13'] },
+    },
   ],
   webServer: {
     command: 'npm run preview:playground',

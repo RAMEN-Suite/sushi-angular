@@ -5316,7 +5316,7 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'InputGroupOrientation',
         defaultValue: "'horizontal'",
-        description: 'Controls whether items flow horizontally, vertically, or responsively.',
+        description: 'Defaults to horizontal. Responsive groups stack below 48rem and become horizontal at 48rem.',
       },
     ],
     templates: [],
@@ -5967,7 +5967,7 @@ export const apiReference: Readonly<{
     className: 'Label',
     declaration: 'Label',
     selector: '[suiLabel]',
-    description: 'Styles a visible control label without prescribing its native or ARIA association.',
+    description: 'Styles a visible control label with wrapping text without prescribing its native or ARIA association.',
     members: [
       {
         name: 'floating',

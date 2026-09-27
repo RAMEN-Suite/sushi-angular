@@ -15,6 +15,6 @@ export type InputGroupOrientation = JoinOrientation | 'responsive';
 })
 /** Connects inputs, add-ons, and actions as one visual group without changing their semantics. */
 export class InputGroup {
-  /** Controls whether items flow horizontally, vertically, or responsively. */
+  /** Defaults to horizontal. Responsive groups stack below 48rem and become horizontal at 48rem. */
   public readonly orientation: InputSignal<InputGroupOrientation> = input<InputGroupOrientation>('horizontal');
 }

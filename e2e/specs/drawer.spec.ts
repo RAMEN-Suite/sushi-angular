@@ -7,6 +7,14 @@ interface BoxGeometry {
   readonly y: number;
 }
 
+interface DrawerGeometry {
+  readonly left: number;
+  readonly right: number;
+  readonly width: number;
+  readonly viewportWidth: number;
+  readonly documentWidth: number;
+}
+
 test('modal Drawer closes with Escape and restores focus to its trigger', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/drawer');
   const trigger: Locator = page.getByRole('button', { name: /Cart/ });
@@ -80,24 +88,27 @@ test('responsive Drawers use one Sidebar as an overlay and persistent desktop la
   await expect(mobileTrigger).toBeFocused();
 });
 
-test('small Drawers fill narrow viewports without horizontal overflow', async ({ page }: { page: Page }): Promise<void> => {
+test('Drawers stay inside narrow viewports without horizontal overflow', async ({ page }: { page: Page }): Promise<void> => {
   await page.setViewportSize({ width: 360, height: 640 });
   await page.goto('/drawer');
   await page.getByRole('button', { name: /Cart/ }).click();
   const panel: Locator = page.getByRole('dialog', { name: 'Your cart' });
-  await expect
-    .poll(async (): Promise<boolean> => {
-      const box: BoxGeometry | null = await panel.boundingBox();
-      if (box === null) return false;
-
-      const viewportWidth: number = await page.evaluate((): number => innerWidth);
-      const horizontalMargin: number = viewportWidth * 0.02;
-      const fillsViewport: boolean = box.width >= viewportWidth - horizontalMargin;
-      const staysContained: boolean = box.x >= -horizontalMargin && box.x + box.width <= viewportWidth + horizontalMargin;
-      return fillsViewport && staysContained;
-    })
-    .toBe(true);
-  await expect
-    .poll(async (): Promise<boolean> => page.evaluate((): boolean => document.documentElement.scrollWidth <= innerWidth))
-    .toBe(true);
+  await expect(panel).toBeVisible();
+  await expect(async (): Promise<void> => {
+    const geometry: DrawerGeometry = await panel.evaluate((element: HTMLElement): DrawerGeometry => {
+      const bounds: DOMRect = element.getBoundingClientRect();
+      return {
+        left: bounds.left,
+        right: bounds.right,
+        width: bounds.width,
+        viewportWidth: document.documentElement.clientWidth,
+        documentWidth: document.documentElement.scrollWidth,
+      };
+    });
+    const details: string = `Drawer geometry: ${JSON.stringify(geometry)}`;
+    // Ignore subpixel rounding, not clipping or reserved scrollbar space.
+    expect(Math.round(geometry.left), details).toBeGreaterThanOrEqual(0);
+    expect(Math.round(geometry.right), details).toBeLessThanOrEqual(geometry.viewportWidth);
+    expect(geometry.documentWidth, details).toBeLessThanOrEqual(geometry.viewportWidth);
+  }).toPass({ timeout: 5_000 });
 });

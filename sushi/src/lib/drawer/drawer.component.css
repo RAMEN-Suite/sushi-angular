@@ -33,6 +33,8 @@
 .sui-drawer__panel {
   @apply flex h-full min-h-0 min-w-0 flex-col;
   width: min(var(--sui-drawer-width), 100vw);
+  /* The containing block can be narrower than 100vw when a scrollbar gutter is reserved. */
+  max-width: 100%;
 }
 
 :host(.sui-drawer--sm) {

@@ -1,11 +1,11 @@
 <sui-drawer
   #libraryDrawer="suiDrawer"
-  class="h-screen overflow-hidden bg-base-100 text-base-content"
+  class="bg-base-100 text-base-content lg:h-screen lg:overflow-hidden"
   persistentAt="lg"
   size="sm"
   ariaLabel="Component library navigation"
 >
-  <div #contentScroll suiDrawerContent class="h-screen overflow-y-auto bg-base-100">
+  <div #contentScroll suiDrawerContent cdkScrollable data-testid="playground-content" class="bg-base-100 lg:h-screen lg:overflow-y-auto">
     <header class="sticky top-0 z-30 h-[65px] border-b border-base-300 bg-base-100/95 backdrop-blur">
       <div class="mx-auto flex h-full max-w-7xl items-center px-0 sm:px-3">
         <sui-navbar

@@ -1,4 +1,5 @@
 import { DOCUMENT, Location } from '@angular/common';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 import {
   afterRenderEffect,
   ChangeDetectionStrategy,
@@ -54,6 +55,7 @@ type PlaygroundTheme = 'sushi' | 'sushi-dark';
   selector: 'pg-root',
   imports: [
     Button,
+    CdkScrollable,
     Drawer,
     DrawerClose,
     DrawerContent,

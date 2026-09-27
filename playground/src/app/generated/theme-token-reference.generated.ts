@@ -242,10 +242,10 @@ export const THEME_TOKEN_REFERENCES: readonly ThemeTokenReference[] = [
   },
   {
     token: '--sui-focus-ring-color',
-    lightValue: 'var(--color-primary)',
-    darkValue: 'var(--color-primary)',
+    lightValue: 'initial',
+    darkValue: 'initial',
     group: 'Semantic UI',
-    purpose: 'Keyboard focus indicator.',
+    purpose: "Optional focus color override. Unset by default to retain each control's color.",
   },
   {
     token: '--sui-shadow-overlay',

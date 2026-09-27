@@ -27,4 +27,22 @@ a:focus-visible {
 
 nav {
   padding: calc(var(--sui-focus-ring-offset) + var(--sui-focus-ring-width));
+  overflow: visible;
+}
+
+ol {
+  flex-wrap: wrap;
+  row-gap: 0.5rem;
+  white-space: normal;
+}
+
+li {
+  min-width: 0;
+  max-width: 100%;
+}
+
+a,
+[aria-current='page'] {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }

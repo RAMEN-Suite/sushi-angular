@@ -3,7 +3,7 @@
   {{ selected()?.name ?? 'Assign chef' }}
 </button>
 <sui-popover #chefPopover ariaLabel="Select a chef" placement="bottom">
-  <div class="grid w-72 gap-1">
+  <div class="grid w-72 max-w-full gap-1">
     <div class="mb-1 grid gap-0.5 px-3 pb-2">
       <strong>Assign this order</strong>
       <span class="text-sm text-base-content/60">Choose an available chef.</span>

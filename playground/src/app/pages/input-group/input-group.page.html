@@ -13,7 +13,8 @@
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Addresses and responsive fields</h2>
       <p class="text-base-content/60">
-        Use add-ons for fixed text and responsive orientation when controls should stack on narrow screens.
+        Groups are horizontal by default. Responsive groups stack below 48rem (768px at the default font size). Apply direction-specific
+        widths and flex sizing at the same breakpoint.
       </p>
     </div>
     <pg-example-code [html]="examples.address.html" [typescript]="examples.address.typescript">
@@ -24,7 +25,7 @@
   <section class="space-y-6">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Mixed controls</h2>
-      <p class="text-base-content/60">Inputs, add-ons, Select, and Button retain their semantics inside one visual group.</p>
+      <p class="text-base-content/60">Keep the amount and currency together. Stack the period and action below on narrow screens.</p>
     </div>
     <pg-example-code [html]="examples.commerce.html" [typescript]="examples.commerce.typescript">
       <ng-template pgExamplePreview><pg-input-group-commerce-example /></ng-template>

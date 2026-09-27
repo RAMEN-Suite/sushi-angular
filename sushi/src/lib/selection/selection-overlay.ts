@@ -18,9 +18,12 @@ export const SELECTION_ABOVE: ConnectedPosition = {
 
 export function selectionOverlayPositions(origin: HTMLElement, panelHeight: number): ConnectedPosition[] {
   const rect: DOMRect = origin.getBoundingClientRect();
-  const viewportHeight: number = window.visualViewport?.height ?? document.documentElement.clientHeight;
-  const availableAbove: number = rect.top - 8;
-  const availableBelow: number = viewportHeight - rect.bottom - 8;
+  // The on-screen keyboard can shrink and shift the visible area within the layout viewport.
+  const viewport: VisualViewport | null = window.visualViewport;
+  const viewportTop: number = viewport?.offsetTop ?? 0;
+  const viewportBottom: number = viewportTop + (viewport?.height ?? document.documentElement.clientHeight);
+  const availableAbove: number = rect.top - viewportTop - 8;
+  const availableBelow: number = viewportBottom - rect.bottom - 8;
 
   return availableBelow < panelHeight && availableAbove > availableBelow
     ? [SELECTION_ABOVE, SELECTION_BELOW]
