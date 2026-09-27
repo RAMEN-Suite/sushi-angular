@@ -1,3 +1,13 @@
+.sui-form-control {
+  /* Keep the configured size; DaisyUI otherwise changes this variable on touch focus. */
+  --font-size: initial;
+}
+
+.sui-form-control,
+.sui-form-control::file-selector-button {
+  box-shadow: none;
+}
+
 .sui-form-control--disabled {
   @apply text-base-content/40;
 }
