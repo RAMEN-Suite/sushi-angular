@@ -20,6 +20,7 @@
     "preview:playground": "npx serve dist/playground/browser -l 4201 -s",
     "release": "commit-and-tag-version",
     "start": "npm run generate:api && ng serve playground",
+    "start:network": "npm start -- --host 0.0.0.0",
     "test": "ng test sushi --no-watch && npm run test:tools",
     "test:coverage": "ng test sushi --no-watch --coverage",
     "test:e2e": "npm run build:playground && playwright test --config e2e/playwright.config.ts",

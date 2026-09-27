@@ -10,6 +10,8 @@ npm start
 
 The repository pins its Node.js version in `.nvmrc` and its npm version in `package.json`.
 
+For a phone on the same trusted network, use `npm run start:network` and open the printed `Network` URL.
+
 `sushi/` is the published Angular library. `playground/` contains examples and generated documentation. `tools/` contains repository-only generators and build checks.
 
 ## Choose the relevant guide
