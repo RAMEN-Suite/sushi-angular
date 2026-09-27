@@ -1,4 +1,31 @@
-<sui-data-view [items]="products" [layouts]="['list', 'grid']" minItemWidth="17rem" ariaLabel="Product catalog">
+<sui-data-view [items]="products" [layouts]="[]" [(layout)]="layout" minItemWidth="17rem" ariaLabel="Product catalog">
+  <ng-template suiDataViewHeader>
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <strong>Products</strong>
+      <div class="flex gap-2" role="group" aria-label="Product layout">
+        <button
+          suiButton
+          type="button"
+          size="sm"
+          severity="neutral"
+          variant="outlined"
+          [attr.aria-pressed]="layout() === 'list'"
+          (click)="layout.set('list')">
+          List
+        </button>
+        <button
+          suiButton
+          type="button"
+          size="sm"
+          severity="neutral"
+          variant="outlined"
+          [attr.aria-pressed]="layout() === 'grid'"
+          (click)="layout.set('grid')">
+          Grid
+        </button>
+      </div>
+    </div>
+  </ng-template>
   <ng-template suiDataViewItem let-product let-layout="layout">
     @if (layout === 'grid') {
       <sui-card size="sm" class="h-full overflow-hidden">

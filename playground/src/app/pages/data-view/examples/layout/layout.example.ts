@@ -1,5 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Button, Card, CardActions, CardTitle, DataView, DataViewItemTemplate } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import {
+  Badge,
+  Button,
+  Card,
+  CardActions,
+  CardTitle,
+  DataView,
+  DataViewHeaderTemplate,
+  DataViewItemTemplate,
+  DataViewLayout,
+} from '@sushi-kit/angular';
 import { LucideShoppingCart } from '@lucide/angular';
 
 interface Product {
@@ -14,11 +24,23 @@ interface Product {
 
 @Component({
   selector: 'pg-data-view-layout-example',
-  imports: [Badge, Button, Card, CardActions, CardTitle, DataView, DataViewItemTemplate, LucideShoppingCart],
+  imports: [
+    Badge,
+    Button,
+    Card,
+    CardActions,
+    CardTitle,
+    DataView,
+    DataViewHeaderTemplate,
+    DataViewItemTemplate,
+    LucideShoppingCart,
+  ],
   templateUrl: './layout.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataViewLayoutExample {
+  protected readonly layout: WritableSignal<DataViewLayout> = signal<DataViewLayout>('list');
+
   protected readonly products: readonly Product[] = [
     {
       id: 1,
