@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField, required, SchemaPathTree } from '@angular/forms/signals';
-import { Button, Input, Join, JoinItem, Label } from '@sushi-kit/angular';
+import { Button, Input, InputGroup, JoinItem, Label } from '@sushi-kit/angular';
 
 interface InputModel {
   name: string;
@@ -8,7 +8,7 @@ interface InputModel {
 
 @Component({
   selector: 'pg-input-basic-example',
-  imports: [FormField, Button, Input, Join, JoinItem, Label],
+  imports: [FormField, Button, Input, InputGroup, JoinItem, Label],
   templateUrl: './basic.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

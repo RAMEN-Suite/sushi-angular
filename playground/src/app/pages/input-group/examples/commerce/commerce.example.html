@@ -1,7 +1,18 @@
-<div suiInputGroup orientation="responsive" class="w-full max-w-2xl">
-  <span suiInputGroupAddon>Budget</span>
-  <input suiInput suiJoinItem type="number" class="min-w-0 flex-1" placeholder="0.00" aria-label="Budget amount" />
-  <span suiInputGroupAddon>EUR</span>
-  <sui-select suiJoinItem class="w-36" ariaLabel="Billing period" [options]="periods" />
-  <button suiButton suiJoinItem type="button">Apply</button>
+<div class="grid w-full max-w-2xl gap-2">
+  <label suiLabel for="budget-amount">Budget</label>
+  <div class="grid gap-3 md:grid-cols-[minmax(0,1fr)_9rem_auto]">
+    <div suiInputGroup class="w-full">
+      <input
+        id="budget-amount"
+        suiInput
+        suiJoinItem
+        type="number"
+        class="min-w-0 flex-1"
+        placeholder="0.00"
+        aria-label="Budget amount" />
+      <span suiInputGroupAddon>EUR</span>
+    </div>
+    <sui-select fluid ariaLabel="Billing period" [options]="periods" />
+    <button suiButton type="button">Apply</button>
+  </div>
 </div>
