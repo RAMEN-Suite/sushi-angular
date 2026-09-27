@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here.
 
+## [0.1.1](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.1.0...v0.1.1) (2026-09-27)
+
+### Bug Fixes
+
+* **playground:** resolve assets from deployment base ([#2](https://github.com/RAMEN-Suite/sushi-angular/issues/2)) ([deb2a11](https://github.com/RAMEN-Suite/sushi-angular/commit/deb2a118d4051cb1b4196bd926644c7fe31a6214))
+* **sushi:** improve mobile layouts and selection feedback ([#4](https://github.com/RAMEN-Suite/sushi-angular/issues/4)) ([7faeed4](https://github.com/RAMEN-Suite/sushi-angular/commit/7faeed4bc51eb9e679f866dac777dcd31ffa4d91))
 ## 0.1.0 (2026-09-23)
 
 ### ⚠ BREAKING CHANGES
