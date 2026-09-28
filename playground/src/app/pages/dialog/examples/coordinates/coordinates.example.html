@@ -1,0 +1,23 @@
+<button suiButton type="button" [suiDialogTrigger]="positionedDialog">Open positioned dialog</button>
+
+<sui-dialog
+  #positionedDialog="suiDialog"
+  [position]="coordinates()"
+  draggable
+  resizable
+  ariaLabelledby="positioned-dialog-title">
+  <header suiDialogHeader><h2 id="positioned-dialog-title" class="text-lg font-semibold">Custom position</h2></header>
+  <div suiDialogBody>
+    <p>
+      Starts 80 pixels from the top and 1.5rem from the right. Drag the header to move it. Close and reopen to restore
+      these offsets.
+    </p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <button suiButton type="button" (click)="coordinates.set({ bottom: '1.5rem', left: 24 })">
+        Move to bottom left
+      </button>
+      <button suiButton type="button" (click)="coordinates.set('center')">Center dialog</button>
+      <button suiButton type="button" (click)="coordinates.set({ top: 80, right: '1.5rem' })">Restore offsets</button>
+    </div>
+  </div>
+</sui-dialog>

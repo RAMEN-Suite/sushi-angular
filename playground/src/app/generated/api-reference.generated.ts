@@ -2960,7 +2960,8 @@ export const apiReference: Readonly<{
         kind: 'input',
         type: 'DialogPosition',
         defaultValue: "'center'",
-        description: 'Places the Dialog at a viewport edge or corner.',
+        description:
+          'Named placement or viewport offsets (numbers in pixels, strings in CSS units). Defaults to center. Changes reposition an open Dialog; reopening restores this position after dragging. Custom offsets must leave room for the Dialog.',
       },
       {
         name: 'ariaLabel',
@@ -3068,12 +3069,47 @@ export const apiReference: Readonly<{
         typeParameters: [],
       },
       {
+        name: 'DialogCoordinates',
+        kind: 'interface',
+        source: 'library',
+        declaration:
+          'interface DialogCoordinates {\n  readonly top?: number | string;\n  readonly right?: number | string;\n  readonly bottom?: number | string;\n  readonly left?: number | string;\n}',
+        description: 'Viewport offsets. Numbers are pixels; strings are CSS lengths. Omitted edges are automatic.',
+        members: [
+          {
+            name: 'top',
+            type: 'number | string',
+            optional: true,
+            description: 'Distance from the top edge.',
+          },
+          {
+            name: 'right',
+            type: 'number | string',
+            optional: true,
+            description: 'Distance from the right edge.',
+          },
+          {
+            name: 'bottom',
+            type: 'number | string',
+            optional: true,
+            description: 'Distance from the bottom edge.',
+          },
+          {
+            name: 'left',
+            type: 'number | string',
+            optional: true,
+            description: 'Distance from the left edge.',
+          },
+        ],
+        typeParameters: [],
+      },
+      {
         name: 'DialogPosition',
         kind: 'type',
         source: 'library',
         declaration:
-          "type DialogPosition = 'center' | 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right' | 'left' | 'right';",
-        description: 'Placement of a Dialog inside the viewport.',
+          "type DialogPosition = 'center' | 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right' | 'left' | 'right' | DialogCoordinates;",
+        description: 'Named placement or custom viewport offsets for a Dialog.',
         members: [],
         typeParameters: [],
       },
