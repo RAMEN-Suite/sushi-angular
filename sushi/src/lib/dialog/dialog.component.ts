@@ -4,6 +4,7 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   ElementRef,
   inject,
@@ -41,7 +42,7 @@ let nextDialogId: number = 0;
       [attr.aria-label]="ariaLabel()"
       [attr.aria-labelledby]="ariaLabelledby()"
       [attr.aria-describedby]="ariaDescribedby()"
-      [attr.data-position]="position()"
+      [attr.data-position]="namedPosition()"
       [attr.data-draggable]="draggable()"
       [id]="dialogId"
       (cancel)="handleCancel($event)"
@@ -73,7 +74,7 @@ export class Dialog {
   public readonly closeOnBackdrop: InputSignalWithTransform<boolean, unknown> = input(true, {
     transform: booleanAttribute,
   });
-  /** Places the Dialog at a viewport edge or corner. */
+  /** Named placement or viewport offsets (numbers in pixels, strings in CSS units). Defaults to center. Changes reposition an open Dialog; reopening restores this position after dragging. Custom offsets must leave room for the Dialog. */
   public readonly position: InputSignal<DialogPosition> = input<DialogPosition>('center');
   /** Accessible name used when no visible heading labels the Dialog. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
@@ -97,12 +98,17 @@ export class Dialog {
 
   private readonly element: Signal<ElementRef<HTMLDialogElement>> =
     viewChild.required<ElementRef<HTMLDialogElement>>('nativeDialog');
+  protected readonly namedPosition: Signal<string | null> = computed((): string | null => {
+    const position: DialogPosition = this.position();
+    return typeof position === 'string' ? position : null;
+  });
   private readonly document: Document = inject(DOCUMENT);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
   private dragEnded: Subscription | null = null;
   private closeReason: DialogCloseReason = 'programmatic';
   private readonly drag: Signal<CdkDrag> = viewChild.required(CdkDrag);
   private restoreTarget: HTMLElement | null = null;
+  private appliedPosition: DialogPosition | null = null;
 
   public constructor() {
     afterRenderEffect({
@@ -181,15 +187,36 @@ export class Dialog {
 
   private syncOpenState(): void {
     const dialog: HTMLDialogElement = this.element().nativeElement;
-    if (this.open() === dialog.open) return;
+    const position: DialogPosition = this.position();
+    if (this.open() === dialog.open) {
+      if (dialog.open && position !== this.appliedPosition) this.applyPosition();
+      return;
+    }
     if (this.open()) {
       this.restoreTarget ??= this.activeElement();
       if (this.modal()) dialog.showModal();
       else dialog.show();
-      this.lockPosition();
+      this.applyPosition();
     } else {
       this.close();
     }
+  }
+
+  private applyPosition(): void {
+    this.drag().reset();
+    this.resetPosition();
+    const position: DialogPosition = this.position();
+    if (typeof position !== 'string') {
+      const style: CSSStyleDeclaration = this.element().nativeElement.style;
+      style.inset = 'auto';
+      style.margin = '0';
+      for (const edge of ['top', 'right', 'bottom', 'left'] as const) {
+        const value: number | string | undefined = position[edge];
+        if (value !== undefined) style[edge] = typeof value === 'number' ? `${value}px` : value;
+      }
+    }
+    this.lockPosition();
+    this.appliedPosition = position;
   }
 
   private lockPosition(): void {
