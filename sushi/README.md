@@ -1,6 +1,13 @@
-# Sushi in Angular
+# Sushi Angular
 
-Accessible, themeable Angular components for Ramen Suite, published as `@sushi-kit/angular`.
+[![npm version](https://img.shields.io/npm/v/%40sushi-kit%2Fangular)](https://www.npmjs.com/package/@sushi-kit/angular)
+[![CI](https://github.com/ramen-suite/sushi-angular/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/ramen-suite/sushi-angular/actions/workflows/ci.yml?query=branch%3Amain)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://github.com/ramen-suite/sushi-angular/blob/main/LICENSE)
+[![Playground](https://img.shields.io/badge/docs-Playground-f2b66d)](https://ramen-suite.github.io/sushi-angular/)
+
+Sushi is an open-source UI component library for Angular applications, published as `@sushi-kit/angular`. It provides standalone components for forms, navigation, data display, and overlays, with typed signal APIs and customizable light and dark themes.
+
+Interactions build on native HTML semantics, Angular Aria, and the CDK. Component styles are included; customize their appearance with CSS tokens to match your application.
 
 ## Compatibility
 
