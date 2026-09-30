@@ -1,6 +1,6 @@
-# Sushi in Angular
+# Sushi Kit for Angular
 
-Sushi is the Angular component library in Ramen Suite, published as `@sushi-kit/angular`. It provides accessible, themeable components with typed signal APIs. Application state stays in Angular; interactions use native HTML semantics, Angular Aria, and the CDK.
+Sushi Kit is an open-source component library for Angular applications, published as `@sushi-kit/angular`. It provides accessible, themeable components with typed signal APIs. Interactions build on native HTML semantics, Angular Aria, and the CDK.
 
 ## Compatibility
 
@@ -16,7 +16,7 @@ Sushi ships the compiled CSS required by its components.
 
 The [Getting started guide](docs/getting-started.md) contains the same setup as the Playground and is the maintained setup reference.
 
-See [Styling and themes](docs/styling-and-themes.md) for theme tokens, component tokens, recommended Tailwind usage, and custom themes.
+See [Styling and themes](docs/styling-and-themes.md) for component tokens, recommended Tailwind usage, and custom themes. All built-in values are listed in the [theme token reference](docs/theme-tokens.md).
 
 ```bash
 npm install @sushi-kit/angular

@@ -1,4 +1,4 @@
-# Sushi Angular
+# Sushi Kit for Angular
 
 [![npm version](https://img.shields.io/npm/v/%40sushi-kit%2Fangular)](https://www.npmjs.com/package/@sushi-kit/angular)
 [![CI](https://github.com/ramen-suite/sushi-angular/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/ramen-suite/sushi-angular/actions/workflows/ci.yml?query=branch%3Amain)
@@ -57,4 +57,4 @@ Theme tokens, component APIs, and examples are documented in the [Sushi Playgrou
 
 ## License
 
-[MIT](https://github.com/ramen-suite/sushi-angular/blob/main/LICENSE)
+[MIT](https://github.com/ramen-suite/sushi-angular/blob/main/LICENSE). Third-party notices are included with the package.
