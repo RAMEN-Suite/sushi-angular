@@ -42,7 +42,7 @@ export const THEME_TOKEN_REFERENCES: readonly ThemeTokenReference[] = [
     lightValue: '#7a0712',
     darkValue: '#e35a60',
     group: 'Brand',
-    purpose: 'Primary actions and selection.',
+    purpose: 'Primary actions and emphasis.',
   },
   {
     token: '--color-primary-content',

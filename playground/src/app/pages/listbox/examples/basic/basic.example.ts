@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, Label, Listbox, ListboxModelValue, ListboxOption } from '@sushi-kit/angular';
+import { Label, Listbox, ListboxModelValue, ListboxOption } from '@sushi-kit/angular';
 
 interface WorkspaceForm {
   workspace: ListboxModelValue;
@@ -8,7 +8,7 @@ interface WorkspaceForm {
 
 @Component({
   selector: 'pg-listbox-basic-example',
-  imports: [Button, FormField, Label, Listbox],
+  imports: [FormField, Label, Listbox],
   templateUrl: './basic.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -21,8 +21,4 @@ export class ListboxBasicExample {
   ];
   protected readonly model: WritableSignal<WorkspaceForm> = signal<WorkspaceForm>({ workspace: 'design' });
   protected readonly workspaceForm: FieldTree<WorkspaceForm> = form(this.model);
-
-  protected reset(): void {
-    this.workspaceForm().reset({ workspace: 'design' });
-  }
 }

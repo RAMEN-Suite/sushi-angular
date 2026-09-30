@@ -9,6 +9,22 @@
   transition-property: opacity, background-color, border-color, color, transform;
 }
 
+.sui-button.btn:not(.sui-button--disabled):active {
+  /** Scale of an enabled button while pressed, including touch input. */
+  transform: scale(var(--sui-button-pressed-scale, 0.97));
+  transition-duration: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sui-button.btn {
+    transition-duration: 0s;
+  }
+
+  .sui-button.btn:not(.sui-button--disabled):active {
+    transform: none;
+  }
+}
+
 .sui-button.btn.sui-button--disabled {
   cursor: not-allowed;
   pointer-events: auto;

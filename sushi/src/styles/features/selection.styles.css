@@ -30,16 +30,16 @@
 
 .sui-selection-option:is([aria-selected='true'], [data-matched='true']) {
   /** Background of a selected or matched option. */
-  background-color: var(--sui-selection-option-selected-background, color-mix(in oklab, var(--color-primary) 15%, transparent));
+  background-color: var(--sui-selection-option-selected-background, color-mix(in oklab, var(--color-base-content) 10%, transparent));
   /** Text color of a selected or matched option. */
-  color: var(--sui-selection-option-selected-color, var(--color-primary));
+  color: var(--sui-selection-option-selected-color, var(--color-base-content));
 }
 
 .sui-selection-option:not([aria-disabled='true']):is([aria-selected='true'], [data-matched='true']):hover,
 .sui-selection-list:not(.sui-selection-list--focus-bound) .sui-selection-option:not([aria-disabled='true']):is([aria-selected='true'], [data-matched='true'])[data-active='true'],
 .sui-selection-list--focus-bound:focus .sui-selection-option:not([aria-disabled='true']):is([aria-selected='true'], [data-matched='true'])[data-active='true'] {
   /** Background of a selected option when hovered, pressed, or actively navigated. */
-  background-color: var(--sui-selection-option-selected-hover-background, color-mix(in oklab, var(--color-primary) 20%, transparent));
+  background-color: var(--sui-selection-option-selected-hover-background, color-mix(in oklab, var(--color-base-content) 15%, transparent));
 }
 
 .sui-selection-list.sui-selection-list[aria-disabled='true'] .sui-selection-option {

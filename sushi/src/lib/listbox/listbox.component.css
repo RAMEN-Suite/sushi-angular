@@ -1,0 +1,15 @@
+:host {
+  /** Minimum height of a listbox option. */
+  --sui-listbox-option-min-height: 2.5rem;
+  /** Padding inside a listbox option. */
+  --sui-listbox-option-padding: 0.5rem 0.75rem;
+}
+
+.sui-listbox-option {
+  min-height: var(--sui-listbox-option-min-height);
+  padding: var(--sui-listbox-option-padding);
+}
+
+.sui-listbox-option::after {
+  display: none;
+}
