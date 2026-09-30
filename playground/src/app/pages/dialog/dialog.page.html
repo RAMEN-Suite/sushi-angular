@@ -1,15 +1,16 @@
-<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="grid gap-4 py-2">
+<main class="pg-page">
+  <section class="pg-page__header">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Dialog</h1>
       <p class="text-lg text-base-content/70">Present a focused modal task with native semantics and explicit close results.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Dialog architecture">
-      <span suiBadge variant="soft" size="sm">Native dialog</span><span suiBadge variant="soft" size="sm">Two-way binding</span
-      ><span suiBadge variant="soft" size="sm">Focus restoration</span>
+      <span suiBadge severity="neutral" variant="soft" size="sm">Native dialog</span
+      ><span suiBadge severity="neutral" variant="soft" size="sm">Two-way binding</span
+      ><span suiBadge severity="neutral" variant="soft" size="sm">Focus restoration</span>
     </div>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Basic modal</h2>
       <p class="text-base-content/60">Open a native modal, close it from an action, and restore focus to its trigger.</p>
@@ -18,7 +19,7 @@
       ><ng-template pgExamplePreview><pg-dialog-basic-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Movable workspace</h2>
       <p class="text-base-content/60">
@@ -31,7 +32,7 @@
       ><ng-template pgExamplePreview><pg-dialog-advanced-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Custom coordinates</h2>
       <p class="text-base-content/60">
@@ -43,7 +44,7 @@
       <ng-template pgExamplePreview><pg-dialog-coordinates-example /></ng-template>
     </pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Form dialog</h2>
       <p class="text-base-content/60">Use the same controlled state with a larger, structured form.</p>
@@ -52,7 +53,7 @@
       ><ng-template pgExamplePreview><pg-dialog-form-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Dynamic dialog with Angular CDK</h2>
       <p class="text-base-content/60">

@@ -1,14 +1,15 @@
-<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="grid gap-4 py-2">
+<main class="pg-page">
+  <section class="pg-page__header">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Button</h1>
       <p class="text-lg text-base-content/70">Trigger actions while preserving native button and link behavior.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Button architecture">
-      <span suiBadge variant="soft" size="sm">Directive</span><span suiBadge variant="soft" size="sm">Native element</span>
+      <span suiBadge severity="neutral" variant="soft" size="sm">Directive</span
+      ><span suiBadge severity="neutral" variant="soft" size="sm">Native element</span>
     </div>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Native actions</h2>
       <p class="text-base-content/60">Use the same directive on buttons, external links, and router links.</p>
@@ -17,7 +18,7 @@
       ><ng-template pgExamplePreview><pg-button-basic-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Appearance</h2>
       <p class="text-base-content/60">Combine severity, variant, size, and shape without changing behavior.</p>
@@ -26,7 +27,7 @@
       ><ng-template pgExamplePreview><pg-button-appearance-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Disabled and loading</h2>
       <p class="text-base-content/60">Both states prevent activation; loading also exposes the busy state.</p>

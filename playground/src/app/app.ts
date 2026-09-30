@@ -13,7 +13,7 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import {
   LucideHouse,
   LucideGitPullRequest,
@@ -78,6 +78,7 @@ type PlaygroundTheme = 'sushi' | 'sushi-dark';
     Navbar,
     NavbarAction,
     NavbarBrand,
+    RouterLink,
     RouterOutlet,
     Sidebar,
     SidebarGroupTemplate,

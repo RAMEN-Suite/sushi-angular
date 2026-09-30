@@ -14,6 +14,7 @@ const DOCUMENT_ROUTES: Readonly<Record<string, string>> = {
   'CONTRIBUTING.md': '/contribute',
   'getting-started.md': '/getting-started',
   'styling-and-themes.md': '/styling-and-themes',
+  'theme-tokens.md': '/theme-tokens',
   'component-development.md': '/contribute/components',
   'component-styling.md': '/contribute/styles',
   'coding-conventions.md': '/contribute/code',
@@ -32,6 +33,7 @@ export class ContributorPage {
   private readonly router: Router = inject(Router);
 
   protected readonly page: ContributorPageData = this.route.snapshot.data as ContributorPageData;
+  protected readonly sectionLabel: string = this.router.url.startsWith('/contribute') ? 'Contribute' : 'Sushi guide';
 
   protected openDocument(href: string): void {
     const fileName: string | undefined = href.split('/').at(-1);

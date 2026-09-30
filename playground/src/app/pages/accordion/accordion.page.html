@@ -1,5 +1,5 @@
-<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="grid gap-4 py-2">
+<main class="pg-page">
+  <section class="pg-page__header">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Accordion</h1>
       <p class="text-lg text-base-content/70">
@@ -7,12 +7,13 @@
       </p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Accordion architecture">
-      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Angular Aria</span
-      ><span suiBadge variant="soft" size="sm">Templates</span>
+      <span suiBadge severity="neutral" variant="soft" size="sm">Component</span
+      ><span suiBadge severity="neutral" variant="soft" size="sm">Angular Aria</span
+      ><span suiBadge severity="neutral" variant="soft" size="sm">Templates</span>
     </div>
   </section>
 
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Basic</h2>
       <p class="text-base-content/60">Group concise, related disclosures with one section expanded at a time.</p>
@@ -21,7 +22,7 @@
       ><ng-template pgExamplePreview><pg-accordion-basic-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Multiple and controlled</h2>
       <p class="text-base-content/60">Bind expansion state and control all enabled sections when the workflow requires it.</p>
@@ -30,7 +31,7 @@
       ><ng-template pgExamplePreview><pg-accordion-control-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Custom headings</h2>
       <p class="text-base-content/60">Enrich headings and indicators while the Accordion retains accessible trigger behavior.</p>
@@ -39,7 +40,7 @@
       ><ng-template pgExamplePreview><pg-accordion-templates-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Sizes</h2>
       <p class="text-base-content/60">Match disclosure density to the surrounding content.</p>

@@ -1,18 +1,18 @@
-<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="grid gap-4 py-2">
+<main class="pg-page">
+  <section class="pg-page__header">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Color Picker</h1>
       <p class="text-lg text-base-content/70">Choose with the native picker, enter an exact hex value, or start from curated presets.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Color Picker architecture">
-      <span suiBadge variant="soft" size="sm">Component</span>
-      <span suiBadge variant="soft" size="sm">Signal Forms</span>
-      <span suiBadge variant="soft" size="sm">Templates</span>
-      <span suiBadge variant="soft" size="sm">Projected content</span>
+      <span suiBadge severity="neutral" variant="soft" size="sm">Component</span>
+      <span suiBadge severity="neutral" variant="soft" size="sm">Signal Forms</span>
+      <span suiBadge severity="neutral" variant="soft" size="sm">Templates</span>
+      <span suiBadge severity="neutral" variant="soft" size="sm">Projected content</span>
     </div>
   </section>
 
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Signal Forms</h2>
       <p class="text-base-content/60">The native picker and hex field edit one string value and reset to an explicit default.</p>
@@ -22,7 +22,7 @@
     </pg-example-code>
   </section>
 
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Application palette</h2>
       <p class="text-base-content/60">Presets provide accessible shortcuts, while a template can replace each option’s content.</p>
@@ -32,7 +32,7 @@
     </pg-example-code>
   </section>
 
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Compact and form states</h2>
       <p class="text-base-content/60">Hide the hex field for compact contexts or communicate disabled and invalid states explicitly.</p>

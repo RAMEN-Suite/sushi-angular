@@ -1,15 +1,17 @@
-<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="grid gap-4 py-2">
+<main class="pg-page">
+  <section class="pg-page__header">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Menu</h1>
       <p class="text-lg text-base-content/70">Present related application commands inline, from a trigger, or at a context-menu gesture.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Menu architecture">
-      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Angular Aria</span
-      ><span suiBadge variant="soft" size="sm">Angular CDK</span><span suiBadge variant="soft" size="sm">Templates</span>
+      <span suiBadge severity="neutral" variant="soft" size="sm">Component</span
+      ><span suiBadge severity="neutral" variant="soft" size="sm">Angular Aria</span
+      ><span suiBadge severity="neutral" variant="soft" size="sm">Angular CDK</span
+      ><span suiBadge severity="neutral" variant="soft" size="sm">Templates</span>
     </div>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Inline command menu</h2>
       <p class="text-base-content/60">Keep a small set of application commands visible beside the content they affect.</p>
@@ -18,7 +20,7 @@
       ><ng-template pgExamplePreview><pg-menu-basic-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Active state and custom icons</h2>
       <p class="text-base-content/60">Extend the item model and render additional content through the item template.</p>
@@ -27,7 +29,7 @@
       ><ng-template pgExamplePreview><pg-menu-active-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Split-button dropdown</h2>
       <p class="text-base-content/60">Keep the common action visible and place related alternatives in a triggered overlay.</p>
@@ -36,7 +38,7 @@
       ><ng-template pgExamplePreview><pg-menu-popup-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Context menu</h2>
       <p class="text-base-content/60">Open commands at the pointer or with <kbd suiKbd size="sm">Shift + F10</kbd>.</p>
@@ -45,7 +47,7 @@
       ><ng-template pgExamplePreview><pg-menu-context-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Nested commands</h2>
       <p class="text-base-content/60">Group secondary commands in submenus with pointer and keyboard navigation.</p>
@@ -54,7 +56,7 @@
       ><ng-template pgExamplePreview><pg-menu-submenu-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Groups and templates</h2>
       <p class="text-base-content/60">Customize repeated entries and structural regions while Menu owns interaction.</p>
@@ -63,7 +65,7 @@
       ><ng-template pgExamplePreview><pg-menu-groups-example /></ng-template
     ></pg-example-code>
   </section>
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Disabled states</h2>
       <p class="text-base-content/60">Disable one unavailable command or the complete menu without hiding it.</p>
