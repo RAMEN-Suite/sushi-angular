@@ -113,6 +113,53 @@ test('enables native bidirectional resizing', async ({ page }: { page: Page }): 
   await expect(dialog).toHaveCSS('resize', 'both');
 });
 
+test('custom coordinates are restored when reopening after dragging', async ({ page }: { page: Page }): Promise<void> => {
+  const trigger: Locator = page.getByRole('button', { name: 'Open positioned dialog' });
+  const dialog: Locator = page.getByRole('dialog', { name: 'Custom position' });
+  await trigger.click();
+  const initial: Bounds | null = await dialog.boundingBox();
+  if (!initial) throw new Error('Expected a visible custom-positioned Dialog.');
+  // These offsets are explicitly configured by the public API, not incidental layout pixels.
+  await expect(async (): Promise<void> => {
+    const bounds: Bounds | null = await dialog.boundingBox();
+    if (!bounds) throw new Error('Expected a visible custom-positioned Dialog.');
+    const viewportWidth: number = await page.evaluate((): number => document.documentElement.clientWidth);
+    const rem: number = await page.evaluate((): number => Number.parseFloat(getComputedStyle(document.documentElement).fontSize));
+    expect(bounds.y).toBeCloseTo(80, 0);
+    expect(viewportWidth - bounds.x - bounds.width).toBeCloseTo(1.5 * rem, 0);
+  }).toPass({ timeout: 5_000 });
+
+  const header: Bounds | null = await dialog.locator('[suiDialogHeader]').boundingBox();
+  if (!header) throw new Error('Expected a draggable header.');
+  await page.mouse.move(header.x + header.width / 2, header.y + header.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(header.x + header.width / 2 - 100, header.y + header.height / 2 + 40, { steps: 5 });
+  await page.mouse.up();
+  await expect.poll(async (): Promise<number> => (await dialog.boundingBox())?.x ?? initial.x).toBeLessThan(initial.x);
+  await dialog.getByRole('button', { name: 'Close', exact: true }).click();
+  await expect(dialog).toBeHidden();
+  await trigger.click();
+  await expect(async (): Promise<void> => {
+    const reopened: Bounds | null = await dialog.boundingBox();
+    expect(reopened?.x).toBeCloseTo(initial.x, 0);
+    expect(reopened?.y).toBeCloseTo(initial.y, 0);
+  }).toPass({ timeout: 5_000 });
+});
+
+test('custom coordinates can change while the Dialog is open', async ({ page }: { page: Page }): Promise<void> => {
+  await page.getByRole('button', { name: 'Open positioned dialog' }).click();
+  const dialog: Locator = page.getByRole('dialog', { name: 'Custom position' });
+  await dialog.getByRole('button', { name: 'Move to bottom left' }).click();
+  await expect(async (): Promise<void> => {
+    const bounds: Bounds | null = await dialog.boundingBox();
+    if (!bounds) throw new Error('Expected the repositioned Dialog to remain visible.');
+    const viewportHeight: number = await page.evaluate((): number => document.documentElement.clientHeight);
+    const rem: number = await page.evaluate((): number => Number.parseFloat(getComputedStyle(document.documentElement).fontSize));
+    expect(bounds.x).toBeCloseTo(24, 0);
+    expect(viewportHeight - bounds.y - bounds.height).toBeCloseTo(1.5 * rem, 0);
+  }).toPass({ timeout: 5_000 });
+});
+
 test('resizes in place without moving the Dialog origin', async ({
   page,
   browserName,

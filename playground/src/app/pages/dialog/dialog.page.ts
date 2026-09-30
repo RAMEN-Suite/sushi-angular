@@ -8,6 +8,9 @@ import * as advancedCss from './examples/advanced/advanced.example.css' with { l
 import advancedHtml from './examples/advanced/advanced.example.html';
 import * as advancedTs from './examples/advanced/advanced.example.ts' with { loader: 'text' };
 import { DialogBasicExample } from './examples/basic/basic.example';
+import { DialogCoordinatesExample } from './examples/coordinates/coordinates.example';
+import coordinatesHtml from './examples/coordinates/coordinates.example.html';
+import * as coordinatesTs from './examples/coordinates/coordinates.example.ts' with { loader: 'text' };
 import basicHtml from './examples/basic/basic.example.html';
 import * as basicTs from './examples/basic/basic.example.ts' with { loader: 'text' };
 import { DialogFormExample } from './examples/form/form.example';
@@ -24,6 +27,7 @@ import * as dynamicTs from './examples/dynamic/dynamic.example.ts' with { loader
     Badge,
     DialogAdvancedExample,
     DialogBasicExample,
+    DialogCoordinatesExample,
     DialogDynamicExample,
     DialogFormExample,
     ExampleCode,
@@ -33,8 +37,9 @@ import * as dynamicTs from './examples/dynamic/dynamic.example.ts' with { loader
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogPage {
-  protected readonly examples: Readonly<Record<'advanced' | 'basic' | 'dynamic' | 'form', ExampleSource>> = {
+  protected readonly examples: Readonly<Record<'advanced' | 'basic' | 'coordinates' | 'dynamic' | 'form', ExampleSource>> = {
     basic: { html: basicHtml, typescript: textSource(basicTs) },
+    coordinates: { html: coordinatesHtml, typescript: textSource(coordinatesTs) },
     advanced: { css: textSource(advancedCss), html: advancedHtml, typescript: textSource(advancedTs) },
     form: { css: textSource(formCss), html: formHtml, typescript: textSource(formTs) },
     dynamic: { html: dynamicHtml, typescript: textSource(dynamicTs) },
