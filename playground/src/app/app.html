@@ -126,41 +126,7 @@
     </div>
 
     <ng-template [suiSidebarGroup]="sidebar" let-group>
-      @switch (group.label) {
-        @case ('General') {
-          <svg lucideHouse class="size-3.5" aria-hidden="true"></svg>
-        }
-        @case ('Contribute') {
-          <svg lucideGitPullRequest class="size-3.5" aria-hidden="true"></svg>
-        }
-        @case ('Inputs') {
-          <svg lucideTextCursorInput class="size-3.5" aria-hidden="true"></svg>
-        }
-        @case ('Selection') {
-          <svg lucideListChecks class="size-3.5" aria-hidden="true"></svg>
-        }
-        @case ('Form Structure') {
-          <svg lucideRows3 class="size-3.5" aria-hidden="true"></svg>
-        }
-        @case ('Actions') {
-          <svg lucideMousePointerClick class="size-3.5" aria-hidden="true"></svg>
-        }
-        @case ('Navigation') {
-          <svg lucideNavigation class="size-3.5" aria-hidden="true"></svg>
-        }
-        @case ('Feedback') {
-          <svg lucideMessageCircle class="size-3.5" aria-hidden="true"></svg>
-        }
-        @case ('Data Display') {
-          <svg lucideTableProperties class="size-3.5" aria-hidden="true"></svg>
-        }
-        @case ('Layout') {
-          <svg lucidePanelsTopLeft class="size-3.5" aria-hidden="true"></svg>
-        }
-        @case ('Utilities') {
-          <svg lucideWrench class="size-3.5" aria-hidden="true"></svg>
-        }
-      }
+      <svg [lucideIcon]="group.icon" class="size-3.5" aria-hidden="true"></svg>
       <span>{{ group.heading ?? group.label }}</span>
     </ng-template>
   </sui-sidebar>
