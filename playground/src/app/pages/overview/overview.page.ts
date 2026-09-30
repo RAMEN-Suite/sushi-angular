@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Card, Code, CodeLine, Tab, Tabs, TabsValue } from '@sushi-kit/angular';
+import { Code, CodeLine, Tab, Tabs, TabsValue } from '@sushi-kit/angular';
 import { highlightLines } from '../../shared/example-code/example-highlighter';
 import { textSource } from '../../shared/example-code/example-source';
 import inviteHtml from './examples/invite/invite.example.html';
@@ -8,8 +8,9 @@ import { OverviewInviteExample } from './examples/invite/invite.example';
 
 @Component({
   selector: 'pg-overview-page',
-  imports: [Card, Code, CodeLine, OverviewInviteExample, Tab, Tabs],
+  imports: [Code, CodeLine, OverviewInviteExample, Tab, Tabs],
   templateUrl: './overview.page.html',
+  styleUrl: './overview.page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OverviewPage {

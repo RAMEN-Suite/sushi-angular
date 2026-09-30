@@ -1,15 +1,15 @@
 # Styling and themes
 
-Sushi ships compiled component CSS and two themes. Its styling implementation builds on DaisyUI, but DaisyUI is not part of the Sushi consumer API. The stylesheet does not include Tailwind's global Preflight reset.
+Sushi ships compiled component CSS and two themes. Its styling implementation builds on [DaisyUI](https://daisyui.com/), but DaisyUI is not part of the Sushi consumer API. The stylesheet does not include Tailwind's global Preflight reset.
 
 ## Choose the right styling level
 
 1. Use a component input for a supported state or appearance.
 2. Use a documented `--sui-*` token to change one component.
 3. Change semantic theme tokens for an application-wide design decision.
-4. Use Tailwind utilities for consumer-owned layout and responsive composition.
+4. Use [Tailwind CSS](https://tailwindcss.com/) utilities for consumer-owned layout and responsive composition.
 
-Do not target a Sushi component's internal elements or classes.
+We do not recommend targeting a Sushi component's internal elements or classes.
 
 ## Customize one component
 
@@ -64,7 +64,7 @@ A nested `data-theme` applies another theme to that region. Keep foreground and 
 
 ## Theme contract
 
-Use the DaisyUI color roles for the application palette. Every background color has a matching `*-content` foreground.
+Sushi exposes semantic color roles for the application palette. They follow [DaisyUI's color system](https://daisyui.com/docs/colors/); pair each background role with its matching `*-content` foreground.
 
 | Role                                                                  | Purpose                                           |
 | --------------------------------------------------------------------- | ------------------------------------------------- |
@@ -90,9 +90,11 @@ Sushi derives shared interaction and overlay styles from these semantic tokens. 
 
 Component tokens remain the correct choice for a local exception. For example, `--sui-popover-shadow` defaults to `--sui-shadow-overlay` but can be changed on one popover.
 
+See the [theme token reference](theme-tokens.md) for every built-in light and dark value.
+
 ## Tailwind recommendation
 
-Tailwind is the recommended way to compose application layout around Sushi components. Install it when the application needs utilities:
+[Tailwind CSS](https://tailwindcss.com/docs/installation/framework-guides/angular) is the recommended way to compose application layout around Sushi components. Install it when the application needs utilities:
 
 ```bash
 npm install --save-dev tailwindcss @tailwindcss/postcss postcss

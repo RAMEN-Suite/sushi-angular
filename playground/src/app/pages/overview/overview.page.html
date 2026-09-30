@@ -1,54 +1,56 @@
-<main class="mx-auto max-w-7xl space-y-16 px-4 py-8 sm:px-8 sm:py-12">
-  <section>
-    <sui-card size="xl" class="border-primary/20 bg-base-200/45">
-      <div class="grid gap-8 py-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(19rem,0.8fr)] lg:items-center lg:py-8">
-        <div class="space-y-4">
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary">Angular component library</p>
-          <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">Sushi</h1>
-          <p class="text-xl font-medium sm:text-2xl">Build consistent interfaces from composable components.</p>
-          <p class="leading-relaxed text-base-content/65">Accessible behavior, typed APIs, and flexible theme tokens are included.</p>
-        </div>
+<main class="pg-overview">
+  <section class="pg-overview__hero">
+    <div class="pg-overview__intro">
+      <p class="pg-overview__kicker">Sushi Kit / Angular</p>
+      <h1>Roll your UI.</h1>
+      <p class="pg-overview__lead">
+        Build accessible Angular interfaces from typed, composable components. Start with the Sushi theme or adapt every part.
+      </p>
 
-        <div class="rounded-box border border-base-300 bg-base-100 p-6 sm:p-8">
-          <p class="mb-3 text-sm font-semibold text-base-content/60">Install the package</p>
-          <code class="block overflow-x-auto font-mono text-sm font-semibold">npm install @sushi-kit/angular</code>
-        </div>
+      <div class="pg-overview__install" aria-label="Install Sushi Kit for Angular">
+        <span>Install</span>
+        <code>npm install @sushi-kit/angular</code>
       </div>
-    </sui-card>
+    </div>
   </section>
 
-  <section id="example" class="scroll-mt-24 space-y-6">
-    <div class="max-w-2xl space-y-2">
-      <h2 class="text-3xl font-bold tracking-tight">See the system in context</h2>
-      <p class="text-base-content/65">A complete form flow composed from public Sushi APIs, without custom component logic.</p>
-    </div>
+  <section id="example" class="pg-overview__showcase">
+    <header>
+      <p class="pg-overview__kicker">One system</p>
+      <h2>See the components working together</h2>
+      <p>A complete form flow composed from public Sushi APIs.</p>
+    </header>
 
-    <sui-tabs [(value)]="showcaseTab" ariaLabel="Team invitation example" variant="lift">
-      <ng-template suiTab value="preview" label="Preview">
-        <div class="p-4 sm:p-7">
-          <pg-overview-invite-example />
-        </div>
-      </ng-template>
+    <div class="pg-example">
+      <sui-tabs
+        class="pg-example__tabs"
+        [(value)]="showcaseTab"
+        ariaLabel="Team invitation example"
+        variant="plain"
+        style="--sui-tabs-panel-padding: 0"
+      >
+        <ng-template suiTab value="preview" label="Preview">
+          <div class="pg-example__preview">
+            <pg-overview-invite-example />
+          </div>
+        </ng-template>
 
-      <ng-template suiTab value="html" label="HTML">
-        <div class="p-4 sm:p-6">
-          <sui-code buttonAriaLabel="Copy invitation HTML">
+        <ng-template suiTab value="html" label="HTML">
+          <sui-code class="pg-example__source" buttonAriaLabel="Copy invitation HTML">
             @for (line of showcaseHtmlLines; track $index) {
               <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
             }
           </sui-code>
-        </div>
-      </ng-template>
+        </ng-template>
 
-      <ng-template suiTab value="typescript" label="TypeScript">
-        <div class="p-4 sm:p-6">
-          <sui-code buttonAriaLabel="Copy invitation TypeScript">
+        <ng-template suiTab value="typescript" label="TypeScript">
+          <sui-code class="pg-example__source" buttonAriaLabel="Copy invitation TypeScript">
             @for (line of showcaseTypescriptLines; track $index) {
               <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
             }
           </sui-code>
-        </div>
-      </ng-template>
-    </sui-tabs>
+        </ng-template>
+      </sui-tabs>
+    </div>
   </section>
 </main>

@@ -1,5 +1,5 @@
-<main class="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-8 sm:py-10">
-  <section class="grid gap-4 py-2">
+<main class="pg-page">
+  <section class="pg-page__header">
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Table</h1>
       <p class="text-lg text-base-content/70">
@@ -7,11 +7,12 @@
       </p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Table architecture">
-      <span suiBadge variant="soft" size="sm">Component</span><span suiBadge variant="soft" size="sm">Templates</span>
+      <span suiBadge severity="neutral" variant="soft" size="sm">Component</span
+      ><span suiBadge severity="neutral" variant="soft" size="sm">Templates</span>
     </div>
   </section>
 
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Basic table</h2>
       <p class="text-base-content/60">Define typed columns once and render records with native table semantics.</p>
@@ -21,7 +22,7 @@
     ></pg-example-code>
   </section>
 
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Search, sort, and paginate</h2>
       <p class="text-base-content/60">Compose controlled collection state with existing SUSHI controls.</p>
@@ -31,7 +32,7 @@
     ></pg-example-code>
   </section>
 
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Appearance and overflow</h2>
       <p class="text-base-content/60">Adjust density and row treatment, or pin headings and the first column while scrolling.</p>
@@ -44,7 +45,7 @@
     ></pg-example-code>
   </section>
 
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Collection states</h2>
       <p class="text-base-content/60">Keep headings stable while loading or displaying an empty collection.</p>
@@ -54,7 +55,7 @@
     ></pg-example-code>
   </section>
 
-  <section class="space-y-6">
+  <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Templates</h2>
       <p class="text-base-content/60">Replace captions, headings, cells, rows, states, and the footer when richer content requires it.</p>

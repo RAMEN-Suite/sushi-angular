@@ -305,6 +305,7 @@ export const generalNavigation: readonly NavbarItem<string>[] = [
   ...overviewNavigation,
   { label: 'Getting started', value: '/getting-started', routerLink: '/getting-started' },
   { label: 'Styling & themes', value: '/styling-and-themes', routerLink: '/styling-and-themes' },
+  { label: 'Theme tokens', value: '/theme-tokens', routerLink: '/theme-tokens' },
 ];
 
 export const contributorNavigation: readonly NavbarItem<string>[] = [

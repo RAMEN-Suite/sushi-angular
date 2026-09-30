@@ -38,8 +38,18 @@ export const routes: Routes = [
     title: 'Styling and themes | Sushi Playground',
     data: {
       title: 'Styling and themes',
-      description: 'Use theme values, component tokens, and Tailwind utilities without coupling component logic to styling.',
+      description: 'Customize Sushi with themes, tokens, and utilities.',
       source: '/repository-docs/styling-and-themes.md',
+    },
+  },
+  {
+    path: 'theme-tokens',
+    loadComponent: () => import('./pages/contributor/contributor.page').then(({ ContributorPage }) => ContributorPage),
+    title: 'Theme token reference | Sushi Playground',
+    data: {
+      title: 'Theme token reference',
+      description: 'Browse the built-in light and dark theme values.',
+      source: '/repository-docs/theme-tokens.md',
       themeTokens: true,
     },
   },

@@ -16,6 +16,15 @@
   display: none;
 }
 
+.sui-tabs__list.tabs-box,
+.sui-tabs__list.tabs-box > .sui-tab:is(.tab-active, [aria-selected='true']) {
+  box-shadow: none;
+}
+
+.sui-tabs__list.tabs-box > .sui-tab:focus-visible {
+  box-shadow: inset 0 0 0 var(--sui-focus-ring-width) currentColor;
+}
+
 .sui-tabs__root--vertical {
   @apply flex-col gap-3 sm:flex-row;
 }

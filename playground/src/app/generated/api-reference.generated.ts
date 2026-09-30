@@ -1322,7 +1322,14 @@ export const apiReference: Readonly<{
         typeParameters: [],
       },
     ],
-    styles: [],
+    styles: [
+      {
+        name: '--sui-button-pressed-scale',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Scale of an enabled button while pressed, including touch input.',
+      },
+    ],
   },
   Card: {
     className: 'Card',
@@ -6973,6 +6980,18 @@ export const apiReference: Readonly<{
       },
     ],
     styles: [
+      {
+        name: '--sui-listbox-option-min-height',
+        defaultValue: '2.5rem',
+        exampleValue: null,
+        description: 'Minimum height of a listbox option.',
+      },
+      {
+        name: '--sui-listbox-option-padding',
+        defaultValue: '0.5rem 0.75rem',
+        exampleValue: null,
+        description: 'Padding inside a listbox option.',
+      },
       {
         name: '--sui-selection-option-hover-background',
         defaultValue: 'theme default',

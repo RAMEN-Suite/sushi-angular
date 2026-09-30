@@ -1,6 +1,12 @@
-# Getting started
+## Compatibility
 
-Sushi requires Angular 22.x.
+| Sushi Kit | Angular |
+| --------- | ------- |
+| `0.1.x`   | `22.x`  |
+
+The package peer dependencies are the source of truth for the supported Angular range.
+
+# Getting started
 
 ## 1. Install
 
@@ -8,7 +14,7 @@ Sushi requires Angular 22.x.
 npm install @sushi-kit/angular
 ```
 
-npm installs the Angular, CDK, Aria, Router, RxJS, Lucide, and PhotoSwipe peer dependencies required by the package.
+npm also installs the required peer dependencies, including [Lucide Angular](https://lucide.dev) and [PhotoSwipe](https://photoswipe.com/). Lucide uses the ISC license; PhotoSwipe uses MIT.
 
 ## 2. Load the styles
 

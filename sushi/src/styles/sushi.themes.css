@@ -15,7 +15,7 @@
   --color-base-content: var(--color-zinc-950);
 
   /* Brand */
-  /** @group Brand | Primary actions and selection. */
+  /** @group Brand | Primary actions and emphasis. */
   --color-primary: #7a0712;
   /** @group Brand | Content on the primary color. */
   --color-primary-content: #ffffff;

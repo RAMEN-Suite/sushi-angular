@@ -1,17 +1,5 @@
 <div class="grid w-full max-w-xl gap-2">
   <label suiLabel for="input-name">Name</label>
-  <div suiInputGroup orientation="responsive" class="w-full">
-    <input
-      id="input-name"
-      suiInput
-      suiJoinItem
-      class="w-full min-w-0 md:w-auto md:flex-1"
-      placeholder="Ada Lovelace"
-      [formField]="form.name" />
-
-    <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">
-      Reset example
-    </button>
-  </div>
+  <input id="input-name" suiInput class="w-full" placeholder="Ada Lovelace" [formField]="form.name" />
   <p class="text-sm text-base-content/60">Current value: {{ form.name().value() || 'Empty' }}</p>
 </div>

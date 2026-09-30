@@ -1,21 +1,26 @@
 <sui-drawer
   #libraryDrawer="suiDrawer"
-  class="bg-base-100 text-base-content lg:h-screen lg:overflow-hidden"
+  class="pg-shell bg-base-100 text-base-content lg:h-screen lg:overflow-hidden"
   persistentAt="lg"
   size="sm"
   ariaLabel="Component library navigation"
 >
-  <div #contentScroll suiDrawerContent cdkScrollable data-testid="playground-content" class="bg-base-100 lg:h-screen lg:overflow-y-auto">
-    <header class="sticky top-0 z-30 h-[65px] border-b border-base-300 bg-base-100/95 backdrop-blur">
-      <div class="mx-auto flex h-full max-w-7xl items-center px-0 sm:px-3">
+  <div
+    #contentScroll
+    suiDrawerContent
+    cdkScrollable
+    data-testid="playground-content"
+    class="pg-shell__content lg:h-screen lg:overflow-y-auto"
+  >
+    <header class="pg-shell__header sticky top-0 z-30">
+      <div class="pg-shell__header-inner">
         <sui-navbar
           class="pg-documentation-navbar w-full"
           [items]="documentationItems()"
           [value]="currentPath()"
           [collapsible]="false"
           orientation="horizontal"
-          inset="comfortable"
-          menuAlign="center"
+          inset="default"
           surface="plain"
           size="md"
           ariaLabel="Component documentation"
@@ -60,19 +65,21 @@
   </div>
 
   <sui-sidebar
-    class="h-full w-full border-r border-base-300"
-    size="lg"
+    class="pg-library-sidebar h-full w-full border-r border-base-300"
+    size="md"
     [groups]="sidebar"
     [value]="activePath()"
     ariaLabel="Component library"
     (valueChange)="libraryDrawer.close()"
   >
-    <div suiSidebarHeader class="flex items-center gap-3 pl-3">
-      <img [src]="theme() === 'sushi' ? 'sushi-logo.svg' : 'sushi-logo-dark.svg'" alt="" class="size-10 shrink-0" />
-      <span class="min-w-0 flex-1">
-        <strong class="block truncate leading-tight">Sushi</strong>
-        <span class="block truncate text-xs leading-tight text-base-content/50">Component Playground</span>
-      </span>
+    <div suiSidebarHeader class="flex items-center gap-3 px-1">
+      <a routerLink="/" class="flex min-w-0 flex-1 items-center gap-3" aria-label="Sushi Kit home">
+        <img [src]="theme() === 'sushi' ? 'sushi-logo.svg' : 'sushi-logo-dark.svg'" alt="" class="size-9 shrink-0" />
+        <span class="min-w-0 flex-1">
+          <strong class="block truncate text-base leading-tight">Sushi Kit</strong>
+          <span class="block truncate text-[0.6875rem] leading-tight tracking-wide text-base-content/50 uppercase">Angular Components</span>
+        </span>
+      </a>
       <button
         suiButton
         type="button"

@@ -1,35 +1,43 @@
-<sui-tabs ariaLabel="Example preview and source" variant="lift" style="--sui-tabs-panel-padding: 0" [(value)]="activeTab">
-  @if (preview(); as previewTemplate) {
-    <ng-template suiTab value="preview" label="Preview">
-      <div class="p-4 sm:p-6">
-        <ng-container [ngTemplateOutlet]="previewTemplate" />
-      </div>
-    </ng-template>
-  }
+<div class="pg-example">
+  <sui-tabs
+    class="pg-example__tabs"
+    ariaLabel="Example preview and source"
+    variant="plain"
+    style="--sui-tabs-panel-padding: 0"
+    [(value)]="activeTab"
+  >
+    @if (preview(); as previewTemplate) {
+      <ng-template suiTab value="preview" label="Preview">
+        <div class="pg-example__preview">
+          <ng-container [ngTemplateOutlet]="previewTemplate" />
+        </div>
+      </ng-template>
+    }
 
-  <ng-template suiTab value="html" label="HTML">
-    <sui-code>
-      @for (line of htmlLines(); track $index) {
-        <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
-      }
-    </sui-code>
-  </ng-template>
-
-  <ng-template suiTab value="typescript" label="TypeScript">
-    <sui-code>
-      @for (line of typescriptLines(); track $index) {
-        <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
-      }
-    </sui-code>
-  </ng-template>
-
-  @if (cssLines().length) {
-    <ng-template suiTab value="css" label="CSS">
-      <sui-code>
-        @for (line of cssLines(); track $index) {
+    <ng-template suiTab value="html" label="HTML">
+      <sui-code class="pg-example__source">
+        @for (line of htmlLines(); track $index) {
           <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
         }
       </sui-code>
     </ng-template>
-  }
-</sui-tabs>
+
+    <ng-template suiTab value="typescript" label="TypeScript">
+      <sui-code class="pg-example__source">
+        @for (line of typescriptLines(); track $index) {
+          <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
+        }
+      </sui-code>
+    </ng-template>
+
+    @if (cssLines().length) {
+      <ng-template suiTab value="css" label="CSS">
+        <sui-code class="pg-example__source">
+          @for (line of cssLines(); track $index) {
+            <pre suiCodeLine [prefix]="$index + 1"><code [innerHTML]="line"></code></pre>
+          }
+        </sui-code>
+      </ng-template>
+    }
+  </sui-tabs>
+</div>

@@ -38,7 +38,7 @@ The generator places documented `--sui-*` properties on the feature's Theming pa
 The global theme reference is generated from `sushi.themes.css`. Document every token in the light theme and define the same token in the dark theme:
 
 ```css
-/** @group Brand | Primary actions and selection. */
+/** @group Brand | Primary actions and emphasis. */
 --color-primary: #7a0712;
 ```
 
@@ -57,6 +57,9 @@ The package build compiles this source into the published `styles.css`. The play
 - Prefer a Sushi component, then a DaisyUI primitive, then Tailwind utilities, then feature CSS.
 - Keep the public API independent of DaisyUI and Tailwind class names.
 - Put consumer-layout utilities on consumer-owned elements.
+- Use neutral surfaces for ordinary hover and selection states; reserve the primary color for actions and emphasis.
+- Keep option height, padding, borders, and radii consistent with adjacent controls. Make stable component dimensions overridable through documented tokens.
+- Show the component by itself in the first Playground example; demonstrate composition separately.
 - Avoid `!important`, broad selectors, duplicated theme colors, and fixed overlay positioning.
 - Respect `prefers-reduced-motion`.
 - Check light and dark themes, long content, zoom, and narrow viewports.

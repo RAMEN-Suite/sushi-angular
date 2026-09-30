@@ -1,3 +1,41 @@
 :host {
   display: block;
 }
+
+.pg-shell__content {
+  background-color: color-mix(in oklab, var(--color-base-200) 36%, var(--color-base-100));
+}
+
+.pg-shell__header {
+  height: 4.0625rem;
+  border-bottom: 1px solid var(--sui-color-border);
+  background-color: color-mix(in oklab, var(--color-base-100) 94%, transparent);
+  backdrop-filter: blur(0.75rem);
+}
+
+.pg-shell__header-inner {
+  display: flex;
+  width: 100%;
+  max-width: 72rem;
+  height: 100%;
+  margin-inline: auto;
+  align-items: center;
+  padding-inline: 0;
+}
+
+.pg-documentation-navbar {
+  --sui-navbar-item-active-background: transparent;
+  --sui-navbar-item-active-color: var(--color-primary);
+}
+
+.pg-library-sidebar {
+  --sui-sidebar-background: var(--color-base-100);
+  --sui-sidebar-item-active-background: color-mix(in oklab, var(--color-base-content) 9%, transparent);
+  --sui-sidebar-item-active-color: var(--color-base-content);
+}
+
+@media (min-width: 40rem) {
+  .pg-shell__header-inner {
+    padding-inline: 1rem;
+  }
+}
