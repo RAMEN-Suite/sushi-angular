@@ -2,10 +2,13 @@
 
 Sushi is the Angular component library in Ramen Suite, published as `@sushi-kit/angular`. It provides accessible, themeable components with typed signal APIs. Application state stays in Angular; interactions use native HTML semantics, Angular Aria, and the CDK.
 
-## Requirements
+## Compatibility
 
-- Angular 22.x
-- A modern browser
+| Sushi Kit | Angular |
+| --------- | ------- |
+| `0.1.x`   | `22.x`  |
+
+The package peer dependencies are the source of truth for the supported Angular range.
 
 Sushi ships the compiled CSS required by its components.
 
