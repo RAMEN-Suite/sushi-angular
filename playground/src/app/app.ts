@@ -15,8 +15,9 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import {
-  LucideHouse,
+  LucideGitFork,
   LucideGitPullRequest,
+  LucideHouse,
   LucideListChecks,
   LucideMenu,
   LucideMessageCircle,
@@ -24,6 +25,7 @@ import {
   LucideMousePointerClick,
   LucideNavigation,
   LucidePanelsTopLeft,
+  LucidePackage,
   LucideRows3,
   LucideSun,
   LucideTableProperties,
@@ -60,8 +62,9 @@ type PlaygroundTheme = 'sushi' | 'sushi-dark';
     DrawerClose,
     DrawerContent,
     DrawerTrigger,
-    LucideHouse,
+    LucideGitFork,
     LucideGitPullRequest,
+    LucideHouse,
     LucideListChecks,
     LucideMenu,
     LucideMessageCircle,
@@ -69,6 +72,7 @@ type PlaygroundTheme = 'sushi' | 'sushi-dark';
     LucideMousePointerClick,
     LucideNavigation,
     LucidePanelsTopLeft,
+    LucidePackage,
     LucideRows3,
     LucideSun,
     LucideTableProperties,
