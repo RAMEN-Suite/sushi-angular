@@ -1,11 +1,12 @@
 # Sushi Kit for Angular
 
-[![npm version](https://img.shields.io/npm/v/%40sushi-kit%2Fangular)](https://www.npmjs.com/package/@sushi-kit/angular)
-[![CI](https://github.com/ramen-suite/sushi-angular/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/ramen-suite/sushi-angular/actions/workflows/ci.yml?query=branch%3Amain)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://github.com/ramen-suite/sushi-angular/blob/main/LICENSE)
-[![Playground](https://img.shields.io/badge/docs-Playground-f2b66d)](https://ramen-suite.github.io/sushi-angular/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-7a0712?labelColor=282a36)](https://github.com/ramen-suite/sushi-angular/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/%40sushi-kit%2Fangular?labelColor=282a36&color=7a0712)](https://www.npmjs.com/package/@sushi-kit/angular)
+[![npm downloads](https://img.shields.io/npm/dm/%40sushi-kit%2Fangular?labelColor=282a36&color=7a0712)](https://www.npmjs.com/package/@sushi-kit/angular)
+[![CI](https://img.shields.io/github/actions/workflow/status/ramen-suite/sushi-angular/ci.yml?branch=main&label=CI&labelColor=282a36)](https://github.com/ramen-suite/sushi-angular/actions/workflows/ci.yml?query=branch%3Amain)
+[![Playground](https://img.shields.io/badge/docs-Playground-996400?labelColor=282a36)](https://ramen-suite.github.io/sushi-angular/)
 
-Sushi is an open-source UI component library for Angular applications, published as `@sushi-kit/angular`. It provides standalone components for forms, navigation, data display, and overlays, with typed signal APIs and customizable light and dark themes.
+Sushi Kit is an open-source UI component library for Angular applications, published as `@sushi-kit/angular`. It provides standalone components for forms, navigation, data display, and overlays, with typed signal APIs and customizable light and dark themes.
 
 Interactions build on native HTML semantics, Angular Aria, and the CDK. Component styles are included; customize their appearance with CSS tokens to match your application.
 
@@ -28,6 +29,8 @@ Load the component styles once in the application's global stylesheet:
 ```css
 @import '@sushi-kit/angular/styles.css';
 ```
+
+See [Getting started](https://ramen-suite.github.io/sushi-angular/getting-started) for the complete setup.
 
 ## Use a component
 
@@ -53,8 +56,8 @@ export class Checkout {}
 <html data-theme="sushi-dark"></html>
 ```
 
-Theme tokens, component APIs, and examples are documented in the [Sushi Playground](https://ramen-suite.github.io/sushi-angular/).
+Browse component examples and APIs in the [Sushi Playground](https://ramen-suite.github.io/sushi-angular/). See [Styling and themes](https://ramen-suite.github.io/sushi-angular/styling-and-themes) for customization and the [theme token reference](https://ramen-suite.github.io/sushi-angular/theme-tokens) for built-in values.
 
 ## License
 
-[MIT](https://github.com/ramen-suite/sushi-angular/blob/main/LICENSE). Third-party notices are included with the package.
+[MIT](https://github.com/ramen-suite/sushi-angular/blob/main/LICENSE). Third-party notices are included with the published package.
