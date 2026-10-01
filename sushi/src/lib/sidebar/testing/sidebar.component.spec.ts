@@ -15,6 +15,10 @@ interface AppItem extends NavbarItem<Page> {
   readonly badge?: string;
 }
 
+interface AppGroup extends SidebarGroup<AppItem> {
+  readonly icon: string;
+}
+
 @Component({
   imports: [Sidebar, SidebarFooter, SidebarGroupTemplate, SidebarHeader, SidebarItemTemplate],
   template: `
@@ -28,7 +32,9 @@ interface AppItem extends NavbarItem<Page> {
     >
       <div suiSidebarHeader data-header>Orbit</div>
       <ng-template [suiSidebarGroup]="groups" let-group let-collapsed="collapsed"
-        ><span [attr.data-drawer-group]="group.label" [attr.data-collapsed]="collapsed">{{ group.label }}</span></ng-template
+        ><span [attr.data-drawer-group]="group.label" [attr.data-group-icon]="group.icon" [attr.data-collapsed]="collapsed">{{
+          group.label
+        }}</span></ng-template
       >
       <ng-template [suiSidebarItem]="groups" let-item let-group="group" let-level="level" let-collapsed="collapsed">
         <span
@@ -48,8 +54,9 @@ class SidebarHost {
   public readonly active: WritableSignal<Page> = signal<Page>('overview');
   public readonly collapsed: WritableSignal<boolean> = signal(false);
   public readonly selected: (Page | null)[] = [];
-  public readonly groups: readonly SidebarGroup<AppItem>[] = [
+  public readonly groups: readonly AppGroup[] = [
     {
+      icon: 'workspace',
       label: 'Workspace',
       items: [
         { label: 'Overview', value: 'overview' },
@@ -57,8 +64,13 @@ class SidebarHost {
         { label: 'Reports', value: 'reports', items: [{ label: 'Activity reports', value: 'activity-reports' }] },
       ],
     },
-    { label: 'Administration', dividerBefore: true, items: [{ label: 'Settings', value: 'settings', disabled: true }] },
-    { label: 'Empty', items: [] },
+    {
+      icon: 'administration',
+      label: 'Administration',
+      dividerBefore: true,
+      items: [{ label: 'Settings', value: 'settings', disabled: true }],
+    },
+    { icon: 'empty', label: 'Empty', items: [] },
   ];
 }
 
@@ -76,6 +88,7 @@ describe('Sidebar', (): void => {
     expect(query(fixture, '[data-footer]').textContent).toContain('Signed in');
     expect(queryAll(fixture, 'nav')).toHaveLength(2);
     expect(query(fixture, '[data-drawer-group="Workspace"]')).toBeDefined();
+    expect(query(fixture, '[data-drawer-group="Workspace"]').getAttribute('data-group-icon')).toBe('workspace');
     expect(query(fixture, '[data-drawer-group="Administration"]').closest('section')?.hasAttribute('data-divider-before')).toBe(
       true,
     );

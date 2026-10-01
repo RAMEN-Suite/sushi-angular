@@ -1,3 +1,18 @@
+import {
+  LucideGitPullRequest,
+  LucideHouse,
+  LucideLayers,
+  LucideListChecks,
+  LucideMessageCircle,
+  LucideMousePointerClick,
+  LucideNavigation,
+  LucidePanelsTopLeft,
+  LucideRows3,
+  LucideTableProperties,
+  LucideTextCursorInput,
+  LucideWrench,
+} from '@lucide/angular';
+import type { LucideIcon } from '@lucide/angular';
 import type { NavbarItem, SidebarGroup } from '@sushi-kit/angular';
 
 export interface NavigationItem {
@@ -5,15 +20,17 @@ export interface NavigationItem {
   readonly path: string;
 }
 
-export interface NavigationGroup {
+interface NavigationGroup {
   readonly dividerBefore?: boolean;
+  readonly icon: LucideIcon;
   readonly label: string;
   readonly items: readonly NavigationItem[];
 }
 
-export const navigation: readonly NavigationGroup[] = [
+const navigation: readonly NavigationGroup[] = [
   {
     dividerBefore: true,
+    icon: LucideTextCursorInput,
     label: 'Inputs',
     items: [
       {
@@ -51,6 +68,7 @@ export const navigation: readonly NavigationGroup[] = [
     ],
   },
   {
+    icon: LucideListChecks,
     label: 'Selection',
     items: [
       {
@@ -96,6 +114,7 @@ export const navigation: readonly NavigationGroup[] = [
     ],
   },
   {
+    icon: LucideRows3,
     label: 'Form Structure',
     items: [
       {
@@ -121,6 +140,7 @@ export const navigation: readonly NavigationGroup[] = [
     ],
   },
   {
+    icon: LucideMousePointerClick,
     label: 'Actions',
     items: [
       {
@@ -134,6 +154,7 @@ export const navigation: readonly NavigationGroup[] = [
     ],
   },
   {
+    icon: LucideNavigation,
     label: 'Navigation',
     items: [
       {
@@ -163,6 +184,7 @@ export const navigation: readonly NavigationGroup[] = [
     ],
   },
   {
+    icon: LucideLayers,
     label: 'Overlays',
     items: [
       {
@@ -184,6 +206,7 @@ export const navigation: readonly NavigationGroup[] = [
     ],
   },
   {
+    icon: LucideMessageCircle,
     label: 'Feedback',
     items: [
       {
@@ -217,6 +240,7 @@ export const navigation: readonly NavigationGroup[] = [
     ],
   },
   {
+    icon: LucideTableProperties,
     label: 'Data Display',
     items: [
       {
@@ -254,6 +278,7 @@ export const navigation: readonly NavigationGroup[] = [
     ],
   },
   {
+    icon: LucidePanelsTopLeft,
     label: 'Layout',
     items: [
       {
@@ -271,6 +296,7 @@ export const navigation: readonly NavigationGroup[] = [
     ],
   },
   {
+    icon: LucideWrench,
     label: 'Utilities',
     items: [
       {
@@ -297,18 +323,20 @@ export const apiNavigation: readonly NavigationItem[] = navigation
   .flatMap((group: NavigationGroup): readonly NavigationItem[] => group.items)
   .filter((item: NavigationItem): boolean => item.path !== '/icon');
 
-export type SidebarNavigationGroup = SidebarGroup<NavbarItem<string>>;
+export interface SidebarNavigationGroup extends SidebarGroup<NavbarItem<string>> {
+  readonly icon: LucideIcon;
+}
 
-export const overviewNavigation: readonly NavbarItem<string>[] = [{ label: 'Overview', value: '/', routerLink: '/' }];
+const overviewNavigation: readonly NavbarItem<string>[] = [{ label: 'Overview', value: '/', routerLink: '/' }];
 
-export const generalNavigation: readonly NavbarItem<string>[] = [
+const generalNavigation: readonly NavbarItem<string>[] = [
   ...overviewNavigation,
   { label: 'Getting started', value: '/getting-started', routerLink: '/getting-started' },
   { label: 'Styling & themes', value: '/styling-and-themes', routerLink: '/styling-and-themes' },
   { label: 'Theme tokens', value: '/theme-tokens', routerLink: '/theme-tokens' },
 ];
 
-export const contributorNavigation: readonly NavbarItem<string>[] = [
+const contributorNavigation: readonly NavbarItem<string>[] = [
   { label: 'Contribution guide', value: '/contribute', routerLink: '/contribute' },
   { label: 'Component workflow', value: '/contribute/components', routerLink: '/contribute/components' },
   { label: 'Component styling', value: '/contribute/styles', routerLink: '/contribute/styles' },
@@ -317,30 +345,19 @@ export const contributorNavigation: readonly NavbarItem<string>[] = [
   { label: 'Responsible AI', value: '/contribute/ai', routerLink: '/contribute/ai' },
 ];
 
-export const navbarNavigation: readonly SidebarNavigationGroup[] = navigation.map(
-  (group: NavigationGroup): SidebarNavigationGroup => ({
-    dividerBefore: group.dividerBefore,
-    label: group.label,
-    items: group.items.map((item: NavigationItem): NavbarItem<string> => ({
-      label: item.label,
-      value: item.path,
-      routerLink: item.path,
-    })),
-  }),
-);
+const navbarNavigation: readonly SidebarNavigationGroup[] = navigation.map((group: NavigationGroup): SidebarNavigationGroup => ({
+  dividerBefore: group.dividerBefore,
+  icon: group.icon,
+  label: group.label,
+  items: group.items.map((item: NavigationItem): NavbarItem<string> => ({
+    label: item.label,
+    value: item.path,
+    routerLink: item.path,
+  })),
+}));
 
 export const sidebarNavigation: readonly SidebarNavigationGroup[] = [
-  { label: 'General', items: generalNavigation },
-  { label: 'Contribute', items: contributorNavigation },
+  { icon: LucideHouse, label: 'General', items: generalNavigation },
+  { icon: LucideGitPullRequest, label: 'Contribute', items: contributorNavigation },
   ...navbarNavigation,
-];
-
-export const mobileNavigation: readonly NavbarItem<string>[] = [
-  ...generalNavigation,
-  { label: 'Contribute', value: 'group:Contribute', items: contributorNavigation },
-  ...navbarNavigation.map((group: SidebarNavigationGroup): NavbarItem<string> => ({
-    label: group.label,
-    value: `group:${group.label}`,
-    items: group.items,
-  })),
 ];

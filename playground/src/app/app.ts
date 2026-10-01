@@ -14,23 +14,7 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
-import {
-  LucideHouse,
-  LucideGitPullRequest,
-  LucideListChecks,
-  LucideMenu,
-  LucideMessageCircle,
-  LucideMoon,
-  LucideMousePointerClick,
-  LucideNavigation,
-  LucidePanelsTopLeft,
-  LucideRows3,
-  LucideSun,
-  LucideTableProperties,
-  LucideTextCursorInput,
-  LucideWrench,
-  LucideX,
-} from '@lucide/angular';
+import { LucideDynamicIcon, LucideGitFork, LucideMenu, LucideMoon, LucidePackage, LucideSun, LucideX } from '@lucide/angular';
 import {
   Button,
   Drawer,
@@ -60,20 +44,12 @@ type PlaygroundTheme = 'sushi' | 'sushi-dark';
     DrawerClose,
     DrawerContent,
     DrawerTrigger,
-    LucideHouse,
-    LucideGitPullRequest,
-    LucideListChecks,
+    LucideDynamicIcon,
+    LucideGitFork,
     LucideMenu,
-    LucideMessageCircle,
     LucideMoon,
-    LucideMousePointerClick,
-    LucideNavigation,
-    LucidePanelsTopLeft,
-    LucideRows3,
+    LucidePackage,
     LucideSun,
-    LucideTableProperties,
-    LucideTextCursorInput,
-    LucideWrench,
     LucideX,
     Navbar,
     NavbarAction,

@@ -24,11 +24,11 @@ export interface SidebarItemContext<I extends NavbarItem = NavbarItem> extends N
 }
 
 /** Context exposed to a custom Sidebar group-heading template. */
-export interface SidebarGroupContext<I extends NavbarItem = NavbarItem> {
+export interface SidebarGroupContext<I extends NavbarItem = NavbarItem, G extends SidebarGroup<I> = SidebarGroup<I>> {
   /** Sidebar group available as the implicit template value. */
-  readonly $implicit: SidebarGroup<I>;
+  readonly $implicit: G;
   /** Sidebar group available by its explicit context name. */
-  readonly group: SidebarGroup<I>;
+  readonly group: G;
   /** Whether the Sidebar currently renders as an icon rail. Use it to hide text or show a meaningful group icon. */
   readonly collapsed: boolean;
 }
