@@ -2,6 +2,20 @@
 
 All notable changes to this project are documented here.
 
+## [0.1.2](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.1.1...v0.1.2) (2026-10-01)
+
+### Features
+
+* **sushi:** polish components and playground design ([#6](https://github.com/RAMEN-Suite/sushi-angular/issues/6)) ([106ed56](https://github.com/RAMEN-Suite/sushi-angular/commit/106ed56ebb26bcf47d16a6aa622c3d60100e11c1))
+* **sushi:** support custom dialog coordinates ([#5](https://github.com/RAMEN-Suite/sushi-angular/issues/5)) ([efdc6cd](https://github.com/RAMEN-Suite/sushi-angular/commit/efdc6cde4098cfebe3c511949b1b2d2a25ddbac5))
+
+### Bug Fixes
+
+* **sushi:** polish responsive navigation and touch feedback ([#9](https://github.com/RAMEN-Suite/sushi-angular/issues/9)) ([34cb9b4](https://github.com/RAMEN-Suite/sushi-angular/commit/34cb9b4ddd2138580485d440bb456294eefe673c))
+
+### Documentation
+
+* **sushi:** polish package documentation ([#10](https://github.com/RAMEN-Suite/sushi-angular/issues/10)) ([5f45b18](https://github.com/RAMEN-Suite/sushi-angular/commit/5f45b186737656c5ae10b3fcd868914bc2574aec))
 ## [0.1.1](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.1.0...v0.1.1) (2026-09-27)
 
 ### Bug Fixes
