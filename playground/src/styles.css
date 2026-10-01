@@ -227,10 +227,6 @@ pg-example-code {
   margin-top: 0;
 }
 
-.pg-markdown__prose > h1:not(:first-child) {
-  margin-top: 3rem;
-}
-
 .pg-markdown h2 {
   margin-top: 2.75rem;
   font-size: 1.45rem;
