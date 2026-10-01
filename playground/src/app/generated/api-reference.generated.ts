@@ -11496,13 +11496,13 @@ export const apiReference: Readonly<{
     templates: [
       {
         name: 'suiSidebarGroup',
-        context: 'SidebarGroupContext<I>',
+        context: 'SidebarGroupContext<I, G>',
         description: 'Customizes visible Sidebar group headings without changing navigation items.',
         members: [
           {
             name: 'groups',
             kind: 'input',
-            type: 'readonly SidebarGroup<I>[] | undefined',
+            type: 'readonly G[] | undefined',
             defaultValue: 'undefined',
             description: 'Group source used to infer custom fields inside the template.',
           },
@@ -11680,18 +11680,18 @@ export const apiReference: Readonly<{
         kind: 'interface',
         source: 'library',
         declaration:
-          'interface SidebarGroupContext<I extends NavbarItem = NavbarItem> {\n  readonly $implicit: SidebarGroup<I>;\n  readonly group: SidebarGroup<I>;\n  readonly collapsed: boolean;\n}',
+          'interface SidebarGroupContext<I extends NavbarItem = NavbarItem, G extends SidebarGroup<I> = SidebarGroup<I>> {\n  readonly $implicit: G;\n  readonly group: G;\n  readonly collapsed: boolean;\n}',
         description: 'Context exposed to a custom Sidebar group-heading template.',
         members: [
           {
             name: '$implicit',
-            type: 'SidebarGroup<I>',
+            type: 'G',
             optional: false,
             description: 'Sidebar group available as the implicit template value.',
           },
           {
             name: 'group',
-            type: 'SidebarGroup<I>',
+            type: 'G',
             optional: false,
             description: 'Sidebar group available by its explicit context name.',
           },
@@ -11708,6 +11708,11 @@ export const apiReference: Readonly<{
             name: 'I',
             constraint: 'NavbarItem',
             defaultValue: 'NavbarItem',
+          },
+          {
+            name: 'G',
+            constraint: 'SidebarGroup<I>',
+            defaultValue: 'SidebarGroup<I>',
           },
         ],
       },

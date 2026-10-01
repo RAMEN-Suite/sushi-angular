@@ -6,9 +6,9 @@
 
 The package peer dependencies are the source of truth for the supported Angular range.
 
-# Getting started
+## Getting started
 
-## 1. Install
+### 1. Install
 
 ```bash
 npm install @sushi-kit/angular
@@ -16,7 +16,7 @@ npm install @sushi-kit/angular
 
 npm also installs the required peer dependencies, including [Lucide Angular](https://lucide.dev) and [PhotoSwipe](https://photoswipe.com/). Lucide uses the ISC license; PhotoSwipe uses MIT.
 
-## 2. Load the styles
+### 2. Load the styles
 
 Import the compiled stylesheet once in `src/styles.css`:
 
@@ -44,7 +44,7 @@ Alternatively, add it before the application stylesheet in `angular.json`:
 
 Choose one method. The consumer does not need a Sushi-specific PostCSS configuration.
 
-## 3. Use a component
+### 3. Use a component
 
 Import each standalone declaration used by a component:
 

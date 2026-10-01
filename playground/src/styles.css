@@ -17,7 +17,16 @@
 }
 
 .pg-documentation-navbar .sui-navbar {
-  padding-inline: 0;
+  padding-inline: 1rem;
+}
+
+@media (width < 40rem) {
+  .pg-documentation-navbar .sui-navbar > sui-navbar-menu {
+    position: absolute;
+    left: 50%;
+    margin-inline-start: 0;
+    transform: translateX(-50%);
+  }
 }
 
 .pg-page {
@@ -125,7 +134,11 @@ pg-example-code {
   border-radius: 0;
 }
 
-@media (min-width: 40rem) {
+@media (width >= 40rem) {
+  .pg-documentation-navbar .sui-navbar {
+    padding-inline: 0;
+  }
+
   .pg-page {
     padding: 3.5rem 2rem 6rem;
   }
@@ -212,10 +225,6 @@ pg-example-code {
 
 .pg-markdown > .pg-markdown__prose:first-child > :first-child {
   margin-top: 0;
-}
-
-.pg-markdown__prose > h1:not(:first-child) {
-  margin-top: 3rem;
 }
 
 .pg-markdown h2 {

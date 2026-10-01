@@ -1,6 +1,12 @@
-# Sushi in Angular
+# Sushi Kit for Angular
 
-Sushi is the Angular component library in Ramen Suite, published as `@sushi-kit/angular`. It provides accessible, themeable components with typed signal APIs. Application state stays in Angular; interactions use native HTML semantics, Angular Aria, and the CDK.
+[![License: MIT](https://img.shields.io/badge/license-MIT-7a0712?labelColor=282a36)](LICENSE)
+[![npm version](https://img.shields.io/npm/v/%40sushi-kit%2Fangular?labelColor=282a36&color=7a0712)](https://www.npmjs.com/package/@sushi-kit/angular)
+[![npm downloads](https://img.shields.io/npm/dm/%40sushi-kit%2Fangular?labelColor=282a36&color=7a0712)](https://www.npmjs.com/package/@sushi-kit/angular)
+[![CI](https://img.shields.io/github/actions/workflow/status/ramen-suite/sushi-angular/ci.yml?branch=main&label=CI&labelColor=282a36)](https://github.com/ramen-suite/sushi-angular/actions/workflows/ci.yml?query=branch%3Amain)
+[![Playground](https://img.shields.io/badge/docs-Playground-996400?labelColor=282a36)](https://ramen-suite.github.io/sushi-angular/)
+
+Sushi Kit is an open-source component library for Angular applications, published as `@sushi-kit/angular`. It provides accessible, themeable components with typed signal APIs. Interactions build on native HTML semantics, Angular Aria, and the CDK.
 
 ## Compatibility
 
@@ -14,10 +20,6 @@ Sushi ships the compiled CSS required by its components.
 
 ## Install
 
-The [Getting started guide](docs/getting-started.md) contains the same setup as the Playground and is the maintained setup reference.
-
-See [Styling and themes](docs/styling-and-themes.md) for theme tokens, component tokens, recommended Tailwind usage, and custom themes.
-
 ```bash
 npm install @sushi-kit/angular
 ```
@@ -29,6 +31,8 @@ Import the public stylesheet from the application's global `src/styles.css`:
 ```
 
 No Sushi-specific PostCSS or Tailwind configuration is required.
+
+Continue with [Getting started](docs/getting-started.md) for the complete setup. See [Styling and themes](docs/styling-and-themes.md) for component tokens, recommended Tailwind usage, and custom themes. All built-in values are listed in the [theme token reference](docs/theme-tokens.md).
 
 ## Use a component
 
