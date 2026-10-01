@@ -15,8 +15,22 @@
   transition-duration: 0s;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .sui-button.btn {
+    /** Hold and return timing for the pressed state on a touch device. */
+    transition-delay: var(--sui-button-touch-release-delay, 150ms);
+    transition-duration: var(--sui-button-touch-release-duration, 300ms);
+    transition-property: opacity, background-color, border-color, color, transform;
+  }
+
+  .sui-button.btn:not(.sui-button--disabled):active {
+    transition-delay: 0s;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .sui-button.btn {
+    transition-delay: 0s;
     transition-duration: 0s;
   }
 
