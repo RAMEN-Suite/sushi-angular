@@ -81,6 +81,7 @@ jobs:
             jq -r '
               .total
               | to_entries[]
+              | select(.key != "branchesTrue")
               | "| \(.key) | \(.value.covered) | \(.value.total) | \(.value.pct)% |"
             ' coverage/sushi/coverage-summary.json
           } >> "$GITHUB_STEP_SUMMARY"
