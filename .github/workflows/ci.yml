@@ -64,11 +64,11 @@ jobs:
       - name: Write coverage summary
         if: always()
         run: |
-          if [ ! -f coverage/coverage-summary.json ]; then
+          if [ ! -f coverage/sushi/coverage-summary.json ]; then
             {
               echo "## 🧪 Coverage"
               echo ""
-              echo "⚠️ \`coverage/coverage-summary.json\` was not found — check the test step's logs above."
+              echo "⚠️ \`coverage/sushi/coverage-summary.json\` was not found — check the test step's logs above."
             } >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
@@ -82,7 +82,7 @@ jobs:
               .total
               | to_entries[]
               | "| \(.key) | \(.value.covered) | \(.value.total) | \(.value.pct)% |"
-            ' coverage/coverage-summary.json
+            ' coverage/sushi/coverage-summary.json
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload coverage report
         if: always()
