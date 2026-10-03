@@ -57,10 +57,10 @@ Branch from the latest `main` and write [Conventional Commits](https://www.conve
 feat(dialog): restore focus to the trigger on close
 ```
 
-| Type                                       | Appears in the changelog |
-| ------------------------------------------ | ------------------------ |
-| `feat`, `fix`, `perf`, `refactor`, `docs`, `revert` | Yes             |
-| `build`, `ci`, `chore`, `style`, `test`    | No                       |
+| Type                                                | Appears in the changelog |
+| --------------------------------------------------- | ------------------------ |
+| `feat`, `fix`, `perf`, `refactor`, `docs`, `revert` | Yes                      |
+| `build`, `ci`, `chore`, `style`, `test`             | No                       |
 
 Pull requests are squash-merged, so the pull request title becomes the commit message and follows the same convention. CI lints both the branch commits and the title.
 
