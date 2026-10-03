@@ -5,8 +5,8 @@
 /.github/workflows/ @ramondevprivate
 /.npmrc @sebenns @ramondevprivate
 /.versionrc.json @ramondevprivate
-/package.json @sebenns @ramondevprivate
-/package-lock.json @sebenns @ramondevprivate
+/package.json @sebenns
+/package-lock.json @sebenns
 /tools/ @sebenns
 
 /sushi/package.json @sebenns
