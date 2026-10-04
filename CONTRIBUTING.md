@@ -68,7 +68,7 @@ Pull requests are squash-merged, so the pull request title becomes the commit me
 
 Renovate opens dependency update pull requests. Do not open Dependabot security update PRs from the alerts page.
 
-The repository installs with install scripts disabled and a seven-day release cooldown, both set in `.npmrc`. A dependency published less than seven days ago cannot enter the lockfile.
+The repository installs with install scripts disabled and a three-day release cooldown, both set in `.npmrc`. A dependency published less than three days ago cannot enter the lockfile.
 
 ## Releases
 
