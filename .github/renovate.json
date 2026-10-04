@@ -15,8 +15,7 @@
     "enabled": true,
     "schedule": ["at any time"],
     "minimumReleaseAge": null,
-    "addLabels": ["security"],
-    "prPriority": 10
+    "addLabels": ["security"]
   },
   "packageRules": [
     {
@@ -29,6 +28,11 @@
       "matchPackageNames": ["typescript"],
       "matchUpdateTypes": ["minor", "major"],
       "groupName": null
+    },
+    {
+      "description": "Group @angular/aria with the Angular monorepo, Renovate does not list it yet",
+      "matchPackageNames": ["@angular/aria"],
+      "groupName": "angular monorepo"
     },
     {
       "description": "Automerge patches and digest pins on weekday mornings once CI passes",
