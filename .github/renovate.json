@@ -1,0 +1,65 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices"],
+  "ignorePresets": [":pinDevDependencies"],
+  "timezone": "Europe/Berlin",
+  "schedule": ["* 2-7 * * 1"],
+  "separateMinorPatch": true,
+  "minimumReleaseAge": "3 days",
+  "labels": ["dependencies"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["* 0-6 1 * *"]
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "schedule": ["at any time"],
+    "minimumReleaseAge": null,
+    "addLabels": ["security"]
+  },
+  "packageRules": [
+    {
+      "description": "State the npm release age explicitly so a preset change cannot alter it",
+      "matchDatasources": ["npm"],
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Keep TypeScript ungrouped: it does not follow semver and Angular supports a narrow range",
+      "matchPackageNames": ["typescript"],
+      "matchUpdateTypes": ["minor", "major"],
+      "groupName": null
+    },
+    {
+      "description": "Group @angular/aria with the Angular monorepo, Renovate does not list it yet",
+      "matchPackageNames": ["@angular/aria"],
+      "groupName": "angular monorepo"
+    },
+    {
+      "description": "Automerge patches and digest pins on weekday mornings once CI passes",
+      "matchUpdateTypes": ["patch", "pin", "pinDigest", "digest"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": false,
+      "schedule": ["* 4-6 * * 1-5"],
+      "automergeSchedule": ["* 4-6 * * 1-5"]
+    },
+    {
+      "description": "Group action updates on a single schedule so mixed update types share one branch",
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions",
+      "schedule": ["* 2-7 * * 1"],
+      "automergeSchedule": ["* 2-7 * * 1"]
+    },
+    {
+      "description": "Mark peer dependency updates as fixes: they change the supported consumer range",
+      "matchDepTypes": ["peerDependencies"],
+      "semanticCommitType": "fix"
+    },
+    {
+      "description": "Raise major updates on the first of the month",
+      "matchUpdateTypes": ["major"],
+      "schedule": ["* 2-7 1 * *"],
+      "addLabels": ["major"]
+    }
+  ]
+}
