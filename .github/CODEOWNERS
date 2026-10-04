@@ -1,6 +1,7 @@
 * @sebenns
 
 /.github/ @sebenns @ramondevprivate
+/.github/renovate.json @ramondevprivate
 /.github/codeql/ @ramondevprivate
 /.github/workflows/ @ramondevprivate
 /.npmrc @sebenns @ramondevprivate
