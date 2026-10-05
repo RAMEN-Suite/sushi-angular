@@ -38,7 +38,7 @@ jobs:
   ci:
     name: CI
     needs: [guard]
-    uses: ./.github/workflows/ci.yml
+    uses: $/.github/workflows/ci.yml
     permissions:
       contents: read # required for actions/checkout to fetch repo contents if this repo is private
       security-events: write # required for uploading results to code scanning
@@ -246,7 +246,7 @@ jobs:
         env:
           VERSION: ${{ needs.release.outputs.version }}
         run: bash tools/package-install-smoke.sh "$PACKAGE_NAME@$VERSION"
-      - name: Verify signature and provenance
+      - name: Verify signature and provenance # zizmor: ignore[adhoc-packages] -- installs the published version on purpose, pinned exactly
         env:
           VERSION: ${{ needs.release.outputs.version }}
         run: |
