@@ -40,8 +40,8 @@
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": false,
-      "schedule": ["* 4-6 * * 1-5"],
-      "automergeSchedule": ["* 4-6 * * 1-5"]
+      "schedule": ["* 4-8 * * 1-5"],
+      "automergeSchedule": ["* 4-8 * * 1-5"]
     },
     {
       "description": "Group action updates on a single schedule so mixed update types share one branch",
