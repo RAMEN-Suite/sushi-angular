@@ -6,7 +6,7 @@ import { defineConfig } from 'eslint/config';
 
 export default defineConfig(
   {
-    ignores: ['.angular/**', 'dist/**', 'coverage/**', 'node_modules/**', '**/*.js'],
+    ignores: ['.angular/**', 'dist/**', 'coverage/**', 'node_modules/**', '**/*.js', 'playground/src/app/generated/**'],
   },
   {
     files: ['sushi/src/lib/**/*.ts'],

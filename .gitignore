@@ -3,6 +3,7 @@
 # Compiled output
 dist
 sushi/generated
+/playground/src/app/generated/
 tmp
 out-tsc
 bazel-out
