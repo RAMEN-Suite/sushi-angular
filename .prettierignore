@@ -4,3 +4,4 @@ dist
 coverage
 .cache
 sushi/generated/
+playground/src/app/generated/api-reference.generated.ts

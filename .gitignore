@@ -3,6 +3,7 @@
 # Compiled output
 dist
 sushi/generated
+/playground/src/app/generated/api-reference.generated.ts
 tmp
 out-tsc
 bazel-out
