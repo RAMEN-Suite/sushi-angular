@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, Signal, signal, WritableSignal } from '@angular/core';
-import { LucideMinus, LucidePlus, LucideShoppingBag, LucideTrash2, LucideX } from '@lucide/angular';
+import { LucideMinus, LucidePlus, LucideShoppingBag, LucideTrash, LucideX } from '@lucide/angular';
 import {
   Badge,
   Button,
@@ -36,7 +36,7 @@ interface CartItem {
     LucideMinus,
     LucidePlus,
     LucideShoppingBag,
-    LucideTrash2,
+    LucideTrash,
     LucideX,
   ],
   templateUrl: './cart.example.html',

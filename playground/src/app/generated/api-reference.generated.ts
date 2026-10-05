@@ -1329,6 +1329,12 @@ export const apiReference: Readonly<{
         exampleValue: null,
         description: 'Scale of an enabled button while pressed, including touch input.',
       },
+      {
+        name: '--sui-button-touch-release-delay',
+        defaultValue: 'theme default',
+        exampleValue: null,
+        description: 'Hold and return timing for the pressed state on a touch device.',
+      },
     ],
   },
   Card: {
