@@ -16,7 +16,7 @@ export function navigateToApiTarget(document: Document, event: MouseEvent, id: s
   }
 
   target.classList.remove(TARGET_HIGHLIGHT_CLASS);
-  void target.offsetWidth;
+  target.getBoundingClientRect();
   target.classList.add(TARGET_HIGHLIGHT_CLASS);
   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   target.focus({ preventScroll: true });
