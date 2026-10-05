@@ -38,7 +38,7 @@ jobs:
   ci:
     name: CI
     needs: [guard]
-    uses: ./.github/workflows/ci.yml
+    uses: $/.github/workflows/ci.yml
     permissions:
       contents: read # required for actions/checkout to fetch repo contents if this repo is private
       security-events: write # required for uploading results to code scanning
