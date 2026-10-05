@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented here.
 
+## [0.1.4](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.1.2...v0.1.4) (2026-10-05)
+
+### Bug Fixes
+
+* **playground:** align page captions across component tabs ([#37](https://github.com/RAMEN-Suite/sushi-angular/issues/37)) ([847cee5](https://github.com/RAMEN-Suite/sushi-angular/commit/847cee5aae99c3a1dd181aedc6d339cf121250d5))
+
+### Documentation
+
+* document setup, pull request flow and dependency policy ([#12](https://github.com/RAMEN-Suite/sushi-angular/issues/12)) ([fb9a17f](https://github.com/RAMEN-Suite/sushi-angular/commit/fb9a17fd8095fb9b72af510f2c90d648c570b59c))
+* **sushi:** remove stale project documentation ([#11](https://github.com/RAMEN-Suite/sushi-angular/issues/11)) ([f8b880e](https://github.com/RAMEN-Suite/sushi-angular/commit/f8b880ef8c92556d497ed7c5b491bec2c97f4401))
+
 ## [0.1.3](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.1.2...v0.1.3) (2026-10-05)
 
 ### Bug Fixes
