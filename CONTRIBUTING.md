@@ -5,6 +5,7 @@
 ```bash
 nvm use
 npm install
+npm run prepare
 npm start
 ```
 
@@ -45,6 +46,33 @@ Useful focused commands:
 | `npm run test:e2e:ui`   | Interactive browser tests                          |
 | `npm run generate:api`  | Regenerate Interface and Theming data              |
 | `npm run package:check` | Build and inspect the publishable package          |
+
+## Branches and commits
+
+`main` is protected. Every change arrives through a pull request with a passing CI run and an approving review from a code owner.
+
+Branch from the latest `main` and write [Conventional Commits](https://www.conventionalcommits.org):
+
+```
+feat(dialog): restore focus to the trigger on close
+```
+
+| Type                                                | Appears in the changelog |
+| --------------------------------------------------- | ------------------------ |
+| `feat`, `fix`, `perf`, `refactor`, `docs`, `revert` | Yes                      |
+| `build`, `ci`, `chore`, `style`, `test`             | No                       |
+
+Pull requests are squash-merged, so the pull request title becomes the commit message and follows the same convention. CI lints both the branch commits and the title.
+
+## Dependencies
+
+Renovate opens dependency update pull requests. Do not open Dependabot security update PRs from the alerts page.
+
+The repository installs with install scripts disabled and a three-day release cooldown, both set in `.npmrc`. A dependency published less than three days ago cannot enter the lockfile.
+
+## Releases
+
+Maintainers release from the Actions tab with the Release workflow. It runs the full check suite, bumps the version, writes the changelog, tags, stages the package on npm for manual approval, verifies the published package, and deploys the playground.
 
 ## Review checklist
 
