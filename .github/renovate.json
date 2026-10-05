@@ -6,6 +6,7 @@
   "schedule": ["* 2-7 * * 1"],
   "separateMinorPatch": true,
   "minimumReleaseAge": "3 days",
+  "ignorePaths": ["**/node_modules/**"],
   "labels": ["dependencies"],
   "lockFileMaintenance": {
     "enabled": true,
