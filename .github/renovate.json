@@ -1,4 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>RAMEN-Suite/renovate-config:angular"]
+  "extends": ["github>THM-Graphs/renovate-config:angular"]
 }
