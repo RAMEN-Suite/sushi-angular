@@ -50,6 +50,7 @@ jobs:
     environment: release
     permissions:
       contents: write # commit the version bump, push the tag, create the GitHub release
+      id-token: write # needed for attestation
     outputs:
       version: ${{ steps.bump.outputs.version }}
       tarball: ${{ steps.pack.outputs.tarball }}
