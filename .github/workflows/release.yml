@@ -50,7 +50,9 @@ jobs:
     environment: release
     permissions:
       contents: write # commit the version bump, push the tag, create the GitHub release
-      id-token: write # needed for attestation
+      id-token: write # required for actions/attest-sbom to sign with a Sigstore token
+      attestations: write # required to persist the SBOM attestation
+
     outputs:
       version: ${{ steps.bump.outputs.version }}
       tarball: ${{ steps.pack.outputs.tarball }}
