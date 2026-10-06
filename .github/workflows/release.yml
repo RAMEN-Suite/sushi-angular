@@ -215,6 +215,9 @@ jobs:
         if: ${{ !inputs.dry_run }}
         env:
           VERSION: ${{ needs.release.outputs.version }}
+          TARBALL: ${{ needs.release.outputs.tarball }}
+          SHASUM: ${{ needs.release.outputs.shasum }}
+          INTEGRITY: ${{ needs.release.outputs.integrity }}
         run: |
           {
             echo "## 📦 Staged on npm"
