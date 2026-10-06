@@ -178,6 +178,8 @@ jobs:
             --title "v${VERSION}" \
             --notes-file RELEASE_NOTES.md \
             "$TARBALL" \
+            "${TARBALL}.provenance.intoto.jsonl" \
+            "${TARBALL}.sbom.intoto.jsonl" \
             sbom.cdx.json \
             dist/sushi/NOTICES.md
 
