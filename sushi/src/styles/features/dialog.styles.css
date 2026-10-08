@@ -4,7 +4,7 @@
     -webkit-user-drag: none;
   }
 
-  :where(.sui-dialog, .sui-dynamic-dialog) {
+  :where(.sui-dialog-host, .sui-dynamic-dialog) {
     /**
      * Preferred width of a Dialog before viewport constraints apply.
      * @example 36rem

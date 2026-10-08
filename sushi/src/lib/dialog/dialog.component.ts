@@ -32,6 +32,7 @@ let nextDialogId: number = 0;
   host: {
     class: 'sui-dialog-host',
     '[attr.draggable]': 'null',
+    '(window:resize)': 'handleViewportResize()',
   },
   template: `
     <dialog
@@ -84,7 +85,7 @@ export class Dialog {
   public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
   /** Enables dragging from the Dialog header. */
   public readonly draggable: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Keeps a draggable Dialog inside the viewport. Disable only when off-screen placement is intentional. */
+  /** Keeps the Dialog inside the viewport after dragging and viewport changes. Disable only when off-screen placement is intentional. */
   public readonly constrainToViewport: InputSignalWithTransform<boolean, unknown> = input(true, {
     transform: booleanAttribute,
   });
@@ -166,6 +167,15 @@ export class Dialog {
     this.restoreFocus();
   }
 
+  protected handleViewportResize(): void {
+    if (!this.element().nativeElement.open) return;
+    const offset: Readonly<{ x: number; y: number }> = this.drag().getFreeDragPosition();
+    this.applyPosition();
+    this.drag().setFreeDragPosition(offset);
+    this.constrainPosition();
+    this.updateResizeBounds();
+  }
+
   private activeElement(): HTMLElement | null {
     const activeElement: Element | null = this.element().nativeElement.ownerDocument.activeElement;
     return activeElement instanceof HTMLElement ? activeElement : null;
@@ -245,8 +255,19 @@ export class Dialog {
     const viewport: Window | null = dialog.ownerDocument.defaultView;
     if (!viewport) return;
     const bounds: DOMRect = dialog.getBoundingClientRect();
-    const gap: number = Number.parseFloat(viewport.getComputedStyle(dialog).getPropertyValue('--sui-dialog-viewport-gap')) || 0;
-    dialog.style.maxWidth = `${Math.max(0, viewport.innerWidth - bounds.left - gap)}px`;
-    dialog.style.maxHeight = `${Math.max(0, viewport.innerHeight - bounds.top - gap)}px`;
+    dialog.style.maxWidth = `max(0px, calc(100vw - ${bounds.left}px - var(--sui-dialog-viewport-gap)))`;
+    dialog.style.maxHeight = `max(0px, calc(100dvh - ${bounds.top}px - var(--sui-dialog-viewport-gap)))`;
+  }
+
+  private constrainPosition(): void {
+    if (!this.constrainToViewport()) return;
+    const dialog: HTMLDialogElement = this.element().nativeElement;
+    const viewport: Window | null = dialog.ownerDocument.defaultView;
+    if (!viewport) return;
+    const bounds: DOMRect = dialog.getBoundingClientRect();
+    const offset: Readonly<{ x: number; y: number }> = this.drag().getFreeDragPosition();
+    const left: number = Math.max(0, Math.min(bounds.left, viewport.innerWidth - bounds.width));
+    const top: number = Math.max(0, Math.min(bounds.top, viewport.innerHeight - bounds.height));
+    this.drag().setFreeDragPosition({ x: offset.x + left - bounds.left, y: offset.y + top - bounds.top });
   }
 }

@@ -57,6 +57,45 @@ async function expectPosition(dialog: Locator, centered: boolean): Promise<void>
   }).toPass({ timeout: 5_000 });
 }
 
+for (const example of [
+  { trigger: 'View today’s menu', name: 'Today’s menu', centered: true },
+  { trigger: 'Open prep board', name: 'Prep board', centered: false },
+  { trigger: 'Open positioned dialog', name: 'Custom position', centered: false },
+]) {
+  test(`${example.name} remains visible when an open Dialog crosses viewport sizes`, async ({
+    page,
+    isMobile,
+  }: {
+    page: Page;
+    isMobile: boolean;
+  }): Promise<void> => {
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.goto('/dialog');
+    await activate(page.getByRole('button', { name: example.trigger }), isMobile);
+    const dialog: Locator = page.getByRole('dialog', { name: example.name });
+    await expect(dialog).toBeVisible();
+
+    for (const viewport of [
+      { width: 390, height: 844 },
+      { width: 1280, height: 600 },
+    ]) {
+      await page.setViewportSize(viewport);
+      await expect(async (): Promise<void> => {
+        const bounds: Geometry = await geometry(dialog);
+        expect(bounds.left).toBeGreaterThanOrEqual(0);
+        expect(bounds.top).toBeGreaterThanOrEqual(0);
+        expect(bounds.right).toBeLessThanOrEqual(bounds.viewportWidth);
+        expect(bounds.bottom).toBeLessThanOrEqual(bounds.viewportHeight);
+        expect(bounds.width).toBeGreaterThan(200);
+        if (example.centered) {
+          expect(bounds.left + bounds.width / 2).toBeCloseTo(bounds.viewportWidth / 2, 0);
+          expect(bounds.top + bounds.height / 2).toBeCloseTo(bounds.viewportHeight / 2, 0);
+        }
+      }).toPass({ timeout: 5_000 });
+    }
+  });
+}
+
 for (const width of [360, 390]) {
   test(`custom and named Dialog positions stay contained at ${width}px`, async ({
     page,

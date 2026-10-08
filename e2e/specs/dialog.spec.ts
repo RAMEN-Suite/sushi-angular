@@ -11,6 +11,21 @@ test.beforeEach(async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/dialog');
 });
 
+test('inherits documented surface tokens from the public Dialog host', async ({ page }: { page: Page }): Promise<void> => {
+  const dialog: Locator = page.getByRole('dialog', { name: 'Today’s menu', includeHidden: true });
+  await dialog.locator('..').evaluate((host: HTMLElement): void => {
+    host.style.setProperty('--sui-dialog-width', '36rem');
+    host.style.setProperty('--sui-dialog-radius', '24px');
+    host.style.setProperty('--sui-dialog-padding', '2rem');
+  });
+  await page.getByRole('button', { name: 'View today’s menu' }).click();
+  const rem: number = await page.evaluate((): number => Number.parseFloat(getComputedStyle(document.documentElement).fontSize));
+
+  await expect(dialog).toHaveCSS('width', `${36 * rem}px`);
+  await expect(dialog).toHaveCSS('border-radius', '24px');
+  await expect(dialog.locator('[suiDialogBody]')).toHaveCSS('padding', `${2 * rem}px`);
+});
+
 test('opens modally, closes with Escape, and restores trigger focus', async ({ page }: { page: Page }): Promise<void> => {
   const trigger: Locator = page.getByRole('button', { name: 'View today’s menu' });
   await trigger.click();
@@ -104,6 +119,33 @@ test('only an enabled drag handle exposes a move cursor', async ({ page }: { pag
   await page.getByRole('button', { name: 'Open prep board' }).click();
   const draggableHeader: Locator = page.getByRole('dialog', { name: 'Prep board' }).locator('[suiDialogHeader]');
   await expect(draggableHeader).toHaveCSS('cursor', 'move');
+});
+
+test('keeps a dragged Dialog visible after viewport changes', async ({ page }: { page: Page }): Promise<void> => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.getByRole('button', { name: 'Open prep board' }).click();
+  const dialog: Locator = page.getByRole('dialog', { name: 'Prep board' });
+  const header: Bounds | null = await dialog.locator('[suiDialogHeader]').boundingBox();
+  if (!header) throw new Error('Expected a visible draggable Dialog header.');
+  await page.mouse.move(header.x + header.width / 2, header.y + header.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(header.x + header.width / 2 - 100, header.y + header.height / 2 + 40, { steps: 5 });
+  await page.mouse.up();
+
+  for (const viewport of [
+    { width: 390, height: 844 },
+    { width: 1280, height: 300 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await expect(async (): Promise<void> => {
+      const bounds: Bounds | null = await dialog.boundingBox();
+      if (!bounds) throw new Error('Expected the dragged Dialog to remain visible.');
+      expect(bounds.x).toBeGreaterThanOrEqual(0);
+      expect(bounds.y).toBeGreaterThanOrEqual(0);
+      expect(bounds.x + bounds.width).toBeLessThanOrEqual(viewport.width);
+      expect(bounds.y + bounds.height).toBeLessThanOrEqual(viewport.height);
+    }).toPass({ timeout: 5_000 });
+  }
 });
 
 test('enables native bidirectional resizing', async ({ page }: { page: Page }): Promise<void> => {
