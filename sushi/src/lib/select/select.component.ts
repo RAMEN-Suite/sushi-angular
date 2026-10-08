@@ -232,6 +232,7 @@ export class Select extends FormControlState implements FormValueControl<SelectM
     const value: SelectValue | undefined = values.at(0);
     if (value !== undefined) this.value.set(value);
     this.handleExpanded(false);
+    this.focus();
   }
 
   protected handleClear(event: Event): void {

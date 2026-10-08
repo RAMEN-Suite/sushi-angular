@@ -41,6 +41,10 @@
       Notes
       <textarea suiTextarea fluid name="notes" rows="3"></textarea>
     </label>
+    <div class="grid gap-2">
+      <span suiLabel id="confirmation-language-label">Confirmation language</span>
+      <sui-select ariaLabelledby="confirmation-language-label" [options]="languages" [(value)]="language" fluid />
+    </div>
     <label suiLabel class="flex items-center gap-2">
       <input suiCheckbox type="checkbox" />
       Counter seating is okay
