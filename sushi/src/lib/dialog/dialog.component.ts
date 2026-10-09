@@ -55,7 +55,7 @@ let nextDialogId: number = 0;
       <ng-content />
       <ng-content select="[suiDialogFooter]" />
       <div class="sui-dialog-header__actions">
-        <button type="button" class="sui-dialog-header__action" aria-label="Close" (click)="close('', 'close')">
+        <button type="button" class="sui-dialog-header__action" [attr.aria-label]="closeLabel()" (click)="close('', 'close')">
           <svg lucideX aria-hidden="true"></svg>
         </button>
       </div>
@@ -83,6 +83,8 @@ export class Dialog {
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
   /** ID of the element that describes the Dialog. */
   public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
+  /** Accessible label of the built-in close button. Defaults to "Close"; bind translated text to localise it. */
+  public readonly closeLabel: InputSignal<string> = input<string>('Close');
   /** Enables dragging from the Dialog header. */
   public readonly draggable: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Keeps the Dialog inside the viewport after dragging and viewport changes. Disable only when off-screen placement is intentional. */

@@ -19,6 +19,7 @@ import { DialogCloseEvent } from '../dialog.interfaces';
     <sui-dialog
       #dialog="suiDialog"
       ariaLabelledby="dialog-title"
+      [closeLabel]="closeLabel()"
       [closeOnEscape]="dismissible()"
       [closeOnBackdrop]="dismissible()"
       [modal]="modal()"
@@ -39,6 +40,7 @@ import { DialogCloseEvent } from '../dialog.interfaces';
   `,
 })
 class DialogHost {
+  public readonly closeLabel: WritableSignal<string> = signal<string>('Close');
   public readonly open: WritableSignal<boolean> = signal<boolean>(false);
   public readonly dismissible: WritableSignal<boolean> = signal<boolean>(true);
   public readonly triggerDisabled: WritableSignal<boolean> = signal<boolean>(false);
@@ -213,6 +215,21 @@ describe('Dialog layout capabilities', (): void => {
 });
 
 describe('Dialog header', (): void => {
+  it('updates the built-in close action label when the language changes', (): void => {
+    const fixture: ComponentFixture<DialogHost> = render(DialogHost);
+    fixture.componentInstance.open.set(true);
+    fixture.componentInstance.closeLabel.set('Schließen');
+    fixture.detectChanges();
+    expect(query(fixture, 'button[aria-label="Schließen"]')).toBeTruthy();
+
+    fixture.componentInstance.closeLabel.set('Fermer');
+    fixture.detectChanges();
+    (query(fixture, 'button[aria-label="Fermer"]') as HTMLButtonElement).click();
+    fixture.detectChanges();
+    expect(fixture.componentInstance.open()).toBe(false);
+    expect(fixture.componentInstance.closed).toEqual([{ reason: 'close', returnValue: '' }]);
+  });
+
   it('provides a default close action', (): void => {
     const fixture: ComponentFixture<DialogHost> = render(DialogHost);
     fixture.componentInstance.open.set(true);
