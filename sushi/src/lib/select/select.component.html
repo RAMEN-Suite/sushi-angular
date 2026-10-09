@@ -85,9 +85,11 @@
   </span>
 </div>
 
+<!-- Keep the popup inside the native modal's interactive subtree. -->
 <ng-template
   cdkConnectedOverlay
   #overlay="cdkConnectedOverlay"
+  cdkConnectedOverlayUsePopover="inline"
   [cdkConnectedOverlayOrigin]="origin"
   [cdkConnectedOverlayPositions]="positions()"
   [cdkConnectedOverlayOpen]="expanded() && !disabled()"

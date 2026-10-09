@@ -29,7 +29,12 @@ export default defineConfig({
     },
     {
       name: 'mobile-webkit',
-      testMatch: ['**/responsive-layout.spec.ts', '**/mobile-overlay.spec.ts', '**/dialog-position.spec.ts'],
+      testMatch: [
+        '**/responsive-layout.spec.ts',
+        '**/mobile-overlay.spec.ts',
+        '**/dialog-position.spec.ts',
+        '**/select-dialog.spec.ts',
+      ],
       use: { ...devices['iPhone 13'] },
     },
   ],
