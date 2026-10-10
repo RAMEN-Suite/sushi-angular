@@ -7,7 +7,7 @@
   --divider-m: var(--sui-divider-margin);
 }
 
-.sui-divider:empty {
+.sui-divider:empty:not(.divider-horizontal) {
   height: var(--sui-divider-thickness);
 }
 

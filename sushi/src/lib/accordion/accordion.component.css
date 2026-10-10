@@ -67,6 +67,8 @@
 }
 
 .sui-accordion__panel {
+  /* Keep the grid transition continuous instead of switching to fit-content mid-animation. */
+  min-height: 0;
   padding-inline: 1rem;
   color: var(--sui-accordion-content-color);
 }
