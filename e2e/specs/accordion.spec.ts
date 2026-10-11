@@ -1,47 +1,68 @@
-import { expect, Locator, Page, test } from '@playwright/test';
+import { expect, JSHandle, Locator, Page, test } from '@playwright/test';
 
-async function sampleTransitionHeights(element: HTMLElement): Promise<readonly number[]> {
+interface AccordionTransition {
+  readonly animations: readonly Animation[];
+  readonly panel: HTMLElement;
+}
+
+async function pauseAccordionTransition(element: HTMLElement): Promise<AccordionTransition> {
   const panel: HTMLElement | null = document.getElementById(element.getAttribute('aria-controls') ?? '');
   const host: Element | null = element.closest('sui-accordion');
   if (!panel || !host) throw new Error('Expected an Accordion trigger with its panel.');
 
-  // Pause at transition start before a busy runner can miss the animation.
-  const animations: Animation[] = await new Promise<Animation[]>((resolve, reject): void => {
-    const onTransitionRun: (event: Event) => void = (event: Event): void => {
-      if (!(event.target instanceof Element) || !event.target.contains(panel)) return;
-      if ((event as TransitionEvent).propertyName !== 'grid-template-rows') return;
+  // Capture during DOM updates, before a delayed transition event can arrive after completion.
+  return new Promise<AccordionTransition>((resolve, reject): void => {
+    const observer: MutationObserver = new MutationObserver((): void => {
       const running: Animation[] = host.getAnimations({ subtree: true }).filter((animation: Animation): boolean => {
-        const effectTarget: Element | null = (animation.effect as KeyframeEffect).target;
-        return effectTarget instanceof Element && (effectTarget.contains(panel) || panel.contains(effectTarget));
+        const target: Element | null = (animation.effect as KeyframeEffect).target;
+        return target instanceof Element && (target.contains(panel) || panel.contains(target));
       });
+      if (
+        !running.some(
+          (animation: Animation): boolean =>
+            animation instanceof CSSTransition && animation.transitionProperty === 'grid-template-rows',
+        )
+      )
+        return;
       running.forEach((animation: Animation): void => animation.pause());
       clearTimeout(timer);
-      host.removeEventListener('transitionrun', onTransitionRun);
-      resolve(running);
-    };
+      observer.disconnect();
+      resolve({ animations: running, panel });
+    });
     const timer: number = window.setTimeout((): void => {
-      host.removeEventListener('transitionrun', onTransitionRun);
+      observer.disconnect();
       reject(new Error('Expected the Accordion height transition to run.'));
     }, 5_000);
-    host.addEventListener('transitionrun', onTransitionRun);
+    observer.observe(host, { attributes: true, subtree: true, attributeFilter: ['class', 'aria-expanded'] });
     element.click();
   });
+}
 
-  const duration: number = Math.max(
-    ...animations.map((animation: Animation): number => Number(animation.effect?.getComputedTiming().endTime ?? 0)),
-  );
+async function sampleTransitionHeights(trigger: Locator): Promise<readonly number[]> {
+  const transition: JSHandle<AccordionTransition> = await trigger.evaluateHandle(pauseAccordionTransition);
+  try {
+    return await transition.evaluate(async ({ animations, panel }: AccordionTransition): Promise<readonly number[]> => {
+      await Promise.all(animations.map((animation: Animation): Promise<Animation> => animation.ready));
+      const duration: number = Math.max(
+        ...animations.map((animation: Animation): number => Number(animation.effect?.getComputedTiming().endTime ?? 0)),
+      );
+      if (!Number.isFinite(duration) || duration <= 0) throw new Error('Expected a finite Accordion transition duration.');
 
-  const heights: number[] = Array.from({ length: 19 }, (_value: unknown, index: number): number => (index + 1) / 20).map(
-    (progress: number): number => {
-      animations.forEach((animation: Animation): void => {
-        animation.currentTime = duration * progress;
-      });
-      return panel.getBoundingClientRect().height;
-    },
-  );
-
-  animations.forEach((animation: Animation): void => animation.finish());
-  return heights;
+      const heights: number[] = [];
+      for (let step: number = 1; step < 20; step += 1) {
+        animations.forEach((animation: Animation): void => {
+          animation.currentTime = (duration * step) / 20;
+        });
+        // Seeking updates timing immediately; read geometry after the browser applies it for rendering.
+        await new Promise<number>((resolve): number => requestAnimationFrame(resolve));
+        heights.push(panel.getBoundingClientRect().height);
+      }
+      animations.forEach((animation: Animation): void => animation.finish());
+      return heights;
+    });
+  } finally {
+    await transition.dispose();
+  }
 }
 
 test('Accordion moves focus between triggers and keeps one item expanded', async ({ page }: { page: Page }): Promise<void> => {
@@ -72,20 +93,26 @@ test('preserved Accordion content expands and collapses without height jumps', a
   const trigger: Locator = page.getByRole('button', { name: 'When will my order arrive?' });
   const panel: Locator = page.getByRole('region', { name: 'When will my order arrive?', includeHidden: true });
   const expanded: number = await panel.evaluate((element: HTMLElement): number => element.getBoundingClientRect().height);
-  const closing: readonly number[] = await trigger.evaluate(sampleTransitionHeights);
+  const closing: readonly number[] = [expanded, ...(await sampleTransitionHeights(trigger)), 0];
 
   expect(
     Math.max(...closing.slice(1).map((height: number, index: number): number => Math.abs(height - closing[index]))),
   ).toBeLessThan(expanded * 0.3);
-  expect(closing.some((height: number): boolean => height > 0 && height < expanded - 1)).toBe(true);
+  expect(
+    closing.some((height: number): boolean => height > 0 && height < expanded - 1),
+    `Closing heights: ${JSON.stringify(closing)}; expanded height: ${expanded}`,
+  ).toBe(true);
   await expect(panel).toHaveCSS('height', '0px');
 
-  const opening: readonly number[] = await trigger.evaluate(sampleTransitionHeights);
+  const opening: readonly number[] = [0, ...(await sampleTransitionHeights(trigger)), expanded];
 
   expect(
     Math.max(...opening.slice(1).map((height: number, index: number): number => Math.abs(height - opening[index]))),
   ).toBeLessThan(expanded * 0.3);
-  expect(opening.some((height: number): boolean => height > 0 && height < expanded - 1)).toBe(true);
+  expect(
+    opening.some((height: number): boolean => height > 0 && height < expanded - 1),
+    `Opening heights: ${JSON.stringify(opening)}; expanded height: ${expanded}`,
+  ).toBe(true);
   await expect(async (): Promise<void> => {
     const height: number = await panel.evaluate((element: HTMLElement): number => element.getBoundingClientRect().height);
     expect(height).toBeCloseTo(expanded, 0);
