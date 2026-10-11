@@ -26,19 +26,30 @@ async function sampleToggle(trigger: Locator): Promise<readonly number[]> {
     const panel: HTMLElement | null = document.getElementById(element.getAttribute('aria-controls') ?? '');
     const host: Element | null = element.closest('sui-accordion');
     if (!panel || !host) throw new Error('Expected an Accordion trigger with its panel.');
-    element.click();
-    for (let frame: number = 0; frame < 2; frame++) {
-      await new Promise<void>((resolve): number => requestAnimationFrame((): void => resolve()));
-    }
-    const animations: Animation[] = host.getAnimations({ subtree: true }).filter((animation: Animation): boolean => {
-      const target: Element | null = (animation.effect as KeyframeEffect).target;
-      return target instanceof Element && (target.contains(panel) || panel.contains(target));
+    // Capture and pause at transitionrun so runner delays cannot miss the animation window.
+    const animations: Animation[] = await new Promise<Animation[]>((resolve, reject): void => {
+      const onTransitionRun: (event: Event) => void = (event: Event): void => {
+        if (!(event.target instanceof Element) || !event.target.contains(panel)) return;
+        if ((event as TransitionEvent).propertyName !== 'grid-template-rows') return;
+        const running: Animation[] = host.getAnimations({ subtree: true }).filter((animation: Animation): boolean => {
+          const effectTarget: Element | null = (animation.effect as KeyframeEffect).target;
+          return effectTarget instanceof Element && (effectTarget.contains(panel) || panel.contains(effectTarget));
+        });
+        running.forEach((animation: Animation): void => animation.pause());
+        clearTimeout(timer);
+        host.removeEventListener('transitionrun', onTransitionRun);
+        resolve(running);
+      };
+      const timer: number = window.setTimeout((): void => {
+        host.removeEventListener('transitionrun', onTransitionRun);
+        reject(new Error('Expected the Accordion height transition to run.'));
+      }, 5_000);
+      host.addEventListener('transitionrun', onTransitionRun);
+      element.click();
     });
-    if (!animations.length) throw new Error('Expected the Accordion height transition to run.');
     const duration: number = Math.max(
       ...animations.map((animation: Animation): number => Number(animation.effect?.getComputedTiming().endTime ?? 0)),
     );
-    animations.forEach((animation: Animation): void => animation.pause());
     const heights: number[] = Array.from({ length: 19 }, (_value: unknown, index: number): number => (index + 1) / 20).map(
       (progress: number): number => {
         animations.forEach((animation: Animation): void => {
