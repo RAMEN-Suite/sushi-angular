@@ -40,10 +40,12 @@ Place browser contracts in `e2e/specs/` and organize them by component or shared
 
 Most components need unit tests only. Existing E2E coverage protects modal focus and dismissal, non-modal scrolling, drag and resize, viewport containment, responsive navigation, overlay focus and placement, selection popups, media viewers, and overflow behavior.
 
+Accordion E2E tests verify settled visibility, expansion state, and preserved content. Animation smoothness and intermediate heights are not covered by automated tests.
+
 ### Browser matrix
 
 - Untagged browser contracts run in Chromium, Firefox, and WebKit. The mobile WebKit project additionally covers the selected responsive, overlay, and modal suites with touch input.
-- Use `@css` only for simple computed-style rules without geometry or interaction differences between engines, such as cursor mappings. These run in Chromium; layout, animation, and native modal regressions retain coverage across engines.
+- Use `@css` only for simple computed-style rules without geometry or interaction differences between engines, such as cursor mappings. These run in Chromium; layout and native modal regressions retain coverage across engines.
 - Use `@desktop` for scenarios that exercise only desktop layout. They run in all three desktop projects and are excluded from mobile WebKit. Tests that switch between desktop and mobile layouts remain in the mobile project when touch or responsive behavior is relevant.
 - Add viewport cases for distinct constraints or breakpoints. Adjacent widths that exercise the same behavior do not each need a separate test.
 
