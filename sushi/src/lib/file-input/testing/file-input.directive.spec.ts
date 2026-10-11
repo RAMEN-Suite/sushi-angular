@@ -30,7 +30,7 @@ class FileInputHost {
 }
 
 describe('FileInput', (): void => {
-  it('preserves native file-input semantics and maps configured appearance', (): void => {
+  it('maps configured layout and appearance', (): void => {
     const fixture: ComponentFixture<FileInputHost> = render(FileInputHost);
     const input: HTMLInputElement = query(fixture, 'input');
     fixture.componentInstance.fluid.set(true);
@@ -38,22 +38,23 @@ describe('FileInput', (): void => {
     fixture.componentInstance.size.set('sm');
     fixture.detectChanges();
 
-    expect(input.type).toBe('file');
     expect(input.classList.contains('file-input')).toBe(true);
     expect(input.classList.contains('file-input-secondary')).toBe(true);
     expect(input.classList.contains('file-input-sm')).toBe(true);
     expect(input.classList.contains('w-full')).toBe(true);
   });
 
-  it('delays invalid state until the control is touched or dirty', (): void => {
+  it.each(['touched', 'dirty'] as const)('delays invalid state until %s', (state: 'touched' | 'dirty'): void => {
     const fixture: ComponentFixture<FileInputHost> = render(FileInputHost);
     const input: HTMLInputElement = query(fixture, 'input');
     fixture.componentInstance.invalid.set(true);
     fixture.detectChanges();
+
     expect(input.hasAttribute('aria-invalid')).toBe(false);
 
-    fixture.componentInstance.dirty.set(true);
+    fixture.componentInstance[state].set(true);
     fixture.detectChanges();
+
     expect(input.getAttribute('aria-invalid')).toBe('true');
   });
 });

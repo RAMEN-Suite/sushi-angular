@@ -106,6 +106,7 @@ describe('Sidebar', (): void => {
 
   it('reflects the current destination and emits selection changes', (): void => {
     const fixture: ComponentFixture<SidebarHost> = render(SidebarHost);
+
     expect(query(fixture, '[data-item="overview"]').closest('button')?.getAttribute('aria-current')).toBe('page');
 
     const activity: HTMLButtonElement | null = query(fixture, '[data-item="activity"]').closest('button');
@@ -159,8 +160,9 @@ describe('Sidebar collapsed rail', (): void => {
     await fixture.whenStable();
 
     const child: HTMLElement | null = document.querySelector('[data-item="activity-reports"]');
-    expect(child).not.toBeNull();
-    child?.closest('button')?.click();
+    const destination: HTMLButtonElement | null | undefined = child?.closest('button');
+    if (!destination) throw new Error('Expected a flyout destination button.');
+    destination.click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.active()).toBe('activity-reports');

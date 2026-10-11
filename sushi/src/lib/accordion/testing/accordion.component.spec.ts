@@ -46,13 +46,17 @@ describe('Accordion rendering and model', (): void => {
     const buttons: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
     buttons[0].click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toEqual(['ingredients']);
     expect(query(fixture, '[data-header="ingredients"]').getAttribute('data-expanded')).toBe('true');
     expect((fixture.nativeElement as HTMLElement).textContent).toContain('Broth and noodles');
 
     buttons[1].click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toEqual(['method']);
+    expect(buttons[0].getAttribute('aria-expanded')).toBe('false');
+    expect(buttons[1].getAttribute('aria-expanded')).toBe('true');
   });
 });
 
@@ -68,12 +72,14 @@ describe('Accordion public controls', (): void => {
 
     fixture.componentInstance.control().collapseAll();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toEqual([]);
   });
 
   it('does not expand all when multiple mode is unavailable', (): void => {
     const fixture: ComponentFixture<AccordionHost> = render(AccordionHost);
     fixture.componentInstance.control().expandAll();
+
     expect(fixture.componentInstance.value()).toEqual([]);
   });
 });
@@ -84,6 +90,7 @@ describe('Accordion keyboard and disabled behavior', (): void => {
     const buttons: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
     buttons[0].focus();
     press(buttons[0], 'ArrowDown');
+
     expect(document.activeElement).toBe(buttons[1]);
   });
 

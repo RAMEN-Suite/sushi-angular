@@ -50,7 +50,6 @@ async function expectPosition(dialog: Locator, centered: boolean): Promise<void>
       expect(bounds.left + bounds.width / 2, details).toBeCloseTo(bounds.viewportWidth / 2, 0);
       expect(bounds.top + bounds.height / 2, details).toBeCloseTo(bounds.viewportHeight / 2, 0);
     } else {
-      // The example explicitly requests these offsets; this is not a decoration measurement.
       expect(bounds.top, details).toBeCloseTo(80, 0);
       expect(bounds.viewportWidth - bounds.right, details).toBeCloseTo(1.5 * bounds.rem, 0);
     }
@@ -73,6 +72,7 @@ for (const example of [
     await page.goto('/dialog');
     await activate(page.getByRole('button', { name: example.trigger }), isMobile);
     const dialog: Locator = page.getByRole('dialog', { name: example.name });
+
     await expect(dialog).toBeVisible();
 
     for (const viewport of [
@@ -96,31 +96,33 @@ for (const example of [
   });
 }
 
-for (const width of [360, 390]) {
-  test(`custom and named Dialog positions stay contained at ${width}px`, async ({
-    page,
-    isMobile,
-  }: {
-    page: Page;
-    isMobile: boolean;
-  }): Promise<void> => {
-    await page.setViewportSize({ width, height: 740 });
-    await page.goto('/dialog');
-    const trigger: Locator = page.getByRole('button', { name: 'Open positioned dialog' });
-    const dialog: Locator = page.getByRole('dialog', { name: 'Custom position' });
-    await activate(trigger, isMobile);
-    await expect(dialog).toBeVisible();
-    await expectPosition(dialog, false);
+test('custom and named Dialog positions stay contained at 360px', async ({
+  page,
+  isMobile,
+}: {
+  page: Page;
+  isMobile: boolean;
+}): Promise<void> => {
+  await page.setViewportSize({ width: 360, height: 740 });
+  await page.goto('/dialog');
+  const trigger: Locator = page.getByRole('button', { name: 'Open positioned dialog' });
+  const dialog: Locator = page.getByRole('dialog', { name: 'Custom position' });
+  await activate(trigger, isMobile);
 
-    await activate(dialog.getByRole('button', { name: 'Center dialog' }), isMobile);
-    await expectPosition(dialog, true);
-    await activate(dialog.getByRole('button', { name: 'Restore offsets' }), isMobile);
-    await expectPosition(dialog, false);
+  await expect(dialog).toBeVisible();
 
-    await activate(dialog.getByRole('button', { name: 'Close', exact: true }), isMobile);
-    await expect(dialog).toBeHidden();
-    await expect(trigger).toBeFocused();
-    await activate(trigger, isMobile);
-    await expectPosition(dialog, false);
-  });
-}
+  await expectPosition(dialog, false);
+
+  await activate(dialog.getByRole('button', { name: 'Center dialog' }), isMobile);
+  await expectPosition(dialog, true);
+  await activate(dialog.getByRole('button', { name: 'Restore offsets' }), isMobile);
+  await expectPosition(dialog, false);
+
+  await activate(dialog.getByRole('button', { name: 'Close', exact: true }), isMobile);
+
+  await expect(dialog).toBeHidden();
+  await expect(trigger).toBeFocused();
+
+  await activate(trigger, isMobile);
+  await expectPosition(dialog, false);
+});

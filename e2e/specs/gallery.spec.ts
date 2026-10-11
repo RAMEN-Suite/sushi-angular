@@ -27,6 +27,7 @@ test('Gallery scrolls overflowing thumbnails and keeps a single roving tab stop'
       thumbnails.evaluate((element: HTMLElement): boolean => element.scrollWidth > element.clientWidth),
     )
     .toBe(true);
+
   await lastThumbnail.click();
 
   await expect(lastThumbnail).toHaveAttribute('aria-current', 'true');
@@ -48,10 +49,13 @@ test('Gallery opens a grouped Lightbox, navigates images, and restores focus', a
   await imageTrigger.click();
 
   const lightbox: Locator = page.locator('.pswp[aria-label="Image viewer"]');
+
   await expect(lightbox).toBeVisible();
+  await expect(lightbox).toBeFocused();
   await expect(lightbox.locator('.pswp__counter')).toHaveText(`1 / ${thumbnailCount}`);
 
   await lightbox.locator('.pswp__button--arrow--next').click();
+
   await expect(lightbox.locator('.pswp__counter')).toHaveText(`2 / ${thumbnailCount}`);
   await expect
     .poll(
@@ -60,9 +64,8 @@ test('Gallery opens a grouped Lightbox, navigates images, and restores focus', a
     )
     .toBe(true);
 
-  await expect(async (): Promise<void> => {
-    await lightbox.getByRole('button', { name: 'Close' }).click();
-    await expect(lightbox).toBeHidden({ timeout: 1_000 });
-  }).toPass({ timeout: 5_000 });
+  await lightbox.getByRole('button', { name: 'Close' }).click();
+
+  await expect(lightbox).toBeHidden();
   await expect(imageTrigger).toBeFocused();
 });

@@ -96,13 +96,22 @@ afterEach((): void => {
   }
 });
 
-describe('ApiReferenceGenerator', (): void => {
-  it('generates documentation only for symbols exported by the package', (): void => {
+describe('API reference exports', (): void => {
+  it('documents exported components and omits internal or unexported symbols', (): void => {
     const result: GeneratedApi = generateApiReference(createFixture()).data;
-    const example: ApiReferenceData = result.references['Example'];
 
     expect(Object.keys(result.references)).toEqual(['Example', 'Secondary']);
-    expect(example.selector).toBe('sui-example');
+    expect(result.references['Example'].selector).toBe('sui-example');
+    expect(result.referencesByRoute['example']).toEqual(['Example', 'Secondary']);
+    expect(result.references['Secondary'].templates).toEqual([]);
+    expect(result.references['Secondary'].types).toEqual([]);
+  });
+});
+
+describe('API reference types and templates', (): void => {
+  it('resolves generic, nested, template-context, and platform types', (): void => {
+    const example: ApiReferenceData = generateApiReference(createFixture()).data.references['Example'];
+
     expect(example.declaration).toBe('Example<T = string>');
     expect(example.typeParameters).toEqual([{ name: 'T', constraint: null, defaultValue: 'string' }]);
     expect(example.templates).toContainEqual(expect.objectContaining({ name: 'suiExampleItem' }));
@@ -112,19 +121,26 @@ describe('ApiReferenceGenerator', (): void => {
       'ExampleOptions',
       'FocusOptions',
     ]);
+
     const focusOptions: ApiTypeDefinition | undefined = example.types.find((type): boolean => type.name === 'FocusOptions');
+
     expect(focusOptions?.members.map((member): string => member.name)).toContain('preventScroll');
     expect(focusOptions?.source).toBe('platform');
-    expect(example.types.find((type): boolean => type.name === 'ExampleOptions')?.source).toBe('library');
-    expect(example.types.find((type): boolean => type.name === 'ExampleOptions')?.typeParameters).toEqual([
-      { name: 'T', constraint: null, defaultValue: 'string' },
-    ]);
+
+    const options: ApiTypeDefinition | undefined = example.types.find((type): boolean => type.name === 'ExampleOptions');
+
+    expect(options?.source).toBe('library');
+    expect(options?.typeParameters).toEqual([{ name: 'T', constraint: null, defaultValue: 'string' }]);
+  });
+});
+
+describe('API reference CSS tokens', (): void => {
+  it('includes declarations and fallback-only token references', (): void => {
+    const example: ApiReferenceData = generateApiReference(createFixture()).data.references['Example'];
+
     expect(example.styles).toContainEqual(expect.objectContaining({ name: '--sui-example-gap', defaultValue: '1rem' }));
     expect(example.styles).toContainEqual(
       expect.objectContaining({ name: '--sui-example-hover-color', defaultValue: 'theme default' }),
     );
-    expect(result.references['Secondary'].templates).toEqual([]);
-    expect(result.references['Secondary'].types).toEqual([]);
-    expect(result.referencesByRoute['example']).toEqual(['Example', 'Secondary']);
   });
 });

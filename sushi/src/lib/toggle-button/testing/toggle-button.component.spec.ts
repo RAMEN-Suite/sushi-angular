@@ -47,11 +47,13 @@ describe('ToggleButton default control', (): void => {
   it('toggles its model and state-specific templates', (): void => {
     const fixture: ComponentFixture<ToggleButtonHost> = render(ToggleButtonHost);
     const button: HTMLButtonElement = query(fixture, 'button');
+
     expect(button.getAttribute('aria-pressed')).toBe('false');
     expect(query(fixture, '[data-off]').textContent).toBe('Pin');
 
     button.click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.checked()).toBe(true);
     expect(button.getAttribute('aria-pressed')).toBe('true');
     expect(query(fixture, '[data-on]').textContent).toBe('Pinned');
@@ -60,6 +62,7 @@ describe('ToggleButton default control', (): void => {
   it('emits touch on blur', (): void => {
     const fixture: ComponentFixture<ToggleButtonHost> = render(ToggleButtonHost);
     query(fixture, 'button').dispatchEvent(new FocusEvent('blur'));
+
     expect(fixture.componentInstance.touches).toBe(1);
   });
 });
@@ -73,6 +76,7 @@ describe('ToggleButton guarded states', (): void => {
 
     button.focus();
     button.click();
+
     expect(document.activeElement).toBe(button);
     expect(fixture.componentInstance.checked()).toBe(false);
     expect(query(fixture, 'sui-toggle-button').classList).toContain('cursor-not-allowed');
@@ -91,7 +95,7 @@ describe('ToggleButton guarded states', (): void => {
 });
 
 describe('ToggleButton custom control', (): void => {
-  it('delegates behavior through the complete template context', (): void => {
+  it('toggles through a custom template callback', (): void => {
     const fixture: ComponentFixture<CustomToggleButtonHost> = render(CustomToggleButtonHost);
     const button: HTMLButtonElement = query(fixture, 'button');
     button.click();

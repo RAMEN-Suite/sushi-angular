@@ -97,6 +97,7 @@ describe('Listbox value and templates', (): void => {
 
     expect(query(fixture, '[data-item="miso"]').getAttribute('data-selected')).toBe('true');
     expect(query(fixture, '[data-item="yuzu"]').getAttribute('data-selected')).toBe('true');
+    expect(query(fixture, '[data-item="shoyu"]').getAttribute('data-selected')).toBe('false');
   });
 });
 
@@ -113,14 +114,18 @@ describe('Listbox selection', (): void => {
     const selectAll: HTMLButtonElement = query(fixture, 'button');
     selectAll.click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toEqual(['miso', 'shoyu', 'yuzu']);
 
     selectAll.click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toEqual([]);
   });
+});
 
-  it('hard-disables listboxes and keeps readonly listboxes unchanged', (): void => {
+describe('Listbox guarded selection', (): void => {
+  it('hard-disables a listbox', (): void => {
     const fixture: ComponentFixture<ListboxHost> = render(ListboxHost);
     const listbox: HTMLElement = query(fixture, '[role="listbox"]') as HTMLElement;
     fixture.componentInstance.disabled.set(true);
@@ -130,16 +135,20 @@ describe('Listbox selection', (): void => {
     const yuzu: HTMLElement = query(fixture, '[data-item="yuzu"]') as HTMLElement;
     yuzu.click();
     fixture.detectChanges();
+
     expect(listbox.tabIndex).toBe(-1);
     expect(listbox.parentElement?.classList.contains('pointer-events-none')).toBe(true);
     expect(query(fixture, 'sui-listbox').classList).toContain('cursor-not-allowed');
     expect(fixture.componentInstance.value()).toEqual(['shoyu']);
+  });
 
-    fixture.componentInstance.disabled.set(false);
+  it('keeps readonly selections unchanged', (): void => {
+    const fixture: ComponentFixture<ListboxHost> = render(ListboxHost);
     fixture.componentInstance.readOnly.set(true);
     fixture.detectChanges();
     const miso: HTMLElement = query(fixture, '[data-item="miso"]') as HTMLElement;
     miso.click();
+
     expect(fixture.componentInstance.value()).toEqual(['shoyu']);
   });
 });
@@ -156,6 +165,7 @@ describe('Listbox validation state', (): void => {
 
     fixture.componentInstance.touched.set(true);
     fixture.detectChanges();
+
     expect(listbox.getAttribute('aria-invalid')).toBe('true');
   });
 });
@@ -172,23 +182,29 @@ describe('Listbox lazy loading', (): void => {
 
     listbox.dispatchEvent(new Event('scroll'));
     listbox.dispatchEvent(new Event('scroll'));
+
     expect(fixture.componentInstance.offsets).toEqual([4]);
 
     fixture.componentInstance.loading.set(true);
     fixture.detectChanges();
     listbox.dispatchEvent(new Event('scroll'));
+
     expect(fixture.componentInstance.offsets).toEqual([4]);
   });
+});
 
+describe('Listbox focus', (): void => {
   it('emits touch only after focus leaves the whole control', (): void => {
     const fixture: ComponentFixture<ListboxHost> = render(ListboxHost);
     const listbox: HTMLElement = query(fixture, '[role="listbox"]') as HTMLElement;
     const filter: HTMLInputElement = query(fixture, 'input');
     listbox.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: filter }));
+
     expect(fixture.componentInstance.touches).toBe(0);
 
     press(listbox, 'Tab');
     listbox.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
+
     expect(fixture.componentInstance.touches).toBe(1);
   });
 });

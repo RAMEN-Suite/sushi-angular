@@ -63,42 +63,60 @@ describe('Code', (): void => {
   it('copies trimmed code lines and shows temporary feedback', (): void => {
     vi.useFakeTimers();
     const fixture: ComponentFixture<CodeHost> = render(CodeHost);
+
     expect(query(fixture, '[suiCodeLine]').getAttribute('data-prefix')).toBe('$');
+
     query(fixture, 'button').dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
+
     expect(copy).toHaveBeenCalledWith('npm run build\ndone');
     expect(query(fixture, '[data-copied]').textContent).toBe('Copied');
-    vi.advanceTimersByTime(25);
+
+    vi.advanceTimersByTime(24);
     fixture.detectChanges();
+
+    expect(query(fixture, '[data-copied]').textContent).toBe('Copied');
+
+    vi.advanceTimersByTime(1);
+    fixture.detectChanges();
+
     expect(query(fixture, '[data-copy]').textContent).toBe('Copy');
   });
 
   it('exposes copy behavior and state to a complete button template', (): void => {
     const fixture: ComponentFixture<CustomCodeHost> = render(CustomCodeHost);
     const button: HTMLButtonElement = query(fixture, 'button');
+
     expect(button.textContent).toBe('Run');
+
     button.click();
     fixture.detectChanges();
+
     expect(copy).toHaveBeenCalledWith('alpha');
     expect(button.textContent).toBe('Done');
   });
+});
 
+describe('Code clipboard guards', (): void => {
   it('does not report copied state when the clipboard rejects the text', (): void => {
     copy.mockReturnValue(false);
     const fixture: ComponentFixture<CustomCodeHost> = render(CustomCodeHost);
     query(fixture, 'button').dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
+
     expect(query(fixture, 'button').textContent).toBe('Run');
   });
 
   it('does not call the clipboard when no copyable lines exist', (): void => {
     const fixture: ComponentFixture<EmptyCodeHost> = render(EmptyCodeHost);
     query(fixture, 'button').click();
+
     expect(copy).not.toHaveBeenCalled();
   });
 
   it('omits the copy control when copying is disabled', (): void => {
     const fixture: ComponentFixture<StaticCodeHost> = render(StaticCodeHost);
+
     expect((fixture.nativeElement as HTMLElement).querySelector('button')).toBeNull();
   });
 });

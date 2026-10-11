@@ -24,9 +24,12 @@ test.describe('Menu browser behavior', (): void => {
 
     const menu: Locator = page.getByRole('menu', { name: 'Message actions' });
     const firstAction: Locator = menu.getByRole('menuitem').first();
+
     await expect(menu).toBeVisible();
     await expect(firstAction).toBeFocused();
+
     await firstAction.press('Escape');
+
     await expect(menu).toBeHidden();
     await expect(trigger).toBeFocused();
   });
@@ -36,8 +39,10 @@ test.describe('Menu browser behavior', (): void => {
     await surface.press('Shift+F10');
 
     const menu: Locator = page.getByRole('menu', { name: 'Draft actions' });
+
     await expect(menu).toBeVisible();
     await expect(menu.getByRole('menuitem', { name: 'Rename draft' })).toBeFocused();
+
     const before: Bounds = await boundsOf(menu);
     const scrollContainer: Locator = page.locator('[suiDrawerContent]').first();
     const scrollBefore: number = await scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop);
@@ -45,15 +50,19 @@ test.describe('Menu browser behavior', (): void => {
       element.scrollTop -= 240;
       element.dispatchEvent(new Event('scroll'));
     });
+
     await expect
       .poll(async (): Promise<number> => scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop))
       .toBeLessThan(scrollBefore);
+
     const scrollAfter: number = await scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop);
     const after: Bounds = await boundsOf(menu);
+
     await expect(menu).toBeVisible();
     expect(scrollAfter).toBeLessThan(scrollBefore);
 
     const scrollDistance: number = scrollBefore - scrollAfter;
+
     expect(Math.abs(after.x - before.x)).toBeLessThan(scrollDistance * 0.05);
     expect(Math.abs(after.y - before.y)).toBeLessThan(scrollDistance * 0.05);
   });

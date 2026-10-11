@@ -36,6 +36,7 @@ describe('Tooltip', (): void => {
     fixture.detectChanges();
     const button: HTMLButtonElement = target.nativeElement as HTMLButtonElement;
     const tooltip: Element | null = document.querySelector('[role="tooltip"]');
+
     expect(tooltip?.textContent).toBe('Helpful details');
     expect(tooltip?.getAttribute('data-placement')).toBe('right');
     expect(button.getAttribute('aria-describedby')).toContain('existing-description');
@@ -49,15 +50,21 @@ describe('Tooltip', (): void => {
 
     button.dispatchEvent(new MouseEvent('mouseenter'));
     vi.advanceTimersByTime(199);
+
     expect(document.querySelector('[role="tooltip"]')).toBeNull();
+
     vi.advanceTimersByTime(1);
     fixture.detectChanges();
+
     expect(document.querySelector('[role="tooltip"]')).not.toBeNull();
 
     button.dispatchEvent(new MouseEvent('mouseleave'));
     vi.advanceTimersByTime(99);
+
     expect(document.querySelector('[role="tooltip"]')).not.toBeNull();
+
     vi.advanceTimersByTime(1);
+
     expect(document.querySelector('[role="tooltip"]')).toBeNull();
     expect(button.getAttribute('aria-describedby')).toBe('existing-description');
   });

@@ -117,6 +117,7 @@ describe('MultiSelect value and state', (): void => {
     const fixture: ComponentFixture<MultiSelectHost> = render(MultiSelectHost);
 
     expect(query(fixture, '[data-selected]').textContent).toBe('Miso, Shoyu');
+
     fixture.componentInstance.control().reset();
     fixture.detectChanges();
 
@@ -131,22 +132,30 @@ describe('MultiSelect value and state', (): void => {
 
     expect(fixture.componentInstance.value()).toEqual([]);
   });
+});
 
+describe('MultiSelect template actions', (): void => {
   it('removes selected values and toggles all through template callbacks', async (): Promise<void> => {
     const fixture: ComponentFixture<MultiSelectHost> = render(MultiSelectHost);
     query(fixture, '[data-remove]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toEqual(['shoyu']);
 
     await fixture.whenStable();
-    document.querySelector<HTMLElement>('[data-toggle-all]')?.click();
+    const toggleAll: HTMLElement | null = document.querySelector('[data-toggle-all]');
+    if (!toggleAll) throw new Error('Expected the template toggle-all action.');
+    toggleAll.click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toEqual(['miso', 'shoyu']);
   });
+});
 
+describe('MultiSelect validation', (): void => {
   it('exposes required, selection count, and delayed invalid state', async (): Promise<void> => {
     const fixture: ComponentFixture<MultiSelectHost> = render(MultiSelectHost);
-    const combobox: HTMLElement = query(fixture, 'div');
+    const combobox: HTMLElement = query(fixture, '[role="combobox"]') as HTMLElement;
     fixture.componentInstance.invalid.set(true);
     combobox.click();
     await fixture.whenStable();
@@ -157,6 +166,7 @@ describe('MultiSelect value and state', (): void => {
 
     fixture.componentInstance.touched.set(true);
     fixture.detectChanges();
+
     expect(combobox.getAttribute('aria-invalid')).toBe('true');
   });
 });
@@ -166,7 +176,7 @@ describe('MultiSelect interaction', (): void => {
     const fixture: ComponentFixture<MultiSelectHost> = render(MultiSelectHost);
     fixture.componentInstance.value.set([]);
     fixture.detectChanges();
-    query(fixture, 'div').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    query(fixture, '[role="combobox"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
     await fixture.whenStable();
 
     const selectAll: HTMLInputElement | null = document.querySelector<HTMLInputElement>('input[type="checkbox"]');
@@ -179,7 +189,7 @@ describe('MultiSelect interaction', (): void => {
 
   it('hard-disables controls and keeps them closed', (): void => {
     const fixture: ComponentFixture<MultiSelectHost> = render(MultiSelectHost);
-    const combobox: HTMLElement = query(fixture, 'div');
+    const combobox: HTMLElement = query(fixture, '[role="combobox"]') as HTMLElement;
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
 
@@ -191,7 +201,9 @@ describe('MultiSelect interaction', (): void => {
     expect(combobox.classList.contains('pointer-events-none')).toBe(true);
     expect(combobox.getAttribute('aria-disabled')).toBe('true');
     expect(document.querySelector('[role="listbox"]')).toBeNull();
+
     const root: HTMLElement = fixture.nativeElement as HTMLElement;
+
     expect(root.querySelector('[aria-label="Clear selection"]')).toBeNull();
   });
 });
@@ -199,6 +211,7 @@ describe('MultiSelect interaction', (): void => {
 describe('MultiSelect extension surfaces', (): void => {
   it('renders default selected text and structural templates', async (): Promise<void> => {
     const fixture: ComponentFixture<MultiSelectTemplatesHost> = render(MultiSelectTemplatesHost);
+
     expect(query(fixture, '[role="combobox"]').textContent).toContain('Miso');
     expect(query(fixture, '[data-clear-icon]')).toBeTruthy();
     expect(query(fixture, '[data-dropdown-icon]')).toBeTruthy();
@@ -219,10 +232,12 @@ describe('MultiSelect extension surfaces', (): void => {
     fixture.detectChanges();
     combobox.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     await fixture.whenStable();
+
     expect(document.querySelector('[data-empty]')).toBeTruthy();
 
     fixture.componentInstance.loading.set(true);
     fixture.detectChanges();
+
     expect(query(fixture, '[data-loading-icon]')).toBeTruthy();
     expect(document.querySelector('[data-loading]')).toBeTruthy();
   });

@@ -78,12 +78,14 @@ describe('FileDrop native selection', (): void => {
 
     query(fixture, '[aria-label="Remove ramen.png"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toEqual([documentFile]);
     expect(document.activeElement).toBe(choose);
 
     const clear: HTMLButtonElement = queryAll(fixture, 'button')[1];
     clear.click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toEqual([]);
     expect(fixture.componentInstance.touches).toBe(2);
   });
@@ -115,6 +117,7 @@ describe('FileDrop drag and drop', (): void => {
 
     zone.dispatchEvent(new Event('dragleave', { bubbles: true, cancelable: true }));
     fixture.detectChanges();
+
     expect(query(fixture, '[data-content]').getAttribute('data-active')).toBe('false');
   });
 });
@@ -127,9 +130,12 @@ describe('FileDrop disabled and public behavior', (): void => {
     fixture.detectChanges();
 
     fixture.componentInstance.control().focus();
+
     expect(document.activeElement).toBe(choose);
+
     fixture.componentInstance.control().reset();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toEqual([]);
   });
 

@@ -33,6 +33,7 @@ class ListHost {
 describe('List', (): void => {
   it('renders native rows with positional template context', (): void => {
     const fixture: ComponentFixture<ListHost> = render(ListHost);
+
     expect(query(fixture, 'ul').getAttribute('aria-label')).toBe('Team');
     expect(queryAll(fixture, 'li')).toHaveLength(2);
     expect(query(fixture, '[data-id="1"]').textContent.trim()).toBe('1/2 Avery true false');
@@ -42,11 +43,14 @@ describe('List', (): void => {
   it('applies hover, density, and divider choices without adding interaction roles', (): void => {
     const fixture: ComponentFixture<ListHost> = render(ListHost);
     const list: Element = query(fixture, 'ul');
+
     expect(list.classList).toContain('sui-list--row-hover');
     expect(list.classList).toContain('sui-list--sm');
     expect(list.hasAttribute('role')).toBe(false);
+
     fixture.componentInstance.dividers.set(false);
     fixture.detectChanges();
+
     expect(list.classList).toContain('sui-list--without-dividers');
   });
 
@@ -58,6 +62,7 @@ describe('List', (): void => {
       people[1],
     ]);
     fixture.detectChanges();
+
     expect(query(fixture, 'li')).toBe(firstRow);
     expect(query(fixture, '[data-id="1"]').textContent).toContain('Updated');
   });

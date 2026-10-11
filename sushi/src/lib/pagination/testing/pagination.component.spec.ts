@@ -67,6 +67,7 @@ describe('Pagination range and templates', (): void => {
     const fixture: ComponentFixture<PaginationHost> = render(PaginationHost);
     fixture.componentInstance.page.set(1);
     fixture.detectChanges();
+
     expect(queryAll(fixture, '[data-page]').map((page: Element): string | null => page.getAttribute('data-page'))).toEqual([
       '1',
       '2',
@@ -75,6 +76,7 @@ describe('Pagination range and templates', (): void => {
 
     fixture.componentInstance.page.set(10);
     fixture.detectChanges();
+
     expect(queryAll(fixture, '[data-page]').map((page: Element): string | null => page.getAttribute('data-page'))).toEqual([
       '8',
       '9',
@@ -102,6 +104,7 @@ describe('Pagination appearance', (): void => {
 
     query(fixture, '[aria-current="page"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
+
     expect(query(fixture, 'input').classList).toContain('join-item');
   });
 });
@@ -110,12 +113,19 @@ describe('Pagination navigation', (): void => {
   it('moves through previous, next, first, and last actions', (): void => {
     const fixture: ComponentFixture<PaginationHost> = render(PaginationHost);
     query(fixture, '[aria-label="Next page"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
     expect(fixture.componentInstance.page()).toBe(6);
 
+    query(fixture, '[aria-label="Previous page"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
+    expect(fixture.componentInstance.page()).toBe(5);
+
     query(fixture, '[aria-label="Last page"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
     expect(fixture.componentInstance.page()).toBe(10);
 
     query(fixture, '[aria-label="First page"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
     expect(fixture.componentInstance.page()).toBe(1);
   });
 
@@ -136,6 +146,7 @@ describe('Pagination navigation', (): void => {
 
     fixture.componentInstance.page.set(10);
     fixture.detectChanges();
+
     expect(query(fixture, '[aria-label="Next page"]').getAttribute('aria-disabled')).toBe('true');
     expect(query(fixture, '[aria-label="Last page"]').getAttribute('aria-disabled')).toBe('true');
   });
@@ -150,8 +161,7 @@ describe('Pagination page size and editing', (): void => {
     const option: HTMLElement | undefined = [...document.querySelectorAll<HTMLElement>('[role="option"]')].find(
       (element: HTMLElement): boolean => element.textContent.trim() === '25',
     );
-    expect(option).toBeDefined();
-    if (!option) return;
+    if (!option) throw new Error('Expected the page-size option 25.');
     option.click();
     fixture.detectChanges();
 

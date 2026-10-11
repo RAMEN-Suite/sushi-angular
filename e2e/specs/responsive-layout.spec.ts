@@ -30,31 +30,33 @@ test('Input keeps its configured text size when focused', async ({
 });
 
 for (const width of [390, 1280]) {
-  test(`Playground scrolls ${width < 1024 ? 'the document on mobile' : 'its content independently on desktop'}`, async ({
-    page,
-  }: {
-    page: Page;
-  }): Promise<void> => {
-    await page.setViewportSize({ width, height: 700 });
-    await page.goto('/input');
-    const content: Locator = page.getByTestId('playground-content');
-    await expect(page.getByRole('textbox', { name: 'Name', exact: true })).toBeVisible();
+  test(
+    `Playground scrolls ${width < 1024 ? 'the document on mobile' : 'its content independently on desktop'}`,
+    { tag: width === 1280 ? '@desktop' : [] },
+    async ({ page }: { page: Page }): Promise<void> => {
+      await page.setViewportSize({ width, height: 700 });
+      await page.goto('/input');
+      const content: Locator = page.getByTestId('playground-content');
 
-    await content.evaluate((element: HTMLElement): void => {
-      element.scrollTo(0, 200);
-      window.scrollTo(0, 200);
-    });
-    await expect
-      .poll((): Promise<boolean> =>
-        content.evaluate((element: HTMLElement): boolean => {
-          const documentScroll: number = document.scrollingElement?.scrollTop ?? 0;
-          return window.innerWidth < 1024
-            ? documentScroll > 0 && element.scrollTop === 0
-            : documentScroll === 0 && element.scrollTop > 0;
-        }),
-      )
-      .toBe(true);
-  });
+      await expect(page.getByRole('textbox', { name: 'Name', exact: true })).toBeVisible();
+
+      await content.evaluate((element: HTMLElement): void => {
+        element.scrollTo(0, 200);
+        window.scrollTo(0, 200);
+      });
+
+      await expect
+        .poll((): Promise<boolean> =>
+          content.evaluate((element: HTMLElement): boolean => {
+            const documentScroll: number = document.scrollingElement?.scrollTop ?? 0;
+            return window.innerWidth < 1024
+              ? documentScroll > 0 && element.scrollTop === 0
+              : documentScroll === 0 && element.scrollTop > 0;
+          }),
+        )
+        .toBe(true);
+    },
+  );
 }
 
 async function boundsOf(locator: Locator): Promise<Bounds> {
@@ -73,10 +75,13 @@ test('collapsible Navbar exposes mobile navigation and restores toggle focus on 
   const toggle: Locator = example.getByRole('button', { name: 'Toggle navigation' });
 
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+
   await toggle.click();
+
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
 
   await example.getByRole('button', { name: 'Products' }).press('Escape');
+
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   await expect(toggle).toBeFocused();
 });
@@ -96,6 +101,7 @@ test('Navbar switches at its configured breakpoint without hiding persistent act
   await expect(action).toBeVisible();
 
   await page.setViewportSize({ width: 600, height: 844 });
+
   await expect(toggle).toBeVisible();
   await expect(action).toBeVisible();
 });
@@ -126,7 +132,9 @@ test('Table keeps only its first column pinned and aligns the remaining headings
   await page.goto('/table');
   const table: Locator = page.getByRole('table', { name: 'Release queue' });
   const viewport: Locator = table.locator('..');
+
   await expect(table).toBeVisible();
+
   const pinnedHeading: Locator = table.getByRole('columnheader').first();
   const movingHeading: Locator = table.getByRole('columnheader').nth(1);
   const firstRow: Locator = table.locator('tbody tr').first();
@@ -192,6 +200,7 @@ for (const route of ['input', 'file-input', 'fieldset', 'range']) {
     const controls: Locator = page.locator(
       'input[suiInput], input[suiInputSurfaceControl], input[suiFileInput], input[suiRange]',
     );
+
     await expect(controls.first()).toBeVisible();
 
     for (const width of [320, 390]) {
@@ -258,34 +267,41 @@ test('Budget controls stack on mobile and remain usable', async ({
   if (isMobile) await period.tap();
   else await period.click();
   const option: Locator = page.getByRole('option', { name: 'Monthly', exact: true });
+
   await expect(option).toBeVisible();
+
   if (isMobile) await option.tap();
   else await option.click();
+
   await expect(period).toContainText('Monthly');
   await expect(amount).toHaveValue('25');
 });
 
-test('Budget controls fit on one row above the desktop breakpoint', async ({ page }: { page: Page }): Promise<void> => {
-  await page.setViewportSize({ width: 800, height: 844 });
-  await page.goto('/input-group');
-  const amount: Locator = page.getByRole('spinbutton', { name: 'Budget amount' });
-  const period: Locator = page.getByRole('combobox', { name: 'Billing period' });
-  const action: Locator = page.getByRole('button', { name: 'Apply', exact: true });
-  const group: Locator = amount.locator('../..');
+test(
+  'Budget controls fit on one row above the desktop breakpoint',
+  { tag: '@desktop' },
+  async ({ page }: { page: Page }): Promise<void> => {
+    await page.setViewportSize({ width: 800, height: 844 });
+    await page.goto('/input-group');
+    const amount: Locator = page.getByRole('spinbutton', { name: 'Budget amount' });
+    const period: Locator = page.getByRole('combobox', { name: 'Billing period' });
+    const action: Locator = page.getByRole('button', { name: 'Apply', exact: true });
+    const group: Locator = amount.locator('../..');
 
-  await expect
-    .poll(async (): Promise<boolean> => {
-      const input: Bounds = await boundsOf(amount);
-      const select: Bounds = await boundsOf(period);
-      const button: Bounds = await boundsOf(action);
-      const container: Bounds = await boundsOf(group);
-      const tolerance: number = input.height * 0.05;
-      return (
-        Math.abs(input.y - select.y) < tolerance &&
-        Math.abs(input.y - button.y) < tolerance &&
-        select.x >= input.x + input.width - tolerance &&
-        button.x + button.width <= container.x + container.width + tolerance
-      );
-    })
-    .toBe(true);
-});
+    await expect
+      .poll(async (): Promise<boolean> => {
+        const input: Bounds = await boundsOf(amount);
+        const select: Bounds = await boundsOf(period);
+        const button: Bounds = await boundsOf(action);
+        const container: Bounds = await boundsOf(group);
+        const tolerance: number = input.height * 0.05;
+        return (
+          Math.abs(input.y - select.y) < tolerance &&
+          Math.abs(input.y - button.y) < tolerance &&
+          select.x >= input.x + input.width - tolerance &&
+          button.x + button.width <= container.x + container.width + tolerance
+        );
+      })
+      .toBe(true);
+  },
+);

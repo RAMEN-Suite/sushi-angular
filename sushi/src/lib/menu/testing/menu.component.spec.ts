@@ -71,6 +71,7 @@ function documentQuery(selector: string): HTMLElement {
 describe('Menu inline semantics', (): void => {
   it('renders actions, groups, separators, active state, and templates', (): void => {
     const fixture: ComponentFixture<InlineMenuHost> = render(InlineMenuHost);
+
     expect(query(fixture, '[role="menu"]').getAttribute('aria-label')).toBe('Document actions');
     expect(queryAll(fixture, '[role="menuitem"]')).toHaveLength(5);
     expect(queryAll(fixture, '[role="separator"]')).toHaveLength(1);
@@ -124,8 +125,10 @@ describe('Menu popup button trigger', (): void => {
     fixture.detectChanges();
 
     const action: HTMLElement = documentQuery('[role="menuitem"]');
+
     expect(trigger.getAttribute('aria-expanded')).toBe('true');
     expect(document.activeElement).toBe(action);
+
     action.click();
     fixture.detectChanges();
 
@@ -140,6 +143,7 @@ describe('Menu popup button trigger', (): void => {
 
     press(trigger, 'ArrowDown');
     await fixture.whenStable();
+
     expect(fixture.componentInstance.menu().isOpen()).toBe(true);
 
     fixture.componentInstance.menu().close();
@@ -162,9 +166,11 @@ describe('Menu context trigger', (): void => {
     fixture.detectChanges();
 
     expect(fixture.componentInstance.menu().isOpen()).toBe(true);
+
     const action: HTMLElement = documentQuery('[role="menuitem"]');
     press(action, 'Escape');
     fixture.detectChanges();
+
     expect(fixture.componentInstance.menu().isOpen()).toBe(false);
     expect(document.activeElement).toBe(context);
   });

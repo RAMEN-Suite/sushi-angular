@@ -14,6 +14,7 @@ describe('Divider', (): void => {
   it('applies axis, placement, and semantic color without interaction semantics', (): void => {
     const fixture: ComponentFixture<DividerHost> = render(DividerHost);
     const divider: Element = query(fixture, '[suiDivider]');
+
     expect(divider.classList).toContain('divider-horizontal');
     expect(divider.classList).toContain('divider-end');
     expect(divider.classList).toContain('divider-secondary');

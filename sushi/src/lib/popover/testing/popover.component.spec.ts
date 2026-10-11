@@ -40,14 +40,19 @@ describe('Popover dismissal', (): void => {
     const trigger: HTMLButtonElement = query(fixture, 'button');
     trigger.click();
     fixture.detectChanges();
-    await Promise.resolve();
+    await fixture.whenStable();
+
     expect(trigger.getAttribute('aria-expanded')).toBe('true');
+
     const surface: Element | null = document.querySelector('[role="dialog"]');
     if (!surface) throw new Error('Expected the Popover surface to be visible.');
+
     expect(surface.textContent).toContain('Content');
     expect(document.activeElement).toBe(surface);
+
     press(surface, 'Escape');
     fixture.detectChanges();
+
     expect(trigger.getAttribute('aria-expanded')).toBe('false');
   });
 
@@ -74,14 +79,16 @@ describe('Popover opt-outs', (): void => {
     trigger.focus();
     trigger.click();
     fixture.detectChanges();
-    await Promise.resolve();
+    await fixture.whenStable();
 
     const surface: HTMLElement | null = document.querySelector('[role="dialog"]');
     if (!surface) throw new Error('Expected the Popover surface to be visible.');
+
     expect(document.activeElement).toBe(trigger);
 
     press(surface, 'Escape');
     fixture.detectChanges();
+
     expect(fixture.componentInstance.popover().open()).toBe(true);
   });
 

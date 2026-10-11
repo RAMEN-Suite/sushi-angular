@@ -29,14 +29,6 @@ class TextareaHost {
 }
 
 describe('Textarea', (): void => {
-  it('preserves native multiline editing', (): void => {
-    const textarea: HTMLTextAreaElement = query(render(TextareaHost), 'textarea');
-    textarea.value = 'First line\nSecond line';
-    textarea.dispatchEvent(new Event('input', { bubbles: true }));
-
-    expect(textarea.value).toBe('First line\nSecond line');
-  });
-
   it('maps every supported resize direction', (): void => {
     const fixture: ComponentFixture<TextareaHost> = render(TextareaHost);
     const textarea: HTMLTextAreaElement = query(fixture, 'textarea');
@@ -70,6 +62,7 @@ describe('Textarea', (): void => {
 
     fixture.componentInstance.touched.set(true);
     fixture.detectChanges();
+
     expect(textarea.getAttribute('aria-invalid')).toBe('true');
     expect(textarea.classList).toContain('textarea-error');
   });

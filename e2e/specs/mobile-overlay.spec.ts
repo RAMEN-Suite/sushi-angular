@@ -31,7 +31,8 @@ async function expectAnchoredAbove(popup: Locator, trigger: Locator): Promise<vo
         if (!control || !panel) return false;
 
         const gap: number = control.y - panel.y - panel.height;
-        return panel.y >= 0 && gap >= 0 && gap < control.height / 2;
+        const overlapsTrigger: boolean = panel.x < control.x + control.width && panel.x + panel.width > control.x;
+        return panel.y >= 0 && gap >= 0 && gap < control.height / 2 && overlapsTrigger;
       },
       { message: 'The popup should stay above and beside its trigger without clipping.' },
     )
@@ -45,6 +46,7 @@ test('large Popover stays within a short viewport when opened at the bottom', as
   await trigger.evaluate((element: HTMLElement): void => element.scrollIntoView({ block: 'end' }));
   await trigger.click();
   const popup: Locator = page.getByRole('dialog', { name: 'Select a chef' });
+
   await expect(popup).toBeVisible();
   await expect
     .poll(async (): Promise<boolean> => {
@@ -62,7 +64,9 @@ test('Popover stays above its separate target near the bottom edge', async ({ pa
   await target.evaluate((element: HTMLElement): void => element.scrollIntoView({ block: 'end' }));
   await trigger.click();
   const popup: Locator = page.getByRole('dialog', { name: 'Product details' });
+
   await expect(popup).toBeVisible();
+
   await expectAnchoredAbove(popup, target);
   await scrollContainer(target, 80);
   await expectAnchoredAbove(popup, target);
@@ -89,15 +93,19 @@ for (const [route, role, name, popupRole, popupName] of [
     else await trigger.click();
 
     const popup: Locator = popupName ? page.getByRole(popupRole, { name: popupName }) : page.getByRole(popupRole).first();
+
     await expect(popup).toBeVisible();
+
     await expectAnchoredAbove(popup, trigger);
 
     const initial: Bounds | null = await trigger.boundingBox();
     if (!initial) throw new Error('Expected a visible overlay trigger.');
     await scrollContainer(trigger, initial.height * 2);
+
     await expect
       .poll(async (): Promise<number> => (await trigger.boundingBox())?.y ?? initial.y)
       .toBeLessThan(initial.y - initial.height);
+
     await expectAnchoredAbove(popup, trigger);
   });
 }

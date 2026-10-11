@@ -64,6 +64,7 @@ class InfiniteDataViewHost {
 describe('DataView collection rendering', (): void => {
   it('renders the current local page with item and collection contexts', (): void => {
     const fixture: ComponentFixture<DataViewHost> = render(DataViewHost);
+
     expect(queryAll(fixture, '[data-item]')).toHaveLength(2);
     expect(query(fixture, '[data-item="Miso"]').getAttribute('data-first')).toBe('true');
     expect(query(fixture, '[data-item="Shoyu"]').getAttribute('data-last')).toBe('true');
@@ -97,19 +98,23 @@ describe('DataView collection states', (): void => {
     const fixture: ComponentFixture<DataViewHost> = render(DataViewHost);
     fixture.componentInstance.loading.set(true);
     fixture.detectChanges();
+
     expect(query(fixture, '[data-loading]').textContent).toBe('Fetching recipes');
     expect(query(fixture, 'sui-data-view').getAttribute('aria-busy')).toBe('true');
 
     fixture.componentInstance.loading.set(false);
     fixture.componentInstance.items.set([]);
     fixture.detectChanges();
+
     expect(query(fixture, '[data-empty]').textContent).toBe('Nothing here');
   });
 
   it('requests more items through a custom infinite-scroll control', (): void => {
     const fixture: ComponentFixture<InfiniteDataViewHost> = render(InfiniteDataViewHost);
     const load: HTMLButtonElement = query(fixture, 'button');
+
     expect(load.getAttribute('data-loading')).toBe('false');
+
     load.click();
 
     expect(fixture.componentInstance.loads).toBe(1);

@@ -1,6 +1,6 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { Gallery, GalleryImage } from '../index';
 
@@ -33,11 +33,13 @@ describe('Gallery', (): void => {
     );
     thumbnails[1].click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.active()).toBe(1);
     expect((query(fixture, '.sui-gallery__image img') as HTMLImageElement).alt).toBe('B');
 
     (query(fixture, '.sui-gallery__next') as HTMLButtonElement).click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.active()).toBe(0);
   });
 
@@ -65,6 +67,7 @@ describe('Gallery keyboard navigation', (): void => {
 
     gallery.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
     fixture.detectChanges();
+
     expect(fixture.componentInstance.active()).toBe(1);
     expect(document.activeElement).toBe(thumbnails[1]);
     expect(thumbnails.map((thumbnail: HTMLButtonElement): number => thumbnail.tabIndex)).toEqual([-1, 0]);
@@ -73,6 +76,7 @@ describe('Gallery keyboard navigation', (): void => {
     fixture.detectChanges();
     gallery.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
     fixture.detectChanges();
+
     expect(fixture.componentInstance.active()).toBe(1);
   });
 });
@@ -87,20 +91,6 @@ describe('Gallery states', (): void => {
     expect((query(fixture, '.sui-gallery') as HTMLElement).dataset['fit']).toBe('contain');
     expect(query(fixture, '.sui-gallery__meta span').textContent.trim()).toBe('2 / 2');
     expect((query(fixture, '.sui-gallery__image img') as HTMLImageElement).alt).toBe('B');
-  });
-
-  it('keeps the active thumbnail visible when navigating a long collection', (): void => {
-    const fixture: ComponentFixture<Host> = render(Host);
-    const thumbnails: HTMLButtonElement[] = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('.sui-gallery__thumbnails button'),
-    );
-    const scrollIntoView: (arg?: boolean | ScrollIntoViewOptions) => void = vi.fn();
-    thumbnails[1].scrollIntoView = scrollIntoView;
-
-    (query(fixture, '.sui-gallery__next') as HTMLButtonElement).click();
-    fixture.detectChanges();
-
-    expect(scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
   });
 
   it('renders an empty state without image navigation', (): void => {

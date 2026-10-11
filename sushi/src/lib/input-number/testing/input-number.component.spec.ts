@@ -77,15 +77,18 @@ describe('InputNumber value and formatting', (): void => {
     const input: HTMLInputElement = query(fixture, 'input');
     input.dispatchEvent(new FocusEvent('focus'));
     fixture.detectChanges();
+
     expect(input.value).toBe('8');
 
     input.value = '99,5 €';
     input.dispatchEvent(new Event('input', { bubbles: true }));
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toBe(12);
 
     input.value = '';
     input.dispatchEvent(new Event('input', { bubbles: true }));
+
     expect(fixture.componentInstance.value()).toBeNull();
   });
 });
@@ -111,13 +114,16 @@ describe('InputNumber interaction', (): void => {
     buttons[0].click();
     buttons[0].click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toBe(12);
 
     press(input, 'ArrowDown');
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toBe(10);
 
     buttons[1].click();
+
     expect(fixture.componentInstance.value()).toBe(8);
     expect(fixture.componentInstance.touches).toBe(3);
   });
@@ -158,13 +164,16 @@ describe('InputNumber disabled state', (): void => {
 describe('InputNumber custom controls', (): void => {
   it('exposes the value and step actions through its template context', (): void => {
     const fixture: ComponentFixture<CustomInputNumberHost> = render(CustomInputNumberHost);
+
     expect(query(fixture, '[data-value]').textContent).toBe('3');
 
     query(fixture, '[data-increment]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toBe(4);
 
     query(fixture, '[data-decrement]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
     expect(fixture.componentInstance.value()).toBe(3);
   });
 });

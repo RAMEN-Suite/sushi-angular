@@ -3,7 +3,7 @@ import { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import type PhotoSwipe from 'photoswipe';
 import type { PhotoSwipeOptions } from 'photoswipe';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { render } from '../../../../testing/test-utils';
 import { GalleryImage } from '../../gallery';
 import { LIGHTBOX_LOADER, LightboxLoader } from '../internal/lightbox-loader.token';
@@ -83,6 +83,10 @@ class LauncherStub {
 })
 class TriggerHost {}
 
+beforeEach((): void => {
+  PhotoSwipeStub.latest = null;
+});
+
 describe('Lightbox', (): void => {
   it('opens a collection at its active image with navigation controls', async (): Promise<void> => {
     const fixture: ComponentFixture<Host> = render(Host);
@@ -93,6 +97,7 @@ describe('Lightbox', (): void => {
 
     const viewer: PhotoSwipeStub | null = PhotoSwipeStub.latest;
     if (!viewer) throw new Error('Expected the Lightbox viewer to be created.');
+
     expect(fixture.componentInstance.open()).toBe(true);
     expect(viewer.options.index).toBe(1);
     expect(viewer.options.arrowPrev).toBe(true);
@@ -102,6 +107,7 @@ describe('Lightbox', (): void => {
     expect(viewer.element.getAttribute('aria-label')).toBe('Image viewer');
 
     viewer.goTo(0);
+
     expect(fixture.componentInstance.activeIndex()).toBe(0);
   });
 
@@ -113,6 +119,7 @@ describe('Lightbox', (): void => {
     await fixture.whenStable();
 
     instance.close();
+
     expect(fixture.componentInstance.open()).toBe(false);
   });
 });
@@ -148,6 +155,7 @@ describe('Lightbox trigger', (): void => {
       GalleryImage,
       { ariaLabel: string; zoom: boolean; wheelToZoom: boolean },
     ];
+
     expect(source.src).toContain('menu.jpg');
     expect(source).toMatchObject({ width: 640, height: 480, alt: 'Seasonal menu' });
     expect(options).toMatchObject({ ariaLabel: 'Image viewer', zoom: true, wheelToZoom: false });

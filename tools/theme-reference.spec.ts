@@ -43,3 +43,22 @@ describe('theme token reference', (): void => {
     );
   });
 });
+
+describe('theme token consistency', (): void => {
+  it('rejects a documented light token without a matching dark value', (): void => {
+    const source: string = `
+      @plugin "daisyui/theme" {
+        name: 'sushi';
+        /** @group Brand | Primary action color. */
+        --color-primary: #7a0712;
+      }
+      @plugin "daisyui/theme" {
+        name: 'sushi-dark';
+      }
+    `;
+
+    expect((): readonly unknown[] => readThemeTokenReferences(source)).toThrow(
+      'Theme token "--color-primary" is missing from sushi-dark.',
+    );
+  });
+});

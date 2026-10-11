@@ -138,15 +138,18 @@ describe('Table controlled sorting', (): void => {
     const sortName: HTMLButtonElement = queryAll(fixture, 'button')[0];
     sortName.click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.sort()).toEqual({ key: 'name', direction: 'ascending' });
     expect(queryAll(fixture, 'thead th')[0].getAttribute('aria-sort')).toBe('ascending');
 
     sortName.click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.sort()).toEqual({ key: 'name', direction: 'descending' });
 
     sortName.click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.sort()).toBeNull();
   });
 
@@ -197,6 +200,7 @@ describe('Table collection states', (): void => {
 
     fixture.componentInstance.loading.set(true);
     fixture.detectChanges();
+
     expect(query(fixture, '[role="status"]').textContent).toContain('Loading records');
     expect(query(fixture, 'table').getAttribute('aria-busy')).toBe('true');
   });

@@ -29,6 +29,7 @@ test.describe('Order List browser behavior', (): void => {
     await row.scrollIntoViewIfNeeded();
 
     await expect(row).toHaveCSS('cursor', 'grab');
+
     const bounds: Bounds | null = await row.boundingBox();
     if (bounds === null) throw new Error('Expected the draggable row to have visible bounds.');
 
@@ -60,6 +61,7 @@ test.describe('Order List browser behavior', (): void => {
     await expect.poll(async (): Promise<readonly string[]> => readItemOrder(rows)).not.toEqual(initialOrder);
 
     const reorderedItems: readonly string[] = await readItemOrder(rows);
+
     expect(reorderedItems[0]).not.toBe(initialOrder[0]);
     expect([...reorderedItems].sort()).toEqual([...initialOrder].sort());
   });

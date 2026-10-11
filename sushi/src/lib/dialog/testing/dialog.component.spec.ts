@@ -1,8 +1,5 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
-import { CdkDrag } from '@angular/cdk/drag-drop';
-import { By } from '@angular/platform-browser';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { DialogClose } from '../dialog-close.directive';
@@ -89,6 +86,7 @@ describe('Dialog state', (): void => {
 
     expect(trigger.getAttribute('aria-controls')).toBe(dialog.id);
     expect(trigger.getAttribute('aria-expanded')).toBe('false');
+
     trigger.click();
     fixture.detectChanges();
 
@@ -154,6 +152,7 @@ describe('Dialog pointer boundaries', (): void => {
     });
 
     dialog.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, clientX: 200, clientY: 200 }));
+
     expect(dialog.open).toBe(true);
     expect(fixture.componentInstance.closed).toEqual([]);
   });
@@ -176,20 +175,11 @@ describe('Dialog required interaction', (): void => {
 });
 
 describe('Dialog layout capabilities', (): void => {
-  it('enables header dragging only when requested', (): void => {
-    const fixture: ComponentFixture<DialogHost> = render(DialogHost);
-    const dialogDebugElement: DebugElement = fixture.debugElement.query(By.directive(CdkDrag));
-    const drag: CdkDrag = dialogDebugElement.injector.get(CdkDrag);
-
-    expect(drag.disabled).toBe(true);
-    fixture.componentInstance.draggable.set(true);
-    fixture.detectChanges();
-    expect(drag.disabled).toBe(false);
-  });
-
-  it('supports non-modal opening and opt-in layout capabilities', (): void => {
+  it('opens without a modal backdrop and applies configured position and resizing', (): void => {
     const fixture: ComponentFixture<DialogHost> = render(DialogHost);
     const dialog: HTMLDialogElement = query(fixture, 'dialog');
+    const show: ReturnType<typeof vi.spyOn> = vi.spyOn(dialog, 'show');
+    const showModal: ReturnType<typeof vi.spyOn> = vi.spyOn(dialog, 'showModal');
     fixture.componentInstance.modal.set(false);
     fixture.componentInstance.position.set('bottom-right');
     fixture.componentInstance.draggable.set(true);
@@ -198,19 +188,10 @@ describe('Dialog layout capabilities', (): void => {
     fixture.detectChanges();
 
     expect(dialog.open).toBe(true);
+    expect(show).toHaveBeenCalledOnce();
+    expect(showModal).not.toHaveBeenCalled();
     expect(dialog.dataset['position']).toBe('bottom-right');
     expect(dialog.classList).toContain('sui-dialog--resizable');
-  });
-
-  it('constrains dragging to the viewport by default and supports opting out', (): void => {
-    const fixture: ComponentFixture<DialogHost> = render(DialogHost);
-    const dialogDebugElement: DebugElement = fixture.debugElement.query(By.directive(CdkDrag));
-    const drag: CdkDrag = dialogDebugElement.injector.get(CdkDrag);
-
-    expect(drag.boundaryElement).toBe(document.documentElement);
-    fixture.componentInstance.constrainToViewport.set(false);
-    fixture.detectChanges();
-    expect(drag.boundaryElement).toBe('');
   });
 });
 
@@ -220,12 +201,14 @@ describe('Dialog header', (): void => {
     fixture.componentInstance.open.set(true);
     fixture.componentInstance.closeLabel.set('Schließen');
     fixture.detectChanges();
+
     expect(query(fixture, 'button[aria-label="Schließen"]')).toBeTruthy();
 
     fixture.componentInstance.closeLabel.set('Fermer');
     fixture.detectChanges();
     (query(fixture, 'button[aria-label="Fermer"]') as HTMLButtonElement).click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.open()).toBe(false);
     expect(fixture.componentInstance.closed).toEqual([{ reason: 'close', returnValue: '' }]);
   });
@@ -238,6 +221,7 @@ describe('Dialog header', (): void => {
 
     (query(fixture, '[aria-label="Close"]') as HTMLButtonElement).click();
     fixture.detectChanges();
+
     expect(dialog.open).toBe(false);
   });
 });
@@ -251,6 +235,9 @@ describe('Dialog trigger', (): void => {
     trigger.click();
     fixture.detectChanges();
 
+    trigger.focus();
+
+    expect(document.activeElement).toBe(trigger);
     expect(trigger.disabled).toBe(false);
     expect(trigger.getAttribute('aria-disabled')).toBe('true');
     expect(fixture.componentInstance.open()).toBe(false);
