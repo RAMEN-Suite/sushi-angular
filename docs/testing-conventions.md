@@ -34,13 +34,11 @@ Place browser contracts in `e2e/specs/` and organize them by component or shared
 - Start from a fresh page and keep tests order-independent.
 - Prefer roles, accessible names, labels, and visible text.
 - Use `data-testid` only for geometry surfaces without a user-facing identity.
-- Use Playwright's retrying locator assertions; do not add manual waits.
+- Use Playwright's retrying assertions for settled user-visible behavior; do not add manual waits or sample animation frames.
 - Assert layout invariants such as contained, aligned, scrollable, or moved. Use exact pixels only when the API promises them.
 - Do not test documentation tabs, copy, utility classes, colors, shadows, or page decoration.
 
 Most components need unit tests only. Existing E2E coverage protects modal focus and dismissal, non-modal scrolling, drag and resize, viewport containment, responsive navigation, overlay focus and placement, selection popups, media viewers, and overflow behavior.
-
-Accordion E2E tests verify settled visibility, expansion state, and preserved content. Animation smoothness and intermediate heights are not covered by automated tests.
 
 ### Browser matrix
 

@@ -9,6 +9,8 @@ test('collapsed Sidebar becomes an icon rail and exposes child destinations in a
 }): Promise<void> => {
   await page.goto('/sidebar');
   const sidebar: Locator = page.getByRole('complementary', { name: 'SUSHI workspace' });
+  await expect(sidebar).toBeVisible();
+
   const expandedWidth: number = await sidebar.evaluate((element: HTMLElement): number => element.getBoundingClientRect().width);
 
   await page.getByRole('button', { name: 'Collapse workspace navigation' }).click();

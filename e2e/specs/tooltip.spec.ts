@@ -20,10 +20,12 @@ test('Tooltip is exposed as the focused control description and honors top place
 
   await expect(trigger).toHaveAttribute('aria-describedby', tooltipId);
 
-  const triggerBounds: Bounds = await visibleBounds(trigger, 'the Tooltip trigger');
-  const tooltipBounds: Bounds = await visibleBounds(tooltip, 'the Tooltip');
+  await expect(async (): Promise<void> => {
+    const triggerBounds: Bounds = await visibleBounds(trigger, 'the Tooltip trigger');
+    const tooltipBounds: Bounds = await visibleBounds(tooltip, 'the Tooltip');
 
-  expect(tooltipBounds.y + tooltipBounds.height).toBeLessThanOrEqual(triggerBounds.y);
+    expect(tooltipBounds.y + tooltipBounds.height).toBeLessThanOrEqual(triggerBounds.y);
+  }).toPass({ timeout: 5_000 });
 
   await page.keyboard.press('Escape');
 

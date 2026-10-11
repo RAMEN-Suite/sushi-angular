@@ -51,19 +51,16 @@ test.describe('Menu browser behavior', (): void => {
       element.dispatchEvent(new Event('scroll'));
     });
 
-    await expect
-      .poll(async (): Promise<number> => scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop))
-      .toBeLessThan(scrollBefore);
+    await expect(async (): Promise<void> => {
+      const scrollAfter: number = await scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop);
+      const after: Bounds = await boundsOf(menu);
+      const scrollDistance: number = scrollBefore - scrollAfter;
 
-    const scrollAfter: number = await scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop);
-    const after: Bounds = await boundsOf(menu);
+      expect(scrollAfter).toBeLessThan(scrollBefore);
+      expect(Math.abs(after.x - before.x)).toBeLessThan(scrollDistance * 0.05);
+      expect(Math.abs(after.y - before.y)).toBeLessThan(scrollDistance * 0.05);
+    }).toPass({ timeout: 5_000 });
 
     await expect(menu).toBeVisible();
-    expect(scrollAfter).toBeLessThan(scrollBefore);
-
-    const scrollDistance: number = scrollBefore - scrollAfter;
-
-    expect(Math.abs(after.x - before.x)).toBeLessThan(scrollDistance * 0.05);
-    expect(Math.abs(after.y - before.y)).toBeLessThan(scrollDistance * 0.05);
   });
 });

@@ -58,11 +58,11 @@ test.describe('Order List browser behavior', (): void => {
 
     await dragBetween(page, source, target);
 
-    await expect.poll(async (): Promise<readonly string[]> => readItemOrder(rows)).not.toEqual(initialOrder);
+    await expect(async (): Promise<void> => {
+      const reorderedItems: readonly string[] = await readItemOrder(rows);
 
-    const reorderedItems: readonly string[] = await readItemOrder(rows);
-
-    expect(reorderedItems[0]).not.toBe(initialOrder[0]);
-    expect([...reorderedItems].sort()).toEqual([...initialOrder].sort());
+      expect(reorderedItems[0]).not.toBe(initialOrder[0]);
+      expect([...reorderedItems].sort()).toEqual([...initialOrder].sort());
+    }).toPass({ timeout: 5_000 });
   });
 });

@@ -1,10 +1,14 @@
 import { expect, Locator, Page, test } from '@playwright/test';
 
-interface Bounds {
-  readonly height: number;
-  readonly width: number;
-  readonly x: number;
-  readonly y: number;
+import { Bounds, visibleBounds } from '../support/geometry';
+
+async function expectOrigin(dialog: Locator, origin: Bounds, tolerance: number): Promise<void> {
+  await expect(async (): Promise<void> => {
+    const bounds: Bounds = await visibleBounds(dialog, 'the Dialog');
+
+    expect(Math.abs(bounds.x - origin.x)).toBeLessThan(tolerance);
+    expect(Math.abs(bounds.y - origin.y)).toBeLessThan(tolerance);
+  }).toPass({ timeout: 5_000 });
 }
 
 test.beforeEach(async ({ page }: { page: Page }): Promise<void> => {
@@ -60,12 +64,15 @@ test('non-dismissible Dialog ignores Escape and honors its configured start posi
   await expect(dialog).toBeVisible();
 
   const viewport: { readonly height: number; readonly width: number } | null = page.viewportSize();
-  const bounds: Bounds | null = await dialog.boundingBox();
-  if (viewport === null || bounds === null) throw new Error('Expected a visible right-positioned Dialog.');
-  const rightGap: number = viewport.width - (bounds.x + bounds.width);
+  if (viewport === null) throw new Error('Expected a viewport for the right-positioned Dialog.');
 
-  expect(rightGap).toBeGreaterThanOrEqual(0);
-  expect(rightGap).toBeLessThan(viewport.width * 0.05);
+  await expect(async (): Promise<void> => {
+    const bounds: Bounds = await visibleBounds(dialog, 'the right-positioned Dialog');
+    const rightGap: number = viewport.width - (bounds.x + bounds.width);
+
+    expect(rightGap).toBeGreaterThanOrEqual(0);
+    expect(rightGap).toBeLessThan(viewport.width * 0.05);
+  }).toPass({ timeout: 5_000 });
 
   await dialog.getByRole('button', { name: 'Close' }).click();
 
@@ -105,22 +112,21 @@ test('drags only from the header and stays inside the viewport', async ({ page }
   await page.mouse.down();
   await page.mouse.move(bodyBounds.x - 100, bodyBounds.y + bodyBounds.height / 2, { steps: 5 });
   await page.mouse.up();
-  const afterBodyDrag: Bounds | null = await dialog.boundingBox();
-  if (afterBodyDrag === null) throw new Error('Expected the Dialog to remain visible after dragging its body.');
 
-  expect(Math.abs(afterBodyDrag.x - initial.x)).toBeLessThan(10);
-  expect(Math.abs(afterBodyDrag.y - initial.y)).toBeLessThan(10);
+  await expectOrigin(dialog, initial, 10);
 
   await page.mouse.move(handle.x + handle.width / 2, handle.y + handle.height / 2);
   await page.mouse.down();
   await page.mouse.move(handle.x - 100, handle.y + handle.height / 2, { steps: 5 });
   await page.mouse.up();
 
-  const moved: Bounds | null = await dialog.boundingBox();
+  await expect(async (): Promise<void> => {
+    const moved: Bounds = await visibleBounds(dialog, 'the dragged Dialog');
 
-  expect(moved?.x).toBeLessThan(initial.x);
-  expect(moved?.x).toBeGreaterThanOrEqual(0);
-  expect(moved?.y).toBeGreaterThanOrEqual(0);
+    expect(moved.x).toBeLessThan(initial.x);
+    expect(moved.x).toBeGreaterThanOrEqual(0);
+    expect(moved.y).toBeGreaterThanOrEqual(0);
+  }).toPass({ timeout: 5_000 });
 });
 
 test('only an enabled drag handle exposes a move cursor', { tag: '@css' }, async ({ page }: { page: Page }): Promise<void> => {
@@ -175,9 +181,6 @@ test('custom coordinates are restored when reopening after dragging', async ({ p
   const trigger: Locator = page.getByRole('button', { name: 'Open positioned dialog' });
   const dialog: Locator = page.getByRole('dialog', { name: 'Custom position' });
   await trigger.click();
-  const initial: Bounds | null = await dialog.boundingBox();
-  if (!initial) throw new Error('Expected a visible custom-positioned Dialog.');
-
   await expect(async (): Promise<void> => {
     const bounds: Bounds | null = await dialog.boundingBox();
     if (!bounds) throw new Error('Expected a visible custom-positioned Dialog.');
@@ -186,6 +189,9 @@ test('custom coordinates are restored when reopening after dragging', async ({ p
     expect(bounds.y).toBeCloseTo(80, 0);
     expect(viewportWidth - bounds.x - bounds.width).toBeCloseTo(1.5 * rem, 0);
   }).toPass({ timeout: 5_000 });
+
+  const initial: Bounds | null = await dialog.boundingBox();
+  if (!initial) throw new Error('Expected a visible custom-positioned Dialog.');
 
   const header: Bounds | null = await dialog.locator('[suiDialogHeader]').boundingBox();
   if (!header) throw new Error('Expected a draggable header.');
@@ -202,11 +208,7 @@ test('custom coordinates are restored when reopening after dragging', async ({ p
 
   await trigger.click();
 
-  await expect(async (): Promise<void> => {
-    const reopened: Bounds | null = await dialog.boundingBox();
-    expect(reopened?.x).toBeCloseTo(initial.x, 0);
-    expect(reopened?.y).toBeCloseTo(initial.y, 0);
-  }).toPass({ timeout: 5_000 });
+  await expectOrigin(dialog, initial, 0.5);
 });
 
 test('custom coordinates can change while the Dialog is open', async ({ page }: { page: Page }): Promise<void> => {
@@ -256,10 +258,11 @@ test('resizes in place without moving the Dialog origin', async ({
   await page.mouse.move(initial.x + initial.width + 60, initial.y + initial.height + 40, { steps: 5 });
   await page.mouse.up();
 
-  const resized: Bounds | null = await dialog.boundingBox();
-  if (resized === null) throw new Error('Expected the Dialog to remain visible after resizing.');
+  await expect(async (): Promise<void> => {
+    const resized: Bounds = await visibleBounds(dialog, 'the resized Dialog');
 
-  expect(Math.abs(resized.x - initial.x)).toBeLessThan(6);
-  expect(Math.abs(resized.y - initial.y)).toBeLessThan(6);
-  expect(resized.width).toBeGreaterThan(initial.width);
+    expect(Math.abs(resized.x - initial.x)).toBeLessThan(6);
+    expect(Math.abs(resized.y - initial.y)).toBeLessThan(6);
+    expect(resized.width).toBeGreaterThan(initial.width);
+  }).toPass({ timeout: 5_000 });
 });

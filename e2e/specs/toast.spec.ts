@@ -1,5 +1,7 @@
 import { expect, Locator, Page, test } from '@playwright/test';
 
+import { Bounds, visibleBounds } from '../support/geometry';
+
 test('Toast places actions below its message and completes the action flow', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/toast');
   await page.getByRole('button', { name: 'Show action' }).click();
@@ -11,14 +13,15 @@ test('Toast places actions below its message and completes the action flow', asy
   await expect(content).not.toHaveText('');
   await expect(actions.getByRole('button')).toHaveCount(1);
 
-  const contentBounds: { x: number; y: number; width: number; height: number } | null = await content.boundingBox();
-  const actionBounds: { x: number; y: number; width: number; height: number } | null = await actions.boundingBox();
-  if (!contentBounds || !actionBounds) throw new Error('Expected visible Toast content and actions.');
+  await expect(async (): Promise<void> => {
+    const contentBounds: Bounds = await visibleBounds(content, 'the Toast content');
+    const actionBounds: Bounds = await visibleBounds(actions, 'the Toast actions');
 
-  const contentCenter: number = contentBounds.y + contentBounds.height / 2;
-  const actionsCenter: number = actionBounds.y + actionBounds.height / 2;
+    const contentCenter: number = contentBounds.y + contentBounds.height / 2;
+    const actionsCenter: number = actionBounds.y + actionBounds.height / 2;
 
-  expect(actionsCenter).toBeGreaterThan(contentCenter);
+    expect(actionsCenter).toBeGreaterThan(contentCenter);
+  }).toPass({ timeout: 5_000 });
 
   await actions.getByRole('button').click();
 

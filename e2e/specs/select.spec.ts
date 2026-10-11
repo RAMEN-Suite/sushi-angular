@@ -11,13 +11,15 @@ test('Select popup follows its control and commits an option', async ({ page }: 
 
   await expect(listbox).toBeVisible();
 
-  const selectBounds: Bounds = await visibleBounds(select, 'the Select control');
-  const popupBounds: Bounds = await visibleBounds(listbox.locator('..'), 'the Select popup');
+  await expect(async (): Promise<void> => {
+    const selectBounds: Bounds = await visibleBounds(select, 'the Select control');
+    const popupBounds: Bounds = await visibleBounds(listbox.locator('..'), 'the Select popup');
 
-  const horizontalTolerance: number = selectBounds.width * 0.02;
+    const horizontalTolerance: number = selectBounds.width * 0.02;
 
-  expect(Math.abs(popupBounds.x - selectBounds.x)).toBeLessThan(horizontalTolerance);
-  expect(Math.abs(popupBounds.width - selectBounds.width)).toBeLessThan(horizontalTolerance);
+    expect(Math.abs(popupBounds.x - selectBounds.x)).toBeLessThan(horizontalTolerance);
+    expect(Math.abs(popupBounds.width - selectBounds.width)).toBeLessThan(horizontalTolerance);
+  }).toPass({ timeout: 5_000 });
 
   await page.getByRole('option', { name: 'Emerald' }).click();
 

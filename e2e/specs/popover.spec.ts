@@ -12,15 +12,17 @@ test('Popover opens outside its trigger and restores focus on Escape', async ({ 
   await expect(popover).toBeFocused();
   await expect(trigger).toHaveAttribute('aria-expanded', 'true');
 
-  const triggerBounds: Bounds = await visibleBounds(trigger, 'the Popover trigger');
-  const popoverBounds: Bounds = await visibleBounds(popover, 'the Popover');
-  const placement: string | null = await popover.getAttribute('data-placement');
-  const gap: number =
-    placement === 'top'
-      ? triggerBounds.y - (popoverBounds.y + popoverBounds.height)
-      : popoverBounds.y - (triggerBounds.y + triggerBounds.height);
+  await expect(async (): Promise<void> => {
+    const triggerBounds: Bounds = await visibleBounds(trigger, 'the Popover trigger');
+    const popoverBounds: Bounds = await visibleBounds(popover, 'the Popover');
+    const placement: string | null = await popover.getAttribute('data-placement');
+    const gap: number =
+      placement === 'top'
+        ? triggerBounds.y - (popoverBounds.y + popoverBounds.height)
+        : popoverBounds.y - (triggerBounds.y + triggerBounds.height);
 
-  expect(gap).toBeGreaterThan(0);
+    expect(gap).toBeGreaterThan(0);
+  }).toPass({ timeout: 5_000 });
 
   await page.keyboard.press('Escape');
 
