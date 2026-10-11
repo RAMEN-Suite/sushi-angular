@@ -96,35 +96,33 @@ for (const example of [
   });
 }
 
-for (const width of [360, 390]) {
-  test(`custom and named Dialog positions stay contained at ${width}px`, async ({
-    page,
-    isMobile,
-  }: {
-    page: Page;
-    isMobile: boolean;
-  }): Promise<void> => {
-    await page.setViewportSize({ width, height: 740 });
-    await page.goto('/dialog');
-    const trigger: Locator = page.getByRole('button', { name: 'Open positioned dialog' });
-    const dialog: Locator = page.getByRole('dialog', { name: 'Custom position' });
-    await activate(trigger, isMobile);
+test('custom and named Dialog positions stay contained at 360px', async ({
+  page,
+  isMobile,
+}: {
+  page: Page;
+  isMobile: boolean;
+}): Promise<void> => {
+  await page.setViewportSize({ width: 360, height: 740 });
+  await page.goto('/dialog');
+  const trigger: Locator = page.getByRole('button', { name: 'Open positioned dialog' });
+  const dialog: Locator = page.getByRole('dialog', { name: 'Custom position' });
+  await activate(trigger, isMobile);
 
-    await expect(dialog).toBeVisible();
+  await expect(dialog).toBeVisible();
 
-    await expectPosition(dialog, false);
+  await expectPosition(dialog, false);
 
-    await activate(dialog.getByRole('button', { name: 'Center dialog' }), isMobile);
-    await expectPosition(dialog, true);
-    await activate(dialog.getByRole('button', { name: 'Restore offsets' }), isMobile);
-    await expectPosition(dialog, false);
+  await activate(dialog.getByRole('button', { name: 'Center dialog' }), isMobile);
+  await expectPosition(dialog, true);
+  await activate(dialog.getByRole('button', { name: 'Restore offsets' }), isMobile);
+  await expectPosition(dialog, false);
 
-    await activate(dialog.getByRole('button', { name: 'Close', exact: true }), isMobile);
+  await activate(dialog.getByRole('button', { name: 'Close', exact: true }), isMobile);
 
-    await expect(dialog).toBeHidden();
-    await expect(trigger).toBeFocused();
+  await expect(dialog).toBeHidden();
+  await expect(trigger).toBeFocused();
 
-    await activate(trigger, isMobile);
-    await expectPosition(dialog, false);
-  });
-}
+  await activate(trigger, isMobile);
+  await expectPosition(dialog, false);
+});

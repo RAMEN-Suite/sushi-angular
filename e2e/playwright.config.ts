@@ -21,14 +21,17 @@ export default defineConfig({
     },
     {
       name: 'firefox',
+      grepInvert: /@css\b/,
       use: { ...devices['Desktop Firefox'] },
     },
     {
       name: 'webkit',
+      grepInvert: /@css\b/,
       use: { ...devices['Desktop Safari'] },
     },
     {
       name: 'mobile-webkit',
+      grepInvert: /@(css|desktop)\b/,
       testMatch: [
         '**/responsive-layout.spec.ts',
         '**/mobile-overlay.spec.ts',

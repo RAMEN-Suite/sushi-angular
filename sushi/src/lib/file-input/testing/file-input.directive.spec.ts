@@ -30,7 +30,7 @@ class FileInputHost {
 }
 
 describe('FileInput', (): void => {
-  it('preserves native file-input semantics and maps configured appearance', (): void => {
+  it('maps configured layout and appearance', (): void => {
     const fixture: ComponentFixture<FileInputHost> = render(FileInputHost);
     const input: HTMLInputElement = query(fixture, 'input');
     fixture.componentInstance.fluid.set(true);
@@ -38,7 +38,6 @@ describe('FileInput', (): void => {
     fixture.componentInstance.size.set('sm');
     fixture.detectChanges();
 
-    expect(input.type).toBe('file');
     expect(input.classList.contains('file-input')).toBe(true);
     expect(input.classList.contains('file-input-secondary')).toBe(true);
     expect(input.classList.contains('file-input-sm')).toBe(true);

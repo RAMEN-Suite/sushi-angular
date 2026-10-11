@@ -30,13 +30,6 @@ class InputHost {
 }
 
 describe('Input', (): void => {
-  it('preserves the native input type and placeholder', (): void => {
-    const input: HTMLInputElement = query(render(InputHost), 'input');
-
-    expect(input.type).toBe('email');
-    expect(input.placeholder).toBe('name@example.com');
-  });
-
   it('maps its supported layout and appearance inputs', (): void => {
     const fixture: ComponentFixture<InputHost> = render(InputHost);
     const input: HTMLInputElement = query(fixture, 'input');

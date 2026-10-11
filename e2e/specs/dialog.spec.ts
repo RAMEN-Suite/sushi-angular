@@ -123,7 +123,7 @@ test('drags only from the header and stays inside the viewport', async ({ page }
   expect(moved?.y).toBeGreaterThanOrEqual(0);
 });
 
-test('only an enabled drag handle exposes a move cursor', async ({ page }: { page: Page }): Promise<void> => {
+test('only an enabled drag handle exposes a move cursor', { tag: '@css' }, async ({ page }: { page: Page }): Promise<void> => {
   await page.getByRole('button', { name: 'View today’s menu' }).click();
   const staticHeader: Locator = page.getByRole('dialog', { name: 'Today’s menu' }).locator('[suiDialogHeader]');
 

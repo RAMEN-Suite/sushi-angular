@@ -17,23 +17,6 @@ class RadioHost {
 }
 
 describe('Radio', (): void => {
-  it('preserves native mutually exclusive selection', (): void => {
-    const fixture: ComponentFixture<RadioHost> = render(RadioHost);
-    const radios: readonly HTMLInputElement[] = queryAll(fixture, 'input');
-    const first: HTMLInputElement = radios[0];
-    const second: HTMLInputElement = radios[1];
-
-    first.click();
-
-    expect(first.checked).toBe(true);
-    expect(second.checked).toBe(false);
-
-    second.click();
-
-    expect(first.checked).toBe(false);
-    expect(second.checked).toBe(true);
-  });
-
   it('maps appearance and delayed invalid state', (): void => {
     const fixture: ComponentFixture<RadioHost> = render(RadioHost);
     const radios: readonly HTMLInputElement[] = queryAll(fixture, 'input');

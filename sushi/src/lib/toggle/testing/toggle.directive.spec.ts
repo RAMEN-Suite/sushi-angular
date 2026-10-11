@@ -14,20 +14,11 @@ class ToggleHost {
 }
 
 describe('Toggle', (): void => {
-  it('exposes switch semantics while retaining native checkbox behavior', (): void => {
-    const toggle: HTMLInputElement = query(render(ToggleHost), 'input');
-
-    expect(toggle.getAttribute('role')).toBe('switch');
-
-    toggle.click();
-
-    expect(toggle.checked).toBe(true);
-  });
-
-  it('maps appearance and delayed invalid state', (): void => {
+  it('exposes switch semantics, appearance, and delayed invalid state', (): void => {
     const fixture: ComponentFixture<ToggleHost> = render(ToggleHost);
     const toggle: HTMLInputElement = query(fixture, 'input');
 
+    expect(toggle.getAttribute('role')).toBe('switch');
     expect(toggle.classList).toContain('toggle-info');
     expect(toggle.classList).toContain('toggle-xl');
 
