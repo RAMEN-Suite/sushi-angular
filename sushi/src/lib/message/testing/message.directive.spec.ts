@@ -20,6 +20,7 @@ describe('Message', (): void => {
   it('lays out semantic feedback and its action region', (): void => {
     const fixture: ComponentFixture<MessageHost> = render(MessageHost);
     const message: Element = query(fixture, '[suiMessage]');
+
     expect(message.classList).toContain('alert-warning');
     expect(message.classList).toContain('alert-outline');
     expect(message.classList).toContain('alert-vertical');

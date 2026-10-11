@@ -27,6 +27,7 @@ class AvatarHost {
 describe('Avatar', (): void => {
   it('renders identity content in an avatar group', (): void => {
     const fixture: ComponentFixture<AvatarHost> = render(AvatarHost);
+
     expect(query(fixture, '[suiAvatarGroup]').classList).toContain('avatar-group');
     expect(query(fixture, 'sui-avatar').textContent.trim()).toBe('AB');
     expect(query(fixture, 'sui-avatar > div').classList).toContain('w-16');
@@ -55,6 +56,7 @@ describe('Avatar', (): void => {
     fixture.detectChanges();
 
     const content: Element = query(fixture, 'sui-avatar > div');
+
     expect(content.classList).toContain('mask');
     expect(content.classList).toContain('mask-star');
     expect(content.classList).toContain('mask-half-2');

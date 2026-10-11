@@ -14,8 +14,11 @@ class IndicatorHost {}
 describe('Indicator', (): void => {
   it('establishes a target and positions its item on both axes', (): void => {
     const fixture: ComponentFixture<IndicatorHost> = render(IndicatorHost);
+
     expect(query(fixture, '[suiIndicator]').classList).toContain('indicator');
+
     const item: Element = query(fixture, '[suiIndicatorItem]');
+
     expect(item.classList).toContain('indicator-start');
     expect(item.classList).toContain('indicator-bottom');
   });

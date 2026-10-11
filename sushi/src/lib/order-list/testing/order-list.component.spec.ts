@@ -53,9 +53,10 @@ class OrderListHost {
 
 @Component({
   imports: [OrderList],
-  template: `<sui-order-list filter ariaLabel="Workflow" [(value)]="value" />`,
+  template: `<sui-order-list filter ariaLabel="Workflow" [(value)]="value" (touch)="touches += 1" />`,
 })
 class DefaultOrderListHost {
+  public touches: number = 0;
   public readonly value: WritableSignal<readonly WorkItem[]> = signal<readonly WorkItem[]>(items);
 }
 
@@ -74,6 +75,7 @@ function values(fixture: ComponentFixture<OrderListHost>): readonly string[] {
 describe('OrderList value and templates', (): void => {
   it('renders typed custom items and filters them', (): void => {
     const fixture: ComponentFixture<OrderListHost> = render(OrderListHost);
+
     expect(queryAll(fixture, '[role="option"]')).toHaveLength(4);
     expect(query(fixture, '[data-header]').textContent).toBe('Workflow steps');
     expect(query(fixture, '[data-item="prototype"]').textContent.trim()).toBe('Prototype · Bo');
@@ -91,23 +93,33 @@ describe('OrderList value and templates', (): void => {
     const fixture: ComponentFixture<OrderListHost> = render(OrderListHost);
     fixture.componentInstance.value.set([...items].reverse());
     fixture.detectChanges();
-    expect(values(fixture)).toEqual(['release', 'review', 'prototype', 'research']);
+
+    expect(queryAll(fixture, '[data-item]').map((item: Element): string | null => item.getAttribute('data-item'))).toEqual([
+      'release',
+      'review',
+      'prototype',
+      'research',
+    ]);
   });
 });
 
 describe('OrderList edge actions', (): void => {
-  it('moves selected items to the top and one position down', (): void => {
-    const topFixture: ComponentFixture<OrderListHost> = render(OrderListHost);
-    select(topFixture, 'release');
-    query(topFixture, '[aria-label="Move selected items to top"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
-    topFixture.detectChanges();
-    expect(values(topFixture)).toEqual(['release', 'research', 'prototype', 'review']);
+  it('moves a selected item to the top', (): void => {
+    const fixture: ComponentFixture<OrderListHost> = render(OrderListHost);
+    select(fixture, 'release');
+    query(fixture, '[aria-label="Move selected items to top"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    fixture.detectChanges();
 
-    const downFixture: ComponentFixture<OrderListHost> = render(OrderListHost);
-    select(downFixture, 'research');
-    query(downFixture, '[aria-label="Move selected items down"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
-    downFixture.detectChanges();
-    expect(values(downFixture)).toEqual(['prototype', 'research', 'review', 'release']);
+    expect(values(fixture)).toEqual(['release', 'research', 'prototype', 'review']);
+  });
+
+  it('moves a selected item one position down', (): void => {
+    const fixture: ComponentFixture<OrderListHost> = render(OrderListHost);
+    select(fixture, 'research');
+    query(fixture, '[aria-label="Move selected items down"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    fixture.detectChanges();
+
+    expect(values(fixture)).toEqual(['prototype', 'research', 'review', 'release']);
   });
 });
 
@@ -119,11 +131,13 @@ describe('OrderList reordering', (): void => {
     const moveUp: HTMLButtonElement = query(fixture, '[aria-label="Move selected items up"]') as HTMLButtonElement;
     moveUp.click();
     fixture.detectChanges();
+
     expect(values(fixture)).toEqual(['prototype', 'research', 'review', 'release']);
 
     const moveBottom: HTMLButtonElement = query(fixture, '[aria-label="Move selected items to bottom"]') as HTMLButtonElement;
     moveBottom.click();
     fixture.detectChanges();
+
     expect(values(fixture)).toEqual(['research', 'review', 'release', 'prototype']);
     expect(fixture.componentInstance.touches).toBe(2);
     expect(query(fixture, '[aria-live="polite"]').textContent).toContain('Order updated');
@@ -148,7 +162,9 @@ describe('OrderList reordering', (): void => {
     select(fixture, 'review');
 
     expect(query(fixture, '[data-item="review"]').getAttribute('data-selected')).toBe('false');
+
     const moveUp: HTMLButtonElement = query(fixture, '[aria-label="Move selected items up"]') as HTMLButtonElement;
+
     expect(moveUp.getAttribute('aria-disabled')).toBe('true');
     expect(values(fixture)).toEqual(['research', 'prototype', 'review', 'release']);
   });
@@ -177,10 +193,12 @@ describe('OrderList disabled and validation state', (): void => {
     const listbox: Element = query(fixture, '[role="listbox"]');
     fixture.componentInstance.invalid.set(true);
     fixture.detectChanges();
+
     expect(listbox.hasAttribute('aria-invalid')).toBe(false);
 
     fixture.componentInstance.touched.set(true);
     fixture.detectChanges();
+
     expect(listbox.getAttribute('aria-invalid')).toBe('true');
   });
 
@@ -190,10 +208,16 @@ describe('OrderList disabled and validation state', (): void => {
     filter.value = 'prototype';
     filter.dispatchEvent(new Event('input', { bubbles: true }));
     fixture.detectChanges();
+
     expect(queryAll(fixture, '[role="option"]')).toHaveLength(1);
 
     const root: Element = query(fixture, '.sui-order-list > div');
     root.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: filter }));
+
+    expect(fixture.componentInstance.touches).toBe(0);
+
     root.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }));
+
+    expect(fixture.componentInstance.touches).toBe(1);
   });
 });

@@ -69,6 +69,7 @@ function closestButton(element: Element): HTMLButtonElement {
 describe('Navbar item model', (): void => {
   it('renders a landmark, native links, actions, current state, and template levels', (): void => {
     const fixture: ComponentFixture<NavbarHost> = render(NavbarHost);
+
     expect(query(fixture, 'nav').getAttribute('aria-label')).toBe('Workspace navigation');
     expect(query(fixture, '[data-brand]').textContent).toBe('Ramen');
     expect(query(fixture, '[data-action]').textContent).toBe('Help');
@@ -112,8 +113,10 @@ describe('Navbar responsive behavior', (): void => {
 
     expect(toggle.getAttribute('aria-controls')).toBe(content.id);
     expect(toggle.getAttribute('aria-expanded')).toBe('false');
+
     toggle.click();
     fixture.detectChanges();
+
     expect(toggle.getAttribute('aria-expanded')).toBe('true');
     expect(query(fixture, 'nav').hasAttribute('data-expanded')).toBe(true);
   });
@@ -151,6 +154,7 @@ describe('Navbar disclosures', (): void => {
     first.dispatchEvent(new Event('toggle'));
     second.open = true;
     second.dispatchEvent(new Event('toggle'));
+
     expect(first.open).toBe(false);
     expect(second.open).toBe(true);
   });
@@ -161,6 +165,7 @@ describe('Navbar disclosures', (): void => {
     const summary: HTMLElement = query(fixture, 'summary');
     details.open = true;
     press(details, 'Escape');
+
     expect(details.open).toBe(false);
     expect(document.activeElement).toBe(summary);
   });
@@ -170,6 +175,7 @@ describe('Navbar disclosures', (): void => {
     const summaries: readonly Element[] = queryAll(fixture, 'summary');
     const disabled: HTMLElement = summaries[2] as HTMLElement;
     disabled.click();
+
     expect(disabled.getAttribute('aria-disabled')).toBe('true');
     expect((disabled.parentElement as HTMLDetailsElement).open).toBe(false);
   });
@@ -178,6 +184,7 @@ describe('Navbar disclosures', (): void => {
 describe('Navbar projected content', (): void => {
   it('uses one responsive shell for custom toolbar content', (): void => {
     const fixture: ComponentFixture<CustomNavbarHost> = render(CustomNavbarHost);
+
     expect(queryAll(fixture, 'nav')).toHaveLength(1);
     expect(query(fixture, '[data-tool]').textContent).toBe('Select');
     expect(query(fixture, '.sui-navbar__content').id).not.toBe('');

@@ -92,10 +92,12 @@ describe('InputOtp value and interaction', (): void => {
     const fixture: ComponentFixture<InputOtpHost> = render(InputOtpHost);
     const input: HTMLInputElement = query(fixture, 'input');
     fixture.componentInstance.control().focus();
+
     expect(document.activeElement).toBe(input);
 
     fixture.componentInstance.control().reset();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toBe('');
     expect(input.value).toBe('');
   });
@@ -103,6 +105,7 @@ describe('InputOtp value and interaction', (): void => {
   it('emits touch when the input loses focus', (): void => {
     const fixture: ComponentFixture<InputOtpHost> = render(InputOtpHost);
     query(fixture, 'input').dispatchEvent(new FocusEvent('blur'));
+
     expect(fixture.componentInstance.touches).toBe(1);
   });
 });

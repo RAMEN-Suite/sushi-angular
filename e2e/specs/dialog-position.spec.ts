@@ -50,7 +50,6 @@ async function expectPosition(dialog: Locator, centered: boolean): Promise<void>
       expect(bounds.left + bounds.width / 2, details).toBeCloseTo(bounds.viewportWidth / 2, 0);
       expect(bounds.top + bounds.height / 2, details).toBeCloseTo(bounds.viewportHeight / 2, 0);
     } else {
-      // The example explicitly requests these offsets; this is not a decoration measurement.
       expect(bounds.top, details).toBeCloseTo(80, 0);
       expect(bounds.viewportWidth - bounds.right, details).toBeCloseTo(1.5 * bounds.rem, 0);
     }
@@ -73,6 +72,7 @@ for (const example of [
     await page.goto('/dialog');
     await activate(page.getByRole('button', { name: example.trigger }), isMobile);
     const dialog: Locator = page.getByRole('dialog', { name: example.name });
+
     await expect(dialog).toBeVisible();
 
     for (const viewport of [
@@ -109,7 +109,9 @@ for (const width of [360, 390]) {
     const trigger: Locator = page.getByRole('button', { name: 'Open positioned dialog' });
     const dialog: Locator = page.getByRole('dialog', { name: 'Custom position' });
     await activate(trigger, isMobile);
+
     await expect(dialog).toBeVisible();
+
     await expectPosition(dialog, false);
 
     await activate(dialog.getByRole('button', { name: 'Center dialog' }), isMobile);
@@ -118,8 +120,10 @@ for (const width of [360, 390]) {
     await expectPosition(dialog, false);
 
     await activate(dialog.getByRole('button', { name: 'Close', exact: true }), isMobile);
+
     await expect(dialog).toBeHidden();
     await expect(trigger).toBeFocused();
+
     await activate(trigger, isMobile);
     await expectPosition(dialog, false);
   });

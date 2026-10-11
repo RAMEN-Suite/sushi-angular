@@ -23,6 +23,7 @@ describe('Badge', (): void => {
     fixture.componentInstance.size.set('sm');
     fixture.detectChanges();
     const badge: Element = query(fixture, '[suiBadge]');
+
     expect(badge.classList).toContain('badge-success');
     expect(badge.classList).toContain('badge-soft');
     expect(badge.classList).toContain('badge-sm');

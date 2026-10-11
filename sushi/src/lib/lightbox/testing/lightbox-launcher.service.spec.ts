@@ -49,6 +49,7 @@ describe('Lightbox launcher', (): void => {
         description: null,
       },
     );
+
     expect(document.querySelectorAll('sui-lightbox')).toHaveLength(1);
     expect(document.querySelector('sui-lightbox')).not.toBe(first);
   });

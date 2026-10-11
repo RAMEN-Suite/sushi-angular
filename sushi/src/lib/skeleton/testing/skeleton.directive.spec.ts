@@ -13,10 +13,13 @@ describe('Skeleton', (): void => {
   it('remains decorative and supports a static state', (): void => {
     const fixture: ComponentFixture<SkeletonHost> = render(SkeletonHost);
     const skeleton: HTMLElement = query(fixture, '[suiSkeleton]') as HTMLElement;
+
     expect(skeleton.getAttribute('aria-hidden')).toBe('true');
     expect(skeleton.classList).toContain('skeleton-text');
+
     fixture.componentInstance.animated.set(false);
     fixture.detectChanges();
+
     expect(skeleton.classList).toContain('sui-skeleton--static');
   });
 });

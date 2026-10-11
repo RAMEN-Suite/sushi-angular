@@ -26,6 +26,7 @@ describe('Mask', (): void => {
     fixture.componentInstance.shape.set('hexagon-2');
     fixture.componentInstance.maskHalf.set('second');
     fixture.detectChanges();
+
     expect(image.classList).not.toContain('mask-heart');
     expect(image.classList).toContain('mask-hexagon-2');
     expect(image.classList).toContain('mask-half-2');
@@ -37,6 +38,7 @@ describe('Mask', (): void => {
 
     fixture.componentInstance.shape.set(null);
     fixture.detectChanges();
+
     expect(image.classList).not.toContain('mask');
     expect(image.classList).not.toContain('mask-half-1');
   });

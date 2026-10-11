@@ -45,6 +45,7 @@ describe('Toast', (): void => {
     fixture.detectChanges();
 
     const outlet: Element = query(fixture, '.sui-toast');
+
     expect(outlet.classList).toContain('toast-start');
     expect(outlet.classList).toContain('toast-top');
     expect(queryAll(fixture, '.sui-toast__item')).toHaveLength(2);
@@ -65,10 +66,13 @@ describe('Toast', (): void => {
     fixture.detectChanges();
 
     const action: HTMLButtonElement = query(fixture, '.sui-toast__actions button') as HTMLButtonElement;
+
     expect(query(fixture, '.sui-toast__item').classList).toContain('sui-toast__item--with-actions');
     expect(action.classList).toContain('btn-error');
+
     action.click();
     fixture.detectChanges();
+
     expect(run).toHaveBeenCalledOnce();
     expect(fixture.componentInstance.toast.toasts()).toHaveLength(0);
   });
@@ -85,8 +89,10 @@ describe('Toast templates', (): void => {
     expect(query(fixture, '.custom-content').textContent).toContain('Custom feedback');
     expect(query(fixture, '.alternate-content').textContent).toContain('Alternate');
     expect(query(fixture, '.sui-toast__content').textContent).toContain('Standard feedback');
+
     (query(fixture, '.custom-dismiss') as HTMLButtonElement).click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.toast.toasts()).toHaveLength(2);
   });
 });
@@ -103,11 +109,13 @@ describe('Toast queue', (): void => {
     fixture.detectChanges();
 
     (query(fixture, '.sui-toast__actions button') as HTMLButtonElement).click();
+
     expect(run).toHaveBeenCalledOnce();
     expect(fixture.componentInstance.toast.toasts()).toHaveLength(2);
 
     fixture.componentInstance.toast.clear();
     fixture.detectChanges();
+
     expect(queryAll(fixture, '.sui-toast__item')).toHaveLength(0);
   });
 });
@@ -120,6 +128,7 @@ describe('Toast dismissal', (): void => {
 
     (query(fixture, '[aria-label="Dismiss Dismiss me"]') as HTMLButtonElement).click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.toast.toasts()).toHaveLength(0);
   });
 });
@@ -133,10 +142,16 @@ describe('Toast timing', (): void => {
     vi.advanceTimersByTime(400);
     fixture.componentInstance.toast.pause(id);
     vi.advanceTimersByTime(1000);
+
     expect(fixture.componentInstance.toast.toasts()).toHaveLength(1);
 
     fixture.componentInstance.toast.resume(id);
-    vi.advanceTimersByTime(600);
+    vi.advanceTimersByTime(599);
+
+    expect(fixture.componentInstance.toast.toasts()).toHaveLength(1);
+
+    vi.advanceTimersByTime(1);
+
     expect(fixture.componentInstance.toast.toasts()).toHaveLength(0);
   });
 
@@ -146,8 +161,11 @@ describe('Toast timing', (): void => {
     const id: string = fixture.componentInstance.toast.show({ message: 'Offline', duration: 0 });
 
     vi.runAllTimers();
+
     expect(fixture.componentInstance.toast.toasts()).toHaveLength(1);
+
     fixture.componentInstance.toast.dismiss(id);
+
     expect(fixture.componentInstance.toast.toasts()).toHaveLength(0);
   });
 });

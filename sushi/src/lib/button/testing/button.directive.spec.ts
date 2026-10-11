@@ -61,8 +61,8 @@ describe('Button defaults', (): void => {
   });
 });
 
-describe('Button appearance options', (): void => {
-  it('maps every public appearance option', (): void => {
+describe('Button severity and size', (): void => {
+  it('replaces the severity class when the public input changes', (): void => {
     const fixture: ComponentFixture<ButtonHost> = render(ButtonHost);
     const button: HTMLButtonElement = query(fixture, 'button');
     const severities: readonly ButtonSeverity[] = [
@@ -75,28 +75,70 @@ describe('Button appearance options', (): void => {
       'warning',
       'error',
     ];
-    const sizes: readonly ButtonSize[] = ['xs', 'sm', 'md', 'lg', 'xl'];
 
     for (const severity of severities) {
       fixture.componentInstance.severity.set(severity);
       fixture.detectChanges();
-      expect(button.classList).toContain(`btn-${severity}`);
+
+      const active: readonly string[] = severities.filter((value: ButtonSeverity): boolean =>
+        button.classList.contains(`btn-${value}`),
+      );
+      expect(active).toEqual([severity]);
     }
+  });
+
+  it('replaces the size class when the public input changes', (): void => {
+    const fixture: ComponentFixture<ButtonHost> = render(ButtonHost);
+    const button: HTMLButtonElement = query(fixture, 'button');
+    const sizes: readonly ButtonSize[] = ['xs', 'sm', 'md', 'lg', 'xl'];
+
     for (const size of sizes) {
       fixture.componentInstance.size.set(size);
       fixture.detectChanges();
-      expect(button.classList).toContain(`btn-${size}`);
+
+      const active: readonly string[] = sizes.filter((value: ButtonSize): boolean => button.classList.contains(`btn-${value}`));
+      expect(active).toEqual([size]);
     }
+  });
+});
+
+describe('Button variant and shape', (): void => {
+  it('replaces the variant class and clears it when unset', (): void => {
+    const fixture: ComponentFixture<ButtonHost> = render(ButtonHost);
+    const button: HTMLButtonElement = query(fixture, 'button');
+
     for (const variant of variants) {
       fixture.componentInstance.variant.set(variant.value);
       fixture.detectChanges();
-      expect(button.classList).toContain(variant.className);
+
+      expect(variants.filter((option: ClassCase<ButtonVariant>): boolean => button.classList.contains(option.className))).toEqual(
+        [variant],
+      );
     }
+
+    fixture.componentInstance.variant.set(null);
+    fixture.detectChanges();
+
+    expect(variants.some((option: ClassCase<ButtonVariant>): boolean => button.classList.contains(option.className))).toBe(false);
+  });
+
+  it('replaces the shape class and clears it when unset', (): void => {
+    const fixture: ComponentFixture<ButtonHost> = render(ButtonHost);
+    const button: HTMLButtonElement = query(fixture, 'button');
+
     for (const shape of shapes) {
       fixture.componentInstance.shape.set(shape.value);
       fixture.detectChanges();
-      expect(button.classList).toContain(shape.className);
+
+      expect(shapes.filter((option: ClassCase<ButtonShape>): boolean => button.classList.contains(option.className))).toEqual([
+        shape,
+      ]);
     }
+
+    fixture.componentInstance.shape.set(null);
+    fixture.detectChanges();
+
+    expect(shapes.some((option: ClassCase<ButtonShape>): boolean => button.classList.contains(option.className))).toBe(false);
   });
 });
 

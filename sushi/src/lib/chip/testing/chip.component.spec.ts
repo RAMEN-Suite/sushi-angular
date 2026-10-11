@@ -33,6 +33,7 @@ describe('Chip', (): void => {
   it('renders severity, density, and typed content templates', (): void => {
     const fixture: ComponentFixture<ChipHost> = render(ChipHost);
     const chip: Element = query(fixture, 'sui-chip');
+
     expect(chip.classList).toContain('badge-warning');
     expect(chip.classList).toContain('badge-soft');
     expect(chip.classList).toContain('sui-chip--sm');
@@ -40,15 +41,33 @@ describe('Chip', (): void => {
     expect(query(fixture, '[data-remove-icon]').textContent).toBe('×');
     expect(chip.getAttribute('aria-label')).toBe('Remove Draft');
   });
+});
 
-  it('removes once from pointer or keyboard activation', (): void => {
+describe('Chip removal', (): void => {
+  it('emits removal only once after repeated activation', (): void => {
     const fixture: ComponentFixture<ChipHost> = render(ChipHost);
     query(fixture, '.sui-chip__remove').dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
+
     expect(fixture.componentInstance.removeCount).toBe(1);
     expect(query(fixture, 'sui-chip').classList).toContain('hidden');
+
     press(query(fixture, 'sui-chip'), 'Enter');
+
     expect(fixture.componentInstance.removeCount).toBe(1);
+  });
+
+  it.each(['Enter', ' ', 'Backspace'])('removes a chip with %s', (key: string): void => {
+    const fixture: ComponentFixture<ChipHost> = render(ChipHost);
+    const chip: HTMLElement = query(fixture, 'sui-chip') as HTMLElement;
+
+    const event: KeyboardEvent = press(chip, key);
+    fixture.detectChanges();
+
+    expect(event.defaultPrevented).toBe(true);
+    expect(fixture.componentInstance.removeCount).toBe(1);
+    expect(chip.classList).toContain('hidden');
+    expect(chip.hasAttribute('tabindex')).toBe(false);
   });
 
   it('keeps a disabled removable chip focusable while blocking removal', (): void => {
@@ -58,6 +77,7 @@ describe('Chip', (): void => {
     const chip: HTMLElement = query(fixture, 'sui-chip') as HTMLElement;
     chip.focus();
     press(chip, 'Backspace');
+
     expect(document.activeElement).toBe(chip);
     expect(chip.getAttribute('aria-disabled')).toBe('true');
     expect(fixture.componentInstance.removeCount).toBe(0);

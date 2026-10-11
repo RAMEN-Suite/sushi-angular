@@ -46,6 +46,7 @@ describe('Breadcrumb', (): void => {
 
   it('renders linked ancestors and one current page in a named landmark', (): void => {
     const fixture: ComponentFixture<BreadcrumbHost> = render(BreadcrumbHost);
+
     expect(query(fixture, 'nav').getAttribute('aria-label')).toBe('Breadcrumb');
     expect(queryAll(fixture, 'a')).toHaveLength(2);
     expect(query(fixture, '[aria-current="page"]').textContent).toBe('Current');
@@ -55,6 +56,7 @@ describe('Breadcrumb', (): void => {
     const fixture: ComponentFixture<ExplicitCurrentHost> = render(ExplicitCurrentHost);
 
     const currentItems: readonly Element[] = queryAll(fixture, '[aria-current="page"]');
+
     expect(currentItems.map((item: Element): string => item.textContent.trim())).toEqual(['Library']);
     expect(query(fixture, '[data-value="3"]').getAttribute('data-index')).toBe('2');
     expect(query(fixture, '[data-value="3"]').getAttribute('data-current')).toBe('false');

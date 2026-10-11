@@ -37,6 +37,7 @@ describe('Checkbox native behavior', (): void => {
     const checkbox: HTMLInputElement = query(fixture, 'input');
 
     checkbox.click();
+
     expect(checkbox.checked).toBe(true);
 
     fixture.componentInstance.disabled.set(true);

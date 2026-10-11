@@ -1,8 +1,7 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { query } from '../../../../testing/test-utils';
-import { render } from '../../../../testing/test-utils';
+import { query, render } from '../../../../testing/test-utils';
 import { DrawerClose } from '../drawer-close.directive';
 import { Drawer } from '../drawer.component';
 import { DrawerCloseReason, DrawerPersistentAt, DrawerPlacement, DrawerSize } from '../drawer.interfaces';
@@ -70,6 +69,7 @@ describe('Drawer', (): void => {
 
     expect(trigger.getAttribute('aria-controls')).toBe(panel.id);
     expect(trigger.getAttribute('aria-expanded')).toBe('false');
+
     trigger.click();
     fixture.detectChanges();
 
@@ -118,12 +118,14 @@ describe('Drawer dismissal', (): void => {
     fixture.detectChanges();
     panel.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: true, key: 'Escape' }));
     fixture.detectChanges();
+
     expect(fixture.componentInstance.closeReasons).toEqual(['escape']);
 
     fixture.componentInstance.open.set(true);
     fixture.detectChanges();
     overlay.click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.closeReasons).toEqual(['escape', 'backdrop']);
   });
 
@@ -154,6 +156,7 @@ describe('Drawer variants', (): void => {
     fixture.detectChanges();
 
     const drawer: Element = query(fixture, 'sui-drawer');
+
     expect(drawer.classList).toContain('drawer-end');
     expect(drawer.classList).toContain('sui-drawer--lg');
   });
@@ -174,6 +177,9 @@ describe('Drawer variants', (): void => {
     trigger.click();
     fixture.detectChanges();
 
+    trigger.focus();
+
+    expect(document.activeElement).toBe(trigger);
     expect(trigger.disabled).toBe(false);
     expect(trigger.getAttribute('aria-disabled')).toBe('true');
     expect(fixture.componentInstance.open()).toBe(false);
@@ -186,6 +192,7 @@ describe('Drawer variants', (): void => {
     fixture.detectChanges();
 
     const host: HTMLElement = fixture.nativeElement as HTMLElement;
+
     expect(host.querySelector('.sui-drawer__header-region')).toBeNull();
     expect(host.querySelector('.sui-drawer__footer-region')).toBeNull();
   });

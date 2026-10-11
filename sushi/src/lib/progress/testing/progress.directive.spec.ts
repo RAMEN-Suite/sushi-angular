@@ -14,6 +14,7 @@ describe('Progress', (): void => {
   it('preserves native progress values and applies optional presentation', (): void => {
     const fixture: ComponentFixture<ProgressHost> = render(ProgressHost);
     const progress: HTMLProgressElement = query(fixture, 'progress');
+
     expect(progress.value).toBe(35);
     expect(progress.max).toBe(100);
     expect(progress.classList).toContain('progress-info');

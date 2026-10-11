@@ -38,12 +38,14 @@ for (const width of [390, 1280]) {
     await page.setViewportSize({ width, height: 700 });
     await page.goto('/input');
     const content: Locator = page.getByTestId('playground-content');
+
     await expect(page.getByRole('textbox', { name: 'Name', exact: true })).toBeVisible();
 
     await content.evaluate((element: HTMLElement): void => {
       element.scrollTo(0, 200);
       window.scrollTo(0, 200);
     });
+
     await expect
       .poll((): Promise<boolean> =>
         content.evaluate((element: HTMLElement): boolean => {
@@ -73,10 +75,13 @@ test('collapsible Navbar exposes mobile navigation and restores toggle focus on 
   const toggle: Locator = example.getByRole('button', { name: 'Toggle navigation' });
 
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+
   await toggle.click();
+
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
 
   await example.getByRole('button', { name: 'Products' }).press('Escape');
+
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   await expect(toggle).toBeFocused();
 });
@@ -96,6 +101,7 @@ test('Navbar switches at its configured breakpoint without hiding persistent act
   await expect(action).toBeVisible();
 
   await page.setViewportSize({ width: 600, height: 844 });
+
   await expect(toggle).toBeVisible();
   await expect(action).toBeVisible();
 });
@@ -126,7 +132,9 @@ test('Table keeps only its first column pinned and aligns the remaining headings
   await page.goto('/table');
   const table: Locator = page.getByRole('table', { name: 'Release queue' });
   const viewport: Locator = table.locator('..');
+
   await expect(table).toBeVisible();
+
   const pinnedHeading: Locator = table.getByRole('columnheader').first();
   const movingHeading: Locator = table.getByRole('columnheader').nth(1);
   const firstRow: Locator = table.locator('tbody tr').first();
@@ -192,6 +200,7 @@ for (const route of ['input', 'file-input', 'fieldset', 'range']) {
     const controls: Locator = page.locator(
       'input[suiInput], input[suiInputSurfaceControl], input[suiFileInput], input[suiRange]',
     );
+
     await expect(controls.first()).toBeVisible();
 
     for (const width of [320, 390]) {
@@ -258,9 +267,12 @@ test('Budget controls stack on mobile and remain usable', async ({
   if (isMobile) await period.tap();
   else await period.click();
   const option: Locator = page.getByRole('option', { name: 'Monthly', exact: true });
+
   await expect(option).toBeVisible();
+
   if (isMobile) await option.tap();
   else await option.click();
+
   await expect(period).toContainText('Monthly');
   await expect(amount).toHaveValue('25');
 });

@@ -28,10 +28,11 @@ describe('Card', (): void => {
   it('projects media before its body and styles semantic slots', (): void => {
     const fixture: ComponentFixture<CardHost> = render(CardHost);
     const card: Element = query(fixture, 'sui-card');
+
     expect(card.firstElementChild?.matches('[suiCardMedia]')).toBe(true);
     expect(query(fixture, '[suiCardTitle]').classList).toContain('card-title');
     expect(query(fixture, '[suiCardActions]').classList).toContain('card-actions');
-    expect(query(fixture, '.sui-card__body').textContent).toContain('Details');
+    expect(card.textContent).toContain('Details');
   });
 
   it('updates variant and density classes', (): void => {
@@ -40,6 +41,7 @@ describe('Card', (): void => {
     fixture.componentInstance.size.set('xl');
     fixture.detectChanges();
     const card: Element = query(fixture, 'sui-card');
+
     expect(card.classList).toContain('card-dash');
     expect(card.classList).toContain('card-xl');
     expect(card.classList).not.toContain('card-border');

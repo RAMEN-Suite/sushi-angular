@@ -47,7 +47,16 @@ describe('Tabs semantics and model', (): void => {
     expect(tabs).toHaveLength(3);
     expect(tabs[0].getAttribute('aria-selected')).toBe('true');
     expect(tabs[2].getAttribute('aria-disabled')).toBe('true');
-    expect(queryAll(fixture, '[role="tabpanel"]')).toHaveLength(3);
+
+    const panels: readonly Element[] = queryAll(fixture, '[role="tabpanel"]');
+
+    expect(panels).toHaveLength(3);
+
+    tabs.forEach((tab: Element, index: number): void => {
+      expect(tab.getAttribute('aria-controls')).toBe(panels[index].id);
+      expect(panels[index].getAttribute('aria-labelledby')).toBe(tab.id);
+    });
+
     expect(query(fixture, '[data-panel="overview"]').textContent).toBe('Summary');
   });
 
@@ -82,8 +91,10 @@ describe('Tabs panel lifecycle', (): void => {
     fixture.detectChanges();
 
     expect(host.querySelector('[data-panel="overview"]')).toBeNull();
+
     tabs[0].click();
     fixture.detectChanges();
+
     expect(host.querySelector('[data-panel="steps"]')).not.toBeNull();
   });
 });
@@ -120,10 +131,12 @@ describe('Tabs keyboard behavior', (): void => {
     fixture.detectChanges();
     tabs[0].focus();
     press(tabs[0], 'ArrowRight');
+
     expect(fixture.componentInstance.value()).toBe('overview');
 
     press(tabs[1], 'Enter');
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toBe('steps');
   });
 });
@@ -149,7 +162,9 @@ describe('Tabs disabled behavior', (): void => {
 
     expect(tabs[2].getAttribute('aria-disabled')).toBe('true');
     expect(tabs[2].tabIndex).toBe(-1);
+
     tabs[2].click();
+
     expect(fixture.componentInstance.value()).toBe('overview');
   });
 

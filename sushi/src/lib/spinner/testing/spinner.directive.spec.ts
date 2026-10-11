@@ -11,6 +11,7 @@ describe('Spinner', (): void => {
   it('renders a decorative loading shape at the selected size', (): void => {
     const fixture: ComponentFixture<SpinnerHost> = render(SpinnerHost);
     const spinner: HTMLSpanElement = query(fixture, 'span');
+
     expect(spinner.classList).toContain('loading-bars');
     expect(spinner.classList).toContain('loading-lg');
     expect(spinner.getAttribute('aria-hidden')).toBe('true');

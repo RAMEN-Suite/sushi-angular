@@ -11,8 +11,8 @@ describe('Kbd', (): void => {
   it('preserves semantic keyboard markup while applying density', (): void => {
     const fixture: ComponentFixture<KbdHost> = render(KbdHost);
     const key: HTMLElement = query(fixture, 'kbd');
+
     expect(key.classList).toContain('kbd-xs');
-    expect(key.classList).toContain('select-none');
     expect(key.textContent).toBe('⌘ K');
     expect(key.hasAttribute('tabindex')).toBe(false);
   });

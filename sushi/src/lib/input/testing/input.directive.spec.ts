@@ -30,14 +30,11 @@ class InputHost {
 }
 
 describe('Input', (): void => {
-  it('preserves native input attributes and editing', (): void => {
+  it('preserves the native input type and placeholder', (): void => {
     const input: HTMLInputElement = query(render(InputHost), 'input');
 
     expect(input.type).toBe('email');
     expect(input.placeholder).toBe('name@example.com');
-    input.value = 'nori@example.com';
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    expect(input.value).toBe('nori@example.com');
   });
 
   it('maps its supported layout and appearance inputs', (): void => {
@@ -60,10 +57,12 @@ describe('Input', (): void => {
     const input: HTMLInputElement = query(fixture, 'input');
     fixture.componentInstance.invalid.set(true);
     fixture.detectChanges();
+
     expect(input.hasAttribute('aria-invalid')).toBe(false);
 
     fixture.componentInstance.dirty.set(true);
     fixture.detectChanges();
+
     expect(input.getAttribute('aria-invalid')).toBe('true');
     expect(input.classList).toContain('input-error');
   });

@@ -14,6 +14,7 @@ class JoinHost {}
 describe('Join', (): void => {
   it('connects marked children without changing their native behavior', (): void => {
     const fixture: ComponentFixture<JoinHost> = render(JoinHost);
+
     expect(query(fixture, '[suiJoin]').classList).toContain('join-vertical');
     expect(queryAll(fixture, 'button')).toHaveLength(2);
     expect(queryAll(fixture, '.join-item')).toHaveLength(2);

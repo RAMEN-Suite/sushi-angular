@@ -34,10 +34,14 @@ test('Select options remain keyboard accessible inside a native modal', async ({
   const dialog: Locator = page.getByRole('dialog', { name: 'Table reservation' });
   const select: Locator = dialog.getByRole('combobox', { name: 'Confirmation language' });
   await select.press('ArrowDown');
+
   await expect(page.getByRole('listbox')).toBeVisible();
+
   await select.press('ArrowDown');
   const optionId: string | null = await page.getByRole('option', { name: 'Deutsch', exact: true }).getAttribute('id');
+
   await expect(select).toHaveAttribute('aria-activedescendant', optionId ?? '');
+
   await select.press('Enter');
 
   await expect(select).toContainText('Deutsch');
@@ -50,12 +54,16 @@ test('Escape dismisses the Select popup before the enclosing modal', async ({ pa
   const dialog: Locator = page.getByRole('dialog', { name: 'Table reservation' });
   const select: Locator = dialog.getByRole('combobox', { name: 'Confirmation language' });
   await select.press('ArrowDown');
+
   await expect(page.getByRole('listbox')).toBeVisible();
+
   await select.press('Escape');
 
   await expect(page.getByRole('listbox')).toBeHidden();
   await expect(dialog).toBeVisible();
   await expect(select).toContainText('English');
+
   await select.press('Escape');
+
   await expect(dialog).toBeHidden();
 });

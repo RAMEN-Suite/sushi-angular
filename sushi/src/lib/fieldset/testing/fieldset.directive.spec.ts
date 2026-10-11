@@ -25,6 +25,7 @@ class FieldsetHost {
 describe('Fieldset', (): void => {
   it('uses native fieldset semantics and exposes its expanded state', (): void => {
     const fixture: ComponentFixture<FieldsetHost> = render(FieldsetHost);
+
     expect(query(fixture, 'fieldset').classList).toContain('sui-fieldset--collapsible');
     expect(query(fixture, 'fieldset').classList).not.toContain('sui-fieldset--borderless');
     expect(query(fixture, 'legend').classList).toContain('fieldset-legend');
@@ -44,6 +45,7 @@ describe('Fieldset', (): void => {
     query(fixture, 'button').dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
     const content: Element = query(fixture, '[suiFieldsetContent]');
+
     expect(fixture.componentInstance.expanded()).toBe(false);
     expect(query(fixture, 'fieldset').classList).toContain('sui-fieldset--collapsed');
     expect(content.getAttribute('aria-hidden')).toBe('true');

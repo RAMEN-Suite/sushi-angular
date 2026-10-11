@@ -18,7 +18,9 @@ describe('Toggle', (): void => {
     const toggle: HTMLInputElement = query(render(ToggleHost), 'input');
 
     expect(toggle.getAttribute('role')).toBe('switch');
+
     toggle.click();
+
     expect(toggle.checked).toBe(true);
   });
 
@@ -31,10 +33,12 @@ describe('Toggle', (): void => {
 
     fixture.componentInstance.invalid.set(true);
     fixture.detectChanges();
+
     expect(toggle.hasAttribute('aria-invalid')).toBe(false);
 
     fixture.componentInstance.touched.set(true);
     fixture.detectChanges();
+
     expect(toggle.getAttribute('aria-invalid')).toBe('true');
     expect(toggle.classList).toContain('toggle-error');
   });

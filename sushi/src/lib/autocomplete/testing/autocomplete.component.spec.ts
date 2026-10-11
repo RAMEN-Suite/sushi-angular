@@ -1,6 +1,6 @@
 import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { press, query, render } from '../../../../testing/test-utils';
 import { Autocomplete } from '../autocomplete.component';
 import type { AutocompleteOption, AutocompleteValue } from '../autocomplete.interfaces';
@@ -66,7 +66,10 @@ function enter(fixture: ComponentFixture<AutocompleteHost>, value: string): HTML
   return input;
 }
 
-afterEach((): void => document.querySelector('.cdk-overlay-container')?.remove());
+afterEach((): void => {
+  vi.useRealTimers();
+  document.querySelector('.cdk-overlay-container')?.remove();
+});
 
 describe('Autocomplete value and query', (): void => {
   it('renders selected labels and supports focus and reset', (): void => {
@@ -74,11 +77,14 @@ describe('Autocomplete value and query', (): void => {
     const input: HTMLInputElement = query(fixture, 'input');
 
     expect(input.value).toBe('Shoyu');
+
     fixture.componentInstance.control().focus();
+
     expect(document.activeElement).toBe(input);
 
     fixture.componentInstance.control().reset();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toBeNull();
     expect(input.value).toBe('');
   });
@@ -87,11 +93,13 @@ describe('Autocomplete value and query', (): void => {
     const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
 
     enter(fixture, 'M');
+
     expect(fixture.componentInstance.value()).toBe('M');
     expect(fixture.componentInstance.queries).toEqual([]);
 
     enter(fixture, 'Mi');
     await fixture.whenStable();
+
     expect(fixture.componentInstance.queries).toEqual(['Mi']);
     expect(document.querySelectorAll('[role="option"]')).toHaveLength(1);
   });
@@ -108,6 +116,7 @@ describe('Autocomplete value and query', (): void => {
 
     expect(fixture.componentInstance.value()).toBe('miso');
     expect(input.value).toBe('Miso');
+    expect(document.querySelector('[role="listbox"]')).toBeNull();
     expect(fixture.componentInstance.touches).toBe(1);
   });
 });
@@ -116,6 +125,7 @@ describe('Autocomplete constraints', (): void => {
   it('emits touch when a closed input loses focus', (): void => {
     const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
     query(fixture, 'input').dispatchEvent(new FocusEvent('blur'));
+
     expect(fixture.componentInstance.touches).toBe(1);
   });
 
@@ -149,7 +159,8 @@ describe('Autocomplete constraints', (): void => {
 });
 
 describe('Autocomplete pending queries', (): void => {
-  it('cancels a pending query when disabled', async (): Promise<void> => {
+  it('cancels a pending query when disabled', (): void => {
+    vi.useFakeTimers();
     const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
     fixture.componentInstance.delay.set(10);
     fixture.detectChanges();
@@ -157,9 +168,7 @@ describe('Autocomplete pending queries', (): void => {
     enter(fixture, 'Miso');
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
-    await new Promise<void>((resolve: () => void): void => {
-      setTimeout(resolve, 20);
-    });
+    vi.advanceTimersByTime(10);
 
     expect(fixture.componentInstance.queries).toEqual([]);
     expect(document.querySelector('[role="listbox"]')).toBeNull();
@@ -169,10 +178,12 @@ describe('Autocomplete pending queries', (): void => {
 describe('Autocomplete templates', (): void => {
   it('renders custom prefix and empty-result context', async (): Promise<void> => {
     const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
+
     expect(query(fixture, '[data-prefix]').textContent).toBe('⌕');
 
     enter(fixture, 'none');
     await fixture.whenStable();
+
     expect(document.querySelector('[data-empty]')?.textContent).toContain('none');
   });
 });

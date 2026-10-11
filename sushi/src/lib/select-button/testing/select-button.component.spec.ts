@@ -56,6 +56,7 @@ describe('SelectButton semantics', (): void => {
 
   it('exposes option state and index to a custom template', (): void => {
     const fixture: ComponentFixture<SelectButtonHost> = render(SelectButtonHost);
+
     expect(query(fixture, '[data-option="list"]').getAttribute('data-selected')).toBe('true');
     expect(query(fixture, '[data-option="board"]').getAttribute('data-index')).toBe('1');
   });
@@ -66,6 +67,7 @@ describe('SelectButton semantics', (): void => {
     fixture.detectChanges();
 
     const group: Element = query(fixture, 'sui-select-button');
+
     expect(group.classList).toContain('cursor-not-allowed');
     expect(group.getAttribute('aria-disabled')).toBe('true');
   });
@@ -77,11 +79,13 @@ describe('SelectButton interaction', (): void => {
     const radios: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
     radios[1].click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toBe('board');
 
     fixture.componentInstance.allowEmpty.set(true);
     fixture.detectChanges();
     radios[1].click();
+
     expect(fixture.componentInstance.value()).toBeNull();
     expect(fixture.componentInstance.touches).toBe(2);
   });
@@ -98,6 +102,7 @@ describe('SelectButton interaction', (): void => {
     fixture.componentInstance.orientation.set('vertical');
     fixture.detectChanges();
     press(radios[1], 'ArrowUp');
+
     expect(document.activeElement).toBe(radios[0]);
     expect(fixture.componentInstance.value()).toBe('list');
   });

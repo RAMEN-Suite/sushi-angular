@@ -50,6 +50,7 @@ describe('Range', (): void => {
 
     fixture.componentInstance.dirty.set(true);
     fixture.detectChanges();
+
     expect(range.getAttribute('aria-invalid')).toBe('true');
     expect(range.classList).toContain('range-error');
   });

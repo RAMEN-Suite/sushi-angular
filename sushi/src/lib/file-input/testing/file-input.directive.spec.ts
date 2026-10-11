@@ -45,15 +45,17 @@ describe('FileInput', (): void => {
     expect(input.classList.contains('w-full')).toBe(true);
   });
 
-  it('delays invalid state until the control is touched or dirty', (): void => {
+  it.each(['touched', 'dirty'] as const)('delays invalid state until %s', (state: 'touched' | 'dirty'): void => {
     const fixture: ComponentFixture<FileInputHost> = render(FileInputHost);
     const input: HTMLInputElement = query(fixture, 'input');
     fixture.componentInstance.invalid.set(true);
     fixture.detectChanges();
+
     expect(input.hasAttribute('aria-invalid')).toBe(false);
 
-    fixture.componentInstance.dirty.set(true);
+    fixture.componentInstance[state].set(true);
     fixture.detectChanges();
+
     expect(input.getAttribute('aria-invalid')).toBe('true');
   });
 });

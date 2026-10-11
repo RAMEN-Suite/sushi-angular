@@ -108,11 +108,12 @@ describe('Select value and state', (): void => {
     const fixture: ComponentFixture<SelectHost> = render(SelectHost);
 
     expect(query(fixture, '[data-selected]').textContent).toBe('Shoyu');
+
     fixture.componentInstance.control().reset();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.value()).toBeNull();
-    expect(query(fixture, '.grow').textContent.trim()).toBe('Choose ramen');
+    expect(query(fixture, '[role="combobox"]').textContent.trim()).toBe('Choose ramen');
   });
 
   it('clears a value through the keyboard-accessible clear action', (): void => {
@@ -135,6 +136,7 @@ describe('Select value and state', (): void => {
 
     fixture.componentInstance.touched.set(true);
     fixture.detectChanges();
+
     expect(combobox.getAttribute('aria-invalid')).toBe('true');
   });
 });
@@ -151,7 +153,7 @@ describe('Select interaction', (): void => {
 
   it('hard-disables controls without opening', (): void => {
     const fixture: ComponentFixture<SelectHost> = render(SelectHost);
-    const combobox: HTMLElement = query(fixture, 'div');
+    const combobox: HTMLElement = query(fixture, '[role="combobox"]') as HTMLElement;
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
 
@@ -181,16 +183,18 @@ describe('Select interaction', (): void => {
 describe('Select option selection', (): void => {
   it('opens options and selects an enabled item', async (): Promise<void> => {
     const fixture: ComponentFixture<SelectHost> = render(SelectHost);
-    const combobox: HTMLElement = query(fixture, 'div');
+    const combobox: HTMLElement = query(fixture, '[role="combobox"]') as HTMLElement;
     combobox.click();
     await fixture.whenStable();
 
     const items: NodeListOf<HTMLElement> = document.querySelectorAll<HTMLElement>('[role="option"]');
+
     expect(items).toHaveLength(3);
     expect(items[2].getAttribute('aria-disabled')).toBe('true');
 
     items[0].click();
     fixture.detectChanges();
+
     expect(fixture.componentInstance.value()).toBe('miso');
     expect(fixture.componentInstance.touches).toBe(1);
   });
@@ -211,6 +215,7 @@ describe('Select option selection', (): void => {
 describe('Select extension surfaces', (): void => {
   it('renders structural and icon templates in their owned regions', async (): Promise<void> => {
     const fixture: ComponentFixture<SelectTemplatesHost> = render(SelectTemplatesHost);
+
     expect(query(fixture, '[data-clear-icon]')).toBeTruthy();
     expect(query(fixture, '[data-dropdown-icon]')).toBeTruthy();
 
@@ -231,10 +236,12 @@ describe('Select extension surfaces', (): void => {
     fixture.detectChanges();
     combobox.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     await fixture.whenStable();
+
     expect(document.querySelector('[data-empty]')).toBeTruthy();
 
     fixture.componentInstance.loading.set(true);
     fixture.detectChanges();
+
     expect(query(fixture, '[data-loading-icon]')).toBeTruthy();
     expect(document.querySelector('[data-loading]')).toBeTruthy();
   });
