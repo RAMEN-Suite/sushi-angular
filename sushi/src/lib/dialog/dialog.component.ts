@@ -21,7 +21,7 @@ import {
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { LucideX } from '@lucide/angular';
 import { Subscription } from 'rxjs';
-import { DialogCloseEvent, DialogCloseReason, DialogPosition } from './dialog.interfaces';
+import { DialogCloseEvent, DialogCloseReason, DialogMotion, DialogPosition } from './dialog.interfaces';
 
 let nextDialogId: number = 0;
 
@@ -40,6 +40,7 @@ let nextDialogId: number = 0;
       #nativeDialog
       class="sui-dialog"
       [class.sui-dialog--resizable]="resizable()"
+      [attr.data-motion]="motion()"
       [attr.aria-label]="ariaLabel()"
       [attr.aria-labelledby]="ariaLabelledby()"
       [attr.aria-describedby]="ariaDescribedby()"
@@ -65,7 +66,7 @@ let nextDialogId: number = 0;
 })
 /** Adds controlled modal behavior to the native dialog element. */
 export class Dialog {
-  /** Controls and reports whether the Dialog is open. */
+  /** Requested open state. Setting false starts exit motion; closed emits after the native Dialog closes. */
   public readonly open: ModelSignal<boolean> = model<boolean>(false);
   /** Opens the Dialog with modal interaction and a native backdrop. */
   public readonly modal: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
@@ -93,7 +94,9 @@ export class Dialog {
   });
   /** Enables native pointer resizing from the bottom-right corner. */
   public readonly resizable: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Emits after the native Dialog closes. */
+  /** Optional Dialog and backdrop fade. CSS tokens configure timing; reduced motion disables it. */
+  public readonly motion: InputSignal<DialogMotion> = input<DialogMotion>('none');
+  /** Emits after the native Dialog closes, including any configured exit motion. */
   public readonly closed: OutputEmitterRef<DialogCloseEvent> = output<DialogCloseEvent>();
 
   /** Stable ID referenced by Dialog triggers. */
@@ -111,6 +114,7 @@ export class Dialog {
   private closeReason: DialogCloseReason = 'programmatic';
   private readonly drag: Signal<CdkDrag> = viewChild.required(CdkDrag);
   private restoreTarget: HTMLElement | null = null;
+  private pendingClose: object | null = null;
   private appliedPosition: DialogPosition | null = null;
 
   public constructor() {
@@ -130,30 +134,56 @@ export class Dialog {
 
   /** Opens the Dialog and remembers where focus should return. */
   public show(restoreTarget?: HTMLElement): void {
-    if (this.element().nativeElement.open) return;
+    this.cancelClosing();
+    if (this.element().nativeElement.open) {
+      this.open.set(true);
+      return;
+    }
     this.restoreTarget = restoreTarget ?? this.activeElement();
     this.open.set(true);
   }
 
   /** Closes the Dialog with an optional return value. */
   public close(returnValue: string = '', reason: DialogCloseReason = 'programmatic'): void {
-    if (!this.element().nativeElement.open) return;
+    const dialog: HTMLDialogElement = this.element().nativeElement;
+    if (!dialog.open || this.pendingClose) return;
     this.closeReason = reason;
-    this.element().nativeElement.close(returnValue);
+    this.open.set(false);
+    if (this.motion() === 'none') {
+      dialog.close(returnValue);
+      return;
+    }
+
+    const request: object = {};
+    this.pendingClose = request;
+    dialog.setAttribute('data-closing', '');
+    const animations: readonly Animation[] = dialog
+      .getAnimations()
+      .filter(
+        (animation: Animation): boolean =>
+          'animationName' in animation &&
+          typeof animation.animationName === 'string' &&
+          animation.animationName.startsWith('sui-dialog-'),
+      );
+    if (animations.length === 0) {
+      dialog.close(returnValue);
+      return;
+    }
+
+    void Promise.allSettled(animations.map((animation: Animation): Promise<Animation> => animation.finished)).then((): void => {
+      if (this.pendingClose === request && !this.destroyRef.destroyed) dialog.close(returnValue);
+    });
   }
 
   /** Toggles the Dialog. */
   public toggle(restoreTarget?: HTMLElement): void {
-    if (this.element().nativeElement.open) this.close();
+    if (this.element().nativeElement.open && !this.pendingClose) this.close();
     else this.show(restoreTarget);
   }
 
   protected handleCancel(event: Event): void {
-    if (!this.closeOnEscape()) {
-      event.preventDefault();
-      return;
-    }
-    this.closeReason = 'escape';
+    event.preventDefault();
+    if (this.closeOnEscape()) this.close('', 'escape');
   }
 
   protected handlePointerDown(event: PointerEvent): void {
@@ -161,6 +191,7 @@ export class Dialog {
   }
 
   protected handleClose(): void {
+    this.cancelClosing();
     this.open.set(false);
     this.closed.emit({ reason: this.closeReason, returnValue: this.element().nativeElement.returnValue });
     this.closeReason = 'programmatic';
@@ -197,9 +228,15 @@ export class Dialog {
     target?.focus({ preventScroll: true });
   }
 
+  private cancelClosing(): void {
+    this.pendingClose = null;
+    this.element().nativeElement.removeAttribute('data-closing');
+  }
+
   private syncOpenState(): void {
     const dialog: HTMLDialogElement = this.element().nativeElement;
     const position: DialogPosition = this.position();
+    if (this.open() && this.pendingClose) this.cancelClosing();
     if (this.open() === dialog.open) {
       if (dialog.open && position !== this.appliedPosition) this.applyPosition();
       return;

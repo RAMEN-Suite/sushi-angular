@@ -1,16 +1,20 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { query, queryAll, render } from '../../../../testing/test-utils';
 import { Toast } from '../toast.component';
 import { ToastService } from '../toast.service';
+import { ToastDismissLabel, ToastTemplateValue } from '../toast.interfaces';
 import { ToastContentTemplate } from '../toast.templates';
 
 @Component({
   imports: [Toast],
-  template: `<sui-toast horizontal="start" vertical="top" [maxVisible]="2" />`,
+  template: `<sui-toast horizontal="start" vertical="top" [maxVisible]="2" [dismissLabel]="dismissLabel()" />`,
 })
 class ToastHost {
+  public readonly dismissLabel: WritableSignal<ToastDismissLabel> = signal<ToastDismissLabel>(
+    (item: ToastTemplateValue): string => `Dismiss ${item.message}`,
+  );
   public readonly toast: ToastService = inject(ToastService);
 }
 
@@ -167,5 +171,26 @@ describe('Toast timing', (): void => {
     fixture.componentInstance.toast.dismiss(id);
 
     expect(fixture.componentInstance.toast.toasts()).toHaveLength(0);
+  });
+});
+
+describe('Toast localisation', (): void => {
+  it('updates translated close labels and supports message-specific formatters', (): void => {
+    const fixture: ComponentFixture<ToastHost> = render(ToastHost);
+    fixture.componentInstance.toast.show({ message: 'Gespeichert', duration: 0 });
+    fixture.componentInstance.dismissLabel.set('Schließen');
+    fixture.detectChanges();
+
+    expect(query(fixture, 'button').getAttribute('aria-label')).toBe('Schließen');
+
+    fixture.componentInstance.dismissLabel.set((item: ToastTemplateValue): string => `Fermer : ${item.message}`);
+    fixture.detectChanges();
+
+    const close: HTMLButtonElement = query(fixture, 'button');
+    expect(close.getAttribute('aria-label')).toBe('Fermer : Gespeichert');
+    close.click();
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.toast.toasts()).toEqual([]);
   });
 });

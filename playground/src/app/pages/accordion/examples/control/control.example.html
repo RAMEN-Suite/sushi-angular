@@ -14,9 +14,26 @@
     </div>
   </div>
 
-  <sui-accordion #settings multiple variant="separated" [(value)]="open">
+  <sui-accordion
+    #settings
+    multiple
+    variant="separated"
+    [(value)]="open"
+    style="
+      --sui-accordion-trigger-min-height: 2rem;
+      --sui-accordion-trigger-padding-block: 0.375rem;
+      --sui-accordion-panel-padding-bottom: 0.5rem;
+      --sui-accordion-gap: 0.5rem;
+    ">
     <ng-template suiAccordionItem value="profile" label="Profile">
-      Choose the name, avatar, and contact details visible to your team.
+      <div class="grid gap-3 pb-2">
+        <label class="grid gap-1">
+          Display name
+          <input suiInput value="Alex" />
+        </label>
+        <button suiButton type="button" (click)="saved.update(increment)">Save profile</button>
+        <span role="status">Saved {{ saved() }} times</span>
+      </div>
     </ng-template>
     <ng-template suiAccordionItem value="security" label="Security">
       Review sign-in methods, active sessions, and recovery options.

@@ -10,6 +10,12 @@
      * @example 36rem
      */
     --sui-dialog-width: 28rem;
+    /** Duration of Dialog and backdrop fade entry when motion is enabled. */
+    --sui-dialog-enter-duration: 180ms;
+    /** Duration of Dialog and backdrop fade exit when motion is enabled. */
+    --sui-dialog-exit-duration: 140ms;
+    /** Easing for Dialog and backdrop motion. */
+    --sui-dialog-motion-easing: ease-out;
     /**
      * Inner spacing of the Dialog surface.
      * @example 2rem
@@ -295,5 +301,44 @@
 
   .sui-dialog-backdrop {
     background-color: var(--sui-dialog-backdrop-color, rgb(0 0 0 / 55%));
+  }
+}
+
+@layer components {
+  .sui-dialog[data-motion='fade'][open],
+  .sui-dialog[data-motion='fade'][open]::backdrop {
+    animation: sui-dialog-enter var(--sui-dialog-enter-duration) var(--sui-dialog-motion-easing) both;
+  }
+
+  .sui-dialog[data-motion='fade'][open][data-closing],
+  .sui-dialog[data-motion='fade'][open][data-closing]::backdrop {
+    animation: sui-dialog-exit var(--sui-dialog-exit-duration) var(--sui-dialog-motion-easing) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sui-dialog[data-motion='fade'][open],
+    .sui-dialog[data-motion='fade'][open]::backdrop,
+    .sui-dialog[data-motion='fade'][open][data-closing],
+    .sui-dialog[data-motion='fade'][open][data-closing]::backdrop {
+      animation: none;
+    }
+  }
+}
+
+@keyframes sui-dialog-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sui-dialog-exit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }

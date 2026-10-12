@@ -7,7 +7,7 @@
   [class.join]="variant() === 'joined'"
   [class.join-vertical]="variant() === 'joined'"
   [class.grid]="variant() === 'separated'"
-  [class.gap-3]="variant() === 'separated'"
+  [class.sui-accordion__group--separated]="variant() === 'separated'"
   [multiExpandable]="multiple()"
   [disabled]="disabled()"
   [softDisabled]="softDisabled()"
@@ -50,9 +50,11 @@
 
       <div
         ngAccordionPanel
+        tabindex="-1"
         #panel="ngAccordionPanel"
         class="collapse-content sui-accordion__panel leading-6"
         [preserveContent]="item.preserveContent()"
+        (keydown)="handlePanelKeydown($event)"
       >
         <ng-template ngAccordionContent>
           <ng-container [ngTemplateOutlet]="item.template" [ngTemplateOutletContext]="context" />

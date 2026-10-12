@@ -29,6 +29,21 @@ class AccordionHost {
   public readonly value: WritableSignal<readonly AccordionValue[]> = signal<readonly AccordionValue[]>([]);
 }
 
+@Component({
+  imports: [Accordion, AccordionItem],
+  template: `
+    <sui-accordion [(value)]="value">
+      <ng-template suiAccordionItem value="settings" label="Settings">
+        <button type="button">Save</button>
+        <input aria-label="Name" />
+      </ng-template>
+    </sui-accordion>
+  `,
+})
+class InteractiveAccordionHost {
+  public readonly value: WritableSignal<readonly AccordionValue[]> = signal<readonly AccordionValue[]>([]);
+}
+
 describe('Accordion rendering and model', (): void => {
   it('renders semantic triggers and typed header contexts', (): void => {
     const fixture: ComponentFixture<AccordionHost> = render(AccordionHost);
@@ -92,6 +107,14 @@ describe('Accordion keyboard and disabled behavior', (): void => {
     press(buttons[0], 'ArrowDown');
 
     expect(document.activeElement).toBe(buttons[1]);
+
+    press(buttons[1], 'Enter');
+    fixture.detectChanges();
+    expect(fixture.componentInstance.value()).toEqual(['method']);
+
+    press(buttons[1], ' ');
+    fixture.detectChanges();
+    expect(fixture.componentInstance.value()).toEqual([]);
   });
 
   it('keeps disabled triggers focusable without expanding them', (): void => {
@@ -113,5 +136,30 @@ describe('Accordion keyboard and disabled behavior', (): void => {
 
     expect(fixture.componentInstance.value()).toEqual([]);
     expect(first.getAttribute('aria-disabled')).toBe('true');
+  });
+});
+
+describe('Accordion panel controls', (): void => {
+  it('leaves panel keys to their controls without toggling or moving header focus', (): void => {
+    const fixture: ComponentFixture<InteractiveAccordionHost> = render(InteractiveAccordionHost);
+    const header: HTMLButtonElement = query(fixture, 'button');
+    header.focus();
+    header.click();
+    fixture.detectChanges();
+
+    const controls: readonly Element[] = queryAll(fixture, '[role="region"] button, [role="region"] input');
+    expect(controls).toHaveLength(2);
+
+    for (const control of controls) {
+      (control as HTMLElement).focus();
+      for (const key of ['Enter', ' ', 'ArrowUp', 'ArrowDown', 'Home', 'End']) {
+        const event: KeyboardEvent = press(control, key);
+        fixture.detectChanges();
+
+        expect(event.defaultPrevented).toBe(false);
+        expect(fixture.componentInstance.value()).toEqual(['settings']);
+        expect(document.activeElement).toBe(control);
+      }
+    }
   });
 });

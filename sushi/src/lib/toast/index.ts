@@ -1,6 +1,8 @@
 export * from './toast.component';
 export type {
   ToastAction,
+  ToastDismissLabel,
+  ToastMotion,
   ToastHorizontalPosition,
   ToastOptions,
   ToastTemplateContext,

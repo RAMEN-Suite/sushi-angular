@@ -70,3 +70,9 @@ export interface ToastTemplateContext {
 
 /** @internal Normalized Toast rendered by an outlet. */
 export type ToastItem = ToastTemplateValue;
+
+/** Motion of Toast entry and dismissal. Disabled by default. */
+export type ToastMotion = 'none' | 'fade';
+
+/** Translated close label, optionally derived from the current Toast. */
+export type ToastDismissLabel = string | ((toast: ToastTemplateValue) => string);

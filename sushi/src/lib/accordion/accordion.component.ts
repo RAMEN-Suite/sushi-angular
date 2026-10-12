@@ -37,7 +37,7 @@ import { AccordionHeaderTemplate, AccordionIndicatorTemplate } from './accordion
   ],
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.css',
-  host: { class: 'sui-accordion block' },
+  host: { class: 'sui-accordion block', '[attr.data-size]': 'size()' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Accordion {
@@ -88,6 +88,11 @@ export class Accordion {
   /** Collapses every accordion item. */
   public collapseAll(): void {
     this.value.set([]);
+  }
+
+  protected handlePanelKeydown(event: KeyboardEvent): void {
+    // Angular Aria handles these keys at the group, including events bubbled from panel controls.
+    if (['Enter', ' ', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) event.stopPropagation();
   }
 
   protected handleExpanded(value: AccordionValue, expanded: boolean): void {

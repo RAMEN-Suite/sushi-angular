@@ -4,15 +4,44 @@
   /** Maximum width of one Toast. */
   --sui-toast-width: 24rem;
 
+  /** Distance from the top or bottom viewport edge; ignored at middle placement. */
+  --sui-toast-offset-block: 1rem;
+  /** Distance from the start or end viewport edge; also limits the stack width. */
+  --sui-toast-offset-inline: 1rem;
+  /** Duration of fade entry when motion is enabled. */
+  --sui-toast-enter-duration: 180ms;
+  /** Duration of fade dismissal when motion is enabled. */
+  --sui-toast-exit-duration: 140ms;
+  /** Easing for entry and exit motion. */
+  --sui-toast-motion-easing: ease-out;
+
   display: contents;
 }
 
 .sui-toast {
   z-index: var(--sui-toast-z-index);
-  width: min(var(--sui-toast-width), calc(100vw - 2rem));
+  width: min(var(--sui-toast-width), calc(100vw - 2 * var(--sui-toast-offset-inline)));
+  max-width: calc(100vw - 2 * var(--sui-toast-offset-inline));
+}
+
+.sui-toast.toast-start {
+  inset-inline: var(--sui-toast-offset-inline) auto;
+}
+
+.sui-toast.toast-end {
+  inset-inline: auto var(--sui-toast-offset-inline);
+}
+
+.sui-toast.toast-top {
+  top: var(--sui-toast-offset-block);
+}
+
+.sui-toast.toast-bottom {
+  bottom: var(--sui-toast-offset-block);
 }
 
 .sui-toast__item {
+  animation: none;
   display: grid;
   grid-template-areas: 'icon content close';
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -98,4 +127,38 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
+}
+
+.sui-toast__item.sui-toast-enter {
+  animation: sui-toast-enter var(--sui-toast-enter-duration) var(--sui-toast-motion-easing) both;
+}
+
+.sui-toast__item.sui-toast-leave {
+  pointer-events: none;
+  animation: sui-toast-exit var(--sui-toast-exit-duration) var(--sui-toast-motion-easing) both;
+}
+
+@keyframes sui-toast-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sui-toast-exit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sui-toast__item.sui-toast-enter,
+  .sui-toast__item.sui-toast-leave {
+    animation: none;
+  }
 }

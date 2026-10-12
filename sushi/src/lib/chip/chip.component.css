@@ -6,7 +6,11 @@
   /** Text color used by a Chip without a semantic severity. */
   --sui-chip-color: var(--color-base-content);
 
-  @apply inline-flex h-8 max-w-full items-center gap-2 rounded-full px-3 text-sm font-medium;
+  /** Corner radius of the Chip. Defaults to a pill. */
+  --sui-chip-radius: calc(infinity * 1px);
+
+  border-radius: var(--sui-chip-radius);
+  @apply inline-flex h-8 max-w-full items-center gap-2 px-3 text-sm font-medium;
 }
 
 :host(:not([class*='badge-'])) {
