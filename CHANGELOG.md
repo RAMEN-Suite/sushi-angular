@@ -2,18 +2,6 @@
 
 All notable changes to this project are documented here.
 
-## [0.1.4](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.1.3...v0.1.4) (2026-10-12)
-
-### Features
-
-* **sushi:** improve component customization, motion and focus styles ([#54](https://github.com/RAMEN-Suite/sushi-angular/issues/54)) ([c80ebd9](https://github.com/RAMEN-Suite/sushi-angular/commit/c80ebd91280307504611f6a42b7660918aef6bb6))
-
-### Bug Fixes
-
-* **sushi:** correct dialog labels and component layout ([#47](https://github.com/RAMEN-Suite/sushi-angular/issues/47)) ([822e60d](https://github.com/RAMEN-Suite/sushi-angular/commit/822e60d1ef71ba7afb2cd9131ce50d48e5d98d82))
-* **sushi:** correct dialog styling and positioning ([#45](https://github.com/RAMEN-Suite/sushi-angular/issues/45)) ([329af8f](https://github.com/RAMEN-Suite/sushi-angular/commit/329af8fe69f470740a7ac14c0fbf0a2951971a31))
-* **sushi:** support select interaction in modal dialogs ([#46](https://github.com/RAMEN-Suite/sushi-angular/issues/46)) ([f6f45a0](https://github.com/RAMEN-Suite/sushi-angular/commit/f6f45a0c9dd0817a43e3e5e65f87c61a4ca65755))
-
 ## [0.1.3](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.1.2...v0.1.3) (2026-10-06)
 
 ### Bug Fixes
