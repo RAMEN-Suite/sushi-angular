@@ -23,8 +23,8 @@
   }
 
   .sui-gallery:focus-visible {
-    outline: 2px solid var(--sui-gallery-selection-color);
-    outline-offset: 4px;
+    outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, var(--sui-gallery-selection-color));
+    outline-offset: var(--sui-focus-ring-offset);
   }
 
   .sui-gallery__stage {
@@ -133,9 +133,10 @@
     scroll-snap-align: start;
   }
 
+  .sui-gallery__image:focus-visible,
   .sui-gallery__thumbnails button:focus-visible {
-    outline: 2px solid var(--sui-gallery-selection-color);
-    outline-offset: -2px;
+    outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, var(--sui-gallery-selection-color));
+    outline-offset: calc(var(--sui-focus-ring-width) * -1);
   }
 
   .sui-gallery__thumbnails .sui-gallery__thumbnail--active {

@@ -16,7 +16,7 @@ a:hover {
 }
 a:focus-visible {
   border-radius: var(--radius-field);
-  outline: var(--sui-focus-ring-width) solid currentColor;
+  outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
   outline-offset: var(--sui-focus-ring-offset);
 }
 [aria-current='page'] {

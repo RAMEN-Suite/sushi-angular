@@ -91,7 +91,7 @@
 
 .sui-color-picker__preset:not([aria-disabled='true']):focus-visible {
   border-color: var(--sui-color-picker-preset-ring);
-  outline: var(--sui-focus-ring-width) solid var(--sui-color-picker-preset-ring);
+  outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, var(--sui-color-picker-preset-ring));
   outline-offset: var(--sui-focus-ring-offset);
 }
 

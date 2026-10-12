@@ -44,8 +44,8 @@
 
 :host(:focus-visible) .sui-chip__remove {
   border-radius: var(--radius-field);
-  outline: var(--sui-focus-ring-width) solid currentColor;
-  outline-offset: 2px;
+  outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
+  outline-offset: var(--sui-focus-ring-offset);
 }
 
 .sui-chip__label {

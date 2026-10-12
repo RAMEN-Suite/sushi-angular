@@ -249,8 +249,8 @@
   }
 
   .sui-dialog-header__action:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
+    outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
+    outline-offset: var(--sui-focus-ring-offset);
   }
 
   .sui-dialog-header__action svg {

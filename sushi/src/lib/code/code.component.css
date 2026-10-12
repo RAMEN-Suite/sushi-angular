@@ -73,7 +73,7 @@
 
 .sui-code__copy-button:focus-visible {
   outline: none;
-  box-shadow: inset 0 0 0 var(--sui-focus-ring-width) currentColor;
+  box-shadow: inset 0 0 0 var(--sui-focus-ring-width) var(--sui-focus-ring-color, currentColor);
 }
 
 .sui-code__copy-button {

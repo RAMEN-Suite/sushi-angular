@@ -157,7 +157,7 @@
 }
 
 .sui-navbar__link:focus-visible {
-  outline: var(--sui-focus-ring-width) solid currentColor;
+  outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
   outline-offset: var(--sui-focus-ring-offset);
 }
 
@@ -214,7 +214,7 @@
 
 .sui-navbar__dropdown > summary:focus-visible {
   border-radius: var(--radius-field);
-  outline: var(--sui-focus-ring-width) solid currentColor;
+  outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
   outline-offset: var(--sui-focus-ring-offset);
 }
 

@@ -1,5 +1,10 @@
 /* @sui-docs autocomplete listbox multi-select order-list select */
 
+.sui-selection-clear:focus-visible {
+  outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
+  outline-offset: var(--sui-focus-ring-offset);
+}
+
 .sui-selection-option {
   @apply select-none text-base font-medium transition-colors duration-150;
 }

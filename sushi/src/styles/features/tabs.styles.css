@@ -4,12 +4,12 @@
 
 .sui-tab:focus-visible {
   border-radius: var(--radius-field);
-  box-shadow: inset 0 0 0 var(--sui-focus-ring-width) currentColor;
+  box-shadow: inset 0 0 0 var(--sui-focus-ring-width) var(--sui-focus-ring-color, currentColor);
 }
 
 .sui-tab-panel:focus-visible {
   outline: none;
-  box-shadow: inset 0 0 0 var(--sui-focus-ring-width) currentColor;
+  box-shadow: inset 0 0 0 var(--sui-focus-ring-width) var(--sui-focus-ring-color, currentColor);
 }
 
 .sui-tab-panel[inert] {
@@ -22,7 +22,7 @@
 }
 
 .sui-tabs__list.tabs-box > .sui-tab:focus-visible {
-  box-shadow: inset 0 0 0 var(--sui-focus-ring-width) currentColor;
+  box-shadow: inset 0 0 0 var(--sui-focus-ring-width) var(--sui-focus-ring-color, currentColor);
 }
 
 .sui-tabs__root--vertical {

@@ -1,3 +1,8 @@
+.sui-order-list__surface:has(:focus-visible) {
+  outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
+  outline-offset: var(--sui-focus-ring-offset);
+}
+
 .cdk-drag-placeholder {
   opacity: 0.3;
 }
