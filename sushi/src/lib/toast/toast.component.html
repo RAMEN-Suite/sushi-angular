@@ -12,6 +12,8 @@
     <div
       suiMessage
       class="sui-toast__item"
+      [animate.enter]="motion() === 'fade' ? 'sui-toast-enter' : ''"
+      [animate.leave]="motion() === 'fade' ? 'sui-toast-leave' : ''"
       [class.sui-toast__item--with-actions]="item.action"
       [severity]="item.severity"
       [variant]="item.variant"
@@ -43,7 +45,7 @@
             size="sm"
             [severity]="buttonSeverity(item)"
             variant="text"
-            [attr.aria-label]="'Dismiss ' + item.message"
+            [attr.aria-label]="accessibleDismissLabel(item)"
             (click)="service.dismiss(item.id)"
           >
             <svg lucideX aria-hidden="true"></svg>

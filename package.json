@@ -14,7 +14,7 @@
     "ng": "ng",
     "package:check": "npm run build:sushi && npm run package:lint && npm pack ./dist/sushi --dry-run --cache .cache/npm && npm run package:smoke && npm run package:install",
     "package:install": "bash tools/package-install-smoke.sh",
-    "package:lint": "publint dist/sushi",
+    "package:lint": "publint dist/sushi && node --import tsx tools/check-package-styles.ts",
     "package:smoke": "npm run build:playground -- --configuration package",
     "prepare": "git config core.hooksPath .githooks",
     "preview:playground": "npx serve dist/playground/browser -l 4201 -s",

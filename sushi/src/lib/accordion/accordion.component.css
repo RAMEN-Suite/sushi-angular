@@ -5,6 +5,40 @@
   --sui-accordion-border-color: var(--sui-color-border);
   /** Text color of expanded Accordion content. */
   --sui-accordion-content-color: color-mix(in oklab, currentColor 72%, transparent);
+  /** Minimum height of an Accordion trigger; defaults follow size. */
+  --sui-accordion-trigger-min-height: var(--_sui-accordion-trigger-min-height, 2.5rem);
+  /** Block padding of an Accordion trigger; defaults follow size. */
+  --sui-accordion-trigger-padding-block: var(--_sui-accordion-trigger-padding-block, 0.625rem);
+  /** Inline padding of an Accordion trigger; defaults follow size. */
+  --sui-accordion-trigger-padding-inline: var(--_sui-accordion-padding-inline, 0.875rem);
+  /** Space between the trigger label and indicator. */
+  --sui-accordion-trigger-gap: 0.75rem;
+  /** Inline padding of expanded content; defaults follow size. */
+  --sui-accordion-panel-padding-inline: var(--_sui-accordion-padding-inline, 0.875rem);
+  /** Bottom padding of expanded content. */
+  --sui-accordion-panel-padding-bottom: 1rem;
+  /** Space between items in the separated variant. */
+  --sui-accordion-gap: 0.75rem;
+  /** Duration of expansion, collapse, and indicator motion. Use 0ms to disable motion. */
+  --sui-accordion-motion-duration: 200ms;
+  /** Easing of expansion, collapse, and indicator motion. */
+  --sui-accordion-motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:host([data-size='md']) {
+  --_sui-accordion-trigger-min-height: 3rem;
+  --_sui-accordion-trigger-padding-block: 0.75rem;
+  --_sui-accordion-padding-inline: 1rem;
+}
+
+:host([data-size='lg']) {
+  --_sui-accordion-trigger-min-height: 3.5rem;
+  --_sui-accordion-trigger-padding-block: 0.875rem;
+  --_sui-accordion-padding-inline: 1.125rem;
+}
+
+.sui-accordion__group--separated {
+  gap: var(--sui-accordion-gap);
 }
 
 .sui-accordion__group {
@@ -15,24 +49,22 @@
   min-width: 0;
   background-color: var(--sui-accordion-background);
   border-color: var(--sui-accordion-border-color);
+  transition: grid-template-rows var(--sui-accordion-motion-duration) var(--sui-accordion-motion-easing);
 }
 
 .sui-accordion__trigger {
   display: flex;
-  min-height: 3rem;
+  min-height: var(--sui-accordion-trigger-min-height);
   cursor: pointer;
   align-items: center;
-  gap: 0.75rem;
-  padding-block: 0.75rem;
-  padding-inline: 1rem;
+  gap: var(--sui-accordion-trigger-gap);
+  padding-block: var(--sui-accordion-trigger-padding-block);
+  padding-inline: var(--sui-accordion-trigger-padding-inline);
   text-align: start;
   font-weight: 600;
 }
 
 .sui-accordion__group--sm .sui-accordion__trigger {
-  min-height: 2.5rem;
-  padding-block: 0.625rem;
-  padding-inline: 0.875rem;
   font-size: 0.9375rem;
 }
 
@@ -41,9 +73,6 @@
 }
 
 .sui-accordion__group--lg .sui-accordion__trigger {
-  min-height: 3.5rem;
-  padding-block: 0.875rem;
-  padding-inline: 1.125rem;
   font-size: 1.125rem;
 }
 
@@ -54,6 +83,8 @@
 
 .sui-accordion__trigger:focus-visible {
   z-index: 1;
+  outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
+  outline-offset: var(--sui-focus-ring-offset);
 }
 
 .sui-accordion__indicator {
@@ -63,18 +94,21 @@
 }
 
 .sui-accordion__indicator svg {
-  transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--sui-accordion-motion-duration) var(--sui-accordion-motion-easing);
 }
 
 .sui-accordion__panel {
   /* Keep the grid transition continuous instead of switching to fit-content mid-animation. */
   min-height: 0;
-  padding-inline: 1rem;
+  transition:
+    content-visibility var(--sui-accordion-motion-duration) allow-discrete,
+    visibility var(--sui-accordion-motion-duration) allow-discrete,
+    padding-bottom var(--sui-accordion-motion-duration) var(--sui-accordion-motion-easing);
+  padding-inline: var(--sui-accordion-panel-padding-inline);
   color: var(--sui-accordion-content-color);
 }
 
 .sui-accordion__group--sm .sui-accordion__panel {
-  padding-inline: 0.875rem;
   font-size: 0.875rem;
 }
 
@@ -83,11 +117,16 @@
 }
 
 .sui-accordion__group--lg .sui-accordion__panel {
-  padding-inline: 1.125rem;
   font-size: 1.0625rem;
 }
 
+.sui-accordion__item.collapse-open > .sui-accordion__panel {
+  padding-bottom: var(--sui-accordion-panel-padding-bottom);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .sui-accordion__item,
+  .sui-accordion__panel,
   .sui-accordion__indicator svg {
     transition: none;
   }

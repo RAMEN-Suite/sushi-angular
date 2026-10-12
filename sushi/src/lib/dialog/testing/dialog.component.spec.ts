@@ -7,7 +7,7 @@ import { DialogHeader } from '../dialog-header.directive';
 import { DialogBody, DialogFooter } from '../dialog-slots.directive';
 import { DialogTrigger } from '../dialog-trigger.directive';
 import { Dialog } from '../dialog.component';
-import { DialogCloseEvent } from '../dialog.interfaces';
+import { DialogCloseEvent, DialogMotion } from '../dialog.interfaces';
 
 @Component({
   imports: [Dialog, DialogBody, DialogClose, DialogFooter, DialogHeader, DialogTrigger],
@@ -20,6 +20,7 @@ import { DialogCloseEvent } from '../dialog.interfaces';
       [closeOnEscape]="dismissible()"
       [closeOnBackdrop]="dismissible()"
       [modal]="modal()"
+      [motion]="motion()"
       [position]="position()"
       [draggable]="draggable()"
       [constrainToViewport]="constrainToViewport()"
@@ -41,6 +42,7 @@ class DialogHost {
   public readonly open: WritableSignal<boolean> = signal<boolean>(false);
   public readonly dismissible: WritableSignal<boolean> = signal<boolean>(true);
   public readonly triggerDisabled: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly motion: WritableSignal<DialogMotion> = signal<DialogMotion>('none');
   public readonly modal: WritableSignal<boolean> = signal<boolean>(true);
   public readonly draggable: WritableSignal<boolean> = signal<boolean>(false);
   public readonly constrainToViewport: WritableSignal<boolean> = signal<boolean>(true);
@@ -241,5 +243,67 @@ describe('Dialog trigger', (): void => {
     expect(trigger.disabled).toBe(false);
     expect(trigger.getAttribute('aria-disabled')).toBe('true');
     expect(fixture.componentInstance.open()).toBe(false);
+  });
+});
+
+function pendingExit(dialog: HTMLDialogElement): () => void {
+  let finish!: (animation: Animation) => void;
+  const finished: Promise<Animation> = new Promise<Animation>((resolve: (animation: Animation) => void): void => {
+    finish = resolve;
+  });
+  const exit: Animation = { animationName: 'sui-dialog-exit', finished } as CSSAnimation;
+  Object.defineProperty(dialog, 'getAnimations', { value: (): readonly Animation[] => [exit] });
+  return (): void => finish(exit);
+}
+
+describe('Dialog exit lifecycle', (): void => {
+  it('keeps modal focus until exit finishes and emits the original action value once', async (): Promise<void> => {
+    const fixture: ComponentFixture<DialogHost> = render(DialogHost);
+    const trigger: HTMLButtonElement = query(fixture, '[data-trigger]') as HTMLButtonElement;
+    trigger.focus();
+    fixture.componentInstance.motion.set('fade');
+    trigger.click();
+    fixture.detectChanges();
+    const dialog: HTMLDialogElement = query(fixture, 'dialog');
+    const finish: () => void = pendingExit(dialog);
+    const confirm: HTMLButtonElement = query(fixture, '[data-confirm]') as HTMLButtonElement;
+    confirm.focus();
+    confirm.click();
+    fixture.detectChanges();
+
+    expect(dialog.open).toBe(true);
+    expect(document.activeElement).toBe(confirm);
+    expect(fixture.componentInstance.open()).toBe(false);
+    expect(fixture.componentInstance.closed).toEqual([]);
+
+    confirm.click();
+    finish();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(dialog.open).toBe(false);
+    expect(document.activeElement).toBe(trigger);
+    expect(fixture.componentInstance.closed).toEqual([{ reason: 'close', returnValue: 'confirmed' }]);
+  });
+});
+
+describe('Dialog exit cancellation', (): void => {
+  it('cancels a pending exit when the controlled Dialog is reopened', async (): Promise<void> => {
+    const fixture: ComponentFixture<DialogHost> = render(DialogHost);
+    fixture.componentInstance.motion.set('fade');
+    fixture.componentInstance.open.set(true);
+    fixture.detectChanges();
+    const dialog: HTMLDialogElement = query(fixture, 'dialog');
+    const finish: () => void = pendingExit(dialog);
+    (query(fixture, '[data-cancel]') as HTMLButtonElement).click();
+    fixture.detectChanges();
+    fixture.componentInstance.open.set(true);
+    fixture.detectChanges();
+    finish();
+    await fixture.whenStable();
+
+    expect(dialog.open).toBe(true);
+    expect(fixture.componentInstance.open()).toBe(true);
+    expect(fixture.componentInstance.closed).toEqual([]);
   });
 });

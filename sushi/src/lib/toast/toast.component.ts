@@ -15,7 +15,14 @@ import type { LucideIconData } from '@lucide/angular';
 import { Button } from '../button';
 import { Message, MessageSeverity } from '../message';
 import { positiveInteger } from '../number.transforms';
-import { ToastHorizontalPosition, ToastItem, ToastTemplateContext, ToastVerticalPosition } from './toast.interfaces';
+import {
+  ToastDismissLabel,
+  ToastHorizontalPosition,
+  ToastItem,
+  ToastMotion,
+  ToastTemplateContext,
+  ToastVerticalPosition,
+} from './toast.interfaces';
 import { ToastService } from './toast.service';
 import { ToastContentTemplate } from './toast.templates';
 
@@ -46,11 +53,23 @@ export class Toast {
   /** Accessible name of the notification region. */
   public readonly ariaLabel: InputSignal<string> = input<string>('Notifications');
 
+  /** Accessible close label or formatter. Bind translated text or a function of the Toast data. */
+  public readonly dismissLabel: InputSignal<ToastDismissLabel> = input<ToastDismissLabel>(
+    (toast: ToastItem): string => `Dismiss ${toast.message}`,
+  );
+  /** Optional entry and exit motion. CSS tokens configure timing; reduced motion disables it. */
+  public readonly motion: InputSignal<ToastMotion> = input<ToastMotion>('none');
+
   protected readonly service: ToastService = inject(ToastService);
   protected readonly contentTemplates: Signal<readonly ToastContentTemplate[]> = contentChildren(ToastContentTemplate);
   protected readonly visibleToasts: Signal<readonly ToastItem[]> = computed((): readonly ToastItem[] =>
     this.service.toasts().slice(-this.maxVisible()),
   );
+
+  protected accessibleDismissLabel(item: ToastItem): string {
+    const label: ToastDismissLabel = this.dismissLabel();
+    return typeof label === 'string' ? label : label(item);
+  }
 
   protected handleAction(item: ToastItem): void {
     item.action?.run();

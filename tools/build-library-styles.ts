@@ -7,7 +7,7 @@ import type { Result } from 'postcss';
 const WORKSPACE_ROOT: string = resolve(process.cwd());
 const SOURCE_FILE: string = resolve(WORKSPACE_ROOT, 'sushi/src/styles/sushi.source.css');
 const OUTPUT_FILE: string = resolve(WORKSPACE_ROOT, 'sushi/generated/styles.css');
-const BUILD_DIRECTIVE: RegExp = /@(import|plugin|reference|source)\b/u;
+const BUILD_DIRECTIVE: RegExp = /@(apply|import|plugin|reference|source|tailwind)\b/u;
 
 async function buildLibraryStyles(): Promise<void> {
   const source: string = await readFile(SOURCE_FILE, 'utf8');

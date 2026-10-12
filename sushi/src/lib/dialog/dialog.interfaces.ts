@@ -24,3 +24,6 @@ export interface DialogCloseEvent {
   /** Optional value returned by the Dialog action. */
   readonly returnValue: string;
 }
+
+/** Optional Dialog and backdrop motion. Disabled by default. */
+export type DialogMotion = 'none' | 'fade';

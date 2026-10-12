@@ -19,7 +19,7 @@
 }
 
 .sui-fieldset__toggle:focus-visible {
-  outline: var(--sui-focus-ring-width) solid currentColor;
+  outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
   outline-offset: var(--sui-focus-ring-offset);
 }
 

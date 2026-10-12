@@ -29,3 +29,24 @@ test('Toast places actions below its message and completes the action flow', asy
   await expect(page.getByRole('status')).toBeVisible();
   await expect(page.getByRole('status')).not.toHaveText('');
 });
+
+test('Toast honours its placement offset and completes translated close dismissal', async ({
+  page,
+}: {
+  page: Page;
+}): Promise<void> => {
+  await page.goto('/toast');
+  await page.getByRole('button', { name: 'Show persistent', exact: true }).click();
+  const toast: Locator = page.getByRole('status').filter({ hasText: 'You are working offline.' });
+  const outlet: Locator = toast.locator('..');
+  await outlet.locator('..').evaluate((host: HTMLElement): void => {
+    host.style.setProperty('--sui-toast-offset-block', '96px');
+    host.style.setProperty('--sui-toast-offset-inline', '24px');
+  });
+
+  await expect(outlet).toHaveCSS('top', '96px');
+  await expect(outlet).toHaveCSS('inset-inline-end', '24px');
+  await toast.getByRole('button', { name: 'Close notification' }).click();
+
+  await expect(toast).toBeHidden();
+});

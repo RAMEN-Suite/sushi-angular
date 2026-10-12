@@ -36,6 +36,12 @@
   -webkit-text-fill-color: currentColor;
 }
 
+.otp:has(input:focus)::after,
+.otp:has(input:valid:focus) > span {
+  outline-color: var(--sui-focus-ring-color, var(--input-color));
+  outline-width: var(--sui-focus-ring-width);
+}
+
 .sui-input-otp--disabled::after {
   outline-color: transparent;
 }

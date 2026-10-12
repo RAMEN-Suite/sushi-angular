@@ -1,3 +1,8 @@
+.sui-listbox__surface:has(:focus-visible) {
+  outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
+  outline-offset: var(--sui-focus-ring-offset);
+}
+
 :host {
   /** Minimum height of a listbox option. */
   --sui-listbox-option-min-height: 2.5rem;

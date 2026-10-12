@@ -266,3 +266,16 @@ test('resizes in place without moving the Dialog origin', async ({
     expect(resized.width).toBeGreaterThan(initial.width);
   }).toPass({ timeout: 5_000 });
 });
+
+test('Dialog fade respects reduced motion and restores focus after Escape', async ({ page }: { page: Page }): Promise<void> => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const trigger: Locator = page.getByRole('button', { name: 'View today’s menu' });
+  await trigger.click();
+  const dialog: Locator = page.getByRole('dialog', { name: 'Today’s menu' });
+
+  await expect(dialog).toHaveCSS('animation-name', 'none');
+  await page.keyboard.press('Escape');
+
+  await expect(dialog).toBeHidden();
+  await expect(trigger).toBeFocused();
+});
