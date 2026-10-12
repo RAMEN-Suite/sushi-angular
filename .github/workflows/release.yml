@@ -121,9 +121,7 @@ jobs:
         if: ${{ !inputs.dry_run }}
         env:
           VERSION: ${{ steps.bump.outputs.version }}
-        run: |
-          git push origin "HEAD:${GITHUB_REF_NAME}"
-          git push origin "refs/tags/v$VERSION"
+        run: git push --atomic origin "HEAD:${GITHUB_REF_NAME}" "refs/tags/v$VERSION"
       - name: Extract latest changelog section
         run: |
           awk '
