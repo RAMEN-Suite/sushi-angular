@@ -1,5 +1,26 @@
 import { expect, Locator, Page, test } from '@playwright/test';
 
+test('Accordion keyboard focus follows the shared focus tokens @css', async ({ page }: { page: Page }): Promise<void> => {
+  await page.goto('/accordion');
+  const trigger: Locator = page.getByRole('button', { name: 'When will my order arrive?' });
+  await trigger.focus();
+  await trigger.press('Home');
+
+  const textColor: string = await trigger.evaluate((element: HTMLElement): string => getComputedStyle(element).color);
+  await expect(trigger).toHaveCSS('outline-style', 'solid');
+  await expect(trigger).toHaveCSS('outline-color', textColor);
+
+  await page.evaluate((): void => {
+    document.documentElement.style.setProperty('--sui-focus-ring-color', 'rgb(180, 20, 40)');
+    document.documentElement.style.setProperty('--sui-focus-ring-width', '3px');
+    document.documentElement.style.setProperty('--sui-focus-ring-offset', '4px');
+  });
+
+  await expect(trigger).toHaveCSS('outline-color', 'rgb(180, 20, 40)');
+  await expect(trigger).toHaveCSS('outline-width', '3px');
+  await expect(trigger).toHaveCSS('outline-offset', '4px');
+});
+
 test('Accordion moves focus between triggers and keeps one item expanded', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/accordion');
   const shipping: Locator = page.getByRole('button', { name: 'When will my order arrive?' });

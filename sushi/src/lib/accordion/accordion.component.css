@@ -83,6 +83,8 @@
 
 .sui-accordion__trigger:focus-visible {
   z-index: 1;
+  outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
+  outline-offset: var(--sui-focus-ring-offset);
 }
 
 .sui-accordion__indicator {
