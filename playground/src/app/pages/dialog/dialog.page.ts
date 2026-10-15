@@ -7,6 +7,9 @@ import { DialogAdvancedExample } from './examples/advanced/advanced.example';
 import * as advancedCss from './examples/advanced/advanced.example.css' with { loader: 'text' };
 import advancedHtml from './examples/advanced/advanced.example.html';
 import * as advancedTs from './examples/advanced/advanced.example.ts' with { loader: 'text' };
+import { DialogContentResizeExample } from './examples/content-resize/content-resize.example';
+import contentResizeHtml from './examples/content-resize/content-resize.example.html';
+import * as contentResizeTs from './examples/content-resize/content-resize.example.ts' with { loader: 'text' };
 import { DialogBasicExample } from './examples/basic/basic.example';
 import { DialogCoordinatesExample } from './examples/coordinates/coordinates.example';
 import coordinatesHtml from './examples/coordinates/coordinates.example.html';
@@ -27,6 +30,7 @@ import * as dynamicTs from './examples/dynamic/dynamic.example.ts' with { loader
     Badge,
     DialogAdvancedExample,
     DialogBasicExample,
+    DialogContentResizeExample,
     DialogCoordinatesExample,
     DialogDynamicExample,
     DialogFormExample,
@@ -37,8 +41,11 @@ import * as dynamicTs from './examples/dynamic/dynamic.example.ts' with { loader
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogPage {
-  protected readonly examples: Readonly<Record<'advanced' | 'basic' | 'coordinates' | 'dynamic' | 'form', ExampleSource>> = {
+  protected readonly examples: Readonly<
+    Record<'advanced' | 'basic' | 'coordinates' | 'contentResize' | 'dynamic' | 'form', ExampleSource>
+  > = {
     basic: { html: basicHtml, typescript: textSource(basicTs) },
+    contentResize: { html: contentResizeHtml, typescript: textSource(contentResizeTs) },
     coordinates: { html: coordinatesHtml, typescript: textSource(coordinatesTs) },
     advanced: { css: textSource(advancedCss), html: advancedHtml, typescript: textSource(advancedTs) },
     form: { css: textSource(formCss), html: formHtml, typescript: textSource(formTs) },

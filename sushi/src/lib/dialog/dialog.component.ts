@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import {
   afterRenderEffect,
+  afterNextRender,
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
@@ -94,6 +95,8 @@ export class Dialog {
   });
   /** Enables native pointer resizing from the bottom-right corner. */
   public readonly resizable: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+  /** Recenters a center-positioned Dialog after content size changes. Defaults to false. Dragging or native resizing suspends automatic centering until reopening or reposition(). */
+  public readonly recenterOnResize: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Optional Dialog and backdrop fade. CSS tokens configure timing; reduced motion disables it. */
   public readonly motion: InputSignal<DialogMotion> = input<DialogMotion>('none');
   /** Emits after the native Dialog closes, including any configured exit motion. */
@@ -110,7 +113,10 @@ export class Dialog {
   });
   private readonly document: Document = inject(DOCUMENT);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
-  private dragEnded: Subscription | null = null;
+  private dragSubscription: Subscription | null = null;
+  private userPositioned: boolean = false;
+  private nativeSize: Readonly<{ width: string; height: string }> | null = null;
+  private observedSize: Readonly<{ width: number; height: number }> | null = null;
   private closeReason: DialogCloseReason = 'programmatic';
   private readonly drag: Signal<CdkDrag> = viewChild.required(CdkDrag);
   private restoreTarget: HTMLElement | null = null;
@@ -123,13 +129,21 @@ export class Dialog {
         const drag: CdkDrag = this.drag();
         drag.disabled = !this.draggable();
         drag.boundaryElement = this.constrainToViewport() ? this.document.documentElement : '';
-        if (!this.dragEnded) {
-          this.dragEnded = drag.ended.subscribe((): void => this.updateResizeBounds());
-          this.destroyRef.onDestroy((): void => this.dragEnded?.unsubscribe());
-        }
+        this.connectDrag(drag);
         this.syncOpenState();
       },
     });
+    afterNextRender((): void => this.observeSize());
+  }
+
+  /** Reapplies the configured position to an open Dialog and resets its drag offset, without reopening or changing focus. Does nothing while closed or closing. */
+  public reposition(): void {
+    if (!this.element().nativeElement.open || this.pendingClose) return;
+    this.userPositioned = false;
+    this.rememberNativeSize();
+    this.applyPosition();
+    this.constrainPosition();
+    this.updateResizeBounds();
   }
 
   /** Opens the Dialog and remembers where focus should return. */
@@ -209,6 +223,62 @@ export class Dialog {
     this.updateResizeBounds();
   }
 
+  private connectDrag(drag: CdkDrag): void {
+    if (this.dragSubscription) return;
+    this.dragSubscription = new Subscription();
+    this.dragSubscription.add(
+      drag.started.subscribe((): void => {
+        this.userPositioned = true;
+      }),
+    );
+    this.dragSubscription.add(drag.ended.subscribe((): void => this.updateResizeBounds()));
+    this.destroyRef.onDestroy(() => this.dragSubscription?.unsubscribe());
+  }
+
+  private observeSize(): void {
+    if (typeof ResizeObserver === 'undefined') return;
+    const dialog: HTMLDialogElement = this.element().nativeElement;
+    const viewport: Window | null = dialog.ownerDocument.defaultView;
+    if (!viewport) return;
+    let frame: number | null = null;
+    const observer: ResizeObserver = new ResizeObserver((): void => {
+      if (frame !== null) return;
+      frame = viewport.requestAnimationFrame((): void => {
+        frame = null;
+        this.handleContentResize();
+      });
+    });
+    observer.observe(dialog);
+    this.destroyRef.onDestroy((): void => {
+      observer.disconnect();
+      if (frame !== null) viewport.cancelAnimationFrame(frame);
+    });
+  }
+
+  private handleContentResize(): void {
+    const dialog: HTMLDialogElement = this.element().nativeElement;
+    if (!this.recenterOnResize() || !dialog.open || this.pendingClose) return;
+    const bounds: DOMRect = dialog.getBoundingClientRect();
+    if (bounds.width === this.observedSize?.width && bounds.height === this.observedSize.height) return;
+    this.observedSize = { width: bounds.width, height: bounds.height };
+    if (this.hasNativeSizeChanged()) this.userPositioned = true;
+    if (this.recenterOnResize() && this.position() === 'center' && !this.userPositioned) {
+      this.applyPosition();
+    }
+    this.updateResizeBounds();
+  }
+
+  private hasNativeSizeChanged(): boolean {
+    if (!this.resizable() || !this.nativeSize) return false;
+    const style: CSSStyleDeclaration = this.element().nativeElement.style;
+    return style.width !== this.nativeSize.width || style.height !== this.nativeSize.height;
+  }
+
+  private rememberNativeSize(): void {
+    const style: CSSStyleDeclaration = this.element().nativeElement.style;
+    this.nativeSize = { width: style.width, height: style.height };
+  }
+
   private activeElement(): HTMLElement | null {
     const activeElement: Element | null = this.element().nativeElement.ownerDocument.activeElement;
     return activeElement instanceof HTMLElement ? activeElement : null;
@@ -238,10 +308,13 @@ export class Dialog {
     const position: DialogPosition = this.position();
     if (this.open() && this.pendingClose) this.cancelClosing();
     if (this.open() === dialog.open) {
-      if (dialog.open && position !== this.appliedPosition) this.applyPosition();
+      if (dialog.open && position !== this.appliedPosition) this.reposition();
       return;
     }
     if (this.open()) {
+      this.userPositioned = false;
+      this.rememberNativeSize();
+      this.observedSize = null;
       this.restoreTarget ??= this.activeElement();
       if (this.modal()) dialog.showModal();
       else dialog.show();

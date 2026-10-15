@@ -36,6 +36,7 @@ export default defineConfig({
         '**/responsive-layout.spec.ts',
         '**/mobile-overlay.spec.ts',
         '**/dialog-position.spec.ts',
+        '**/dialog-content-resize.spec.ts',
         '**/select-dialog.spec.ts',
       ],
       use: { ...devices['iPhone 13'] },
