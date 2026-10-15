@@ -52,11 +52,11 @@ export class SelectClearIconTemplate {}
 @Directive({ selector: 'ng-template[suiSelectCheckmarkIcon]' })
 export class SelectCheckmarkIconTemplate {}
 
-/** Adds content above the option list. */
+/** Adds focusable or static content above the option list. Interactive popup content supports Tab; Escape closes and restores control focus. */
 @Directive({ selector: 'ng-template[suiSelectHeader]' })
 export class SelectHeaderTemplate {}
 
-/** Adds content below the option list. */
+/** Adds focusable or static content below the option list. Escape closes the popup and restores control focus. */
 @Directive({ selector: 'ng-template[suiSelectFooter]' })
 export class SelectFooterTemplate {}
 

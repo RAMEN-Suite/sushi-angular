@@ -67,3 +67,27 @@ test('Escape dismisses the Select popup before the enclosing modal', async ({ pa
 
   await expect(dialog).toBeHidden();
 });
+
+test('Select search stays interactive in a modal and Escape closes only the popup', async ({
+  page,
+}: {
+  page: Page;
+}): Promise<void> => {
+  const dialog: Locator = page.getByRole('dialog', { name: 'Table reservation' });
+  const select: Locator = dialog.getByRole('combobox', { name: 'Confirmation language' });
+
+  await dialog.getByRole('checkbox', { name: 'Search languages' }).check();
+  await select.click();
+
+  const search: Locator = page.getByRole('searchbox', { name: 'Filter languages' });
+  await search.fill('Deutsch');
+
+  await expect(search).toBeFocused();
+  await expect(page.getByRole('option')).toHaveCount(1);
+
+  await search.press('Escape');
+
+  await expect(search).toBeHidden();
+  await expect(dialog).toBeVisible();
+  await expect(select).toBeFocused();
+});

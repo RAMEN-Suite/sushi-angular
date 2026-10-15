@@ -44,6 +44,7 @@ import {
 export class DialogFormExample {
   protected readonly open: WritableSignal<boolean> = signal<boolean>(false);
   protected readonly result: WritableSignal<string> = signal<string>('Not submitted');
+  protected readonly searchLanguages: WritableSignal<boolean> = signal(false);
   protected readonly language: WritableSignal<SelectModelValue> = signal<SelectModelValue>('en');
   protected readonly languages: readonly SelectOption[] = [
     { label: 'English', value: 'en' },

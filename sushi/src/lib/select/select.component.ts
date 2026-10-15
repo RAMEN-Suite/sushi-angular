@@ -6,6 +6,7 @@ import {
   Component,
   computed,
   contentChild,
+  ElementRef,
   input,
   InputSignal,
   InputSignalWithTransform,
@@ -26,7 +27,13 @@ import { Listbox, Option } from '@angular/aria/listbox';
 import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { LucideCheck, LucideChevronDown, LucideX } from '@lucide/angular';
 import { FormControlSeverity, FormControlSize, FormControlState } from '../form-control';
-import { compareSelectionValues, selectionOverlayPositions, SELECTION_ABOVE, SELECTION_BELOW } from '../selection';
+import {
+  compareSelectionValues,
+  filterSelectionOption,
+  selectionOverlayPositions,
+  SELECTION_ABOVE,
+  SELECTION_BELOW,
+} from '../selection';
 import { Spinner } from '../spinner';
 import {
   SelectCompareWith,
@@ -85,6 +92,16 @@ export class Select extends FormControlState implements FormValueControl<SelectM
 
   /** Text shown while no option is selected. */
   public readonly placeholder: InputSignal<string> = input<string>('Select an option');
+
+  /** Shows a search field in the popup. Defaults to false; filtering never changes the selected value. */
+  public readonly filter: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+  /** Placeholder for the optional search field. */
+  public readonly filterPlaceholder: InputSignal<string> = input<string>('Filter options');
+  /** Accessible name of the optional search field. */
+  public readonly filterLabel: InputSignal<string> = input<string>('Filter options');
+  /** Message displayed when the search matches no options. */
+  public readonly emptyFilterMessage: InputSignal<string> = input<string>('No matching options');
+
   /** Message shown when no options are available. */
   public readonly emptyMessage: InputSignal<string> = input<string>('No options available');
   /** Message shown while options are loading. */
@@ -170,6 +187,17 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   protected readonly listbox: Signal<Listbox<SelectValue> | undefined> = viewChild(Listbox);
 
   protected readonly expanded: WritableSignal<boolean> = signal(false);
+  protected readonly filterInput: Signal<ElementRef<HTMLInputElement> | undefined> = viewChild('filterInput');
+
+  protected readonly filterQuery: WritableSignal<string> = signal('');
+
+  protected readonly visibleOptions: Signal<readonly SelectOption[]> = computed(() =>
+    this.options().filter((option: SelectOption): boolean => filterSelectionOption(option, this.filterQuery())),
+  );
+
+  protected readonly interactivePopup: Signal<boolean> = computed(
+    () => this.filter() || Boolean(this.headerTemplate()) || Boolean(this.footerTemplate()),
+  );
 
   protected readonly selectedOption: Signal<SelectOption | undefined> = computed(() => {
     const value: SelectModelValue = this.value();
@@ -187,15 +215,24 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   });
   protected readonly positions: WritableSignal<ConnectedPosition[]> = signal([SELECTION_BELOW, SELECTION_ABOVE]);
 
+  private readonly focusFilter: WritableSignal<boolean> = signal(false);
   private readonly centerSelected: WritableSignal<boolean> = signal(false);
 
   public constructor() {
     super();
+
     afterRenderEffect({
       write: () => {
         if (!this.expanded()) return;
+
+        if (this.focusFilter() && this.filterInput()) {
+          this.focusFilter.set(false);
+          this.filterInput()?.nativeElement.focus();
+        }
+
         const listbox: Listbox<SelectValue> | undefined = this.listbox();
         if (!listbox?.activeDescendant()) return;
+
         const center: boolean = this.centerSelected();
         listbox.scrollActiveItemIntoView({ block: center ? 'center' : 'nearest' });
         if (center) this.centerSelected.set(false);
@@ -206,6 +243,7 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   /** Moves focus to the combobox. */
   public focus(): void {
     if (this.disabled()) return;
+
     this.combobox().element.focus();
   }
 
@@ -213,24 +251,61 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   public reset(): void {
     this.value.set(null);
     this.expanded.set(false);
+    this.filterQuery.set('');
   }
 
   protected handleExpanded(expanded: boolean): void {
     if (expanded && (this.disabled() || this.loading())) return;
     if (this.expanded() === expanded) return;
+
     if (expanded) {
+      this.filterQuery.set('');
+      this.focusFilter.set(this.filter());
       this.preferAvailableSpace();
       this.centerSelected.set(Boolean(this.selectedOption()));
     }
+
     this.expanded.set(expanded);
     if (expanded) return;
+
     this.touch.emit();
+  }
+
+  protected handleFilter(event: Event): void {
+    if (!(event.target instanceof HTMLInputElement) || this.disabled() || this.loading()) return;
+
+    this.filterQuery.set(event.target.value);
+  }
+
+  protected handlePopupKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+
+      this.handleExpanded(false);
+      this.focus();
+      return;
+    }
+
+    const fromFilter: boolean = event.target === this.filterInput()?.nativeElement;
+    const fromRelay: boolean = event.target === event.currentTarget;
+    if (!fromRelay && (!fromFilter || !['ArrowDown', 'ArrowUp', 'Enter'].includes(event.key))) return;
+
+    const listbox: Listbox<SelectValue> | undefined = this.listbox();
+    if (!listbox) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    listbox.element.dispatchEvent(new KeyboardEvent('keydown', event));
   }
 
   protected handleSelection(values: SelectValue[]): void {
     if (this.disabled() || this.loading()) return;
+
     const value: SelectValue | undefined = values.at(0);
-    if (value !== undefined) this.value.set(value);
+    if (value === undefined) return;
+
+    this.value.set(value);
     this.handleExpanded(false);
     this.focus();
   }
@@ -257,7 +332,9 @@ export class Select extends FormControlState implements FormValueControl<SelectM
     const optionHeight: number = this.options().length
       ? Math.min(this.scrollHeight(), this.options().length * this.optionHeight() + 8)
       : 56;
-    const panelHeight: number = optionHeight + (this.headerTemplate() ? 52 : 0) + (this.footerTemplate() ? 52 : 0);
+    const panelHeight: number =
+      optionHeight + (this.filter() ? 60 : 0) + (this.headerTemplate() ? 52 : 0) + (this.footerTemplate() ? 52 : 0);
+
     this.positions.set(selectionOverlayPositions(this.combobox().element, panelHeight));
   }
 }
