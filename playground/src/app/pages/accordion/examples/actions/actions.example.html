@@ -4,14 +4,14 @@
       <button
         suiButton
         type="button"
-        size="sm"
+        size="xs"
         severity="neutral"
         variant="text"
         shape="square"
         [attr.aria-label]="'Add to ' + item.label"
         [disabled]="item.disabled"
         (click)="add(item)">
-        <svg lucidePlus aria-hidden="true"></svg>
+        <svg lucidePlus class="size-4" aria-hidden="true"></svg>
       </button>
     </ng-template>
     <ng-template suiAccordionItem value="bowls" label="Bowls">

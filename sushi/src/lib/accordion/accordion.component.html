@@ -43,11 +43,12 @@
               @if (indicatorTemplate(); as indicator) {
                 <ng-container [ngTemplateOutlet]="indicator" [ngTemplateOutletContext]="context" />
               } @else {
-                <svg lucideChevronDown class="size-4" [class.rotate-180]="context.expanded"></svg>
+                <svg lucideChevronDown [class]="context.expanded ? 'size-4 rotate-180' : 'size-4'"></svg>
               }
             </span>
           </button>
         </h3>
+
         @if (actionsTemplate(); as actions) {
           <div class="sui-accordion__actions" role="group" [attr.aria-label]="item.label()" (keydown)="handleContentKeydown($event)">
             <ng-container [ngTemplateOutlet]="actions" [ngTemplateOutletContext]="context" />

@@ -25,6 +25,7 @@ export class AccordionActionsExample {
       ...entries,
       [item.value]: entries[item.value] + 1,
     }));
+
     this.message.set(`Added an entry to ${item.label}.`);
   }
 }
