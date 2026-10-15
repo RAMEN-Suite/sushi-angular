@@ -58,7 +58,7 @@
           class="h-auto min-h-0 w-8 flex-1 px-0"
           [disabled]="disabled()"
           [tabIndex]="disabled() ? -1 : null"
-          aria-label="Increase"
+          [attr.aria-label]="incrementLabel()"
           (click)="handleStep(1)"
         >
           <svg lucideChevronUp class="size-3" aria-hidden="true"></svg>
@@ -73,7 +73,7 @@
           class="h-auto min-h-0 w-8 flex-1 px-0"
           [disabled]="disabled()"
           [tabIndex]="disabled() ? -1 : null"
-          aria-label="Decrease"
+          [attr.aria-label]="decrementLabel()"
           (click)="handleStep(-1)"
         >
           <svg lucideChevronDown class="size-3" aria-hidden="true"></svg>

@@ -16,6 +16,8 @@ import { InputNumberButtonsTemplate } from '../input-number.templates';
       prefix="~"
       suffix="net"
       showButtons
+      [incrementLabel]="incrementLabel()"
+      [decrementLabel]="decrementLabel()"
       [disabled]="disabled()"
       [invalid]="invalid()"
       [max]="12"
@@ -31,6 +33,8 @@ class InputNumberHost {
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly invalid: WritableSignal<boolean> = signal<boolean>(false);
   public readonly value: WritableSignal<number | null> = signal<number | null>(8);
+  public readonly incrementLabel: WritableSignal<string> = signal('Increase');
+  public readonly decrementLabel: WritableSignal<string> = signal('Decrease');
   public touches: number = 0;
 }
 
@@ -103,6 +107,36 @@ describe('InputNumber reset', (): void => {
 
     expect(fixture.componentInstance.value()).toBe(8);
     expect(input.value).toContain('€');
+  });
+});
+
+describe('InputNumber button labels', (): void => {
+  it('localizes the default step buttons and updates their accessible names', (): void => {
+    const fixture: ComponentFixture<InputNumberHost> = render(InputNumberHost);
+    const buttons: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
+
+    expect(buttons.map((button: HTMLButtonElement): string | null => button.getAttribute('aria-label'))).toEqual([
+      'Increase',
+      'Decrease',
+    ]);
+
+    fixture.componentInstance.incrementLabel.set('Erhöhen');
+    fixture.componentInstance.decrementLabel.set('Verringern');
+    fixture.detectChanges();
+
+    expect(buttons.map((button: HTMLButtonElement): string | null => button.getAttribute('aria-label'))).toEqual([
+      'Erhöhen',
+      'Verringern',
+    ]);
+
+    fixture.componentInstance.incrementLabel.set('Aumenta');
+    fixture.componentInstance.decrementLabel.set('Diminuisci');
+    fixture.detectChanges();
+    buttons[0].click();
+
+    expect(buttons[0].getAttribute('aria-label')).toBe('Aumenta');
+    expect(buttons[1].getAttribute('aria-label')).toBe('Diminuisci');
+    expect(fixture.componentInstance.value()).toBe(10);
   });
 });
 
