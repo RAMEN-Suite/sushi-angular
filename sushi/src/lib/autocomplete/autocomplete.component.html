@@ -46,9 +46,10 @@
     [attr.aria-invalid]="isInvalid() || null"
     [attr.aria-busy]="loading() || null"
     (input)="handleInput($event)"
+    (focus)="handleFocus()"
+    (click)="handleClick()"
     (blur)="handleBlur()"
     (expandedChange)="handleExpanded($event)"
-    (keydown.escape)="handleEscape($event)"
   />
   @if (loading()) {
     <span suiSpinner size="sm" class="shrink-0"></span>
@@ -60,6 +61,7 @@
 
 <ng-template
   cdkConnectedOverlay
+  cdkConnectedOverlayUsePopover="inline"
   [cdkConnectedOverlayOrigin]="origin"
   [cdkConnectedOverlayOpen]="expanded() && !disabled()"
   [cdkConnectedOverlayHasBackdrop]="true"

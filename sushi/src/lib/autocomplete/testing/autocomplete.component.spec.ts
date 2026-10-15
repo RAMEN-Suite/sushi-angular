@@ -129,7 +129,7 @@ describe('Autocomplete constraints', (): void => {
     expect(fixture.componentInstance.touches).toBe(1);
   });
 
-  it('restores an empty valid value when force selection closes', (): void => {
+  it('restores the previous selection when force selection editing is cancelled', (): void => {
     const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
     fixture.componentInstance.forceSelection.set(true);
     fixture.detectChanges();
@@ -137,8 +137,8 @@ describe('Autocomplete constraints', (): void => {
     press(input, 'Escape');
     fixture.detectChanges();
 
-    expect(fixture.componentInstance.value()).toBeNull();
-    expect(input.value).toBe('');
+    expect(fixture.componentInstance.value()).toBe('shoyu');
+    expect(input.value).toBe('Shoyu');
     expect(fixture.componentInstance.touches).toBe(1);
   });
 
@@ -185,5 +185,70 @@ describe('Autocomplete templates', (): void => {
     await fixture.whenStable();
 
     expect(document.querySelector('[data-empty]')?.textContent).toContain('none');
+  });
+});
+
+describe('Autocomplete public popup methods', (): void => {
+  it('shows all suggestions without clearing selection and can close explicitly', async (): Promise<void> => {
+    const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
+    fixture.componentInstance.control().show();
+    await fixture.whenStable();
+
+    expect(document.querySelectorAll('[role="option"]')).toHaveLength(3);
+    expect(query(fixture, 'input').value).toBe('Shoyu');
+    expect(fixture.componentInstance.queries).toEqual(['']);
+    expect(fixture.componentInstance.value()).toBe('shoyu');
+
+    fixture.componentInstance.control().hide();
+    await fixture.whenStable();
+
+    expect(document.querySelector('[role="listbox"]')).toBeNull();
+  });
+
+  it('does not open or request options when disabled or loading', (): void => {
+    const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
+    fixture.componentInstance.disabled.set(true);
+    fixture.detectChanges();
+    fixture.componentInstance.control().show();
+    fixture.componentInstance.disabled.set(false);
+    fixture.componentInstance.loading.set(true);
+    fixture.detectChanges();
+    fixture.componentInstance.control().show();
+
+    expect(fixture.componentInstance.queries).toEqual([]);
+    expect(document.querySelector('[role="listbox"]')).toBeNull();
+  });
+});
+
+describe('Autocomplete cancelled edits', (): void => {
+  it('cancels a delayed query without reopening after Escape', (): void => {
+    vi.useFakeTimers();
+    const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
+    fixture.componentInstance.delay.set(300);
+    fixture.detectChanges();
+    const input: HTMLInputElement = enter(fixture, 'Miso');
+    press(input, 'Escape');
+    fixture.detectChanges();
+    vi.advanceTimersByTime(300);
+
+    expect(fixture.componentInstance.value()).toBe('shoyu');
+    expect(input.value).toBe('Shoyu');
+    expect(fixture.componentInstance.queries).toEqual([]);
+    expect(document.querySelector('[role="listbox"]')).toBeNull();
+  });
+});
+
+describe('Autocomplete keyboard opening', (): void => {
+  it('opens every option and requests an empty query without filtering by the selected label', async (): Promise<void> => {
+    const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
+    const input: HTMLInputElement = query(fixture, 'input');
+    input.focus();
+    press(input, 'ArrowDown');
+    await fixture.whenStable();
+
+    expect(input.value).toBe('Shoyu');
+    expect(document.querySelectorAll('[role="option"]')).toHaveLength(3);
+    expect(fixture.componentInstance.queries).toEqual(['']);
+    expect(fixture.componentInstance.value()).toBe('shoyu');
   });
 });

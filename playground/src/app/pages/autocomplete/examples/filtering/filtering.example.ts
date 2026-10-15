@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@ang
 import { LucideMapPin } from '@lucide/angular';
 import {
   Autocomplete,
+  Button,
   AutocompleteCompareWith,
   AutocompleteEmptyTemplate,
   AutocompleteFilter,
@@ -22,7 +23,15 @@ interface DestinationOption extends AutocompleteOption {
 
 @Component({
   selector: 'pg-autocomplete-filtering-example',
-  imports: [Autocomplete, AutocompleteEmptyTemplate, AutocompleteItemTemplate, AutocompletePrefixTemplate, Label, LucideMapPin],
+  imports: [
+    Button,
+    Autocomplete,
+    AutocompleteEmptyTemplate,
+    AutocompleteItemTemplate,
+    AutocompletePrefixTemplate,
+    Label,
+    LucideMapPin,
+  ],
   templateUrl: './filtering.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

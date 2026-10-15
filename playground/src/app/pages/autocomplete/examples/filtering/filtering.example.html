@@ -2,6 +2,11 @@
   <label suiLabel for="autocomplete-destination">Destination</label>
   <sui-autocomplete
     fluid
+    forceSelection
+    openOnFocus
+    openOnClick
+    [delay]="0"
+    #destination
     id="autocomplete-destination"
     [options]="cities"
     [compareWith]="compareDestinations"
@@ -20,4 +25,7 @@
     </ng-template>
     <ng-template suiAutocompleteEmpty let-query="query">No destinations match “{{ query }}”.</ng-template>
   </sui-autocomplete>
+  <button suiButton type="button" severity="neutral" variant="soft" (click)="destination.show()">
+    Show destinations
+  </button>
 </div>
