@@ -5,19 +5,20 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  ErrorHandler,
   inject,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   NgZone,
   PLATFORM_ID,
 } from '@angular/core';
 import type PhotoSwipe from 'photoswipe';
 import type { SlideData } from 'photoswipe';
-import { GalleryImage } from '../gallery';
-import { LIGHTBOX_LOADER, LightboxLoader } from './internal/lightbox-loader.token';
+import { type GalleryImage } from '../gallery';
+import { LIGHTBOX_LOADER, type LightboxLoader } from './internal/lightbox-loader.token';
 
 /** Opens Gallery images in a zoomable, gesture-enabled full-screen viewer powered by PhotoSwipe. */
 @Component({ selector: 'sui-lightbox', exportAs: 'suiLightbox', template: '', changeDetection: ChangeDetectionStrategy.OnPush })
@@ -40,6 +41,7 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
   public readonly wheelToZoom: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private readonly errorHandler: ErrorHandler = inject(ErrorHandler);
   private readonly zone: NgZone = inject(NgZone);
   private readonly platformId: object = inject(PLATFORM_ID);
   private readonly loadViewer: LightboxLoader = inject(LIGHTBOX_LOADER);
@@ -79,19 +81,25 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
   private async launch(): Promise<void> {
     this.launching = true;
     this.restoreTarget = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const PhotoSwipeConstructor: typeof PhotoSwipe = await this.loadViewer();
-    if (!this.open() || this.destroyRef.destroyed) {
-      this.launching = false;
-      return;
-    }
+    try {
+      const PhotoSwipeConstructor: typeof PhotoSwipe = await this.loadViewer();
+      if (!this.open() || this.destroyRef.destroyed) return;
 
-    this.zone.runOutsideAngular((): void => {
-      const viewer: PhotoSwipe = this.createViewer(PhotoSwipeConstructor);
-      this.configureViewer(viewer);
-      this.instance = viewer;
+      this.zone.runOutsideAngular((): void => {
+        const viewer: PhotoSwipe = this.createViewer(PhotoSwipeConstructor);
+        this.configureViewer(viewer);
+        this.instance = viewer;
+        viewer.init();
+      });
+    } catch (error: unknown) {
+      if (this.destroyRef.destroyed) return;
+      this.open.set(false);
+      this.destroy();
+      this.restoreFocus();
+      this.errorHandler.handleError(error);
+    } finally {
       this.launching = false;
-      viewer.init();
-    });
+    }
   }
 
   private createViewer(PhotoSwipeConstructor: typeof PhotoSwipe): PhotoSwipe {
@@ -148,8 +156,8 @@ export class Lightbox<I extends GalleryImage = GalleryImage> {
       appendTo: 'root',
       onInit: (element: HTMLElement, pswp: PhotoSwipe): void => {
         const update: () => void = (): void => {
-          const image: I = images[pswp.currIndex];
-          element.textContent = grouped ? (image.caption ?? '') : (this.description() ?? image.caption ?? '');
+          const image: I | undefined = images[pswp.currIndex];
+          element.textContent = grouped ? (image?.caption ?? '') : (this.description() ?? image?.caption ?? '');
           element.hidden = element.textContent.length === 0;
         };
         pswp.on('change', update);

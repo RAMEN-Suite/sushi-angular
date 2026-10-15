@@ -1,5 +1,14 @@
-import { ApplicationRef, ComponentRef, createComponent, DOCUMENT, EnvironmentInjector, inject, Injectable } from '@angular/core';
-import { GalleryImage } from '../../gallery';
+import {
+  ApplicationRef,
+  type ComponentRef,
+  createComponent,
+  DOCUMENT,
+  DestroyRef,
+  EnvironmentInjector,
+  inject,
+  Injectable,
+} from '@angular/core';
+import { type GalleryImage } from '../../gallery';
 import { Lightbox } from '../lightbox.component';
 
 interface LightboxLaunchOptions {
@@ -15,7 +24,12 @@ export class LightboxLauncher {
   private readonly applicationRef: ApplicationRef = inject(ApplicationRef);
   private readonly environmentInjector: EnvironmentInjector = inject(EnvironmentInjector);
   private readonly document: Document = inject(DOCUMENT);
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
   private activeRef: ComponentRef<Lightbox> | null = null;
+
+  public constructor() {
+    this.destroyRef.onDestroy((): void => this.destroyActive());
+  }
 
   public show(image: GalleryImage, options: LightboxLaunchOptions): void {
     this.destroyActive();

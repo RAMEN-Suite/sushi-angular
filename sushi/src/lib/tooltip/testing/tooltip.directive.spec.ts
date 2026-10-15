@@ -1,5 +1,5 @@
-import { Component, DebugElement, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, type DebugElement, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { render } from '../../../../testing/test-utils';
@@ -78,5 +78,24 @@ describe('Tooltip', (): void => {
     target.injector.get(Tooltip).show();
 
     expect(document.querySelector('[role="tooltip"]')).toBeNull();
+  });
+});
+
+describe('Tooltip description ownership', (): void => {
+  it('preserves existing descriptions when hiding before opening or hiding repeatedly', (): void => {
+    const fixture: ComponentFixture<Host> = render(Host);
+    const target: DebugElement = fixture.debugElement.query(By.directive(Tooltip));
+    const tooltip: Tooltip = target.injector.get(Tooltip);
+    const button: HTMLButtonElement = target.nativeElement as HTMLButtonElement;
+    tooltip.hide();
+
+    expect(button.getAttribute('aria-describedby')).toBe('existing-description');
+
+    tooltip.show();
+    fixture.detectChanges();
+    tooltip.hide();
+    tooltip.hide();
+
+    expect(button.getAttribute('aria-describedby')).toBe('existing-description');
   });
 });

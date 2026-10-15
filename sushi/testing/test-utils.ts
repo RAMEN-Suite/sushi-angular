@@ -1,5 +1,5 @@
-import { Type } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type Type } from '@angular/core';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 
 /** Creates and initially renders a standalone test host. */
 export function render<T>(host: Type<T>): ComponentFixture<T> {
@@ -42,4 +42,11 @@ export function press(target: EventTarget, key: string, init: KeyboardEventInit 
   });
   target.dispatchEvent(event);
   return event;
+}
+
+/** Returns a fixture item or fails with its missing index instead of an unchecked assertion. */
+export function requireItem<T>(items: ArrayLike<T>, index: number): T {
+  const item: T | undefined = items[index];
+  if (item === undefined) throw new Error(`Expected a fixture item at index ${index}.`);
+  return item;
 }

@@ -1,10 +1,10 @@
-import { ApplicationRef } from '@angular/core';
+import { ApplicationRef, createEnvironmentInjector, EnvironmentInjector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type PhotoSwipe from 'photoswipe';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { GalleryImage } from '../../gallery';
+import { type GalleryImage } from '../../gallery';
 import { LightboxLauncher } from '../internal/lightbox-launcher.service';
-import { LIGHTBOX_LOADER, LightboxLoader } from '../internal/lightbox-loader.token';
+import { LIGHTBOX_LOADER, type LightboxLoader } from '../internal/lightbox-loader.token';
 
 class PhotoSwipeStub {
   public readonly element: HTMLElement = document.createElement('div');
@@ -52,5 +52,20 @@ describe('Lightbox launcher', (): void => {
 
     expect(document.querySelectorAll('sui-lightbox')).toHaveLength(1);
     expect(document.querySelector('sui-lightbox')).not.toBe(first);
+  });
+});
+
+describe('Lightbox launcher lifecycle', (): void => {
+  it('removes its dynamic host when the owning injector is destroyed', (): void => {
+    TestBed.configureTestingModule({ providers: [{ provide: LIGHTBOX_LOADER, useValue: loadViewer }] });
+    const injector: EnvironmentInjector = createEnvironmentInjector([LightboxLauncher], TestBed.inject(EnvironmentInjector));
+    const launcher: LightboxLauncher = injector.get(LightboxLauncher);
+    launcher.show(image, { zoom: true, wheelToZoom: false, ariaLabel: 'Menu image', description: null });
+
+    expect(document.querySelectorAll('sui-lightbox')).toHaveLength(1);
+
+    injector.destroy();
+
+    expect(document.querySelector('sui-lightbox')).toBeNull();
   });
 });

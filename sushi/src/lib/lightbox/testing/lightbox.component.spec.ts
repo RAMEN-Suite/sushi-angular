@@ -1,12 +1,12 @@
-import { Component, DebugElement, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, ErrorHandler, type DebugElement, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import type PhotoSwipe from 'photoswipe';
 import type { PhotoSwipeOptions } from 'photoswipe';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { render } from '../../../../testing/test-utils';
-import { GalleryImage } from '../../gallery';
-import { LIGHTBOX_LOADER, LightboxLoader } from '../internal/lightbox-loader.token';
+import { render, requireItem } from '../../../../testing/test-utils';
+import { type GalleryImage } from '../../gallery';
+import { LIGHTBOX_LOADER, type LightboxLoader } from '../internal/lightbox-loader.token';
 import { LightboxLauncher } from '../internal/lightbox-launcher.service';
 import { LightboxTrigger } from '../lightbox-trigger.directive';
 import { Lightbox } from '../lightbox.component';
@@ -21,7 +21,7 @@ class PhotoSwipeStub {
   public readonly options: PhotoSwipeOptions;
   public currIndex: number;
   public currSlide: undefined;
-  private readonly handlers: Map<ViewerEvent, () => void> = new Map<ViewerEvent, () => void>();
+  private readonly handlers: Map<ViewerEvent, () => void> = new Map();
 
   public constructor(options: PhotoSwipeOptions) {
     this.options = options;
@@ -66,7 +66,7 @@ const loadViewer: LightboxLoader = (): Promise<typeof PhotoSwipe> =>
 class Host {
   public readonly activeIndex: WritableSignal<number> = signal(1);
   public readonly open: WritableSignal<boolean> = signal(false);
-  public readonly images: readonly GalleryImage[] = [
+  public readonly images: readonly [GalleryImage, GalleryImage] = [
     { value: 'a', src: 'a.jpg', width: 800, height: 600, alt: 'A' },
     { value: 'b', src: 'b.jpg', width: 800, height: 600, alt: 'B' },
   ];
@@ -124,6 +124,41 @@ describe('Lightbox', (): void => {
   });
 });
 
+describe('Lightbox loading failures', (): void => {
+  it('reports a failed load, closes safely, and allows another opening attempt', async (): Promise<void> => {
+    const failure: Error = new Error('Viewer download failed');
+    const loader: ReturnType<typeof vi.fn<LightboxLoader>> = vi
+      .fn<LightboxLoader>()
+      .mockRejectedValueOnce(failure)
+      .mockImplementationOnce(loadViewer);
+    const handleError: ReturnType<typeof vi.fn> = vi.fn();
+    TestBed.overrideComponent(Host, {
+      set: {
+        providers: [
+          { provide: LIGHTBOX_LOADER, useValue: loader },
+          { provide: ErrorHandler, useValue: { handleError } },
+        ],
+      },
+    });
+    const fixture: ComponentFixture<Host> = render(Host);
+    const instance: Lightbox = fixture.debugElement.query(By.directive(Lightbox)).componentInstance as Lightbox;
+    instance.show();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(handleError).toHaveBeenCalledWith(failure);
+    expect(fixture.componentInstance.open()).toBe(false);
+    expect(PhotoSwipeStub.latest).toBeNull();
+
+    instance.show();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(PhotoSwipeStub.latest).not.toBeNull();
+    expect(fixture.componentInstance.open()).toBe(true);
+  });
+});
+
 describe('Lightbox focus management', (): void => {
   it('restores focus after the viewer is destroyed', async (): Promise<void> => {
     const fixture: ComponentFixture<Host> = render(Host);
@@ -151,7 +186,7 @@ describe('Lightbox trigger', (): void => {
 
     trigger.injector.get(LightboxTrigger).show();
 
-    const [source, options] = launcher.show.mock.calls[0] as [
+    const [source, options] = requireItem(launcher.show.mock.calls, 0) as [
       GalleryImage,
       { ariaLabel: string; zoom: boolean; wheelToZoom: boolean },
     ];

@@ -1,34 +1,34 @@
 import {
-  ConnectedOverlayPositionChange,
-  ConnectedPosition,
-  FlexibleConnectedPositionStrategy,
+  type ConnectedOverlayPositionChange,
+  type ConnectedPosition,
+  type FlexibleConnectedPositionStrategy,
   Overlay,
   OverlayPositionBuilder,
-  OverlayRef,
+  type OverlayRef,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
   booleanAttribute,
-  ComponentRef,
+  type ComponentRef,
   DestroyRef,
   Directive,
   ElementRef,
   inject,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   numberAttribute,
 } from '@angular/core';
 import { TooltipSurface } from './internal/tooltip-surface.component';
-import { TooltipPlacement } from './tooltip.interfaces';
+import { type TooltipPlacement } from './tooltip.interfaces';
 
 let nextTooltipId: number = 0;
 
-const POSITIONS: Record<TooltipPlacement, ConnectedPosition[]> = {
-  top: [{ originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetY: -1 }],
-  right: [{ originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: 1 }],
-  bottom: [{ originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetY: 1 }],
-  left: [{ originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: -1 }],
+const POSITIONS: Record<TooltipPlacement, ConnectedPosition> = {
+  top: { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetY: -1 },
+  right: { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: 1 },
+  bottom: { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetY: 1 },
+  left: { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: -1 },
 };
 
 const PLACEMENTS: readonly TooltipPlacement[] = ['top', 'right', 'bottom', 'left'];
@@ -41,7 +41,7 @@ function resolvePlacement(position: ConnectedPosition): TooltipPlacement {
 }
 
 function createPosition(placement: TooltipPlacement, offset: number): ConnectedPosition {
-  const position: ConnectedPosition = POSITIONS[placement][0];
+  const position: ConnectedPosition = POSITIONS[placement];
   return {
     ...position,
     offsetX: position.offsetX ? Math.sign(position.offsetX) * offset : undefined,
@@ -86,7 +86,7 @@ export class Tooltip {
   private resolvedPlacement: TooltipPlacement = 'top';
   private showTimer: ReturnType<typeof setTimeout> | null = null;
   private hideTimer: ReturnType<typeof setTimeout> | null = null;
-  private previousDescription: string | null = null;
+  private previousDescription: string | null | undefined;
 
   public constructor() {
     this.destroyRef.onDestroy((): void => this.destroy());
@@ -158,10 +158,12 @@ export class Tooltip {
   }
 
   private restoreDescription(): void {
+    if (this.previousDescription === undefined) return;
+
     const target: HTMLElement = this.element.nativeElement;
-    if (this.previousDescription) target.setAttribute('aria-describedby', this.previousDescription);
-    else target.removeAttribute('aria-describedby');
-    this.previousDescription = null;
+    if (this.previousDescription === null) target.removeAttribute('aria-describedby');
+    else target.setAttribute('aria-describedby', this.previousDescription);
+    this.previousDescription = undefined;
   }
 
   private clearTimers(): void {
