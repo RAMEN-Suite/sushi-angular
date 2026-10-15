@@ -1,0 +1,28 @@
+<button suiButton type="button" [suiDialogTrigger]="details">Open adaptive dialog</button>
+<sui-dialog #details="suiDialog" draggable resizable ariaLabelledby="adaptive-title">
+  <header suiDialogHeader><h2 id="adaptive-title">Adaptive details</h2></header>
+  <div suiDialogBody class="grid gap-4">
+    <p>Change the content, then use Reposition dialog to center it again. Your inputs and chosen size stay intact.</p>
+    <button suiButton type="button" (click)="detailed.set(!detailed())">
+      {{ detailed() ? 'Show short summary' : 'Show detailed form' }}
+    </button>
+    @if (detailed()) {
+      <label suiLabel class="grid gap-2">
+        Name
+        <input suiInput fluid />
+      </label>
+      <label suiLabel class="grid gap-2">
+        Description
+        <input suiInput fluid />
+      </label>
+      <label suiLabel class="grid gap-2">
+        Category
+        <input suiInput fluid />
+      </label>
+    }
+  </div>
+  <div suiDialogFooter>
+    <button suiButton type="button" severity="neutral" (click)="details.reposition()">Reposition dialog</button>
+    <button suiButton type="button" [suiDialogClose]="details">Done</button>
+  </div>
+</sui-dialog>

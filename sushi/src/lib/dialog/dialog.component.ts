@@ -110,7 +110,7 @@ export class Dialog {
   });
   private readonly document: Document = inject(DOCUMENT);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
-  private dragEnded: Subscription | null = null;
+  private dragSubscription: Subscription | null = null;
   private closeReason: DialogCloseReason = 'programmatic';
   private readonly drag: Signal<CdkDrag> = viewChild.required(CdkDrag);
   private restoreTarget: HTMLElement | null = null;
@@ -123,13 +123,19 @@ export class Dialog {
         const drag: CdkDrag = this.drag();
         drag.disabled = !this.draggable();
         drag.boundaryElement = this.constrainToViewport() ? this.document.documentElement : '';
-        if (!this.dragEnded) {
-          this.dragEnded = drag.ended.subscribe((): void => this.updateResizeBounds());
-          this.destroyRef.onDestroy((): void => this.dragEnded?.unsubscribe());
-        }
+        this.connectDrag(drag);
         this.syncOpenState();
       },
     });
+  }
+
+  /** Reapplies the configured position to an open Dialog and resets its drag offset, without reopening or changing focus. Does nothing while closed or closing. */
+  public reposition(): void {
+    if (!this.element().nativeElement.open || this.pendingClose) return;
+
+    this.applyPosition();
+    this.constrainPosition();
+    this.updateResizeBounds();
   }
 
   /** Opens the Dialog and remembers where focus should return. */
@@ -209,6 +215,12 @@ export class Dialog {
     this.updateResizeBounds();
   }
 
+  private connectDrag(drag: CdkDrag): void {
+    if (this.dragSubscription) return;
+    this.dragSubscription = drag.ended.subscribe((): void => this.updateResizeBounds());
+    this.destroyRef.onDestroy(() => this.dragSubscription?.unsubscribe());
+  }
+
   private activeElement(): HTMLElement | null {
     const activeElement: Element | null = this.element().nativeElement.ownerDocument.activeElement;
     return activeElement instanceof HTMLElement ? activeElement : null;
@@ -236,11 +248,13 @@ export class Dialog {
   private syncOpenState(): void {
     const dialog: HTMLDialogElement = this.element().nativeElement;
     const position: DialogPosition = this.position();
+
     if (this.open() && this.pendingClose) this.cancelClosing();
     if (this.open() === dialog.open) {
-      if (dialog.open && position !== this.appliedPosition) this.applyPosition();
+      if (dialog.open && position !== this.appliedPosition) this.reposition();
       return;
     }
+
     if (this.open()) {
       this.restoreTarget ??= this.activeElement();
       if (this.modal()) dialog.showModal();
@@ -255,6 +269,7 @@ export class Dialog {
     this.drag().reset();
     this.resetPosition();
     const position: DialogPosition = this.position();
+
     if (typeof position !== 'string') {
       const style: CSSStyleDeclaration = this.element().nativeElement.style;
       style.inset = 'auto';
@@ -264,6 +279,7 @@ export class Dialog {
         if (value !== undefined) style[edge] = typeof value === 'number' ? `${value}px` : value;
       }
     }
+
     this.lockPosition();
     this.appliedPosition = position;
   }
@@ -293,6 +309,7 @@ export class Dialog {
     const dialog: HTMLDialogElement = this.element().nativeElement;
     const viewport: Window | null = dialog.ownerDocument.defaultView;
     if (!viewport) return;
+
     const bounds: DOMRect = dialog.getBoundingClientRect();
     dialog.style.maxWidth = `max(0px, calc(100vw - ${bounds.left}px - var(--sui-dialog-viewport-gap)))`;
     dialog.style.maxHeight = `max(0px, calc(100dvh - ${bounds.top}px - var(--sui-dialog-viewport-gap)))`;
@@ -303,6 +320,7 @@ export class Dialog {
     const dialog: HTMLDialogElement = this.element().nativeElement;
     const viewport: Window | null = dialog.ownerDocument.defaultView;
     if (!viewport) return;
+
     const bounds: DOMRect = dialog.getBoundingClientRect();
     const offset: Readonly<{ x: number; y: number }> = this.drag().getFreeDragPosition();
     const left: number = Math.max(0, Math.min(bounds.left, viewport.innerWidth - bounds.width));
