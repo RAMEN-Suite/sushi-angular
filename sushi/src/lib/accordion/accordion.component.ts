@@ -22,7 +22,7 @@ import {
 import { LucideChevronDown } from '@lucide/angular';
 import { AccordionItem } from './accordion-item.directive';
 import { AccordionItemContext, AccordionItemData, AccordionSize, AccordionValue, AccordionVariant } from './accordion.interfaces';
-import { AccordionHeaderTemplate, AccordionIndicatorTemplate } from './accordion.templates';
+import { AccordionActionsTemplate, AccordionHeaderTemplate, AccordionIndicatorTemplate } from './accordion.templates';
 
 /** Organizes related content into accessible expandable sections. */
 @Component({
@@ -70,6 +70,10 @@ export class Accordion {
     AccordionHeaderTemplate,
     { read: TemplateRef },
   );
+  protected readonly actionsTemplate: Signal<TemplateRef<AccordionItemContext> | undefined> = contentChild(
+    AccordionActionsTemplate,
+    { read: TemplateRef },
+  );
   protected readonly indicatorTemplate: Signal<TemplateRef<AccordionItemContext> | undefined> = contentChild(
     AccordionIndicatorTemplate,
     { read: TemplateRef },
@@ -90,8 +94,8 @@ export class Accordion {
     this.value.set([]);
   }
 
-  protected handlePanelKeydown(event: KeyboardEvent): void {
-    // Angular Aria handles these keys at the group, including events bubbled from panel controls.
+  protected handleContentKeydown(event: KeyboardEvent): void {
+    // Angular Aria handles these keys at the group, including events bubbled from panel controls and sibling actions.
     if (['Enter', ' ', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) event.stopPropagation();
   }
 

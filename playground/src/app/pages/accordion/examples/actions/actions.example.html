@@ -1,0 +1,25 @@
+<div class="max-w-md overflow-hidden rounded-box border border-base-300">
+  <sui-accordion class="block" style="--sui-focus-ring-offset: -3px" [(value)]="open">
+    <ng-template suiAccordionActions let-item>
+      <button
+        suiButton
+        type="button"
+        size="sm"
+        severity="neutral"
+        variant="text"
+        shape="square"
+        [attr.aria-label]="'Add to ' + item.label"
+        [disabled]="item.disabled"
+        (click)="add(item)">
+        <svg lucidePlus aria-hidden="true"></svg>
+      </button>
+    </ng-template>
+    <ng-template suiAccordionItem value="bowls" label="Bowls">
+      <p>Rice and noodle bowls. Added entries: {{ entries()['bowls'] }}</p>
+    </ng-template>
+    <ng-template suiAccordionItem value="desserts" label="Desserts">
+      <p>Sweet treats. Added entries: {{ entries()['desserts'] }}</p>
+    </ng-template>
+  </sui-accordion>
+</div>
+<p role="status" class="mt-3 text-sm text-base-content/70">{{ message() }}</p>

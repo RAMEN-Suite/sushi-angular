@@ -1,4 +1,5 @@
 import { expect, Locator, Page, test } from '@playwright/test';
+import { Bounds, visibleBounds } from '../support/geometry';
 
 test('Accordion keyboard focus follows the shared focus tokens @css', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/accordion');
@@ -113,5 +114,70 @@ test('Accordion density tokens reach triggers, panels, and separated item spacin
   await expect(panel).toHaveCSS('padding-inline', '8px');
   await expect(panel).toHaveCSS('padding-bottom', '0px');
   await expect(host.locator('.sui-accordion__group')).toHaveCSS('gap', '4px');
-  await expect(header.locator('..').locator('..')).toHaveCSS('transition-duration', '0s');
+  await expect(host.locator('.sui-accordion__item').first()).toHaveCSS('transition-duration', '0s');
+});
+
+test('Accordion actions follow triggers in Tab order and keep their own keyboard activation', async ({
+  page,
+  browserName,
+}: {
+  page: Page;
+  browserName: 'chromium' | 'firefox' | 'webkit';
+}): Promise<void> => {
+  await page.goto('/accordion');
+  const example: Locator = page.locator('pg-accordion-actions-example');
+  const bowls: Locator = example.getByRole('button', { name: 'Bowls', exact: true });
+  const add: Locator = example.getByRole('button', { name: 'Add to Bowls' });
+  const desserts: Locator = example.getByRole('button', { name: 'Desserts', exact: true });
+  const tabKey: string = browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab';
+  await bowls.focus();
+  await bowls.press(tabKey);
+
+  await expect(add).toBeFocused();
+  await add.press('Enter');
+  await expect(example.getByRole('status')).toHaveText('Added an entry to Bowls.');
+  await expect(bowls).toHaveAttribute('aria-expanded', 'true');
+  await add.press('ArrowDown');
+  await expect(add).toBeFocused();
+  await add.press(tabKey);
+
+  await expect(desserts).toBeFocused();
+  await desserts.press('ArrowUp');
+  await expect(bowls).toBeFocused();
+});
+
+test('Accordion keeps its header and sibling action within a narrow clipped container', async ({
+  page,
+}: {
+  page: Page;
+}): Promise<void> => {
+  await page.setViewportSize({ width: 360, height: 740 });
+  await page.goto('/accordion');
+  const example: Locator = page.locator('pg-accordion-actions-example');
+  const header: Locator = example.getByRole('button', { name: 'Desserts', exact: true });
+  const add: Locator = example.getByRole('button', { name: 'Add to Desserts' });
+  const first: Locator = example.getByRole('button', { name: 'Bowls', exact: true });
+  await first.focus();
+  await first.press('Home');
+  await expect(first).toHaveCSS('outline-offset', '-3px');
+  await first.press('Enter');
+  await expect(first).toHaveAttribute('aria-expanded', 'false');
+  await first.press('End');
+  await expect(header).toBeFocused();
+  await header.press('Enter');
+
+  await expect(header).toHaveAttribute('aria-expanded', 'true');
+  await expect(add).toBeVisible();
+  await expect(header).toHaveCSS('outline-offset', '-3px');
+  await expect(async (): Promise<void> => {
+    const trigger: Bounds = await visibleBounds(header, 'the last Accordion trigger');
+    const action: Bounds = await visibleBounds(add, 'the last Accordion action');
+    expect(trigger.x + trigger.width).toBeLessThanOrEqual(action.x);
+    expect(action.x + action.width).toBeLessThanOrEqual(360);
+  }).toPass();
+
+  await header.press('Enter');
+
+  await expect(header).toHaveAttribute('aria-expanded', 'false');
+  await expect(header).toBeFocused();
 });

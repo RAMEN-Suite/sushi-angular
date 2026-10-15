@@ -3,6 +3,9 @@ import { Badge } from '@sushi-kit/angular';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
 import { ExampleSource, textSource } from '../../shared/example-code/example-source';
+import { AccordionActionsExample } from './examples/actions/actions.example';
+import actionsHtml from './examples/actions/actions.example.html';
+import * as actionsTs from './examples/actions/actions.example.ts' with { loader: 'text' };
 import basicHtml from './examples/basic/basic.example.html';
 import * as basicTs from './examples/basic/basic.example.ts' with { loader: 'text' };
 import { AccordionBasicExample } from './examples/basic/basic.example';
@@ -20,6 +23,7 @@ import { AccordionTemplatesExample } from './examples/templates/templates.exampl
   selector: 'pg-accordion-page',
   imports: [
     AccordionBasicExample,
+    AccordionActionsExample,
     AccordionControlExample,
     AccordionSizesExample,
     AccordionTemplatesExample,
@@ -31,7 +35,8 @@ import { AccordionTemplatesExample } from './examples/templates/templates.exampl
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccordionPage {
-  protected readonly examples: Readonly<Record<'basic' | 'control' | 'sizes' | 'templates', ExampleSource>> = {
+  protected readonly examples: Readonly<Record<'actions' | 'basic' | 'control' | 'sizes' | 'templates', ExampleSource>> = {
+    actions: { html: actionsHtml, typescript: textSource(actionsTs) },
     basic: { html: basicHtml, typescript: textSource(basicTs) },
     control: { html: controlHtml, typescript: textSource(controlTs) },
     sizes: { html: sizesHtml, typescript: textSource(sizesTs) },
