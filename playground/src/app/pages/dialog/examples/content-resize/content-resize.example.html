@@ -1,8 +1,8 @@
 <button suiButton type="button" [suiDialogTrigger]="details">Open adaptive dialog</button>
-<sui-dialog #details="suiDialog" draggable resizable [recenterOnResize]="automatic()" ariaLabelledby="adaptive-title">
+<sui-dialog #details="suiDialog" draggable resizable ariaLabelledby="adaptive-title">
   <header suiDialogHeader><h2 id="adaptive-title">Adaptive details</h2></header>
   <div suiDialogBody class="grid gap-4">
-    <p>Content changes can keep this dialog centered until you move or resize it.</p>
+    <p>Change the content, then use Reposition dialog to center it again. Your inputs and chosen size stay intact.</p>
     <button suiButton type="button" (click)="detailed.set(!detailed())">
       {{ detailed() ? 'Show short summary' : 'Show detailed form' }}
     </button>
@@ -20,10 +20,6 @@
         <input suiInput fluid />
       </label>
     }
-    <label suiLabel class="flex items-center gap-2">
-      <input suiCheckbox type="checkbox" [checked]="automatic()" (change)="automatic.set(!automatic())" />
-      Center on content resize
-    </label>
   </div>
   <div suiDialogFooter>
     <button suiButton type="button" severity="neutral" (click)="details.reposition()">Reposition dialog</button>

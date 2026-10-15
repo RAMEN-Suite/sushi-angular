@@ -49,8 +49,7 @@
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Changing content</h2>
       <p class="text-base-content/60">
-        Opt into recenterOnResize for centered dialogs. Dragging or native resizing preserves your placement; reposition() reapplies the
-        configured position without reopening.
+        Call reposition() after content changes to reapply the configured position without reopening, clearing inputs, or changing focus.
       </p>
     </div>
     <pg-example-code [html]="examples.contentResize.html" [typescript]="examples.contentResize.typescript">
