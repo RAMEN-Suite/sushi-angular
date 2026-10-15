@@ -74,13 +74,8 @@ export class Tooltip {
   public readonly placement: InputSignal<TooltipPlacement> = input<TooltipPlacement>('top');
   /** Space in pixels between the target and Tooltip. */
   public readonly offset: InputSignalWithTransform<number, unknown> = input(6, { transform: numberAttribute });
-  /** Prevents the Tooltip from opening. */
+  /** Hides the Tooltip and cancels pending timers. Re-enabling requires fresh hover or keyboard focus. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Suspends the Tooltip during external work, hiding it and cancelling pending timers. Resuming does not open it; a fresh hover or keyboard focus is required. */
-  public readonly suspended: InputSignalWithTransform<boolean, unknown> = input(false, {
-    alias: 'suiTooltipSuspended',
-    transform: booleanAttribute,
-  });
   /** Delay in milliseconds before the Tooltip appears. */
   public readonly showDelay: InputSignalWithTransform<number, unknown> = input(300, { transform: numberAttribute });
   /** Delay in milliseconds before the Tooltip disappears. */
@@ -89,9 +84,7 @@ export class Tooltip {
   private readonly overlayOpen: Signal<boolean> | null = inject(OVERLAY_TRIGGER_OPEN, { optional: true, self: true });
   private readonly focusMonitor: FocusMonitor = inject(FocusMonitor);
   private readonly renderer: Renderer2 = inject(Renderer2);
-  private readonly blocked: Signal<boolean> = computed(
-    (): boolean => this.disabled() || this.suspended() || this.overlayOpen?.() === true,
-  );
+  private readonly blocked: Signal<boolean> = computed((): boolean => this.disabled() || this.overlayOpen?.() === true);
   private wasBlocked: boolean = false;
   private pointerSuppressed: boolean = false;
   private pendingHover: boolean = false;
@@ -128,7 +121,7 @@ export class Tooltip {
     this.destroyRef.onDestroy((): void => this.destroy());
   }
 
-  /** Shows the Tooltip immediately unless disabled, suspended or its associated Sushi overlay is open. */
+  /** Shows the Tooltip immediately unless disabled or its associated Sushi overlay is open. */
   public show(): void {
     this.clearTimers();
     if (this.blocked() || this.overlayRef?.hasAttached()) return;

@@ -13,7 +13,6 @@ import { Tooltip } from '../tooltip.directive';
     suiTooltip="Helpful details"
     placement="right"
     [disabled]="disabled()"
-    [suiTooltipSuspended]="suspended()"
     [showDelay]="200"
     [hideDelay]="100"
     [offset]="10"
@@ -23,7 +22,6 @@ import { Tooltip } from '../tooltip.directive';
   </button>`,
 })
 class Host {
-  public readonly suspended: WritableSignal<boolean> = signal(false);
   public readonly disabled: WritableSignal<boolean> = signal(false);
 }
 
@@ -115,7 +113,7 @@ class MenuHost {
   public readonly menu: Signal<Menu> = viewChild.required(Menu);
 }
 
-describe('Tooltip activation and suspension', (): void => {
+describe('Tooltip activation', (): void => {
   it('cancels pending hover and immediately hides visible help on activation', (): void => {
     vi.useFakeTimers();
     const fixture: ComponentFixture<Host> = render(Host);
@@ -137,20 +135,20 @@ describe('Tooltip activation and suspension', (): void => {
   });
 });
 
-describe('Tooltip external suspension', (): void => {
-  it('hides while suspended and requires fresh hover after resuming', (): void => {
+describe('Tooltip disabling', (): void => {
+  it('hides while disabled and requires fresh hover after re-enabling', (): void => {
     vi.useFakeTimers();
     const fixture: ComponentFixture<Host> = render(Host);
     const tooltip: Tooltip = fixture.debugElement.query(By.directive(Tooltip)).injector.get(Tooltip);
     tooltip.show();
     fixture.detectChanges();
-    fixture.componentInstance.suspended.set(true);
+    fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
     tooltip.show();
 
     expect(document.querySelector('[role="tooltip"]')).toBeNull();
 
-    fixture.componentInstance.suspended.set(false);
+    fixture.componentInstance.disabled.set(false);
     fixture.detectChanges();
     vi.advanceTimersByTime(300);
 
