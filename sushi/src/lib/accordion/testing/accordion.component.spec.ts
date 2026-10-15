@@ -1,5 +1,5 @@
 import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { press, query, queryAll, render } from '../../../../testing/test-utils';
 import { AccordionItem } from '../accordion-item.directive';
@@ -72,6 +72,31 @@ describe('Accordion rendering and model', (): void => {
     expect(fixture.componentInstance.value()).toEqual(['method']);
     expect(buttons[0].getAttribute('aria-expanded')).toBe('false');
     expect(buttons[1].getAttribute('aria-expanded')).toBe('true');
+  });
+});
+
+describe('Accordion default indicator', (): void => {
+  it('points the default indicator up for an initially expanded item and follows subsequent toggles', (): void => {
+    const fixture: ComponentFixture<InteractiveAccordionHost> = TestBed.createComponent(InteractiveAccordionHost);
+    fixture.componentInstance.value.set(['settings']);
+    fixture.detectChanges();
+
+    const trigger: HTMLButtonElement = query(fixture, 'button');
+    const indicator: Element = query(fixture, 'button svg');
+    expect(trigger.getAttribute('aria-expanded')).toBe('true');
+    expect(indicator.classList.contains('rotate-180')).toBe(true);
+
+    trigger.click();
+    fixture.detectChanges();
+
+    expect(trigger.getAttribute('aria-expanded')).toBe('false');
+    expect(indicator.classList.contains('rotate-180')).toBe(false);
+
+    trigger.click();
+    fixture.detectChanges();
+
+    expect(trigger.getAttribute('aria-expanded')).toBe('true');
+    expect(indicator.classList.contains('rotate-180')).toBe(true);
   });
 });
 

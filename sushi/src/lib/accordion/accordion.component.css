@@ -19,6 +19,8 @@
   --sui-accordion-panel-padding-bottom: 1rem;
   /** Space between items in the separated variant. */
   --sui-accordion-gap: 0.75rem;
+  /** Space between independent actions beside a trigger. */
+  --sui-accordion-actions-gap: 0.5rem;
   /** Duration of expansion, collapse, and indicator motion. Use 0ms to disable motion. */
   --sui-accordion-motion-duration: 200ms;
   /** Easing of expansion, collapse, and indicator motion. */
@@ -52,7 +54,24 @@
   transition: grid-template-rows var(--sui-accordion-motion-duration) var(--sui-accordion-motion-easing);
 }
 
+.sui-accordion__heading {
+  display: flex;
+  min-width: 0;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.sui-accordion__actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sui-accordion-actions-gap);
+  padding-inline-end: var(--sui-accordion-trigger-padding-inline);
+}
+
 .sui-accordion__trigger {
+  flex: 1;
+  min-width: 0;
   display: flex;
   min-height: var(--sui-accordion-trigger-min-height);
   cursor: pointer;

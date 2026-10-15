@@ -50,4 +50,16 @@
       ><ng-template pgExamplePreview><pg-accordion-sizes-example /></ng-template
     ></pg-example-code>
   </section>
+  <section class="pg-page__section">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Independent category actions</h2>
+      <p class="text-base-content/60">
+        Place actions beside a trigger with suiAccordionActions. Tab visits each trigger and its actions; arrow keys navigate triggers only.
+        Scope --sui-focus-ring-offset to a negative value on the public host to keep focus outlines inside clipped containers.
+      </p>
+    </div>
+    <pg-example-code [html]="examples.actions.html" [typescript]="examples.actions.typescript">
+      <ng-template pgExamplePreview><pg-accordion-actions-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>

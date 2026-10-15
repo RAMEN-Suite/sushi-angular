@@ -19,3 +19,14 @@ export class AccordionIndicatorTemplate {
     return true;
   }
 }
+
+/** Adds independent actions beside each trigger, outside its button and heading. Uses normal Tab order; Enter/Space activate the action and header-navigation keys do not affect the Accordion. Consumers control action labels and disabled state. */
+@Directive({ selector: 'ng-template[suiAccordionActions]' })
+export class AccordionActionsTemplate {
+  public static ngTemplateContextGuard(
+    _directive: AccordionActionsTemplate,
+    _context: unknown,
+  ): _context is AccordionItemContext {
+    return true;
+  }
+}

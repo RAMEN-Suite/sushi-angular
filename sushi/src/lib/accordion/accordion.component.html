@@ -20,33 +20,41 @@
       [class.join-item]="variant() === 'joined'"
       [class.collapse-open]="context.expanded"
     >
-      <h3 class="contents">
-        <button
-          ngAccordionTrigger
-          type="button"
-          class="collapse-title sui-accordion__trigger"
-          [panel]="panel"
-          [disabled]="item.disabled()"
-          [expanded]="context.expanded"
-          (expandedChange)="handleExpanded(item.value(), $event)"
-        >
-          <span class="min-w-0 flex-1">
-            @if (headerTemplate(); as header) {
-              <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="context" />
-            } @else {
-              {{ item.label() }}
-            }
-          </span>
+      <div class="sui-accordion__heading">
+        <h3 class="contents">
+          <button
+            ngAccordionTrigger
+            type="button"
+            class="collapse-title sui-accordion__trigger"
+            [panel]="panel"
+            [disabled]="item.disabled()"
+            [expanded]="context.expanded"
+            (expandedChange)="handleExpanded(item.value(), $event)"
+          >
+            <span class="min-w-0 flex-1">
+              @if (headerTemplate(); as header) {
+                <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="context" />
+              } @else {
+                {{ item.label() }}
+              }
+            </span>
 
-          <span class="sui-accordion__indicator" aria-hidden="true">
-            @if (indicatorTemplate(); as indicator) {
-              <ng-container [ngTemplateOutlet]="indicator" [ngTemplateOutletContext]="context" />
-            } @else {
-              <svg lucideChevronDown class="size-4" [class.rotate-180]="context.expanded"></svg>
-            }
-          </span>
-        </button>
-      </h3>
+            <span class="sui-accordion__indicator" aria-hidden="true">
+              @if (indicatorTemplate(); as indicator) {
+                <ng-container [ngTemplateOutlet]="indicator" [ngTemplateOutletContext]="context" />
+              } @else {
+                <svg lucideChevronDown [class]="context.expanded ? 'size-4 rotate-180' : 'size-4'"></svg>
+              }
+            </span>
+          </button>
+        </h3>
+
+        @if (actionsTemplate(); as actions) {
+          <div class="sui-accordion__actions" role="group" [attr.aria-label]="item.label()" (keydown)="handleContentKeydown($event)">
+            <ng-container [ngTemplateOutlet]="actions" [ngTemplateOutletContext]="context" />
+          </div>
+        }
+      </div>
 
       <div
         ngAccordionPanel
@@ -54,7 +62,7 @@
         #panel="ngAccordionPanel"
         class="collapse-content sui-accordion__panel leading-6"
         [preserveContent]="item.preserveContent()"
-        (keydown)="handlePanelKeydown($event)"
+        (keydown)="handleContentKeydown($event)"
       >
         <ng-template ngAccordionContent>
           <ng-container [ngTemplateOutlet]="item.template" [ngTemplateOutletContext]="context" />
