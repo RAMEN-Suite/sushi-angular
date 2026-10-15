@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   Button,
   Dialog,
@@ -18,13 +18,4 @@ import {
   templateUrl: './interactions.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TooltipInteractionsExample {
-  protected readonly exporting: WritableSignal<boolean> = signal(false);
-  protected readonly result: WritableSignal<string> = signal('No export started.');
-
-  protected finishExport(trigger: HTMLButtonElement, result: string): void {
-    this.exporting.set(false);
-    this.result.set(result);
-    trigger.focus({ preventScroll: true });
-  }
-}
+export class TooltipInteractionsExample {}

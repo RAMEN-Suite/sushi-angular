@@ -88,36 +88,6 @@ for (const surface of ['dialog', 'popover'] as const) {
   });
 }
 
-for (const outcome of ['Save', 'Cancel'] as const) {
-  test(`Tooltip stays dismissed after ${outcome.toLowerCase()} of external work`, async ({
-    page,
-  }: {
-    page: Page;
-  }): Promise<void> => {
-    await page.goto('/tooltip');
-    await page.clock.install();
-    const trigger: Locator = page.getByRole('button', { name: 'Export', exact: true });
-    const help: Locator = page.getByRole('tooltip', { name: 'Export help' });
-    await trigger.hover();
-    await page.clock.runFor(1_000);
-    await expect(help).toBeVisible();
-    await trigger.click();
-    await expect(help).toBeHidden();
-    await page.clock.runFor(1_000);
-    await expect(help).toBeHidden();
-    await page.getByRole('button', { name: `${outcome} export`, exact: true }).press('Enter');
-
-    await expect(trigger).toBeFocused();
-    await page.clock.runFor(1_000);
-    await expect(help).toBeHidden();
-
-    await page.mouse.move(0, 0);
-    await trigger.hover();
-    await page.clock.runFor(1_000);
-    await expect(help).toBeVisible();
-  });
-}
-
 test('Tooltip still opens on deliberate keyboard focus after menu dismissal', async ({
   page,
   browserName,

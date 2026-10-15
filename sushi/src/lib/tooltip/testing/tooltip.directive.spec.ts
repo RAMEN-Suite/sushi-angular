@@ -138,7 +138,7 @@ describe('Tooltip activation and suspension', (): void => {
 });
 
 describe('Tooltip external suspension', (): void => {
-  it('hides while suspended, rejects explicit opening, and stays closed when resumed', (): void => {
+  it('hides while suspended and requires fresh hover after resuming', (): void => {
     vi.useFakeTimers();
     const fixture: ComponentFixture<Host> = render(Host);
     const tooltip: Tooltip = fixture.debugElement.query(By.directive(Tooltip)).injector.get(Tooltip);
@@ -155,6 +155,14 @@ describe('Tooltip external suspension', (): void => {
     vi.advanceTimersByTime(300);
 
     expect(document.querySelector('[role="tooltip"]')).toBeNull();
+
+    const button: HTMLButtonElement = fixture.debugElement.query(By.directive(Tooltip)).nativeElement as HTMLButtonElement;
+    button.dispatchEvent(new MouseEvent('mouseleave'));
+    button.dispatchEvent(new MouseEvent('mouseenter'));
+    vi.advanceTimersByTime(300);
+    fixture.detectChanges();
+
+    expect(document.querySelector('[role="tooltip"]')).not.toBeNull();
   });
 });
 
