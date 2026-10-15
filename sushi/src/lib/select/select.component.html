@@ -118,6 +118,7 @@
             <ng-container [ngTemplateOutlet]="template" />
           </div>
         }
+
         @if (filter()) {
           <div class="border-base-300 border-b p-3">
             <input
@@ -134,6 +135,7 @@
             />
           </div>
         }
+
         @if (loading()) {
           <div class="w-full" role="status">
             @if (loadingTemplate(); as template) {
@@ -213,6 +215,7 @@
             }
           </div>
         }
+
         @if (footerTemplate(); as template) {
           <div class="border-base-300 border-t p-3">
             <ng-container [ngTemplateOutlet]="template" />

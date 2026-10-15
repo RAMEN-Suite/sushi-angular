@@ -23,6 +23,7 @@ afterEach((): void => document.querySelectorAll('.cdk-overlay-container').forEac
 async function openFilter(fixture: ComponentFixture<FilterHost>): Promise<HTMLInputElement> {
   query(fixture, '[role="combobox"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
   await fixture.whenStable();
+
   const input: HTMLInputElement | null = document.querySelector('[aria-label="Filter ramen"]');
   if (!input) throw new Error('Expected the public Select filter input.');
   return input;
@@ -32,6 +33,7 @@ describe('Select filtering', (): void => {
   it('filters labels without changing selection and resets the query on reopening', async (): Promise<void> => {
     const fixture: ComponentFixture<FilterHost> = render(FilterHost);
     const input: HTMLInputElement = await openFilter(fixture);
+
     input.value = 'MIS';
     input.dispatchEvent(new Event('input', { bubbles: true }));
     await fixture.whenStable();
@@ -42,6 +44,7 @@ describe('Select filtering', (): void => {
 
     input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
     await fixture.whenStable();
+
     const reopened: HTMLInputElement = await openFilter(fixture);
 
     expect(reopened.value).toBe('');
@@ -51,6 +54,7 @@ describe('Select filtering', (): void => {
   it('shows a distinct no-match message and retains the selected value', async (): Promise<void> => {
     const fixture: ComponentFixture<FilterHost> = render(FilterHost);
     const input: HTMLInputElement = await openFilter(fixture);
+
     input.value = 'not available';
     input.dispatchEvent(new Event('input', { bubbles: true }));
     await fixture.whenStable();
