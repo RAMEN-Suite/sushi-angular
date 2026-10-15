@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
   afterRenderEffect,
+  afterNextRender,
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
@@ -116,6 +117,10 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
   public readonly required: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Restricts the model to values from `options`. */
   public readonly forceSelection: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+  /** Opens all suggestions on focus. Defaults to false; typed text still filters the list. */
+  public readonly openOnFocus: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+  /** Opens all suggestions on click, including after Escape while the input remains focused. Defaults to false. */
+  public readonly openOnClick: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Expands the control to the available width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
@@ -154,7 +159,8 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
   protected readonly combobox: Signal<Combobox> = viewChild.required(Combobox);
   protected readonly listbox: Signal<Listbox<AutocompleteValue> | undefined> = viewChild(Listbox);
 
-  protected readonly query: WritableSignal<string> = signal<string>('');
+  protected readonly query: WritableSignal<string | null> = signal<string | null>(null);
+  protected readonly showAll: WritableSignal<boolean> = signal(false);
   protected readonly expanded: WritableSignal<boolean> = signal<boolean>(false);
 
   protected readonly selectedOption: Signal<O | undefined> = computed(() => {
@@ -162,11 +168,11 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
     return value === null ? undefined : this.options().find((option: O): boolean => this.compareWith()(option.value, value));
   });
   protected readonly inputValue: Signal<string> = computed(() => {
-    const query: string = this.query();
-    return query.length > 0 ? query : (this.selectedOption()?.label ?? '');
+    const value: AutocompleteValue = this.value();
+    return this.query() ?? this.selectedOption()?.label ?? (typeof value === 'string' ? value : '');
   });
   protected readonly filteredOptions: Signal<readonly O[]> = computed(() =>
-    this.options().filter((option: O): boolean => this.filterWith()(option, this.inputValue())),
+    this.options().filter((option: O): boolean => this.filterWith()(option, this.showAll() ? '' : this.inputValue())),
   );
   protected readonly matchedOption: Signal<O | undefined> = computed(() => {
     const query: string = this.inputValue().trim().toLocaleLowerCase();
@@ -194,11 +200,13 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
   protected readonly positions: ConnectedPosition[] = [SELECTION_BELOW, SELECTION_ABOVE];
 
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private editSession: Readonly<{ value: AutocompleteValue }> | null = null;
   private queryTimer: ReturnType<typeof setTimeout> | undefined;
 
   public constructor() {
     super();
     this.destroyRef.onDestroy(() => clearTimeout(this.queryTimer));
+    afterNextRender((): void => this.listenForEscape());
     afterRenderEffect({
       write: () => {
         if (!this.expanded()) return;
@@ -219,8 +227,36 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
   public reset(): void {
     clearTimeout(this.queryTimer);
     this.value.set(null);
-    this.query.set('');
+    this.query.set(null);
+    this.showAll.set(false);
+    this.editSession = null;
     this.expanded.set(false);
+  }
+
+  /** Focuses the input and opens all suggestions without clearing the displayed selection or applying minQueryLength/delay. Emits an empty query for remote loaders. Disabled or loading controls do not open. */
+  public show(): void {
+    if (this.disabled() || this.loading() || this.expanded()) return;
+    clearTimeout(this.queryTimer);
+    this.beginEdit();
+    this.showAll.set(true);
+    this.expanded.set(true);
+    this.focus();
+    this.queryChange.emit('');
+  }
+
+  /** Closes suggestions, cancels a pending query, and discards unconfirmed text in forceSelection mode. */
+  public hide(): void {
+    clearTimeout(this.queryTimer);
+    if (this.expanded()) this.handleExpanded(false);
+    else this.finishEdit();
+  }
+
+  protected handleFocus(): void {
+    if (this.openOnFocus()) this.show();
+  }
+
+  protected handleClick(): void {
+    if (this.openOnClick()) this.show();
   }
 
   protected handleInput(event: Event): void {
@@ -229,10 +265,11 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
     const query: string = event.target.value;
 
     clearTimeout(this.queryTimer);
+    this.beginEdit();
     this.query.set(query);
-    if (!query) this.value.set(null);
-    else if (this.selectedOption()?.label !== query) this.value.set(this.forceSelection() ? null : query);
-    if (query.length < this.minQueryLength()) {
+    this.showAll.set(false);
+    if (!this.forceSelection()) this.value.set(query || null);
+    if (!this.openOnFocus() && !this.openOnClick() && query.length < this.minQueryLength()) {
       this.expanded.set(false);
       if (!query) this.queryChange.emit('');
       return;
@@ -242,7 +279,7 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
 
   protected handleBlur(): void {
     if (this.expanded()) return;
-    if (this.forceSelection()) this.query.set(this.selectedOption()?.label ?? '');
+    this.finishEdit();
     this.touch.emit();
   }
 
@@ -250,30 +287,40 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
     if (this.disabled() || this.loading()) return;
     clearTimeout(this.queryTimer);
     const value: AutocompleteValue = values.at(0) ?? null;
-    if (value === null) {
-      this.handleExpanded(false);
-      return;
-    }
+    if (value === null) return;
     this.value.set(value);
-    this.query.set(this.options().find((option: O): boolean => this.compareWith()(option.value, value))?.label ?? '');
+    this.query.set(null);
+    this.editSession = null;
     this.handleExpanded(false);
   }
 
   protected handleExpanded(expanded: boolean): void {
     if (expanded && (this.disabled() || this.loading())) return;
     if (this.expanded() === expanded) return;
+    if (expanded) {
+      this.beginEdit();
+      // Angular Aria can expand before our input handler receives the new search text.
+      const input: HTMLElement = this.combobox().element;
+      if (this.query() === null && input instanceof HTMLInputElement && input.value === this.inputValue()) {
+        this.showAll.set(true);
+        this.queryChange.emit('');
+      }
+    }
     this.expanded.set(expanded);
     if (expanded) return;
-    if (this.forceSelection()) this.query.set(this.selectedOption()?.label ?? '');
+    clearTimeout(this.queryTimer);
+    this.finishEdit();
     this.touch.emit();
   }
 
   protected handleEscape(event: Event): void {
-    const query: string = event.target instanceof HTMLInputElement ? event.target.value : this.inputValue();
+    if (!this.expanded() && !this.editSession) return;
     event.preventDefault();
     event.stopImmediatePropagation();
-    this.handleExpanded(false);
-    if (!this.forceSelection()) this.query.set(query);
+    clearTimeout(this.queryTimer);
+    if (this.editSession && !this.forceSelection()) this.value.set(this.editSession.value);
+    this.query.set(null);
+    this.hide();
   }
 
   protected itemContext(option: O, index: number): AutocompleteItemContext<O> {
@@ -286,6 +333,29 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
       disabled: Boolean(option.disabled),
       index,
     };
+  }
+
+  private listenForEscape(): void {
+    const element: HTMLElement = this.combobox().element;
+    const listener: (event: KeyboardEvent) => void = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape') this.handleEscape(event);
+    };
+    // Restore the edit before Angular Aria closes the popup and finalizes its value.
+    element.addEventListener('keydown', listener, { capture: true });
+    this.destroyRef.onDestroy(() => element.removeEventListener('keydown', listener, { capture: true }));
+  }
+
+  private beginEdit(): void {
+    this.editSession ??= { value: this.value() };
+  }
+
+  private finishEdit(): void {
+    if (this.forceSelection()) {
+      if (this.query() === '') this.value.set(null);
+      this.query.set(null);
+    }
+    this.editSession = null;
+    this.showAll.set(false);
   }
 
   private scheduleQuery(query: string): void {
