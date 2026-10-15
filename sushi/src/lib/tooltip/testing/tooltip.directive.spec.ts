@@ -1,8 +1,10 @@
-import { Component, type DebugElement, signal, type WritableSignal } from '@angular/core';
+import { FocusMonitor } from '@angular/cdk/a11y';
+import { Component, type DebugElement, signal, viewChild, type Signal, type WritableSignal } from '@angular/core';
 import { type ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { render } from '../../../../testing/test-utils';
+import { Menu, MenuTrigger } from '../../menu';
 import { Tooltip } from '../tooltip.directive';
 
 @Component({
@@ -11,6 +13,7 @@ import { Tooltip } from '../tooltip.directive';
     suiTooltip="Helpful details"
     placement="right"
     [disabled]="disabled()"
+    [suiTooltipSuspended]="suspended()"
     [showDelay]="200"
     [hideDelay]="100"
     [offset]="10"
@@ -20,6 +23,7 @@ import { Tooltip } from '../tooltip.directive';
   </button>`,
 })
 class Host {
+  public readonly suspended: WritableSignal<boolean> = signal(false);
   public readonly disabled: WritableSignal<boolean> = signal(false);
 }
 
@@ -97,5 +101,116 @@ describe('Tooltip description ownership', (): void => {
     tooltip.hide();
 
     expect(button.getAttribute('aria-describedby')).toBe('existing-description');
+  });
+});
+
+@Component({
+  imports: [Tooltip, Menu, MenuTrigger],
+  template: `
+    <button suiTooltip="Menu help" [suiMenuTrigger]="menu">Commands</button>
+    <sui-menu #menu popup [items]="[{ label: 'Save', value: 'save' }]" />
+  `,
+})
+class MenuHost {
+  public readonly menu: Signal<Menu> = viewChild.required(Menu);
+}
+
+describe('Tooltip activation and suspension', (): void => {
+  it('cancels pending hover and immediately hides visible help on activation', (): void => {
+    vi.useFakeTimers();
+    const fixture: ComponentFixture<Host> = render(Host);
+    const target: DebugElement = fixture.debugElement.query(By.directive(Tooltip));
+    const button: HTMLButtonElement = target.nativeElement as HTMLButtonElement;
+    button.dispatchEvent(new MouseEvent('mouseenter'));
+    button.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    vi.advanceTimersByTime(300);
+
+    expect(document.querySelector('[role="tooltip"]')).toBeNull();
+
+    target.injector.get(Tooltip).show();
+    fixture.detectChanges();
+    expect(document.querySelector('[role="tooltip"]')).not.toBeNull();
+
+    button.click();
+
+    expect(document.querySelector('[role="tooltip"]')).toBeNull();
+  });
+});
+
+describe('Tooltip external suspension', (): void => {
+  it('hides while suspended, rejects explicit opening, and stays closed when resumed', (): void => {
+    vi.useFakeTimers();
+    const fixture: ComponentFixture<Host> = render(Host);
+    const tooltip: Tooltip = fixture.debugElement.query(By.directive(Tooltip)).injector.get(Tooltip);
+    tooltip.show();
+    fixture.detectChanges();
+    fixture.componentInstance.suspended.set(true);
+    fixture.detectChanges();
+    tooltip.show();
+
+    expect(document.querySelector('[role="tooltip"]')).toBeNull();
+
+    fixture.componentInstance.suspended.set(false);
+    fixture.detectChanges();
+    vi.advanceTimersByTime(300);
+
+    expect(document.querySelector('[role="tooltip"]')).toBeNull();
+  });
+});
+
+describe('Tooltip keyboard reentry', (): void => {
+  it('suppresses restored focus until fresh keyboard navigation', (): void => {
+    vi.useFakeTimers();
+    const fixture: ComponentFixture<Host> = render(Host);
+    const target: DebugElement = fixture.debugElement.query(By.directive(Tooltip));
+    const button: HTMLButtonElement = target.nativeElement as HTMLButtonElement;
+    const monitor: FocusMonitor = target.injector.get(FocusMonitor);
+    button.click();
+    monitor.focusVia(button, 'keyboard');
+    vi.advanceTimersByTime(300);
+
+    expect(document.querySelector('[role="tooltip"]')).toBeNull();
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }));
+    monitor.focusVia(button, 'keyboard');
+    vi.advanceTimersByTime(300);
+    fixture.detectChanges();
+
+    expect(document.querySelector('[role="tooltip"]')).not.toBeNull();
+  });
+});
+
+describe('Tooltip overlay coordination', (): void => {
+  it('keeps help closed throughout a programmatically opened associated menu', (): void => {
+    const fixture: ComponentFixture<MenuHost> = render(MenuHost);
+    const target: DebugElement = fixture.debugElement.query(By.directive(Tooltip));
+    const tooltip: Tooltip = target.injector.get(Tooltip);
+    tooltip.show();
+    fixture.detectChanges();
+    fixture.componentInstance.menu().open(target.nativeElement as HTMLElement);
+    fixture.detectChanges();
+    tooltip.show();
+
+    expect(document.querySelector('[role="tooltip"]')).toBeNull();
+
+    fixture.componentInstance.menu().close();
+    fixture.detectChanges();
+
+    expect(document.querySelector('[role="tooltip"]')).toBeNull();
+  });
+});
+
+@Component({ imports: [Tooltip], template: `<input suiTooltip="Text help" />` })
+class TextHost {}
+
+describe('Tooltip text controls', (): void => {
+  it('does not treat typing a space as button activation', (): void => {
+    const fixture: ComponentFixture<TextHost> = render(TextHost);
+    const target: DebugElement = fixture.debugElement.query(By.directive(Tooltip));
+    target.injector.get(Tooltip).show();
+    fixture.detectChanges();
+    (target.nativeElement as HTMLInputElement).dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+
+    expect(document.querySelector('[role="tooltip"]')).not.toBeNull();
   });
 });

@@ -1,17 +1,29 @@
 import {
   booleanAttribute,
+  computed,
   Directive,
   ElementRef,
   inject,
   input,
   type InputSignal,
   type InputSignalWithTransform,
+  type Signal,
 } from '@angular/core';
 import { type Popover } from './popover.component';
+import { OVERLAY_TRIGGER_OPEN } from '../internal/overlay-trigger-state';
 
 /** Opens a Popover from a native button. */
 @Directive({
   selector: 'button[suiPopoverTrigger]',
+  providers: [
+    {
+      provide: OVERLAY_TRIGGER_OPEN,
+      useFactory: (): Signal<boolean> => {
+        const trigger: PopoverTrigger = inject(PopoverTrigger);
+        return computed((): boolean => trigger.popover().open());
+      },
+    },
+  ],
   host: {
     type: 'button',
     '[attr.aria-controls]': 'popover().popoverId',

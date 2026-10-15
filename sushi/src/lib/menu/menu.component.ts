@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import { CdkConnectedOverlay, type ConnectedPosition, type FlexibleConnectedPositionStrategyOrigin } from '@angular/cdk/overlay';
 import {
@@ -113,6 +114,7 @@ export class Menu<I extends MenuItem = MenuItem> {
   );
 
   private readonly focusPending: WritableSignal<boolean> = signal(false);
+  private readonly focusMonitor: FocusMonitor = inject(FocusMonitor);
   private restoreTarget: HTMLElement | undefined;
   private anchor: HTMLElement | undefined;
 
@@ -152,7 +154,7 @@ export class Menu<I extends MenuItem = MenuItem> {
     this.expanded.set(false);
     this.restoreTarget = undefined;
     this.removeAnchor();
-    if (restoreFocus) restoreTarget?.focus({ preventScroll: true });
+    if (restoreFocus && restoreTarget) this.focusMonitor.focusVia(restoreTarget, 'program', { preventScroll: true });
   }
 
   /** Toggles the popup menu beside a trigger. */
@@ -175,6 +177,12 @@ export class Menu<I extends MenuItem = MenuItem> {
     if (this.disabled()) return;
     this.itemSelected.emit(value);
     if (this.popup()) this.close();
+  }
+
+  protected handleOutsideClick(event: MouseEvent): void {
+    const origin: FlexibleConnectedPositionStrategyOrigin | undefined = this.origin();
+    if (origin instanceof HTMLElement && event.target instanceof Node && origin.contains(event.target)) return;
+    this.close();
   }
 
   protected handleOverlayKeydown(event: KeyboardEvent): void {

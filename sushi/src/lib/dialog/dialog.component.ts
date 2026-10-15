@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { DOCUMENT } from '@angular/common';
 import {
   afterRenderEffect,
@@ -113,6 +114,7 @@ export class Dialog {
   private dragSubscription: Subscription | null = null;
   private closeReason: DialogCloseReason = 'programmatic';
   private readonly drag: Signal<CdkDrag> = viewChild.required(CdkDrag);
+  private readonly focusMonitor: FocusMonitor = inject(FocusMonitor);
   private restoreTarget: HTMLElement | null = null;
   private pendingClose: object | null = null;
   private appliedPosition: DialogPosition | null = null;
@@ -239,7 +241,7 @@ export class Dialog {
   private restoreFocus(): void {
     const target: HTMLElement | null = this.restoreTarget;
     this.restoreTarget = null;
-    target?.focus({ preventScroll: true });
+    if (target) this.focusMonitor.focusVia(target, 'program', { preventScroll: true });
   }
 
   private cancelClosing(): void {

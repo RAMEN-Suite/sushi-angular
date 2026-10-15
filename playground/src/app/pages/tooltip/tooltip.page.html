@@ -21,4 +21,16 @@
       ><ng-template pgExamplePreview><pg-tooltip-usage-example /></ng-template
     ></pg-example-code>
   </section>
+  <section class="pg-page__section">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Activation and external work</h2>
+      <p class="text-base-content/60">
+        Activating a control dismisses its help. Closing a Sushi overlay preserves focus without reopening the Tooltip. For external work,
+        bind suiTooltipSuspended. The export controls simulate saving or cancelling a native dialog.
+      </p>
+    </div>
+    <pg-example-code [html]="interactions.html" [typescript]="interactions.typescript">
+      <ng-template pgExamplePreview><pg-tooltip-interactions-example /></ng-template>
+    </pg-example-code>
+  </section>
 </main>
