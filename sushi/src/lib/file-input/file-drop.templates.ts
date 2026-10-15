@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { FileDropContentContext, FileDropItemContext } from './file-drop.interfaces';
+import { type FileDropContentContext, type FileDropItemContext } from './file-drop.interfaces';
 
 /** Replaces the instructional content inside the drop zone. */
 @Directive({ selector: 'ng-template[suiFileDropContent]' })

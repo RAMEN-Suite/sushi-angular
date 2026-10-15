@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Card, CardTitle, List, ListItemTemplate, Status, ThemeSeverity } from '@sushi-kit/angular';
+import { Badge, Card, CardTitle, List, ListItemTemplate, Status, type ThemeSeverity } from '@sushi-kit/angular';
 
 interface Activity {
   readonly title: string;

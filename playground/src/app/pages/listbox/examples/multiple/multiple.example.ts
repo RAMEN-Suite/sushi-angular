@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, Signal, signal, WritableSignal } from '@angular/core';
-import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Badge, Label, Listbox, ListboxModelValue, ListboxOption } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, computed, type Signal, signal, type WritableSignal } from '@angular/core';
+import { type FieldTree, form, FormField } from '@angular/forms/signals';
+import { Badge, Label, Listbox, type ListboxModelValue, type ListboxOption } from '@sushi-kit/angular';
 
 interface ChannelForm {
   channels: ListboxModelValue;

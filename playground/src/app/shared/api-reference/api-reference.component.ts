@@ -1,6 +1,6 @@
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, input, InputSignal, Signal } from '@angular/core';
-import { Badge, List, ListItemTemplate, Table, TableCellTemplate, TableColumn } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, computed, inject, input, type InputSignal, type Signal } from '@angular/core';
+import { Badge, List, ListItemTemplate, Table, TableCellTemplate, type TableColumn } from '@sushi-kit/angular';
 import type {
   ApiMember,
   ApiMemberKind,
@@ -119,7 +119,6 @@ export class ApiReference {
   protected readonly typeColumns: readonly TableColumn<ApiTypeDefinition>[] = typeColumns;
   protected readonly typeParameterColumns: readonly TableColumn<ApiTypeParameter>[] = typeParameterColumns;
 
-  // Data prepared for the view.
   protected readonly groups: Signal<readonly ApiGroup[]> = computed(() =>
     (Object.keys(labels) as ApiMemberKind[])
       .map((kind: ApiMemberKind): ApiGroup => ({
@@ -141,7 +140,6 @@ export class ApiReference {
 
   private readonly document: Document = inject(DOCUMENT);
 
-  // Stable targets used by type links and browser fragments.
   protected typeId(name: string): string {
     return `api-${this.api().className}-type-${name}`;
   }

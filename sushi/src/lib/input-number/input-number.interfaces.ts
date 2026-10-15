@@ -1,4 +1,4 @@
-import { FormControlSize } from '../form-control';
+import { type FormControlSize } from '../form-control';
 
 /** Context exposed to the complete input-number step-control template. */
 export interface InputNumberButtonsContext {

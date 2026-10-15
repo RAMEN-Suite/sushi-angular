@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Label, SelectButton, SelectButtonOption, SelectButtonValue } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { Label, SelectButton, type SelectButtonOption, type SelectButtonValue } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-select-button-layout-example',

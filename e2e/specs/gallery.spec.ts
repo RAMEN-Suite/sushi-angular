@@ -1,4 +1,4 @@
-import { expect, Locator, Page, test } from '@playwright/test';
+import { expect, type Locator, type Page, test } from '@playwright/test';
 
 async function getThumbnailButtons(gallery: Locator): Promise<Locator> {
   const buttons: Locator = gallery.getByRole('group', { name: 'Choose image' }).getByRole('button');

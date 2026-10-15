@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucideBadgeCheck, LucideChevronsUpDown, LucideCircleX } from '@lucide/angular';
 import {
   Button,
@@ -15,8 +15,8 @@ import {
   SelectHeaderTemplate,
   SelectLoadingIconTemplate,
   SelectLoadingTemplate,
-  SelectModelValue,
-  SelectOption,
+  type SelectModelValue,
+  type SelectOption,
   Spinner,
 } from '@sushi-kit/angular';
 

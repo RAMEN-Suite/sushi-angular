@@ -1,4 +1,4 @@
-import { SelectionValue } from '../sushi.types';
+import { type SelectionValue } from '../sushi.types';
 
 /** One selectable label and value with optional disabled state. */
 export interface SelectionOption {

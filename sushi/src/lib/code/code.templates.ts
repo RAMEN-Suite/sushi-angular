@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { CodeButtonContext } from './code.interfaces';
+import { type CodeButtonContext } from './code.interfaces';
 
 /** Replaces the complete copy control and exposes copy state and behavior. */
 @Directive({

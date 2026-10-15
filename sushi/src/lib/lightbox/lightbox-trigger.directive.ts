@@ -1,5 +1,13 @@
-import { booleanAttribute, Directive, ElementRef, inject, input, InputSignal, InputSignalWithTransform } from '@angular/core';
-import { GalleryImage } from '../gallery';
+import {
+  booleanAttribute,
+  Directive,
+  ElementRef,
+  inject,
+  input,
+  type InputSignal,
+  type InputSignalWithTransform,
+} from '@angular/core';
+import { type GalleryImage } from '../gallery';
 import { LightboxLauncher } from './internal/lightbox-launcher.service';
 
 /** Opens one native image in a Lightbox. */

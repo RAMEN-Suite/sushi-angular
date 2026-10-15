@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { ListItemContext } from './list.interfaces';
+import { type ListItemContext } from './list.interfaces';
 
 /** Renders each row and exposes `$implicit`, `item`, `index`, `count`, `first`, `last`, `even`, and `odd`. */
 @Directive({ selector: 'ng-template[suiListItem]' })

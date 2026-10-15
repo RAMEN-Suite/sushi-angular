@@ -1,2 +1,2 @@
 export * from './status.directive';
-export * from './status.interfaces';
+export type * from './status.interfaces';

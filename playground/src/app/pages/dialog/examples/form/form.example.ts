@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import {
   Button,
   Checkbox,
   Dialog,
   DialogClose,
-  DialogCloseEvent,
+  type DialogCloseEvent,
   DialogBody,
   DialogFooter,
   DialogHeader,
@@ -14,8 +14,8 @@ import {
   Input,
   Label,
   Select,
-  SelectModelValue,
-  SelectOption,
+  type SelectModelValue,
+  type SelectOption,
   Textarea,
 } from '@sushi-kit/angular';
 

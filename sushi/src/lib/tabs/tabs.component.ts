@@ -12,14 +12,21 @@ import {
   Component,
   contentChildren,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
-  Signal,
+  type ModelSignal,
+  type Signal,
 } from '@angular/core';
 import { Tab } from './tab.directive';
-import { TabsOrientation, TabsPlacement, TabsSelectionMode, TabsSize, TabsValue, TabsVariant } from './tabs.interfaces';
+import {
+  type TabsOrientation,
+  type TabsPlacement,
+  type TabsSelectionMode,
+  type TabsSize,
+  type TabsValue,
+  type TabsVariant,
+} from './tabs.interfaces';
 
 @Component({
   selector: 'sui-tabs',

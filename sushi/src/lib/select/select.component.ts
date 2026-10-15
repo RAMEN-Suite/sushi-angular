@@ -6,27 +6,27 @@ import {
   Component,
   computed,
   contentChild,
-  ElementRef,
+  type ElementRef,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   numberAttribute,
   output,
-  OutputEmitterRef,
+  type OutputEmitterRef,
   signal,
-  Signal,
+  type Signal,
   TemplateRef,
   viewChild,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
+import { type FormValueControl } from '@angular/forms/signals';
 import { Combobox, ComboboxPopup, ComboboxWidget } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
-import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, CdkOverlayOrigin, type ConnectedPosition } from '@angular/cdk/overlay';
 import { LucideCheck, LucideChevronDown, LucideX } from '@lucide/angular';
-import { FormControlSeverity, FormControlSize, FormControlState } from '../form-control';
+import { type FormControlSeverity, type FormControlSize, FormControlState } from '../form-control';
 import {
   compareSelectionValues,
   filterSelectionOption,
@@ -36,15 +36,15 @@ import {
 } from '../selection';
 import { Spinner } from '../spinner';
 import {
-  SelectCompareWith,
-  SelectGroupContext,
-  SelectItemContext,
-  SelectLoadingContext,
-  SelectModelValue,
-  SelectOption,
-  SelectSelectedItemContext,
-  SelectValue,
-  SelectVariant,
+  type SelectCompareWith,
+  type SelectGroupContext,
+  type SelectItemContext,
+  type SelectLoadingContext,
+  type SelectModelValue,
+  type SelectOption,
+  type SelectSelectedItemContext,
+  type SelectValue,
+  type SelectVariant,
 } from './select.interfaces';
 import {
   SelectClearIconTemplate,

@@ -1,4 +1,4 @@
-import { FormControlSeverity, FormControlSize } from '../form-control';
+import { type FormControlSeverity, type FormControlSize } from '../form-control';
 
 /** Size scale available to native file inputs. */
 export type FileInputSize = FormControlSize;

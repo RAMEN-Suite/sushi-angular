@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge } from '@sushi-kit/angular';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
-import { ExampleSource, textSource } from '../../shared/example-code/example-source';
+import { type ExampleSource, textSource } from '../../shared/example-code/example-source';
 import contextsHtml from './examples/contexts/contexts.example.html';
 import * as contextsTs from './examples/contexts/contexts.example.ts' with { loader: 'text' };
 import { SpinnerContextsExample } from './examples/contexts/contexts.example';

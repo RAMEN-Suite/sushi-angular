@@ -1,7 +1,15 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, contentChild, input, InputSignal, Signal, TemplateRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  contentChild,
+  input,
+  type InputSignal,
+  type Signal,
+  TemplateRef,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { BreadcrumbItem, BreadcrumbItemContext } from './breadcrumb.interfaces';
+import { type BreadcrumbItem, type BreadcrumbItemContext } from './breadcrumb.interfaces';
 import { BreadcrumbItemTemplate } from './breadcrumb.templates';
 
 /** Renders the hierarchical path to the current page as native navigation links. */

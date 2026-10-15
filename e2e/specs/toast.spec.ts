@@ -1,6 +1,6 @@
-import { expect, Locator, Page, test } from '@playwright/test';
+import { expect, type Locator, type Page, test } from '@playwright/test';
 
-import { Bounds, visibleBounds } from '../support/geometry';
+import { type Bounds, visibleBounds } from '../support/geometry';
 
 test('Toast places actions below its message and completes the action flow', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/toast');

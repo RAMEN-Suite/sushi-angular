@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import {
   Badge,
   Chip,
   Label,
   MultiSelect,
-  MultiSelectCompareWith,
+  type MultiSelectCompareWith,
   MultiSelectItemTemplate,
-  MultiSelectModelValue,
-  MultiSelectOption,
+  type MultiSelectModelValue,
+  type MultiSelectOption,
   MultiSelectSelectedItemsTemplate,
-  MultiSelectValue,
+  type MultiSelectValue,
 } from '@sushi-kit/angular';
 
 @Component({

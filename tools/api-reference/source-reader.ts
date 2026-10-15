@@ -38,7 +38,7 @@ type ApiTypeNode = ts.InterfaceDeclaration | ts.TypeAliasDeclaration | ts.EnumDe
 type TypeParameterOwner = ts.ClassDeclaration | ts.InterfaceDeclaration | ts.TypeAliasDeclaration;
 
 // Syntax conventions understood by the reader. Keep framework-specific names centralized here.
-const ANGULAR_DECLARATION_DECORATORS: ReadonlySet<string> = new Set<string>(['Component', 'Directive']);
+const ANGULAR_DECLARATION_DECORATORS: ReadonlySet<string> = new Set(['Component', 'Directive']);
 const INJECTABLE_DECORATOR: string = 'Injectable';
 const SELECTOR_METADATA_PROPERTY: string = 'selector';
 const STYLE_URL_METADATA_PROPERTY: string = 'styleUrl';
@@ -47,7 +47,7 @@ const TEMPLATE_CONTEXT_GUARD: string = 'ngTemplateContextGuard';
 const TEMPLATE_CONTEXT_PROPERTY: string = 'ngTemplateContextType';
 const INTERNAL_JSDOC_TAG: string = 'internal';
 const JSDOC_OPENING: string = '/**';
-const SIGNAL_KINDS: ReadonlyMap<string, ApiMemberKind> = new Map<string, ApiMemberKind>([
+const SIGNAL_KINDS: ReadonlyMap<string, ApiMemberKind> = new Map([
   ['input', 'input'],
   ['input.required', 'input'],
   ['model', 'model'],
@@ -57,8 +57,6 @@ const SIGNAL_KINDS: ReadonlyMap<string, ApiMemberKind> = new Map<string, ApiMemb
 const STYLE_PROPERTY_PREFIX: string = '--sui-';
 const STYLE_REFERENCE_PATTERN: RegExp = /var\((--sui-[\w-]+),/u;
 const STYLE_EXAMPLE_PATTERN: RegExp = /^@example\s+(.+)$/mu;
-
-// Style token documentation
 
 function precedingDocumentation(declaration: Declaration): string | null {
   const previous: ChildNode | undefined = declaration.prev();
@@ -91,11 +89,12 @@ function stylePropertyFrom(declaration: Declaration): ApiStyleProperty | null {
   }
 
   const reference: RegExpExecArray | null = STYLE_REFERENCE_PATTERN.exec(declaration.value);
-  return reference ? parseStyleProperty(reference[1], 'theme default', documentation) : null;
+  const name: string | undefined = reference?.[1];
+  return name ? parseStyleProperty(name, 'theme default', documentation) : null;
 }
 
 function readStyleProperties(files: readonly string[]): readonly ApiStyleProperty[] {
-  const properties: Map<string, ApiStyleProperty> = new Map<string, ApiStyleProperty>();
+  const properties: Map<string, ApiStyleProperty> = new Map();
   for (const file of files) {
     const stylesheet: Root = postcss.parse(readFileSync(file, 'utf8'), { from: file });
     stylesheet.walkDecls((declaration: Declaration): void => {
@@ -106,8 +105,6 @@ function readStyleProperties(files: readonly string[]): readonly ApiStylePropert
 
   return [...properties.values()];
 }
-
-// Angular metadata and class declarations
 
 export function readClassDeclaration(node: ts.ClassDeclaration): string {
   const className: string = node.name?.text ?? '';
@@ -218,8 +215,6 @@ export function isInternal(node: ts.Node): boolean {
   return ts.getJSDocTags(node).some((tag: ts.JSDocTag): boolean => tag.tagName.text === INTERNAL_JSDOC_TAG);
 }
 
-// Public inputs, models, outputs and methods
-
 function isPublic(node: ts.Node & { readonly modifiers?: ts.NodeArray<ts.ModifierLike> }): boolean {
   return !node.modifiers?.some(
     (modifier: ts.ModifierLike): boolean =>
@@ -329,7 +324,7 @@ function findBaseClass(node: ts.ClassDeclaration, checker: ts.TypeChecker): ts.C
 }
 
 export function readMembers(node: ts.ClassDeclaration, checker: ts.TypeChecker): ApiMember[] {
-  const members: Map<string, ApiMember> = new Map<string, ApiMember>();
+  const members: Map<string, ApiMember> = new Map();
   let current: ts.ClassDeclaration | null = node;
   while (current) {
     for (const member of readDeclaredMembers(current, checker)) {
@@ -354,8 +349,6 @@ export function readTemplateContext(node: ts.ClassDeclaration): string {
   );
   return context && ts.isPropertyDeclaration(context) ? (context.type?.getText() ?? 'void') : 'void';
 }
-
-// Exported interfaces, aliases and enums
 
 function isExported(node: ts.Node): boolean {
   return Boolean(
@@ -455,8 +448,8 @@ function addTypeSymbols(type: ts.Type, checker: ts.TypeChecker, names: Set<strin
 }
 
 function findReferencedTypeNames(node: ts.Node, checker: ts.TypeChecker): readonly string[] {
-  const names: Set<string> = new Set<string>();
-  const visited: Set<ts.Type> = new Set<ts.Type>();
+  const names: Set<string> = new Set();
+  const visited: Set<ts.Type> = new Set();
   const visit: (child: ts.Node) => void = (child: ts.Node): void => {
     if (ts.isTypeReferenceNode(child)) {
       const referencedSymbol: ts.Symbol | undefined = checker.getSymbolAtLocation(child.typeName);
@@ -499,7 +492,7 @@ function addClassTypeNames(node: ts.ClassDeclaration, checker: ts.TypeChecker, n
 }
 
 function publicMemberTypeNames(node: ts.ClassDeclaration, checker: ts.TypeChecker): readonly string[] {
-  const names: Set<string> = new Set<string>();
+  const names: Set<string> = new Set();
   let current: ts.ClassDeclaration | null = node;
   while (current) {
     addClassTypeNames(current, checker, names);
@@ -548,7 +541,7 @@ export class ApiSourceReader {
     dependencies: ReadonlyMap<string, readonly string[]>,
   ): readonly ApiTypeDefinition[] {
     const pending: string[] = [...initialNames];
-    const found: Map<string, ApiTypeDefinition> = new Map<string, ApiTypeDefinition>();
+    const found: Map<string, ApiTypeDefinition> = new Map();
     while (pending.length) {
       const name: string | undefined = pending.shift();
       const definition: ApiTypeDefinition | undefined = name ? definitions.get(name) : undefined;

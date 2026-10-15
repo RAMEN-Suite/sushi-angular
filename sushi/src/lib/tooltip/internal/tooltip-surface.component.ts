@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular/core';
-import { TooltipPlacement } from '../tooltip.interfaces';
+import { ChangeDetectionStrategy, Component, input, type InputSignal } from '@angular/core';
+import { type TooltipPlacement } from '../tooltip.interfaces';
 
 @Component({
   selector: 'sui-tooltip-surface',

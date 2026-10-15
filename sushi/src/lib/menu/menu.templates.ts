@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { MenuEntry, MenuGroupContext, MenuItem, MenuItemContext } from './menu.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type MenuEntry, type MenuGroupContext, type MenuItem, type MenuItemContext } from './menu.interfaces';
 
 /** Adds content before all menu entries. */
 @Directive({ selector: 'ng-template[suiMenuStart]' })

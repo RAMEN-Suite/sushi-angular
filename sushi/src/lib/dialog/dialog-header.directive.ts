@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { ThemeSeverity } from '../sushi.types';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type ThemeSeverity } from '../sushi.types';
 
 @Directive({
   selector: 'header[suiDialogHeader]',

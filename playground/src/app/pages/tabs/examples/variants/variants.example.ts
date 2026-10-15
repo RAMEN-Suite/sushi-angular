@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Tab, Tabs, TabsValue, TabsVariant } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { Tab, Tabs, type TabsValue, type TabsVariant } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-tabs-variants-example',

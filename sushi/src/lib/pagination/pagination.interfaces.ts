@@ -1,4 +1,4 @@
-import { ComponentSize, ThemeSeverity } from '../sushi.types';
+import { type ComponentSize, type ThemeSeverity } from '../sushi.types';
 
 /** Size scale available to pagination controls. */
 export type PaginationSize = ComponentSize;

@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { SpinnerSize, SpinnerType } from './spinner.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type SpinnerSize, type SpinnerType } from './spinner.interfaces';
 
 @Directive({
   selector: 'span[suiSpinner]',

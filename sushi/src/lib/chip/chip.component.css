@@ -13,7 +13,7 @@
   @apply inline-flex h-8 max-w-full items-center gap-2 px-3 text-sm font-medium;
 }
 
-:host(:not([class*='badge-'])) {
+:host(:not([class*="badge-"])) {
   background-color: var(--sui-chip-background);
   color: var(--sui-chip-color);
 }

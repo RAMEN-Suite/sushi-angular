@@ -1,5 +1,13 @@
-import { booleanAttribute, Directive, ElementRef, inject, input, InputSignal, InputSignalWithTransform } from '@angular/core';
-import { Drawer } from './drawer.component';
+import {
+  booleanAttribute,
+  Directive,
+  ElementRef,
+  inject,
+  input,
+  type InputSignal,
+  type InputSignalWithTransform,
+} from '@angular/core';
+import { type Drawer } from './drawer.component';
 
 @Directive({
   selector: 'button[suiDrawerTrigger]',

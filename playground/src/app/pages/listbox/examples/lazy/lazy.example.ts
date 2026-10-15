@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Badge, Label, Listbox, ListboxFooterTemplate, ListboxHeaderTemplate, ListboxOption } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal, type WritableSignal } from '@angular/core';
+import { Badge, Label, Listbox, ListboxFooterTemplate, ListboxHeaderTemplate, type ListboxOption } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-listbox-lazy-example',
@@ -20,9 +20,17 @@ export class ListboxLazyExample {
   protected readonly options: WritableSignal<readonly ListboxOption[]> = signal(this.members.slice(0, 12));
   protected readonly loading: WritableSignal<boolean> = signal(false);
 
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private timer: ReturnType<typeof setTimeout> | undefined;
+
+  public constructor() {
+    this.destroyRef.onDestroy((): void => clearTimeout(this.timer));
+  }
+
   protected loadMore(offset: number): void {
+    if (this.loading()) return;
     this.loading.set(true);
-    window.setTimeout((): void => {
+    this.timer = setTimeout((): void => {
       this.options.set(this.members.slice(0, offset + this.pageSize));
       this.loading.set(false);
     }, 500);

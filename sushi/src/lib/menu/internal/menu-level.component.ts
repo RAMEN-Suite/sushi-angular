@@ -4,24 +4,24 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
-  InputSignal,
+  type InputSignal,
   output,
-  OutputEmitterRef,
-  Signal,
-  TemplateRef,
+  type OutputEmitterRef,
+  type Signal,
+  type TemplateRef,
   viewChild,
 } from '@angular/core';
 import { Divider } from '../../divider';
 import { MenuAction } from './menu-action.component';
 import {
-  MenuEntry,
-  MenuGroup,
-  MenuGroupContext,
-  MenuItem,
-  MenuItemContext,
-  MenuSeparator,
-  MenuSeverity,
-  MenuSize,
+  type MenuEntry,
+  type MenuGroup,
+  type MenuGroupContext,
+  type MenuItem,
+  type MenuItemContext,
+  type MenuSeparator,
+  type MenuSeverity,
+  type MenuSize,
 } from '../menu.interfaces';
 
 /** @internal */
@@ -56,7 +56,11 @@ export class MenuLevel<I extends MenuItem = MenuItem> {
   public readonly ariaMenu: Signal<AriaMenu<I['value']>> = viewChild.required(AriaMenu<I['value']>);
 
   public focus(): void {
-    this.ariaMenu()._pattern.first();
+    const menu: HTMLElement = this.ariaMenu().element;
+    const firstItem: HTMLElement | null = menu.querySelector<HTMLElement>(
+      '[role="menuitem"]:not([aria-disabled="true"]):not([disabled])',
+    );
+    firstItem?.focus();
   }
 
   protected isGroup(entry: MenuEntry<I>): entry is MenuGroup<I> {

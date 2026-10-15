@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Input, Label, Select, SelectOption, Textarea } from '@sushi-kit/angular';
+import { Input, Label, Select, type SelectOption, Textarea } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-label-basic-example',

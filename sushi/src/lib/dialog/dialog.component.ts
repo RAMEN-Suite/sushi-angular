@@ -6,22 +6,22 @@ import {
   Component,
   computed,
   DestroyRef,
-  ElementRef,
+  type ElementRef,
   inject,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
   viewChild,
 } from '@angular/core';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { LucideX } from '@lucide/angular';
-import { Subscription } from 'rxjs';
-import { DialogCloseEvent, DialogCloseReason, DialogMotion, DialogPosition } from './dialog.interfaces';
+import { type Subscription } from 'rxjs';
+import { type DialogCloseEvent, type DialogCloseReason, type DialogMotion, type DialogPosition } from './dialog.interfaces';
 
 let nextDialogId: number = 0;
 
@@ -145,6 +145,7 @@ export class Dialog {
       this.open.set(true);
       return;
     }
+
     this.restoreTarget = restoreTarget ?? this.activeElement();
     this.open.set(true);
   }
@@ -153,6 +154,7 @@ export class Dialog {
   public close(returnValue: string = '', reason: DialogCloseReason = 'programmatic'): void {
     const dialog: HTMLDialogElement = this.element().nativeElement;
     if (!dialog.open || this.pendingClose) return;
+
     this.closeReason = reason;
     this.open.set(false);
     if (this.motion() === 'none') {

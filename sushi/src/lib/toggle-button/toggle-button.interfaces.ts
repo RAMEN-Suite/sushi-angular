@@ -1,4 +1,4 @@
-import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from '../button';
+import { type ButtonSeverity, type ButtonShape, type ButtonSize, type ButtonVariant } from '../button';
 
 /** Semantic colors available to toggle buttons. */
 export type ToggleButtonSeverity = ButtonSeverity;

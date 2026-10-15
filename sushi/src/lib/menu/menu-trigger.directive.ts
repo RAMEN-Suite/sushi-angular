@@ -1,6 +1,14 @@
-import { booleanAttribute, Directive, ElementRef, inject, input, InputSignal, InputSignalWithTransform } from '@angular/core';
-import { Menu } from './menu.component';
-import { MenuItem } from './menu.interfaces';
+import {
+  booleanAttribute,
+  Directive,
+  ElementRef,
+  inject,
+  input,
+  type InputSignal,
+  type InputSignalWithTransform,
+} from '@angular/core';
+import { type Menu } from './menu.component';
+import { type MenuItem } from './menu.interfaces';
 
 /** Opens a popup Menu from a native button. */
 @Directive({

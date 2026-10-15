@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { FieldTree, form, FormField, max, min, SchemaPathTree } from '@angular/forms/signals';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { type FieldTree, form, FormField, max, min, type SchemaPathTree } from '@angular/forms/signals';
 import { Button, Label, Range } from '@sushi-kit/angular';
 
 interface VolumeModel {

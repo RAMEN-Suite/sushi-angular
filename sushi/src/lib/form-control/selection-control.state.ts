@@ -1,6 +1,6 @@
-import { Directive, input, InputSignal } from '@angular/core';
+import { Directive, input, type InputSignal } from '@angular/core';
 import { FormControlState } from './form-control-state';
-import { FormControlSeverity, FormControlSize } from './form-control.interfaces';
+import { type FormControlSeverity, type FormControlSize } from './form-control.interfaces';
 
 @Directive()
 export abstract class SelectionControlState extends FormControlState {

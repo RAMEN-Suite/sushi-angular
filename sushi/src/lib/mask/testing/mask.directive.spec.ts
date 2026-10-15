@@ -1,9 +1,9 @@
-import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { Mask } from '../mask.directive';
-import { MaskHalf, MaskShape } from '../mask.interfaces';
+import { type MaskHalf, type MaskShape } from '../mask.interfaces';
 
 @Component({
   imports: [Mask],

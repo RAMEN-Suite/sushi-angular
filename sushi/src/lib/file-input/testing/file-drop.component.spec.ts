@@ -1,7 +1,7 @@
-import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type Signal, viewChild, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { query, queryAll, render } from '../../../../testing/test-utils';
+import { query, queryAll, render, requireItem } from '../../../../testing/test-utils';
 import { FileDrop } from '../file-drop.component';
 import type { FileDropRejection } from '../file-drop.interfaces';
 import { FileDropContentTemplate, FileDropItemTemplate } from '../file-drop.templates';
@@ -65,7 +65,7 @@ describe('FileDrop native selection', (): void => {
 
     expect(fixture.componentInstance.value()).toEqual([image, documentFile]);
     expect(fixture.componentInstance.rejections).toHaveLength(1);
-    expect(fixture.componentInstance.rejections[0][0].file).toBe(textFile);
+    expect(requireItem(requireItem(fixture.componentInstance.rejections, 0), 0).file).toBe(textFile);
     expect(query(fixture, '[data-file="ramen.png"]').getAttribute('data-index')).toBe('0');
     expect(query(fixture, '[data-file="menu.pdf"]').getAttribute('data-size')).toBe('8 B');
   });
@@ -82,7 +82,7 @@ describe('FileDrop native selection', (): void => {
     expect(fixture.componentInstance.value()).toEqual([documentFile]);
     expect(document.activeElement).toBe(choose);
 
-    const clear: HTMLButtonElement = queryAll(fixture, 'button')[1];
+    const clear: HTMLButtonElement = requireItem(queryAll(fixture, 'button'), 1);
     clear.click();
     fixture.detectChanges();
 

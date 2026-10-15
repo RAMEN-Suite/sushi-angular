@@ -1,4 +1,4 @@
-import { booleanAttribute, Directive, input, InputSignalWithTransform } from '@angular/core';
+import { booleanAttribute, Directive, input, type InputSignalWithTransform } from '@angular/core';
 import { SelectionControlState } from './selection-control.state';
 
 @Directive()

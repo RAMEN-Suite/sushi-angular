@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import {
   Avatar,
   Badge,
   Divider,
   Menu,
   MenuEndTemplate,
-  MenuEntry,
+  type MenuEntry,
   MenuGroupTemplate,
-  MenuItem,
+  type MenuItem,
   MenuItemTemplate,
   MenuStartTemplate,
-  MenuValue,
+  type MenuValue,
 } from '@sushi-kit/angular';
 
 type WorkspaceAction = 'profile' | 'settings' | 'help' | 'sign-out';

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Button, Table, TableColumn } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { Button, Table, type TableColumn } from '@sushi-kit/angular';
 
 interface Deployment {
   readonly environment: string;

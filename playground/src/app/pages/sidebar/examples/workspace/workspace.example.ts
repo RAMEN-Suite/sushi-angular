@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import {
   LucideBell,
   LucideChartNoAxesCombined,
@@ -25,10 +25,10 @@ import {
   Navbar,
   NavbarAction,
   NavbarBrand,
-  NavbarItem,
+  type NavbarItem,
   Sidebar,
   SidebarFooter,
-  SidebarGroup,
+  type SidebarGroup,
   SidebarItemTemplate,
 } from '@sushi-kit/angular';
 

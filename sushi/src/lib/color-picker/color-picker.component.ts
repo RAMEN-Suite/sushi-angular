@@ -8,23 +8,23 @@ import {
   ElementRef,
   inject,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
   signal,
   TemplateRef,
   viewChild,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
+import { type FormValueControl } from '@angular/forms/signals';
 import { Button } from '../button';
 import { Input } from '../input';
 import { Join, JoinItem } from '../join';
-import { ColorPickerPresetContext, ColorPickerPresetValue } from './color-picker.interfaces';
+import { type ColorPickerPresetContext, type ColorPickerPresetValue } from './color-picker.interfaces';
 import { ColorPickerPresetTemplate } from './color-picker.templates';
 
 interface ColorPickerOption {
@@ -144,7 +144,9 @@ export class ColorPicker implements FormValueControl<string> {
 
   protected handleColorInput(event: Event): void {
     if (this.disabled()) return;
-    const input: HTMLInputElement = event.currentTarget as HTMLInputElement;
+    const input: EventTarget | null = event.currentTarget;
+    if (!(input instanceof HTMLInputElement)) return;
+
     this.draft.set(null);
     this.localInvalid.set(false);
     this.customColor.set(input.value);
@@ -153,7 +155,9 @@ export class ColorPicker implements FormValueControl<string> {
 
   protected handleTextInput(event: Event): void {
     if (this.disabled()) return;
-    const input: HTMLInputElement = event.currentTarget as HTMLInputElement;
+    const input: EventTarget | null = event.currentTarget;
+    if (!(input instanceof HTMLInputElement)) return;
+
     this.draft.set(input.value);
     if (!HEX_COLOR_PATTERN.test(input.value)) return;
     this.localInvalid.set(false);
@@ -174,6 +178,7 @@ export class ColorPicker implements FormValueControl<string> {
     if (this.disabled() || option.disabled) return;
     const current: string = this.value();
     if (!this.isPreset(current)) this.customColor.set(current);
+
     this.draft.set(null);
     this.localInvalid.set(false);
     this.value.set(option.color);
@@ -182,6 +187,7 @@ export class ColorPicker implements FormValueControl<string> {
   protected isTabStop(option: ColorPickerOption, index: number): boolean {
     if (this.disabled() || option.disabled) return false;
     if (option.selected) return true;
+
     const options: readonly ColorPickerOption[] = this.options();
     const hasEnabledSelection: boolean = options.some(
       (candidate: ColorPickerOption): boolean => candidate.selected && !candidate.disabled,
@@ -204,16 +210,19 @@ export class ColorPicker implements FormValueControl<string> {
 
     const currentPosition: number = Math.max(0, enabledIndices.indexOf(index));
     const direction: number = ['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1;
-    const nextPosition: number =
-      event.key === 'Home'
-        ? 0
-        : event.key === 'End'
-          ? enabledIndices.length - 1
-          : (currentPosition + direction + enabledIndices.length) % enabledIndices.length;
-    const nextIndex: number = enabledIndices[nextPosition];
+    let nextPosition: number = (currentPosition + direction + enabledIndices.length) % enabledIndices.length;
+    if (event.key === 'Home') nextPosition = 0;
+    else if (event.key === 'End') nextPosition = enabledIndices.length - 1;
+
+    const nextIndex: number | undefined = enabledIndices[nextPosition];
+    if (nextIndex === undefined) return;
+
+    const option: ColorPickerOption | undefined = options[nextIndex];
+    if (!option) return;
+
     const buttons: NodeListOf<HTMLButtonElement> = this.element.nativeElement.querySelectorAll('[role="radio"]');
     buttons.item(nextIndex).focus();
-    this.selectOption(options[nextIndex]);
+    this.selectOption(option);
   }
 
   protected presetContext(option: ColorPickerOption): ColorPickerPresetContext {
@@ -228,7 +237,8 @@ export class ColorPicker implements FormValueControl<string> {
   }
 
   protected handleFocusout(event: FocusEvent): void {
-    if (!this.element.nativeElement.contains(event.relatedTarget as Node | null)) this.touch.emit();
+    const destination: EventTarget | null = event.relatedTarget;
+    if (!(destination instanceof Node) || !this.element.nativeElement.contains(destination)) this.touch.emit();
   }
 
   protected handleDisabledEvent(event: Event): void {

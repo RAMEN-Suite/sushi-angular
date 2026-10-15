@@ -6,27 +6,27 @@ import {
   computed,
   contentChild,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   numberAttribute,
-  Signal,
+  type Signal,
   TemplateRef,
 } from '@angular/core';
 import { LucideArrowDown, LucideArrowUp, LucideArrowUpDown } from '@lucide/angular';
 import { Button } from '../button';
 import { Spinner } from '../spinner';
 import {
-  TableCellContext,
-  TableCollectionContext,
-  TableColumn,
-  TableHeaderContext,
-  TableRowContext,
-  TableSize,
-  TableSort,
-  TableSortDirection,
-  TableTrackBy,
+  type TableCellContext,
+  type TableCollectionContext,
+  type TableColumn,
+  type TableHeaderContext,
+  type TableRowContext,
+  type TableSize,
+  type TableSort,
+  type TableSortDirection,
+  type TableTrackBy,
 } from './table.interfaces';
 import {
   TableCaptionTemplate,

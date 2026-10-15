@@ -1,5 +1,10 @@
 import { Directive } from '@angular/core';
-import { TableCellContext, TableCollectionContext, TableHeaderContext, TableRowContext } from './table.interfaces';
+import {
+  type TableCellContext,
+  type TableCollectionContext,
+  type TableHeaderContext,
+  type TableRowContext,
+} from './table.interfaces';
 
 /** Replaces the native caption and exposes the rendered collection. */
 @Directive({ selector: 'ng-template[suiTableCaption]' })

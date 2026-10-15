@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, Signal, signal, WritableSignal } from '@angular/core';
-import { Gallery, GalleryImage, Lightbox } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, computed, type Signal, signal, type WritableSignal } from '@angular/core';
+import { Gallery, type GalleryImage, Lightbox } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-gallery-usage-example',
@@ -76,5 +76,9 @@ export class GalleryUsageExample {
   ];
 
   protected readonly activeIndex: WritableSignal<number> = signal(0);
-  protected readonly activeImage: Signal<GalleryImage> = computed((): GalleryImage => this.images[this.activeIndex()]);
+  protected readonly activeImage: Signal<GalleryImage> = computed((): GalleryImage => {
+    const image: GalleryImage | undefined = this.images[this.activeIndex()];
+    if (!image) throw new Error('Expected an active Gallery image.');
+    return image;
+  });
 }

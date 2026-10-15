@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, Signal, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, type Signal, signal, type WritableSignal } from '@angular/core';
 import { LucideMinus, LucidePlus, LucideShoppingBag, LucideTrash, LucideX } from '@lucide/angular';
 import {
   Badge,

@@ -6,23 +6,23 @@ import {
   computed,
   contentChild,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
   TemplateRef,
 } from '@angular/core';
-import { FormCheckboxControl } from '@angular/forms/signals';
+import { type FormCheckboxControl } from '@angular/forms/signals';
 import { Button } from '../button';
 import {
-  ToggleButtonContext,
-  ToggleButtonSeverity,
-  ToggleButtonShape,
-  ToggleButtonSize,
-  ToggleButtonVariant,
+  type ToggleButtonContext,
+  type ToggleButtonSeverity,
+  type ToggleButtonShape,
+  type ToggleButtonSize,
+  type ToggleButtonVariant,
 } from './toggle-button.interfaces';
 import { ToggleButtonOffTemplate, ToggleButtonOnTemplate, ToggleButtonTemplate } from './toggle-button.templates';
 

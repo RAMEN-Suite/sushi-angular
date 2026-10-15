@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, signal, Signal, viewChild, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  type ElementRef,
+  signal,
+  type Signal,
+  viewChild,
+  type WritableSignal,
+} from '@angular/core';
 import { Button, Fieldset, FieldsetLegend, FileInput, Label } from '@sushi-kit/angular';
 
 @Component({

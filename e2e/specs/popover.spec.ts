@@ -1,6 +1,6 @@
-import { expect, Locator, Page, test } from '@playwright/test';
+import { expect, type Locator, type Page, test } from '@playwright/test';
 
-import { Bounds, visibleBounds } from '../support/geometry';
+import { type Bounds, visibleBounds } from '../support/geometry';
 
 test('Popover opens outside its trigger and restores focus on Escape', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/popover');

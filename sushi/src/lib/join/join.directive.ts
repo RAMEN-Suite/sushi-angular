@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { JoinOrientation } from './join.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type JoinOrientation } from './join.interfaces';
 
 @Directive({
   selector: '[suiJoin]',

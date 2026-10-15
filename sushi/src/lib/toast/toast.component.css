@@ -43,7 +43,7 @@
 .sui-toast__item {
   animation: none;
   display: grid;
-  grid-template-areas: 'icon content close';
+  grid-template-areas: "icon content close";
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   width: 100%;
@@ -51,8 +51,8 @@
 
 .sui-toast__item--with-actions {
   grid-template-areas:
-    'icon content close'
-    '. actions .';
+    "icon content close"
+    ". actions .";
   row-gap: 0.5rem;
 }
 

@@ -1,5 +1,13 @@
-import { booleanAttribute, Directive, ElementRef, inject, input, InputSignal, InputSignalWithTransform } from '@angular/core';
-import { Menu } from './menu.component';
+import {
+  booleanAttribute,
+  Directive,
+  ElementRef,
+  inject,
+  input,
+  type InputSignal,
+  type InputSignalWithTransform,
+} from '@angular/core';
+import { type Menu } from './menu.component';
 
 /** Opens a popup Menu from a context-menu gesture on its host. */
 @Directive({

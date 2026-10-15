@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { InputNumberButtonsContext } from './input-number.interfaces';
+import { type InputNumberButtonsContext } from './input-number.interfaces';
 
 /** Replaces the complete increment and decrement control group. */
 @Directive({ selector: 'ng-template[suiInputNumberButtons]' })

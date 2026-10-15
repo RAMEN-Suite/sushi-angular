@@ -1,4 +1,4 @@
-import { NavbarItem, NavbarItemContext } from '../navbar';
+import { type NavbarItem, type NavbarItemContext } from '../navbar';
 
 /** Supported persistent Sidebar widths. */
 export type SidebarSize = 'sm' | 'md' | 'lg';

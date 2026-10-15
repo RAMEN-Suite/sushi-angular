@@ -1,6 +1,6 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { NavbarItem } from '../navbar';
-import { SidebarGroup, SidebarGroupContext } from './sidebar.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type NavbarItem } from '../navbar';
+import { type SidebarGroup, type SidebarGroupContext } from './sidebar.interfaces';
 
 /** Customizes visible Sidebar group headings without changing navigation items. */
 @Directive({ selector: 'ng-template[suiSidebarGroup]' })

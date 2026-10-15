@@ -4,14 +4,14 @@ import {
   Component,
   inject,
   input,
-  InputSignal,
+  type InputSignal,
   output,
-  OutputEmitterRef,
-  TemplateRef,
+  type OutputEmitterRef,
+  type TemplateRef,
 } from '@angular/core';
 import { LucideChevronDown } from '@lucide/angular';
 import { RouterLink } from '@angular/router';
-import { NavbarItem, NavbarItemContext, NavbarOrientation, NavbarVariant } from '../navbar.interfaces';
+import { type NavbarItem, type NavbarItemContext, type NavbarOrientation, type NavbarVariant } from '../navbar.interfaces';
 import { NavbarDropdown } from './navbar-dropdown.directive';
 import { NavbarLink } from './navbar-link.directive';
 import { NavbarLinks } from './navbar-links.directive';

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { query, queryAll, render } from '../../../../testing/test-utils';
 import { Breadcrumb } from '../breadcrumb.component';
-import { BreadcrumbItem } from '../breadcrumb.interfaces';
+import { type BreadcrumbItem } from '../breadcrumb.interfaces';
 import { BreadcrumbItemTemplate } from '../breadcrumb.templates';
 
 @Component({

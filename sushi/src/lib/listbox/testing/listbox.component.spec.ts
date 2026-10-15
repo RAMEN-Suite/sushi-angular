@@ -1,5 +1,5 @@
-import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type Signal, viewChild, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { press, query, queryAll, render } from '../../../../testing/test-utils';
 import { Listbox } from '../listbox.component';
@@ -39,7 +39,7 @@ const options: readonly RamenOption[] = [
       (touch)="touches += 1"
     >
       <ng-template suiListboxFilter let-query let-update="update">
-        <input data-filter [value]="query" (input)="update($any($event.target).value)" />
+        <input #filterInput data-filter [value]="query" (input)="update(filterInput.value)" />
       </ng-template>
       <ng-template [suiListboxItem]="options" let-option let-selected="selected" let-disabled="disabled">
         <span

@@ -22,7 +22,7 @@
   background-color: var(--sui-tabs-panel-background);
 }
 
-.sui-tab[aria-disabled='true'] {
+.sui-tab[aria-disabled="true"] {
   cursor: not-allowed;
   opacity: var(--sui-tabs-disabled-opacity);
   pointer-events: auto;

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Code, CodeLine, Tab, Tabs, TabsValue } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { Code, CodeLine, Tab, Tabs, type TabsValue } from '@sushi-kit/angular';
 import { highlightLines } from '../../shared/example-code/example-highlighter';
 import { textSource } from '../../shared/example-code/example-source';
 import inviteHtml from './examples/invite/invite.example.html';

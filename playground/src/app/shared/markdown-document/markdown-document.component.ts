@@ -2,10 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
-  InputSignal,
+  type InputSignal,
   output,
-  OutputEmitterRef,
-  ResourceRef,
+  type OutputEmitterRef,
+  type ResourceRef,
   resource,
 } from '@angular/core';
 import {
@@ -13,9 +13,9 @@ import {
   CodeLine,
   Spinner,
   Table,
-  TableAlignment,
+  type TableAlignment,
   TableCellTemplate,
-  TableColumn,
+  type TableColumn,
   TableHeaderTemplate,
 } from '@sushi-kit/angular';
 import { marked } from 'marked';

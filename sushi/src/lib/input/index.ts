@@ -1,2 +1,2 @@
 export * from './input.directive';
-export * from './input.interfaces';
+export type * from './input.interfaces';

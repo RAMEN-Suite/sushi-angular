@@ -5,27 +5,27 @@ import {
   Component,
   computed,
   contentChild,
-  ElementRef,
+  type ElementRef,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   numberAttribute,
   output,
-  OutputEmitterRef,
+  type OutputEmitterRef,
   signal,
-  Signal,
+  type Signal,
   TemplateRef,
   viewChild,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
+import { type FormValueControl } from '@angular/forms/signals';
 import { LucideChevronDown, LucideChevronUp } from '@lucide/angular';
 import { Button } from '../button';
-import { FormControlSize } from '../form-control';
+import { type FormControlSize } from '../form-control';
 import { Join, JoinItem } from '../join';
-import { InputNumberButtonsContext } from './input-number.interfaces';
+import { type InputNumberButtonsContext } from './input-number.interfaces';
 import { InputNumberButtonsTemplate } from './input-number.templates';
 
 const optionalNumber: (value: unknown) => number | undefined = (value: unknown): number | undefined =>
@@ -147,7 +147,9 @@ export class InputNumber implements FormValueControl<number | null> {
 
   protected handleInput(event: Event): void {
     if (this.disabled()) return;
-    const input: HTMLInputElement = event.currentTarget as HTMLInputElement;
+    const input: EventTarget | null = event.currentTarget;
+    if (!(input instanceof HTMLInputElement)) return;
+
     const parts: Intl.NumberFormatPart[] = this.formatter().formatToParts(12345.6);
     const group: string = parts.find((part): boolean => part.type === 'group')?.value ?? ',';
     const decimal: string = parts.find((part): boolean => part.type === 'decimal')?.value ?? '.';

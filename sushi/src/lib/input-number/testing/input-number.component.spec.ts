@@ -1,7 +1,7 @@
-import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type Signal, viewChild, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { press, query, queryAll, render } from '../../../../testing/test-utils';
+import { press, query, queryAll, render, requireItem } from '../../../../testing/test-utils';
 import { InputNumber } from '../input-number.component';
 import { InputNumberButtonsTemplate } from '../input-number.templates';
 
@@ -132,10 +132,10 @@ describe('InputNumber button labels', (): void => {
     fixture.componentInstance.incrementLabel.set('Aumenta');
     fixture.componentInstance.decrementLabel.set('Diminuisci');
     fixture.detectChanges();
-    buttons[0].click();
+    requireItem(buttons, 0).click();
 
-    expect(buttons[0].getAttribute('aria-label')).toBe('Aumenta');
-    expect(buttons[1].getAttribute('aria-label')).toBe('Diminuisci');
+    expect(requireItem(buttons, 0).getAttribute('aria-label')).toBe('Aumenta');
+    expect(requireItem(buttons, 1).getAttribute('aria-label')).toBe('Diminuisci');
     expect(fixture.componentInstance.value()).toBe(10);
   });
 });
@@ -145,8 +145,8 @@ describe('InputNumber interaction', (): void => {
     const fixture: ComponentFixture<InputNumberHost> = render(InputNumberHost);
     const input: HTMLInputElement = query(fixture, 'input');
     const buttons: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
-    buttons[0].click();
-    buttons[0].click();
+    requireItem(buttons, 0).click();
+    requireItem(buttons, 0).click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.value()).toBe(12);
@@ -156,7 +156,7 @@ describe('InputNumber interaction', (): void => {
 
     expect(fixture.componentInstance.value()).toBe(10);
 
-    buttons[1].click();
+    requireItem(buttons, 1).click();
 
     expect(fixture.componentInstance.value()).toBe(8);
     expect(fixture.componentInstance.touches).toBe(3);

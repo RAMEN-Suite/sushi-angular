@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { Drawer } from './drawer.component';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type Drawer } from './drawer.component';
 
 @Directive({
   selector: 'button[suiDrawerClose]',

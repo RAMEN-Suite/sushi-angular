@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge } from '@sushi-kit/angular';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
-import { ExampleSource, textSource } from '../../shared/example-code/example-source';
+import { type ExampleSource, textSource } from '../../shared/example-code/example-source';
 import asyncHtml from './examples/async/async.example.html';
 import * as asyncTs from './examples/async/async.example.ts' with { loader: 'text' };
 import { AutocompleteAsyncExample } from './examples/async/async.example';

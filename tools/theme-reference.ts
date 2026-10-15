@@ -54,7 +54,7 @@ function documentedToken(declaration: Declaration): ThemeTokenDocumentation | nu
 }
 
 function valuesFrom(theme: AtRule): ReadonlyMap<string, string> {
-  const values: Map<string, string> = new Map<string, string>();
+  const values: Map<string, string> = new Map();
   theme.walkDecls((declaration: Declaration): void => {
     if (declaration.prop.startsWith('--')) values.set(declaration.prop, declaration.value);
   });

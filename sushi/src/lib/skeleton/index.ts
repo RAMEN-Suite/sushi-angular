@@ -1,2 +1,2 @@
 export * from './skeleton.directive';
-export * from './skeleton.interfaces';
+export type * from './skeleton.interfaces';

@@ -1,4 +1,4 @@
-@import 'photoswipe/style.css' layer(components);
+@import "photoswipe/style.css" layer(components);
 
 @layer components {
   .sui-lightbox-trigger {

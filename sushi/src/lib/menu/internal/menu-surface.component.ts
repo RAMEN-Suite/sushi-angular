@@ -3,14 +3,21 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
-  InputSignal,
+  type InputSignal,
   output,
-  OutputEmitterRef,
-  Signal,
-  TemplateRef,
+  type OutputEmitterRef,
+  type Signal,
+  type TemplateRef,
   viewChild,
 } from '@angular/core';
-import { MenuEntry, MenuGroupContext, MenuItem, MenuItemContext, MenuSeverity, MenuSize } from '../menu.interfaces';
+import {
+  type MenuEntry,
+  type MenuGroupContext,
+  type MenuItem,
+  type MenuItemContext,
+  type MenuSeverity,
+  type MenuSize,
+} from '../menu.interfaces';
 import { MenuLevel } from './menu-level.component';
 
 /** @internal */

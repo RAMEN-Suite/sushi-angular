@@ -19,7 +19,7 @@ a:focus-visible {
   outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
   outline-offset: var(--sui-focus-ring-offset);
 }
-[aria-current='page'] {
+[aria-current="page"] {
   color: var(--sui-breadcrumb-current-color);
   cursor: default;
   font-weight: 600;
@@ -42,7 +42,7 @@ li {
 }
 
 a,
-[aria-current='page'] {
+[aria-current="page"] {
   min-width: 0;
   overflow-wrap: anywhere;
 }

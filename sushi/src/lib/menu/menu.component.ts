@@ -1,5 +1,5 @@
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
-import { CdkConnectedOverlay, ConnectedPosition, FlexibleConnectedPositionStrategyOrigin } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, type ConnectedPosition, type FlexibleConnectedPositionStrategyOrigin } from '@angular/cdk/overlay';
 import {
   afterRenderEffect,
   booleanAttribute,
@@ -10,18 +10,26 @@ import {
   DestroyRef,
   inject,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   numberAttribute,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
   signal,
   TemplateRef,
   viewChild,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
-import { MenuEntry, MenuGroupContext, MenuItem, MenuItemContext, MenuPlacement, MenuSeverity, MenuSize } from './menu.interfaces';
+import {
+  type MenuEntry,
+  type MenuGroupContext,
+  type MenuItem,
+  type MenuItemContext,
+  type MenuPlacement,
+  type MenuSeverity,
+  type MenuSize,
+} from './menu.interfaces';
 import { MenuSurface } from './internal/menu-surface.component';
 import { MenuEndTemplate, MenuGroupTemplate, MenuItemTemplate, MenuStartTemplate } from './menu.templates';
 

@@ -3,20 +3,20 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  ElementRef,
+  type ElementRef,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   numberAttribute,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
   viewChild,
 } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
-import { FormControlSize } from '../form-control';
+import { type FormValueControl } from '@angular/forms/signals';
+import { type FormControlSize } from '../form-control';
 
 /** Edits a fixed-length one-time code through one accessible native input. */
 @Component({
@@ -77,7 +77,9 @@ export class InputOtp implements FormValueControl<string> {
 
   protected handleInput(event: Event): void {
     if (this.disabled()) return;
-    const inputElement: HTMLInputElement = event.currentTarget as HTMLInputElement;
+    const inputElement: EventTarget | null = event.currentTarget;
+    if (!(inputElement instanceof HTMLInputElement)) return;
+
     const nextValue: string = (this.numeric() ? inputElement.value.replace(/\D/g, '') : inputElement.value).slice(
       0,
       this.length(),

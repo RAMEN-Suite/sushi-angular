@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { DataViewCollectionContext, DataViewItemContext, DataViewLoadMoreContext } from './data-view.interfaces';
+import { type DataViewCollectionContext, type DataViewItemContext, type DataViewLoadMoreContext } from './data-view.interfaces';
 
 /** Renders every item and exposes its layout and page position. */
 @Directive({ selector: 'ng-template[suiDataViewItem]' })

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import {
   Badge,
   Button,
@@ -8,7 +8,7 @@ import {
   DataView,
   DataViewHeaderTemplate,
   DataViewItemTemplate,
-  DataViewLayout,
+  type DataViewLayout,
 } from '@sushi-kit/angular';
 import { LucideShoppingCart } from '@lucide/angular';
 

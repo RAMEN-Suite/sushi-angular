@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { Popover } from './popover.component';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type Popover } from './popover.component';
 
 /** Closes a Popover from a native button. */
 @Directive({ selector: 'button[suiPopoverClose]', host: { type: 'button', '(click)': 'popover().hide(true)' } })

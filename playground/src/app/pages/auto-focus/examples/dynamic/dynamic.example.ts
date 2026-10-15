@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { AutoFocus, Button, Input, Join, JoinItem } from '@sushi-kit/angular';
 
 @Component({

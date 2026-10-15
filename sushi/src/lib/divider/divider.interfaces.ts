@@ -1,4 +1,4 @@
-import { Orientation, ThemeSeverity } from '../sushi.types';
+import { type Orientation, type ThemeSeverity } from '../sushi.types';
 
 /** Semantic colors available to dividers. */
 export type DividerSeverity = ThemeSeverity;

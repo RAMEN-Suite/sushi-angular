@@ -1,6 +1,6 @@
-import { expect, Locator, Page, test } from '@playwright/test';
+import { expect, type Locator, type Page, test } from '@playwright/test';
 
-import { Bounds, visibleBounds } from '../support/geometry';
+import { type Bounds, visibleBounds } from '../support/geometry';
 
 test('Chip sizes produce different surface dimensions and accept a public radius override', async ({
   page,

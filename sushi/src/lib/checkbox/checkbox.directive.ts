@@ -1,4 +1,4 @@
-import { booleanAttribute, Directive, input, InputSignalWithTransform } from '@angular/core';
+import { booleanAttribute, Directive, input, type InputSignalWithTransform } from '@angular/core';
 import { SelectionControlState } from '../form-control';
 
 /** Styles a native checkbox and exposes consistent form state. */

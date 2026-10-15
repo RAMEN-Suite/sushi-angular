@@ -9,14 +9,14 @@ const PACKAGE_DIRECTIVE: RegExp = /@(?:import|plugin|reference)\s+["']([^"']+)["
 const LICENSE_FILE: RegExp = /^(licen[cs]e|copying)/iu;
 
 interface PackageManifest {
-  version: string;
+  readonly version: string;
 }
 
 function toPackageName(specifier: string): string | null {
   if (/^[./]|^https?:/u.test(specifier)) return null;
 
   const segments: string[] = specifier.split('/');
-  return specifier.startsWith('@') ? segments.slice(0, 2).join('/') : segments[0];
+  return specifier.startsWith('@') ? segments.slice(0, 2).join('/') : (segments[0] ?? null);
 }
 
 async function collectPackages(): Promise<string[]> {
@@ -25,12 +25,13 @@ async function collectPackages(): Promise<string[]> {
     .filter((entry: Dirent): boolean => entry.isFile() && entry.name.endsWith('.css'))
     .map((entry: Dirent): string => resolve(entry.parentPath, entry.name));
 
-  const packages: Set<string> = new Set<string>();
+  const packages: Set<string> = new Set();
 
   for (const file of styleFiles) {
     const content: string = await readFile(file, 'utf8');
 
     for (const [, specifier] of content.matchAll(PACKAGE_DIRECTIVE)) {
+      if (!specifier) continue;
       const packageName: string | null = toPackageName(specifier);
       if (packageName) packages.add(packageName);
     }
@@ -41,7 +42,11 @@ async function collectPackages(): Promise<string[]> {
 
 async function readManifest(packageDir: string): Promise<PackageManifest> {
   const content: string = await readFile(resolve(packageDir, 'package.json'), 'utf8');
-  return JSON.parse(content) as PackageManifest;
+  const manifest: unknown = JSON.parse(content);
+  if (typeof manifest !== 'object' || manifest === null || !('version' in manifest) || typeof manifest.version !== 'string') {
+    throw new Error(`Expected a package version in ${packageDir}/package.json.`);
+  }
+  return { version: manifest.version };
 }
 
 async function readNotice(packageName: string): Promise<string> {

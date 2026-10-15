@@ -1,4 +1,4 @@
-import { ComponentSize } from '../sushi.types';
+import { type ComponentSize } from '../sushi.types';
 
 /** Size scale controlling list row density. */
 export type ListSize = ComponentSize;

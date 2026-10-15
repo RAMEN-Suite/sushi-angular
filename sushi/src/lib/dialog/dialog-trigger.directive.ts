@@ -1,5 +1,13 @@
-import { booleanAttribute, Directive, ElementRef, inject, input, InputSignal, InputSignalWithTransform } from '@angular/core';
-import { Dialog } from './dialog.component';
+import {
+  booleanAttribute,
+  Directive,
+  ElementRef,
+  inject,
+  input,
+  type InputSignal,
+  type InputSignalWithTransform,
+} from '@angular/core';
+import { type Dialog } from './dialog.component';
 
 @Directive({
   selector: 'button[suiDialogTrigger]',

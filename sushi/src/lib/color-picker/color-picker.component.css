@@ -77,25 +77,25 @@
     0 -1px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset;
 }
 
-.sui-color-picker__preset:not([aria-disabled='true']):hover {
+.sui-color-picker__preset:not([aria-disabled="true"]):hover {
   border-color: color-mix(in oklab, var(--color-base-content) 35%, transparent);
   background-color: var(--sui-color-picker-preset-background);
   color: var(--color-base-content);
 }
 
-.sui-color-picker__preset:not([aria-disabled='true'])[aria-checked='true'] {
+.sui-color-picker__preset:not([aria-disabled="true"])[aria-checked="true"] {
   border-color: var(--sui-color-picker-preset-ring);
   background-color: var(--sui-color-picker-preset-background);
   color: var(--sui-color-picker-preset-content);
 }
 
-.sui-color-picker__preset:not([aria-disabled='true']):focus-visible {
+.sui-color-picker__preset:not([aria-disabled="true"]):focus-visible {
   border-color: var(--sui-color-picker-preset-ring);
   outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, var(--sui-color-picker-preset-ring));
   outline-offset: var(--sui-focus-ring-offset);
 }
 
-.sui-color-picker__preset[aria-disabled='true'] {
+.sui-color-picker__preset[aria-disabled="true"] {
   --btn-color: var(--color-base-200);
   --btn-fg: color-mix(in oklab, var(--color-base-content) 45%, transparent);
   --btn-rest-fg: color-mix(in oklab, var(--color-base-content) 45%, transparent);
@@ -110,7 +110,7 @@
   user-select: none;
 }
 
-.sui-color-picker__preset[aria-disabled='true'] .sui-color-picker__preset-swatch {
+.sui-color-picker__preset[aria-disabled="true"] .sui-color-picker__preset-swatch {
   opacity: 0.4;
 }
 

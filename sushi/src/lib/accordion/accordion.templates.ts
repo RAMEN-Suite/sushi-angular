@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { AccordionItemContext } from './accordion.interfaces';
+import { type AccordionItemContext } from './accordion.interfaces';
 
 /** Replaces each accordion heading and exposes its item and expanded state. */
 @Directive({ selector: 'ng-template[suiAccordionHeader]' })

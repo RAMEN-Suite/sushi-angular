@@ -87,8 +87,8 @@
   z-index: 1;
 }
 
-.join > .join-item:is(.input-error, .select-error, .textarea-error, .file-input-error, [aria-invalid='true']),
-.join > .join-item:has(.input-error, .select-error, .textarea-error, .file-input-error, [aria-invalid='true']) {
+.join > .join-item:is(.input-error, .select-error, .textarea-error, .file-input-error, [aria-invalid="true"]),
+.join > .join-item:has(.input-error, .select-error, .textarea-error, .file-input-error, [aria-invalid="true"]) {
   z-index: 2;
 }
 

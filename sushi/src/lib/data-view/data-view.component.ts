@@ -6,15 +6,15 @@ import {
   Component,
   computed,
   contentChild,
-  ElementRef,
+  type ElementRef,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
   TemplateRef,
   viewChild,
 } from '@angular/core';
@@ -22,15 +22,15 @@ import { LucideGrid2x2, LucideList } from '@lucide/angular';
 import { Button } from '../button';
 import { nonNegativeInteger, positiveInteger } from '../number.transforms';
 import { Pagination } from '../pagination';
-import { SelectButton, SelectButtonOption, SelectButtonOptionTemplate, SelectButtonValue } from '../select-button';
+import { SelectButton, type SelectButtonOption, SelectButtonOptionTemplate, type SelectButtonValue } from '../select-button';
 import { Spinner } from '../spinner';
 import {
-  DataViewCollectionContext,
-  DataViewItemContext,
-  DataViewLayout,
-  DataViewLoadMoreContext,
-  DataViewPaginatorPosition,
-  DataViewTrackBy,
+  type DataViewCollectionContext,
+  type DataViewItemContext,
+  type DataViewLayout,
+  type DataViewLoadMoreContext,
+  type DataViewPaginatorPosition,
+  type DataViewTrackBy,
 } from './data-view.interfaces';
 import {
   DataViewEmptyTemplate,

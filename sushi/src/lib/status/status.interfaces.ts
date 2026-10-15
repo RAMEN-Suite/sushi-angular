@@ -1,4 +1,4 @@
-import { ComponentSize, ThemeSeverity } from '../sushi.types';
+import { type ComponentSize, type ThemeSeverity } from '../sushi.types';
 
 /** Semantic colors available to status markers. */
 export type StatusSeverity = ThemeSeverity;

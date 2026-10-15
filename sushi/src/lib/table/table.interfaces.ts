@@ -1,4 +1,4 @@
-import { ComponentSize } from '../sushi.types';
+import { type ComponentSize } from '../sushi.types';
 
 /** Size scale available to table cells. */
 export type TableSize = ComponentSize;

@@ -1,4 +1,4 @@
-import { Injectable, signal, WritableSignal } from '@angular/core';
+import { Injectable, signal, type WritableSignal } from '@angular/core';
 
 let nextNavbarId: number = 0;
 

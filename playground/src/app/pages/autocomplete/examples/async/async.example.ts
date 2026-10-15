@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal, type WritableSignal } from '@angular/core';
 import {
   Autocomplete,
   AutocompleteEmptyTemplate,
   AutocompleteErrorTemplate,
   AutocompleteLoadingTemplate,
-  AutocompleteOption,
+  type AutocompleteOption,
   Label,
   Spinner,
 } from '@sushi-kit/angular';

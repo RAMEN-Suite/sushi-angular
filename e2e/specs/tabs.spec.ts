@@ -1,4 +1,4 @@
-import { expect, Locator, Page, test } from '@playwright/test';
+import { expect, type Locator, type Page, test } from '@playwright/test';
 
 test('Tabs follow arrow focus, activate the focused tab, and skip disabled tabs', async ({
   page,

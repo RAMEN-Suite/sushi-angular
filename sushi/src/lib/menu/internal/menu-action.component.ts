@@ -5,13 +5,13 @@ import {
   Component,
   forwardRef,
   input,
-  InputSignal,
+  type InputSignal,
   output,
-  OutputEmitterRef,
-  TemplateRef,
+  type OutputEmitterRef,
+  type TemplateRef,
 } from '@angular/core';
 import { LucideChevronRight } from '@lucide/angular';
-import { MenuGroupContext, MenuItem, MenuItemContext, MenuSeverity, MenuSize } from '../menu.interfaces';
+import { type MenuGroupContext, type MenuItem, type MenuItemContext, type MenuSeverity, type MenuSize } from '../menu.interfaces';
 import { MenuLevel } from './menu-level.component';
 
 let nextMenuActionId: number = 0;

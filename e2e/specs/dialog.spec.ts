@@ -1,6 +1,6 @@
-import { expect, Locator, Page, test } from '@playwright/test';
+import { expect, type Locator, type Page, test } from '@playwright/test';
 
-import { Bounds, visibleBounds } from '../support/geometry';
+import { type Bounds, visibleBounds } from '../support/geometry';
 
 async function expectOrigin(dialog: Locator, origin: Bounds, tolerance: number): Promise<void> {
   await expect(async (): Promise<void> => {

@@ -1,9 +1,9 @@
-import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { afterEach, describe, expect, it } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { Select } from '../select.component';
-import { SelectModelValue, SelectOption } from '../select.interfaces';
+import { type SelectModelValue, type SelectOption } from '../select.interfaces';
 
 @Component({
   imports: [Select],

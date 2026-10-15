@@ -1,7 +1,7 @@
-import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type Signal, viewChild, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { press, query, queryAll, render } from '../../../../testing/test-utils';
+import { press, query, queryAll, render, requireItem } from '../../../../testing/test-utils';
 import { ColorPicker } from '../color-picker.component';
 import type { ColorPickerPresetValue } from '../color-picker.interfaces';
 import { ColorPickerPresetTemplate } from '../color-picker.templates';
@@ -121,13 +121,13 @@ describe('ColorPicker presets', (): void => {
   it('selects enabled presets and skips disabled presets with arrow keys', (): void => {
     const fixture: ComponentFixture<ColorPickerHost> = render(ColorPickerHost);
     const radios: readonly HTMLButtonElement[] = queryAll(fixture, 'button[role="radio"]') as readonly HTMLButtonElement[];
-    press(radios[0], 'ArrowRight');
+    press(requireItem(radios, 0), 'ArrowRight');
     fixture.detectChanges();
 
-    expect(document.activeElement).toBe(radios[2]);
+    expect(document.activeElement).toBe(requireItem(radios, 2));
     expect(fixture.componentInstance.value()).toBe('#0000ff');
 
-    radios[1].click();
+    requireItem(radios, 1).click();
 
     expect(fixture.componentInstance.value()).toBe('#0000ff');
   });
@@ -140,7 +140,7 @@ describe('ColorPicker presets', (): void => {
     fixture.detectChanges();
 
     const radios: readonly HTMLButtonElement[] = queryAll(fixture, 'button[role="radio"]') as readonly HTMLButtonElement[];
-    radios[0].click();
+    requireItem(radios, 0).click();
     fixture.detectChanges();
     const custom: HTMLButtonElement | undefined = radios.at(-1);
     if (!custom) throw new Error('Expected the custom-color preset.');

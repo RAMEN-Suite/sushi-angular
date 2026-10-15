@@ -5,12 +5,12 @@ import {
   Component,
   contentChild,
   input,
-  InputSignal,
-  InputSignalWithTransform,
-  Signal,
+  type InputSignal,
+  type InputSignalWithTransform,
+  type Signal,
   TemplateRef,
 } from '@angular/core';
-import { ListItemContext, ListSize, ListTrackBy } from './list.interfaces';
+import { type ListItemContext, type ListSize, type ListTrackBy } from './list.interfaces';
 import { ListItemTemplate } from './list.templates';
 
 /** Renders a typed collection as a native list with consumer-defined rows. */

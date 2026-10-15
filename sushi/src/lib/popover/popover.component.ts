@@ -1,8 +1,8 @@
 import {
   CdkConnectedOverlay,
-  ConnectedOverlayPositionChange,
-  ConnectedPosition,
-  FlexibleConnectedPositionStrategyOrigin,
+  type ConnectedOverlayPositionChange,
+  type ConnectedPosition,
+  type FlexibleConnectedPositionStrategyOrigin,
 } from '@angular/cdk/overlay';
 import { LucideX } from '@lucide/angular';
 import {
@@ -11,19 +11,19 @@ import {
   Component,
   computed,
   input,
-  ElementRef,
-  InputSignal,
-  InputSignalWithTransform,
+  type ElementRef,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   numberAttribute,
-  Signal,
+  type Signal,
   signal,
   viewChild,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
 import { Button } from '../button';
-import { PopoverPlacement } from './popover.interfaces';
+import { type PopoverPlacement } from './popover.interfaces';
 
 let nextPopoverId: number = 0;
 

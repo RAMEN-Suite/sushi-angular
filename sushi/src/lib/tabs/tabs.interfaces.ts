@@ -1,4 +1,4 @@
-import { ComponentSize, Orientation } from '../sushi.types';
+import { type ComponentSize, type Orientation } from '../sushi.types';
 
 /** Identifier used to select one tab. */
 export type TabsValue = string;

@@ -1,3 +1,3 @@
 export * from './table.component';
-export * from './table.interfaces';
+export type * from './table.interfaces';
 export * from './table.templates';

@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { ColorPickerPresetContext } from './color-picker.interfaces';
+import { type ColorPickerPresetContext } from './color-picker.interfaces';
 
 /** Replaces each preset action's default swatch while preserving selection, keyboard behavior, and themed interaction states. */
 @Directive({ selector: 'ng-template[suiColorPickerPreset]' })

@@ -6,14 +6,14 @@ import {
   computed,
   contentChild,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
-  Signal,
+  type ModelSignal,
+  type Signal,
   signal,
   TemplateRef,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
 import { LucideChevronLeft, LucideChevronRight, LucideChevronsLeft, LucideChevronsRight } from '@lucide/angular';
 import { AutoFocus } from '../auto-focus';

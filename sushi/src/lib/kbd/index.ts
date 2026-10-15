@@ -1,2 +1,2 @@
 export * from './kbd.directive';
-export * from './kbd.interfaces';
+export type * from './kbd.interfaces';

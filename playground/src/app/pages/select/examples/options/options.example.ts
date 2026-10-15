@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucideGlobe } from '@lucide/angular';
 import {
   Badge,
   Label,
   Select,
-  SelectCompareWith,
+  type SelectCompareWith,
   SelectGroupTemplate,
   SelectItemTemplate,
-  SelectModelValue,
-  SelectOption,
+  type SelectModelValue,
+  type SelectOption,
   SelectSelectedItemTemplate,
-  SelectValue,
+  type SelectValue,
 } from '@sushi-kit/angular';
 
 interface Country extends SelectOption {

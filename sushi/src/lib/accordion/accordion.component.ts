@@ -12,16 +12,22 @@ import {
   contentChild,
   contentChildren,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
-  Signal,
+  type ModelSignal,
+  type Signal,
   TemplateRef,
 } from '@angular/core';
 import { LucideChevronDown } from '@lucide/angular';
 import { AccordionItem } from './accordion-item.directive';
-import { AccordionItemContext, AccordionItemData, AccordionSize, AccordionValue, AccordionVariant } from './accordion.interfaces';
+import {
+  type AccordionItemContext,
+  type AccordionItemData,
+  type AccordionSize,
+  type AccordionValue,
+  type AccordionVariant,
+} from './accordion.interfaces';
 import { AccordionActionsTemplate, AccordionHeaderTemplate, AccordionIndicatorTemplate } from './accordion.templates';
 
 /** Organizes related content into accessible expandable sections. */

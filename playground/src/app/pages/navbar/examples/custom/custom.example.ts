@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucideBell, LucidePlus, LucideSearch, LucideZap } from '@lucide/angular';
 import {
   Badge,
@@ -7,7 +7,7 @@ import {
   Navbar,
   NavbarAction,
   NavbarBrand,
-  NavbarItem,
+  type NavbarItem,
   NavbarItemTemplate,
   Status,
 } from '@sushi-kit/angular';

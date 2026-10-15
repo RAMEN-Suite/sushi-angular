@@ -6,13 +6,13 @@ import {
   ElementRef,
   inject,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   numberAttribute,
   Renderer2,
-  Signal,
+  type Signal,
 } from '@angular/core';
-import { ButtonSeverity, ButtonShape, ButtonSize, ButtonVariant } from './button.interfaces';
+import { type ButtonSeverity, type ButtonShape, type ButtonSize, type ButtonVariant } from './button.interfaces';
 
 @Directive({
   selector: 'button[suiButton], a[suiButton]',

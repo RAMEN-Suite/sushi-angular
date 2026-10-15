@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { BreakpointObserver, type BreakpointState } from '@angular/cdk/layout';
 import {
   afterRenderEffect,
   booleanAttribute,
@@ -10,16 +10,16 @@ import {
   contentChild,
   inject,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { DrawerCloseReason, DrawerPersistentAt, DrawerPlacement, DrawerSize } from './drawer.interfaces';
+import { type DrawerCloseReason, type DrawerPersistentAt, type DrawerPlacement, type DrawerSize } from './drawer.interfaces';
 import { DrawerFooter, DrawerHeader } from './drawer-slots.directive';
 
 let nextDrawerId: number = 0;
@@ -85,7 +85,7 @@ export class Drawer {
 
   protected readonly persistent: Signal<boolean> = computed((): boolean => {
     const breakpoint: DrawerPersistentAt | null = this.persistentAt();
-    return breakpoint !== null && this.viewport().breakpoints[DRAWER_BREAKPOINTS[breakpoint]];
+    return breakpoint !== null && this.viewport().breakpoints[DRAWER_BREAKPOINTS[breakpoint]] === true;
   });
   protected readonly modalOpen: Signal<boolean> = computed((): boolean => this.open() && !this.persistent());
 

@@ -1,4 +1,4 @@
-import { MessageSeverity, MessageVariant } from '../message';
+import { type MessageSeverity, type MessageVariant } from '../message';
 
 /** Horizontal placement of a Toast outlet. */
 export type ToastHorizontalPosition = 'start' | 'center' | 'end';

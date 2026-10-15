@@ -1,4 +1,4 @@
-import { expect, Locator, Page, test } from '@playwright/test';
+import { expect, type Locator, type Page, test } from '@playwright/test';
 
 test('Multi-Select remains open while adding multiple options', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/multi-select');

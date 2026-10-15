@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { KbdSize } from './kbd.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type KbdSize } from './kbd.interfaces';
 
 @Directive({
   selector: 'kbd[suiKbd]',

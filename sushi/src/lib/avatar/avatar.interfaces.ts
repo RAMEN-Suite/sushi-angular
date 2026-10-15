@@ -1,5 +1,5 @@
-import { ComponentSize } from '../sushi.types';
-import { MaskHalf, MaskShape } from '../mask';
+import { type ComponentSize } from '../sushi.types';
+import { type MaskHalf, type MaskShape } from '../mask';
 
 /** Presence states displayed by an avatar. */
 export type AvatarStatus = 'online' | 'offline';

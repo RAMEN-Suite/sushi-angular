@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucideCreditCard, LucideFolderKanban, LucideUsers } from '@lucide/angular';
 import {
   Badge,
@@ -9,9 +9,9 @@ import {
   MultiSelect,
   MultiSelectGroupTemplate,
   MultiSelectItemTemplate,
-  MultiSelectModelValue,
-  MultiSelectOption,
-  MultiSelectValue,
+  type MultiSelectModelValue,
+  type MultiSelectOption,
+  type MultiSelectValue,
   Progress,
 } from '@sushi-kit/angular';
 
