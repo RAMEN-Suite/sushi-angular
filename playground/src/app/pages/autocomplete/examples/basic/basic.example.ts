@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Autocomplete, AutocompleteOption, AutocompleteValue, Button, Join, JoinItem, Label } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { type FieldTree, form, FormField } from '@angular/forms/signals';
+import { Autocomplete, type AutocompleteOption, type AutocompleteValue, Button, Join, JoinItem, Label } from '@sushi-kit/angular';
 
 interface CityForm {
   city: AutocompleteValue;

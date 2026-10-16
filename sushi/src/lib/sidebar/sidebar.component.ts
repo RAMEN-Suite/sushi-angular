@@ -6,17 +6,17 @@ import {
   computed,
   contentChild,
   input,
-  InputSignal,
+  type InputSignal,
   model,
-  ModelSignal,
-  Signal,
+  type ModelSignal,
+  type Signal,
   TemplateRef,
 } from '@angular/core';
-import { Navbar, NavbarItem, NavbarItemTemplate } from '../navbar';
+import { Navbar, type NavbarItem, NavbarItemTemplate } from '../navbar';
 import { Menu, MenuItemTemplate, MenuTrigger } from '../menu';
 import { SidebarGroupTemplate } from './sidebar-group-template.directive';
 import { SidebarItemTemplate } from './sidebar-item-template.directive';
-import { SidebarGroup, SidebarGroupContext, SidebarItemContext, SidebarSize } from './sidebar.interfaces';
+import { type SidebarGroup, type SidebarGroupContext, type SidebarItemContext, type SidebarSize } from './sidebar.interfaces';
 import { SidebarFooter, SidebarHeader } from './sidebar-slots.directive';
 
 /** Renders persistent, grouped application navigation with optional header and footer regions. */

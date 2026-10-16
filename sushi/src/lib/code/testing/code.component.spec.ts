@@ -1,7 +1,7 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { afterEach, beforeEach, describe, expect, it, Mock, vi } from 'vitest';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { afterEach, beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { CodeLine } from '../code-line.directive';
 import { Code } from '../code.component';

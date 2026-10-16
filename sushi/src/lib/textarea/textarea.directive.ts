@@ -1,6 +1,6 @@
-import { afterNextRender, DestroyRef, Directive, ElementRef, inject, input, InputSignal } from '@angular/core';
+import { afterNextRender, DestroyRef, Directive, ElementRef, inject, input, type InputSignal } from '@angular/core';
 import { FluidControlState } from '../form-control';
-import { TextareaResize } from './textarea.interfaces';
+import { type TextareaResize } from './textarea.interfaces';
 
 /** Styles a native multiline text control and configures its resize behavior. */
 @Directive({
@@ -48,6 +48,7 @@ export class Textarea extends FluidControlState {
       if (!parent) return;
 
       this.observer = new ResizeObserver(([entry]: ResizeObserverEntry[]): void => {
+        if (!entry) return;
         const inlineSize: number = entry.contentBoxSize[0]?.inlineSize ?? entry.contentRect.width;
         this.element.nativeElement.style.maxInlineSize = `${inlineSize}px`;
       });

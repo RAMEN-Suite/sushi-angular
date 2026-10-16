@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { FieldTree, form, FormField, maxLength, required, SchemaPathTree } from '@angular/forms/signals';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { type FieldTree, form, FormField, maxLength, required, type SchemaPathTree } from '@angular/forms/signals';
 import { Button, Join, JoinItem, Label, Textarea } from '@sushi-kit/angular';
 
 interface TextareaModel {

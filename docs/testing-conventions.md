@@ -72,14 +72,15 @@ To rerun only the isolated installation step, use `npm run package:install`. It 
 
 ## Commands
 
-| Command                   | Scope                                                              |
-| ------------------------- | ------------------------------------------------------------------ |
-| `npm test`                | Library and documentation-tool unit tests                          |
-| `npm run test:coverage`   | Library units with coverage thresholds                             |
-| `npm run test:tools`      | Documentation generator units                                      |
-| `npm run test:e2e`        | Browser contracts                                                  |
-| `npm run package:check`   | Build and check the package and both consumer builds               |
-| `npm run package:install` | Install the packed tarball in an isolated Angular app and build it |
-| `npm run verify`          | Complete handoff gate                                              |
+| Command                   | Scope                                                                     |
+| ------------------------- | ------------------------------------------------------------------------- |
+| `npm run typecheck`       | Strict TypeScript checks for library, fixtures, Playground, tools and E2E |
+| `npm test`                | Library and documentation-tool unit tests                                 |
+| `npm run test:coverage`   | Library units with coverage thresholds                                    |
+| `npm run test:tools`      | Documentation generator units                                             |
+| `npm run test:e2e`        | Browser contracts                                                         |
+| `npm run package:check`   | Build and check the package and both consumer builds                      |
+| `npm run package:install` | Install the packed tarball in an isolated Angular app and build it        |
+| `npm run verify`          | Complete handoff gate                                                     |
 
 References: [Angular component testing](https://angular.dev/guide/testing/components-basics), [Angular testing scenarios](https://angular.dev/guide/testing/components-scenarios), and [Playwright best practices](https://playwright.dev/docs/best-practices).

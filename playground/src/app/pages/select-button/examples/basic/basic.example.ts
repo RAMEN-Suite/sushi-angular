@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { FieldTree, form, FormField } from '@angular/forms/signals';
-import { Button, Card, Label, SelectButton, SelectButtonOption, SelectButtonValue } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { type FieldTree, form, FormField } from '@angular/forms/signals';
+import { Button, Card, Label, SelectButton, type SelectButtonOption, type SelectButtonValue } from '@sushi-kit/angular';
 
 interface AlignmentForm {
   alignment: SelectButtonValue | null;

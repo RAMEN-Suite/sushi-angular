@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Button, Dialog, DialogBody, DialogHeader, DialogPosition, DialogTrigger } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { Button, Dialog, DialogBody, DialogHeader, type DialogPosition, DialogTrigger } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-dialog-coordinates-example',

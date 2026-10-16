@@ -1,5 +1,5 @@
 @plugin "daisyui/theme" {
-  name: 'sushi';
+  name: "sushi";
   default: true;
   prefersdark: false;
   color-scheme: light;
@@ -98,7 +98,7 @@
 }
 
 @plugin "daisyui/theme" {
-  name: 'sushi-dark';
+  name: "sushi-dark";
   default: false;
   prefersdark: true;
   color-scheme: dark;

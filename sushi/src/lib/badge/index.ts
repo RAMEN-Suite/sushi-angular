@@ -1,2 +1,2 @@
 export * from './badge.directive';
-export * from './badge.interfaces';
+export type * from './badge.interfaces';

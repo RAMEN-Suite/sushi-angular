@@ -1,4 +1,4 @@
-import { Orientation } from '../sushi.types';
+import { type Orientation } from '../sushi.types';
 
 /** Semantic feedback colors available to messages. */
 export type MessageSeverity = 'info' | 'success' | 'warning' | 'error';

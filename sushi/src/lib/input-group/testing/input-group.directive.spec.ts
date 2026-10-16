@@ -1,9 +1,9 @@
-import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { InputGroupAddon } from '../input-group-addon.directive';
-import { InputGroup, InputGroupOrientation } from '../input-group.directive';
+import { InputGroup, type InputGroupOrientation } from '../input-group.directive';
 
 @Component({
   imports: [InputGroup, InputGroupAddon],

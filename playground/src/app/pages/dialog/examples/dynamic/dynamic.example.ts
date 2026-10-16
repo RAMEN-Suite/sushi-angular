@@ -1,5 +1,5 @@
 import { Dialog as CdkDialog, DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { ChangeDetectionStrategy, Component, inject, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, type WritableSignal } from '@angular/core';
 import { Button } from '@sushi-kit/angular';
 
 interface MenuDialogData {

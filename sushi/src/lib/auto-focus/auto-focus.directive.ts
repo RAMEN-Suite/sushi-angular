@@ -1,4 +1,12 @@
-import { afterNextRender, booleanAttribute, Directive, ElementRef, inject, input, InputSignalWithTransform } from '@angular/core';
+import {
+  afterNextRender,
+  booleanAttribute,
+  Directive,
+  ElementRef,
+  inject,
+  input,
+  type InputSignalWithTransform,
+} from '@angular/core';
 
 @Directive({
   selector: '[suiAutoFocus]',

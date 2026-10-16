@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { FieldTree, form, FormField, required, SchemaPathTree } from '@angular/forms/signals';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { type FieldTree, form, FormField, required, type SchemaPathTree } from '@angular/forms/signals';
 import { Input, Label } from '@sushi-kit/angular';
 
 interface InputModel {

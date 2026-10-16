@@ -1,5 +1,5 @@
-import { booleanAttribute, Directive, input, InputSignal, InputSignalWithTransform } from '@angular/core';
-import { FormControlSeverity, FormControlSize } from '../form-control';
+import { booleanAttribute, Directive, input, type InputSignal, type InputSignalWithTransform } from '@angular/core';
+import { type FormControlSeverity, type FormControlSize } from '../form-control';
 
 @Directive({
   selector: 'div[suiInputSurface]',

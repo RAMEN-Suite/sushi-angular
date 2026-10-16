@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucideMapPin } from '@lucide/angular';
 import {
   Autocomplete,
   Button,
-  AutocompleteCompareWith,
+  type AutocompleteCompareWith,
   AutocompleteEmptyTemplate,
-  AutocompleteFilter,
+  type AutocompleteFilter,
   AutocompleteItemTemplate,
-  AutocompleteOption,
+  type AutocompleteOption,
   AutocompletePrefixTemplate,
-  AutocompleteValue,
+  type AutocompleteValue,
   Label,
 } from '@sushi-kit/angular';
 

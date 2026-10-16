@@ -1,2 +1,2 @@
 export * from './button.directive';
-export * from './button.interfaces';
+export type * from './button.interfaces';

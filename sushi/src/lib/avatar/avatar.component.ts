@@ -4,12 +4,12 @@ import {
   Component,
   computed,
   input,
-  InputSignal,
-  InputSignalWithTransform,
-  Signal,
+  type InputSignal,
+  type InputSignalWithTransform,
+  type Signal,
 } from '@angular/core';
-import { AvatarMaskHalf, AvatarShape, AvatarSize, AvatarStatus } from './avatar.interfaces';
-import { Mask, MaskShape } from '../mask';
+import { type AvatarMaskHalf, type AvatarShape, type AvatarSize, type AvatarStatus } from './avatar.interfaces';
+import { Mask, type MaskShape } from '../mask';
 
 @Component({
   selector: 'sui-avatar',

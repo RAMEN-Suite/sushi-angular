@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { BreadcrumbItemContext } from './breadcrumb.interfaces';
+import { type BreadcrumbItemContext } from './breadcrumb.interfaces';
 
 /** Replaces each Breadcrumb label while preserving navigation semantics. */
 @Directive({ selector: 'ng-template[suiBreadcrumbItem]' })

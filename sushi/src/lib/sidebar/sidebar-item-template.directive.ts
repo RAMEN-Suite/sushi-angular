@@ -1,6 +1,6 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { NavbarItem } from '../navbar';
-import { SidebarGroup, SidebarItemContext } from './sidebar.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type NavbarItem } from '../navbar';
+import { type SidebarGroup, type SidebarItemContext } from './sidebar.interfaces';
 
 /** Customizes each destination rendered from Sidebar groups. */
 @Directive({ selector: 'ng-template[suiSidebarItem]' })

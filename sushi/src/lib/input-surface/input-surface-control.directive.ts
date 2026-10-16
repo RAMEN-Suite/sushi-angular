@@ -1,4 +1,4 @@
-import { booleanAttribute, Directive, input, InputSignalWithTransform } from '@angular/core';
+import { booleanAttribute, Directive, input, type InputSignalWithTransform } from '@angular/core';
 import { FormControlState } from '../form-control';
 
 @Directive({

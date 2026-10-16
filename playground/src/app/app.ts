@@ -5,12 +5,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  ElementRef,
+  type ElementRef,
   inject,
-  Signal,
+  type Signal,
   signal,
   viewChild,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -24,7 +24,7 @@ import {
   Navbar,
   NavbarAction,
   NavbarBrand,
-  NavbarItem,
+  type NavbarItem,
   Sidebar,
   SidebarGroupTemplate,
   SidebarHeader,
@@ -100,7 +100,7 @@ export class App {
     ),
     { initialValue: this.location.path(true) || this.router.url },
   );
-  protected readonly currentPath: Signal<string> = computed((): string => this.currentUrl().split(/[?#]/, 1)[0] || '/');
+  protected readonly currentPath: Signal<string> = computed((): string => this.currentUrl().split(/[?#]/, 1)[0] ?? '/');
   protected readonly theme: WritableSignal<PlaygroundTheme> = signal<PlaygroundTheme>(this.getInitialTheme());
 
   public constructor() {

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, inject, input, InputSignal } from '@angular/core';
+import { Directive, ElementRef, inject, input, type InputSignal } from '@angular/core';
 
 @Directive({
   selector: '[suiCodeLine]',

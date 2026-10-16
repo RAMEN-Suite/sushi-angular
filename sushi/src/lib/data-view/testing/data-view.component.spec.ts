@@ -1,7 +1,7 @@
-import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { query, queryAll, render } from '../../../../testing/test-utils';
+import { query, queryAll, render, requireItem } from '../../../../testing/test-utils';
 import { DataView } from '../data-view.component';
 import type { DataViewLayout } from '../data-view.interfaces';
 import {
@@ -85,7 +85,7 @@ describe('DataView collection rendering', (): void => {
   it('switches layouts through its SUSHI SelectButton', (): void => {
     const fixture: ComponentFixture<DataViewHost> = render(DataViewHost);
     const radios: readonly HTMLButtonElement[] = queryAll(fixture, '[role="radio"]') as readonly HTMLButtonElement[];
-    radios[1].click();
+    requireItem(radios, 1).click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.layout()).toBe('grid');

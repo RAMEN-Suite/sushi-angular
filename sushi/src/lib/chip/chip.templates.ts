@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { ChipContentContext } from './chip.interfaces';
+import { type ChipContentContext } from './chip.interfaces';
 
 /** Replaces the projected content and label of a chip. */
 @Directive({ selector: 'ng-template[suiChipContent]' })

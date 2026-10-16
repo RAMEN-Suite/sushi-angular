@@ -1,5 +1,5 @@
-import { DestroyRef, inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
-import { ToastItem, ToastOptions } from './toast.interfaces';
+import { DestroyRef, inject, Injectable, signal, type Signal, type WritableSignal } from '@angular/core';
+import { type ToastItem, type ToastOptions } from './toast.interfaces';
 
 interface ToastTimer {
   pauses: number;
@@ -17,7 +17,7 @@ export class ToastService {
   public readonly toasts: Signal<readonly ToastItem[]>;
 
   private readonly toastState: WritableSignal<readonly ToastItem[]> = signal<readonly ToastItem[]>([]);
-  private readonly timers: Map<string, ToastTimer> = new Map<string, ToastTimer>();
+  private readonly timers: Map<string, ToastTimer> = new Map();
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
 
   public constructor() {
@@ -38,6 +38,7 @@ export class ToastService {
       action: options.action ?? null,
       template: options.template ?? null,
     };
+
     this.toastState.update((items: readonly ToastItem[]): readonly ToastItem[] => [...items, item]);
     this.startTimer(item.id, item.duration);
     return item.id;
@@ -63,6 +64,7 @@ export class ToastService {
     if (!timer) return;
     timer.pauses += 1;
     if (timer.pauses > 1 || !timer.timeout) return;
+
     clearTimeout(timer.timeout);
     timer.timeout = null;
     timer.remaining = Math.max(0, timer.remaining - (Date.now() - timer.startedAt));
@@ -78,6 +80,7 @@ export class ToastService {
       this.dismiss(id);
       return;
     }
+
     this.schedule(id, timer);
   }
 

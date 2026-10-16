@@ -1,4 +1,4 @@
-import { booleanAttribute, Directive, input, InputSignalWithTransform, model, ModelSignal } from '@angular/core';
+import { booleanAttribute, Directive, input, type InputSignalWithTransform, model, type ModelSignal } from '@angular/core';
 
 @Directive({
   selector: 'fieldset[suiFieldset]',

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge } from '@sushi-kit/angular';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
-import { ExampleSource, textSource } from '../../shared/example-code/example-source';
+import { type ExampleSource, textSource } from '../../shared/example-code/example-source';
 import { DialogAdvancedExample } from './examples/advanced/advanced.example';
 import * as advancedCss from './examples/advanced/advanced.example.css' with { loader: 'text' };
 import advancedHtml from './examples/advanced/advanced.example.html';

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Fieldset, FieldsetLegend, Label, Select, SelectModelValue, SelectOption } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { Fieldset, FieldsetLegend, Label, Select, type SelectModelValue, type SelectOption } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-select-states-example',

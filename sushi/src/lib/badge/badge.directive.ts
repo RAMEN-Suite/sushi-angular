@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { BadgeSeverity, BadgeSize, BadgeVariant } from './badge.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type BadgeSeverity, type BadgeSize, type BadgeVariant } from './badge.interfaces';
 
 /** Styles compact, non-interactive labels for status or metadata. */
 @Directive({

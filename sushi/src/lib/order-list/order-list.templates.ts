@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { OrderListFilterContext, OrderListItemContext, OrderListOption } from './order-list.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type OrderListFilterContext, type OrderListItemContext, type OrderListOption } from './order-list.interfaces';
 
 /** Replaces the filter control and exposes its query, state, and update function. */
 @Directive({ selector: 'ng-template[suiOrderListFilter]' })

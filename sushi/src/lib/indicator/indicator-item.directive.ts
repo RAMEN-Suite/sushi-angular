@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { IndicatorHorizontalPosition, IndicatorVerticalPosition } from './indicator.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type IndicatorHorizontalPosition, type IndicatorVerticalPosition } from './indicator.interfaces';
 
 @Directive({
   selector: '[suiIndicatorItem]',

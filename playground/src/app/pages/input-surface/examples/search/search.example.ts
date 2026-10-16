@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { FieldTree, form, FormField } from '@angular/forms/signals';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { type FieldTree, form, FormField } from '@angular/forms/signals';
 import { LucideSearch } from '@lucide/angular';
 import { Button, InputSurface, InputSurfaceControl, Join, JoinItem, Kbd, Label } from '@sushi-kit/angular';
 

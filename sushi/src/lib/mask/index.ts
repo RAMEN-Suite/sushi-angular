@@ -1,2 +1,2 @@
 export * from './mask.directive';
-export * from './mask.interfaces';
+export type * from './mask.interfaces';

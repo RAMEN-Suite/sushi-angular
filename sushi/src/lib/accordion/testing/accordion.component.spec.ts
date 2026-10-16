@@ -1,7 +1,7 @@
-import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, signal, type Signal, viewChild, type WritableSignal } from '@angular/core';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { press, query, queryAll, render } from '../../../../testing/test-utils';
+import { press, query, queryAll, render, requireItem } from '../../../../testing/test-utils';
 import { AccordionItem } from '../accordion-item.directive';
 import { Accordion } from '../accordion.component';
 import type { AccordionValue } from '../accordion.interfaces';
@@ -50,8 +50,8 @@ describe('Accordion rendering and model', (): void => {
     const buttons: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
 
     expect(buttons).toHaveLength(3);
-    expect(buttons[0].getAttribute('aria-expanded')).toBe('false');
-    expect(buttons[2].getAttribute('aria-disabled')).toBe('true');
+    expect(requireItem(buttons, 0).getAttribute('aria-expanded')).toBe('false');
+    expect(requireItem(buttons, 2).getAttribute('aria-disabled')).toBe('true');
     expect(query(fixture, '[data-header="ingredients"]').getAttribute('data-expanded')).toBe('false');
     expect(query(fixture, '[data-indicator="method"]').textContent).toBe('Toggle');
   });
@@ -59,19 +59,19 @@ describe('Accordion rendering and model', (): void => {
   it('expands one item at a time in single mode', (): void => {
     const fixture: ComponentFixture<AccordionHost> = render(AccordionHost);
     const buttons: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
-    buttons[0].click();
+    requireItem(buttons, 0).click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.value()).toEqual(['ingredients']);
     expect(query(fixture, '[data-header="ingredients"]').getAttribute('data-expanded')).toBe('true');
     expect((fixture.nativeElement as HTMLElement).textContent).toContain('Broth and noodles');
 
-    buttons[1].click();
+    requireItem(buttons, 1).click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.value()).toEqual(['method']);
-    expect(buttons[0].getAttribute('aria-expanded')).toBe('false');
-    expect(buttons[1].getAttribute('aria-expanded')).toBe('true');
+    expect(requireItem(buttons, 0).getAttribute('aria-expanded')).toBe('false');
+    expect(requireItem(buttons, 1).getAttribute('aria-expanded')).toBe('true');
   });
 });
 
@@ -128,16 +128,16 @@ describe('Accordion keyboard and disabled behavior', (): void => {
   it('moves focus between triggers with Angular Aria keyboard navigation', (): void => {
     const fixture: ComponentFixture<AccordionHost> = render(AccordionHost);
     const buttons: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
-    buttons[0].focus();
-    press(buttons[0], 'ArrowDown');
+    requireItem(buttons, 0).focus();
+    press(requireItem(buttons, 0), 'ArrowDown');
 
-    expect(document.activeElement).toBe(buttons[1]);
+    expect(document.activeElement).toBe(requireItem(buttons, 1));
 
-    press(buttons[1], 'Enter');
+    press(requireItem(buttons, 1), 'Enter');
     fixture.detectChanges();
     expect(fixture.componentInstance.value()).toEqual(['method']);
 
-    press(buttons[1], ' ');
+    press(requireItem(buttons, 1), ' ');
     fixture.detectChanges();
     expect(fixture.componentInstance.value()).toEqual([]);
   });
@@ -145,16 +145,16 @@ describe('Accordion keyboard and disabled behavior', (): void => {
   it('keeps disabled triggers focusable without expanding them', (): void => {
     const fixture: ComponentFixture<AccordionHost> = render(AccordionHost);
     const buttons: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
-    buttons[2].focus();
-    buttons[2].click();
+    requireItem(buttons, 2).focus();
+    requireItem(buttons, 2).click();
 
-    expect(document.activeElement).toBe(buttons[2]);
+    expect(document.activeElement).toBe(requireItem(buttons, 2));
     expect(fixture.componentInstance.value()).toEqual([]);
   });
 
   it('blocks the complete group when disabled', (): void => {
     const fixture: ComponentFixture<AccordionHost> = render(AccordionHost);
-    const first: HTMLButtonElement = queryAll(fixture, 'button')[0];
+    const first: HTMLButtonElement = requireItem(queryAll(fixture, 'button'), 0);
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
     first.click();

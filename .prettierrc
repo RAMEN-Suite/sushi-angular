@@ -37,7 +37,7 @@
       "files": ["*.scss", "*.css"],
       "options": {
         "printWidth": 200,
-        "singleQuote": true
+        "singleQuote": false
       }
     },
     {

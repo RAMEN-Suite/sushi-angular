@@ -1,5 +1,5 @@
-import { Directive, inject, input, InputSignal, TemplateRef } from '@angular/core';
-import { ToastTemplateContext } from './toast.interfaces';
+import { Directive, inject, input, type InputSignal, TemplateRef } from '@angular/core';
+import { type ToastTemplateContext } from './toast.interfaces';
 
 @Directive({ selector: 'ng-template[suiToastContent]' })
 /** Registers named custom content that can be selected for individual Toasts. */

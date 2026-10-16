@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { NavbarOrientation, NavbarVariant } from '../navbar.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type NavbarOrientation, type NavbarVariant } from '../navbar.interfaces';
 
 /**
  * Arranges links rendered by the internal Navbar menu.

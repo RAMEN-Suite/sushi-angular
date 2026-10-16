@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { NavbarItem, NavbarItemContext } from './navbar.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type NavbarItem, type NavbarItemContext } from './navbar.interfaces';
 
 /** Customizes the visible content of every item rendered from the Navbar model. */
 @Directive({ selector: 'ng-template[suiNavbarItem]' })

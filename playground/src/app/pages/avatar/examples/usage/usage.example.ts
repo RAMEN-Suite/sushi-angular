@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Avatar, AvatarShape, AvatarSize } from '@sushi-kit/angular';
+import { Avatar, type AvatarShape, type AvatarSize } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-avatar-usage-example',

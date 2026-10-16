@@ -77,35 +77,35 @@
     box-shadow: var(--sui-dialog-shadow);
   }
 
-  .sui-dialog[data-position='top'] {
+  .sui-dialog[data-position="top"] {
     margin: var(--sui-dialog-viewport-gap) auto auto;
   }
 
-  .sui-dialog[data-position='bottom'] {
+  .sui-dialog[data-position="bottom"] {
     margin: auto auto var(--sui-dialog-viewport-gap);
   }
 
-  .sui-dialog[data-position='left'] {
+  .sui-dialog[data-position="left"] {
     margin: auto auto auto var(--sui-dialog-viewport-gap);
   }
 
-  .sui-dialog[data-position='right'] {
+  .sui-dialog[data-position="right"] {
     margin: auto var(--sui-dialog-viewport-gap) auto auto;
   }
 
-  .sui-dialog[data-position='top-left'] {
+  .sui-dialog[data-position="top-left"] {
     margin: var(--sui-dialog-viewport-gap) auto auto var(--sui-dialog-viewport-gap);
   }
 
-  .sui-dialog[data-position='top-right'] {
+  .sui-dialog[data-position="top-right"] {
     margin: var(--sui-dialog-viewport-gap) var(--sui-dialog-viewport-gap) auto auto;
   }
 
-  .sui-dialog[data-position='bottom-left'] {
+  .sui-dialog[data-position="bottom-left"] {
     margin: auto auto var(--sui-dialog-viewport-gap) var(--sui-dialog-viewport-gap);
   }
 
-  .sui-dialog[data-position='bottom-right'] {
+  .sui-dialog[data-position="bottom-right"] {
     margin: auto var(--sui-dialog-viewport-gap) var(--sui-dialog-viewport-gap) auto;
   }
 
@@ -139,47 +139,47 @@
     min-width: 0;
   }
 
-  .sui-dialog[data-draggable='true'] > .sui-dialog-drag-region {
+  .sui-dialog[data-draggable="true"] > .sui-dialog-drag-region {
     cursor: move;
     touch-action: none;
   }
 
-  .sui-dialog-header[data-severity='primary'] {
+  .sui-dialog-header[data-severity="primary"] {
     --sui-dialog-header-background: var(--color-primary);
     --sui-dialog-header-color: var(--color-primary-content);
   }
 
-  .sui-dialog-header[data-severity='secondary'] {
+  .sui-dialog-header[data-severity="secondary"] {
     --sui-dialog-header-background: var(--color-secondary);
     --sui-dialog-header-color: var(--color-secondary-content);
   }
 
-  .sui-dialog-header[data-severity='accent'] {
+  .sui-dialog-header[data-severity="accent"] {
     --sui-dialog-header-background: var(--color-accent);
     --sui-dialog-header-color: var(--color-accent-content);
   }
 
-  .sui-dialog-header[data-severity='neutral'] {
+  .sui-dialog-header[data-severity="neutral"] {
     --sui-dialog-header-background: var(--color-neutral);
     --sui-dialog-header-color: var(--color-neutral-content);
   }
 
-  .sui-dialog-header[data-severity='info'] {
+  .sui-dialog-header[data-severity="info"] {
     --sui-dialog-header-background: var(--color-info);
     --sui-dialog-header-color: var(--color-info-content);
   }
 
-  .sui-dialog-header[data-severity='success'] {
+  .sui-dialog-header[data-severity="success"] {
     --sui-dialog-header-background: var(--color-success);
     --sui-dialog-header-color: var(--color-success-content);
   }
 
-  .sui-dialog-header[data-severity='warning'] {
+  .sui-dialog-header[data-severity="warning"] {
     --sui-dialog-header-background: var(--color-warning);
     --sui-dialog-header-color: var(--color-warning-content);
   }
 
-  .sui-dialog-header[data-severity='error'] {
+  .sui-dialog-header[data-severity="error"] {
     --sui-dialog-header-background: var(--color-error);
     --sui-dialog-header-color: var(--color-error-content);
   }
@@ -199,35 +199,35 @@
     gap: 0.25rem;
   }
 
-  .sui-dialog:has(.sui-dialog-header[data-severity='primary']) > .sui-dialog-header__actions {
+  .sui-dialog:has(.sui-dialog-header[data-severity="primary"]) > .sui-dialog-header__actions {
     color: var(--color-primary-content);
   }
 
-  .sui-dialog:has(.sui-dialog-header[data-severity='secondary']) > .sui-dialog-header__actions {
+  .sui-dialog:has(.sui-dialog-header[data-severity="secondary"]) > .sui-dialog-header__actions {
     color: var(--color-secondary-content);
   }
 
-  .sui-dialog:has(.sui-dialog-header[data-severity='accent']) > .sui-dialog-header__actions {
+  .sui-dialog:has(.sui-dialog-header[data-severity="accent"]) > .sui-dialog-header__actions {
     color: var(--color-accent-content);
   }
 
-  .sui-dialog:has(.sui-dialog-header[data-severity='neutral']) > .sui-dialog-header__actions {
+  .sui-dialog:has(.sui-dialog-header[data-severity="neutral"]) > .sui-dialog-header__actions {
     color: var(--color-neutral-content);
   }
 
-  .sui-dialog:has(.sui-dialog-header[data-severity='info']) > .sui-dialog-header__actions {
+  .sui-dialog:has(.sui-dialog-header[data-severity="info"]) > .sui-dialog-header__actions {
     color: var(--color-info-content);
   }
 
-  .sui-dialog:has(.sui-dialog-header[data-severity='success']) > .sui-dialog-header__actions {
+  .sui-dialog:has(.sui-dialog-header[data-severity="success"]) > .sui-dialog-header__actions {
     color: var(--color-success-content);
   }
 
-  .sui-dialog:has(.sui-dialog-header[data-severity='warning']) > .sui-dialog-header__actions {
+  .sui-dialog:has(.sui-dialog-header[data-severity="warning"]) > .sui-dialog-header__actions {
     color: var(--color-warning-content);
   }
 
-  .sui-dialog:has(.sui-dialog-header[data-severity='error']) > .sui-dialog-header__actions {
+  .sui-dialog:has(.sui-dialog-header[data-severity="error"]) > .sui-dialog-header__actions {
     color: var(--color-error-content);
   }
 
@@ -305,21 +305,21 @@
 }
 
 @layer components {
-  .sui-dialog[data-motion='fade'][open],
-  .sui-dialog[data-motion='fade'][open]::backdrop {
+  .sui-dialog[data-motion="fade"][open],
+  .sui-dialog[data-motion="fade"][open]::backdrop {
     animation: sui-dialog-enter var(--sui-dialog-enter-duration) var(--sui-dialog-motion-easing) both;
   }
 
-  .sui-dialog[data-motion='fade'][open][data-closing],
-  .sui-dialog[data-motion='fade'][open][data-closing]::backdrop {
+  .sui-dialog[data-motion="fade"][open][data-closing],
+  .sui-dialog[data-motion="fade"][open][data-closing]::backdrop {
     animation: sui-dialog-exit var(--sui-dialog-exit-duration) var(--sui-dialog-motion-easing) both;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sui-dialog[data-motion='fade'][open],
-    .sui-dialog[data-motion='fade'][open]::backdrop,
-    .sui-dialog[data-motion='fade'][open][data-closing],
-    .sui-dialog[data-motion='fade'][open][data-closing]::backdrop {
+    .sui-dialog[data-motion="fade"][open],
+    .sui-dialog[data-motion="fade"][open]::backdrop,
+    .sui-dialog[data-motion="fade"][open][data-closing],
+    .sui-dialog[data-motion="fade"][open][data-closing]::backdrop {
       animation: none;
     }
   }

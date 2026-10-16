@@ -6,17 +6,17 @@ import {
   computed,
   contentChild,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   output,
-  OutputEmitterRef,
+  type OutputEmitterRef,
   signal,
-  Signal,
+  type Signal,
   TemplateRef,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
 import { LucideX } from '@lucide/angular';
-import { ChipContentContext, ChipSeverity, ChipSize, ChipVariant } from './chip.interfaces';
+import { type ChipContentContext, type ChipSeverity, type ChipSize, type ChipVariant } from './chip.interfaces';
 import { ChipContentTemplate, ChipRemoveIconTemplate } from './chip.templates';
 
 /** Displays a compact value that can optionally be removed. */

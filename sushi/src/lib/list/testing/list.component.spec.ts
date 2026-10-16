@@ -1,7 +1,7 @@
-import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { query, queryAll, render } from '../../../../testing/test-utils';
+import { query, queryAll, render, requireItem } from '../../../../testing/test-utils';
 import { List } from '../list.component';
 import type { ListTrackBy } from '../list.interfaces';
 import { ListItemTemplate } from '../list.templates';
@@ -58,8 +58,8 @@ describe('List', (): void => {
     const fixture: ComponentFixture<ListHost> = render(ListHost);
     const firstRow: Element = query(fixture, 'li');
     fixture.componentInstance.items.update((people: readonly Person[]): readonly Person[] => [
-      { id: people[0].id, name: 'Updated' },
-      people[1],
+      { id: requireItem(people, 0).id, name: 'Updated' },
+      requireItem(people, 1),
     ]);
     fixture.detectChanges();
 

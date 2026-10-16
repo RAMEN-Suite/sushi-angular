@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucidePlus } from '@lucide/angular';
 import {
   Accordion,
   AccordionActionsTemplate,
   AccordionItem,
-  AccordionItemData,
-  AccordionValue,
+  type AccordionItemData,
+  type AccordionValue,
   Button,
 } from '@sushi-kit/angular';
 
@@ -23,7 +23,7 @@ export class AccordionActionsExample {
   protected add(item: AccordionItemData): void {
     this.entries.update((entries: Readonly<Record<string, number>>): Readonly<Record<string, number>> => ({
       ...entries,
-      [item.value]: entries[item.value] + 1,
+      [item.value]: (entries[item.value] ?? 0) + 1,
     }));
 
     this.message.set(`Added an entry to ${item.label}.`);

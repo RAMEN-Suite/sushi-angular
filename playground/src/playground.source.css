@@ -1,6 +1,6 @@
-@import '../../sushi/src/styles/sushi.source.css';
-@import 'tailwindcss/preflight.css' layer(base);
+@import "../../sushi/src/styles/sushi.source.css";
+@import "tailwindcss/preflight.css" layer(base);
 
 @source './app';
 
-@import './styles.css';
+@import "./styles.css";

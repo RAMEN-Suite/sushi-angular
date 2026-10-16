@@ -16,7 +16,7 @@
 }
 
 @media (hover: hover) {
-  :host(.sui-pagination--plain) .sui-pagination__action:not([aria-disabled='true']):is(:hover, :focus-visible) {
+  :host(.sui-pagination--plain) .sui-pagination__action:not([aria-disabled="true"]):is(:hover, :focus-visible) {
     color: var(--btn-color, var(--color-primary));
     background-color: color-mix(in oklab, var(--btn-color, var(--color-primary)) var(--sui-pagination-hover-mix), transparent);
     border-color: transparent;

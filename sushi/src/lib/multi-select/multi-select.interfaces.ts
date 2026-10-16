@@ -1,11 +1,11 @@
 import {
-  SelectCompareWith,
-  SelectGroupContext,
-  SelectItemContext,
-  SelectLoadingContext,
-  SelectOption,
-  SelectValue,
-  SelectVariant,
+  type SelectCompareWith,
+  type SelectGroupContext,
+  type SelectItemContext,
+  type SelectLoadingContext,
+  type SelectOption,
+  type SelectValue,
+  type SelectVariant,
 } from '../select';
 
 /** Value accepted by a multi-select option. */

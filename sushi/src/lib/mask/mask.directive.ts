@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { MaskHalf, MaskShape } from './mask.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type MaskHalf, type MaskShape } from './mask.interfaces';
 
 @Directive({
   selector: '[suiMask]',

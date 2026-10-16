@@ -9,17 +9,17 @@ import {
   DestroyRef,
   inject,
   input,
-  InputSignal,
-  InputSignalWithTransform,
-  Signal,
+  type InputSignal,
+  type InputSignalWithTransform,
+  type Signal,
   signal,
   TemplateRef,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
 import { LucideCheck, LucideCopy } from '@lucide/angular';
-import { Button, ButtonShape } from '../button';
+import { Button, type ButtonShape } from '../button';
 import { nonNegativeInteger } from '../number.transforms';
-import { CodeButtonContext } from './code.interfaces';
+import { type CodeButtonContext } from './code.interfaces';
 import { CodeLine } from './code-line.directive';
 import { CodeButtonOffTemplate, CodeButtonOnTemplate, CodeButtonTemplate } from './code.templates';
 

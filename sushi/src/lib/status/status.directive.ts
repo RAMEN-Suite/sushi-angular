@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { StatusAnimation, StatusSeverity, StatusSize } from './status.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type StatusAnimation, type StatusSeverity, type StatusSize } from './status.interfaces';
 
 @Directive({
   selector: 'span[suiStatus]',

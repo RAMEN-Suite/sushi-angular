@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucideLockKeyhole, LucideLockKeyholeOpen, LucideSearch } from '@lucide/angular';
 import {
   Badge,
@@ -10,8 +10,8 @@ import {
   OrderListFilterTemplate,
   OrderListHeaderTemplate,
   OrderListItemTemplate,
-  OrderListOption,
-  OrderListValue,
+  type OrderListOption,
+  type OrderListValue,
 } from '@sushi-kit/angular';
 
 interface BacklogItem extends OrderListOption {

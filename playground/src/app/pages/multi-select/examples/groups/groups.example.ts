@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucideGlobe } from '@lucide/angular';
 import {
   Badge,
   Label,
   MultiSelect,
-  MultiSelectCompareWith,
+  type MultiSelectCompareWith,
   MultiSelectGroupTemplate,
   MultiSelectItemTemplate,
-  MultiSelectModelValue,
-  MultiSelectOption,
-  MultiSelectValue,
+  type MultiSelectModelValue,
+  type MultiSelectOption,
+  type MultiSelectValue,
 } from '@sushi-kit/angular';
 
 interface Country extends MultiSelectOption {

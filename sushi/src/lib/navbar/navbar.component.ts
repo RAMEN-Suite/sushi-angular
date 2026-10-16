@@ -7,11 +7,11 @@ import {
   contentChildren,
   inject,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
   TemplateRef,
 } from '@angular/core';
 import { LucideMenu } from '@lucide/angular';
@@ -22,15 +22,15 @@ import { NavbarToggle } from './internal/navbar-toggle.directive';
 import { NavbarContent } from './navbar-content.directive';
 import { NavbarItemTemplate } from './navbar-item-template.directive';
 import {
-  NavbarCollapseAt,
-  NavbarInset,
-  NavbarItem,
-  NavbarItemContext,
-  NavbarMenuAlign,
-  NavbarOrientation,
-  NavbarSize,
-  NavbarSurface,
-  NavbarVariant,
+  type NavbarCollapseAt,
+  type NavbarInset,
+  type NavbarItem,
+  type NavbarItemContext,
+  type NavbarMenuAlign,
+  type NavbarOrientation,
+  type NavbarSize,
+  type NavbarSurface,
+  type NavbarVariant,
 } from './navbar.interfaces';
 import { NavbarAction, NavbarBrand } from './navbar-slot.directive';
 

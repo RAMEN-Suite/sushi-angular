@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { Kbd } from '../kbd.directive';

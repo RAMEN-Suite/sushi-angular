@@ -1,11 +1,11 @@
-import { Directive, input, InputSignal } from '@angular/core';
+import { Directive, input, type InputSignal } from '@angular/core';
 import {
-  MultiSelectGroupContext,
-  MultiSelectHeaderContext,
-  MultiSelectItemContext,
-  MultiSelectLoadingContext,
-  MultiSelectOption,
-  MultiSelectSelectedItemsContext,
+  type MultiSelectGroupContext,
+  type MultiSelectHeaderContext,
+  type MultiSelectItemContext,
+  type MultiSelectLoadingContext,
+  type MultiSelectOption,
+  type MultiSelectSelectedItemsContext,
 } from './multi-select.interfaces';
 
 /** Replaces each option and exposes its index, selected, and disabled state. */

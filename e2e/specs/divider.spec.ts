@@ -1,4 +1,4 @@
-import { expect, Locator, Page, test } from '@playwright/test';
+import { expect, type Locator, type Page, test } from '@playwright/test';
 
 test('empty vertical Dividers respect explicit height and flex stretching', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/divider');

@@ -1,4 +1,4 @@
-import { expect, JSHandle, Locator, Page, test } from '@playwright/test';
+import { expect, type JSHandle, type Locator, type Page, test } from '@playwright/test';
 
 test('File Drop accepts supported files and reports rejected files through a real drop event', async ({
   page,

@@ -1,7 +1,7 @@
-import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { query, queryAll, render } from '../../../../testing/test-utils';
+import { query, queryAll, render, requireItem } from '../../../../testing/test-utils';
 import { Table } from '../table.component';
 import type { TableColumn, TableSort } from '../table.interfaces';
 import {
@@ -110,8 +110,8 @@ describe('Table native structure and templates', (): void => {
     const fixture: ComponentFixture<TableHost> = render(TableHost);
     const headings: readonly HTMLTableCellElement[] = queryAll(fixture, 'thead th') as readonly HTMLTableCellElement[];
 
-    expect(headings[0].getAttribute('aria-sort')).toBe('none');
-    expect(headings[1].classList.contains('sui-table__cell--end')).toBe(true);
+    expect(requireItem(headings, 0).getAttribute('aria-sort')).toBe('none');
+    expect(requireItem(headings, 1).classList.contains('sui-table__cell--end')).toBe(true);
     expect(query(fixture, '[data-header="name"]').getAttribute('data-direction')).toBeNull();
   });
 
@@ -135,12 +135,12 @@ describe('Table native structure and templates', (): void => {
 describe('Table controlled sorting', (): void => {
   it('cycles ascending, descending, and unsorted states', (): void => {
     const fixture: ComponentFixture<TableHost> = render(TableHost);
-    const sortName: HTMLButtonElement = queryAll(fixture, 'button')[0];
+    const sortName: HTMLButtonElement = requireItem(queryAll(fixture, 'button'), 0);
     sortName.click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.sort()).toEqual({ key: 'name', direction: 'ascending' });
-    expect(queryAll(fixture, 'thead th')[0].getAttribute('aria-sort')).toBe('ascending');
+    expect(requireItem(queryAll(fixture, 'thead th'), 0).getAttribute('aria-sort')).toBe('ascending');
 
     sortName.click();
     fixture.detectChanges();
@@ -155,7 +155,7 @@ describe('Table controlled sorting', (): void => {
 
   it('switches sorting to another column', (): void => {
     const fixture: ComponentFixture<TableHost> = render(TableHost);
-    const sortLength: HTMLButtonElement = queryAll(fixture, 'button')[1];
+    const sortLength: HTMLButtonElement = requireItem(queryAll(fixture, 'button'), 1);
     fixture.componentInstance.sort.set({ key: 'name', direction: 'descending' });
     fixture.detectChanges();
     sortLength.click();
@@ -176,7 +176,7 @@ describe('Table collection states', (): void => {
 
   it('renders loading state and blocks sorting without losing focus', (): void => {
     const fixture: ComponentFixture<TableHost> = render(TableHost);
-    const sortName: HTMLButtonElement = queryAll(fixture, 'button')[0];
+    const sortName: HTMLButtonElement = requireItem(queryAll(fixture, 'button'), 0);
     fixture.componentInstance.loading.set(true);
     fixture.detectChanges();
     sortName.focus();

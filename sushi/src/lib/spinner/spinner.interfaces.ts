@@ -1,4 +1,4 @@
-import { ComponentSize } from '../sushi.types';
+import { type ComponentSize } from '../sushi.types';
 
 /** Built-in loading animation shapes. */
 export type SpinnerType = 'spinner' | 'dots' | 'ring' | 'ball' | 'bars' | 'infinity';

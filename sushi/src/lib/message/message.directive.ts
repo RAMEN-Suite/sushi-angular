@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { MessageOrientation, MessageSeverity, MessageVariant } from './message.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type MessageOrientation, type MessageSeverity, type MessageVariant } from './message.interfaces';
 
 @Directive({
   selector: '[suiMessage]',

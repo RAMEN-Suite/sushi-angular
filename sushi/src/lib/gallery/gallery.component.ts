@@ -4,20 +4,20 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  ElementRef,
+  type ElementRef,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
   viewChildren,
 } from '@angular/core';
 import { LucideChevronLeft, LucideChevronRight } from '@lucide/angular';
 import { Button } from '../button';
-import { GalleryFit, GalleryImage } from './gallery.interfaces';
+import { type GalleryFit, type GalleryImage } from './gallery.interfaces';
 
 /** Browses an image collection with a large stage and accessible thumbnail navigation. */
 @Component({
@@ -166,7 +166,8 @@ export class Gallery<I extends GalleryImage = GalleryImage> {
   }
 
   protected activateImage(event: MouseEvent, image: I): void {
-    (event.currentTarget as HTMLButtonElement).focus({ preventScroll: true });
+    const target: EventTarget | null = event.currentTarget;
+    if (target instanceof HTMLButtonElement) target.focus({ preventScroll: true });
     this.imageActivated.emit(image);
   }
 

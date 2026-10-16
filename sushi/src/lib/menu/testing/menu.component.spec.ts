@@ -1,5 +1,5 @@
-import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type Signal, viewChild, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { afterEach, describe, expect, it } from 'vitest';
 import { press, query, queryAll, render } from '../../../../testing/test-utils';
 import { ContextMenuTrigger } from '../context-menu-trigger.directive';

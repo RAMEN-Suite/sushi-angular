@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, Signal, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, type Signal, signal, type WritableSignal } from '@angular/core';
 import {
   LucideChevronDown,
   LucideChevronRight,
@@ -16,9 +16,9 @@ import {
   Button,
   Divider,
   Menu,
-  MenuEntry,
+  type MenuEntry,
   MenuTrigger,
-  MenuValue,
+  type MenuValue,
   Navbar,
   NavbarAction,
   NavbarBrand,

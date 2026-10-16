@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { ProgressAnimation, ProgressSeverity } from './progress.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type ProgressAnimation, type ProgressSeverity } from './progress.interfaces';
 
 /** Styles a native progress element without replacing its value, maximum, or accessibility semantics. */
 @Directive({

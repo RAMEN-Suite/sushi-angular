@@ -5,25 +5,25 @@ import {
   Component,
   contentChild,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
   TemplateRef,
 } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
+import { type FormValueControl } from '@angular/forms/signals';
 import { Button } from '../button';
 import { JoinItem } from '../join';
 import {
-  SelectButtonOption,
-  SelectButtonOptionContext,
-  SelectButtonOrientation,
-  SelectButtonSeverity,
-  SelectButtonSize,
-  SelectButtonValue,
+  type SelectButtonOption,
+  type SelectButtonOptionContext,
+  type SelectButtonOrientation,
+  type SelectButtonSeverity,
+  type SelectButtonSize,
+  type SelectButtonValue,
 } from './select-button.interfaces';
 import { SelectButtonOptionTemplate } from './select-button.templates';
 
@@ -119,12 +119,17 @@ export class SelectButton implements FormValueControl<SelectButtonValue | null> 
   protected handleKeydown(event: KeyboardEvent, index: number): void {
     const keys: Readonly<Partial<Record<string, number>>> = this.orientation() === 'vertical' ? VERTICAL_KEYS : HORIZONTAL_KEYS;
     const direction: number | undefined = keys[event.key];
-    const edge: number | undefined = event.key === 'Home' ? 0 : event.key === 'End' ? this.options().length - 1 : undefined;
+    let edge: number | undefined;
+    if (event.key === 'Home') edge = 0;
+    else if (event.key === 'End') edge = this.options().length - 1;
     if (direction === undefined && edge === undefined) return;
     event.preventDefault();
 
     const options: readonly SelectButtonOption[] = this.options();
     const nextIndex: number = edge ?? (index + (direction ?? 0) + options.length) % options.length;
+
+    const option: SelectButtonOption | undefined = options[nextIndex];
+    if (!option) return;
 
     const target: EventTarget | null = event.currentTarget;
     if (!(target instanceof HTMLElement)) return;
@@ -132,6 +137,6 @@ export class SelectButton implements FormValueControl<SelectButtonValue | null> 
     if (!parent) return;
     const buttons: NodeListOf<HTMLButtonElement> = parent.querySelectorAll('button[role="radio"]');
     buttons.item(nextIndex).focus();
-    this.handleSelection(options[nextIndex]);
+    this.handleSelection(option);
   }
 }

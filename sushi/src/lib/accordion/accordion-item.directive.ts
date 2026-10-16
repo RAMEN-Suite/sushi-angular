@@ -1,5 +1,13 @@
-import { booleanAttribute, Directive, inject, input, InputSignal, InputSignalWithTransform, TemplateRef } from '@angular/core';
-import { AccordionItemContext, AccordionValue } from './accordion.interfaces';
+import {
+  booleanAttribute,
+  Directive,
+  inject,
+  input,
+  type InputSignal,
+  type InputSignalWithTransform,
+  TemplateRef,
+} from '@angular/core';
+import { type AccordionItemContext, type AccordionValue } from './accordion.interfaces';
 
 /** Defines one accordion heading, value, and content template. */
 @Directive({ selector: 'ng-template[suiAccordionItem]' })

@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, Indicator, IndicatorHorizontalPosition, IndicatorItem, IndicatorVerticalPosition } from '@sushi-kit/angular';
+import {
+  Badge,
+  Indicator,
+  type IndicatorHorizontalPosition,
+  IndicatorItem,
+  type IndicatorVerticalPosition,
+} from '@sushi-kit/angular';
 
 interface Position {
   readonly horizontal: IndicatorHorizontalPosition;

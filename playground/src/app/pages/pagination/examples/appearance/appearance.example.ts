@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Pagination, PaginationSeverity, PaginationSize, PaginationVariant } from '@sushi-kit/angular';
+import { Pagination, type PaginationSeverity, type PaginationSize, type PaginationVariant } from '@sushi-kit/angular';
 
 interface PaginationStyle {
   readonly label: string;

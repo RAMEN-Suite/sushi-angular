@@ -57,16 +57,7 @@ const GENERATED_FILE: string = 'playground/src/app/generated/api-reference.gener
 const STYLE_FILE_SUFFIX: string = '.styles.css';
 const TEMPLATE_SELECTOR_PREFIX: string = 'ng-template[';
 const STYLE_ROUTE_DIRECTIVE: string = '@sui-docs';
-const PLATFORM_TYPE_EXCLUSIONS: ReadonlySet<string> = new Set<string>([
-  'Array',
-  'Map',
-  'Promise',
-  'ReadonlyArray',
-  'Record',
-  'Set',
-]);
-
-// Workspace discovery
+const PLATFORM_TYPE_EXCLUSIONS: ReadonlySet<string> = new Set(['Array', 'Map', 'Promise', 'ReadonlyArray', 'Record', 'Set']);
 
 export function createApiReferencePaths(root: string): ApiReferencePaths {
   return {
@@ -85,7 +76,7 @@ function toKebabCase(value: string): string {
 
 function createRouteResolver(root: string): (className: string, folder: string) => string {
   const pageEntries: readonly Dirent[] = readdirSync(join(root, PAGE_DIRECTORY), { withFileTypes: true });
-  const routes: Set<string> = new Set<string>();
+  const routes: Set<string> = new Set();
   for (const entry of pageEntries) {
     if (entry.isDirectory()) routes.add(entry.name);
   }
@@ -97,7 +88,7 @@ function createRouteResolver(root: string): (className: string, folder: string) 
 }
 
 function discoverGlobalStyles(root: string): ReadonlyMap<string, readonly string[]> {
-  const filesByRoute: Map<string, string[]> = new Map<string, string[]>();
+  const filesByRoute: Map<string, string[]> = new Map();
   const styleFolder: string = join(root, STYLE_DIRECTORY);
   for (const entry of readdirSync(styleFolder, { withFileTypes: true })) {
     if (!entry.isFile() || !entry.name.endsWith(STYLE_FILE_SUFFIX)) continue;
@@ -124,8 +115,6 @@ function readAdditionalStyleRoutes(stylesheet: Root): readonly string[] {
 
   return [];
 }
-
-// TypeScript program and source collection
 
 function loadProgram(root: string): ts.Program {
   const configFile: string = join(root, TYPESCRIPT_CONFIG_FILE);
@@ -167,7 +156,7 @@ function findPublicDeclarations(root: string, program: ts.Program, checker: ts.T
 }
 
 function findPlatformTypes(program: ts.Program): ReadonlyMap<string, ts.Statement> {
-  const declarations: Map<string, ts.Statement> = new Map<string, ts.Statement>();
+  const declarations: Map<string, ts.Statement> = new Map();
   for (const sourceFile of program.getSourceFiles()) {
     if (!sourceFile.isDeclarationFile || !/^lib\..+\.d\.ts$/u.test(basename(sourceFile.fileName))) continue;
 
@@ -251,8 +240,6 @@ function collectDeclarations(
   }
 }
 
-// Final API model
-
 function templatesFor(reference: ComponentReference, collection: Collection): readonly ApiTemplate[] {
   const templates: readonly ApiTemplate[] = collection.templates.get(reference.folder) ?? [];
   const siblings: readonly ComponentReference[] = collection.references.filter(
@@ -265,7 +252,7 @@ function templatesFor(reference: ComponentReference, collection: Collection): re
 }
 
 function typesFor(names: readonly string[], collection: Collection, reader: ApiSourceReader): readonly ApiTypeDefinition[] {
-  const definitions: Map<string, ApiTypeDefinition> = new Map<string, ApiTypeDefinition>(collection.types);
+  const definitions: Map<string, ApiTypeDefinition> = new Map(collection.types);
   for (const name of names) {
     if (definitions.has(name) || PLATFORM_TYPE_EXCLUSIONS.has(name)) continue;
 

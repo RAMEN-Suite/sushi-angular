@@ -4,15 +4,15 @@ import {
   computed,
   contentChild,
   input,
-  InputSignal,
+  type InputSignal,
   linkedSignal,
-  Signal,
+  type Signal,
   TemplateRef,
   ViewEncapsulation,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { Code, CodeLine, Tab, Tabs, TabsValue } from '@sushi-kit/angular';
+import { Code, CodeLine, Tab, Tabs, type TabsValue } from '@sushi-kit/angular';
 import { highlightLines } from './example-highlighter';
 import { ExamplePreview } from './example-preview.directive';
 

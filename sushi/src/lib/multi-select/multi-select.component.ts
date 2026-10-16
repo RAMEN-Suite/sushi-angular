@@ -7,39 +7,39 @@ import {
   computed,
   contentChild,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   numberAttribute,
   output,
-  OutputEmitterRef,
+  type OutputEmitterRef,
   signal,
-  Signal,
+  type Signal,
   TemplateRef,
   viewChild,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
+import { type FormValueControl } from '@angular/forms/signals';
 import { Combobox, ComboboxPopup, ComboboxWidget } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
-import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, CdkOverlayOrigin, type ConnectedPosition } from '@angular/cdk/overlay';
 import { LucideCheck, LucideChevronDown, LucideX } from '@lucide/angular';
 import { Checkbox } from '../checkbox';
-import { FormControlSeverity, FormControlSize, FormControlState } from '../form-control';
+import { type FormControlSeverity, type FormControlSize, FormControlState } from '../form-control';
 import { compareSelectionValues, selectionOverlayPositions, SELECTION_BELOW, SELECTION_ABOVE } from '../selection';
 import { Spinner } from '../spinner';
 import {
-  MultiSelectCompareWith,
-  MultiSelectGroupContext,
-  MultiSelectHeaderContext,
-  MultiSelectItemContext,
-  MultiSelectLoadingContext,
-  MultiSelectModelValue,
-  MultiSelectOption,
-  MultiSelectSelectedItemsContext,
-  MultiSelectValue,
-  MultiSelectVariant,
+  type MultiSelectCompareWith,
+  type MultiSelectGroupContext,
+  type MultiSelectHeaderContext,
+  type MultiSelectItemContext,
+  type MultiSelectLoadingContext,
+  type MultiSelectModelValue,
+  type MultiSelectOption,
+  type MultiSelectSelectedItemsContext,
+  type MultiSelectValue,
+  type MultiSelectVariant,
 } from './multi-select.interfaces';
 import {
   MultiSelectCheckmarkIconTemplate,
@@ -193,8 +193,9 @@ export class MultiSelect<O extends MultiSelectOption = MultiSelectOption>
   );
   protected readonly displayValue: Signal<string> = computed(() => {
     const options: readonly O[] = this.selectedOptions();
-    if (!options.length) return this.placeholder();
-    return options.length === 1 ? options[0].label : `${options[0].label} +${options.length - 1}`;
+    const first: O | undefined = options[0];
+    if (!first) return this.placeholder();
+    return options.length === 1 ? first.label : `${first.label} +${options.length - 1}`;
   });
   protected readonly enabledOptions: Signal<readonly O[]> = computed(() =>
     this.options().filter((option: O): boolean => !option.disabled),
@@ -235,6 +236,7 @@ export class MultiSelect<O extends MultiSelectOption = MultiSelectOption>
         if (!this.expanded()) return;
         const listbox: Listbox<MultiSelectValue> | undefined = this.listbox();
         if (!listbox?.activeDescendant()) return;
+
         listbox.scrollActiveItemIntoView();
       },
     });
@@ -255,6 +257,7 @@ export class MultiSelect<O extends MultiSelectOption = MultiSelectOption>
   protected handleExpanded(expanded: boolean): void {
     if (expanded && (this.disabled() || this.loading())) return;
     if (this.expanded() === expanded) return;
+
     if (expanded) this.preferAvailableSpace();
     this.expanded.set(expanded);
     if (expanded) return;

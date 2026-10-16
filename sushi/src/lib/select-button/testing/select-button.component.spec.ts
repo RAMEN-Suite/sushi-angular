@@ -1,7 +1,7 @@
-import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { press, query, queryAll, render } from '../../../../testing/test-utils';
+import { press, query, queryAll, render, requireItem } from '../../../../testing/test-utils';
 import { SelectButton } from '../select-button.component';
 import type { SelectButtonOption, SelectButtonOrientation, SelectButtonValue } from '../select-button.interfaces';
 import { SelectButtonOptionTemplate } from '../select-button.templates';
@@ -50,8 +50,8 @@ describe('SelectButton semantics', (): void => {
     expect(group.getAttribute('aria-label')).toBe('View');
     expect(group.getAttribute('aria-orientation')).toBe('horizontal');
     expect(radios.map((radio: Element): string | null => radio.getAttribute('tabindex'))).toEqual(['0', '-1', '-1']);
-    expect(radios[0].getAttribute('aria-checked')).toBe('true');
-    expect(radios[2].getAttribute('aria-disabled')).toBe('true');
+    expect(requireItem(radios, 0).getAttribute('aria-checked')).toBe('true');
+    expect(requireItem(radios, 2).getAttribute('aria-disabled')).toBe('true');
   });
 
   it('exposes option state and index to a custom template', (): void => {
@@ -77,14 +77,14 @@ describe('SelectButton interaction', (): void => {
   it('selects an enabled option and optionally clears it', (): void => {
     const fixture: ComponentFixture<SelectButtonHost> = render(SelectButtonHost);
     const radios: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
-    radios[1].click();
+    requireItem(radios, 1).click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.value()).toBe('board');
 
     fixture.componentInstance.allowEmpty.set(true);
     fixture.detectChanges();
-    radios[1].click();
+    requireItem(radios, 1).click();
 
     expect(fixture.componentInstance.value()).toBeNull();
     expect(fixture.componentInstance.touches).toBe(2);
@@ -93,27 +93,27 @@ describe('SelectButton interaction', (): void => {
   it('moves and selects with orientation-aware arrow keys', (): void => {
     const fixture: ComponentFixture<SelectButtonHost> = render(SelectButtonHost);
     const radios: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
-    press(radios[0], 'ArrowRight');
+    press(requireItem(radios, 0), 'ArrowRight');
     fixture.detectChanges();
 
-    expect(document.activeElement).toBe(radios[1]);
+    expect(document.activeElement).toBe(requireItem(radios, 1));
     expect(fixture.componentInstance.value()).toBe('board');
 
     fixture.componentInstance.orientation.set('vertical');
     fixture.detectChanges();
-    press(radios[1], 'ArrowUp');
+    press(requireItem(radios, 1), 'ArrowUp');
 
-    expect(document.activeElement).toBe(radios[0]);
+    expect(document.activeElement).toBe(requireItem(radios, 0));
     expect(fixture.componentInstance.value()).toBe('list');
   });
 
   it('keeps disabled options focusable without changing the value', (): void => {
     const fixture: ComponentFixture<SelectButtonHost> = render(SelectButtonHost);
     const radios: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
-    radios[2].focus();
-    radios[2].click();
+    requireItem(radios, 2).focus();
+    requireItem(radios, 2).click();
 
-    expect(document.activeElement).toBe(radios[2]);
+    expect(document.activeElement).toBe(requireItem(radios, 2));
     expect(fixture.componentInstance.value()).toBe('list');
   });
 });

@@ -27,13 +27,13 @@
   --sui-accordion-motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-:host([data-size='md']) {
+:host([data-size="md"]) {
   --_sui-accordion-trigger-min-height: 3rem;
   --_sui-accordion-trigger-padding-block: 0.75rem;
   --_sui-accordion-padding-inline: 1rem;
 }
 
-:host([data-size='lg']) {
+:host([data-size="lg"]) {
   --_sui-accordion-trigger-min-height: 3.5rem;
   --_sui-accordion-trigger-padding-block: 0.875rem;
   --_sui-accordion-padding-inline: 1.125rem;
@@ -95,7 +95,7 @@
   font-size: 1.125rem;
 }
 
-.sui-accordion__trigger[aria-disabled='true'] {
+.sui-accordion__trigger[aria-disabled="true"] {
   cursor: not-allowed;
   opacity: 0.5;
 }

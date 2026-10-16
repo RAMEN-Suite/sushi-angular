@@ -1,10 +1,10 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, inject, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { query, queryAll, render } from '../../../../testing/test-utils';
 import { Toast } from '../toast.component';
 import { ToastService } from '../toast.service';
-import { ToastDismissLabel, ToastTemplateValue } from '../toast.interfaces';
+import { type ToastDismissLabel, type ToastTemplateValue } from '../toast.interfaces';
 import { ToastContentTemplate } from '../toast.templates';
 
 @Component({

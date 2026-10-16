@@ -27,7 +27,8 @@
     "test:e2e:ui": "npm run build:playground && playwright test --config e2e/playwright.config.ts --ui",
     "test:tools": "vitest run tools",
     "test:watch": "ng test sushi",
-    "verify": "npm run lint && npm run format && npm run test:coverage && npm run test:tools && npm run test:e2e && npm run package:check"
+    "verify": "npm run lint && npm run format && npm run typecheck && npm run test:coverage && npm run test:tools && npm run test:e2e && npm run package:check",
+    "typecheck": "tsc -p sushi/tsconfig.lib.json --noEmit && tsc -p sushi/tsconfig.spec.json --noEmit && tsc -p playground/tsconfig.app.json --noEmit && tsc -p tools/tsconfig.json --noEmit && tsc -p e2e/tsconfig.json --noEmit"
   },
   "private": true,
   "engines": {

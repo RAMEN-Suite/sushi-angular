@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Badge, BadgeSeverity, BadgeSize, BadgeVariant } from '@sushi-kit/angular';
+import { Badge, type BadgeSeverity, type BadgeSize, type BadgeVariant } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-badge-usage-example',

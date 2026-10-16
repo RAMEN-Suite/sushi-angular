@@ -1,5 +1,9 @@
 import { Directive } from '@angular/core';
-import { PaginationNavigationContext, PaginationPageContext, PaginationReportContext } from './pagination.interfaces';
+import {
+  type PaginationNavigationContext,
+  type PaginationPageContext,
+  type PaginationReportContext,
+} from './pagination.interfaces';
 
 /** Replaces the content of every numbered page action. */
 @Directive({ selector: 'ng-template[suiPaginationPage]' })

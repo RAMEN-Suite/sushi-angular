@@ -1,5 +1,5 @@
-import { SelectionCompareWith, SelectionOption } from '../selection';
-import { SelectionValue } from '../sushi.types';
+import { type SelectionCompareWith, type SelectionOption } from '../selection';
+import { type SelectionValue } from '../sushi.types';
 
 /** Value accepted by a select option. */
 export type SelectValue = SelectionValue;

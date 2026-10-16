@@ -1,5 +1,10 @@
 import { Directive } from '@angular/core';
-import { SelectGroupContext, SelectItemContext, SelectLoadingContext, SelectSelectedItemContext } from './select.interfaces';
+import {
+  type SelectGroupContext,
+  type SelectItemContext,
+  type SelectLoadingContext,
+  type SelectSelectedItemContext,
+} from './select.interfaces';
 
 /** Replaces each option and exposes its index, selected, and disabled state. */
 @Directive({ selector: 'ng-template[suiSelectItem]' })

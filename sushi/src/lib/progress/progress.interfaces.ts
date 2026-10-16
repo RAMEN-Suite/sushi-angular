@@ -1,4 +1,4 @@
-import { ThemeSeverity } from '../sushi.types';
+import { type ThemeSeverity } from '../sushi.types';
 
 /** Semantic colors available to progress indicators. */
 export type ProgressSeverity = ThemeSeverity;

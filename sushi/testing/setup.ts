@@ -1,5 +1,5 @@
 class ResizeObserverStub implements ResizeObserver {
-  private readonly targets: Set<Element> = new Set<Element>();
+  private readonly targets: Set<Element> = new Set();
 
   public disconnect(): void {
     this.targets.clear();

@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Listbox as AriaListbox, Option as AriaOption } from '@angular/aria/listbox';
-import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDrag, type CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import {
   afterRenderEffect,
@@ -10,26 +10,31 @@ import {
   computed,
   contentChild,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   numberAttribute,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
   signal,
   TemplateRef,
   viewChild,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
+import { type FormValueControl } from '@angular/forms/signals';
 import { LucideChevronDown, LucideChevronUp, LucideChevronsDown, LucideChevronsUp, LucideSearch } from '@lucide/angular';
 import { Button } from '../button';
 import { FormControlState } from '../form-control';
 import { InputSurface, InputSurfaceControl } from '../input-surface';
 import { filterSelectionOption } from '../selection';
-import { OrderListFilterContext, OrderListItemContext, OrderListOption, OrderListValue } from './order-list.interfaces';
+import {
+  type OrderListFilterContext,
+  type OrderListItemContext,
+  type OrderListOption,
+  type OrderListValue,
+} from './order-list.interfaces';
 import { OrderListFilterTemplate, OrderListHeaderTemplate, OrderListItemTemplate } from './order-list.templates';
 
 /** Sorts a collection with selection controls or optional drag and drop. */
@@ -176,21 +181,29 @@ export class OrderList<I extends OrderListOption = OrderListOption>
 
   protected moveUp(): void {
     if (this.disabled() || !this.canMoveUp()) return;
+
     const items: I[] = [...this.value()];
     const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
+
     for (const index of this.selectedIndexes()) {
-      if (index > 0 && !selected.has(items[index - 1].value)) moveItemInArray(items, index, index - 1);
+      const previous: I | undefined = items[index - 1];
+      if (previous && !selected.has(previous.value)) moveItemInArray(items, index, index - 1);
     }
+
     this.commit(items);
   }
 
   protected moveDown(): void {
     if (this.disabled() || !this.canMoveDown()) return;
+
     const items: I[] = [...this.value()];
     const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
+
     for (const index of [...this.selectedIndexes()].reverse()) {
-      if (index < items.length - 1 && !selected.has(items[index + 1].value)) moveItemInArray(items, index, index + 1);
+      const next: I | undefined = items[index + 1];
+      if (next && !selected.has(next.value)) moveItemInArray(items, index, index + 1);
     }
+
     this.commit(items);
   }
 
@@ -234,7 +247,8 @@ export class OrderList<I extends OrderListOption = OrderListOption>
   }
 
   protected handleFilter(event: Event): void {
-    this.updateFilter((event.target as HTMLInputElement).value);
+    const input: EventTarget | null = event.target;
+    if (input instanceof HTMLInputElement) this.updateFilter(input.value);
   }
 
   protected handleDrop(event: CdkDragDrop<readonly I[]>): void {
@@ -250,8 +264,10 @@ export class OrderList<I extends OrderListOption = OrderListOption>
   }
 
   protected handleFocusout(event: FocusEvent): void {
-    const currentTarget: HTMLElement = event.currentTarget as HTMLElement;
-    if (!currentTarget.contains(event.relatedTarget as Node | null)) this.touch.emit();
+    const currentTarget: EventTarget | null = event.currentTarget;
+    if (!(currentTarget instanceof HTMLElement)) return;
+    const destination: EventTarget | null = event.relatedTarget;
+    if (!(destination instanceof Node) || !currentTarget.contains(destination)) this.touch.emit();
   }
 
   protected itemContext(item: I, index: number): OrderListItemContext<I> {

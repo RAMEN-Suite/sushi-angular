@@ -79,6 +79,9 @@ export default defineConfig(
         },
       ],
 
+      '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports', fixStyle: 'inline-type-imports' }],
+      '@typescript-eslint/consistent-type-exports': 'error',
+      '@typescript-eslint/consistent-generic-constructors': ['error', 'type-annotation'],
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/explicit-module-boundary-types': 'error',
       '@typescript-eslint/typedef': [
@@ -92,6 +95,7 @@ export default defineConfig(
         },
       ],
 
+      'no-nested-ternary': 'error',
       complexity: ['error', 12],
       'max-lines-per-function': [
         'error',

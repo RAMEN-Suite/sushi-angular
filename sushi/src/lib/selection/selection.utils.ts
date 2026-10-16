@@ -1,5 +1,5 @@
-import { SelectionValue } from '../sushi.types';
-import { SelectionCompareWith, SelectionFilter, SelectionOption } from './selection.interfaces';
+import { type SelectionValue } from '../sushi.types';
+import { type SelectionCompareWith, type SelectionFilter, type SelectionOption } from './selection.interfaces';
 
 export const compareSelectionValues: SelectionCompareWith = (first: SelectionValue, second: SelectionValue): boolean =>
   Object.is(first, second);

@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucideGrid3x3, LucideList, LucideRows3 } from '@lucide/angular';
-import { SelectButton, SelectButtonOption, SelectButtonOptionTemplate, SelectButtonValue } from '@sushi-kit/angular';
+import { SelectButton, type SelectButtonOption, SelectButtonOptionTemplate, type SelectButtonValue } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-select-button-template-example',

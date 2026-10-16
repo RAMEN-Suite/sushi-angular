@@ -1,4 +1,4 @@
-import { ComponentSize } from '../sushi.types';
+import { type ComponentSize } from '../sushi.types';
 
 /** Surface treatments available to cards. */
 export type CardVariant = 'plain' | 'border' | 'dash';

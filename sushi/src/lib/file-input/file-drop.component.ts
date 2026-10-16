@@ -5,25 +5,25 @@ import {
   Component,
   computed,
   contentChild,
-  ElementRef,
+  type ElementRef,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
   signal,
   TemplateRef,
   viewChild,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
+import { type FormValueControl } from '@angular/forms/signals';
 import { LucideX } from '@lucide/angular';
 import { Button } from '../button';
 import { FormControlState } from '../form-control';
-import { FileDropContentContext, FileDropItemContext, FileDropRejection } from './file-drop.interfaces';
+import { type FileDropContentContext, type FileDropItemContext, type FileDropRejection } from './file-drop.interfaces';
 import { FileDropContentTemplate, FileDropItemTemplate } from './file-drop.templates';
 
 let nextFileDropId: number = 0;
@@ -157,6 +157,7 @@ export class FileDrop extends FormControlState implements FormValueControl<reado
     if (this.disabled()) return;
     const inputElement: EventTarget | null = event.currentTarget;
     if (!(inputElement instanceof HTMLInputElement)) return;
+
     this.value.set(this.selectFiles(inputElement.files));
     this.touch.emit();
   }
@@ -178,6 +179,7 @@ export class FileDrop extends FormControlState implements FormValueControl<reado
   protected handleRemove(index: number): void {
     if (this.disabled()) return;
     this.fileInput().nativeElement.value = '';
+
     const files: readonly File[] = this.value().filter((_file: File, itemIndex: number) => itemIndex !== index);
     this.value.set(files);
     this.announcement.set(files.length ? files.map((file: File): string => file.name).join(', ') : 'No files selected');

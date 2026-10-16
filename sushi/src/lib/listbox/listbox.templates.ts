@@ -1,4 +1,4 @@
-import { Directive, input, InputSignal } from '@angular/core';
+import { Directive, input, type InputSignal } from '@angular/core';
 import type { ListboxFilterContext, ListboxGroupContext, ListboxItemContext, ListboxOption } from './listbox.interfaces';
 
 /** Replaces the filter control and exposes its query, state, and update function. */

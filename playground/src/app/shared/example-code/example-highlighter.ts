@@ -37,21 +37,24 @@ export const highlightLines: (source: string, language: CodeLanguage) => readonl
 };
 
 const splitLines: (source: string) => readonly string[] = (source: string): readonly string[] => {
-  const lines: string[] = [''];
+  const lines: string[] = [];
   const spans: string[] = [];
   const tokens: readonly string[] = source.split(/(<span class="[^"]+">|<\/span>|\n)/);
+  let line: string = '';
 
   tokens.forEach((token: string): void => {
     if (token === '\n') {
-      lines[lines.length - 1] += '</span>'.repeat(spans.length);
-      lines.push(spans.join(''));
+      lines.push(line + '</span>'.repeat(spans.length));
+      line = spans.join('');
       return;
     }
 
     if (token.startsWith('<span ')) spans.push(token);
     if (token === '</span>') spans.pop();
-    lines[lines.length - 1] += token;
+    line += token;
   });
+
+  lines.push(line);
 
   return lines;
 };

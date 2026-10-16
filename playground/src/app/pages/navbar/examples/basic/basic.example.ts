@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucideSoup } from '@lucide/angular';
-import { Navbar, NavbarBrand, NavbarItem } from '@sushi-kit/angular';
+import { Navbar, NavbarBrand, type NavbarItem } from '@sushi-kit/angular';
 
 type Page = 'Products' | 'Solutions' | 'Pricing';
 

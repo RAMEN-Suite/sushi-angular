@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Card, Pagination, PaginationLabels } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { Card, Pagination, type PaginationLabels } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-pagination-compact-example',

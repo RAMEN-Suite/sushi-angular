@@ -1,10 +1,30 @@
-import { booleanAttribute, Directive, ElementRef, inject, input, InputSignal, InputSignalWithTransform } from '@angular/core';
-import { Menu } from './menu.component';
-import { MenuItem } from './menu.interfaces';
+import {
+  booleanAttribute,
+  computed,
+  Directive,
+  ElementRef,
+  inject,
+  input,
+  type InputSignal,
+  type InputSignalWithTransform,
+  type Signal,
+} from '@angular/core';
+import { type Menu } from './menu.component';
+import { type MenuItem } from './menu.interfaces';
+import { OVERLAY_TRIGGER_OPEN } from '../internal/overlay-trigger-state';
 
 /** Opens a popup Menu from a native button. */
 @Directive({
   selector: 'button[suiMenuTrigger]',
+  providers: [
+    {
+      provide: OVERLAY_TRIGGER_OPEN,
+      useFactory: (): Signal<boolean> => {
+        const trigger: MenuTrigger = inject(MenuTrigger);
+        return computed((): boolean => trigger.menu().isOpen());
+      },
+    },
+  ],
   host: {
     type: 'button',
     '[attr.aria-controls]': 'menu().surfaceId',

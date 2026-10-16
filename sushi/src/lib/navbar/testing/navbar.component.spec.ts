@@ -1,7 +1,7 @@
-import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { press, query, queryAll, render } from '../../../../testing/test-utils';
+import { press, query, queryAll, render, requireItem } from '../../../../testing/test-utils';
 import { NavbarContent } from '../navbar-content.directive';
 import { NavbarItemTemplate } from '../navbar-item-template.directive';
 import { Navbar } from '../navbar.component';
@@ -148,8 +148,8 @@ describe('Navbar disclosures', (): void => {
   it('keeps only the most recently opened disclosure expanded', (): void => {
     const fixture: ComponentFixture<NavbarHost> = render(NavbarHost);
     const details: readonly Element[] = queryAll(fixture, 'details');
-    const first: HTMLDetailsElement = details[0] as HTMLDetailsElement;
-    const second: HTMLDetailsElement = details[1] as HTMLDetailsElement;
+    const first: HTMLDetailsElement = requireItem(details, 0) as HTMLDetailsElement;
+    const second: HTMLDetailsElement = requireItem(details, 1) as HTMLDetailsElement;
     first.open = true;
     first.dispatchEvent(new Event('toggle'));
     second.open = true;
@@ -173,7 +173,7 @@ describe('Navbar disclosures', (): void => {
   it('does not open a disabled disclosure', (): void => {
     const fixture: ComponentFixture<NavbarHost> = render(NavbarHost);
     const summaries: readonly Element[] = queryAll(fixture, 'summary');
-    const disabled: HTMLElement = summaries[2] as HTMLElement;
+    const disabled: HTMLElement = requireItem(summaries, 2) as HTMLElement;
     disabled.click();
 
     expect(disabled.getAttribute('aria-disabled')).toBe('true');

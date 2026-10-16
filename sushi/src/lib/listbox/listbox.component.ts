@@ -7,20 +7,20 @@ import {
   computed,
   contentChild,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   numberAttribute,
   output,
-  OutputEmitterRef,
-  Signal,
+  type OutputEmitterRef,
+  type Signal,
   signal,
   TemplateRef,
   viewChild,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
+import { type FormValueControl } from '@angular/forms/signals';
 import { Listbox as AriaListbox, Option as AriaOption } from '@angular/aria/listbox';
 import { LucideCheck, LucideSearch } from '@lucide/angular';
 import { Button } from '../button';
@@ -30,12 +30,12 @@ import { InputSurface, InputSurfaceControl } from '../input-surface';
 import { filterSelectionOption } from '../selection';
 import { Spinner } from '../spinner';
 import {
-  ListboxFilterContext,
-  ListboxGroupContext,
-  ListboxItemContext,
-  ListboxModelValue,
-  ListboxOption,
-  ListboxValue,
+  type ListboxFilterContext,
+  type ListboxGroupContext,
+  type ListboxItemContext,
+  type ListboxModelValue,
+  type ListboxOption,
+  type ListboxValue,
 } from './listbox.interfaces';
 import {
   ListboxEmptyFilterTemplate,
@@ -190,12 +190,15 @@ export class Listbox<O extends ListboxOption = ListboxOption>
   }
 
   protected handleFocusout(event: FocusEvent): void {
-    const currentTarget: HTMLElement = event.currentTarget as HTMLElement;
-    if (!currentTarget.contains(event.relatedTarget as Node | null)) this.touch.emit();
+    const currentTarget: EventTarget | null = event.currentTarget;
+    if (!(currentTarget instanceof HTMLElement)) return;
+    const destination: EventTarget | null = event.relatedTarget;
+    if (!(destination instanceof Node) || !currentTarget.contains(destination)) this.touch.emit();
   }
 
   protected handleFilter(event: Event): void {
-    this.updateFilter((event.target as HTMLInputElement).value);
+    const input: EventTarget | null = event.target;
+    if (input instanceof HTMLInputElement) this.updateFilter(input.value);
   }
 
   protected handleSelectAll(): void {
@@ -215,7 +218,8 @@ export class Listbox<O extends ListboxOption = ListboxOption>
 
   protected handleScroll(event: Event): void {
     if (!this.lazy() || this.loading()) return;
-    const element: HTMLElement = event.currentTarget as HTMLElement;
+    const element: EventTarget | null = event.currentTarget;
+    if (!(element instanceof HTMLElement)) return;
     if (element.scrollHeight - element.scrollTop - element.clientHeight > 48) return;
     const offset: number = this.options().length;
     if (this.loadedOffset() === offset) return;

@@ -1,7 +1,7 @@
-import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type Signal, viewChild, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { afterEach, describe, expect, it } from 'vitest';
-import { query, render } from '../../../../testing/test-utils';
+import { query, render, requireItem } from '../../../../testing/test-utils';
 import { Select } from '../select.component';
 import type { SelectModelValue, SelectOption } from '../select.interfaces';
 import {
@@ -190,9 +190,9 @@ describe('Select option selection', (): void => {
     const items: NodeListOf<HTMLElement> = document.querySelectorAll<HTMLElement>('[role="option"]');
 
     expect(items).toHaveLength(3);
-    expect(items[2].getAttribute('aria-disabled')).toBe('true');
+    expect(requireItem(items, 2).getAttribute('aria-disabled')).toBe('true');
 
-    items[0].click();
+    requireItem(items, 0).click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.value()).toBe('miso');
@@ -204,7 +204,7 @@ describe('Select option selection', (): void => {
     query(fixture, '[role="combobox"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
     await fixture.whenStable();
 
-    document.querySelectorAll<HTMLElement>('[role="option"]')[2].click();
+    requireItem(document.querySelectorAll<HTMLElement>('[role="option"]'), 2).click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.value()).toBe('shoyu');

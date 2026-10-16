@@ -1,6 +1,6 @@
-import { ButtonSeverity, ButtonSize } from '../button';
-import { SelectionOption } from '../selection';
-import { Orientation, SelectionValue } from '../sushi.types';
+import { type ButtonSeverity, type ButtonSize } from '../button';
+import { type SelectionOption } from '../selection';
+import { type Orientation, type SelectionValue } from '../sushi.types';
 
 /** One option displayed by a select button. */
 export type SelectButtonOption = SelectionOption;

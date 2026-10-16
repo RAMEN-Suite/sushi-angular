@@ -1,4 +1,4 @@
-import { Orientation } from '../sushi.types';
+import { type Orientation } from '../sushi.types';
 
 /** Supported Navbar link arrangements. */
 export type NavbarOrientation = Orientation | 'responsive';

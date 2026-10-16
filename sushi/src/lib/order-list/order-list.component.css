@@ -30,7 +30,7 @@
   min-width: 0;
 }
 
-.cdk-drag-preview.sui-order-list-row[data-selected='true'] {
+.cdk-drag-preview.sui-order-list-row[data-selected="true"] {
   color: var(--color-primary);
   background: color-mix(in oklab, var(--color-primary) 12%, var(--color-base-100));
 }

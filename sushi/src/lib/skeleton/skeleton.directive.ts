@@ -1,5 +1,5 @@
-import { booleanAttribute, Directive, input, InputSignal, InputSignalWithTransform } from '@angular/core';
-import { SkeletonVariant } from './skeleton.interfaces';
+import { booleanAttribute, Directive, input, type InputSignal, type InputSignalWithTransform } from '@angular/core';
+import { type SkeletonVariant } from './skeleton.interfaces';
 
 /** Marks a non-interactive placeholder for content that is still loading. */
 @Directive({

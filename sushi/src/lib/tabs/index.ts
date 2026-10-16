@@ -1,3 +1,3 @@
 export * from './tab.directive';
 export * from './tabs.component';
-export * from './tabs.interfaces';
+export type * from './tabs.interfaces';

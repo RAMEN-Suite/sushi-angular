@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge } from '@sushi-kit/angular';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
-import { ExampleSource, textSource } from '../../shared/example-code/example-source';
+import { type ExampleSource, textSource } from '../../shared/example-code/example-source';
 import contentHtml from './examples/content/content.example.html';
 import * as contentTs from './examples/content/content.example.ts' with { loader: 'text' };
 import { InputSurfaceContentExample } from './examples/content/content.example';

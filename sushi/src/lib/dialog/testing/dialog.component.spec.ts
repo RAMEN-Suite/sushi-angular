@@ -1,5 +1,5 @@
-import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { DialogClose } from '../dialog-close.directive';
@@ -7,7 +7,7 @@ import { DialogHeader } from '../dialog-header.directive';
 import { DialogBody, DialogFooter } from '../dialog-slots.directive';
 import { DialogTrigger } from '../dialog-trigger.directive';
 import { Dialog } from '../dialog.component';
-import { DialogCloseEvent, DialogMotion } from '../dialog.interfaces';
+import { type DialogCloseEvent, type DialogMotion } from '../dialog.interfaces';
 
 @Component({
   imports: [Dialog, DialogBody, DialogClose, DialogFooter, DialogHeader, DialogTrigger],
@@ -248,7 +248,7 @@ describe('Dialog trigger', (): void => {
 
 function pendingExit(dialog: HTMLDialogElement): () => void {
   let finish!: (animation: Animation) => void;
-  const finished: Promise<Animation> = new Promise<Animation>((resolve: (animation: Animation) => void): void => {
+  const finished: Promise<Animation> = new Promise((resolve: (animation: Animation) => void): void => {
     finish = resolve;
   });
   const exit: Animation = { animationName: 'sui-dialog-exit', finished } as CSSAnimation;

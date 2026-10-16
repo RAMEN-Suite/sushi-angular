@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, computed, Signal, signal, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  computed,
+  type Signal,
+  signal,
+  type WritableSignal,
+} from '@angular/core';
 import {
   Badge,
   Button,
@@ -47,9 +56,17 @@ export class DataViewRemoteExample {
     return deployments.slice(start, start + 3);
   });
 
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private timer: ReturnType<typeof setTimeout> | undefined;
+
+  public constructor() {
+    this.destroyRef.onDestroy((): void => clearTimeout(this.timer));
+  }
+
   protected handlePage(page: number): void {
+    clearTimeout(this.timer);
     this.loading.set(true);
     this.page.set(page);
-    window.setTimeout((): void => this.loading.set(false), 450);
+    this.timer = setTimeout((): void => this.loading.set(false), 450);
   }
 }

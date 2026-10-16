@@ -96,21 +96,27 @@ afterEach((): void => {
   }
 });
 
+function requireReference(result: GeneratedApi, name: string): ApiReferenceData {
+  const reference: ApiReferenceData | undefined = result.references[name];
+  if (!reference) throw new Error(`Expected generated API reference for ${name}.`);
+  return reference;
+}
+
 describe('API reference exports', (): void => {
   it('documents exported components and omits internal or unexported symbols', (): void => {
     const result: GeneratedApi = generateApiReference(createFixture()).data;
 
     expect(Object.keys(result.references)).toEqual(['Example', 'Secondary']);
-    expect(result.references['Example'].selector).toBe('sui-example');
+    expect(requireReference(result, 'Example').selector).toBe('sui-example');
     expect(result.referencesByRoute['example']).toEqual(['Example', 'Secondary']);
-    expect(result.references['Secondary'].templates).toEqual([]);
-    expect(result.references['Secondary'].types).toEqual([]);
+    expect(requireReference(result, 'Secondary').templates).toEqual([]);
+    expect(requireReference(result, 'Secondary').types).toEqual([]);
   });
 });
 
 describe('API reference types and templates', (): void => {
   it('resolves generic, nested, template-context, and platform types', (): void => {
-    const example: ApiReferenceData = generateApiReference(createFixture()).data.references['Example'];
+    const example: ApiReferenceData = requireReference(generateApiReference(createFixture()).data, 'Example');
 
     expect(example.declaration).toBe('Example<T = string>');
     expect(example.typeParameters).toEqual([{ name: 'T', constraint: null, defaultValue: 'string' }]);
@@ -136,7 +142,7 @@ describe('API reference types and templates', (): void => {
 
 describe('API reference CSS tokens', (): void => {
   it('includes declarations and fallback-only token references', (): void => {
-    const example: ApiReferenceData = generateApiReference(createFixture()).data.references['Example'];
+    const example: ApiReferenceData = requireReference(generateApiReference(createFixture()).data, 'Example');
 
     expect(example.styles).toContainEqual(expect.objectContaining({ name: '--sui-example-gap', defaultValue: '1rem' }));
     expect(example.styles).toContainEqual(

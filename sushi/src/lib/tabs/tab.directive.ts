@@ -1,5 +1,13 @@
-import { booleanAttribute, Directive, inject, input, InputSignal, InputSignalWithTransform, TemplateRef } from '@angular/core';
-import { TabsValue } from './tabs.interfaces';
+import {
+  booleanAttribute,
+  Directive,
+  inject,
+  input,
+  type InputSignal,
+  type InputSignalWithTransform,
+  TemplateRef,
+} from '@angular/core';
+import { type TabsValue } from './tabs.interfaces';
 
 /** Defines one tab label, value, and panel template. */
 @Directive({ selector: 'ng-template[suiTab]' })

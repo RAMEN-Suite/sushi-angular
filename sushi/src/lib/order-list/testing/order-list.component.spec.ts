@@ -1,5 +1,5 @@
-import { Component, signal, Signal, viewChild, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type Signal, viewChild, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { press, query, queryAll, render } from '../../../../testing/test-utils';
 import { OrderList } from '../order-list.component';
@@ -32,7 +32,7 @@ const items: readonly WorkItem[] = [
     >
       <ng-template suiOrderListHeader><span data-header>Workflow steps</span></ng-template>
       <ng-template suiOrderListFilter let-query let-update="update">
-        <input data-filter [value]="query" (input)="update($any($event.target).value)" />
+        <input #filterInput data-filter [value]="query" (input)="update(filterInput.value)" />
       </ng-template>
       <ng-template [suiOrderListItem]="value()" let-item let-index="index" let-selected="selected">
         <span [attr.data-item]="item.value" [attr.data-index]="index" [attr.data-selected]="selected">

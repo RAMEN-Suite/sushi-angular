@@ -4,7 +4,7 @@ import {
   Badge,
   Table,
   TableCaptionTemplate,
-  TableColumn,
+  type TableColumn,
   TableEmptyTemplate,
   TableFooterTemplate,
   TableHeaderTemplate,

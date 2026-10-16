@@ -1,8 +1,8 @@
-import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { query, render } from '../../../../testing/test-utils';
-import { Gallery, GalleryImage } from '../index';
+import { query, render, requireItem } from '../../../../testing/test-utils';
+import { Gallery, type GalleryImage } from '../index';
 
 @Component({
   imports: [Gallery],
@@ -31,7 +31,7 @@ describe('Gallery', (): void => {
     const thumbnails: readonly HTMLButtonElement[] = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('.sui-gallery__thumbnails button'),
     );
-    thumbnails[1].click();
+    requireItem(thumbnails, 1).click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.active()).toBe(1);
@@ -51,7 +51,7 @@ describe('Gallery', (): void => {
     const image: HTMLButtonElement = query(fixture, '.sui-gallery__image') as HTMLButtonElement;
     image.click();
 
-    expect(fixture.componentInstance.activated).toEqual([fixture.componentInstance.images()[1]]);
+    expect(fixture.componentInstance.activated).toEqual([requireItem(fixture.componentInstance.images(), 1)]);
     expect(document.activeElement).toBe(image);
   });
 });
@@ -63,13 +63,13 @@ describe('Gallery keyboard navigation', (): void => {
     const thumbnails: readonly HTMLButtonElement[] = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('.sui-gallery__thumbnails button'),
     );
-    thumbnails[0].focus();
+    requireItem(thumbnails, 0).focus();
 
     gallery.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
     fixture.detectChanges();
 
     expect(fixture.componentInstance.active()).toBe(1);
-    expect(document.activeElement).toBe(thumbnails[1]);
+    expect(document.activeElement).toBe(requireItem(thumbnails, 1));
     expect(thumbnails.map((thumbnail: HTMLButtonElement): number => thumbnail.tabIndex)).toEqual([-1, 0]);
 
     fixture.componentInstance.wrap.set(false);

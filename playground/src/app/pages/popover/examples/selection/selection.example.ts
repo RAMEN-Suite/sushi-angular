@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucideChefHat } from '@lucide/angular';
 import { Button, Popover, PopoverTrigger } from '@sushi-kit/angular';
 

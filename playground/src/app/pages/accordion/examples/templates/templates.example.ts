@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import {
   Accordion,
   AccordionHeaderTemplate,
   AccordionIndicatorTemplate,
   AccordionItem,
-  AccordionItemData,
+  type AccordionItemData,
   Badge,
   Status,
 } from '@sushi-kit/angular';
@@ -35,6 +35,8 @@ export class AccordionTemplatesExample {
   }
 
   protected environment(item: AccordionItemData): string {
-    return item.value === 'production' ? 'Healthy' : item.value === 'preview' ? 'Review' : 'Paused';
+    if (item.value === 'production') return 'Healthy';
+    if (item.value === 'preview') return 'Review';
+    return 'Paused';
   }
 }

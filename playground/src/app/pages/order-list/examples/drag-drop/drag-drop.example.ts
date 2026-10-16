@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Checkbox, Label, OrderList, OrderListItemTemplate, OrderListOption } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { Checkbox, Label, OrderList, OrderListItemTemplate, type OrderListOption } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-order-list-drag-drop-example',

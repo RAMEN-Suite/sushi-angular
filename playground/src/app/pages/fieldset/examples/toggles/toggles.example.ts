@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucideChevronRight } from '@lucide/angular';
 import { Button, Fieldset, FieldsetContent, FieldsetLegend, FieldsetToggle, Input, Label } from '@sushi-kit/angular';
 

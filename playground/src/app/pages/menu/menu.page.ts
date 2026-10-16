@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge, Kbd } from '@sushi-kit/angular';
 import { ExampleCode } from '../../shared/example-code/example-code.component';
 import { ExamplePreview } from '../../shared/example-code/example-preview.directive';
-import { ExampleSource, textSource } from '../../shared/example-code/example-source';
+import { type ExampleSource, textSource } from '../../shared/example-code/example-source';
 import activeHtml from './examples/active/active.example.html';
 import * as activeTs from './examples/active/active.example.ts' with { loader: 'text' };
 import { MenuActiveExample } from './examples/active/active.example';

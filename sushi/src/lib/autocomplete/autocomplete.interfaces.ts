@@ -1,5 +1,5 @@
-import { SelectionCompareWith, SelectionFilter, SelectionOption } from '../selection';
-import { SelectionValue } from '../sushi.types';
+import { type SelectionCompareWith, type SelectionFilter, type SelectionOption } from '../selection';
+import { type SelectionValue } from '../sushi.types';
 
 /** Value held by an autocomplete control. */
 export type AutocompleteValue = SelectionValue | null;

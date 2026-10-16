@@ -1,2 +1,2 @@
 export * from './spinner.directive';
-export * from './spinner.interfaces';
+export type * from './spinner.interfaces';

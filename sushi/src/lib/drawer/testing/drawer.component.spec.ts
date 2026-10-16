@@ -1,10 +1,10 @@
-import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { DrawerClose } from '../drawer-close.directive';
 import { Drawer } from '../drawer.component';
-import { DrawerCloseReason, DrawerPersistentAt, DrawerPlacement, DrawerSize } from '../drawer.interfaces';
+import { type DrawerCloseReason, type DrawerPersistentAt, type DrawerPlacement, type DrawerSize } from '../drawer.interfaces';
 import { DrawerFooter, DrawerHeader } from '../drawer-slots.directive';
 import { DrawerTrigger } from '../drawer-trigger.directive';
 

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Label, MultiSelect, MultiSelectModelValue, MultiSelectOption } from '@sushi-kit/angular';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { Label, MultiSelect, type MultiSelectModelValue, type MultiSelectOption } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-multi-select-behavior-example',

@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { DividerOrientation, DividerPlacement, DividerSeverity } from './divider.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type DividerOrientation, type DividerPlacement, type DividerSeverity } from './divider.interfaces';
 
 @Directive({
   selector: '[suiDivider]',

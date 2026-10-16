@@ -1,7 +1,7 @@
-import { Component, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { queryAll, render } from '../../../../testing/test-utils';
+import { queryAll, render, requireItem } from '../../../../testing/test-utils';
 import { Radio } from '../radio.directive';
 
 @Component({
@@ -20,8 +20,8 @@ describe('Radio', (): void => {
   it('maps appearance and delayed invalid state', (): void => {
     const fixture: ComponentFixture<RadioHost> = render(RadioHost);
     const radios: readonly HTMLInputElement[] = queryAll(fixture, 'input');
-    const first: HTMLInputElement = radios[0];
-    const second: HTMLInputElement = radios[1];
+    const first: HTMLInputElement = requireItem(radios, 0);
+    const second: HTMLInputElement = requireItem(radios, 1);
 
     expect(second.classList).toContain('radio-warning');
     expect(second.classList).toContain('radio-sm');

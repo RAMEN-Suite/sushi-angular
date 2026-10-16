@@ -1,5 +1,5 @@
-import { expect, Locator, Page, test } from '@playwright/test';
-import { Bounds, visibleBounds } from '../support/geometry';
+import { expect, type Locator, type Page, test } from '@playwright/test';
+import { type Bounds, visibleBounds } from '../support/geometry';
 
 test('Accordion keyboard focus follows the shared focus tokens @css', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/accordion');

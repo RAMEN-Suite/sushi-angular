@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, input, InputSignal, ViewEncapsulation } from '@angular/core';
-import { CardSize, CardVariant } from './card.interfaces';
+import { ChangeDetectionStrategy, Component, input, type InputSignal, ViewEncapsulation } from '@angular/core';
+import { type CardSize, type CardVariant } from './card.interfaces';
 
 @Component({
   selector: 'sui-card',

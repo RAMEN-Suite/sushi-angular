@@ -6,22 +6,22 @@ import {
   contentChildren,
   inject,
   input,
-  InputSignal,
-  InputSignalWithTransform,
-  Signal,
+  type InputSignal,
+  type InputSignalWithTransform,
+  type Signal,
 } from '@angular/core';
 import { LucideCircleCheck, LucideCircleX, LucideDynamicIcon, LucideInfo, LucideTriangleAlert, LucideX } from '@lucide/angular';
 import type { LucideIconData } from '@lucide/angular';
 import { Button } from '../button';
-import { Message, MessageSeverity } from '../message';
+import { Message, type MessageSeverity } from '../message';
 import { positiveInteger } from '../number.transforms';
 import {
-  ToastDismissLabel,
-  ToastHorizontalPosition,
-  ToastItem,
-  ToastMotion,
-  ToastTemplateContext,
-  ToastVerticalPosition,
+  type ToastDismissLabel,
+  type ToastHorizontalPosition,
+  type ToastItem,
+  type ToastMotion,
+  type ToastTemplateContext,
+  type ToastVerticalPosition,
 } from './toast.interfaces';
 import { ToastService } from './toast.service';
 import { ToastContentTemplate } from './toast.templates';

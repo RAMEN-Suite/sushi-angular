@@ -1,5 +1,5 @@
-import { Directive, input, InputSignal } from '@angular/core';
-import { AutocompleteItemContext, AutocompleteOption, AutocompleteStatusContext } from './autocomplete.interfaces';
+import { Directive, input, type InputSignal } from '@angular/core';
+import { type AutocompleteItemContext, type AutocompleteOption, type AutocompleteStatusContext } from './autocomplete.interfaces';
 
 /** Replaces each suggestion and exposes its option, index, and selection state. */
 @Directive({ selector: 'ng-template[suiAutocompleteItem]' })

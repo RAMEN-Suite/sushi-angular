@@ -1,10 +1,11 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { Button, Chip, ToggleButton } from '@sushi-kit/angular';
 
 @Component({
   selector: 'app-root',
   imports: [Button, Chip, ToggleButton],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <button suiButton severity="primary" type="button">Save</button>
     <sui-chip label="Extra small" size="xs" />

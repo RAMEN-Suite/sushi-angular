@@ -1,5 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Autocomplete, AutocompleteOption, Badge, ComponentSize, Fieldset, FieldsetLegend, Label } from '@sushi-kit/angular';
+import {
+  Autocomplete,
+  type AutocompleteOption,
+  Badge,
+  type ComponentSize,
+  Fieldset,
+  FieldsetLegend,
+  Label,
+} from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-autocomplete-states-example',

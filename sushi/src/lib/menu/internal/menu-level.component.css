@@ -56,35 +56,35 @@
   display: none;
 }
 
-.sui-menu-surface[data-severity='primary'] {
+.sui-menu-surface[data-severity="primary"] {
   --menu-active-color: var(--color-primary);
 }
 
-.sui-menu-surface[data-severity='secondary'] {
+.sui-menu-surface[data-severity="secondary"] {
   --menu-active-color: var(--color-secondary);
 }
 
-.sui-menu-surface[data-severity='accent'] {
+.sui-menu-surface[data-severity="accent"] {
   --menu-active-color: var(--color-accent);
 }
 
-.sui-menu-surface[data-severity='neutral'] {
+.sui-menu-surface[data-severity="neutral"] {
   --menu-active-color: var(--color-neutral);
   --menu-active-fg: var(--color-base-content);
 }
 
-.sui-menu-surface[data-severity='info'] {
+.sui-menu-surface[data-severity="info"] {
   --menu-active-color: var(--color-info);
 }
 
-.sui-menu-surface[data-severity='success'] {
+.sui-menu-surface[data-severity="success"] {
   --menu-active-color: var(--color-success);
 }
 
-.sui-menu-surface[data-severity='warning'] {
+.sui-menu-surface[data-severity="warning"] {
   --menu-active-color: var(--color-warning);
 }
 
-.sui-menu-surface[data-severity='error'] {
+.sui-menu-surface[data-severity="error"] {
   --menu-active-color: var(--color-error);
 }

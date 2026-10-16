@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { LucideArrowLeft, LucideSend, LucideShieldCheck } from '@lucide/angular';
 import {
   Button,
@@ -8,11 +8,11 @@ import {
   Input,
   Label,
   Message,
-  NavbarItem,
+  type NavbarItem,
   Radio,
   Sidebar,
   SidebarFooter,
-  SidebarGroup,
+  type SidebarGroup,
   Toggle,
 } from '@sushi-kit/angular';
 

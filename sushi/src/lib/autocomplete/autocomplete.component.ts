@@ -10,33 +10,33 @@ import {
   DestroyRef,
   inject,
   input,
-  InputSignal,
-  InputSignalWithTransform,
+  type InputSignal,
+  type InputSignalWithTransform,
   model,
-  ModelSignal,
+  type ModelSignal,
   numberAttribute,
   output,
-  OutputEmitterRef,
+  type OutputEmitterRef,
   signal,
-  Signal,
+  type Signal,
   TemplateRef,
   viewChild,
-  WritableSignal,
+  type WritableSignal,
 } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
+import { type FormValueControl } from '@angular/forms/signals';
 import { Combobox, ComboboxPopup, ComboboxWidget } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
-import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
-import { FormControlSeverity, FormControlSize, FormControlState } from '../form-control';
+import { CdkConnectedOverlay, CdkOverlayOrigin, type ConnectedPosition } from '@angular/cdk/overlay';
+import { type FormControlSeverity, type FormControlSize, FormControlState } from '../form-control';
 import { compareSelectionValues, filterSelectionOption, SELECTION_ABOVE, SELECTION_BELOW } from '../selection';
 import { Spinner } from '../spinner';
 import {
-  AutocompleteCompareWith,
-  AutocompleteFilter,
-  AutocompleteItemContext,
-  AutocompleteOption,
-  AutocompleteStatusContext,
-  AutocompleteValue,
+  type AutocompleteCompareWith,
+  type AutocompleteFilter,
+  type AutocompleteItemContext,
+  type AutocompleteOption,
+  type AutocompleteStatusContext,
+  type AutocompleteValue,
 } from './autocomplete.interfaces';
 import {
   AutocompleteEmptyTemplate,
@@ -212,6 +212,7 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
         if (!this.expanded()) return;
         const listbox: Listbox<AutocompleteValue> | undefined = this.listbox();
         if (!listbox?.activeDescendant()) return;
+
         listbox.scrollActiveItemIntoView();
       },
     });
@@ -236,6 +237,7 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
   /** Focuses the input and opens all suggestions without clearing the displayed selection or applying minQueryLength/delay. Emits an empty query for remote loaders. Disabled or loading controls do not open. */
   public show(): void {
     if (this.disabled() || this.loading() || this.expanded()) return;
+
     clearTimeout(this.queryTimer);
     this.beginEdit();
     this.showAll.set(true);
@@ -288,6 +290,7 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
     clearTimeout(this.queryTimer);
     const value: AutocompleteValue = values.at(0) ?? null;
     if (value === null) return;
+
     this.value.set(value);
     this.query.set(null);
     this.editSession = null;
@@ -308,6 +311,7 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
     }
     this.expanded.set(expanded);
     if (expanded) return;
+
     clearTimeout(this.queryTimer);
     this.finishEdit();
     this.touch.emit();
@@ -365,6 +369,7 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
       this.queryChange.emit(query);
       this.expanded.set(true);
     };
+
     const delay: number = Math.max(0, this.delay());
     if (delay === 0) complete();
     else this.queryTimer = setTimeout(complete, delay);

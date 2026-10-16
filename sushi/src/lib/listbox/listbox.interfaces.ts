@@ -1,5 +1,5 @@
-import { SelectionFilterContext, SelectionOption } from '../selection';
-import { SelectionValue } from '../sushi.types';
+import { type SelectionFilterContext, type SelectionOption } from '../selection';
+import { type SelectionValue } from '../sushi.types';
 
 /** Value accepted by a listbox option. */
 export type ListboxValue = SelectionValue;

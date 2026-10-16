@@ -17,7 +17,7 @@
 }
 
 .sui-tabs__list.tabs-box,
-.sui-tabs__list.tabs-box > .sui-tab:is(.tab-active, [aria-selected='true']) {
+.sui-tabs__list.tabs-box > .sui-tab:is(.tab-active, [aria-selected="true"]) {
   box-shadow: none;
 }
 

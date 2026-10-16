@@ -1,2 +1,2 @@
 export * from './textarea.directive';
-export * from './textarea.interfaces';
+export type * from './textarea.interfaces';

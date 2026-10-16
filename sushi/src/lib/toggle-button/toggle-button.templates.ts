@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { ToggleButtonContext } from './toggle-button.interfaces';
+import { type ToggleButtonContext } from './toggle-button.interfaces';
 
 /** Replaces the complete control while preserving the toggle state and handlers. */
 @Directive({
