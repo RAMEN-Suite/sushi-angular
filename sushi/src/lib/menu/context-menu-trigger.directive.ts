@@ -1,17 +1,29 @@
 import {
   booleanAttribute,
+  computed,
   Directive,
   ElementRef,
   inject,
   input,
   type InputSignal,
   type InputSignalWithTransform,
+  type Signal,
 } from '@angular/core';
 import { type Menu } from './menu.component';
+import { OVERLAY_TRIGGER_OPEN } from '../internal/overlay-trigger-state';
 
 /** Opens a popup Menu from a context-menu gesture on its host. */
 @Directive({
   selector: '[suiContextMenuTrigger]',
+  providers: [
+    {
+      provide: OVERLAY_TRIGGER_OPEN,
+      useFactory: (): Signal<boolean> => {
+        const trigger: ContextMenuTrigger = inject(ContextMenuTrigger);
+        return computed((): boolean => trigger.menu().isOpen());
+      },
+    },
+  ],
   host: {
     '[attr.aria-controls]': 'menu().surfaceId',
     '[attr.aria-disabled]': 'disabled() || menu().disabled() || null',

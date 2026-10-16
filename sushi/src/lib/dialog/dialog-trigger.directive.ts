@@ -1,16 +1,28 @@
 import {
   booleanAttribute,
+  computed,
   Directive,
   ElementRef,
   inject,
   input,
   type InputSignal,
   type InputSignalWithTransform,
+  type Signal,
 } from '@angular/core';
 import { type Dialog } from './dialog.component';
+import { OVERLAY_TRIGGER_OPEN } from '../internal/overlay-trigger-state';
 
 @Directive({
   selector: 'button[suiDialogTrigger]',
+  providers: [
+    {
+      provide: OVERLAY_TRIGGER_OPEN,
+      useFactory: (): Signal<boolean> => {
+        const trigger: DialogTrigger = inject(DialogTrigger);
+        return computed((): boolean => trigger.dialog().open());
+      },
+    },
+  ],
   host: {
     type: 'button',
     '[attr.aria-controls]': 'dialog().dialogId',

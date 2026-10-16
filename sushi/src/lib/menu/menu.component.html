@@ -31,6 +31,7 @@
     [cdkConnectedOverlayViewportMargin]="8"
     cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
     (backdropClick)="close()"
+    (overlayOutsideClick)="handleOutsideClick($event)"
     (detach)="close(false)"
     (overlayKeydown)="handleOverlayKeydown($event)"
   >

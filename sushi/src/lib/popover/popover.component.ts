@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
   CdkConnectedOverlay,
   type ConnectedOverlayPositionChange,
@@ -10,6 +11,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
   type ElementRef,
   type InputSignal,
@@ -139,6 +141,7 @@ export class Popover {
   protected readonly arrowX: WritableSignal<string> = signal<string>('50%');
   protected readonly arrowY: WritableSignal<string> = signal<string>('50%');
   private readonly surface: Signal<ElementRef<HTMLElement> | undefined> = viewChild<ElementRef<HTMLElement>>('surface');
+  private readonly focusMonitor: FocusMonitor = inject(FocusMonitor);
   private restoreTarget: HTMLElement | null = null;
 
   /** Opens the Popover beside an element. */
@@ -152,7 +155,7 @@ export class Popover {
   public hide(restoreFocus: boolean = false): void {
     if (!this.open()) return;
     this.open.set(false);
-    if (restoreFocus) this.restoreTarget?.focus({ preventScroll: true });
+    if (restoreFocus && this.restoreTarget) this.focusMonitor.focusVia(this.restoreTarget, 'program', { preventScroll: true });
   }
 
   /** Toggles the Popover beside an element. */

@@ -1,0 +1,18 @@
+<div class="flex flex-wrap gap-3">
+  <button suiButton type="button" suiTooltip="Menu help" [suiMenuTrigger]="commands">Open menu</button>
+  <sui-menu #commands popup ariaLabel="Tooltip commands" [items]="[{ label: 'Choose action', value: 'choose' }]" />
+
+  <button suiButton type="button" suiTooltip="Dialog help" [suiDialogTrigger]="details">Open dialog</button>
+  <sui-dialog #details ariaLabel="Tooltip dialog">
+    <div suiDialogBody>
+      <p class="mb-4">Closing restores focus without reopening the trigger's help.</p>
+      <button suiButton type="button" [suiDialogClose]="details">Close dialog</button>
+    </div>
+  </sui-dialog>
+
+  <button suiButton type="button" suiTooltip="Popover help" [suiPopoverTrigger]="info">Open popover</button>
+  <sui-popover #info ariaLabel="Tooltip popover">
+    <p class="mb-4">Help stays closed while this surface is open.</p>
+    <button suiButton type="button" (click)="info.hide(true)">Close popover</button>
+  </sui-popover>
+</div>

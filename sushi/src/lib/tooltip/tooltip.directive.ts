@@ -1,3 +1,5 @@
+import { FocusMonitor, type FocusOrigin } from '@angular/cdk/a11y';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   type ConnectedOverlayPositionChange,
   type ConnectedPosition,
@@ -9,6 +11,10 @@ import {
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
   booleanAttribute,
+  computed,
+  effect,
+  type Signal,
+  Renderer2,
   type ComponentRef,
   DestroyRef,
   Directive,
@@ -19,6 +25,7 @@ import {
   type InputSignalWithTransform,
   numberAttribute,
 } from '@angular/core';
+import { OVERLAY_TRIGGER_OPEN } from '../internal/overlay-trigger-state';
 import { TooltipSurface } from './internal/tooltip-surface.component';
 import { type TooltipPlacement } from './tooltip.interfaces';
 
@@ -53,11 +60,11 @@ function createPosition(placement: TooltipPlacement, offset: number): ConnectedP
 @Directive({
   selector: '[suiTooltip]',
   host: {
-    '(mouseenter)': 'scheduleShow()',
-    '(mouseleave)': 'scheduleHide()',
-    '(focusin)': 'scheduleShow()',
-    '(focusout)': 'scheduleHide()',
-    '(keydown.escape)': 'hide()',
+    '(mouseenter)': 'handlePointerEnter($event)',
+    '(mouseleave)': 'handlePointerLeave($event)',
+    '(pointerdown)': 'handleActivation()',
+    '(click)': 'handleActivation()',
+    '(keydown)': 'handleKeydown($event)',
   },
 })
 export class Tooltip {
@@ -67,13 +74,24 @@ export class Tooltip {
   public readonly placement: InputSignal<TooltipPlacement> = input<TooltipPlacement>('top');
   /** Space in pixels between the target and Tooltip. */
   public readonly offset: InputSignalWithTransform<number, unknown> = input(6, { transform: numberAttribute });
-  /** Prevents the Tooltip from opening. */
+  /** Hides the Tooltip and cancels pending timers. Re-enabling requires fresh hover or keyboard focus. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Delay in milliseconds before the Tooltip appears. */
   public readonly showDelay: InputSignalWithTransform<number, unknown> = input(300, { transform: numberAttribute });
   /** Delay in milliseconds before the Tooltip disappears. */
   public readonly hideDelay: InputSignalWithTransform<number, unknown> = input(100, { transform: numberAttribute });
 
+  private readonly overlayOpen: Signal<boolean> | null = inject(OVERLAY_TRIGGER_OPEN, { optional: true, self: true });
+  private readonly focusMonitor: FocusMonitor = inject(FocusMonitor);
+  private readonly renderer: Renderer2 = inject(Renderer2);
+  private readonly blocked: Signal<boolean> = computed((): boolean => this.disabled() || this.overlayOpen?.() === true);
+  private wasBlocked: boolean = false;
+  private pointerSuppressed: boolean = false;
+  private pendingHover: boolean = false;
+  private keyboardSuppressed: boolean = false;
+  private stopKeyboardTracking: (() => void) | null = null;
+  private pointer: Readonly<{ x: number; y: number }> | null = null;
+  private stopPointerTracking: (() => void) | null = null;
   private readonly id: string = `sui-tooltip-${++nextTooltipId}`;
   private readonly element: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly overlay: Overlay = inject(Overlay);
@@ -89,13 +107,24 @@ export class Tooltip {
   private previousDescription: string | null | undefined;
 
   public constructor() {
+    this.focusMonitor
+      .monitor(this.element, true)
+      .pipe(takeUntilDestroyed())
+      .subscribe((origin: FocusOrigin): void => {
+        this.handleFocus(origin);
+      });
+    effect((): void => {
+      const blocked: boolean = this.blocked();
+      if (blocked || this.wasBlocked) this.handleActivation();
+      this.wasBlocked = blocked;
+    });
     this.destroyRef.onDestroy((): void => this.destroy());
   }
 
-  /** Shows the Tooltip immediately. */
+  /** Shows the Tooltip immediately unless disabled or its associated Sushi overlay is open. */
   public show(): void {
     this.clearTimers();
-    if (this.disabled() || this.overlayRef?.hasAttached()) return;
+    if (this.blocked() || this.overlayRef?.hasAttached()) return;
     if (this.overlayRef && (this.configuredPlacement !== this.placement() || this.configuredOffset !== this.offset())) {
       this.overlayRef.dispose();
       this.overlayRef = null;
@@ -118,14 +147,100 @@ export class Tooltip {
     this.restoreDescription();
   }
 
+  protected handleActivation(): void {
+    this.hide();
+    this.keyboardSuppressed = true;
+    this.trackKeyboardNavigation();
+    this.pointerSuppressed = this.pointer === null || this.containsPointer(this.pointer);
+    this.pendingHover = false;
+    this.stopPointerTracking ??= this.renderer.listen(
+      this.element.nativeElement.ownerDocument,
+      'pointermove',
+      (event: PointerEvent): void => this.trackPointer(event),
+    );
+  }
+
+  protected handleKeydown(event: KeyboardEvent): void {
+    const button: boolean = this.element.nativeElement.matches('button, [role="button"]');
+    if (
+      event.key === 'Escape' ||
+      (button && ['Enter', ' '].includes(event.key)) ||
+      (event.key === 'ArrowDown' && this.overlayOpen)
+    ) {
+      this.handleActivation();
+    }
+  }
+
+  protected handlePointerEnter(event: MouseEvent): void {
+    this.pendingHover = true;
+    if (this.pointerSuppressed || this.blocked()) return;
+    this.pointer = { x: event.clientX, y: event.clientY };
+    this.scheduleShow();
+  }
+
+  protected handlePointerLeave(event: MouseEvent): void {
+    this.pointer = { x: event.clientX, y: event.clientY };
+    this.pendingHover = false;
+    if (!this.blocked() && !this.containsPointer(this.pointer)) this.releasePointer();
+    this.scheduleHide();
+  }
+
   protected scheduleShow(): void {
     this.clearTimers();
+    if (this.blocked()) return;
     this.showTimer = setTimeout((): void => this.show(), Math.max(0, this.showDelay()));
   }
 
   protected scheduleHide(): void {
     this.clearTimers();
     this.hideTimer = setTimeout((): void => this.hide(), Math.max(0, this.hideDelay()));
+  }
+
+  private handleFocus(origin: FocusOrigin): void {
+    if (origin === 'keyboard' && !this.keyboardSuppressed && !this.blocked()) this.scheduleShow();
+    else if (origin === 'program') this.handleActivation();
+    else if (origin === null) this.scheduleHide();
+  }
+
+  private trackKeyboardNavigation(): void {
+    // Native dialogs can return focus with the CDK's previous keyboard origin. Require a fresh navigation key.
+    if (this.stopKeyboardTracking) return;
+    this.stopKeyboardTracking = this.renderer.listen(
+      this.element.nativeElement.ownerDocument,
+      'keydown',
+      (event: KeyboardEvent): void => {
+        if (!['Tab', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        this.keyboardSuppressed = false;
+        this.stopKeyboardTracking?.();
+        this.stopKeyboardTracking = null;
+      },
+    );
+  }
+
+  private trackPointer(event: PointerEvent): void {
+    if (event.pointerType !== 'mouse') return;
+    // A disappearing overlay can synthesize mouseenter without a deliberate pointer entry.
+    const previous: Readonly<{ x: number; y: number }> | null = this.pointer;
+    this.pointer = { x: event.clientX, y: event.clientY };
+    if (this.blocked()) return;
+
+    const inside: boolean = this.containsPointer(this.pointer);
+    if (!inside) this.releasePointer();
+    else if (this.pendingHover && (!previous || !this.containsPointer(previous))) {
+      this.releasePointer();
+      this.scheduleShow();
+    }
+  }
+
+  private containsPointer(point: Readonly<{ x: number; y: number }>): boolean {
+    const bounds: DOMRect = this.element.nativeElement.getBoundingClientRect();
+    return point.x >= bounds.left && point.x < bounds.right && point.y >= bounds.top && point.y < bounds.bottom;
+  }
+
+  private releasePointer(): void {
+    this.pointerSuppressed = false;
+    this.stopPointerTracking?.();
+    this.stopPointerTracking = null;
   }
 
   private addDescription(): void {
@@ -174,6 +289,9 @@ export class Tooltip {
   }
 
   private destroy(): void {
+    this.focusMonitor.stopMonitoring(this.element);
+    this.releasePointer();
+    this.stopKeyboardTracking?.();
     this.clearTimers();
     this.restoreDescription();
     this.overlayRef?.dispose();
