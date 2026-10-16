@@ -63,3 +63,25 @@ describe('Select filtering', (): void => {
     expect(fixture.componentInstance.value()).toBe('shoyu');
   });
 });
+
+describe('Select filter text composition', (): void => {
+  it('keeps the selection and popup while Enter confirms composed text', async (): Promise<void> => {
+    const fixture: ComponentFixture<FilterHost> = render(FilterHost);
+    const input: HTMLInputElement = await openFilter(fixture);
+    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+    await fixture.whenStable();
+
+    const confirm: KeyboardEvent = new KeyboardEvent('keydown', {
+      key: 'Enter',
+      isComposing: true,
+      bubbles: true,
+      cancelable: true,
+    });
+    input.dispatchEvent(confirm);
+    await fixture.whenStable();
+
+    expect(confirm.defaultPrevented).toBe(false);
+    expect(fixture.componentInstance.value()).toBe('shoyu');
+    expect(document.querySelector('[aria-label="Filter ramen"]')).not.toBeNull();
+  });
+});

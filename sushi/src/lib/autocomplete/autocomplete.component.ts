@@ -206,7 +206,7 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
   public constructor() {
     super();
     this.destroyRef.onDestroy(() => clearTimeout(this.queryTimer));
-    afterNextRender((): void => this.listenForEscape());
+    afterNextRender((): void => this.listenForKeydown());
     afterRenderEffect({
       write: () => {
         if (!this.expanded()) return;
@@ -335,9 +335,13 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
     };
   }
 
-  private listenForEscape(): void {
+  private listenForKeydown(): void {
     const element: HTMLElement = this.combobox().element;
     const listener: (event: KeyboardEvent) => void = (event: KeyboardEvent): void => {
+      if (event.isComposing) {
+        event.stopImmediatePropagation();
+        return;
+      }
       if (event.key === 'Escape') this.handleEscape(event);
     };
     // Restore the edit before Angular Aria closes the popup and finalizes its value.
