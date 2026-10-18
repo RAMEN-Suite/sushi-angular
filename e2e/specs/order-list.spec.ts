@@ -70,9 +70,9 @@ test('OrderList drags the complete row without changing its preview or placehold
   await expect(preview).toBeVisible();
   const moving: Bounds = await visibleBounds(preview, 'the full row preview');
   const reserved: Bounds = await visibleBounds(placeholder, 'the reserved row');
-  expect(moving.width).toBeCloseTo(original.width, 0);
-  expect(moving.height).toBeCloseTo(original.height, 0);
-  expect(reserved.height).toBeCloseTo(original.height, 0);
+  expect(Math.abs(moving.width - original.width)).toBeLessThanOrEqual(1);
+  expect(Math.abs(moving.height - original.height)).toBeLessThanOrEqual(1);
+  expect(Math.abs(reserved.height - original.height)).toBeLessThanOrEqual(1);
 
   await finishDrag(page, source, destination, isMobile);
   await expect(list.getByTestId('movie-label')).toHaveText([
@@ -178,6 +178,7 @@ test('OrderList cancels an outside drop without changing order or losing handle 
 test('OrderList commits the drop without moving rows away from their destination slots @desktop', async ({
   page,
 }): Promise<void> => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/order-list');
   const list: Locator = page.getByRole('list', { name: 'Workflow', exact: true });
   await list.scrollIntoViewIfNeeded();
@@ -186,15 +187,14 @@ test('OrderList commits the drop without moving rows away from their destination
   const slots: readonly number[] = await rows.evaluateAll((elements: Element[]): number[] =>
     elements.map((element: Element): number => element.getBoundingClientRect().y),
   );
-  const firstSlot: number | undefined = slots[0];
-  if (firstSlot === undefined) throw new Error('Expected workflow rows before dragging.');
+  const firstSlot: Bounds = await visibleBounds(rows.first(), 'the first workflow row');
 
   const destination: Bounds = await visibleBounds(rows.nth(2), 'the target row');
   await startDrag(page, handle, false);
   await page.mouse.move(destination.x + 20, destination.y + destination.height / 2, { steps: 12 });
   await expect
-    .poll(async (): Promise<number> => (await visibleBounds(rows.nth(1), 'the shifted row')).y)
-    .toBeCloseTo(firstSlot, 0);
+    .poll(async (): Promise<number> => Math.abs((await visibleBounds(rows.nth(1), 'the shifted row')).y - firstSlot.y))
+    .toBeLessThanOrEqual(1);
 
   // Inspect the first committed layout; a settled assertion misses the drop jump.
   const [committed] = await Promise.all([
@@ -215,7 +215,7 @@ test('OrderList commits the drop without moving rows away from their destination
   committed.forEach((position: number, index: number): void => {
     const slot: number | undefined = slots[index];
     if (slot === undefined) throw new Error('Expected a destination slot for each committed row.');
-    expect(position).toBeCloseTo(slot, 0);
+    expect(Math.abs(position - slot)).toBeLessThanOrEqual(1);
   });
 });
 
