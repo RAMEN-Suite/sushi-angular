@@ -1,4 +1,4 @@
-/* @sui-docs autocomplete listbox multi-select order-list select */
+/* @sui-docs autocomplete listbox multi-select select */
 
 .sui-selection-clear:focus-visible {
   outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);

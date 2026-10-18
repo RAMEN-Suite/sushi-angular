@@ -1,287 +1,250 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Listbox as AriaListbox, Option as AriaOption } from '@angular/aria/listbox';
-import { CdkDrag, type CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { CdkScrollable } from '@angular/cdk/scrolling';
+import { CdkDrag, type CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   afterRenderEffect,
   booleanAttribute,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   computed,
   contentChild,
+  ElementRef,
+  inject,
   input,
   type InputSignal,
   type InputSignalWithTransform,
   model,
   type ModelSignal,
-  numberAttribute,
   output,
   type OutputEmitterRef,
   type Signal,
   signal,
   TemplateRef,
   viewChild,
+  viewChildren,
   type WritableSignal,
 } from '@angular/core';
 import { type FormValueControl } from '@angular/forms/signals';
-import { LucideChevronDown, LucideChevronUp, LucideChevronsDown, LucideChevronsUp, LucideSearch } from '@lucide/angular';
-import { Button } from '../button';
+import { LucideGripVertical } from '@lucide/angular';
 import { FormControlState } from '../form-control';
-import { InputSurface, InputSurfaceControl } from '../input-surface';
-import { filterSelectionOption } from '../selection';
+import { Menu, type MenuItem, MenuTrigger } from '../menu';
 import {
-  type OrderListFilterContext,
   type OrderListItemContext,
+  type OrderListLabels,
   type OrderListOption,
+  type OrderListReorderEvent,
+  type OrderListSize,
   type OrderListValue,
 } from './order-list.interfaces';
-import { OrderListFilterTemplate, OrderListHeaderTemplate, OrderListItemTemplate } from './order-list.templates';
+import { OrderListItemTemplate } from './order-list.templates';
 
-/** Sorts a collection with selection controls or optional drag and drop. */
+type MoveAction = 'up' | 'down' | 'top' | 'bottom';
+
+interface FocusRequest {
+  readonly value: OrderListValue;
+  readonly scroll: boolean;
+}
+
+const DEFAULT_LABELS: OrderListLabels = {
+  reorder: (item: OrderListOption): string => `Reorder ${item.label}`,
+  moveUp: 'Move up',
+  moveDown: 'Move down',
+  moveToTop: 'Move to top',
+  moveToBottom: 'Move to bottom',
+  empty: 'No items available',
+  instructions:
+    'Click the handle for move actions. Alt (Option on Mac) + Up/Down moves one position; add Shift to move to the start/end.',
+  moved: (event: OrderListReorderEvent, count: number): string =>
+    `Moved ${event.item.label} to position ${event.currentIndex + 1} of ${count}`,
+};
+
+let nextOrderListId: number = 0;
+
+/** Reorders complete rich rows using a handle, movement menu or Alt keyboard shortcuts. Scrolling belongs to the container. */
 @Component({
   selector: 'sui-order-list',
-  imports: [
-    AriaListbox,
-    AriaOption,
-    Button,
-    CdkDrag,
-    CdkDropList,
-    CdkScrollable,
-    InputSurface,
-    InputSurfaceControl,
-    LucideChevronDown,
-    LucideChevronUp,
-    LucideChevronsDown,
-    LucideChevronsUp,
-    LucideSearch,
-    NgTemplateOutlet,
-  ],
+  imports: [CdkDrag, CdkDragHandle, CdkDropList, LucideGripVertical, Menu, MenuTrigger, NgTemplateOutlet],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.css',
-  host: { class: 'sui-order-list block max-w-full', '[class.cursor-not-allowed]': 'disabled()' },
+  host: {
+    class: 'sui-order-list block min-w-0',
+    '[attr.data-size]': 'size()',
+    '[attr.data-disabled]': 'disabled() || null',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderList<I extends OrderListOption = OrderListOption>
   extends FormControlState
   implements FormValueControl<readonly I[]>
 {
-  /** Ordered collection controlled directly or through Signal Forms. */
+  /** Complete collection with unique stable values. Moves emit a new array without mutating the input. */
   public readonly value: ModelSignal<readonly I[]> = model<readonly I[]>([]);
-
-  /** Shows a text filter above the collection. */
-  public readonly filter: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Placeholder displayed by the text filter. */
-  public readonly filterPlaceholder: InputSignal<string> = input<string>('Filter items');
-  /** Enables pointer and touch reordering. */
-  public readonly dragDrop: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Limits the visible collection height in pixels before it scrolls. */
-  public readonly scrollHeight: InputSignalWithTransform<number, unknown> = input(320, { transform: numberAttribute });
-
-  /** ID assigned to the listbox. */
-  public readonly id: InputSignal<string | null> = input<string | null>(null);
-  /** Accessible label used when no visible label is available. */
-  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
-  /** ID of the element that labels the listbox. */
-  public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
-  /** IDs of elements that describe the listbox. */
-  public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
-
-  /** Prevents filtering, selection, and reordering and removes controls from sequential focus. */
+  /** Row density shared with List. Defaults to sm. */
+  public readonly size: InputSignal<OrderListSize> = input<OrderListSize>('sm');
+  /** Allows movement by every input method. False leaves custom row content usable. Defaults to true. */
+  public readonly reorderable: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
+  /** Enables dragging from the handle. Menu and keyboard moves remain available when false. Defaults to true. */
+  public readonly dragDrop: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
+  /** Disables interaction in the entire list, including custom row controls. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-
-  /** Emits when interaction with the collection completes. */
+  /** ID of the native ordered list. */
+  public readonly id: InputSignal<string | null> = input<string | null>(null);
+  /** Accessible name when no visible heading labels the list. */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  /** ID of the visible heading that labels the list. */
+  public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
+  /** IDs of additional descriptions of the list. */
+  public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
+  /** Partial translations of movement labels, instructions and announcements. */
+  public readonly labels: InputSignal<Partial<OrderListLabels<I>>> = input<Partial<OrderListLabels<I>>>({});
+  /** Emits after an actual move, with indexes in the complete collection. */
+  public readonly reordered: OutputEmitterRef<OrderListReorderEvent<I>> = output();
+  /** Emits when movement completes or focus leaves the collection. */
   public readonly touch: OutputEmitterRef<void> = output();
 
-  protected readonly headerTemplate: Signal<TemplateRef<void> | undefined> = contentChild(OrderListHeaderTemplate, {
-    read: TemplateRef,
-  });
-  protected readonly filterTemplate: Signal<TemplateRef<OrderListFilterContext> | undefined> = contentChild(
-    OrderListFilterTemplate,
-    { read: TemplateRef },
-  );
   protected readonly itemTemplate: Signal<TemplateRef<OrderListItemContext<I>> | undefined> = contentChild(
     OrderListItemTemplate,
     { read: TemplateRef },
   );
-  protected readonly listbox: Signal<AriaListbox<OrderListValue>> = viewChild.required(AriaListbox);
+  private readonly list: Signal<ElementRef<HTMLOListElement>> = viewChild.required('list');
+  private readonly handles: Signal<readonly ElementRef<HTMLButtonElement>[]> = viewChildren('handle', { read: ElementRef });
+  private readonly menus: Signal<readonly Menu[]> = viewChildren(Menu);
 
-  protected readonly query: WritableSignal<string> = signal('');
-  protected readonly selection: WritableSignal<readonly OrderListValue[]> = signal([]);
-  protected readonly announcement: WritableSignal<string> = signal('');
-  protected readonly updateFilter: (query: string) => void = (query: string): void => {
-    if (!this.disabled()) this.query.set(query);
-  };
-  protected readonly filterContext: Signal<OrderListFilterContext> = computed((): OrderListFilterContext => ({
-    $implicit: this.query(),
-    query: this.query(),
-    placeholder: this.filterPlaceholder(),
-    disabled: this.disabled(),
-    readOnly: false,
-    update: this.updateFilter,
+  protected readonly text: Signal<OrderListLabels<I>> = computed((): OrderListLabels<I> => ({
+    ...DEFAULT_LABELS,
+    ...this.labels(),
   }));
-  protected readonly ariaSelection: Signal<OrderListValue[]> = computed((): OrderListValue[] => [...this.selection()]);
-  protected readonly visibleItems: Signal<readonly I[]> = computed((): readonly I[] => {
-    const query: string = this.query();
-    return query ? this.value().filter((item: I): boolean => filterSelectionOption(item, query)) : this.value();
-  });
-  protected readonly selectedIndexes: Signal<readonly number[]> = computed((): readonly number[] => {
-    const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
-    return this.value().flatMap((item: I, index: number): readonly number[] =>
-      selected.has(item.value) && !item.disabled ? [index] : [],
-    );
-  });
-  protected readonly canMoveTop: Signal<boolean> = computed((): boolean =>
-    this.selectedIndexes().some((index: number, position: number): boolean => index !== position),
-  );
-  protected readonly canMoveUp: Signal<boolean> = computed((): boolean => {
-    const selected: ReadonlySet<number> = new Set(this.selectedIndexes());
-    return this.selectedIndexes().some((index: number): boolean => index > 0 && !selected.has(index - 1));
-  });
-  protected readonly canMoveDown: Signal<boolean> = computed((): boolean => {
-    const selected: ReadonlySet<number> = new Set(this.selectedIndexes());
-    return this.selectedIndexes().some((index: number): boolean => index < this.value().length - 1 && !selected.has(index + 1));
-  });
-  protected readonly canMoveBottom: Signal<boolean> = computed((): boolean => {
-    const indexes: readonly number[] = this.selectedIndexes();
-    const offset: number = this.value().length - indexes.length;
-    return indexes.some((index: number, position: number): boolean => index !== offset + position);
-  });
+  protected readonly announcement: WritableSignal<string> = signal('');
+  protected readonly instructionsId: string = `sui-order-list-instructions-${++nextOrderListId}`;
+  protected readonly host: HTMLElement = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
-  private readonly refocusAfterRender: WritableSignal<boolean> = signal(false);
+  private readonly changeDetector: ChangeDetectorRef = inject(ChangeDetectorRef);
+  private readonly pendingFocus: WritableSignal<FocusRequest | null> = signal(null);
 
   public constructor() {
     super();
+    afterRenderEffect({ write: (): void => this.restoreMovedFocus() });
     afterRenderEffect({
       write: (): void => {
-        // Re-run after reordered rows render even when the active value stays unchanged.
-        this.value();
-        if (this.refocusAfterRender()) {
-          this.refocusAfterRender.set(false);
-          this.focus();
-        }
-        if (this.listbox().activeDescendant()) this.listbox().scrollActiveItemIntoView();
+        if (this.disabled() || !this.reorderable()) this.menus().forEach((menu: Menu): void => menu.close(false));
       },
     });
   }
 
-  /** Moves focus to the ordered collection. */
+  /** Focuses the first movable handle, or the list when none is available. */
   public focus(): void {
     if (this.disabled()) return;
-    this.listbox().element.focus();
+    const index: number = this.value().findIndex((item: I): boolean => this.canReorder(item));
+    (this.handles()[index]?.nativeElement ?? this.list().nativeElement).focus();
   }
 
-  protected moveToTop(): void {
-    if (this.disabled() || !this.canMoveTop()) return;
-    const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
-    this.commit([
-      ...this.value().filter((item: I): boolean => selected.has(item.value)),
-      ...this.value().filter((item: I): boolean => !selected.has(item.value)),
-    ]);
+  protected canReorder(item: I): boolean {
+    return !this.disabled() && this.reorderable() && !item.disabled;
   }
 
-  protected moveUp(): void {
-    if (this.disabled() || !this.canMoveUp()) return;
-
-    const items: I[] = [...this.value()];
-    const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
-
-    for (const index of this.selectedIndexes()) {
-      const previous: I | undefined = items[index - 1];
-      if (previous && !selected.has(previous.value)) moveItemInArray(items, index, index - 1);
-    }
-
-    this.commit(items);
+  protected actions(item: I, index: number): readonly MenuItem<MoveAction>[] {
+    const blocked: boolean = !this.canReorder(item);
+    const last: number = this.value().length - 1;
+    const text: OrderListLabels<I> = this.text();
+    return [
+      { label: text.moveUp, value: 'up', disabled: blocked || index === 0 },
+      { label: text.moveToTop, value: 'top', disabled: blocked || index === 0 },
+      { label: text.moveDown, value: 'down', disabled: blocked || index === last },
+      { label: text.moveToBottom, value: 'bottom', disabled: blocked || index === last },
+    ];
   }
 
-  protected moveDown(): void {
-    if (this.disabled() || !this.canMoveDown()) return;
+  protected handleAction(item: I, action: MoveAction): void {
+    const index: number = this.value().findIndex((entry: I): boolean => Object.is(entry.value, item.value));
+    const destinations: Readonly<Record<MoveAction, number>> = {
+      up: index - 1,
+      down: index + 1,
+      top: 0,
+      bottom: this.value().length - 1,
+    };
 
-    const items: I[] = [...this.value()];
-    const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
-
-    for (const index of [...this.selectedIndexes()].reverse()) {
-      const next: I | undefined = items[index + 1];
-      if (next && !selected.has(next.value)) moveItemInArray(items, index, index + 1);
-    }
-
-    this.commit(items);
+    this.move(item, destinations[action], true);
   }
 
-  protected moveToBottom(): void {
-    if (this.disabled() || !this.canMoveBottom()) return;
-    const selected: ReadonlySet<OrderListValue> = new Set(this.selection());
-    this.commit([
-      ...this.value().filter((item: I): boolean => !selected.has(item.value)),
-      ...this.value().filter((item: I): boolean => selected.has(item.value)),
-    ]);
-  }
+  protected handleKeydown(event: KeyboardEvent, item: I): void {
+    if (!event.altKey || event.ctrlKey || event.metaKey || event.isComposing) return;
+    const actions: Readonly<Record<string, MoveAction | undefined>> = {
+      ArrowUp: event.shiftKey ? 'top' : 'up',
+      ArrowDown: event.shiftKey ? 'bottom' : 'down',
+      Home: 'top',
+      End: 'bottom',
+    };
+    const action: MoveAction | undefined = actions[event.key];
+    if (!action || !this.canReorder(item)) return;
 
-  protected handleSelection(values: OrderListValue[]): void {
-    if (this.disabled()) return;
-    this.selection.set(values);
-  }
-
-  protected handleKeydown(event: KeyboardEvent): void {
-    if (!event.altKey || this.disabled()) return;
-
-    switch (event.key) {
-      case 'ArrowUp':
-        this.moveUp();
-        break;
-      case 'ArrowDown':
-        this.moveDown();
-        break;
-      case 'Home':
-        this.moveToTop();
-        break;
-      case 'End':
-        this.moveToBottom();
-        break;
-      default:
-        return;
-    }
-
-    this.refocusAfterRender.set(true);
     event.preventDefault();
     event.stopPropagation();
+    this.handleAction(item, action);
   }
 
-  protected handleFilter(event: Event): void {
-    const input: EventTarget | null = event.target;
-    if (input instanceof HTMLInputElement) this.updateFilter(input.value);
-  }
+  protected handleDrop(event: CdkDragDrop<readonly I[], readonly I[], I>): void {
+    // CDK temporarily detaches the row even when the drop is cancelled.
+    this.pendingFocus.set({ value: event.item.data.value, scroll: false });
+    if (!event.isPointerOverContainer || !this.dragDrop()) return;
 
-  protected handleDrop(event: CdkDragDrop<readonly I[]>): void {
-    if (this.disabled()) return;
-    if (event.previousIndex === event.currentIndex) return;
-    const source: I | undefined = this.visibleItems().at(event.previousIndex);
-    const target: I | undefined = this.visibleItems().at(event.currentIndex);
-    if (!source || !target || source.disabled) return;
-
-    const items: I[] = [...this.value()];
-    moveItemInArray(items, items.indexOf(source), items.indexOf(target));
-    this.commit(items, `Moved ${source.label} to position ${items.indexOf(source) + 1}`);
+    this.move(event.item.data, event.currentIndex, false);
+    // Commit the new DOM order before the browser paints CDK's restored original row.
+    this.changeDetector.detectChanges();
   }
 
   protected handleFocusout(event: FocusEvent): void {
-    const currentTarget: EventTarget | null = event.currentTarget;
-    if (!(currentTarget instanceof HTMLElement)) return;
-    const destination: EventTarget | null = event.relatedTarget;
-    if (!(destination instanceof Node) || !currentTarget.contains(destination)) this.touch.emit();
+    if (!(event.relatedTarget instanceof Node) || !this.host.contains(event.relatedTarget)) this.touch.emit();
   }
 
   protected itemContext(item: I, index: number): OrderListItemContext<I> {
+    const count: number = this.value().length;
     return {
       $implicit: item,
-      option: item,
+      item,
       index,
-      selected: this.selection().includes(item.value),
+      count,
+      first: index === 0,
+      last: index === count - 1,
+      even: index % 2 === 0,
+      odd: index % 2 !== 0,
+      disabled: this.disabled(),
+      reorderable: this.canReorder(item),
     };
   }
 
-  private commit(items: readonly I[], message: string = 'Order updated'): void {
+  private move(item: I, currentIndex: number, scroll: boolean): void {
+    const previousIndex: number = this.value().findIndex((entry: I): boolean => Object.is(entry.value, item.value));
+    const source: I | undefined = this.value()[previousIndex];
+    if (
+      !source ||
+      !this.canReorder(source) ||
+      previousIndex === currentIndex ||
+      currentIndex < 0 ||
+      currentIndex >= this.value().length
+    )
+      return;
+
+    const items: I[] = [...this.value()];
+    moveItemInArray(items, previousIndex, currentIndex);
+    const event: OrderListReorderEvent<I> = { item: source, previousIndex, currentIndex };
+
+    this.pendingFocus.set({ value: source.value, scroll });
     this.value.set(items);
-    this.announcement.set(message);
+    this.announcement.set(this.text().moved(event, items.length));
+    this.reordered.emit(event);
     this.touch.emit();
+  }
+
+  private restoreMovedFocus(): void {
+    const items: readonly I[] = this.value();
+    const request: FocusRequest | null = this.pendingFocus();
+    if (request === null) return;
+
+    this.pendingFocus.set(null);
+    if (this.disabled()) return;
+    const index: number = items.findIndex((item: I): boolean => Object.is(item.value, request.value));
+    const handle: HTMLButtonElement | undefined = this.handles()[index]?.nativeElement;
+    handle?.focus({ preventScroll: true });
+    if (request.scroll) handle?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   }
 }

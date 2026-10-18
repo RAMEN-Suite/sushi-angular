@@ -1,155 +1,67 @@
-<div
-  class="flex max-w-full flex-col gap-2 sm:flex-row"
-  [class.opacity-50]="disabled()"
-  [class.pointer-events-none]="disabled()"
+<ol
+  #list
+  role="list"
+  cdkDropList
+  class="sui-order-list__items"
+  tabindex="-1"
+  [attr.id]="id()"
+  [attr.inert]="disabled() ? '' : null"
+  [attr.aria-disabled]="disabled() || null"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-labelledby]="ariaLabelledby()"
+  [attr.aria-describedby]="ariaDescribedby()"
+  [attr.aria-invalid]="isInvalid() || null"
+  [cdkDropListData]="value()"
+  [cdkDropListDisabled]="disabled() || !reorderable() || !dragDrop()"
   (focusout)="handleFocusout($event)"
+  (cdkDropListDropped)="handleDrop($event)"
 >
-  <div class="grid grid-cols-4 gap-1 self-center sm:grid-cols-1" role="group" aria-label="Reorder selected items">
-    <button
-      suiButton
-      type="button"
-      size="xs"
-      severity="neutral"
-      variant="soft"
-      aria-label="Move selected items up"
-      aria-keyshortcuts="Alt+ArrowUp"
-      [disabled]="disabled() || !canMoveUp()"
-      (click)="moveUp()"
+  @for (item of value(); track item.value; let index = $index) {
+    <li
+      cdkDrag
+      cdkDragLockAxis="y"
+      class="sui-order-list__row"
+      [cdkDragData]="item"
+      [cdkDragDisabled]="!canReorder(item) || !dragDrop()"
+      [cdkDragPreviewContainer]="host"
+      [cdkDragStartDelay]="{ mouse: 0, touch: 150 }"
     >
-      <svg lucideChevronUp class="size-4" aria-hidden="true"></svg>
-    </button>
-    <button
-      suiButton
-      type="button"
-      size="xs"
-      severity="neutral"
-      variant="soft"
-      aria-label="Move selected items to top"
-      aria-keyshortcuts="Alt+Home"
-      [disabled]="disabled() || !canMoveTop()"
-      (click)="moveToTop()"
-    >
-      <svg lucideChevronsUp class="size-4" aria-hidden="true"></svg>
-    </button>
-    <button
-      suiButton
-      type="button"
-      size="xs"
-      severity="neutral"
-      variant="soft"
-      aria-label="Move selected items down"
-      aria-keyshortcuts="Alt+ArrowDown"
-      [disabled]="disabled() || !canMoveDown()"
-      (click)="moveDown()"
-    >
-      <svg lucideChevronDown class="size-4" aria-hidden="true"></svg>
-    </button>
-    <button
-      suiButton
-      type="button"
-      size="xs"
-      severity="neutral"
-      variant="soft"
-      aria-label="Move selected items to bottom"
-      aria-keyshortcuts="Alt+End"
-      [disabled]="disabled() || !canMoveBottom()"
-      (click)="moveToBottom()"
-    >
-      <svg lucideChevronsDown class="size-4" aria-hidden="true"></svg>
-    </button>
-  </div>
-
-  <div
-    class="min-w-0 grow overflow-hidden rounded-box border border-base-300 bg-base-100 sui-order-list__surface"
-    [class.border-error]="isInvalid()"
-  >
-    @if (headerTemplate(); as template) {
-      <div class="border-b border-base-300 p-3"><ng-container [ngTemplateOutlet]="template" /></div>
-    }
-
-    @if (filter()) {
-      <div class="border-b border-base-300 p-2">
-        @if (filterTemplate(); as template) {
-          <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="filterContext()" />
+      <button
+        #handle
+        cdkDragHandle
+        class="sui-order-list__handle"
+        type="button"
+        [suiMenuTrigger]="movement"
+        [disabled]="!canReorder(item)"
+        [attr.aria-label]="text().reorder(item)"
+        [attr.aria-describedby]="instructionsId"
+        aria-keyshortcuts="Alt+ArrowUp Alt+ArrowDown Alt+Shift+ArrowUp Alt+Shift+ArrowDown Alt+Home Alt+End"
+        [class.sui-order-list__handle--draggable]="canReorder(item) && dragDrop()"
+        (keydown)="handleKeydown($event, item)"
+      >
+        <svg lucideGripVertical aria-hidden="true"></svg>
+      </button>
+      <div class="sui-order-list__content">
+        @if (itemTemplate(); as template) {
+          <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="itemContext(item, index)" />
         } @else {
-          <div suiInputSurface fluid>
-            <svg lucideSearch class="size-4 shrink-0 text-base-content/50" aria-hidden="true"></svg>
-            <input
-              suiInputSurfaceControl
-              type="search"
-              class="text-base"
-              [value]="query()"
-              [placeholder]="filterPlaceholder()"
-              [attr.aria-label]="filterPlaceholder()"
-              [readonly]="disabled()"
-              [attr.aria-disabled]="disabled() || null"
-              (input)="handleFilter($event)"
-            />
-          </div>
+          {{ item.label }}
         }
       </div>
-    }
-
-    <div
-      #listbox="ngListbox"
-      ngListbox
-      cdkDropList
-      cdkScrollable
-      class="list sui-selection-list sui-selection-list--focus-bound max-w-full overflow-y-auto p-2 outline-none"
-      focusMode="activedescendant"
-      selectionMode="explicit"
-      [attr.id]="id()"
-      [tabindex]="disabled() ? -1 : 0"
-      [multi]="true"
-      [disabled]="disabled()"
-      [softDisabled]="false"
-      [value]="ariaSelection()"
-      [style.max-height.px]="scrollHeight()"
-      [attr.aria-label]="ariaLabel()"
-      [attr.aria-labelledby]="ariaLabelledby()"
-      [attr.aria-describedby]="ariaDescribedby()"
-      [attr.aria-invalid]="isInvalid() || null"
-      [cdkDropListData]="visibleItems()"
-      [cdkDropListDisabled]="disabled() || !dragDrop()"
-      (valueChange)="handleSelection($event)"
-      (keydown)="handleKeydown($event)"
-      (cdkDropListDropped)="handleDrop($event)"
-    >
-      @for (item of visibleItems(); track item.value; let index = $index) {
-        <div
-          #ariaOption="ngOption"
-          ngOption
-          cdkDrag
-          cdkDragLockAxis="y"
-          cdkDragBoundary=".sui-order-list"
-          class="sui-order-list-row sui-selection-option list-row items-center rounded-field outline-none active:cursor-grabbing"
-          [class.cursor-grab]="dragDrop() && !item.disabled"
-          [class.cursor-pointer]="!dragDrop() && !item.disabled"
-          [class.cursor-not-allowed]="item.disabled"
-          [class.opacity-40]="item.disabled"
-          [value]="item.value"
-          [label]="item.label"
-          [disabled]="item.disabled ?? false"
-          [cdkDragData]="item"
-          [cdkDragDisabled]="disabled() || !dragDrop() || item.disabled"
-          [attr.data-active]="ariaOption.active() || null"
-          [attr.data-selected]="ariaOption.selected() || null"
-        >
-          <div class="list-col-grow min-w-0">
-            @if (itemTemplate(); as template) {
-              <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="itemContext(item, index)" />
-            } @else {
-              {{ item.label }}
-            }
-          </div>
-        </div>
-      } @empty {
-        <div class="p-6 text-center text-sm text-base-content/60" role="presentation">
-          {{ query() ? 'No matching items' : 'No items available' }}
-        </div>
-      }
-    </div>
-  </div>
-</div>
-
-<span class="sr-only" aria-live="polite">{{ announcement() }}</span>
+      <sui-menu
+        #movement
+        popup
+        size="sm"
+        severity="neutral"
+        [ariaLabel]="text().reorder(item)"
+        [disabled]="!canReorder(item)"
+        [items]="actions(item, index)"
+        (itemSelected)="handleAction(item, $event)"
+      />
+    </li>
+  } @empty {
+    <li class="sui-order-list__empty">{{ text().empty }}</li>
+  }
+</ol>
+<p class="sr-only" [id]="instructionsId">{{ text().instructions }}</p>
+<span class="sr-only" role="status" aria-live="polite" aria-atomic="true">{{ announcement() }}</span>
