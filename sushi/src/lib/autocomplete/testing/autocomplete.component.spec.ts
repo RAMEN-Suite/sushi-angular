@@ -252,3 +252,27 @@ describe('Autocomplete keyboard opening', (): void => {
     expect(fixture.componentInstance.value()).toBe('shoyu');
   });
 });
+
+describe('Autocomplete text composition', (): void => {
+  it('keeps the edit and suggestions when Escape belongs to text composition', async (): Promise<void> => {
+    const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
+    fixture.componentInstance.forceSelection.set(true);
+    fixture.detectChanges();
+    const input: HTMLInputElement = enter(fixture, 'Mis');
+    await fixture.whenStable();
+
+    const cancel: KeyboardEvent = new KeyboardEvent('keydown', {
+      key: 'Escape',
+      isComposing: true,
+      bubbles: true,
+      cancelable: true,
+    });
+    input.dispatchEvent(cancel);
+    await fixture.whenStable();
+
+    expect(cancel.defaultPrevented).toBe(false);
+    expect(input.value).toBe('Mis');
+    expect(fixture.componentInstance.value()).toBe('shoyu');
+    expect(document.querySelector('[role="listbox"]')).not.toBeNull();
+  });
+});

@@ -278,6 +278,8 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   }
 
   protected handlePopupKeydown(event: KeyboardEvent): void {
+    if (event.isComposing) return;
+
     if (event.key === 'Escape') {
       event.preventDefault();
       event.stopPropagation();
