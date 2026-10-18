@@ -1,59 +1,66 @@
-<div class="w-full max-w-xl">
-  <div class="flex flex-wrap items-center justify-between gap-3">
-    <span suiLabel id="backlog-order-label" class="font-medium">Product backlog</span>
-    <button suiButton type="button" size="sm" severity="neutral" variant="soft" (click)="toggleLock()">
-      @if (locked()) {
-        <svg lucideLockKeyholeOpen class="size-4" aria-hidden="true"></svg>
-        Unlock order
-      } @else {
-        <svg lucideLockKeyhole class="size-4" aria-hidden="true"></svg>
-        Lock order
-      }
-    </button>
-  </div>
-
-  <sui-order-list
-    filter
-    class="mt-4"
-    ariaLabelledby="backlog-order-label"
-    filterPlaceholder="Filter backlog"
-    [disabled]="locked()"
-    [scrollHeight]="240"
-    [(value)]="backlog">
-    <ng-template suiOrderListHeader>
-      <div class="flex flex-wrap items-center justify-between gap-2">
-        <strong>Next release</strong>
-        <span suiBadge size="sm" variant="soft">{{ backlog().length }} candidates</span>
+<section
+  class="w-full max-w-xl overflow-hidden rounded-box border border-base-300 bg-base-100"
+  aria-labelledby="property-order-heading">
+  <header class="flex min-h-20 items-center justify-between gap-3 border-b border-base-300 px-4 py-3">
+    <div class="flex min-w-0 items-center gap-3">
+      <span class="grid size-9 shrink-0 place-items-center rounded-field bg-base-200 text-base-content/70">
+        <svg lucideListFilter class="size-4" aria-hidden="true"></svg>
+      </span>
+      <div>
+        <h3 id="property-order-heading" class="font-semibold">Properties</h3>
+        <p class="text-xs text-base-content/60">Choose how fields appear in your workspace.</p>
       </div>
-    </ng-template>
-
-    <ng-template suiOrderListFilter let-query let-placeholder="placeholder" let-disabled="disabled" let-update="update">
-      <div suiInputSurface fluid>
-        <svg lucideSearch class="size-4 shrink-0 text-base-content/50" aria-hidden="true"></svg>
-        <input
-          #filterInput
-          suiInputSurfaceControl
-          type="search"
-          class="text-base"
-          [value]="query"
-          [placeholder]="placeholder"
-          [attr.aria-label]="placeholder"
-          [disabled]="disabled"
-          (input)="update(filterInput.value)" />
-        <span class="shrink-0 text-sm text-base-content/50">{{ backlog().length }} total</span>
-      </div>
-    </ng-template>
-
-    <ng-template [suiOrderListItem]="backlog()" let-item let-selected="selected">
-      <div class="flex min-w-0 items-center gap-3">
-        <span class="min-w-0 grow">
-          <strong class="block truncate">{{ item.label }}</strong>
-          <span class="block truncate text-sm" [class.text-base-content/60]="!selected">
-            {{ details.get(item.value)?.area }}
+    </div>
+    @if (!sorting()) {
+      <button suiButton size="sm" severity="neutral" variant="text" (click)="start()">
+        <svg lucideArrowDownUp class="size-4" aria-hidden="true"></svg>
+        Sort properties
+      </button>
+    }
+  </header>
+  <div cdkScrollable class="m-2 max-h-72 overflow-y-auto" aria-label="Property panel">
+    <sui-order-list
+      ariaLabel="Properties"
+      [reorderable]="sorting()"
+      [labels]="labels"
+      [(value)]="draft"
+      (reordered)="message.set('Unsaved order. Save or cancel your changes.')">
+      <ng-template [suiOrderListItem]="draft()" let-property>
+        <div class="flex min-w-0 items-center gap-3">
+          <span class="grid size-7 shrink-0 place-items-center rounded-field bg-base-200 text-base-content/60">
+            @if (property.type === 'Date') {
+              <svg lucideCalendarDays class="size-3.5" aria-hidden="true"></svg>
+            } @else {
+              <svg lucideType class="size-3.5" aria-hidden="true"></svg>
+            }
           </span>
-        </span>
-        <span suiBadge size="sm" variant="soft">{{ details.get(item.value)?.effort }} points</span>
+          <span class="min-w-0 grow text-sm font-medium">{{ property.label }}</span>
+          <span class="text-xs text-base-content/50">{{ property.type }}</span>
+          @if (property.disabled) {
+            <span class="flex items-center gap-1 text-xs text-base-content/50">
+              <svg lucideLockKeyhole class="size-3" aria-hidden="true"></svg>
+              Locked
+            </span>
+          }
+        </div>
+      </ng-template>
+    </sui-order-list>
+  </div>
+  <footer
+    class="flex min-h-20 flex-col gap-3 border-t border-base-300 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+    <p role="status" aria-label="Order changes" class="min-w-0 flex-1 text-xs leading-5 text-base-content/60">
+      {{ message() }}
+    </p>
+    @if (sorting()) {
+      <div class="flex shrink-0 items-center justify-end gap-2">
+        <button suiButton size="sm" severity="neutral" variant="outlined" class="px-4" (click)="cancel()">
+          Cancel
+        </button>
+        <button suiButton size="sm" severity="neutral" class="px-4" (click)="save()">
+          <svg lucideCheck class="size-4" aria-hidden="true"></svg>
+          Save order
+        </button>
       </div>
-    </ng-template>
-  </sui-order-list>
-</div>
+    }
+  </footer>
+</section>

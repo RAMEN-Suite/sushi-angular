@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Order List</h1>
-      <p class="text-lg text-base-content/70">Sort a collection with selection controls or optional drag and drop.</p>
+      <p class="text-lg text-base-content/70">Reorder rich rows with a handle, a movement menu or keyboard shortcuts.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Order List architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Component</span>
@@ -17,7 +17,9 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Basic</h2>
-      <p class="text-base-content/60">Select one or more rows and reorder them with the controls or the matching Alt keyboard shortcuts.</p>
+      <p class="text-base-content/60">
+        Bind the complete collection directly or through Signal Forms. Sorting moves one complete row at a time.
+      </p>
     </div>
     <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript">
       <ng-template pgExamplePreview><pg-order-list-basic-example /></ng-template>
@@ -27,7 +29,9 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Drag and drop</h2>
-      <p class="text-base-content/60">Enable dragDrop when the complete row should also act as a drag target.</p>
+      <p class="text-base-content/60">
+        Drag only from the leading handle. Click the same handle for movement actions. Row content keeps its own interaction.
+      </p>
     </div>
     <pg-example-code [html]="examples.dragDrop.html" [typescript]="examples.dragDrop.typescript">
       <ng-template pgExamplePreview><pg-order-list-drag-drop-example /></ng-template>
@@ -37,7 +41,9 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Disabled</h2>
-      <p class="text-base-content/60">Disable filtering, selection, controls, keyboard reordering, and drag and drop together.</p>
+      <p class="text-base-content/60">
+        Disabled makes the collection inert. Use reorderable=false to keep row controls usable while stopping movement.
+      </p>
     </div>
     <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript">
       <ng-template pgExamplePreview><pg-order-list-states-example /></ng-template>
@@ -46,8 +52,10 @@
 
   <section class="pg-page__section">
     <div class="space-y-2">
-      <h2 class="text-2xl font-bold tracking-tight">Filter and templates</h2>
-      <p class="text-base-content/60">Use the item and header templates for richer collections without replacing the interaction model.</p>
+      <h2 class="text-2xl font-bold tracking-tight">Save or cancel an order</h2>
+      <p class="text-base-content/60">
+        Choose Sort properties, move a property using its handle, then save the new order or cancel to restore the saved order.
+      </p>
     </div>
     <pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript">
       <ng-template pgExamplePreview><pg-order-list-templates-example /></ng-template>
