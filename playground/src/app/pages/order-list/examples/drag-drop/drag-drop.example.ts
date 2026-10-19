@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
-import { Checkbox, Label, OrderList, OrderListItemTemplate, type OrderListOption } from '@sushi-kit/angular';
+import { OrderList, OrderListItemTemplate, type OrderListOption } from '@sushi-kit/angular';
 
 @Component({
   selector: 'pg-order-list-drag-drop-example',
-  imports: [Checkbox, Label, OrderList, OrderListItemTemplate],
+  imports: [OrderList, OrderListItemTemplate],
   templateUrl: './drag-drop.example.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderListDragDropExample {
-  protected readonly movies: WritableSignal<readonly OrderListOption[]> = signal<readonly OrderListOption[]>([
+  protected readonly movies: WritableSignal<readonly OrderListOption[]> = signal([
     { label: 'The Shawshank Redemption', value: 'shawshank' },
     { label: 'Inception', value: 'inception' },
     { label: 'Interstellar', value: 'interstellar' },

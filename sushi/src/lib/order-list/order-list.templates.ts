@@ -1,20 +1,10 @@
 import { Directive, input, type InputSignal } from '@angular/core';
-import { type OrderListFilterContext, type OrderListItemContext, type OrderListOption } from './order-list.interfaces';
+import { type OrderListItemContext, type OrderListOption } from './order-list.interfaces';
 
-/** Replaces the filter control and exposes its query, state, and update function. */
-@Directive({ selector: 'ng-template[suiOrderListFilter]' })
-export class OrderListFilterTemplate {
-  public static ngTemplateContextGuard(
-    _directive: OrderListFilterTemplate,
-    _context: unknown,
-  ): _context is OrderListFilterContext {
-    return true;
-  }
-}
-
-/** Replaces each row and exposes its item, index, and selection state. */
+/** Replaces row content. Buttons, links and inputs are supported; the library owns the separate reorder handle. */
 @Directive({ selector: 'ng-template[suiOrderListItem]' })
 export class OrderListItemTemplate<I extends OrderListOption = OrderListOption> {
+  /** Optional collection used to infer the item type in the template. */
   public readonly items: InputSignal<readonly I[] | '' | undefined> = input<readonly I[] | '' | undefined>(undefined, {
     alias: 'suiOrderListItem',
   });
@@ -25,7 +15,3 @@ export class OrderListItemTemplate<I extends OrderListOption = OrderListOption> 
     return true;
   }
 }
-
-/** Adds content above the filter and ordered collection. */
-@Directive({ selector: 'ng-template[suiOrderListHeader]' })
-export class OrderListHeaderTemplate {}

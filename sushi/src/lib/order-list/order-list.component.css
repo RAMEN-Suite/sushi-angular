@@ -1,38 +1,135 @@
-.sui-order-list__surface:has(:focus-visible) {
+:host {
+  /** Padding inside a row; defaults follow the List size scale. */
+  --sui-order-list-row-padding: var(--_sui-order-list-padding, 0.5rem);
+  /** Space between the handle and row content; defaults follow size. */
+  --sui-order-list-row-gap: var(--_sui-order-list-padding, 0.5rem);
+  /** Corner radius of rows and drag previews. */
+  --sui-order-list-row-radius: var(--radius-field);
+  /** Background of the complete row on hover. */
+  --sui-order-list-row-hover-background: var(--sui-color-hover);
+  /** Opaque surface of the moving row. */
+  --sui-order-list-preview-background: var(--color-base-100);
+  /** Border of the moving row. */
+  --sui-order-list-preview-border-color: var(--sui-color-border);
+}
+
+:host([data-size="xs"]) {
+  --_sui-order-list-padding: 0.25rem;
+}
+
+:host([data-size="md"]) {
+  --_sui-order-list-padding: 1rem;
+}
+
+:host([data-size="lg"]) {
+  --_sui-order-list-padding: 1.25rem;
+}
+
+:host([data-size="xl"]) {
+  --_sui-order-list-padding: 1.5rem;
+}
+
+.sui-order-list__items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sui-order-list__items:focus-visible,
+.sui-order-list__handle:focus-visible {
   outline: var(--sui-focus-ring-width) solid var(--sui-focus-ring-color, currentColor);
   outline-offset: var(--sui-focus-ring-offset);
+}
+
+:host([data-disabled="true"]) {
+  cursor: not-allowed;
+}
+
+.sui-order-list__items[aria-disabled="true"] {
+  opacity: var(--sui-disabled-opacity);
+}
+
+.sui-order-list__row {
+  display: flex;
+  align-items: center;
+  gap: var(--sui-order-list-row-gap);
+  box-sizing: border-box;
+  min-width: 0;
+  padding: var(--sui-order-list-row-padding);
+  border-radius: var(--sui-order-list-row-radius);
+  color: var(--color-base-content);
+}
+
+.sui-order-list__items:not(.cdk-drop-list-dragging):not([aria-disabled="true"]) > .sui-order-list__row:hover {
+  background: var(--sui-order-list-row-hover-background);
+}
+
+.sui-order-list__content {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.sui-order-list__row > sui-menu {
+  display: contents;
+}
+
+.sui-order-list__handle {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--sui-order-list-row-radius);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.sui-order-list__handle svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.sui-order-list__handle[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sui-order-list__handle--draggable {
+  cursor: grab;
+  touch-action: none;
+}
+
+.sui-order-list__empty {
+  padding: var(--sui-order-list-row-padding);
+  color: var(--color-base-content);
+  opacity: 0.6;
+}
+
+.cdk-drop-list-dragging > .sui-order-list__row {
+  pointer-events: none;
+}
+
+.cdk-drop-list-dragging {
+  cursor: grabbing;
 }
 
 .cdk-drag-placeholder {
   opacity: 0.3;
 }
 
-.cdk-drag-preview.sui-order-list-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  box-sizing: border-box;
+.cdk-drag-preview.sui-order-list__row {
+  background: var(--sui-order-list-preview-background);
+  outline: 1px solid var(--sui-order-list-preview-border-color);
   cursor: grabbing;
-  padding: 0.75rem 1rem;
-  color: var(--color-base-content);
-  background: var(--color-base-100);
-  border: 1px solid var(--color-base-300);
-  border-radius: var(--radius-field);
+  box-shadow: none;
 }
 
-.cdk-drop-list-dragging,
-.cdk-drop-list-dragging .sui-order-list-row {
+.cdk-drag-preview .sui-order-list__handle {
   cursor: grabbing;
-}
-
-.cdk-drag-preview.sui-order-list-row .list-col-grow {
-  flex: 1;
-  min-width: 0;
-}
-
-.cdk-drag-preview.sui-order-list-row[data-selected="true"] {
-  color: var(--color-primary);
-  background: color-mix(in oklab, var(--color-primary) 12%, var(--color-base-100));
 }
 
 .cdk-drag-animating,
