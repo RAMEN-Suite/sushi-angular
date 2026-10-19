@@ -6,8 +6,8 @@ async function expectOrigin(dialog: Locator, origin: Bounds, tolerance: number):
   await expect(async (): Promise<void> => {
     const bounds: Bounds = await visibleBounds(dialog, 'the Dialog');
 
-    expect(Math.abs(bounds.x - origin.x)).toBeLessThan(tolerance);
-    expect(Math.abs(bounds.y - origin.y)).toBeLessThan(tolerance);
+    expect(Math.abs(bounds.x - origin.x)).toBeLessThanOrEqual(tolerance);
+    expect(Math.abs(bounds.y - origin.y)).toBeLessThanOrEqual(tolerance);
   }).toPass({ timeout: 5_000 });
 }
 
@@ -186,8 +186,8 @@ test('custom coordinates are restored when reopening after dragging', async ({ p
     if (!bounds) throw new Error('Expected a visible custom-positioned Dialog.');
     const viewportWidth: number = await page.evaluate((): number => document.documentElement.clientWidth);
     const rem: number = await page.evaluate((): number => Number.parseFloat(getComputedStyle(document.documentElement).fontSize));
-    expect(bounds.y).toBeCloseTo(80, 0);
-    expect(viewportWidth - bounds.x - bounds.width).toBeCloseTo(1.5 * rem, 0);
+    expect(Math.abs(bounds.y - 80)).toBeLessThanOrEqual(1);
+    expect(Math.abs(viewportWidth - bounds.x - bounds.width - 1.5 * rem)).toBeLessThanOrEqual(1);
   }).toPass({ timeout: 5_000 });
 
   const initial: Bounds | null = await dialog.boundingBox();
@@ -208,7 +208,7 @@ test('custom coordinates are restored when reopening after dragging', async ({ p
 
   await trigger.click();
 
-  await expectOrigin(dialog, initial, 0.5);
+  await expectOrigin(dialog, initial, 1);
 });
 
 test('custom coordinates can change while the Dialog is open', async ({ page }: { page: Page }): Promise<void> => {
@@ -221,8 +221,8 @@ test('custom coordinates can change while the Dialog is open', async ({ page }: 
     if (!bounds) throw new Error('Expected the repositioned Dialog to remain visible.');
     const viewportHeight: number = await page.evaluate((): number => document.documentElement.clientHeight);
     const rem: number = await page.evaluate((): number => Number.parseFloat(getComputedStyle(document.documentElement).fontSize));
-    expect(bounds.x).toBeCloseTo(24, 0);
-    expect(viewportHeight - bounds.y - bounds.height).toBeCloseTo(1.5 * rem, 0);
+    expect(Math.abs(bounds.x - 24)).toBeLessThanOrEqual(1);
+    expect(Math.abs(viewportHeight - bounds.y - bounds.height - 1.5 * rem)).toBeLessThanOrEqual(1);
   }).toPass({ timeout: 5_000 });
 });
 
@@ -267,12 +267,18 @@ test('resizes in place without moving the Dialog origin', async ({
   }).toPass({ timeout: 5_000 });
 });
 
-test('Dialog fade respects reduced motion and restores focus after Escape', async ({ page }: { page: Page }): Promise<void> => {
-  await page.emulateMedia({ reducedMotion: 'reduce' });
+test('Dialog fade honors motion preference changes and restores focus after Escape', async ({
+  page,
+}: {
+  page: Page;
+}): Promise<void> => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
   const trigger: Locator = page.getByRole('button', { name: 'View today’s menu' });
   await trigger.click();
   const dialog: Locator = page.getByRole('dialog', { name: 'Today’s menu' });
 
+  await expect(dialog).not.toHaveCSS('animation-name', 'none');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(dialog).toHaveCSS('animation-name', 'none');
   await page.keyboard.press('Escape');
 

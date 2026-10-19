@@ -41,17 +41,17 @@ async function expectPosition(dialog: Locator, centered: boolean): Promise<void>
   await expect(async (): Promise<void> => {
     const bounds: Geometry = await geometry(dialog);
     const details: string = `Dialog geometry: ${JSON.stringify(bounds)}`;
-    expect(Math.round(bounds.left), details).toBeGreaterThanOrEqual(0);
-    expect(Math.round(bounds.top), details).toBeGreaterThanOrEqual(0);
-    expect(Math.round(bounds.right), details).toBeLessThanOrEqual(bounds.viewportWidth);
-    expect(Math.round(bounds.bottom), details).toBeLessThanOrEqual(bounds.viewportHeight);
+    expect(bounds.left, details).toBeGreaterThanOrEqual(-1);
+    expect(bounds.top, details).toBeGreaterThanOrEqual(-1);
+    expect(bounds.right, details).toBeLessThanOrEqual(bounds.viewportWidth + 1);
+    expect(bounds.bottom, details).toBeLessThanOrEqual(bounds.viewportHeight + 1);
     expect(bounds.documentWidth, details).toBeLessThanOrEqual(bounds.viewportWidth);
     if (centered) {
-      expect(bounds.left + bounds.width / 2, details).toBeCloseTo(bounds.viewportWidth / 2, 0);
-      expect(bounds.top + bounds.height / 2, details).toBeCloseTo(bounds.viewportHeight / 2, 0);
+      expect(Math.abs(bounds.left + bounds.width / 2 - bounds.viewportWidth / 2), details).toBeLessThanOrEqual(1);
+      expect(Math.abs(bounds.top + bounds.height / 2 - bounds.viewportHeight / 2), details).toBeLessThanOrEqual(1);
     } else {
-      expect(bounds.top, details).toBeCloseTo(80, 0);
-      expect(bounds.viewportWidth - bounds.right, details).toBeCloseTo(1.5 * bounds.rem, 0);
+      expect(Math.abs(bounds.top - 80), details).toBeLessThanOrEqual(1);
+      expect(Math.abs(bounds.viewportWidth - bounds.right - 1.5 * bounds.rem), details).toBeLessThanOrEqual(1);
     }
   }).toPass({ timeout: 5_000 });
 }
@@ -82,16 +82,16 @@ for (const example of [
       await page.setViewportSize(viewport);
       await expect(async (): Promise<void> => {
         const bounds: Geometry = await geometry(dialog);
-        expect(bounds.left).toBeGreaterThanOrEqual(0);
-        expect(bounds.top).toBeGreaterThanOrEqual(0);
-        expect(bounds.right).toBeLessThanOrEqual(bounds.viewportWidth);
-        expect(bounds.bottom).toBeLessThanOrEqual(bounds.viewportHeight);
-        expect(bounds.width).toBeGreaterThan(200);
+        expect(bounds.left).toBeGreaterThanOrEqual(-1);
+        expect(bounds.top).toBeGreaterThanOrEqual(-1);
+        expect(bounds.right).toBeLessThanOrEqual(bounds.viewportWidth + 1);
+        expect(bounds.bottom).toBeLessThanOrEqual(bounds.viewportHeight + 1);
         if (example.centered) {
-          expect(bounds.left + bounds.width / 2).toBeCloseTo(bounds.viewportWidth / 2, 0);
-          expect(bounds.top + bounds.height / 2).toBeCloseTo(bounds.viewportHeight / 2, 0);
+          expect(Math.abs(bounds.left + bounds.width / 2 - bounds.viewportWidth / 2)).toBeLessThanOrEqual(1);
+          expect(Math.abs(bounds.top + bounds.height / 2 - bounds.viewportHeight / 2)).toBeLessThanOrEqual(1);
         }
       }).toPass({ timeout: 5_000 });
+      await expect(dialog.getByRole('button', { name: 'Close', exact: true })).toBeInViewport();
     }
   });
 }

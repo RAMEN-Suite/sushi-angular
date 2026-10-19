@@ -93,6 +93,7 @@ test('Accordion density tokens reach triggers, panels, and separated item spacin
 }: {
   page: Page;
 }): Promise<void> => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/accordion');
   const example: Locator = page.locator('pg-accordion-control-example');
   const host: Locator = example.locator('sui-accordion');
