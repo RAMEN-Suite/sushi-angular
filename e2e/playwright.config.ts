@@ -39,6 +39,7 @@ export default defineConfig({
         '**/dialog-position.spec.ts',
         '**/dialog-content-resize.spec.ts',
         '**/select-dialog.spec.ts',
+        '**/order-list.spec.ts',
       ],
       use: { ...devices['iPhone 13'] },
     },
