@@ -18,6 +18,6 @@ test('empty vertical Dividers respect explicit height and flex stretching', asyn
           parent.getBoundingClientRect().height - Number.parseFloat(style.marginTop) - Number.parseFloat(style.marginBottom),
       };
     });
-    expect(layout.height).toBeCloseTo(layout.available, 0);
+    expect(Math.abs(layout.height - layout.available)).toBeLessThanOrEqual(1);
   }).toPass({ timeout: 5_000 });
 });

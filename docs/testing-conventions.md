@@ -34,6 +34,7 @@ Place browser contracts in `e2e/specs/` and organize them by component or shared
 - Start from a fresh page and keep tests order-independent.
 - Prefer roles, accessible names, labels, and visible text.
 - Use `data-testid` only for geometry surfaces without a user-facing identity.
+- Request reduced motion by default. Opt into normal motion when the test needs to exercise animation behavior.
 - Use Playwright's retrying assertions for settled user-visible behavior; do not add manual waits or sample animation frames.
 - Assert layout invariants such as contained, aligned, scrollable, or moved. Use exact pixels only when the API promises them.
 - Do not test documentation tabs, copy, utility classes, colors, shadows, or page decoration.

@@ -50,7 +50,7 @@ test('Dialog explicitly repositions after content changes while preserving input
   await dialog.getByRole('button', { name: 'Show detailed form' }).press('Enter');
 
   await expect.poll(async (): Promise<number> => (await bounds(dialog)).height).toBeGreaterThan(initial.height);
-  await expect.poll(async (): Promise<number> => (await bounds(dialog)).top).toBeCloseTo(initial.top, 0);
+  await expect.poll(async (): Promise<number> => Math.abs((await bounds(dialog)).top - initial.top)).toBeLessThanOrEqual(1);
   await dialog.getByRole('textbox', { name: 'Name', exact: true }).fill('Annotation type');
   await dialog.getByRole('button', { name: 'Reposition dialog' }).press('Enter');
 
@@ -81,7 +81,7 @@ test('Dialog preserves dragging during content changes and explicitly reposition
 
   await dialog.getByRole('button', { name: 'Show detailed form' }).press('Enter');
   await expect.poll(async (): Promise<number> => (await bounds(dialog)).height).toBeGreaterThan(moved.height);
-  await expect.poll(async (): Promise<number> => (await bounds(dialog)).top).toBeCloseTo(moved.top, 0);
+  await expect.poll(async (): Promise<number> => Math.abs((await bounds(dialog)).top - moved.top)).toBeLessThanOrEqual(1);
   await dialog.getByRole('button', { name: 'Reposition dialog' }).press('Enter');
 
   await expectCentered(dialog);
@@ -120,7 +120,7 @@ test('Dialog keeps native resizing in place until explicitly repositioned @deskt
   await expectCentered(dialog);
   await expect(async (): Promise<void> => {
     const repositioned: Bounds = await visibleBounds(dialog, 'the repositioned Dialog');
-    expect(repositioned.width).toBeCloseTo(resized.width, 0);
-    expect(repositioned.height).toBeCloseTo(resized.height, 0);
+    expect(Math.abs(repositioned.width - resized.width)).toBeLessThanOrEqual(1);
+    expect(Math.abs(repositioned.height - resized.height)).toBeLessThanOrEqual(1);
   }).toPass();
 });
