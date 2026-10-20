@@ -2,6 +2,30 @@
 
 All notable changes to this project are documented here.
 
+## [0.2.0](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.1.4...v0.2.0) (2026-10-20)
+
+### ⚠ BREAKING CHANGES
+
+* **sushi:** replace order list with compact row controls ([#71](https://github.com/RAMEN-Suite/sushi-angular/issues/71))
+
+### Features
+
+* **sushi:** add explicit autocomplete opening controls ([#65](https://github.com/RAMEN-Suite/sushi-angular/issues/65)) ([330098e](https://github.com/RAMEN-Suite/sushi-angular/commit/330098edcd177d0f6aa5178977b69cdeb2ce036e))
+* **sushi:** add explicit dialog repositioning ([#66](https://github.com/RAMEN-Suite/sushi-angular/issues/66)) ([a5fa37c](https://github.com/RAMEN-Suite/sushi-angular/commit/a5fa37c716bba16bbbcf2b7b1a5769d34553f907))
+* **sushi:** add independent accordion actions ([#67](https://github.com/RAMEN-Suite/sushi-angular/issues/67)) ([d28f334](https://github.com/RAMEN-Suite/sushi-angular/commit/d28f3342bcf1f9617b0438a7c6d0349dd5be1b3f))
+* **sushi:** add searchable select popups ([#64](https://github.com/RAMEN-Suite/sushi-angular/issues/64)) ([d434c0c](https://github.com/RAMEN-Suite/sushi-angular/commit/d434c0c4e9f00a22fe65b461ea433cadfbedeb39))
+* **sushi:** replace order list with compact row controls ([#71](https://github.com/RAMEN-Suite/sushi-angular/issues/71)) ([6cce3c1](https://github.com/RAMEN-Suite/sushi-angular/commit/6cce3c122e2f37308f5f03b4894a713cba3852b2))
+
+### Bug Fixes
+
+* **sushi:** localize number input step labels ([94ba13c](https://github.com/RAMEN-Suite/sushi-angular/commit/94ba13c1cf2aba37539c0821de935f0f61357d73))
+* **sushi:** preserve text composition in selection controls ([#70](https://github.com/RAMEN-Suite/sushi-angular/issues/70)) ([bef8ed1](https://github.com/RAMEN-Suite/sushi-angular/commit/bef8ed1e10f82c7575b23f404bcfff90cb59056f))
+* **sushi:** prevent tooltip reopening after activation ([#69](https://github.com/RAMEN-Suite/sushi-angular/issues/69)) ([ee214c4](https://github.com/RAMEN-Suite/sushi-angular/commit/ee214c41ac91a1a9d71e8ee1795893f2a4c711c1))
+
+### Refactoring
+
+* **sushi:** align code and check types ([#68](https://github.com/RAMEN-Suite/sushi-angular/issues/68)) ([686309f](https://github.com/RAMEN-Suite/sushi-angular/commit/686309f53ce5f8797de0e2c2c95b54082987c17a))
+
 ## [0.1.4](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.1.3...v0.1.4) (2026-10-12)
 
 ### Features
