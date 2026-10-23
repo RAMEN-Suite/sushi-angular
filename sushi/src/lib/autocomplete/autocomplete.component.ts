@@ -82,6 +82,10 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
   public readonly placeholder: InputSignal<string> = input<string>('Search');
   /** Message shown when no suggestion matches. */
   public readonly emptyMessage: InputSignal<string> = input<string>('No suggestions found');
+  /** Formats the live announcement for a positive filtered suggestion count. Defaults to English with singular/plural forms. */
+  public readonly suggestionsMessage: InputSignal<(count: number) => string> = input<(count: number) => string>(
+    (count: number): string => `${count} ${count === 1 ? 'suggestion' : 'suggestions'} available.`,
+  );
   /** Message shown while suggestions are loading. */
   public readonly loadingMessage: InputSignal<string> = input<string>('Loading suggestions');
   /** Message shown instead of suggestions when loading failed. */

@@ -276,3 +276,18 @@ describe('Autocomplete text composition', (): void => {
     expect(document.querySelector('[role="listbox"]')).not.toBeNull();
   });
 });
+
+describe('Autocomplete suggestion announcements', (): void => {
+  it('announces the filtered count with English singular and plural defaults', async (): Promise<void> => {
+    const fixture: ComponentFixture<AutocompleteHost> = render(AutocompleteHost);
+    fixture.componentInstance.control().show();
+    await fixture.whenStable();
+
+    expect(query(fixture, '[role="status"]').textContent.trim()).toBe('3 suggestions available.');
+
+    enter(fixture, 'Mis');
+    await fixture.whenStable();
+
+    expect(query(fixture, '[role="status"]').textContent.trim()).toBe('1 suggestion available.');
+  });
+});
