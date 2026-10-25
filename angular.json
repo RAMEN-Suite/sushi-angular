@@ -50,8 +50,8 @@
             "runner": "vitest",
             "isolate": true,
             "setupFiles": ["sushi/testing/setup.ts"],
-            "coverageInclude": ["src/lib/**/*.ts", "src/lib/**/*.html"],
-            "coverageExclude": ["src/lib/**/*.interfaces.ts", "src/lib/**/index.ts"],
+            "coverageInclude": ["sushi/src/lib/**/*.ts", "sushi/src/lib/**/*.html"],
+            "coverageExclude": ["sushi/src/lib/**/*.interfaces.ts", "sushi/src/lib/**/index.ts"],
             "coverageReporters": ["text-summary", "html", "json-summary"],
             "coverageThresholds": {
               "statements": 80,
