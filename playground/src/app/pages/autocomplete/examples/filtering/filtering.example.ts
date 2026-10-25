@@ -44,6 +44,8 @@ export class AutocompleteFilteringExample {
     { label: 'London', value: { id: 'london' }, country: 'United Kingdom' },
   ];
   protected readonly value: WritableSignal<AutocompleteValue> = signal<AutocompleteValue>({ id: 'lisbon' });
+  protected readonly destinationMessage: (count: number) => string = (count: number): string =>
+    `${count} ${count === 1 ? 'destination' : 'destinations'} available.`;
   protected readonly startsWith: AutocompleteFilter = (option: AutocompleteOption, query: string): boolean =>
     option.label.toLocaleLowerCase().startsWith(query.trim().toLocaleLowerCase());
   protected readonly compareDestinations: AutocompleteCompareWith = (
