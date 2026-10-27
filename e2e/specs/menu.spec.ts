@@ -33,21 +33,32 @@ test('opens from its trigger and restores focus with Escape', async ({ page }: {
   await expect(trigger).toBeFocused();
 });
 
-test('keeps a right-click menu open until selection or an outside click', async ({ page }: { page: Page }): Promise<void> => {
+test('keeps a held right-click menu open until selection or an outside click', async ({
+  page,
+}: {
+  page: Page;
+}): Promise<void> => {
   const surface: Locator = page.locator('pg-menu-context-example sui-card[tabindex="0"]');
   const menu: Locator = page.getByRole('menu', { name: 'Draft actions' });
-  await surface.click({ button: 'right' });
+  await surface.scrollIntoViewIfNeeded();
+  const surfaceBounds: Bounds = await boundsOf(surface);
+  await page.mouse.move(surfaceBounds.x + surfaceBounds.width / 2, surfaceBounds.y + surfaceBounds.height / 2);
+  await page.mouse.down({ button: 'right' });
+  await expect(menu).toBeVisible();
+  await page.mouse.up({ button: 'right' });
   await expect(menu).toBeVisible();
   await menu.getByRole('menuitem', { name: 'Rename draft', exact: true }).click();
   await expect(menu).toBeHidden();
   await expect(surface).toBeFocused();
   await expect(page.locator('pg-menu-context-example')).toContainText('Last action: rename');
 
-  await surface.click({ button: 'right' });
-  await expect(menu).toBeVisible();
-  const surfaceBounds: Bounds = await boundsOf(surface);
-  await page.mouse.click(surfaceBounds.x + 8, surfaceBounds.y + 8);
-  await expect(menu).toBeHidden();
+  const outsideBounds: Bounds = await boundsOf(page.getByRole('link', { name: 'Examples', exact: true }));
+  for (const button of ['left', 'right'] as const) {
+    await surface.click({ button: 'right' });
+    await expect(menu).toBeVisible();
+    await page.mouse.click(outsideBounds.x + outsideBounds.width / 2, outsideBounds.y + outsideBounds.height / 2, { button });
+    await expect(menu).toBeHidden();
+  }
 });
 
 test('opens a context menu from the keyboard at the document surface', async ({ page }: { page: Page }): Promise<void> => {
