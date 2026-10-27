@@ -1,8 +1,6 @@
 import { Directive, input, type InputSignal } from '@angular/core';
 import { type InputGroupOrientation } from './input-group.interfaces';
 
-export type { InputGroupOrientation } from './input-group.interfaces';
-
 @Directive({
   selector: '[suiInputGroup]',
   host: {

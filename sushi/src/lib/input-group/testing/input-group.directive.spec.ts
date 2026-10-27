@@ -3,7 +3,8 @@ import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { InputGroupAddon } from '../input-group-addon.directive';
-import { InputGroup, type InputGroupOrientation } from '../input-group.directive';
+import { InputGroup } from '../input-group.directive';
+import { type InputGroupOrientation } from '../input-group.interfaces';
 
 @Component({
   imports: [InputGroup, InputGroupAddon],
