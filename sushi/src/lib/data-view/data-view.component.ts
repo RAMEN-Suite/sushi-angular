@@ -48,7 +48,7 @@ import {
   templateUrl: './data-view.component.html',
   styleUrl: './data-view.component.css',
   host: {
-    class: 'sui-data-view block min-w-0 max-w-full',
+    class: 'sui-size-text sui-data-view block min-w-0 max-w-full',
     '[attr.aria-busy]': 'loading() || loadingMore()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

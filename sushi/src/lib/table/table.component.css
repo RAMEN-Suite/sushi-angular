@@ -98,3 +98,7 @@ tbody tr.row-hover:hover {
 .sui-table--pin-first-column.table-zebra tbody tr.row-hover:hover :is(th, td):first-child {
   background-color: var(--sui-table-zebra-hover-background);
 }
+
+.table {
+  font-size: inherit;
+}

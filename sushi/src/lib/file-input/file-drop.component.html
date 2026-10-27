@@ -56,7 +56,7 @@
 
 <div class="sui-file-drop__selection mt-3">
   @if (rejectionMessage(); as message) {
-    <p class="mb-2 text-sm text-error" aria-live="polite">{{ message }}</p>
+    <p class="mb-2 text-error" aria-live="polite">{{ message }}</p>
   }
 
   @if (itemContexts().length) {
@@ -83,7 +83,7 @@
               <ng-container [ngTemplateOutlet]="item" [ngTemplateOutletContext]="context" />
             } @else {
               <p class="truncate font-medium" [title]="context.file.name">{{ context.file.name }}</p>
-              <p class="text-sm text-base-content/60">{{ context.size }}</p>
+              <p class="text-base-content/60">{{ context.size }}</p>
             }
           </div>
 

@@ -78,7 +78,12 @@ import {
     Spinner,
   ],
   templateUrl: './select.component.html',
-  host: { class: 'inline-block max-w-full', '[class.w-full]': 'fluid()', '[class.cursor-not-allowed]': 'disabled()' },
+  host: {
+    class: 'sui-size-text inline-block max-w-full',
+    '[attr.data-size]': 'size()',
+    '[class.w-full]': 'fluid()',
+    '[class.cursor-not-allowed]': 'disabled()',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Select extends FormControlState implements FormValueControl<SelectModelValue> {

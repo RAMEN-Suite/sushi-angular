@@ -1,4 +1,5 @@
 :host {
+  font-size: var(--sui-font-size-md);
   /** Border color of the idle drop zone. */
   --sui-file-drop-border: color-mix(in oklab, var(--color-base-content) 30%, transparent);
   /** Border color while a supported file is dragged over the drop zone. */

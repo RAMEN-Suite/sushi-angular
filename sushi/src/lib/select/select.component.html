@@ -110,7 +110,8 @@
         tabindex="-1"
         [attr.aria-label]="ariaLabel() ?? placeholder()"
         [attr.aria-labelledby]="ariaLabelledby()"
-        class="w-full overflow-hidden rounded-box border border-base-300 bg-base-100"
+        class="sui-size-text w-full overflow-hidden rounded-box border border-base-300 bg-base-100"
+        [attr.data-size]="size()"
         (keydown)="handlePopupKeydown($event)"
       >
         @if (headerTemplate(); as template) {
@@ -144,13 +145,13 @@
                 [ngTemplateOutletContext]="{ $implicit: loadingMessage(), message: loadingMessage() }"
               />
             } @else {
-              <div class="flex items-center justify-center gap-2 p-6 text-sm opacity-60">
+              <div class="flex items-center justify-center gap-2 p-4 opacity-60">
                 <span suiSpinner size="sm"></span>{{ loadingMessage() }}
               </div>
             }
           </div>
         } @else if (visibleOptions().length === 0) {
-          <div class="p-4 text-center text-sm opacity-60">
+          <div class="p-4 text-center opacity-60">
             @if (emptyTemplate(); as template) {
               <ng-container [ngTemplateOutlet]="template" />
             } @else {
@@ -223,7 +224,7 @@
         }
       </div>
     } @else {
-      <div class="w-full overflow-hidden rounded-box border border-base-300 bg-base-100">
+      <div class="sui-size-text w-full overflow-hidden rounded-box border border-base-300 bg-base-100" [attr.data-size]="size()">
         @if (loading()) {
           <div ngComboboxWidget class="w-full" role="status">
             @if (loadingTemplate(); as template) {
@@ -232,13 +233,13 @@
                 [ngTemplateOutletContext]="{ $implicit: loadingMessage(), message: loadingMessage() }"
               />
             } @else {
-              <div class="flex items-center justify-center gap-2 p-6 text-sm opacity-60">
+              <div class="flex items-center justify-center gap-2 p-4 opacity-60">
                 <span suiSpinner size="sm"></span>{{ loadingMessage() }}
               </div>
             }
           </div>
         } @else if (options().length === 0) {
-          <div ngComboboxWidget class="p-4 text-center text-sm opacity-60">
+          <div ngComboboxWidget class="p-4 text-center opacity-60">
             @if (emptyTemplate(); as template) {
               <ng-container [ngTemplateOutlet]="template" />
             } @else {

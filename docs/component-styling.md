@@ -44,6 +44,10 @@ The global theme reference is generated from `sushi.themes.css`. Document every 
 
 `npm run generate:api` reads both themes, produces the Light and Dark columns, and fails when documentation or the matching dark value is missing.
 
+## Text sizes
+
+Use `--sui-font-size-xs` through `--sui-font-size-xl` for size-dependent component text. Their defaults follow the input/action scale, with `md` at `0.875rem`. Selection options and status messages follow their component size; captions and headings may retain a separate visual role. Chip heights follow `--size-field` and can be overridden with `--sui-chip-height`.
+
 ## DaisyUI and Tailwind
 
 Library styles are authored in `sushi/src/styles/sushi.source.css`. It imports Tailwind utilities, the Sushi themes and core styles, and the DaisyUI primitives used by the library.

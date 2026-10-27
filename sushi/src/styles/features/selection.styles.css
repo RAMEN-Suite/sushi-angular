@@ -6,7 +6,7 @@
 }
 
 .sui-selection-option {
-  @apply select-none text-base font-medium transition-colors duration-150;
+  @apply select-none font-medium transition-colors duration-150;
 }
 
 .sui-selection-list[aria-disabled="true"] {
