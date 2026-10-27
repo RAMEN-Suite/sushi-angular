@@ -1,7 +1,7 @@
 <div
   class="max-w-full overflow-hidden rounded-box border border-base-300 bg-base-100 sui-listbox__surface"
   [class.border-error]="isInvalid()"
-  [class.sui-disabled-opacity]="disabled()"
+  [class.sui-internal-disabled-opacity]="disabled()"
   [class.pointer-events-none]="disabled()"
   (focusout)="handleFocusout($event)"
 >
@@ -88,7 +88,7 @@
         [class.cursor-pointer]="!option.disabled && !readOnly()"
         [class.cursor-not-allowed]="option.disabled"
         [class.cursor-default]="readOnly()"
-        [class.sui-disabled-opacity]="option.disabled"
+        [class.sui-internal-disabled-opacity]="option.disabled"
         [class.pointer-events-none]="readOnly()"
         [value]="option.value"
         [label]="option.label"

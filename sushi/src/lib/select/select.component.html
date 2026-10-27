@@ -110,17 +110,17 @@
         tabindex="-1"
         [attr.aria-label]="ariaLabel() ?? placeholder()"
         [attr.aria-labelledby]="ariaLabelledby()"
-        class="sui-overlay-surface w-full overflow-hidden rounded-box border"
+        class="sui-internal-overlay-surface w-full overflow-hidden rounded-box border"
         (keydown)="handlePopupKeydown($event)"
       >
         @if (headerTemplate(); as template) {
-          <div class="border-base-300 border-b p-3">
+          <div class="border-(--sui-color-border) border-b p-3">
             <ng-container [ngTemplateOutlet]="template" />
           </div>
         }
 
         @if (filter()) {
-          <div class="border-base-300 border-b p-3">
+          <div class="border-(--sui-color-border) border-b p-3">
             <input
               #filterInput
               class="input w-full"
@@ -190,7 +190,7 @@
                 [style.min-height.px]="optionHeight()"
                 [class.cursor-pointer]="!option.disabled"
                 [class.cursor-not-allowed]="option.disabled"
-                [class.sui-disabled-opacity]="option.disabled"
+                [class.sui-internal-disabled-opacity]="option.disabled"
                 [value]="option.value"
                 [label]="option.label"
                 [disabled]="option.disabled ?? false"
@@ -217,13 +217,13 @@
         }
 
         @if (footerTemplate(); as template) {
-          <div class="border-base-300 border-t p-3">
+          <div class="border-(--sui-color-border) border-t p-3">
             <ng-container [ngTemplateOutlet]="template" />
           </div>
         }
       </div>
     } @else {
-      <div class="sui-overlay-surface w-full overflow-hidden rounded-box border">
+      <div class="sui-internal-overlay-surface w-full overflow-hidden rounded-box border">
         @if (loading()) {
           <div ngComboboxWidget class="w-full" role="status">
             @if (loadingTemplate(); as template) {
@@ -280,7 +280,7 @@
                 [style.min-height.px]="optionHeight()"
                 [class.cursor-pointer]="!option.disabled"
                 [class.cursor-not-allowed]="option.disabled"
-                [class.sui-disabled-opacity]="option.disabled"
+                [class.sui-internal-disabled-opacity]="option.disabled"
                 [value]="option.value"
                 [label]="option.label"
                 [disabled]="option.disabled ?? false"

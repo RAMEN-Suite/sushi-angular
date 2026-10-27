@@ -98,9 +98,9 @@
   (detach)="handleExpanded(false)"
 >
   <ng-template ngComboboxPopup [combobox]="combobox">
-    <div class="sui-overlay-surface w-full overflow-hidden rounded-box border">
+    <div class="sui-internal-overlay-surface w-full overflow-hidden rounded-box border">
       @if (showSelectAll() || headerTemplate()) {
-        <div class="grid gap-3 border-b border-base-300 p-3" (pointerdown)="$event.preventDefault()">
+        <div class="grid gap-3 border-b border-(--sui-color-border) p-3" (pointerdown)="$event.preventDefault()">
           @if (showSelectAll()) {
             <label class="flex min-h-8 cursor-pointer items-center gap-3 font-medium">
               <input
@@ -176,7 +176,7 @@
               [style.min-height.px]="optionHeight()"
               [class.cursor-pointer]="!option.disabled"
               [class.cursor-not-allowed]="option.disabled"
-              [class.sui-disabled-opacity]="option.disabled"
+              [class.sui-internal-disabled-opacity]="option.disabled"
               [value]="option.value"
               [label]="option.label"
               [disabled]="option.disabled ?? false"
@@ -202,7 +202,7 @@
         </div>
       }
       @if (footerTemplate(); as template) {
-        <div class="border-t border-base-300 p-3" (pointerdown)="$event.preventDefault()">
+        <div class="border-t border-(--sui-color-border) p-3" (pointerdown)="$event.preventDefault()">
           <ng-container [ngTemplateOutlet]="template" />
         </div>
       }

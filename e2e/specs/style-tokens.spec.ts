@@ -11,13 +11,64 @@ async function configureTokens(page: Page, theme: string): Promise<void> {
   }, theme);
 }
 
-async function expectOverlayTokens(surface: Locator): Promise<void> {
-  await expect(surface).toHaveCSS('background-color', 'rgb(30, 40, 50)');
-  await expect(surface).toHaveCSS('border-top-color', 'rgb(80, 90, 100)');
-  await expect(surface).toHaveCSS('box-shadow', 'rgb(0, 0, 0) 0px 3px 9px 0px');
+interface SurfaceStyles {
+  readonly background: string;
+  readonly border: string;
+  readonly shadow: string;
+  readonly hover: string;
+}
+
+async function themeStyles(page: Page, theme: string): Promise<SurfaceStyles> {
+  return page.evaluate((name: string): SurfaceStyles => {
+    document.documentElement.setAttribute('data-theme', name);
+    const probe: HTMLDivElement = document.createElement('div');
+    probe.style.cssText =
+      'background: var(--sui-color-overlay); color: var(--sui-color-border); box-shadow: var(--sui-shadow-overlay)';
+    document.body.append(probe);
+    const style: CSSStyleDeclaration = getComputedStyle(probe);
+    const background: string = style.backgroundColor;
+    const border: string = style.color;
+    const shadow: string = style.boxShadow;
+    probe.style.backgroundColor = 'var(--sui-color-hover)';
+    const hover: string = getComputedStyle(probe).backgroundColor;
+    probe.remove();
+    return { background, border, shadow, hover };
+  }, theme);
+}
+
+async function expectOverlayTokens(surface: Locator, expected?: SurfaceStyles): Promise<void> {
+  await expect(surface).toHaveCSS('background-color', expected?.background ?? 'rgb(30, 40, 50)');
+  await expect(surface).toHaveCSS('border-top-color', expected?.border ?? 'rgb(80, 90, 100)');
+  await expect(surface).toHaveCSS('box-shadow', expected?.shadow ?? 'rgb(0, 0, 0) 0px 3px 9px 0px');
 }
 
 for (const theme of ['sushi', 'sushi-dark']) {
+  test(`popup and striped Table hover defaults follow ${theme} without token overrides @css`, async ({
+    page,
+  }: {
+    page: Page;
+  }): Promise<void> => {
+    await page.goto('/select');
+    const expected: SurfaceStyles = await themeStyles(page, theme);
+    await expect(page.locator('html')).toHaveCSS('color-scheme', theme === 'sushi-dark' ? 'dark' : 'light');
+    expect(expected.shadow).not.toBe('none');
+    await page.getByRole('combobox', { name: 'Favorite color', exact: true }).click();
+    await expectOverlayTokens(page.getByRole('listbox').locator('..'), expected);
+
+    await page.goto('/menu');
+    await themeStyles(page, theme);
+    await page.getByRole('button', { name: 'More message actions', exact: true }).click();
+    await expectOverlayTokens(page.locator('sui-menu-surface > .sui-internal-overlay-surface'), expected);
+
+    await page.goto('/table');
+    await themeStyles(page, theme);
+    const row: Locator = page.getByRole('table', { name: 'Compact team directory', exact: true }).locator('tbody tr').nth(1);
+    const resting: string = await row.evaluate((element: HTMLElement): string => getComputedStyle(element).backgroundColor);
+    await row.hover();
+    await expect(row).toHaveCSS('background-color', expected.hover);
+    expect(expected.hover).not.toBe(resting);
+  });
+
   test(`selection and menu popups honor shared surface and hover tokens in ${theme} @css`, async ({
     page,
   }: {
@@ -34,7 +85,7 @@ for (const theme of ['sushi', 'sushi-dark']) {
     await page.goto('/menu');
     await configureTokens(page, theme);
     await page.getByRole('button', { name: 'More message actions', exact: true }).click();
-    await expectOverlayTokens(page.locator('sui-menu-surface > .sui-overlay-surface'));
+    await expectOverlayTokens(page.locator('sui-menu-surface > .sui-internal-overlay-surface'));
   });
 }
 
@@ -47,4 +98,34 @@ test('disabled Chip and Listbox honor the shared opacity token @css', async ({ p
   await configureTokens(page, 'sushi');
   const listbox: Locator = page.getByRole('listbox', { name: 'Disabled listbox', exact: true });
   await expect(listbox.locator('..')).toHaveCSS('opacity', '0.25');
+});
+
+for (const example of [
+  { path: '/select', label: 'Workspace team' },
+  { path: '/multi-select', label: 'Workspace teams' },
+]) {
+  test(`${example.path} popup header and footer share the border token @css`, async ({ page }: { page: Page }): Promise<void> => {
+    await page.goto(example.path);
+    await configureTokens(page, 'sushi');
+    await page.getByRole('combobox', { name: example.label, exact: true }).click();
+    const surface: Locator = page.locator('.sui-internal-overlay-surface');
+    await expect(surface.locator(':scope > .border-b')).toHaveCSS('border-bottom-color', 'rgb(80, 90, 100)');
+    await expect(surface.locator(':scope > .border-t')).toHaveCSS('border-top-color', 'rgb(80, 90, 100)');
+  });
+}
+
+test('Table hover overrides reach ordinary, striped and pinned rows @css', async ({ page }: { page: Page }): Promise<void> => {
+  await page.goto('/table');
+  await configureTokens(page, 'sushi');
+  for (const name of ['Recent invoices', 'Compact team directory', 'Release queue']) {
+    const row: Locator = page.getByRole('table', { name, exact: true }).locator('tbody tr').nth(1);
+    await row.hover();
+    await expect(row).toHaveCSS('background-color', 'rgb(110, 120, 130)');
+    if (name === 'Release queue') {
+      await expect(row.locator('th, td').first()).toHaveCSS(
+        'background-image',
+        'linear-gradient(rgb(110, 120, 130), rgb(110, 120, 130))',
+      );
+    }
+  }
 });

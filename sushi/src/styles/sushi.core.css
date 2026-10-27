@@ -25,10 +25,10 @@
 @import "./features/tabs.styles.css";
 @import "./features/textarea.styles.css";
 
-.sui-disabled-opacity {
+.sui-internal-disabled-opacity {
   opacity: var(--sui-disabled-opacity);
 }
 
-.sui-disabled-opacity .sui-disabled-opacity {
+.sui-internal-disabled-opacity .sui-internal-disabled-opacity {
   opacity: 1;
 }
