@@ -99,6 +99,7 @@ tbody tr.row-hover:hover {
   background-color: var(--sui-table-zebra-hover-background);
 }
 
-.table {
+.table,
+.table tr {
   font-size: inherit;
 }

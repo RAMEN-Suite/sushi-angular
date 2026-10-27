@@ -84,15 +84,15 @@
 }
 
 .sui-accordion__group--sm .sui-accordion__trigger {
-  font-size: var(--sui-font-size-sm);
-}
-
-.sui-accordion__group--md .sui-accordion__trigger {
   font-size: var(--sui-font-size-md);
 }
 
-.sui-accordion__group--lg .sui-accordion__trigger {
+.sui-accordion__group--md .sui-accordion__trigger {
   font-size: var(--sui-font-size-lg);
+}
+
+.sui-accordion__group--lg .sui-accordion__trigger {
+  font-size: var(--sui-font-size-xl);
 }
 
 .sui-accordion__trigger[aria-disabled="true"] {
@@ -128,11 +128,11 @@
 }
 
 .sui-accordion__group--sm .sui-accordion__panel {
-  font-size: var(--sui-font-size-sm);
+  font-size: var(--sui-font-size-body);
 }
 
 .sui-accordion__group--md .sui-accordion__panel {
-  font-size: var(--sui-font-size-md);
+  font-size: var(--sui-font-size-body);
 }
 
 .sui-accordion__group--lg .sui-accordion__panel {

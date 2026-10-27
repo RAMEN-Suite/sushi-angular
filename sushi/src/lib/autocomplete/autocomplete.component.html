@@ -74,7 +74,7 @@
   (detach)="handleExpanded(false)"
 >
   <ng-template ngComboboxPopup [combobox]="combobox">
-    <div class="sui-size-text w-full overflow-hidden rounded-box border border-base-300 bg-base-100" [attr.data-size]="size()">
+    <div class="sui-internal-size-text w-full overflow-hidden rounded-box border border-base-300 bg-base-100" [attr.data-size]="size()">
       @if (loading()) {
         <div ngComboboxWidget class="flex items-center justify-center gap-2 p-4 opacity-60" role="status" aria-live="polite">
           @if (loadingTemplate(); as template) {

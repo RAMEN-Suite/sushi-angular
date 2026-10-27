@@ -29,7 +29,7 @@
 
 :host(.sui-chip--xs) {
   --_sui-chip-height-scale: 5;
-  font-size: var(--sui-font-size-xs);
+  font-size: var(--sui-font-size-sm);
   @apply gap-1 px-1.5;
 }
 
@@ -41,13 +41,13 @@
 
 :host(.sui-chip--lg) {
   --_sui-chip-height-scale: 10;
-  font-size: var(--sui-font-size-lg);
+  font-size: var(--sui-font-size-body);
   @apply gap-2.5 px-4;
 }
 
 :host(.sui-chip--xl) {
   --_sui-chip-height-scale: 12;
-  font-size: var(--sui-font-size-xl);
+  font-size: var(--sui-font-size-lg);
   @apply gap-3 px-5;
 }
 

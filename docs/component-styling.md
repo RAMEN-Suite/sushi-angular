@@ -46,7 +46,11 @@ The global theme reference is generated from `sushi.themes.css`. Document every 
 
 ## Text sizes
 
-Use `--sui-font-size-xs` through `--sui-font-size-xl` for size-dependent component text. Their defaults follow the input/action scale, with `md` at `0.875rem`. Selection options and status messages follow their component size; captions and headings may retain a separate visual role. Chip heights follow `--size-field` and can be overridden with `--sui-chip-height`.
+Use `--sui-font-size-xs` through `--sui-font-size-xl` for size-dependent field text. Their defaults follow the input/action scale, with `md` at `0.875rem`. `--sui-font-size-body` supplies readable `1rem` body text. Selection popups follow their control size; standalone Listbox options retain the body text scale. Accordion maps its density to heading/body roles: small uses `md`/`body`, medium `lg`/`body`, and large `xl`/`lg`.
+
+Chip labels retain their compact scale: `sm`, `sm`, `md`, `body`, and `lg` for sizes `xs` through `xl`. Their heights follow `--size-field` and can be overridden with `--sui-chip-height`.
+
+`sui-internal-size-text` is a library implementation detail, not a consumer utility. Customize typography through the documented tokens.
 
 ## DaisyUI and Tailwind
 

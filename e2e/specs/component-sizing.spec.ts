@@ -33,12 +33,49 @@ test('shared typography overrides reach a control, its popup and empty collectio
   await expect(page.getByText('No matching environments are available.', { exact: true })).toHaveCSS('font-size', '19px');
 });
 
-test('Accordion headers and panels use the same size token @css', async ({ page }: { page: Page }): Promise<void> => {
+test('Accordion keeps readable heading and body roles with public token overrides @css', async ({
+  page,
+}: {
+  page: Page;
+}): Promise<void> => {
   await page.goto('/accordion');
-  await page.evaluate((): void => document.documentElement.style.setProperty('--sui-font-size-sm', '19px'));
   const accordion: Locator = page.locator('pg-accordion-basic-example sui-accordion');
-  await expect(accordion.getByRole('button').first()).toHaveCSS('font-size', '19px');
-  await expect(accordion.locator('.sui-accordion__panel').first()).toHaveCSS('font-size', '19px');
+  const trigger: Locator = accordion.getByRole('button').first();
+  const panel: Locator = accordion.locator('.sui-accordion__panel').first();
+  await expect(trigger).toHaveCSS('font-size', '14px');
+  await expect(panel).toHaveCSS('font-size', '16px');
+
+  await page.evaluate((): void => {
+    document.documentElement.style.setProperty('--sui-font-size-md', '19px');
+    document.documentElement.style.setProperty('--sui-font-size-body', '21px');
+  });
+  await expect(trigger).toHaveCSS('font-size', '19px');
+  await expect(panel).toHaveCSS('font-size', '21px');
+});
+
+test('standalone Listbox options retain the body text role @css', async ({ page }: { page: Page }): Promise<void> => {
+  await page.goto('/listbox');
+  const option: Locator = page.getByRole('listbox', { name: 'Active workspace', exact: true }).getByRole('option').first();
+  await expect(option).toHaveCSS('font-size', '16px');
+  await page.evaluate((): void => document.documentElement.style.setProperty('--sui-font-size-body', '21px'));
+  await expect(option).toHaveCSS('font-size', '21px');
+});
+
+test('Table typography overrides reach rows and cells at each density @css', async ({ page }: { page: Page }): Promise<void> => {
+  await page.goto('/table');
+  await page.evaluate((): void => {
+    document.documentElement.style.setProperty('--sui-font-size-md', '19px');
+    document.documentElement.style.setProperty('--sui-font-size-sm', '17px');
+  });
+  const cases: readonly (readonly [string, string])[] = [
+    ['Recent invoices', '19px'],
+    ['Compact team directory', '17px'],
+  ];
+  for (const [name, fontSize] of cases) {
+    const table: Locator = page.getByRole('table', { name, exact: true });
+    await expect(table.locator('tbody tr').first()).toHaveCSS('font-size', fontSize);
+    await expect(table.getByRole('cell').first()).toHaveCSS('font-size', fontSize);
+  }
 });
 
 test('Chip sizes follow field density and keep an explicit height override @css', async ({
@@ -49,6 +86,9 @@ test('Chip sizes follow field density and keep an explicit height override @css'
   await page.goto('/chip');
   const chips: Locator = page.locator('pg-chip-appearance-example sui-chip');
   await expect(chips).toHaveCount(5);
+  for (const [index, fontSize] of ['12px', '12px', '14px', '16px', '18px'].entries()) {
+    await expect(chips.nth(index)).toHaveCSS('font-size', fontSize);
+  }
   const heights: readonly number[] = await chips.evaluateAll((elements: Element[]): number[] =>
     elements.map((element: Element): number => Number.parseFloat(getComputedStyle(element).height)),
   );

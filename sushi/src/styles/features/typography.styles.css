@@ -1,24 +1,24 @@
-.sui-size-text {
+.sui-internal-size-text {
   font-size: var(--sui-font-size-md);
 }
 
-.sui-size-text[data-size="xs"] {
+.sui-internal-size-text[data-size="xs"] {
   font-size: var(--sui-font-size-xs);
 }
 
-.sui-size-text[data-size="sm"] {
+.sui-internal-size-text[data-size="sm"] {
   font-size: var(--sui-font-size-sm);
 }
 
-.sui-size-text[data-size="lg"] {
+.sui-internal-size-text[data-size="lg"] {
   font-size: var(--sui-font-size-lg);
 }
 
-.sui-size-text[data-size="xl"] {
+.sui-internal-size-text[data-size="xl"] {
   font-size: var(--sui-font-size-xl);
 }
 
-.sui-size-text > .sui-form-control,
+.sui-internal-size-text > .sui-form-control,
 .sui-selection-list,
 .sui-selection-option {
   font-size: inherit;

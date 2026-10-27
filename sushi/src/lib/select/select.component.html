@@ -110,7 +110,7 @@
         tabindex="-1"
         [attr.aria-label]="ariaLabel() ?? placeholder()"
         [attr.aria-labelledby]="ariaLabelledby()"
-        class="sui-size-text w-full overflow-hidden rounded-box border border-base-300 bg-base-100"
+        class="sui-internal-size-text w-full overflow-hidden rounded-box border border-base-300 bg-base-100"
         [attr.data-size]="size()"
         (keydown)="handlePopupKeydown($event)"
       >
@@ -224,7 +224,7 @@
         }
       </div>
     } @else {
-      <div class="sui-size-text w-full overflow-hidden rounded-box border border-base-300 bg-base-100" [attr.data-size]="size()">
+      <div class="sui-internal-size-text w-full overflow-hidden rounded-box border border-base-300 bg-base-100" [attr.data-size]="size()">
         @if (loading()) {
           <div ngComboboxWidget class="w-full" role="status">
             @if (loadingTemplate(); as template) {

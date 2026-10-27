@@ -118,7 +118,7 @@
         }
       </div>
     } @empty {
-      <div class="p-6 text-center text-base-content/60" role="presentation">
+      <div class="p-6 text-center text-(length:--sui-font-size-md) text-base-content/60" role="presentation">
         @if (query() && emptyFilterTemplate(); as template) {
           <ng-container [ngTemplateOutlet]="template" />
         } @else if (emptyTemplate(); as template) {
@@ -130,7 +130,11 @@
     }
 
     @if (loading()) {
-      <div class="flex items-center justify-center gap-2 p-4 text-base-content/60" role="status" aria-live="polite">
+      <div
+        class="flex items-center justify-center gap-2 p-4 text-(length:--sui-font-size-md) text-base-content/60"
+        role="status"
+        aria-live="polite"
+      >
         <span suiSpinner size="sm"></span>Loading more options
       </div>
     }

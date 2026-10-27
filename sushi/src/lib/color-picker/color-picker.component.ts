@@ -45,7 +45,7 @@ let nextColorPickerId: number = 0;
   templateUrl: './color-picker.component.html',
   styleUrl: './color-picker.component.css',
   host: {
-    class: 'sui-size-text sui-color-picker inline-grid max-w-full gap-2',
+    class: 'sui-internal-size-text sui-color-picker inline-grid max-w-full gap-2',
     '[class.w-full]': 'fluid()',
     '[attr.id]': 'null',
     '[attr.aria-disabled]': 'disabled() || null',

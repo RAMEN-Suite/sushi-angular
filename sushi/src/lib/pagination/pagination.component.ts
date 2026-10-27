@@ -62,7 +62,7 @@ const DEFAULT_LABELS: PaginationLabels = {
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.css',
   host: {
-    class: 'sui-size-text sui-pagination flex max-w-full flex-wrap items-center justify-between gap-3',
+    class: 'sui-internal-size-text sui-pagination flex max-w-full flex-wrap items-center justify-between gap-3',
     '[attr.data-size]': 'size()',
     role: 'navigation',
     '[class.sui-pagination--plain]': 'variant() === "plain"',

@@ -98,7 +98,7 @@
   (detach)="handleExpanded(false)"
 >
   <ng-template ngComboboxPopup [combobox]="combobox">
-    <div class="sui-size-text w-full overflow-hidden rounded-box border border-base-300 bg-base-100" [attr.data-size]="size()">
+    <div class="sui-internal-size-text w-full overflow-hidden rounded-box border border-base-300 bg-base-100" [attr.data-size]="size()">
       @if (showSelectAll() || headerTemplate()) {
         <div class="grid gap-3 border-b border-base-300 p-3" (pointerdown)="$event.preventDefault()">
           @if (showSelectAll()) {

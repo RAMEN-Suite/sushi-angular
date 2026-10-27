@@ -69,7 +69,7 @@ function isMultipleValue(value: ListboxModelValue): value is readonly ListboxVal
   templateUrl: './listbox.component.html',
   styleUrl: './listbox.component.css',
   host: {
-    class: 'sui-size-text sui-listbox block max-w-full',
+    class: 'sui-listbox block max-w-full',
     '[class.cursor-not-allowed]': 'disabled()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

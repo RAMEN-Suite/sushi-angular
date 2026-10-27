@@ -79,7 +79,7 @@ import {
   ],
   templateUrl: './select.component.html',
   host: {
-    class: 'sui-size-text inline-block max-w-full',
+    class: 'sui-internal-size-text inline-block max-w-full',
     '[attr.data-size]': 'size()',
     '[class.w-full]': 'fluid()',
     '[class.cursor-not-allowed]': 'disabled()',
