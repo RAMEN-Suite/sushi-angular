@@ -9,10 +9,10 @@
     [class.input-xl]="size() === 'xl'"
     [class.input-error]="invalid()"
     [class.cursor-not-allowed]="disabled()"
-    [class.opacity-50]="disabled()"
+    [class.sui-disabled-opacity]="disabled()"
   >
     @if (prefix()) {
-      <span class="shrink-0 text-base-content/60">{{ prefix() }}</span>
+      <span class="shrink-0 text-(--sui-color-muted)">{{ prefix() }}</span>
     }
     <input
       #inputElement
@@ -39,7 +39,7 @@
       (keydown.arrowdown)="adjust(-1); $event.preventDefault()"
     />
     @if (suffix()) {
-      <span class="-ml-1 shrink-0 text-base-content/60">{{ suffix() }}</span>
+      <span class="-ml-1 shrink-0 text-(--sui-color-muted)">{{ suffix() }}</span>
     }
   </div>
 

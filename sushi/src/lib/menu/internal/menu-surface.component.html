@@ -1,9 +1,10 @@
 <div
   class="max-w-full rounded-box border border-base-300 bg-base-100 p-1.5"
+  [class.sui-overlay-surface]="popup()"
   [class.w-60]="!fluid()"
   [class.w-full]="fluid()"
   [class.pointer-events-none]="disabled()"
-  [class.opacity-40]="disabled()"
+  [class.sui-disabled-opacity]="disabled()"
 >
   @if (startTemplate(); as template) {
     <ng-container [ngTemplateOutlet]="template" />

@@ -24,7 +24,7 @@
         <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
       </caption>
     } @else if (caption(); as text) {
-      <caption class="px-4 py-3 text-start text-sm text-base-content/60">
+      <caption class="px-4 py-3 text-start text-sm text-(--sui-color-muted)">
         {{
           text
         }}
@@ -66,7 +66,7 @@
                     <svg lucideArrowDown class="size-4" aria-hidden="true"></svg>
                   }
                   @default {
-                    <svg lucideArrowUpDown class="size-4 text-base-content/40" aria-hidden="true"></svg>
+                    <svg lucideArrowUpDown class="size-4 text-(--sui-color-subtle)" aria-hidden="true"></svg>
                   }
                 }
               </button>
@@ -87,7 +87,7 @@
             @if (loadingTemplate(); as template) {
               <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
             } @else {
-              <span class="flex items-center justify-center gap-2 py-8 text-sm text-base-content/60" role="status" aria-live="polite">
+              <span class="flex items-center justify-center gap-2 py-8 text-sm text-(--sui-color-muted)" role="status" aria-live="polite">
                 <span suiSpinner size="sm"></span>
                 {{ loadingMessage() }}
               </span>
@@ -133,7 +133,7 @@
               @if (emptyTemplate(); as template) {
                 <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
               } @else {
-                <span class="block py-8 text-center text-sm text-base-content/60">{{ emptyMessage() }}</span>
+                <span class="block py-8 text-center text-sm text-(--sui-color-muted)">{{ emptyMessage() }}</span>
               }
             </td>
           </tr>

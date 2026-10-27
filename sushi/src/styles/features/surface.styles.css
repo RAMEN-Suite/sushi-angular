@@ -1,0 +1,5 @@
+.sui-overlay-surface {
+  border-color: var(--sui-color-border);
+  background-color: var(--sui-color-overlay);
+  box-shadow: var(--sui-shadow-overlay);
+}

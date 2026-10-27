@@ -21,5 +21,14 @@
 @import "./features/tooltip.styles.css";
 @import "./features/spinner.styles.css";
 @import "./features/status.styles.css";
+@import "./features/surface.styles.css";
 @import "./features/tabs.styles.css";
 @import "./features/textarea.styles.css";
+
+.sui-disabled-opacity {
+  opacity: var(--sui-disabled-opacity);
+}
+
+.sui-disabled-opacity .sui-disabled-opacity {
+  opacity: 1;
+}
