@@ -181,7 +181,11 @@ export class Menu<I extends MenuItem = MenuItem> {
 
   protected handleOutsideClick(event: MouseEvent): void {
     const origin: FlexibleConnectedPositionStrategyOrigin | undefined = this.origin();
-    if (origin instanceof HTMLElement && event.target instanceof Node && origin.contains(event.target)) return;
+    const target: EventTarget | null = event.target;
+    if (target instanceof Node) {
+      if (origin instanceof HTMLElement && origin.contains(target)) return;
+      if (event.type === 'auxclick' && event.button === 2 && this.restoreTarget?.contains(target)) return;
+    }
     this.close();
   }
 

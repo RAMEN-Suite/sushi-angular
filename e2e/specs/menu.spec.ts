@@ -13,54 +13,69 @@ async function boundsOf(locator: Locator): Promise<Bounds> {
   return bounds;
 }
 
-test.describe('Menu browser behavior', (): void => {
-  test.beforeEach(async ({ page }: { page: Page }): Promise<void> => {
-    await page.goto('/menu');
+test.beforeEach(async ({ page }: { page: Page }): Promise<void> => {
+  await page.goto('/menu');
+});
+
+test('opens from its trigger and restores focus with Escape', async ({ page }: { page: Page }): Promise<void> => {
+  const trigger: Locator = page.getByRole('button', { name: 'More message actions' });
+  await trigger.click();
+
+  const menu: Locator = page.getByRole('menu', { name: 'Message actions' });
+  const firstAction: Locator = menu.getByRole('menuitem').first();
+
+  await expect(menu).toBeVisible();
+  await expect(firstAction).toBeFocused();
+
+  await firstAction.press('Escape');
+
+  await expect(menu).toBeHidden();
+  await expect(trigger).toBeFocused();
+});
+
+test('keeps a right-click menu open until selection or an outside click', async ({ page }: { page: Page }): Promise<void> => {
+  const surface: Locator = page.locator('pg-menu-context-example sui-card[tabindex="0"]');
+  const menu: Locator = page.getByRole('menu', { name: 'Draft actions' });
+  await surface.click({ button: 'right' });
+  await expect(menu).toBeVisible();
+  await menu.getByRole('menuitem', { name: 'Rename draft', exact: true }).click();
+  await expect(menu).toBeHidden();
+  await expect(surface).toBeFocused();
+  await expect(page.locator('pg-menu-context-example')).toContainText('Last action: rename');
+
+  await surface.click({ button: 'right' });
+  await expect(menu).toBeVisible();
+  const surfaceBounds: Bounds = await boundsOf(surface);
+  await page.mouse.click(surfaceBounds.x + 8, surfaceBounds.y + 8);
+  await expect(menu).toBeHidden();
+});
+
+test('opens a context menu from the keyboard at the document surface', async ({ page }: { page: Page }): Promise<void> => {
+  const surface: Locator = page.locator('pg-menu-context-example sui-card[tabindex="0"]');
+  await surface.press('Shift+F10');
+
+  const menu: Locator = page.getByRole('menu', { name: 'Draft actions' });
+
+  await expect(menu).toBeVisible();
+  await expect(menu.getByRole('menuitem', { name: 'Rename draft' })).toBeFocused();
+
+  const before: Bounds = await boundsOf(menu);
+  const scrollContainer: Locator = page.locator('[suiDrawerContent]').first();
+  const scrollBefore: number = await scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop);
+  await scrollContainer.evaluate((element: HTMLElement): void => {
+    element.scrollTop -= 240;
+    element.dispatchEvent(new Event('scroll'));
   });
 
-  test('opens from its trigger and restores focus with Escape', async ({ page }: { page: Page }): Promise<void> => {
-    const trigger: Locator = page.getByRole('button', { name: 'More message actions' });
-    await trigger.click();
+  await expect(async (): Promise<void> => {
+    const scrollAfter: number = await scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop);
+    const after: Bounds = await boundsOf(menu);
+    const scrollDistance: number = scrollBefore - scrollAfter;
 
-    const menu: Locator = page.getByRole('menu', { name: 'Message actions' });
-    const firstAction: Locator = menu.getByRole('menuitem').first();
+    expect(scrollAfter).toBeLessThan(scrollBefore);
+    expect(Math.abs(after.x - before.x)).toBeLessThan(scrollDistance * 0.05);
+    expect(Math.abs(after.y - before.y)).toBeLessThan(scrollDistance * 0.05);
+  }).toPass({ timeout: 5_000 });
 
-    await expect(menu).toBeVisible();
-    await expect(firstAction).toBeFocused();
-
-    await firstAction.press('Escape');
-
-    await expect(menu).toBeHidden();
-    await expect(trigger).toBeFocused();
-  });
-
-  test('opens a context menu from the keyboard at the document surface', async ({ page }: { page: Page }): Promise<void> => {
-    const surface: Locator = page.locator('pg-menu-context-example sui-card[tabindex="0"]');
-    await surface.press('Shift+F10');
-
-    const menu: Locator = page.getByRole('menu', { name: 'Draft actions' });
-
-    await expect(menu).toBeVisible();
-    await expect(menu.getByRole('menuitem', { name: 'Rename draft' })).toBeFocused();
-
-    const before: Bounds = await boundsOf(menu);
-    const scrollContainer: Locator = page.locator('[suiDrawerContent]').first();
-    const scrollBefore: number = await scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop);
-    await scrollContainer.evaluate((element: HTMLElement): void => {
-      element.scrollTop -= 240;
-      element.dispatchEvent(new Event('scroll'));
-    });
-
-    await expect(async (): Promise<void> => {
-      const scrollAfter: number = await scrollContainer.evaluate((element: HTMLElement): number => element.scrollTop);
-      const after: Bounds = await boundsOf(menu);
-      const scrollDistance: number = scrollBefore - scrollAfter;
-
-      expect(scrollAfter).toBeLessThan(scrollBefore);
-      expect(Math.abs(after.x - before.x)).toBeLessThan(scrollDistance * 0.05);
-      expect(Math.abs(after.y - before.y)).toBeLessThan(scrollDistance * 0.05);
-    }).toPass({ timeout: 5_000 });
-
-    await expect(menu).toBeVisible();
-  });
+  await expect(menu).toBeVisible();
 });
