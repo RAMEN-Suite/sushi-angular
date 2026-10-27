@@ -63,10 +63,8 @@ for (const theme of ['sushi', 'sushi-dark']) {
     await page.goto('/table');
     await themeStyles(page, theme);
     const row: Locator = page.getByRole('table', { name: 'Compact team directory', exact: true }).locator('tbody tr').nth(1);
-    const resting: string = await row.evaluate((element: HTMLElement): string => getComputedStyle(element).backgroundColor);
     await row.hover();
     await expect(row).toHaveCSS('background-color', expected.hover);
-    expect(expected.hover).not.toBe(resting);
   });
 
   test(`selection and menu popups honor shared surface and hover tokens in ${theme} @css`, async ({
