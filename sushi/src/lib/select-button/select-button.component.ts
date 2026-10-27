@@ -68,13 +68,9 @@ export class SelectButton implements FormValueControl<SelectButtonValue | null> 
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
 
   /** Allows the active option to clear itself when selected again. */
-  public readonly allowEmpty: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly allowEmpty: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Prevents selection while keeping the current option focusable. */
-  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   /** Emits after a pointer or keyboard selection completes. */
   public readonly touch: OutputEmitterRef<void> = output();

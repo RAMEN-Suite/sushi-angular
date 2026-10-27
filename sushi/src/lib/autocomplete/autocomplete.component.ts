@@ -121,9 +121,9 @@ export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>
   public readonly required: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Restricts the model to values from `options`. */
   public readonly forceSelection: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Opens all suggestions on focus. Defaults to false; typed text still filters the list. */
+  /** Opens all suggestions on focus. Typed text still filters the list. */
   public readonly openOnFocus: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Opens all suggestions on click, including after Escape while the input remains focused. Defaults to false. */
+  /** Opens all suggestions on click, including after Escape while the input remains focused. */
   public readonly openOnClick: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Expands the control to the available width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });

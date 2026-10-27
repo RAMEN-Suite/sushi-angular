@@ -93,7 +93,7 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   /** Text shown while no option is selected. */
   public readonly placeholder: InputSignal<string> = input<string>('Select an option');
 
-  /** Shows a search field in the popup. Defaults to false; filtering never changes the selected value. */
+  /** Shows a search field in the popup. Filtering never changes the selected value. */
   public readonly filter: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Placeholder for the optional search field. */
   public readonly filterPlaceholder: InputSignal<string> = input<string>('Filter options');

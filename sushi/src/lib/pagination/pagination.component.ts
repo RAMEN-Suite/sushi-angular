@@ -84,9 +84,7 @@ export class Pagination {
   /** Available item counts shown in the optional page-size selector. */
   public readonly pageSizeOptions: InputSignal<readonly number[]> = input<readonly number[]>([]);
   /** Shows a checkmark beside the selected page size. */
-  public readonly pageSizeCheckmark: InputSignalWithTransform<boolean, unknown> = input(false, {
-    transform: booleanAttribute,
-  });
+  public readonly pageSizeCheckmark: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   /** Controls the dimensions of every pagination action. */
   public readonly size: InputSignal<PaginationSize> = input<PaginationSize>('md');
@@ -102,25 +100,15 @@ export class Pagination {
   public readonly labels: InputSignal<PaginationLabels> = input<PaginationLabels>(DEFAULT_LABELS);
 
   /** Shows direct links to a moving window of pages. */
-  public readonly showPageLinks: InputSignalWithTransform<boolean, unknown> = input(true, {
-    transform: booleanAttribute,
-  });
+  public readonly showPageLinks: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Shows actions that move directly to the first and last pages. */
-  public readonly showFirstLast: InputSignalWithTransform<boolean, unknown> = input(true, {
-    transform: booleanAttribute,
-  });
+  public readonly showFirstLast: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Shows the current item range and total item count. */
-  public readonly showReport: InputSignalWithTransform<boolean, unknown> = input(false, {
-    transform: booleanAttribute,
-  });
+  public readonly showReport: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Makes the current page action editable for direct navigation. */
-  public readonly showPageInput: InputSignalWithTransform<boolean, unknown> = input(false, {
-    transform: booleanAttribute,
-  });
+  public readonly showPageInput: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Prevents navigation while keeping pagination actions focusable. */
-  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, {
-    transform: booleanAttribute,
-  });
+  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   protected readonly pageTemplate: Signal<TemplateRef<PaginationPageContext> | undefined> = contentChild(PaginationPageTemplate, {
     read: TemplateRef,

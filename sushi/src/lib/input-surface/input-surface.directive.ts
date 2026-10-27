@@ -30,7 +30,5 @@ export class InputSurface {
   /** Expands the surface to the available width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Applies the invalid appearance to the complete field surface. */
-  public readonly invalid: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly invalid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 }

@@ -74,17 +74,13 @@ export class Table<T> {
   /** Alternates body row backgrounds. */
   public readonly zebra: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Draws borders between table cells. */
-  public readonly showGridlines: InputSignalWithTransform<boolean, unknown> = input(false, {
-    transform: booleanAttribute,
-  });
+  public readonly showGridlines: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Highlights generated body rows on pointer hover. */
   public readonly rowHover: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Keeps the heading visible within a vertically scrolling parent. */
   public readonly stickyHeader: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Keeps the first column visible while the table scrolls horizontally. */
-  public readonly pinFirstColumn: InputSignalWithTransform<boolean, unknown> = input(false, {
-    transform: booleanAttribute,
-  });
+  public readonly pinFirstColumn: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Maximum table viewport height in pixels when the heading is sticky. */
   public readonly scrollHeight: InputSignalWithTransform<number, unknown> = input(320, { transform: numberAttribute });
   /** Shows the loading state instead of body rows. */

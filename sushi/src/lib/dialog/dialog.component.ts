@@ -74,10 +74,8 @@ export class Dialog {
   /** Allows Escape to close the Dialog. */
   public readonly closeOnEscape: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Allows a click on the modal backdrop to close the Dialog. */
-  public readonly closeOnBackdrop: InputSignalWithTransform<boolean, unknown> = input(true, {
-    transform: booleanAttribute,
-  });
-  /** Named placement or viewport offsets (numbers in pixels, strings in CSS units). Defaults to center. Changes reposition an open Dialog; reopening restores this position after dragging. Custom offsets must leave room for the Dialog. */
+  public readonly closeOnBackdrop: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
+  /** Named placement or viewport offsets (numbers in pixels, strings in CSS units). Changes reposition an open Dialog; reopening restores this position after dragging. Custom offsets must leave room for the Dialog. */
   public readonly position: InputSignal<DialogPosition> = input<DialogPosition>('center');
   /** Accessible name used when no visible heading labels the Dialog. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
@@ -85,14 +83,12 @@ export class Dialog {
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
   /** ID of the element that describes the Dialog. */
   public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
-  /** Accessible label of the built-in close button. Defaults to "Close"; bind translated text to localise it. */
+  /** Accessible label of the built-in close button. Bind translated text to localise it. */
   public readonly closeLabel: InputSignal<string> = input<string>('Close');
   /** Enables dragging from the Dialog header. */
   public readonly draggable: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Keeps the Dialog inside the viewport after dragging and viewport changes. Disable only when off-screen placement is intentional. */
-  public readonly constrainToViewport: InputSignalWithTransform<boolean, unknown> = input(true, {
-    transform: booleanAttribute,
-  });
+  public readonly constrainToViewport: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Enables native pointer resizing from the bottom-right corner. */
   public readonly resizable: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Optional Dialog and backdrop fade. CSS tokens configure timing; reduced motion disables it. */

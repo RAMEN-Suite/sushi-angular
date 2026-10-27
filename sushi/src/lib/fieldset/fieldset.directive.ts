@@ -14,13 +14,9 @@ export class Fieldset {
   /** Controls and reports whether collapsible content is visible. */
   public readonly expanded: ModelSignal<boolean> = model<boolean>(true);
   /** Shows the visual frame and its accompanying inset spacing. */
-  public readonly bordered: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, {
-    transform: booleanAttribute,
-  });
+  public readonly bordered: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Enables toggling of the fieldset content. */
-  public readonly collapsible: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly collapsible: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   /** Toggles the expanded state when the fieldset is collapsible. */
   public toggle(): void {

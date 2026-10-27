@@ -68,13 +68,9 @@ export class Button {
   });
 
   /** Prevents pointer and keyboard activation. */
-  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Marks the action as busy and prevents activation. */
-  public readonly loading: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly loading: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   protected readonly isDisabled: Signal<boolean> = computed<boolean>((): boolean => this.disabled() || this.loading());
 

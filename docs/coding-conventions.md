@@ -12,7 +12,7 @@ The formatter, compiler and ESLint configuration enforce mechanical rules. Revie
 
 ## Angular and member order
 
-- Use signal APIs: `input`, `model`, `output`, `signal`, `computed`, and signal queries.
+- Use signal APIs: `input`, `model`, `output`, `signal`, `computed`, and signal queries. Infer `booleanAttribute` input call types from the transformer while keeping the explicit `InputSignalWithTransform<boolean, unknown>` field type.
 - Use `inject()` and `ChangeDetectionStrategy.OnPush`.
 - Use Signal Forms for form controls; do not add CVA, `FormsModule`, or Reactive Forms.
 - Prefer Angular Aria for interaction patterns and CDK for overlays, focus, portals, drag/drop and virtual scrolling. Use their public APIs.
@@ -85,7 +85,7 @@ this.focus();
 ## Public API, documentation and verification
 
 - Prefer projection for content rendered once and typed templates for repeated or contextual content.
-- Add consumer-facing JSDoc to public declarations, members, template contexts and types. Describe behavior, defaults, units and constraints without narrating the signature.
+- Add consumer-facing JSDoc to public declarations, members, template contexts and types. Explain behavior, units, constraints and computed fallbacks. Generated API tables read input/model defaults from their initializers; avoid repeating literal defaults in JSDoc.
 - Use only public APIs in examples. Do not maintain handwritten API tables; the generator reads TypeScript and CSS sources.
 - Keep focus visible, accessible names meaningful and focus restoration predictable. Respect reduced motion and long translated text.
 - Test observable contracts and failure paths, not private implementation steps. Avoid redundant coverage of the same contract.

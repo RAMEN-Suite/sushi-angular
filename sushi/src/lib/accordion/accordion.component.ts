@@ -51,25 +51,17 @@ export class Accordion {
   public readonly value: ModelSignal<readonly AccordionValue[]> = model<readonly AccordionValue[]>([]);
 
   /** Allows more than one item to remain expanded. */
-  public readonly multiple: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly multiple: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Changes whether item borders are connected or separated. */
   public readonly variant: InputSignal<AccordionVariant> = input<AccordionVariant>('joined');
   /** Controls header type, spacing, and content density. */
   public readonly size: InputSignal<AccordionSize> = input<AccordionSize>('sm');
   /** Disables every accordion trigger. */
-  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Allows disabled items to receive focus while remaining inactive. */
-  public readonly softDisabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, {
-    transform: booleanAttribute,
-  });
+  public readonly softDisabled: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Wraps arrow-key navigation between the first and last trigger. */
-  public readonly wrap: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly wrap: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   protected readonly items: Signal<readonly AccordionItem[]> = contentChildren(AccordionItem);
   protected readonly headerTemplate: Signal<TemplateRef<AccordionItemContext> | undefined> = contentChild(

@@ -1,3 +1,5 @@
+import { type ComponentSize } from '../sushi.types';
+
 /** Stable identifier used to control one accordion item. */
 export type AccordionValue = string;
 
@@ -5,7 +7,7 @@ export type AccordionValue = string;
 export type AccordionVariant = 'joined' | 'separated';
 
 /** Density and type scales available to an accordion. */
-export type AccordionSize = 'sm' | 'md' | 'lg';
+export type AccordionSize = Extract<ComponentSize, 'sm' | 'md' | 'lg'>;
 
 /** Public item state exposed to custom templates. */
 export interface AccordionItemData {

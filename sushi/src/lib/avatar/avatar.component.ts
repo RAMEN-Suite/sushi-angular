@@ -34,9 +34,7 @@ export class Avatar {
   /** Displays only one half of a decorative mask. */
   public readonly maskHalf: InputSignal<AvatarMaskHalf | null> = input<AvatarMaskHalf | null>(null);
   /** Marks projected content as a fallback instead of an image. */
-  public readonly placeholder: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly placeholder: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   protected readonly maskShape: Signal<MaskShape | null> = computed((): MaskShape | null => {
     const shape: AvatarShape = this.shape();

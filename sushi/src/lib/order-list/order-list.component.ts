@@ -79,11 +79,11 @@ export class OrderList<I extends OrderListOption = OrderListOption>
 {
   /** Complete collection with unique stable values. Moves emit a new array without mutating the input. */
   public readonly value: ModelSignal<readonly I[]> = model<readonly I[]>([]);
-  /** Row density shared with List. Defaults to sm. */
+  /** Row density shared with List. */
   public readonly size: InputSignal<OrderListSize> = input<OrderListSize>('sm');
-  /** Allows movement by every input method. False leaves custom row content usable. Defaults to true. */
+  /** Allows movement by every input method. False leaves custom row content usable. */
   public readonly reorderable: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
-  /** Enables dragging from the handle. Menu and keyboard moves remain available when false. Defaults to true. */
+  /** Enables dragging from the handle. Menu and keyboard moves remain available when false. */
   public readonly dragDrop: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Disables interaction in the entire list, including custom row controls. */
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });

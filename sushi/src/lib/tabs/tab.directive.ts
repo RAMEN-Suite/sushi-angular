@@ -17,13 +17,9 @@ export class Tab {
   /** Sets the visible tab label. */
   public readonly label: InputSignal<string> = input.required<string>();
   /** Prevents activation of this tab. */
-  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Keeps the panel instantiated after its first activation. */
-  public readonly preserveContent: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly preserveContent: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   public readonly template: TemplateRef<void> = inject<TemplateRef<void>>(TemplateRef);
 }
