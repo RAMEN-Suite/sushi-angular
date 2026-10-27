@@ -9,6 +9,14 @@
   @apply select-none font-medium transition-colors duration-150;
 }
 
+.sui-internal-size-text[data-size="xs"] .sui-selection-option {
+  @apply py-1;
+}
+
+.sui-internal-size-text[data-size="sm"] .sui-selection-option {
+  @apply py-1.5;
+}
+
 .sui-selection-list[aria-disabled="true"] {
   @apply cursor-not-allowed bg-base-200 text-base-content/40 select-none;
 }

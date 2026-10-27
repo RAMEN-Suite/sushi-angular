@@ -16,6 +16,22 @@ test('Select options use the trigger text size across the public size scale @css
   }
 });
 
+test('Select option spacing increases from extra compact to default @css', async ({ page }: { page: Page }): Promise<void> => {
+  await page.goto('/select');
+  let previousPadding: number = 0;
+  for (const name of ['Extra compact', 'Compact', 'Default']) {
+    const control: Locator = page.getByRole('combobox', { name, exact: true });
+    await control.click();
+    const padding: number = await page
+      .getByRole('option')
+      .first()
+      .evaluate((element: HTMLElement): number => Number.parseFloat(getComputedStyle(element).paddingBlockStart));
+    expect(padding).toBeGreaterThan(previousPadding);
+    previousPadding = padding;
+    await control.press('Escape');
+  }
+});
+
 test('shared typography overrides reach a control, its popup and empty collection text @css', async ({
   page,
 }: {
