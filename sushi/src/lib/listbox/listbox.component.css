@@ -4,7 +4,6 @@
 }
 
 :host {
-  font-size: var(--sui-font-size-body);
   /** Minimum height of a listbox option. */
   --sui-listbox-option-min-height: 2.5rem;
   /** Padding inside a listbox option. */

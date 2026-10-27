@@ -53,13 +53,26 @@ test('Accordion keeps readable heading and body roles with public token override
   await expect(panel).toHaveCSS('font-size', '21px');
 });
 
-test('standalone Listbox options retain the body text role @css', async ({ page }: { page: Page }): Promise<void> => {
-  await page.goto('/listbox');
-  const option: Locator = page.getByRole('listbox', { name: 'Active workspace', exact: true }).getByRole('option').first();
-  await expect(option).toHaveCSS('font-size', '16px');
-  await page.evaluate((): void => document.documentElement.style.setProperty('--sui-font-size-body', '21px'));
-  await expect(option).toHaveCSS('font-size', '21px');
-});
+for (const example of [
+  { path: '/listbox', host: 'pg-listbox-templates-example sui-listbox', content: '[role="option"] strong' },
+  { path: '/data-view', host: 'pg-data-view-layout-example sui-data-view', content: 'header strong' },
+  { path: '/file-drop', host: 'pg-file-drop-custom-example sui-file-drop', content: 'strong' },
+]) {
+  test(`${example.path} consumer templates retain the surrounding text size @css`, async ({
+    page,
+  }: {
+    page: Page;
+  }): Promise<void> => {
+    await page.goto(example.path);
+    const component: Locator = page.locator(example.host);
+    await page.evaluate((): void => document.documentElement.style.setProperty('--sui-font-size-body', '21px'));
+    await component.locator('..').evaluate((element: HTMLElement): void => {
+      element.style.fontSize = '14px';
+    });
+    await expect(component).toHaveCSS('font-size', '14px');
+    await expect(component.locator(example.content).first()).toHaveCSS('font-size', '14px');
+  });
+}
 
 test('Table typography overrides reach rows and cells at each density @css', async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/table');

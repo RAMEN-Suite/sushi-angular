@@ -46,7 +46,7 @@ The global theme reference is generated from `sushi.themes.css`. Document every 
 
 ## Text sizes
 
-Use `--sui-font-size-xs` through `--sui-font-size-xl` for size-dependent field text. Their defaults follow the input/action scale, with `md` at `0.875rem`. `--sui-font-size-body` supplies readable `1rem` body text. Selection popups follow their control size; standalone Listbox options retain the body text scale. Accordion maps its density to heading/body roles: small uses `md`/`body`, medium `lg`/`body`, and large `xl`/`lg`.
+Use `--sui-font-size-xs` through `--sui-font-size-xl` for size-dependent field text. Their defaults follow the input/action scale, with `md` at `0.875rem`. `--sui-font-size-body` supplies readable `1rem` body text. Selection popups follow their control size; DataView, Listbox, and FileDrop keep host typography inherited so consumer templates retain their surrounding text size. Accordion maps its density to heading/body roles: small uses `md`/`body`, medium `lg`/`body`, and large `xl`/`lg`.
 
 Chip labels retain their compact scale: `sm`, `sm`, `md`, `body`, and `lg` for sizes `xs` through `xl`. Their heights follow `--size-field` and can be overridden with `--sui-chip-height`.
 
