@@ -33,6 +33,7 @@ export class MenuSurface<I extends MenuItem = MenuItem> {
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
+  public readonly popup: InputSignal<boolean> = input(false);
   public readonly fluid: InputSignal<boolean> = input<boolean>(false);
   public readonly severity: InputSignal<MenuSeverity> = input<MenuSeverity>('primary');
   public readonly size: InputSignal<MenuSize> = input<MenuSize>('md');

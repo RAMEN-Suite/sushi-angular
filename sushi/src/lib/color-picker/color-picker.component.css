@@ -57,7 +57,7 @@
 
 .sui-color-picker__native:disabled::-webkit-color-swatch,
 .sui-color-picker__native:disabled::-moz-color-swatch {
-  opacity: 0.4;
+  opacity: var(--sui-disabled-opacity);
 }
 
 .sui-color-picker__presets {
@@ -111,7 +111,7 @@
 }
 
 .sui-color-picker__preset[aria-disabled="true"] .sui-color-picker__preset-swatch {
-  opacity: 0.4;
+  opacity: var(--sui-disabled-opacity);
 }
 
 .sui-color-picker__preset-swatch {

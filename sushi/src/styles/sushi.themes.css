@@ -87,11 +87,11 @@
   --sui-color-subtle: color-mix(in oklab, var(--color-base-content) 45%, transparent);
   /** @group Semantic UI | Neutral hover surface. */
   --sui-color-hover: color-mix(in oklab, var(--color-base-content) 7%, transparent);
-  /** @group Semantic UI | Dialog and popover surface. */
+  /** @group Semantic UI | Popup, dialog and popover surface. */
   --sui-color-overlay: var(--color-base-100);
   /** @group Semantic UI | Optional focus color override. Unset by default to retain each control's color. */
   --sui-focus-ring-color: initial;
-  /** @group Semantic UI | Dialog and popover elevation. */
+  /** @group Semantic UI | Popup, dialog and popover elevation. */
   --sui-shadow-overlay: 0 0.75rem 2rem rgb(0 0 0 / 12%);
   /** @group Semantic UI | Shared disabled-state opacity. */
   --sui-disabled-opacity: 0.5;

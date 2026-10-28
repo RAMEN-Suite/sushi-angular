@@ -10,7 +10,7 @@
 }
 
 .sui-selection-list[aria-disabled="true"] {
-  @apply cursor-not-allowed bg-base-200 text-base-content/40 select-none;
+  @apply cursor-not-allowed bg-base-200 select-none;
 }
 
 .sui-selection-list[aria-disabled="true"] * {
@@ -21,14 +21,14 @@
 .sui-selection-list:not(.sui-selection-list--focus-bound) .sui-selection-option:not([aria-disabled="true"]):not([aria-selected="true"], [data-matched="true"])[data-active="true"],
 .sui-selection-list--focus-bound:focus .sui-selection-option:not([aria-disabled="true"]):not([aria-selected="true"], [data-matched="true"])[data-active="true"] {
   /** Background of an enabled option when hovered or actively navigated. */
-  background-color: var(--sui-selection-option-hover-background, var(--color-base-200));
+  background-color: var(--sui-selection-option-hover-background, var(--sui-color-hover));
   /** Text color of an enabled option when hovered or actively navigated. */
   color: var(--sui-selection-option-hover-color, var(--color-base-content));
 }
 
 .sui-selection-option:not([aria-disabled="true"]):not([aria-selected="true"], [data-matched="true"]):active {
   /** Background of an enabled option while pressed. */
-  background-color: var(--sui-selection-option-active-background, var(--sui-selection-option-hover-background, var(--color-base-200)));
+  background-color: var(--sui-selection-option-active-background, var(--sui-selection-option-hover-background, var(--sui-color-hover)));
   /** Text color of an enabled option while pressed. */
   color: var(--sui-selection-option-active-color, var(--sui-selection-option-hover-color, var(--color-base-content)));
 }

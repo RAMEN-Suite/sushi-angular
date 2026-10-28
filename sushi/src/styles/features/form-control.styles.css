@@ -9,9 +9,9 @@
 }
 
 .sui-form-control--disabled {
-  @apply text-base-content/40;
+  color: color-mix(in oklab, var(--color-base-content) calc(var(--sui-disabled-opacity) * 100%), transparent);
 }
 
 .sui-form-control--placeholder {
-  @apply text-base-content/50;
+  color: var(--sui-color-subtle);
 }

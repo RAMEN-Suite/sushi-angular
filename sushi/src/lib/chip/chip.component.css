@@ -19,7 +19,8 @@
 }
 
 :host(.sui-chip--disabled) {
-  @apply cursor-not-allowed opacity-50;
+  @apply cursor-not-allowed;
+  opacity: var(--sui-disabled-opacity);
 }
 
 :host(.sui-chip--xs) {
