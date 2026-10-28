@@ -98,7 +98,7 @@
   (detach)="handleExpanded(false)"
 >
   <ng-template ngComboboxPopup [combobox]="combobox">
-    <div class="sui-internal-overlay-surface w-full overflow-hidden rounded-box border">
+    <div class="sui-internal-size-text sui-internal-overlay-surface w-full overflow-hidden rounded-box border" [attr.data-size]="size()">
       @if (showSelectAll() || headerTemplate()) {
         <div class="grid gap-3 border-b border-(--sui-color-border) p-3" (pointerdown)="$event.preventDefault()">
           @if (showSelectAll()) {
@@ -128,13 +128,13 @@
               [ngTemplateOutletContext]="{ $implicit: loadingMessage(), message: loadingMessage() }"
             />
           } @else {
-            <div class="flex items-center justify-center gap-2 p-6 text-sm text-(--sui-color-muted)">
+            <div class="flex items-center justify-center gap-2 p-4 text-(--sui-color-muted)">
               <span suiSpinner size="sm"></span>{{ loadingMessage() }}
             </div>
           }
         </div>
       } @else if (options().length === 0) {
-        <div ngComboboxWidget class="p-4 text-center text-sm text-(--sui-color-muted)">
+        <div ngComboboxWidget class="p-4 text-center text-(--sui-color-muted)">
           @if (emptyTemplate(); as template) {
             <ng-container [ngTemplateOutlet]="template" />
           } @else {

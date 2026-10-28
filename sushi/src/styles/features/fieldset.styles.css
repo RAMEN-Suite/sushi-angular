@@ -1,5 +1,6 @@
 .sui-fieldset__legend {
-  @apply py-2 text-base;
+  @apply py-2;
+  font-size: var(--sui-font-size-body);
   min-height: 2.75rem;
 }
 

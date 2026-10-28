@@ -74,14 +74,9 @@
   (detach)="handleExpanded(false)"
 >
   <ng-template ngComboboxPopup [combobox]="combobox">
-    <div class="sui-internal-overlay-surface w-full overflow-hidden rounded-box border">
+    <div class="sui-internal-size-text sui-internal-overlay-surface w-full overflow-hidden rounded-box border" [attr.data-size]="size()">
       @if (loading()) {
-        <div
-          ngComboboxWidget
-          class="flex items-center justify-center gap-2 p-5 text-sm text-(--sui-color-muted)"
-          role="status"
-          aria-live="polite"
-        >
+        <div ngComboboxWidget class="flex items-center justify-center gap-2 p-4 text-(--sui-color-muted)" role="status" aria-live="polite">
           @if (loadingTemplate(); as template) {
             <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="loadingContext()" />
           } @else {
@@ -90,7 +85,7 @@
           }
         </div>
       } @else if (errorMessage()) {
-        <div ngComboboxWidget class="text-error p-4 text-center text-sm" role="status" aria-live="polite">
+        <div ngComboboxWidget class="text-error p-4 text-center" role="status" aria-live="polite">
           @if (errorTemplate(); as template) {
             <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="errorContext()" />
           } @else {
@@ -98,7 +93,7 @@
           }
         </div>
       } @else if (filteredOptions().length === 0) {
-        <div ngComboboxWidget class="p-4 text-center text-sm text-(--sui-color-muted)" role="status" aria-live="polite">
+        <div ngComboboxWidget class="p-4 text-center text-(--sui-color-muted)" role="status" aria-live="polite">
           @if (emptyTemplate(); as template) {
             <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="emptyContext()" />
           } @else {

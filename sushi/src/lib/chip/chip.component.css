@@ -9,8 +9,13 @@
   /** Corner radius of the Chip. Defaults to a pill. */
   --sui-chip-radius: calc(infinity * 1px);
 
+  /** Height of the Chip; follows the theme field density and configured size. */
+  --sui-chip-height: calc(var(--size-field, 0.25rem) * var(--_sui-chip-height-scale, 8));
+
+  height: var(--sui-chip-height);
+  font-size: var(--sui-font-size-md);
   border-radius: var(--sui-chip-radius);
-  @apply inline-flex h-8 max-w-full items-center gap-2 px-3 text-sm font-medium;
+  @apply inline-flex max-w-full items-center gap-2 px-3 font-medium;
 }
 
 :host(:not([class*="badge-"])) {
@@ -24,19 +29,27 @@
 }
 
 :host(.sui-chip--xs) {
-  @apply h-5 gap-1 px-1.5 text-xs;
+  --_sui-chip-height-scale: 5;
+  font-size: var(--sui-font-size-sm);
+  @apply gap-1 px-1.5;
 }
 
 :host(.sui-chip--sm) {
-  @apply h-6 gap-1.5 px-2 text-xs;
+  --_sui-chip-height-scale: 6;
+  font-size: var(--sui-font-size-sm);
+  @apply gap-1.5 px-2;
 }
 
 :host(.sui-chip--lg) {
-  @apply h-10 gap-2.5 px-4 text-base;
+  --_sui-chip-height-scale: 10;
+  font-size: var(--sui-font-size-body);
+  @apply gap-2.5 px-4;
 }
 
 :host(.sui-chip--xl) {
-  @apply h-12 gap-3 px-5 text-lg;
+  --_sui-chip-height-scale: 12;
+  font-size: var(--sui-font-size-lg);
+  @apply gap-3 px-5;
 }
 
 :host(:focus-visible) {

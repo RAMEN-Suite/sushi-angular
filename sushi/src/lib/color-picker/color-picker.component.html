@@ -45,7 +45,7 @@
   <ng-content select="[suiJoinItem]" />
 </div>
 @if (localInvalid()) {
-  <p class="text-error text-sm" [id]="errorId()" role="alert">{{ invalidMessage() }}</p>
+  <p class="text-error" [id]="errorId()" role="alert">{{ invalidMessage() }}</p>
 }
 <span class="sr-only" aria-live="polite">Selected color {{ value() }}</span>
 @if (presets().length > 0) {

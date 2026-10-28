@@ -110,7 +110,8 @@
         tabindex="-1"
         [attr.aria-label]="ariaLabel() ?? placeholder()"
         [attr.aria-labelledby]="ariaLabelledby()"
-        class="sui-internal-overlay-surface w-full overflow-hidden rounded-box border"
+        class="sui-internal-size-text sui-internal-overlay-surface w-full overflow-hidden rounded-box border"
+        [attr.data-size]="size()"
         (keydown)="handlePopupKeydown($event)"
       >
         @if (headerTemplate(); as template) {
@@ -144,13 +145,13 @@
                 [ngTemplateOutletContext]="{ $implicit: loadingMessage(), message: loadingMessage() }"
               />
             } @else {
-              <div class="flex items-center justify-center gap-2 p-6 text-sm text-(--sui-color-muted)">
+              <div class="flex items-center justify-center gap-2 p-4 text-(--sui-color-muted)">
                 <span suiSpinner size="sm"></span>{{ loadingMessage() }}
               </div>
             }
           </div>
         } @else if (visibleOptions().length === 0) {
-          <div class="p-4 text-center text-sm text-(--sui-color-muted)">
+          <div class="p-4 text-center text-(--sui-color-muted)">
             @if (emptyTemplate(); as template) {
               <ng-container [ngTemplateOutlet]="template" />
             } @else {
@@ -223,7 +224,7 @@
         }
       </div>
     } @else {
-      <div class="sui-internal-overlay-surface w-full overflow-hidden rounded-box border">
+      <div class="sui-internal-size-text sui-internal-overlay-surface w-full overflow-hidden rounded-box border" [attr.data-size]="size()">
         @if (loading()) {
           <div ngComboboxWidget class="w-full" role="status">
             @if (loadingTemplate(); as template) {
@@ -232,13 +233,13 @@
                 [ngTemplateOutletContext]="{ $implicit: loadingMessage(), message: loadingMessage() }"
               />
             } @else {
-              <div class="flex items-center justify-center gap-2 p-6 text-sm text-(--sui-color-muted)">
+              <div class="flex items-center justify-center gap-2 p-4 text-(--sui-color-muted)">
                 <span suiSpinner size="sm"></span>{{ loadingMessage() }}
               </div>
             }
           </div>
         } @else if (options().length === 0) {
-          <div ngComboboxWidget class="p-4 text-center text-sm text-(--sui-color-muted)">
+          <div ngComboboxWidget class="p-4 text-center text-(--sui-color-muted)">
             @if (emptyTemplate(); as template) {
               <ng-container [ngTemplateOutlet]="template" />
             } @else {

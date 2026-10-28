@@ -44,7 +44,7 @@ import {
   imports: [Button, LucideArrowDown, LucideArrowUp, LucideArrowUpDown, NgTemplateOutlet, Spinner],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
-  host: { class: 'sui-table block w-full min-w-0 max-w-full' },
+  host: { class: 'sui-internal-size-text sui-table block w-full min-w-0 max-w-full', '[attr.data-size]': 'size()' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Table<T> {

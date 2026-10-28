@@ -61,7 +61,12 @@ import {
     Spinner,
   ],
   templateUrl: './autocomplete.component.html',
-  host: { class: 'inline-block max-w-full', '[class.w-full]': 'fluid()', '[attr.id]': 'null' },
+  host: {
+    class: 'sui-internal-size-text inline-block max-w-full',
+    '[attr.data-size]': 'size()',
+    '[class.w-full]': 'fluid()',
+    '[attr.id]': 'null',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Autocomplete<O extends AutocompleteOption = AutocompleteOption>

@@ -6,7 +6,15 @@
 }
 
 .sui-selection-option {
-  @apply select-none text-base font-medium transition-colors duration-150;
+  @apply select-none font-medium transition-colors duration-150;
+}
+
+.sui-internal-size-text[data-size="xs"] .sui-selection-option {
+  @apply py-1;
+}
+
+.sui-internal-size-text[data-size="sm"] .sui-selection-option {
+  @apply py-1.5;
 }
 
 .sui-selection-list[aria-disabled="true"] {

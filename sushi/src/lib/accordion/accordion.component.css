@@ -84,15 +84,15 @@
 }
 
 .sui-accordion__group--sm .sui-accordion__trigger {
-  font-size: 0.9375rem;
+  font-size: var(--sui-font-size-md);
 }
 
 .sui-accordion__group--md .sui-accordion__trigger {
-  font-size: 1.0625rem;
+  font-size: var(--sui-font-size-lg);
 }
 
 .sui-accordion__group--lg .sui-accordion__trigger {
-  font-size: 1.125rem;
+  font-size: var(--sui-font-size-xl);
 }
 
 .sui-accordion__trigger[aria-disabled="true"] {
@@ -128,15 +128,15 @@
 }
 
 .sui-accordion__group--sm .sui-accordion__panel {
-  font-size: 0.875rem;
+  font-size: var(--sui-font-size-body);
 }
 
 .sui-accordion__group--md .sui-accordion__panel {
-  font-size: 1rem;
+  font-size: var(--sui-font-size-body);
 }
 
 .sui-accordion__group--lg .sui-accordion__panel {
-  font-size: 1.0625rem;
+  font-size: var(--sui-font-size-lg);
 }
 
 .sui-accordion__item.collapse-open > .sui-accordion__panel {

@@ -99,3 +99,8 @@ tbody tr.row-hover:hover {
 .sui-table--pin-first-column.table-zebra tbody tr.row-hover:hover :is(th, td):first-child {
   background-image: linear-gradient(var(--sui-table-zebra-hover-background), var(--sui-table-zebra-hover-background));
 }
+
+.table,
+.table tr {
+  font-size: inherit;
+}
