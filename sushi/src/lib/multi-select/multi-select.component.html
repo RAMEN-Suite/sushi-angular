@@ -98,9 +98,9 @@
   (detach)="handleExpanded(false)"
 >
   <ng-template ngComboboxPopup [combobox]="combobox">
-    <div class="sui-internal-size-text w-full overflow-hidden rounded-box border border-base-300 bg-base-100" [attr.data-size]="size()">
+    <div class="sui-internal-size-text sui-internal-overlay-surface w-full overflow-hidden rounded-box border" [attr.data-size]="size()">
       @if (showSelectAll() || headerTemplate()) {
-        <div class="grid gap-3 border-b border-base-300 p-3" (pointerdown)="$event.preventDefault()">
+        <div class="grid gap-3 border-b border-(--sui-color-border) p-3" (pointerdown)="$event.preventDefault()">
           @if (showSelectAll()) {
             <label class="flex min-h-8 cursor-pointer items-center gap-3 font-medium">
               <input
@@ -128,13 +128,13 @@
               [ngTemplateOutletContext]="{ $implicit: loadingMessage(), message: loadingMessage() }"
             />
           } @else {
-            <div class="flex items-center justify-center gap-2 p-4 opacity-60">
+            <div class="flex items-center justify-center gap-2 p-4 text-(--sui-color-muted)">
               <span suiSpinner size="sm"></span>{{ loadingMessage() }}
             </div>
           }
         </div>
       } @else if (options().length === 0) {
-        <div ngComboboxWidget class="p-4 text-center opacity-60">
+        <div ngComboboxWidget class="p-4 text-center text-(--sui-color-muted)">
           @if (emptyTemplate(); as template) {
             <ng-container [ngTemplateOutlet]="template" />
           } @else {
@@ -166,7 +166,7 @@
                     [ngTemplateOutletContext]="{ $implicit: option.group, group: option.group, option: option, index: index }"
                   />
                 } @else {
-                  <span class="text-xs font-semibold uppercase tracking-wider text-base-content/60">{{ option.group }}</span>
+                  <span class="text-xs font-semibold uppercase tracking-wide text-(--sui-color-muted)">{{ option.group }}</span>
                 }
               </div>
             }
@@ -176,7 +176,7 @@
               [style.min-height.px]="optionHeight()"
               [class.cursor-pointer]="!option.disabled"
               [class.cursor-not-allowed]="option.disabled"
-              [class.opacity-40]="option.disabled"
+              [class.sui-internal-disabled-opacity]="option.disabled"
               [value]="option.value"
               [label]="option.label"
               [disabled]="option.disabled ?? false"
@@ -202,7 +202,7 @@
         </div>
       }
       @if (footerTemplate(); as template) {
-        <div class="border-t border-base-300 p-3" (pointerdown)="$event.preventDefault()">
+        <div class="border-t border-(--sui-color-border) p-3" (pointerdown)="$event.preventDefault()">
           <ng-container [ngTemplateOutlet]="template" />
         </div>
       }

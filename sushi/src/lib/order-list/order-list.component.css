@@ -94,7 +94,7 @@
 }
 
 .sui-order-list__handle[aria-disabled="true"] {
-  opacity: 0.4;
+  opacity: var(--sui-disabled-opacity);
   cursor: not-allowed;
 }
 
@@ -105,8 +105,7 @@
 
 .sui-order-list__empty {
   padding: var(--sui-order-list-row-padding);
-  color: var(--color-base-content);
-  opacity: 0.6;
+  color: var(--sui-color-muted);
 }
 
 .cdk-drop-list-dragging > .sui-order-list__row {

@@ -4,11 +4,11 @@
   /** Background behind sticky headings and pinned cells. */
   --sui-table-pinned-background: var(--color-base-100);
   /** Background used by a hovered body row. */
-  --sui-table-row-hover-background: var(--color-base-200);
+  --sui-table-row-hover-background: var(--sui-color-hover);
   /** Background behind a pinned cell in an alternating row. */
   --sui-table-pinned-zebra-background: var(--color-base-200);
   /** Background used by a hovered pinned cell in a striped row. */
-  --sui-table-zebra-hover-background: var(--color-base-300);
+  --sui-table-zebra-hover-background: var(--sui-table-row-hover-background);
   /** Background used by sortable heading actions on hover and press. */
   --sui-table-sort-hover-background: var(--sui-color-hover);
 }
@@ -92,11 +92,12 @@ tbody tr.row-hover:hover {
 }
 
 .sui-table--pin-first-column tbody tr.row-hover:hover :is(th, td):first-child {
-  background-color: var(--sui-table-row-hover-background);
+  background-color: var(--sui-table-pinned-background);
+  background-image: linear-gradient(var(--sui-table-row-hover-background), var(--sui-table-row-hover-background));
 }
 
 .sui-table--pin-first-column.table-zebra tbody tr.row-hover:hover :is(th, td):first-child {
-  background-color: var(--sui-table-zebra-hover-background);
+  background-image: linear-gradient(var(--sui-table-zebra-hover-background), var(--sui-table-zebra-hover-background));
 }
 
 .table,

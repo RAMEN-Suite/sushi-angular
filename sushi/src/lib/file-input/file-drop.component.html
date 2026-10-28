@@ -28,7 +28,7 @@
     <ng-container [ngTemplateOutlet]="content" [ngTemplateOutletContext]="contentContext()" />
   } @else {
     <strong [id]="labelId">{{ label() }}</strong>
-    <span class="text-base-content/60" [id]="descriptionId">{{ description() }}</span>
+    <span class="text-(--sui-color-muted)" [id]="descriptionId">{{ description() }}</span>
     @if (value().length) {
       <span>{{ value().length }} {{ value().length === 1 ? 'file selected' : 'files selected' }}</span>
     }
@@ -83,7 +83,7 @@
               <ng-container [ngTemplateOutlet]="item" [ngTemplateOutletContext]="context" />
             } @else {
               <p class="truncate font-medium" [title]="context.file.name">{{ context.file.name }}</p>
-              <p class="text-(length:--sui-font-size-md) text-base-content/60">{{ context.size }}</p>
+              <p class="text-(length:--sui-font-size-md) text-(--sui-color-muted)">{{ context.size }}</p>
             }
           </div>
 
@@ -104,6 +104,6 @@
       }
     </ul>
   } @else {
-    <p class="text-base-content/60">No files selected</p>
+    <p class="text-(--sui-color-muted)">No files selected</p>
   }
 </div>

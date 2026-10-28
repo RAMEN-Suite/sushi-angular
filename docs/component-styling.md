@@ -13,6 +13,10 @@ This page covers styling inside the library. Consumer theme setup is documented 
 
 Do not add a global style when an adjacent component stylesheet can own it.
 
+## Internal selectors
+
+Classes prefixed with `sui-internal-` are implementation details for library-owned markup, not consumer utilities. `sui-internal-overlay-surface` applies the shared overlay surface, border and shadow tokens. `sui-internal-disabled-opacity` applies the shared disabled opacity once across nested disabled elements. Use the documented component APIs and CSS custom properties to customize these roles.
+
 ## Public tokens
 
 Expose a token when consumers need to change a stable visual role. Prefix it with the feature name and document it immediately above the declaration:
