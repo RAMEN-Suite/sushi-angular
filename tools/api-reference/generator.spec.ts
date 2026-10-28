@@ -16,7 +16,7 @@ const FIXTURE_FILES: Readonly<Record<string, string>> = {
   'sushi/src/lib/example/example.component.ts': `
     declare function Component(metadata: unknown): ClassDecorator;
     declare function Directive(metadata: unknown): ClassDecorator;
-    declare function input<T>(value: T): T;
+    declare function input<T>(value: T, options?: { alias: string }): T;
 
     /** Nested options resolved through a symbol instead of a text search. */
     export interface DetailOptions { readonly compact?: boolean; }
@@ -34,7 +34,7 @@ const FIXTURE_FILES: Readonly<Record<string, string>> = {
     /** Public example component. */
     export class Example<T = string> {
       /** Configures the example. */
-      public readonly options = input<ExampleOptions<T>>({});
+      public readonly options = input<ExampleOptions<T>>({}, { alias: 'suiExampleOptions' });
 
       /** Moves focus to the example. */
       public focus(options?: FocusOptions): void { void options; }
@@ -138,6 +138,14 @@ describe('API reference types and templates', (): void => {
     expect(options?.source).toBe('library');
     expect(options?.typeParameters).toEqual([{ name: 'T', constraint: null, defaultValue: 'string' }]);
   });
+});
+
+it('documents the public signal alias and its description', (): void => {
+  const example: ApiReferenceData = requireReference(generateApiReference(createFixture()).data, 'Example');
+  expect(example.members).toContainEqual(
+    expect.objectContaining({ name: 'suiExampleOptions', description: 'Configures the example.' }),
+  );
+  expect(example.members.some((member): boolean => member.name === 'options')).toBe(false);
 });
 
 describe('API reference CSS tokens', (): void => {

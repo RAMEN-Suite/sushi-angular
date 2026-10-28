@@ -25,16 +25,16 @@ import {
       [(layout)]="layout"
       [(page)]="page"
     >
-      <ng-template suiDataViewHeader let-items
+      <ng-template [suiDataViewHeader]="items()" let-items
         ><span data-header>{{ items.length }} visible</span></ng-template
       >
-      <ng-template suiDataViewItem let-item let-index="index" let-first="first" let-last="last">
+      <ng-template [suiDataViewItem]="items()" let-item let-index="index" let-first="first" let-last="last">
         <span [attr.data-item]="item" [attr.data-index]="index" [attr.data-first]="first" [attr.data-last]="last">
           {{ item }}
         </span>
       </ng-template>
-      <ng-template suiDataViewEmpty><span data-empty>Nothing here</span></ng-template>
-      <ng-template suiDataViewLoading><span data-loading>Fetching recipes</span></ng-template>
+      <ng-template [suiDataViewEmpty]="items()"><span data-empty>Nothing here</span></ng-template>
+      <ng-template [suiDataViewLoading]="items()"><span data-loading>Fetching recipes</span></ng-template>
     </sui-data-view>
   `,
 })
@@ -49,7 +49,7 @@ class DataViewHost {
   imports: [DataView, DataViewItemTemplate, DataViewLoadMoreTemplate],
   template: `
     <sui-data-view infiniteScroll hasMore [items]="items" (loadMore)="loads += 1">
-      <ng-template suiDataViewItem let-item>{{ item }}</ng-template>
+      <ng-template [suiDataViewItem]="items" let-item>{{ item }}</ng-template>
       <ng-template suiDataViewLoadMore let-loading="loading" let-load="load">
         <button data-load type="button" [attr.data-loading]="loading" (click)="load()">More</button>
       </ng-template>

@@ -53,17 +53,30 @@ export class FileDrop extends FormControlState implements FormValueControl<reado
   public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   /** Primary drop-zone instruction. */
-  public readonly label: InputSignal<string> = input('Drop files here');
+  public readonly label: InputSignal<string> = input<string>('Drop files here');
   /** Supporting drop-zone instruction. */
-  public readonly description: InputSignal<string> = input('or choose them from your device');
+  public readonly description: InputSignal<string> = input<string>('or choose them from your device');
   /** Label for the initial file-picker action. */
-  public readonly chooseLabel: InputSignal<string> = input('Choose files');
+  public readonly chooseLabel: InputSignal<string> = input<string>('Choose files');
   /** Label for the file-picker action after a selection. */
-  public readonly replaceLabel: InputSignal<string> = input('Choose other files');
+  public readonly replaceLabel: InputSignal<string> = input<string>('Choose other files');
   /** Label for the action that removes every selected file. */
-  public readonly clearLabel: InputSignal<string> = input('Clear');
+  public readonly clearLabel: InputSignal<string> = input<string>('Clear');
   /** Prefix for rejected file type feedback. */
-  public readonly rejectionLabel: InputSignal<string> = input('File type not accepted');
+  public readonly rejectionLabel: InputSignal<string> = input<string>('File type not accepted');
+
+  /** Heading and accessible name of the selected-file list. */
+  public readonly selectedFilesLabel: InputSignal<string> = input<string>('Selected files');
+  /** Message used when the selection is empty, including live announcements. */
+  public readonly emptyMessage: InputSignal<string> = input<string>('No files selected');
+  /** Formats the selection count, including singular and plural forms. */
+  public readonly selectionMessage: InputSignal<(count: number) => string> = input<(count: number) => string>(
+    (count: number): string => `${count} ${count === 1 ? 'file selected' : 'files selected'}`,
+  );
+  /** Formats the accessible label of an individual file's remove action. */
+  public readonly removeLabel: InputSignal<(file: File) => string> = input<(file: File) => string>(
+    (file: File): string => `Remove ${file.name}`,
+  );
 
   /** Emits the accepted files after a drop. */
   public readonly filesDropped: OutputEmitterRef<readonly File[]> = output<readonly File[]>();
@@ -124,7 +137,7 @@ export class FileDrop extends FormControlState implements FormValueControl<reado
     this.fileInput().nativeElement.value = '';
     this.value.set([]);
     this.rejections.set([]);
-    this.announcement.set('No files selected');
+    this.announcement.set(this.emptyMessage());
   }
 
   protected handleDrag(event: DragEvent): void {
@@ -182,7 +195,7 @@ export class FileDrop extends FormControlState implements FormValueControl<reado
 
     const files: readonly File[] = this.value().filter((_file: File, itemIndex: number) => itemIndex !== index);
     this.value.set(files);
-    this.announcement.set(files.length ? files.map((file: File): string => file.name).join(', ') : 'No files selected');
+    this.announcement.set(files.length ? files.map((file: File): string => file.name).join(', ') : this.emptyMessage());
     this.chooseButton().nativeElement.focus();
     this.touch.emit();
   }
@@ -198,7 +211,7 @@ export class FileDrop extends FormControlState implements FormValueControl<reado
     }
 
     this.rejections.set(rejected);
-    this.announcement.set(accepted.length ? accepted.map((file: File): string => file.name).join(', ') : 'No files selected');
+    this.announcement.set(accepted.length ? accepted.map((file: File): string => file.name).join(', ') : this.emptyMessage());
     if (rejected.length) this.filesRejected.emit(rejected);
 
     return accepted;

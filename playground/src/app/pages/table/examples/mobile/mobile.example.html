@@ -6,11 +6,11 @@
         {{ releases.length }} releases
       </span>
     </div>
-    <span class="text-sm text-base-content/60">Columns remain intact and scroll inside the table.</span>
+    <span class="text-sm text-(--sui-color-muted)">Columns remain intact and scroll inside the table.</span>
   </div>
 
   <sui-table pinFirstColumn class="w-full min-w-0" ariaLabel="Release queue" [columns]="columns" [rows]="releases">
-    <ng-template suiTableCell let-value let-row="row" let-column="column">
+    <ng-template [suiTableCell]="releases" let-value let-row="row" let-column="column">
       @if (column.key === 'state') {
         <span suiBadge [severity]="severity(row.state)" variant="soft" size="sm">{{ value }}</span>
       } @else {

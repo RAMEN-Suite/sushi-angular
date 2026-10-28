@@ -3,7 +3,7 @@
     <div class="flex flex-wrap items-start justify-between gap-4">
       <div>
         <h3 suiCardTitle>System status</h3>
-        <p class="text-sm text-base-content/60">All core services are operational.</p>
+        <p class="text-sm text-(--sui-color-muted)">All core services are operational.</p>
       </div>
       <span suiBadge severity="success" variant="soft">
         <span suiStatus severity="success" size="sm"></span>
@@ -12,10 +12,10 @@
     </div>
 
     <sui-list class="mt-3" [items]="services" ariaLabel="Core services">
-      <ng-template suiListItem let-service>
+      <ng-template [suiListItem]="services" let-service>
         <span class="list-col-grow">{{ service.name }}</span>
         <span class="inline-flex items-center gap-2 text-sm">
-          <span suiStatus [severity]="service.severity" [animation]="service.animation"></span>
+          <span suiStatus [severity]="service.severity" [animation]="service.animation ?? null"></span>
           {{ service.state }}
         </span>
       </ng-template>

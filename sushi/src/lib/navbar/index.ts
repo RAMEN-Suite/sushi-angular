@@ -1,5 +1,5 @@
 export * from './navbar.component';
 export * from './navbar-content.directive';
 export type * from './navbar.interfaces';
-export * from './navbar-item-template.directive';
-export * from './navbar-slot.directive';
+export * from './navbar.templates';
+export * from './navbar-slots.directive';

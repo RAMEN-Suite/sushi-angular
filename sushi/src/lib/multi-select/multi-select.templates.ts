@@ -11,6 +11,7 @@ import {
 /** Replaces each option and exposes its index, selected, and disabled state. */
 @Directive({ selector: 'ng-template[suiMultiSelectItem]' })
 export class MultiSelectItemTemplate<O extends MultiSelectOption = MultiSelectOption> {
+  /** Option source used to infer custom fields inside the template. */
   public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
     alias: 'suiMultiSelectItem',
   });
@@ -25,6 +26,7 @@ export class MultiSelectItemTemplate<O extends MultiSelectOption = MultiSelectOp
 /** Replaces the selected-value summary and exposes removal behavior. */
 @Directive({ selector: 'ng-template[suiMultiSelectSelectedItems]' })
 export class MultiSelectSelectedItemsTemplate<O extends MultiSelectOption = MultiSelectOption> {
+  /** Option source used to infer custom fields inside the template. */
   public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
     alias: 'suiMultiSelectSelectedItems',
   });
@@ -39,6 +41,7 @@ export class MultiSelectSelectedItemsTemplate<O extends MultiSelectOption = Mult
 /** Replaces each group heading and exposes its group and first option. */
 @Directive({ selector: 'ng-template[suiMultiSelectGroup]' })
 export class MultiSelectGroupTemplate<O extends MultiSelectOption = MultiSelectOption> {
+  /** Option source used to infer custom fields inside the template. */
   public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
     alias: 'suiMultiSelectGroup',
   });
@@ -80,6 +83,7 @@ export class MultiSelectCheckmarkIconTemplate {}
 /** Adds content above the list and exposes aggregate selection behavior. */
 @Directive({ selector: 'ng-template[suiMultiSelectHeader]' })
 export class MultiSelectHeaderTemplate<O extends MultiSelectOption = MultiSelectOption> {
+  /** Option source used to infer custom fields inside the template. */
   public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
     alias: 'suiMultiSelectHeader',
   });

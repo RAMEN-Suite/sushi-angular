@@ -86,12 +86,18 @@ import {
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Select extends FormControlState implements FormValueControl<SelectModelValue> {
+export class Select<O extends SelectOption = SelectOption>
+  extends FormControlState
+  implements FormValueControl<SelectModelValue>
+{
+  /** Accessible label for the action that clears the selection. */
+  public readonly clearLabel: InputSignal<string> = input<string>('Clear selection');
+
   /** Selected option value or `null` when empty. */
   public readonly value: ModelSignal<SelectModelValue> = model<SelectModelValue>(null);
 
   /** Fixed options available for selection. */
-  public readonly options: InputSignal<readonly SelectOption[]> = input.required<readonly SelectOption[]>();
+  public readonly options: InputSignal<readonly O[]> = input.required<readonly O[]>();
   /** Compares object values when reference identity is not sufficient. Primitive values use the default comparator. */
   public readonly compareWith: InputSignal<SelectCompareWith> = input<SelectCompareWith>(compareSelectionValues);
 
@@ -148,11 +154,11 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   /** Emits when the user closes the popup after interaction. */
   public readonly touch: OutputEmitterRef<void> = output();
 
-  protected readonly itemTemplate: Signal<TemplateRef<SelectItemContext> | undefined> = contentChild(SelectItemTemplate, {
+  protected readonly itemTemplate: Signal<TemplateRef<SelectItemContext<O>> | undefined> = contentChild(SelectItemTemplate<O>, {
     read: TemplateRef,
   });
-  protected readonly selectedItemTemplate: Signal<TemplateRef<SelectSelectedItemContext> | undefined> = contentChild(
-    SelectSelectedItemTemplate,
+  protected readonly selectedItemTemplate: Signal<TemplateRef<SelectSelectedItemContext<O>> | undefined> = contentChild(
+    SelectSelectedItemTemplate<O>,
     {
       read: TemplateRef,
     },
@@ -166,9 +172,12 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   protected readonly emptyTemplate: Signal<TemplateRef<void> | undefined> = contentChild(SelectEmptyTemplate, {
     read: TemplateRef,
   });
-  protected readonly groupTemplate: Signal<TemplateRef<SelectGroupContext> | undefined> = contentChild(SelectGroupTemplate, {
-    read: TemplateRef,
-  });
+  protected readonly groupTemplate: Signal<TemplateRef<SelectGroupContext<O>> | undefined> = contentChild(
+    SelectGroupTemplate<O>,
+    {
+      read: TemplateRef,
+    },
+  );
   protected readonly loadingTemplate: Signal<TemplateRef<SelectLoadingContext> | undefined> = contentChild(
     SelectLoadingTemplate,
     {
@@ -191,31 +200,30 @@ export class Select extends FormControlState implements FormValueControl<SelectM
   protected readonly combobox: Signal<Combobox> = viewChild.required(Combobox);
   protected readonly listbox: Signal<Listbox<SelectValue> | undefined> = viewChild(Listbox);
 
-  protected readonly expanded: WritableSignal<boolean> = signal(false);
   protected readonly filterInput: Signal<ElementRef<HTMLInputElement> | undefined> = viewChild('filterInput');
+
+  protected readonly expanded: WritableSignal<boolean> = signal(false);
 
   protected readonly filterQuery: WritableSignal<string> = signal('');
 
-  protected readonly visibleOptions: Signal<readonly SelectOption[]> = computed(() =>
-    this.options().filter((option: SelectOption): boolean => filterSelectionOption(option, this.filterQuery())),
+  protected readonly visibleOptions: Signal<readonly O[]> = computed(() =>
+    this.options().filter((option: O): boolean => filterSelectionOption(option, this.filterQuery())),
   );
 
   protected readonly interactivePopup: Signal<boolean> = computed(
     () => this.filter() || Boolean(this.headerTemplate()) || Boolean(this.footerTemplate()),
   );
 
-  protected readonly selectedOption: Signal<SelectOption | undefined> = computed(() => {
+  protected readonly selectedOption: Signal<O | undefined> = computed(() => {
     const value: SelectModelValue = this.value();
-    return value === null
-      ? undefined
-      : this.options().find((option: SelectOption): boolean => this.compareWith()(option.value, value));
+    return value === null ? undefined : this.options().find((option: O): boolean => this.compareWith()(option.value, value));
   });
   protected readonly listboxValue: Signal<SelectValue[]> = computed(() => {
-    const option: SelectOption | undefined = this.selectedOption();
+    const option: O | undefined = this.selectedOption();
     return option ? [option.value] : [];
   });
-  protected readonly selectedContext: Signal<SelectSelectedItemContext | undefined> = computed(() => {
-    const option: SelectOption | undefined = this.selectedOption();
+  protected readonly selectedContext: Signal<SelectSelectedItemContext<O> | undefined> = computed(() => {
+    const option: O | undefined = this.selectedOption();
     return option ? { $implicit: option, option } : undefined;
   });
   protected readonly positions: WritableSignal<ConnectedPosition[]> = signal([SELECTION_BELOW, SELECTION_ABOVE]);
@@ -325,12 +333,12 @@ export class Select extends FormControlState implements FormValueControl<SelectM
     this.handleExpanded(false);
   }
 
-  protected isSelected(option: SelectOption): boolean {
+  protected isSelected(option: O): boolean {
     const value: SelectModelValue = this.value();
     return value !== null && this.compareWith()(option.value, value);
   }
 
-  protected itemContext(option: SelectOption, index: number): SelectItemContext {
+  protected itemContext(option: O, index: number): SelectItemContext<O> {
     return { $implicit: option, option, selected: this.isSelected(option), disabled: Boolean(option.disabled), index };
   }
 

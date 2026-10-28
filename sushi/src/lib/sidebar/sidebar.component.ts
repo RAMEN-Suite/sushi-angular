@@ -14,8 +14,7 @@ import {
 } from '@angular/core';
 import { Navbar, type NavbarItem, NavbarItemTemplate } from '../navbar';
 import { Menu, MenuItemTemplate, MenuTrigger } from '../menu';
-import { SidebarGroupTemplate } from './sidebar-group-template.directive';
-import { SidebarItemTemplate } from './sidebar-item-template.directive';
+import { SidebarGroupTemplate, SidebarItemTemplate } from './sidebar.templates';
 import { type SidebarGroup, type SidebarGroupContext, type SidebarItemContext, type SidebarSize } from './sidebar.interfaces';
 import { SidebarFooter, SidebarHeader } from './sidebar-slots.directive';
 

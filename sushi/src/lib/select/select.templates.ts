@@ -1,34 +1,53 @@
-import { Directive } from '@angular/core';
+import { Directive, input, type InputSignal } from '@angular/core';
 import {
   type SelectGroupContext,
   type SelectItemContext,
+  type SelectOption,
   type SelectLoadingContext,
   type SelectSelectedItemContext,
 } from './select.interfaces';
 
 /** Replaces each option and exposes its index, selected, and disabled state. */
 @Directive({ selector: 'ng-template[suiSelectItem]' })
-export class SelectItemTemplate {
-  public static ngTemplateContextGuard(_directive: SelectItemTemplate, _context: unknown): _context is SelectItemContext {
+export class SelectItemTemplate<O extends SelectOption = SelectOption> {
+  /** Option source used to infer custom fields inside the template. */
+  public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
+    alias: 'suiSelectItem',
+  });
+  public static ngTemplateContextGuard<O extends SelectOption>(
+    _directive: SelectItemTemplate<O>,
+    _context: unknown,
+  ): _context is SelectItemContext<O> {
     return true;
   }
 }
 
 /** Replaces the selected value shown in the closed control. */
 @Directive({ selector: 'ng-template[suiSelectSelectedItem]' })
-export class SelectSelectedItemTemplate {
-  public static ngTemplateContextGuard(
-    _directive: SelectSelectedItemTemplate,
+export class SelectSelectedItemTemplate<O extends SelectOption = SelectOption> {
+  /** Option source used to infer custom fields inside the template. */
+  public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
+    alias: 'suiSelectSelectedItem',
+  });
+  public static ngTemplateContextGuard<O extends SelectOption>(
+    _directive: SelectSelectedItemTemplate<O>,
     _context: unknown,
-  ): _context is SelectSelectedItemContext {
+  ): _context is SelectSelectedItemContext<O> {
     return true;
   }
 }
 
 /** Replaces each group heading and exposes its group and first option. */
 @Directive({ selector: 'ng-template[suiSelectGroup]' })
-export class SelectGroupTemplate {
-  public static ngTemplateContextGuard(_directive: SelectGroupTemplate, _context: unknown): _context is SelectGroupContext {
+export class SelectGroupTemplate<O extends SelectOption = SelectOption> {
+  /** Option source used to infer custom fields inside the template. */
+  public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
+    alias: 'suiSelectGroup',
+  });
+  public static ngTemplateContextGuard<O extends SelectOption>(
+    _directive: SelectGroupTemplate<O>,
+    _context: unknown,
+  ): _context is SelectGroupContext<O> {
     return true;
   }
 }

@@ -4,8 +4,8 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { query, queryAll, render } from '../../../../testing/test-utils';
 import { type NavbarItem } from '../../navbar';
 import { Sidebar } from '../sidebar.component';
-import { SidebarGroupTemplate } from '../sidebar-group-template.directive';
-import { SidebarItemTemplate } from '../sidebar-item-template.directive';
+import { SidebarGroupTemplate } from '../sidebar.templates';
+import { SidebarItemTemplate } from '../sidebar.templates';
 import { type SidebarGroup } from '../sidebar.interfaces';
 import { SidebarFooter, SidebarHeader } from '../sidebar-slots.directive';
 

@@ -1,5 +1,5 @@
 <sui-data-view [items]="products" [layouts]="[]" [(layout)]="layout" minItemWidth="17rem" ariaLabel="Product catalog">
-  <ng-template suiDataViewHeader>
+  <ng-template [suiDataViewHeader]="products">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <strong>Products</strong>
       <div class="flex gap-2" role="group" aria-label="Product layout">
@@ -26,7 +26,7 @@
       </div>
     </div>
   </ng-template>
-  <ng-template suiDataViewItem let-product let-layout="layout">
+  <ng-template [suiDataViewItem]="products" let-product let-layout="layout">
     @if (layout === 'grid') {
       <sui-card size="sm" class="h-full overflow-hidden">
         <div class="relative grid h-32 place-items-center rounded-box bg-base-200">
@@ -43,7 +43,7 @@
               {{ product.stock }}
             </span>
           </div>
-          <p class="mt-2 flex-1 text-sm leading-relaxed text-base-content/60">{{ product.description }}</p>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-(--sui-color-muted)">{{ product.description }}</p>
 
           <div suiCardActions class="mt-5 items-center justify-between">
             <strong class="text-lg">{{ product.price }} €</strong>
@@ -66,7 +66,7 @@
               <h3 suiCardTitle>{{ product.name }}</h3>
               <span suiBadge size="sm" severity="neutral" variant="soft">{{ product.category }}</span>
             </div>
-            <p class="mt-1 text-sm leading-relaxed text-base-content/60">{{ product.description }}</p>
+            <p class="mt-1 text-sm leading-relaxed text-(--sui-color-muted)">{{ product.description }}</p>
             <span
               class="mt-2 inline-flex"
               suiBadge

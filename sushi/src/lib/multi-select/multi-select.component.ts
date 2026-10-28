@@ -86,6 +86,9 @@ export class MultiSelect<O extends MultiSelectOption = MultiSelectOption>
   extends FormControlState
   implements FormValueControl<MultiSelectModelValue>
 {
+  /** Accessible label for the action that clears the selection. */
+  public readonly clearLabel: InputSignal<string> = input<string>('Clear selection');
+
   /** Selected option values in option order. */
   public readonly value: ModelSignal<MultiSelectModelValue> = model<MultiSelectModelValue>([]);
 

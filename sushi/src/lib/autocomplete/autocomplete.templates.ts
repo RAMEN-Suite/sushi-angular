@@ -5,6 +5,7 @@ import { type AutocompleteItemContext, type AutocompleteOption, type Autocomplet
 @Directive({ selector: 'ng-template[suiAutocompleteItem]' })
 export class AutocompleteItemTemplate<O extends AutocompleteOption = AutocompleteOption> {
   /** Option source used to infer custom fields inside the template. */
+  /** Option source used to infer custom fields inside the template. */
   public readonly options: InputSignal<readonly O[] | '' | undefined> = input<readonly O[] | '' | undefined>(undefined, {
     alias: 'suiAutocompleteItem',
   });

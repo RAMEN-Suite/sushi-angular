@@ -1,5 +1,5 @@
 <sui-data-view [items]="activities" ariaLabel="Recent activity">
-  <ng-template suiDataViewItem let-activity>
+  <ng-template [suiDataViewItem]="activities" let-activity>
     <sui-card size="sm">
       <div class="flex items-start gap-3">
         <span class="mt-0.5 grid size-9 shrink-0 place-items-center rounded-field bg-base-200">
@@ -18,7 +18,7 @@
 
         <span class="min-w-0 flex-1">
           <strong class="block">{{ activity.title }}</strong>
-          <span class="mt-1 block text-sm text-base-content/60">{{ activity.detail }}</span>
+          <span class="mt-1 block text-sm text-(--sui-color-muted)">{{ activity.detail }}</span>
         </span>
 
         <span suiBadge size="sm" variant="soft" severity="neutral">{{ activity.time }}</span>

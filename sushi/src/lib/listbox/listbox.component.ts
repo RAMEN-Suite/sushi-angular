@@ -78,6 +78,17 @@ export class Listbox<O extends ListboxOption = ListboxOption>
   extends FormControlState
   implements FormValueControl<ListboxModelValue>
 {
+  /** Label for selecting all enabled options. */
+  public readonly selectAllLabel: InputSignal<string> = input<string>('Select all');
+  /** Label for clearing all selected options. */
+  public readonly clearAllLabel: InputSignal<string> = input<string>('Clear all');
+  /** Message shown while another option page is loading. */
+  public readonly loadingMessage: InputSignal<string> = input<string>('Loading more options');
+  /** Message shown when no options are available. */
+  public readonly emptyMessage: InputSignal<string> = input<string>('No options available');
+  /** Message shown when filtering produces no matches. */
+  public readonly emptyFilterMessage: InputSignal<string> = input<string>('No matching options');
+
   /** Selected value in single mode or selected values in multiple mode. */
   public readonly value: ModelSignal<ListboxModelValue> = model<ListboxModelValue>(null);
 

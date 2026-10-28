@@ -265,12 +265,23 @@ function readMethodType(method: ts.MethodDeclaration): string {
   return `(${parameters}) => ${method.type?.getText() ?? 'void'}`;
 }
 
+function readSignalName(member: ts.PropertyDeclaration, kind: ApiMemberKind): string {
+  const initializer: ts.Expression | undefined = member.initializer;
+  if (!initializer || !ts.isCallExpression(initializer)) return member.name.getText();
+  const required: boolean =
+    ts.isPropertyAccessExpression(initializer.expression) && initializer.expression.name.text === 'required';
+  const options: ts.Expression | undefined = initializer.arguments.at(kind === 'output' || required ? 0 : 1);
+  if (!options || !ts.isObjectLiteralExpression(options)) return member.name.getText();
+  const alias: ts.PropertyAssignment | undefined = findMetadataProperty(options, 'alias');
+  return alias && ts.isStringLiteralLike(alias.initializer) ? alias.initializer.text : member.name.getText();
+}
+
 function readPropertyMember(member: ts.PropertyDeclaration, checker: ts.TypeChecker): ApiMember | null {
   const kind: ApiMemberKind | null = readSignalKind(member.initializer, checker);
   if (!kind) return null;
 
   return {
-    name: member.name.getText(),
+    name: readSignalName(member, kind),
     kind,
     type: readSignalType(member, checker),
     defaultValue: readDefaultValue(member, kind),

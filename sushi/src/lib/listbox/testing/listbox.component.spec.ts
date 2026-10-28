@@ -208,3 +208,37 @@ describe('Listbox focus', (): void => {
     expect(fixture.componentInstance.touches).toBe(1);
   });
 });
+
+@Component({
+  imports: [Listbox],
+  template: `<sui-listbox
+    loading
+    multiple
+    selectAll
+    [options]="options()"
+    selectAllLabel="Alle auswählen"
+    clearAllLabel="Auswahl leeren"
+    loadingMessage="Weitere Optionen werden geladen"
+    emptyMessage="Keine Optionen"
+  />`,
+})
+class LocalizedListboxHost {
+  public readonly options: WritableSignal<readonly ListboxOption[]> = signal<readonly ListboxOption[]>([]);
+}
+
+it('translates Listbox empty and loading messages', (): void => {
+  const fixture: ComponentFixture<LocalizedListboxHost> = render(LocalizedListboxHost);
+  expect(query(fixture, 'sui-listbox').textContent).toContain('Keine Optionen');
+  expect(query(fixture, '[role="status"]').textContent).toContain('Weitere Optionen werden geladen');
+});
+
+it('translates the Listbox select-all and clear-all actions', (): void => {
+  const fixture: ComponentFixture<LocalizedListboxHost> = render(LocalizedListboxHost);
+  fixture.componentInstance.options.set([{ label: 'Miso', value: 'miso' }]);
+  fixture.detectChanges();
+  const action: HTMLButtonElement = query(fixture, 'button');
+  expect(action.textContent).toContain('Alle auswählen');
+  action.click();
+  fixture.detectChanges();
+  expect(action.textContent).toContain('Auswahl leeren');
+});
