@@ -1,5 +1,6 @@
 import { booleanAttribute, Directive, input, type InputSignalWithTransform, model, type ModelSignal } from '@angular/core';
 
+/** Styles a native fieldset and optionally controls collapsible content. */
 @Directive({
   selector: 'fieldset[suiFieldset]',
   host: {
@@ -9,7 +10,6 @@ import { booleanAttribute, Directive, input, type InputSignalWithTransform, mode
     '[class.sui-fieldset--collapsed]': 'collapsible() && !expanded()',
   },
 })
-/** Styles a native fieldset and optionally controls collapsible content. */
 export class Fieldset {
   /** Controls and reports whether collapsible content is visible. */
   public readonly expanded: ModelSignal<boolean> = model<boolean>(true);

@@ -21,8 +21,8 @@ For a phone on the same trusted network, use `npm run start:network` and open th
 | --------------------------- | --------------------------------------------------- |
 | Add or change a component   | [Component workflow](docs/component-development.md) |
 | Add tokens or shared styles | [Component styling](docs/component-styling.md)      |
-| Write library code          | [Coding standards](docs/coding-conventions.md)      |
-| Select and write tests      | [Testing standards](docs/testing-conventions.md)    |
+| Write library code          | [Coding conventions](docs/coding-conventions.md)    |
+| Select and write tests      | [Testing conventions](docs/testing-conventions.md)  |
 | Use AI assistance           | [AI conventions](docs/ai-conventions.md)            |
 
 ## Change workflow

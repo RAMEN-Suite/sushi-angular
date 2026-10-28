@@ -1,6 +1,7 @@
 import { Directive, input, type InputSignal } from '@angular/core';
 import { type MaskHalf, type MaskShape } from './mask.interfaces';
 
+/** Crops an image or other element to a built-in shape. */
 @Directive({
   selector: '[suiMask]',
   host: {
@@ -25,7 +26,6 @@ import { type MaskHalf, type MaskShape } from './mask.interfaces';
     '[class.mask-half-2]': 'suiMask() !== null && maskHalf() === "second"',
   },
 })
-/** Crops an image or other element to a built-in shape. */
 export class Mask {
   /** Shape applied to the host element. Pass null to remove masking. */
   public readonly suiMask: InputSignal<MaskShape | null> = input.required<MaskShape | null>();

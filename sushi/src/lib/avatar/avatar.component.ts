@@ -11,6 +11,7 @@ import {
 import { type AvatarMaskHalf, type AvatarShape, type AvatarSize, type AvatarStatus } from './avatar.interfaces';
 import { Mask, type MaskShape } from '../mask';
 
+/** Displays an image or fallback identity with optional presence state and masking. */
 @Component({
   selector: 'sui-avatar',
   imports: [Mask],
@@ -23,7 +24,6 @@ import { Mask, type MaskShape } from '../mask';
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-/** Displays an image or fallback identity with optional presence state and masking. */
 export class Avatar {
   /** Displays an online or offline presence marker. */
   public readonly status: InputSignal<AvatarStatus | null> = input<AvatarStatus | null>(null);

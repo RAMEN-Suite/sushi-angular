@@ -1,9 +1,9 @@
 import { Directive } from '@angular/core';
 
-@Directive({ selector: '[suiDialogBody]', host: { class: 'sui-dialog-body' } })
 /** Marks the scrollable content region of a structured Dialog. */
+@Directive({ selector: '[suiDialogBody]', host: { class: 'sui-dialog-body' } })
 export class DialogBody {}
 
-@Directive({ selector: '[suiDialogFooter]', host: { class: 'sui-dialog-footer' } })
 /** Marks the action region below a structured Dialog body. */
+@Directive({ selector: '[suiDialogFooter]', host: { class: 'sui-dialog-footer' } })
 export class DialogFooter {}

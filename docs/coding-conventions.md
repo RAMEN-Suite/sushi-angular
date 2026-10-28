@@ -1,4 +1,4 @@
-# Coding standards
+# Coding conventions
 
 The formatter, compiler and ESLint configuration enforce mechanical rules. Review remains responsible for design, public contracts and semantic grouping.
 
@@ -85,7 +85,7 @@ this.focus();
 ## Public API, documentation and verification
 
 - Prefer projection for content rendered once and typed templates for repeated or contextual content.
-- Add consumer-facing JSDoc to public declarations, members, template contexts and types. Explain behavior, units, constraints and computed fallbacks. Generated API tables read input/model defaults from their initializers; avoid repeating literal defaults in JSDoc.
+- Place declaration JSDoc before Angular decorators. Add consumer-facing JSDoc to public declarations, members, template contexts and types. Explain behavior, units, constraints and computed fallbacks. Generated API tables read input/model defaults from their initializers; avoid repeating literal defaults in JSDoc.
 - Use only public APIs in examples. Do not maintain handwritten API tables; the generator reads TypeScript and CSS sources.
 - Keep focus visible, accessible names meaningful and focus restoration predictable. Respect reduced motion and long translated text.
 - Test observable contracts and failure paths, not private implementation steps. Avoid redundant coverage of the same contract.
@@ -93,4 +93,4 @@ this.focus();
 - Keep formatter, lint, compiler configuration and documentation consistent. Do not weaken checks to accommodate an unclear design.
 - Keep broad style migrations separate from behavior fixes when committing. Follow the repository's `type(scope): description` rules and validate commit messages.
 
-See [Component styling](component-styling.md) and [Testing standards](testing-conventions.md) for the corresponding Sushi rules and verification commands.
+See [Component styling](component-styling.md) and [Testing conventions](testing-conventions.md) for the corresponding Sushi rules and verification commands.

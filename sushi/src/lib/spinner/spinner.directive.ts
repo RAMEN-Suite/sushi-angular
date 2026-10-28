@@ -1,6 +1,7 @@
 import { Directive, input, type InputSignal } from '@angular/core';
 import { type SpinnerSize, type SpinnerType } from './spinner.interfaces';
 
+/** Renders an assistive-technology-hidden loading animation that must be paired with accessible status text. */
 @Directive({
   selector: 'span[suiSpinner]',
   host: {
@@ -22,7 +23,6 @@ import { type SpinnerSize, type SpinnerType } from './spinner.interfaces';
     '[attr.aria-hidden]': '"true"',
   },
 })
-/** Renders an assistive-technology-hidden loading animation that must be paired with accessible status text. */
 export class Spinner {
   /** Selects the loading animation. */
   public readonly type: InputSignal<SpinnerType> = input<SpinnerType>('spinner');

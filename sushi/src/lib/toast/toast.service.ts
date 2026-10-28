@@ -10,8 +10,8 @@ interface ToastTimer {
 
 let nextToastId: number = 0;
 
-@Injectable({ providedIn: 'root' })
 /** Manages transient messages rendered by a Toast outlet. */
+@Injectable({ providedIn: 'root' })
 export class ToastService {
   /** @internal Current Toast queue in creation order. */
   public readonly toasts: Signal<readonly ToastItem[]>;

@@ -23,6 +23,7 @@ import { type CodeButtonContext } from './code.interfaces';
 import { CodeLine } from './code-line.directive';
 import { CodeButtonOffTemplate, CodeButtonOnTemplate, CodeButtonTemplate } from './code.templates';
 
+/** Presents terminal-like code and copies all projected code lines. */
 @Component({
   selector: 'sui-code',
   imports: [NgTemplateOutlet, LucideCheck, LucideCopy, Button],
@@ -33,7 +34,6 @@ import { CodeButtonOffTemplate, CodeButtonOnTemplate, CodeButtonTemplate } from 
     class: 'mockup-code sui-code relative block',
   },
 })
-/** Presents terminal-like code and copies all projected code lines. */
 export class Code {
   /** Shows or hides the copy control. */
   public readonly copyable: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });

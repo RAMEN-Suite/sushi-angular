@@ -340,8 +340,8 @@ const contributorNavigation: readonly NavbarItem<string>[] = [
   { label: 'Contribution guide', value: '/contribute', routerLink: '/contribute' },
   { label: 'Component workflow', value: '/contribute/components', routerLink: '/contribute/components' },
   { label: 'Component styling', value: '/contribute/styles', routerLink: '/contribute/styles' },
-  { label: 'Code standards', value: '/contribute/code', routerLink: '/contribute/code' },
-  { label: 'Testing standards', value: '/contribute/testing', routerLink: '/contribute/testing' },
+  { label: 'Coding conventions', value: '/contribute/code', routerLink: '/contribute/code' },
+  { label: 'Testing conventions', value: '/contribute/testing', routerLink: '/contribute/testing' },
   { label: 'Responsible AI', value: '/contribute/ai', routerLink: '/contribute/ai' },
 ];
 

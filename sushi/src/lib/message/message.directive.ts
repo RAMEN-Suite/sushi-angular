@@ -1,6 +1,7 @@
 import { Directive, input, type InputSignal } from '@angular/core';
 import { type MessageOrientation, type MessageSeverity, type MessageVariant } from './message.interfaces';
 
+/** Presents contextual feedback with optional semantic color and layout. */
 @Directive({
   selector: '[suiMessage]',
   host: {
@@ -18,7 +19,6 @@ import { type MessageOrientation, type MessageSeverity, type MessageVariant } fr
     '[class.alert-vertical]': 'orientation() === "vertical"',
   },
 })
-/** Presents contextual feedback with optional semantic color and layout. */
 export class Message {
   /** Applies a semantic feedback color. Omit it for a neutral message. */
   public readonly severity: InputSignal<MessageSeverity | null> = input<MessageSeverity | null>(null);

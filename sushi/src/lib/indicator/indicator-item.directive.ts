@@ -1,6 +1,7 @@
 import { Directive, input, type InputSignal } from '@angular/core';
 import { type IndicatorHorizontalPosition, type IndicatorVerticalPosition } from './indicator.interfaces';
 
+/** Positions projected content relative to its indicator target. */
 @Directive({
   selector: '[suiIndicatorItem]',
   host: {
@@ -13,7 +14,6 @@ import { type IndicatorHorizontalPosition, type IndicatorVerticalPosition } from
     '[class.indicator-bottom]': 'vertical() === "bottom"',
   },
 })
-/** Positions projected content relative to its indicator target. */
 export class IndicatorItem {
   /** Aligns the item along the horizontal axis. */
   public readonly horizontal: InputSignal<IndicatorHorizontalPosition> = input<IndicatorHorizontalPosition>('end');
