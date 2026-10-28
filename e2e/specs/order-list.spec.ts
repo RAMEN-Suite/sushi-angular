@@ -1,5 +1,22 @@
-import { expect, type Locator, type Page, test } from '@playwright/test';
+import { expect, type JSHandle, type Locator, type Page, test } from '@playwright/test';
 import { type Bounds, visibleBounds } from '../support/geometry';
+
+interface DropSample {
+  readonly committed: Promise<readonly number[]>;
+}
+
+async function observeCommittedRows(list: Locator): Promise<JSHandle<DropSample>> {
+  return list.evaluateHandle((element: HTMLElement): DropSample => ({
+    committed: new Promise((resolve): void => {
+      const observer: MutationObserver = new MutationObserver((): void => {
+        if (element.querySelector('button')?.getAttribute('aria-label') !== 'Reorder Create prototype') return;
+        observer.disconnect();
+        resolve(Array.from(element.children, (row: Element): number => row.getBoundingClientRect().y));
+      });
+      observer.observe(element, { childList: true });
+    }),
+  }));
+}
 
 async function touchAt(handle: Locator, type: string, x: number, y: number): Promise<void> {
   const scroll: Readonly<{ x: number; y: number }> = await handle.evaluate((): Readonly<{ x: number; y: number }> => ({
@@ -196,21 +213,12 @@ test('OrderList commits the drop without moving rows away from their destination
     .poll(async (): Promise<number> => Math.abs((await visibleBounds(rows.nth(1), 'the shifted row')).y - firstSlot.y))
     .toBeLessThanOrEqual(1);
 
-  // Inspect the first committed layout; a settled assertion misses the drop jump.
-  const [committed] = await Promise.all([
-    list.evaluate(
-      (element: HTMLElement): Promise<readonly number[]> =>
-        new Promise((resolve): void => {
-          const observer: MutationObserver = new MutationObserver((): void => {
-            if (element.querySelector('button')?.getAttribute('aria-label') !== 'Reorder Create prototype') return;
-            observer.disconnect();
-            resolve(Array.from(element.children, (row: Element): number => row.getBoundingClientRect().y));
-          });
-          observer.observe(element, { childList: true });
-        }),
-    ),
-    page.mouse.up(),
-  ]);
+  // Register before releasing, and capture the first committed layout to catch the drop jump.
+  const sample: JSHandle<DropSample> = await observeCommittedRows(list);
+  await page.mouse.up();
+  await expect(rows.first().getByRole('button', { name: 'Reorder Create prototype', exact: true })).toBeVisible();
+  const committed: readonly number[] = await sample.evaluate((value: DropSample): Promise<readonly number[]> => value.committed);
+  await sample.dispose();
   expect(committed).toHaveLength(slots.length);
   committed.forEach((position: number, index: number): void => {
     const slot: number | undefined = slots[index];
