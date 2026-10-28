@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Dialog</h1>
-      <p class="text-lg text-base-content/70">Present a focused modal task with native semantics and explicit close results.</p>
+      <p class="text-lg text-(--sui-color-muted)">Present a focused modal task with native semantics and explicit close results.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Dialog architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Native dialog</span
@@ -14,7 +14,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Basic modal</h2>
-      <p class="text-base-content/60">Open a native modal, close it from an action, and restore focus to its trigger.</p>
+      <p class="text-(--sui-color-muted)">Open a native modal, close it from an action, and restore focus to its trigger.</p>
     </div>
     <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
       ><ng-template pgExamplePreview><pg-dialog-basic-example /></ng-template
@@ -23,7 +23,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Movable workspace</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Combine constrained dragging, resizing, explicit dismissal, and a non-modal surface that leaves the page scrollable. Use
         <code>position</code> to start in the center, at an edge, or in a corner. This example starts vertically centered at the right edge
         and can then be moved from its header.
@@ -36,7 +36,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Custom coordinates</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Pass top, right, bottom, or left offsets to position. Numbers use pixels; strings accept CSS units. Keep enough space for the dialog
         inside the viewport. Updating position moves an open dialog and resets its drag offset.
       </p>
@@ -48,7 +48,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Changing content</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Call reposition() after content changes to reapply the configured position without reopening, clearing inputs, or changing focus.
       </p>
     </div>
@@ -59,7 +59,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Form dialog</h2>
-      <p class="text-base-content/60">Use the same controlled state with a larger, structured form.</p>
+      <p class="text-(--sui-color-muted)">Use the same controlled state with a larger, structured form.</p>
     </div>
     <pg-example-code [css]="examples.form.css" [html]="examples.form.html" [typescript]="examples.form.typescript"
       ><ng-template pgExamplePreview><pg-dialog-form-example /></ng-template
@@ -68,7 +68,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Dynamic dialog with Angular CDK</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Use CDK Dialog directly when content must be created from application logic. The SUSHI panel class applies the same surface and
         tokens without adding another service API.
       </p>

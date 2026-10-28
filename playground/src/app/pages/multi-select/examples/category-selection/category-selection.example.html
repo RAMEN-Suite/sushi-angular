@@ -53,7 +53,7 @@
         </span>
       </ng-template>
     </sui-multi-select>
-    <span class="text-xs text-base-content/60" id="permission-hint">
+    <span class="text-xs text-(--sui-color-muted)" id="permission-hint">
       Choose a complete category or adjust individual permissions.
     </span>
   </div>
@@ -68,7 +68,7 @@
         <div class="grid gap-1">
           <div class="flex items-center justify-between gap-3 text-sm">
             <span>{{ group }}</span>
-            <span class="tabular-nums text-base-content/60">{{ selectedCount(group) }}/{{ groupSize(group) }}</span>
+            <span class="tabular-nums text-(--sui-color-muted)">{{ selectedCount(group) }}/{{ groupSize(group) }}</span>
           </div>
           <progress
             suiProgress

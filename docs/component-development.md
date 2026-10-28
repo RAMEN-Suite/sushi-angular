@@ -1,6 +1,6 @@
 # Build a component
 
-This page lists every repository change required for a public component. Use the [coding standards](coding-conventions.md), [component styling](component-styling.md), and [testing standards](testing-conventions.md) for the detailed rules.
+This page lists every repository change required for a public component. Use the [coding conventions](coding-conventions.md), [component styling](component-styling.md), and [testing conventions](testing-conventions.md) for the detailed rules.
 
 ## Workflow
 
@@ -49,7 +49,7 @@ Use a directive instead of a component when native markup should remain in consu
 A minimal component follows this shape:
 
 ```ts
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, type InputSignal } from '@angular/core';
 
 /** Visual tone available for a note. */
 export type NoteTone = 'neutral' | 'info';
@@ -63,7 +63,7 @@ export type NoteTone = 'neutral' | 'info';
 })
 export class Note {
   /** Controls the semantic color treatment. */
-  readonly tone = input<NoteTone>('neutral');
+  public readonly tone: InputSignal<NoteTone> = input<NoteTone>('neutral');
 }
 ```
 
@@ -72,6 +72,8 @@ export class Note {
   <ng-content />
 </aside>
 ```
+
+Use an optional source binding on contextual collection templates, such as `[suiSelectItem]="options"` or `[suiDataViewItem]="items"`, to infer custom item fields. Expose the context with `ngTemplateContextGuard`.
 
 Document every public declaration and member in its source. Describe consumer behavior, not TypeScript syntax.
 
@@ -191,7 +193,7 @@ Write unit tests in `sushi/src/lib/<feature>/testing/`. Render a host and test t
 
 Add Playwright coverage only for behavior that requires a real browser, such as geometry, scrolling, responsive layout, native focus, pointer drag, resize, or overlay placement.
 
-Do not test that Angular constructs the class, documentation page markup, or every CSS declaration. See [testing standards](testing-conventions.md).
+Do not test that Angular constructs the class, documentation page markup, or every CSS declaration. See [testing conventions](testing-conventions.md).
 
 ## 7. Generate and verify
 

@@ -5,7 +5,7 @@
         <code class="text-xl font-semibold text-base-content">
           <ng-container [ngTemplateOutlet]="linkedTypeValue" [ngTemplateOutletContext]="{ $implicit: api().declaration }" />
         </code>
-        <p class="text-base-content/70">
+        <p class="text-(--sui-color-muted)">
           {{ api().description || 'Public API exposed by ' + api().selector + '.' }}
         </p>
       </div>
@@ -17,10 +17,10 @@
     <section class="grid gap-3" [attr.aria-labelledby]="sectionId('type-parameters')">
       <div class="flex items-baseline gap-2">
         <h3 class="scroll-mt-24 text-lg font-semibold" [id]="sectionId('type-parameters')" tabindex="-1">Type parameters</h3>
-        <span class="text-sm tabular-nums text-base-content/50">{{ api().typeParameters.length }}</span>
+        <span class="text-sm tabular-nums text-(--sui-color-subtle)">{{ api().typeParameters.length }}</span>
       </div>
       <sui-table size="sm" [columns]="typeParameterColumns" [rows]="api().typeParameters">
-        <ng-template suiTableCell let-parameter="row" let-column="column">
+        <ng-template [suiTableCell]="api().typeParameters" let-parameter="row" let-column="column">
           @switch (column.key) {
             @case ('name') {
               <code
@@ -58,10 +58,10 @@
     <section class="grid scroll-mt-24 gap-3" [attr.aria-labelledby]="sectionId(group.kind)">
       <div class="flex items-baseline gap-2">
         <h3 class="scroll-mt-24 text-lg font-semibold" [id]="sectionId(group.kind)" tabindex="-1">{{ group.label }}</h3>
-        <span class="text-sm tabular-nums text-base-content/50">{{ group.members.length }}</span>
+        <span class="text-sm tabular-nums text-(--sui-color-subtle)">{{ group.members.length }}</span>
       </div>
       <sui-table size="sm" [columns]="memberColumns" [rows]="group.members">
-        <ng-template suiTableCell let-member="row" let-column="column">
+        <ng-template [suiTableCell]="group.members" let-member="row" let-column="column">
           @switch (column.key) {
             @case ('name') {
               <code class="font-semibold">{{ member.name }}</code>
@@ -75,7 +75,7 @@
               <code class="text-sm">{{ member.defaultValue ?? '—' }}</code>
             }
             @default {
-              <span class="text-base-content/70">{{ member.description || '—' }}</span>
+              <span class="text-(--sui-color-muted)">{{ member.description || '—' }}</span>
             }
           }
         </ng-template>
@@ -87,10 +87,10 @@
     <section class="grid scroll-mt-24 gap-3" [attr.aria-labelledby]="sectionId('templates')">
       <div class="flex items-baseline gap-2">
         <h3 class="scroll-mt-24 text-lg font-semibold" [id]="sectionId('templates')" tabindex="-1">Templates</h3>
-        <span class="text-sm tabular-nums text-base-content/50">{{ api().templates.length }}</span>
+        <span class="text-sm tabular-nums text-(--sui-color-subtle)">{{ api().templates.length }}</span>
       </div>
       <sui-table size="sm" [columns]="templateColumns" [rows]="api().templates">
-        <ng-template suiTableCell let-template="row" let-column="column">
+        <ng-template [suiTableCell]="api().templates" let-template="row" let-column="column">
           @switch (column.key) {
             @case ('marker') {
               <code class="font-semibold">{{ template.name }}</code>
@@ -103,24 +103,24 @@
             @case ('inputs') {
               @if (template.members.length > 0) {
                 <sui-list size="xs" [dividers]="false" [items]="template.members">
-                  <ng-template suiListItem let-member>
+                  <ng-template [suiListItem]="template.members" let-member>
                     <span class="flex flex-wrap items-baseline gap-x-2 text-sm">
                       <code class="font-semibold">{{ member.name }}</code>
-                      <code class="text-base-content/60">
+                      <code class="text-(--sui-color-muted)">
                         <ng-container [ngTemplateOutlet]="linkedTypeValue" [ngTemplateOutletContext]="{ $implicit: member.type }" />
                       </code>
                       @if (hasExplicitDefault(member)) {
-                        <span class="text-base-content/50">({{ member.defaultValue }})</span>
+                        <span class="text-(--sui-color-subtle)">({{ member.defaultValue }})</span>
                       }
                     </span>
                   </ng-template>
                 </sui-list>
               } @else {
-                <span class="text-base-content/50">—</span>
+                <span class="text-(--sui-color-subtle)">—</span>
               }
             }
             @default {
-              <span class="text-base-content/70">{{ template.description || '—' }}</span>
+              <span class="text-(--sui-color-muted)">{{ template.description || '—' }}</span>
             }
           }
         </ng-template>
@@ -132,10 +132,10 @@
     <section class="grid scroll-mt-24 gap-3" [attr.aria-labelledby]="sectionId('types')">
       <div class="flex items-baseline gap-2">
         <h3 class="scroll-mt-24 text-lg font-semibold" [id]="sectionId('types')" tabindex="-1">Types</h3>
-        <span class="text-sm tabular-nums text-base-content/50">{{ api().types.length }}</span>
+        <span class="text-sm tabular-nums text-(--sui-color-subtle)">{{ api().types.length }}</span>
       </div>
       <sui-table size="sm" [columns]="typeColumns" [rows]="api().types">
-        <ng-template suiTableCell let-type="row" let-column="column">
+        <ng-template [suiTableCell]="api().types" let-type="row" let-column="column">
           @switch (column.key) {
             @case ('name') {
               <span
@@ -171,7 +171,7 @@
             }
             @case ('definition') {
               @if (type.kind === 'interface' || type.source === 'platform') {
-                <span class="text-base-content/50">{{ typeDefinition(type) }}</span>
+                <span class="text-(--sui-color-subtle)">{{ typeDefinition(type) }}</span>
               } @else {
                 <span class="font-mono text-sm text-base-content/80">
                   <ng-container
@@ -182,7 +182,7 @@
               }
             }
             @default {
-              <span class="text-base-content/70">{{ type.description || '—' }}</span>
+              <span class="text-(--sui-color-muted)">{{ type.description || '—' }}</span>
             }
           }
         </ng-template>
@@ -190,7 +190,11 @@
       <div class="mt-4 grid gap-6">
         @for (type of api().types; track type.name) {
           @if (showsTypeDetails(type)) {
-            <article class="grid scroll-mt-20 gap-3 rounded-box border border-base-300 p-4" [id]="typeId(type.name)" tabindex="-1">
+            <article
+              class="grid scroll-mt-20 gap-3 rounded-box border border-(--sui-color-border) p-4"
+              [id]="typeId(type.name)"
+              tabindex="-1"
+            >
               <div class="flex flex-wrap items-center gap-3">
                 <span class="font-semibold">
                   @for (part of typeParts().get(typeSignature(type)); track $index) {
@@ -216,10 +220,10 @@
                 <span suiBadge [severity]="typeSeverity(type.kind)" variant="soft" size="xs">{{ type.kind }}</span>
               </div>
               @if (type.description) {
-                <p class="text-sm text-base-content/70">{{ type.description }}</p>
+                <p class="text-sm text-(--sui-color-muted)">{{ type.description }}</p>
               }
               <sui-table size="sm" [columns]="typeMemberColumns" [rows]="type.members">
-                <ng-template suiTableCell let-member="row" let-column="column">
+                <ng-template [suiTableCell]="type.members" let-member="row" let-column="column">
                   @switch (column.key) {
                     @case ('name') {
                       <code class="font-semibold">{{ member.name }}{{ member.optional ? '?' : '' }}</code>
@@ -233,7 +237,7 @@
                       </code>
                     }
                     @default {
-                      <span class="text-base-content/70">{{ member.description || '—' }}</span>
+                      <span class="text-(--sui-color-muted)">{{ member.description || '—' }}</span>
                     }
                   }
                 </ng-template>

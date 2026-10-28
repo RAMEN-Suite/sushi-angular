@@ -3,7 +3,9 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Menu</h1>
-      <p class="text-lg text-base-content/70">Present related application commands inline, from a trigger, or at a context-menu gesture.</p>
+      <p class="text-lg text-(--sui-color-muted)">
+        Present related application commands inline, from a trigger, or at a context-menu gesture.
+      </p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Menu architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Component</span
@@ -15,7 +17,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Inline command menu</h2>
-      <p class="text-base-content/60">Keep a small set of application commands visible beside the content they affect.</p>
+      <p class="text-(--sui-color-muted)">Keep a small set of application commands visible beside the content they affect.</p>
     </div>
     <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
       ><ng-template pgExamplePreview><pg-menu-basic-example /></ng-template
@@ -24,7 +26,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Active state and custom icons</h2>
-      <p class="text-base-content/60">Extend the item model and render additional content through the item template.</p>
+      <p class="text-(--sui-color-muted)">Extend the item model and render additional content through the item template.</p>
     </div>
     <pg-example-code [html]="examples.active.html" [typescript]="examples.active.typescript"
       ><ng-template pgExamplePreview><pg-menu-active-example /></ng-template
@@ -33,7 +35,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Split-button dropdown</h2>
-      <p class="text-base-content/60">Keep the common action visible and place related alternatives in a triggered overlay.</p>
+      <p class="text-(--sui-color-muted)">Keep the common action visible and place related alternatives in a triggered overlay.</p>
     </div>
     <pg-example-code [html]="examples.popup.html" [typescript]="examples.popup.typescript"
       ><ng-template pgExamplePreview><pg-menu-popup-example /></ng-template
@@ -42,7 +44,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Context menu</h2>
-      <p class="text-base-content/60">Open commands at the pointer or with <kbd suiKbd size="sm">Shift + F10</kbd>.</p>
+      <p class="text-(--sui-color-muted)">Open commands at the pointer or with <kbd suiKbd size="sm">Shift + F10</kbd>.</p>
     </div>
     <pg-example-code [html]="examples.context.html" [typescript]="examples.context.typescript"
       ><ng-template pgExamplePreview><pg-menu-context-example /></ng-template
@@ -51,7 +53,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Nested commands</h2>
-      <p class="text-base-content/60">Group secondary commands in submenus with pointer and keyboard navigation.</p>
+      <p class="text-(--sui-color-muted)">Group secondary commands in submenus with pointer and keyboard navigation.</p>
     </div>
     <pg-example-code [html]="examples.submenu.html" [typescript]="examples.submenu.typescript"
       ><ng-template pgExamplePreview><pg-menu-submenu-example /></ng-template
@@ -60,7 +62,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Groups and templates</h2>
-      <p class="text-base-content/60">Customize repeated entries and structural regions while Menu owns interaction.</p>
+      <p class="text-(--sui-color-muted)">Customize repeated entries and structural regions while Menu owns interaction.</p>
     </div>
     <pg-example-code [html]="examples.groups.html" [typescript]="examples.groups.typescript"
       ><ng-template pgExamplePreview><pg-menu-groups-example /></ng-template
@@ -69,7 +71,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Disabled states</h2>
-      <p class="text-base-content/60">Disable one unavailable command or the complete menu without hiding it.</p>
+      <p class="text-(--sui-color-muted)">Disable one unavailable command or the complete menu without hiding it.</p>
     </div>
     <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript"
       ><ng-template pgExamplePreview><pg-menu-states-example /></ng-template

@@ -3,7 +3,9 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Color Picker</h1>
-      <p class="text-lg text-base-content/70">Choose with the native picker, enter an exact hex value, or start from curated presets.</p>
+      <p class="text-lg text-(--sui-color-muted)">
+        Choose with the native picker, enter an exact hex value, or start from curated presets.
+      </p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Color Picker architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Component</span>
@@ -16,7 +18,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Signal Forms</h2>
-      <p class="text-base-content/60">The native picker and hex field edit one string value and reset to an explicit default.</p>
+      <p class="text-(--sui-color-muted)">The native picker and hex field edit one string value and reset to an explicit default.</p>
     </div>
     <pg-example-code class="block" [html]="examples.basic.html" [typescript]="examples.basic.typescript">
       <ng-template pgExamplePreview><pg-color-picker-basic-example class="block" /></ng-template>
@@ -26,7 +28,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Application palette</h2>
-      <p class="text-base-content/60">Presets provide accessible shortcuts, while a template can replace each option’s content.</p>
+      <p class="text-(--sui-color-muted)">Presets provide accessible shortcuts, while a template can replace each option’s content.</p>
     </div>
     <pg-example-code class="block" [html]="examples.presets.html" [typescript]="examples.presets.typescript">
       <ng-template pgExamplePreview><pg-color-picker-presets-example class="block" /></ng-template>
@@ -36,7 +38,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Compact and form states</h2>
-      <p class="text-base-content/60">Hide the hex field for compact contexts or communicate disabled and invalid states explicitly.</p>
+      <p class="text-(--sui-color-muted)">Hide the hex field for compact contexts or communicate disabled and invalid states explicitly.</p>
     </div>
     <pg-example-code class="block" [html]="examples.states.html" [typescript]="examples.states.typescript">
       <ng-template pgExamplePreview><pg-color-picker-states-example class="block" /></ng-template>

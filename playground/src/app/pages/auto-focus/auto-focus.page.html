@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Auto Focus</h1>
-      <p class="text-lg text-base-content/70">Request focus after an enabled element enters the rendered view.</p>
+      <p class="text-lg text-(--sui-color-muted)">Request focus after an enabled element enters the rendered view.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Auto Focus architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Directive</span
@@ -13,7 +13,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Dynamic content</h2>
-      <p class="text-base-content/60">Move focus when Angular finishes rendering a newly requested control.</p>
+      <p class="text-(--sui-color-muted)">Move focus when Angular finishes rendering a newly requested control.</p>
     </div>
     <pg-example-code [html]="examples.dynamic.html" [typescript]="examples.dynamic.typescript"
       ><ng-template pgExamplePreview><pg-auto-focus-dynamic-example /></ng-template
@@ -22,7 +22,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Opt-out and disabled controls</h2>
-      <p class="text-base-content/60">Suppress the request explicitly; disabled elements are skipped automatically.</p>
+      <p class="text-(--sui-color-muted)">Suppress the request explicitly; disabled elements are skipped automatically.</p>
     </div>
     <pg-example-code [html]="examples.disabled.html" [typescript]="examples.disabled.typescript"
       ><ng-template pgExamplePreview><pg-auto-focus-disabled-example /></ng-template

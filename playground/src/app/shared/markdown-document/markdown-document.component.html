@@ -20,10 +20,10 @@
         }
         @case ('table') {
           <sui-table size="sm" showGridlines [rowHover]="false" [rows]="block.rows" [columns]="block.columns">
-            <ng-template suiTableHeader let-column>
+            <ng-template [suiTableHeader]="block.rows" let-column>
               <span [innerHTML]="column.header"></span>
             </ng-template>
-            <ng-template suiTableCell let-value>
+            <ng-template [suiTableCell]="block.rows" let-value>
               <span [innerHTML]="value"></span>
             </ng-template>
           </sui-table>

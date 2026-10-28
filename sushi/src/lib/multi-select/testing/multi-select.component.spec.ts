@@ -242,3 +242,16 @@ describe('MultiSelect extension surfaces', (): void => {
     expect(document.querySelector('[data-loading]')).toBeTruthy();
   });
 });
+
+@Component({
+  imports: [MultiSelect],
+  template: `<sui-multi-select showClear clearLabel="Auswahl löschen" [options]="options" [value]="['miso']" />`,
+})
+class LocalizedMultiSelectHost {
+  public readonly options: readonly MultiSelectOption[] = [{ label: 'Miso', value: 'miso' }];
+}
+
+it('translates the MultiSelect clear action', (): void => {
+  const fixture: ComponentFixture<LocalizedMultiSelectHost> = render(LocalizedMultiSelectHost);
+  expect(query(fixture, '[aria-label="Auswahl löschen"]')).toBeTruthy();
+});

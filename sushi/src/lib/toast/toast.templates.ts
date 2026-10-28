@@ -1,8 +1,8 @@
 import { Directive, inject, input, type InputSignal, TemplateRef } from '@angular/core';
 import { type ToastTemplateContext } from './toast.interfaces';
 
-@Directive({ selector: 'ng-template[suiToastContent]' })
 /** Registers named custom content that can be selected for individual Toasts. */
+@Directive({ selector: 'ng-template[suiToastContent]' })
 export class ToastContentTemplate {
   public static ngTemplateContextGuard(_directive: ToastContentTemplate, _context: unknown): _context is ToastTemplateContext {
     return true;

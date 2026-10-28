@@ -162,3 +162,40 @@ describe('FileDrop disabled and public behavior', (): void => {
     expect(fixture.componentInstance.drops).toEqual([]);
   });
 });
+
+@Component({
+  imports: [FileDrop],
+  template: `
+    <sui-file-drop
+      multiple
+      [(value)]="files"
+      selectedFilesLabel="Dateien"
+      emptyMessage="Keine Dateien"
+      [selectionMessage]="selectionMessage"
+      [removeLabel]="removeLabel"
+    />
+  `,
+})
+class LocalizedFileDropHost {
+  public readonly files: WritableSignal<readonly File[]> = signal<readonly File[]>([]);
+  public readonly selectionMessage: (count: number) => string = (count: number): string =>
+    `${count} ${count === 1 ? 'Datei' : 'Dateien'} gewählt`;
+  public readonly removeLabel: (file: File) => string = (file: File): string => `${file.name} entfernen`;
+}
+
+it('translates FileDrop counts, list names, remove labels and empty announcements', (): void => {
+  const fixture: ComponentFixture<LocalizedFileDropHost> = render(LocalizedFileDropHost);
+  expect(query(fixture, 'sui-file-drop').textContent).toContain('Keine Dateien');
+  fixture.componentInstance.files.set([image]);
+  fixture.detectChanges();
+  expect(query(fixture, 'sui-file-drop').textContent).toContain('1 Datei gewählt');
+  expect(query(fixture, 'ul').getAttribute('aria-label')).toBe('Dateien');
+  fixture.componentInstance.files.set([image, documentFile]);
+  fixture.detectChanges();
+  expect(query(fixture, 'sui-file-drop').textContent).toContain('2 Dateien gewählt');
+  query(fixture, '[aria-label="ramen.png entfernen"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+  fixture.detectChanges();
+  query(fixture, '[aria-label="menu.pdf entfernen"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+  fixture.detectChanges();
+  expect(query(fixture, '[aria-live="polite"]').textContent).toBe('Keine Dateien');
+});

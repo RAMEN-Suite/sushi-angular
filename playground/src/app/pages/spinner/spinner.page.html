@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Spinner</h1>
-      <p class="text-lg text-base-content/70">Indicate ongoing work with a decorative loading animation.</p>
+      <p class="text-lg text-(--sui-color-muted)">Indicate ongoing work with a decorative loading animation.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Spinner architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Directive</span>
@@ -14,7 +14,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Animations and sizes</h2>
-      <p class="text-base-content/60">Choose the animation shape and size that fit the density of its surrounding content.</p>
+      <p class="text-(--sui-color-muted)">Choose the animation shape and size that fit the density of its surrounding content.</p>
     </div>
     <pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript">
       <ng-template pgExamplePreview><pg-spinner-usage-example /></ng-template>
@@ -24,7 +24,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Loading contexts</h2>
-      <p class="text-base-content/60">Pair the decorative spinner with visible status text for regions, rows, and buttons.</p>
+      <p class="text-(--sui-color-muted)">Pair the decorative spinner with visible status text for regions, rows, and buttons.</p>
     </div>
     <pg-example-code [html]="examples.contexts.html" [typescript]="examples.contexts.typescript">
       <ng-template pgExamplePreview><pg-spinner-contexts-example /></ng-template>

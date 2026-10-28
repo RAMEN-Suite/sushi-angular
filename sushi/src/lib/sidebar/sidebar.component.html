@@ -9,7 +9,7 @@
     <section
       class="sui-sidebar__group"
       [class.border-t]="group.dividerBefore"
-      [class.border-base-300]="group.dividerBefore"
+      [style.border-color]="group.dividerBefore ? 'var(--sui-sidebar-divider-color)' : null"
       [class.pt-4]="group.dividerBefore"
       [attr.data-divider-before]="group.dividerBefore ? '' : null"
     >

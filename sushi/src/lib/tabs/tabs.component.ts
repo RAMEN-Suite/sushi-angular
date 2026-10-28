@@ -28,6 +28,7 @@ import {
   type TabsVariant,
 } from './tabs.interfaces';
 
+/** Switches between related templated views with Angular Aria keyboard behavior. */
 @Component({
   selector: 'sui-tabs',
   imports: [AriaTab, AriaTabContent, AriaTabList, AriaTabPanel, AriaTabs, NgTemplateOutlet],
@@ -36,7 +37,6 @@ import {
   host: { class: 'sui-tabs block min-w-0' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-/** Switches between related templated views with Angular Aria keyboard behavior. */
 export class Tabs {
   /** Controls and reports the active tab value. */
   public readonly value: ModelSignal<TabsValue> = model.required<TabsValue>();

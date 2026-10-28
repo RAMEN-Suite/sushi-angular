@@ -9,7 +9,7 @@
 
   <sui-card size="sm">
     <sui-list [items]="environments" ariaLabel="Deployment environments">
-      <ng-template suiListItem let-environment>
+      <ng-template [suiListItem]="environments" let-environment>
         <span class="list-col-grow">{{ environment.name }}</span>
         <span suiBadge size="sm" [severity]="environment.severity" variant="soft">{{ environment.state }}</span>
       </ng-template>

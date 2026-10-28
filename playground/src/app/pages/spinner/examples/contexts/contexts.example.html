@@ -4,7 +4,7 @@
       <div>
         <span suiSpinner type="ring" size="lg"></span>
         <p class="mt-3 font-medium">Preparing dashboard</p>
-        <p class="mt-1 text-sm text-base-content/60">This may take a few seconds.</p>
+        <p class="mt-1 text-sm text-(--sui-color-muted)">This may take a few seconds.</p>
       </div>
     </div>
   </sui-card>
@@ -12,7 +12,7 @@
   <sui-card size="sm">
     <h3 suiCardTitle>Recent activity</h3>
     <sui-list [items]="activities" ariaLabel="Background activity">
-      <ng-template suiListItem let-activity>
+      <ng-template [suiListItem]="activities" let-activity>
         <span class="list-col-grow">{{ activity.label }}</span>
         <span suiSpinner [type]="activity.spinner" size="sm"></span>
       </ng-template>

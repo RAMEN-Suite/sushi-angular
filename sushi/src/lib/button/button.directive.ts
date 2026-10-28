@@ -14,10 +14,12 @@ import {
 } from '@angular/core';
 import { type ButtonSeverity, type ButtonShape, type ButtonSize, type ButtonVariant } from './button.interfaces';
 
+/** Styles native buttons and links with consistent, focusable disabled behavior. */
 @Directive({
   selector: 'button[suiButton], a[suiButton]',
   host: {
-    class: 'btn sui-button',
+    class: 'btn sui-button sui-internal-size-text',
+    '[attr.data-size]': 'size()',
 
     '[class.btn-primary]': 'severity() === "primary"',
     '[class.btn-secondary]': 'severity() === "secondary"',
@@ -52,7 +54,6 @@ import { type ButtonSeverity, type ButtonShape, type ButtonSize, type ButtonVari
     '[attr.tabindex]': 'tabIndex()',
   },
 })
-/** Styles native buttons and links with consistent, focusable disabled behavior. */
 export class Button {
   /** Applies a semantic theme color. */
   public readonly severity: InputSignal<ButtonSeverity> = input<ButtonSeverity>('primary');

@@ -8,6 +8,7 @@ import {
   Component,
   computed,
   contentChild,
+  DestroyRef,
   inject,
   input,
   type InputSignal,
@@ -75,11 +76,11 @@ export class Drawer {
   /** Emits when the Drawer requests to close. */
   public readonly closed: OutputEmitterRef<DrawerCloseReason> = output<DrawerCloseReason>();
 
-  /** Stable ID referenced by Drawer triggers. */
-  public readonly drawerId: string = `sui-drawer-${++nextDrawerId}`;
-
   protected readonly header: Signal<DrawerHeader | undefined> = contentChild(DrawerHeader);
   protected readonly footer: Signal<DrawerFooter | undefined> = contentChild(DrawerFooter);
+
+  /** Stable ID referenced by Drawer triggers. */
+  public readonly drawerId: string = `sui-drawer-${++nextDrawerId}`;
 
   protected readonly toggleId: string = `${this.drawerId}-toggle`;
 
@@ -95,10 +96,13 @@ export class Drawer {
     this.breakpointObserver.observe(Object.values(DRAWER_BREAKPOINTS)),
     { initialValue: { breakpoints: {}, matches: false } },
   );
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private focusFrame: number | undefined;
   private restoreTarget: HTMLElement | null = null;
   private wasModalOpen: boolean = false;
 
   public constructor() {
+    this.destroyRef.onDestroy((): void => this.cancelFocus());
     afterRenderEffect({ write: (): void => this.syncModalState() });
   }
 
@@ -150,9 +154,11 @@ export class Drawer {
     if (open === this.wasModalOpen) return;
 
     this.wasModalOpen = open;
+    this.cancelFocus();
     if (open) {
       this.restoreTarget ??= this.activeElement();
-      this.document.defaultView?.requestAnimationFrame((): void => {
+      this.focusFrame = this.document.defaultView?.requestAnimationFrame((): void => {
+        this.focusFrame = undefined;
         if (this.modalOpen()) this.focusPanel();
       });
       return;
@@ -163,6 +169,12 @@ export class Drawer {
       return;
     }
     this.restoreFocus();
+  }
+
+  private cancelFocus(): void {
+    if (this.focusFrame === undefined) return;
+    this.document.defaultView?.cancelAnimationFrame(this.focusFrame);
+    this.focusFrame = undefined;
   }
 
   private activeElement(): HTMLElement | null {

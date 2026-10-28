@@ -16,7 +16,7 @@
      * Color of fixed header and footer separators.
      * @example color-mix(in oklab, var(--color-base-content) 12%, transparent)
      */
-    --sui-sidebar-divider-color: var(--color-base-300);
+    --sui-sidebar-divider-color: var(--sui-color-border);
     /**
      * Color of group headings.
      * @example color-mix(in oklab, var(--color-primary) 65%, var(--color-base-content))

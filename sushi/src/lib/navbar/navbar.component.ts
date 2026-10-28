@@ -20,7 +20,7 @@ import { NavbarMenu } from './internal/navbar-menu.component';
 import { NavbarState } from './internal/navbar.state';
 import { NavbarToggle } from './internal/navbar-toggle.directive';
 import { NavbarContent } from './navbar-content.directive';
-import { NavbarItemTemplate } from './navbar-item-template.directive';
+import { NavbarItemTemplate } from './navbar.templates';
 import {
   type NavbarCollapseAt,
   type NavbarInset,
@@ -32,7 +32,7 @@ import {
   type NavbarSurface,
   type NavbarVariant,
 } from './navbar.interfaces';
-import { NavbarAction, NavbarBrand } from './navbar-slot.directive';
+import { NavbarAction, NavbarBrand } from './navbar-slots.directive';
 
 /** Builds a responsive navigation landmark from an item model or projected custom content. */
 @Component({
@@ -63,7 +63,7 @@ export class Navbar<I extends NavbarItem = NavbarItem> {
   public readonly inset: InputSignal<NavbarInset> = input<NavbarInset>('default');
   /** Optionally centers generated navigation items in the expanded layout. */
   public readonly menuAlign: InputSignal<NavbarMenuAlign> = input<NavbarMenuAlign>('auto');
-  /** Controls the minimum height of horizontal Navbar layouts. */
+  /** Controls the minimum height of horizontal layouts. Generated labels use the shared medium text token; projected content keeps its surrounding typography. */
   public readonly size: InputSignal<NavbarSize> = input<NavbarSize>('md');
   /** Controls whether the Navbar renders its own bordered surface. */
   public readonly surface: InputSignal<NavbarSurface> = input<NavbarSurface>('bordered');

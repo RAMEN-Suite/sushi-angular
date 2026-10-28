@@ -63,7 +63,7 @@
       class="sui-selection-clear inline-flex size-4 shrink-0 cursor-pointer items-center justify-center"
       role="button"
       tabindex="0"
-      aria-label="Clear selection"
+      [attr.aria-label]="clearLabel()"
       (click)="handleClear($event)"
       (keydown.enter)="handleClear($event)"
       (keydown.space)="handleClear($event)"

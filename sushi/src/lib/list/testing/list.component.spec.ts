@@ -15,7 +15,7 @@ interface Person {
   imports: [List, ListItemTemplate],
   template: `
     <sui-list ariaLabel="Team" size="sm" rowHover [dividers]="dividers()" [items]="items()" [trackBy]="trackPerson">
-      <ng-template suiListItem let-person let-index="index" let-count="count" let-first="first" let-last="last">
+      <ng-template [suiListItem]="items()" let-person let-index="index" let-count="count" let-first="first" let-last="last">
         <span [attr.data-id]="person.id">{{ index + 1 }}/{{ count }} {{ person.name }} {{ first }} {{ last }}</span>
       </ng-template>
     </sui-list>

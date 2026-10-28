@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Message</h1>
-      <p class="text-lg text-base-content/70">Present contextual information, outcomes, and recoverable problems.</p>
+      <p class="text-lg text-(--sui-color-muted)">Present contextual information, outcomes, and recoverable problems.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Message architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Directive</span>
@@ -13,7 +13,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Semantic feedback</h2>
-      <p class="text-base-content/60">Choose severity from the meaning and set status or alert semantics according to urgency.</p>
+      <p class="text-(--sui-color-muted)">Choose severity from the meaning and set status or alert semantics according to urgency.</p>
     </div>
     <pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript">
       <ng-template pgExamplePreview><pg-message-usage-example /></ng-template>
@@ -23,7 +23,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Messages with actions</h2>
-      <p class="text-base-content/60">Keep recovery actions close to their message without prescribing the surrounding page layout.</p>
+      <p class="text-(--sui-color-muted)">Keep recovery actions close to their message without prescribing the surrounding page layout.</p>
     </div>
     <pg-example-code [html]="examples.actions.html" [typescript]="examples.actions.typescript">
       <ng-template pgExamplePreview><pg-message-actions-example /></ng-template>
@@ -33,7 +33,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Vertical layout</h2>
-      <p class="text-base-content/60">Stack content explicitly when a horizontal message would become crowded.</p>
+      <p class="text-(--sui-color-muted)">Stack content explicitly when a horizontal message would become crowded.</p>
     </div>
     <pg-example-code [html]="examples.vertical.html" [typescript]="examples.vertical.typescript">
       <ng-template pgExamplePreview><pg-message-vertical-example /></ng-template>

@@ -20,7 +20,7 @@
 .sui-input-otp--disabled {
   --input-color: color-mix(in oklab, var(--color-base-content) 12%, transparent);
 
-  color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+  color: color-mix(in oklab, var(--color-base-content) calc(var(--sui-disabled-opacity) * 100%), transparent);
   user-select: none;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .sui-input-otp--disabled > input {
-  color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+  color: color-mix(in oklab, var(--color-base-content) calc(var(--sui-disabled-opacity) * 100%), transparent);
   opacity: 1;
   -webkit-text-fill-color: currentColor;
 }

@@ -3,10 +3,10 @@ import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { press, query, queryAll, render, requireItem } from '../../../../testing/test-utils';
 import { NavbarContent } from '../navbar-content.directive';
-import { NavbarItemTemplate } from '../navbar-item-template.directive';
+import { NavbarItemTemplate } from '../navbar.templates';
 import { Navbar } from '../navbar.component';
 import type { NavbarItem, NavbarItemValue } from '../navbar.interfaces';
-import { NavbarAction, NavbarBrand } from '../navbar-slot.directive';
+import { NavbarAction, NavbarBrand } from '../navbar-slots.directive';
 
 const items: readonly NavbarItem[] = [
   { label: 'Overview', value: 'overview', href: '/overview' },

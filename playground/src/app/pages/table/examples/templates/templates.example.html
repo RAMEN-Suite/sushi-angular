@@ -1,5 +1,5 @@
 <sui-table [columns]="columns" [rows]="items">
-  <ng-template suiTableCaption let-rows="rows">
+  <ng-template [suiTableCaption]="items" let-rows="rows">
     <span class="flex min-w-max items-center justify-between gap-4 px-4 py-3 text-start">
       <span class="inline-flex items-center gap-2">
         <svg lucideBoxes class="size-4" aria-hidden="true"></svg>
@@ -11,18 +11,18 @@
     </span>
   </ng-template>
 
-  <ng-template suiTableHeader let-column>
-    <span class="text-xs uppercase tracking-wide text-base-content/60">{{ column.header }}</span>
+  <ng-template [suiTableHeader]="items" let-column>
+    <span class="text-xs uppercase tracking-wide text-(--sui-color-muted)">{{ column.header }}</span>
   </ng-template>
 
-  <ng-template suiTableRow let-row let-rowIndex="rowIndex">
+  <ng-template [suiTableRow]="items" let-row let-rowIndex="rowIndex">
     <tr class="row-hover" [class.bg-warning/5]="row.state === 'Low'">
       <th scope="row">
         <span class="flex items-center gap-3">
-          <span class="text-xs tabular-nums text-base-content/40">{{ rowIndex + 1 }}</span>
+          <span class="text-xs tabular-nums text-(--sui-color-subtle)">{{ rowIndex + 1 }}</span>
           <span>
             <strong class="block">{{ row.product }}</strong>
-            <span class="text-xs text-base-content/55">{{ row.sku }}</span>
+            <span class="text-xs text-(--sui-color-muted)">{{ row.sku }}</span>
           </span>
         </span>
       </th>
@@ -35,18 +35,18 @@
     </tr>
   </ng-template>
 
-  <ng-template suiTableEmpty>
-    <span class="flex flex-col items-center gap-2 py-10 text-base-content/60">
+  <ng-template [suiTableEmpty]="items">
+    <span class="flex flex-col items-center gap-2 py-10 text-(--sui-color-muted)">
       <svg lucidePackageOpen class="size-7" aria-hidden="true"></svg>
       No inventory has been added.
     </span>
   </ng-template>
 
-  <ng-template suiTableLoading>Refreshing inventory…</ng-template>
+  <ng-template [suiTableLoading]="items">Refreshing inventory…</ng-template>
 
-  <ng-template suiTableFooter let-rows="rows">
+  <ng-template [suiTableFooter]="items" let-rows="rows">
     <span class="flex min-w-max items-center justify-between gap-6 whitespace-nowrap text-sm">
-      <span class="text-base-content/60">Warehouse sync complete</span>
+      <span class="text-(--sui-color-muted)">Warehouse sync complete</span>
       <strong>{{ rows.length }} tracked products</strong>
     </span>
   </ng-template>

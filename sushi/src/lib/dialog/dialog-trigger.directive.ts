@@ -12,6 +12,7 @@ import {
 import { type Dialog } from './dialog.component';
 import { OVERLAY_TRIGGER_OPEN } from '../internal/overlay-trigger-state';
 
+/** Opens and closes a Dialog from a native button. */
 @Directive({
   selector: 'button[suiDialogTrigger]',
   providers: [
@@ -33,7 +34,6 @@ import { OVERLAY_TRIGGER_OPEN } from '../internal/overlay-trigger-state';
     '(click)': 'handleClick($event)',
   },
 })
-/** Opens and closes a Dialog from a native button. */
 export class DialogTrigger {
   /** Dialog controlled by this trigger. */
   public readonly dialog: InputSignal<Dialog> = input.required<Dialog>({ alias: 'suiDialogTrigger' });

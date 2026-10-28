@@ -1,8 +1,15 @@
-import { Directive } from '@angular/core';
+import { Directive, input, type InputSignal } from '@angular/core';
 import { type ListItemContext } from './list.interfaces';
 
-/** Renders each row and exposes `$implicit`, `item`, `index`, `count`, `first`, `last`, `even`, and `odd`. */
+/** Customizes each item while preserving the collection's native semantics. */
 @Directive({ selector: 'ng-template[suiListItem]' })
-export class ListItemTemplate {
-  declare public static readonly ngTemplateContextType: ListItemContext<unknown>;
+export class ListItemTemplate<T = unknown> {
+  /** Item source used to infer the template context. */
+  public readonly items: InputSignal<readonly T[] | '' | undefined> = input<readonly T[] | '' | undefined>(undefined, {
+    alias: 'suiListItem',
+  });
+
+  public static ngTemplateContextGuard<T>(_directive: ListItemTemplate<T>, _context: unknown): _context is ListItemContext<T> {
+    return true;
+  }
 }

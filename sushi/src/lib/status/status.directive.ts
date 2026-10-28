@@ -1,6 +1,7 @@
 import { Directive, input, type InputSignal } from '@angular/core';
 import { type StatusAnimation, type StatusSeverity, type StatusSize } from './status.interfaces';
 
+/** Renders an assistive-technology-hidden state marker that must be paired with descriptive content. */
 @Directive({
   selector: 'span[suiStatus]',
   host: {
@@ -27,7 +28,6 @@ import { type StatusAnimation, type StatusSeverity, type StatusSize } from './st
     '[attr.aria-hidden]': '"true"',
   },
 })
-/** Renders an assistive-technology-hidden state marker that must be paired with descriptive content. */
 export class Status {
   /** Applies a semantic theme color. */
   public readonly severity: InputSignal<StatusSeverity | null> = input<StatusSeverity | null>(null);

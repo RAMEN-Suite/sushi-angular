@@ -1,6 +1,6 @@
 <sui-card size="sm" class="w-full max-w-2xl">
   <sui-list rowHover size="sm" [dividers]="false" [items]="members" ariaLabel="Project members">
-    <ng-template suiListItem let-member>
+    <ng-template [suiListItem]="members" let-member>
       @if (member.image) {
         <sui-avatar shape="circle" size="md" status="online"><img src="sample-avatar.svg" alt="" /></sui-avatar>
       } @else {
@@ -10,7 +10,7 @@
       }
       <div class="list-col-grow min-w-0">
         <strong class="block truncate">{{ member.name }}</strong>
-        <span class="block truncate text-sm text-base-content/60">{{ member.role }} · {{ member.location }}</span>
+        <span class="block truncate text-sm text-(--sui-color-muted)">{{ member.role }} · {{ member.location }}</span>
       </div>
       <div class="flex items-center gap-1">
         <button

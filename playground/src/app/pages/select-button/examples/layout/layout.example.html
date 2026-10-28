@@ -7,7 +7,7 @@
         ariaLabelledby="select-button-optional-label"
         [options]="options"
         [(value)]="value" />
-      <small class="text-base-content/60">Select the active view again to clear it.</small>
+      <small class="text-(--sui-color-muted)">Select the active view again to clear it.</small>
     </div>
     <div class="grid gap-2">
       <span suiLabel id="select-button-vertical-label" class="font-medium">Vertical navigation</span>
@@ -22,7 +22,7 @@
   <div class="grid gap-4">
     <div>
       <h3 class="font-semibold">Semantic colors</h3>
-      <p class="text-sm text-base-content/60">Each group keeps one color across its outlined and filled states.</p>
+      <p class="text-sm text-(--sui-color-muted)">Each group keeps one color across its outlined and filled states.</p>
     </div>
     <div class="grid items-start gap-4 sm:grid-cols-2 xl:grid-cols-3">
       <sui-select-button severity="primary" [options]="priorityOptions" value="medium" ariaLabel="Primary priority" />

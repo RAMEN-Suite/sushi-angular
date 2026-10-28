@@ -1,6 +1,6 @@
 :host {
   /** Divider color used when grid lines are enabled. */
-  --sui-table-border-color: var(--color-base-300);
+  --sui-table-border-color: var(--sui-color-border);
   /** Background behind sticky headings and pinned cells. */
   --sui-table-pinned-background: var(--color-base-100);
   /** Background used by a hovered body row. */
@@ -98,9 +98,4 @@ tbody tr.row-hover:hover {
 
 .sui-table--pin-first-column.table-zebra tbody tr.row-hover:hover :is(th, td):first-child {
   background-image: linear-gradient(var(--sui-table-zebra-hover-background), var(--sui-table-zebra-hover-background));
-}
-
-.table,
-.table tr {
-  font-size: inherit;
 }

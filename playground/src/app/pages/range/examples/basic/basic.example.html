@@ -2,7 +2,7 @@
   <div class="grid gap-2">
     <label suiLabel for="range-volume">Volume</label>
     <input suiRange id="range-volume" type="range" step="5" [formField]="form.volume" />
-    <p class="text-sm text-base-content/60">Current value: {{ form.volume().value() }}%</p>
+    <p class="text-sm text-(--sui-color-muted)">Current value: {{ form.volume().value() }}%</p>
   </div>
   <button suiButton type="button" class="w-fit" severity="neutral" variant="soft" (click)="reset()">
     Reset example

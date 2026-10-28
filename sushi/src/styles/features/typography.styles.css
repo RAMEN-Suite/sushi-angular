@@ -1,25 +1,77 @@
 .sui-internal-size-text {
-  font-size: var(--sui-font-size-md);
+  --_sui-font-size: var(--sui-font-size-md);
+  font-size: var(--_sui-font-size);
 }
 
 .sui-internal-size-text[data-size="xs"] {
-  font-size: var(--sui-font-size-xs);
+  --_sui-font-size: var(--sui-font-size-xs);
 }
 
 .sui-internal-size-text[data-size="sm"] {
-  font-size: var(--sui-font-size-sm);
+  --_sui-font-size: var(--sui-font-size-sm);
 }
 
 .sui-internal-size-text[data-size="lg"] {
-  font-size: var(--sui-font-size-lg);
+  --_sui-font-size: var(--sui-font-size-lg);
 }
 
 .sui-internal-size-text[data-size="xl"] {
-  font-size: var(--sui-font-size-xl);
+  --_sui-font-size: var(--sui-font-size-xl);
 }
 
 .sui-internal-size-text > .sui-form-control,
+.sui-input-surface__control,
 .sui-selection-list,
 .sui-selection-option {
   font-size: inherit;
+}
+
+.sui-tab,
+.sui-navbar__links,
+.sui-navbar__link,
+.sui-navbar__dropdown > summary,
+.sui-navbar__dropdown > ul {
+  font-size: inherit;
+}
+
+.sui-table .table,
+.sui-table .table tr {
+  font-size: inherit;
+}
+
+.sui-list .list {
+  font-size: var(--sui-font-size-md);
+}
+
+/* Preserve the compact Badge and enlarged OTP scales when shared tokens change. */
+.sui-badge[data-size="xs"] {
+  --_sui-font-size: calc(var(--sui-font-size-xs) * 10 / 11);
+}
+
+.sui-badge[data-size="lg"] {
+  --_sui-font-size: calc(var(--sui-font-size-lg) * 8 / 9);
+}
+
+.sui-badge[data-size="xl"] {
+  --_sui-font-size: var(--sui-font-size-lg);
+}
+
+.sui-input-otp > .otp {
+  --_sui-font-size: calc(var(--sui-font-size-md) * 2);
+}
+
+.sui-input-otp > .otp[data-size="xs"] {
+  --_sui-font-size: calc(var(--sui-font-size-xs) * 20 / 11);
+}
+
+.sui-input-otp > .otp[data-size="sm"] {
+  --_sui-font-size: calc(var(--sui-font-size-sm) * 2);
+}
+
+.sui-input-otp > .otp[data-size="lg"] {
+  --_sui-font-size: calc(var(--sui-font-size-lg) * 16 / 9);
+}
+
+.sui-input-otp > .otp[data-size="xl"] {
+  --_sui-font-size: calc(var(--sui-font-size-xl) * 20 / 11);
 }

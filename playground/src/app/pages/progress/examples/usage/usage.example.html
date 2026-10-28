@@ -2,7 +2,7 @@
   <div class="grid gap-2">
     <div class="flex items-center justify-between gap-4">
       <span class="font-medium">Workspace setup</span>
-      <span class="text-sm tabular-nums text-base-content/60">{{ value() }}%</span>
+      <span class="text-sm tabular-nums text-(--sui-color-muted)">{{ value() }}%</span>
     </div>
     <progress suiProgress severity="primary" class="w-full" [value]="value()" max="100">{{ value() }}%</progress>
   </div>

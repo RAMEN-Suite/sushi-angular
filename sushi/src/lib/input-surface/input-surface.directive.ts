@@ -1,10 +1,12 @@
 import { booleanAttribute, Directive, input, type InputSignal, type InputSignalWithTransform } from '@angular/core';
 import { type FormControlSeverity, type FormControlSize } from '../form-control';
 
+/** Creates one visual field around a native input and optional inline content. */
 @Directive({
   selector: 'div[suiInputSurface]',
   host: {
-    class: 'input sui-input-surface',
+    class: 'input sui-input-surface sui-internal-size-text',
+    '[attr.data-size]': 'size()',
     '[class.input-primary]': 'severity() === "primary"',
     '[class.input-secondary]': 'severity() === "secondary"',
     '[class.input-accent]': 'severity() === "accent"',
@@ -21,7 +23,6 @@ import { type FormControlSeverity, type FormControlSize } from '../form-control'
     '[class.w-full]': 'fluid()',
   },
 })
-/** Creates one visual field around a native input and optional inline content. */
 export class InputSurface {
   /** Applies a semantic border color. */
   public readonly severity: InputSignal<FormControlSeverity | null> = input<FormControlSeverity | null>(null);

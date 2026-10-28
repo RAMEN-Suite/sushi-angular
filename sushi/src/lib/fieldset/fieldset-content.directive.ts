@@ -1,6 +1,7 @@
 import { Directive, inject } from '@angular/core';
 import { Fieldset } from './fieldset.directive';
 
+/** Marks the animated and inert-aware content of a collapsible fieldset. */
 @Directive({
   selector: '[suiFieldsetContent]',
   host: {
@@ -9,7 +10,6 @@ import { Fieldset } from './fieldset.directive';
     '[attr.inert]': 'fieldset.collapsible() && !fieldset.expanded() ? "" : null',
   },
 })
-/** Marks the animated and inert-aware content of a collapsible fieldset. */
 export class FieldsetContent {
   protected readonly fieldset: Fieldset = inject(Fieldset);
 }

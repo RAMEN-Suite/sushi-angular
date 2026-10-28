@@ -246,3 +246,33 @@ describe('Select extension surfaces', (): void => {
     expect(document.querySelector('[data-loading]')).toBeTruthy();
   });
 });
+
+interface DetailedOption extends SelectOption {
+  readonly detail: string;
+}
+
+@Component({
+  imports: [Select, SelectItemTemplate, SelectSelectedItemTemplate],
+  template: `
+    <sui-select showClear ariaLabel="Team" [options]="options" [(value)]="value" [clearLabel]="clearLabel()">
+      <ng-template [suiSelectItem]="options" let-option>{{ option.detail }}</ng-template>
+      <ng-template [suiSelectSelectedItem]="options" let-option>{{ option.detail }}</ng-template>
+    </sui-select>
+  `,
+})
+class DetailedSelectHost {
+  public readonly options: readonly DetailedOption[] = [{ label: 'Miso', value: 'miso', detail: 'Design team' }];
+  public readonly value: WritableSignal<SelectModelValue> = signal<SelectModelValue>('miso');
+  public readonly clearLabel: WritableSignal<string> = signal<string>('Auswahl löschen');
+}
+
+it('preserves custom Select fields in typed templates and translates the clear action', (): void => {
+  const fixture: ComponentFixture<DetailedSelectHost> = render(DetailedSelectHost);
+  expect(query(fixture, 'sui-select').textContent).toContain('Design team');
+  expect(query(fixture, '[aria-label="Auswahl löschen"]')).toBeTruthy();
+  fixture.componentInstance.clearLabel.set('Cancella selezione');
+  fixture.detectChanges();
+  query(fixture, '[aria-label="Cancella selezione"]').dispatchEvent(new MouseEvent('click', { bubbles: true }));
+  fixture.detectChanges();
+  expect(fixture.componentInstance.value()).toBeNull();
+});

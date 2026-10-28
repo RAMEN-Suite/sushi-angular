@@ -42,7 +42,7 @@
 
 :host(.sui-chip--lg) {
   --_sui-chip-height-scale: 10;
-  font-size: var(--sui-font-size-body);
+  font-size: calc(var(--sui-font-size-lg) * 8 / 9);
   @apply gap-2.5 px-4;
 }
 

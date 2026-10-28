@@ -1,6 +1,6 @@
-<div class="h-[34rem] overflow-hidden rounded-box border border-base-300">
+<div class="h-[34rem] overflow-hidden rounded-box border border-(--sui-color-border)">
   <sui-navbar
-    class="border-b border-base-300"
+    class="border-b border-(--sui-color-border)"
     [collapsible]="false"
     surface="plain"
     inset="comfortable"
@@ -57,24 +57,24 @@
       <main class="mx-auto grid max-w-2xl gap-5">
         <div class="flex items-start justify-between gap-4">
           <div>
-            <p class="text-sm text-base-content/60">SUSHI workspace</p>
+            <p class="text-sm text-(--sui-color-muted)">SUSHI workspace</p>
             <h3 class="text-2xl font-semibold tracking-tight">{{ activePage() }}</h3>
           </div>
           <button suiButton type="button" size="sm">Create project</button>
         </div>
         <div class="grid gap-3 sm:grid-cols-2">
           <sui-card size="sm">
-            <span class="text-sm text-base-content/60">Active projects</span>
+            <span class="text-sm text-(--sui-color-muted)">Active projects</span>
             <strong class="text-2xl">8</strong>
           </sui-card>
           <sui-card size="sm">
-            <span class="text-sm text-base-content/60">Team members</span>
+            <span class="text-sm text-(--sui-color-muted)">Team members</span>
             <strong class="text-2xl">14</strong>
           </sui-card>
         </div>
         <sui-card size="sm">
           <strong>Current destination</strong>
-          <p class="text-sm text-base-content/60">
+          <p class="text-sm text-(--sui-color-muted)">
             Selecting a destination updates the workspace while navigation remains available.
           </p>
         </sui-card>
@@ -82,7 +82,7 @@
     </div>
 
     <sui-sidebar
-      class="h-full border-r border-base-300"
+      class="h-full border-r border-(--sui-color-border)"
       size="lg"
       [groups]="groups"
       [(value)]="activePage"

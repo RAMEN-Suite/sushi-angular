@@ -31,18 +31,18 @@ const columns: readonly TableColumn<string>[] = [
   ],
   template: `
     <sui-table ariaLabel="Ramen inventory" [columns]="columns" [loading]="loading()" [rows]="rows()" [(sort)]="sort">
-      <ng-template suiTableCaption let-rows
+      <ng-template [suiTableCaption]="rows()" let-rows
         ><span data-caption>{{ rows.length }} recipes</span></ng-template
       >
-      <ng-template suiTableHeader let-column let-direction="direction">
+      <ng-template [suiTableHeader]="rows()" let-column let-direction="direction">
         <span [attr.data-header]="column.key" [attr.data-direction]="direction">{{ column.header }}</span>
       </ng-template>
-      <ng-template suiTableCell let-value let-rowIndex="rowIndex" let-columnIndex="columnIndex">
+      <ng-template [suiTableCell]="rows()" let-value let-rowIndex="rowIndex" let-columnIndex="columnIndex">
         <span [attr.data-cell]="rowIndex + '-' + columnIndex">{{ value }}</span>
       </ng-template>
-      <ng-template suiTableEmpty><span data-empty>No recipes</span></ng-template>
-      <ng-template suiTableLoading><span data-loading>Loading recipes</span></ng-template>
-      <ng-template suiTableFooter let-rows
+      <ng-template [suiTableEmpty]="rows()"><span data-empty>No recipes</span></ng-template>
+      <ng-template [suiTableLoading]="rows()"><span data-loading>Loading recipes</span></ng-template>
+      <ng-template [suiTableFooter]="rows()" let-rows
         ><span data-footer>{{ rows.length }} total</span></ng-template
       >
     </sui-table>
@@ -78,7 +78,7 @@ class DefaultTableHost {
   imports: [Table, TableRowTemplate],
   template: `
     <sui-table [columns]="columns" [rows]="rows">
-      <ng-template suiTableRow let-row let-rowIndex="rowIndex">
+      <ng-template [suiTableRow]="rows" let-row let-rowIndex="rowIndex">
         <tr>
           <td [attr.data-row]="rowIndex">{{ row }}</td>
         </tr>

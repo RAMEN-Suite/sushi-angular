@@ -1,6 +1,6 @@
 :host {
   /** Divider and panel border color. */
-  --sui-tabs-border-color: var(--color-base-300);
+  --sui-tabs-border-color: var(--sui-color-border);
   /** Background of a lifted tab panel. */
   --sui-tabs-panel-background: var(--color-base-100);
   /** Space inside each tab panel. */

@@ -12,5 +12,5 @@
       placeholder="Search cities" />
     <button suiButton suiJoinItem type="button" severity="neutral" variant="soft" (click)="reset()">Reset</button>
   </div>
-  <p class="text-sm text-base-content/60">Selected: {{ cityForm.city().value() ?? 'None' }}</p>
+  <p class="text-sm text-(--sui-color-muted)">Selected: {{ cityForm.city().value() ?? 'None' }}</p>
 </div>

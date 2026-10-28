@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Fieldset</h1>
-      <p class="text-lg text-base-content/70">
+      <p class="text-lg text-(--sui-color-muted)">
         Group related form controls with native semantics and optionally reveal secondary settings on demand.
       </p>
     </div>
@@ -16,7 +16,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Preference group with actions</h2>
-      <p class="text-base-content/60">Group one form decision, supporting controls, and its actions inside the same native fieldset.</p>
+      <p class="text-(--sui-color-muted)">Group one form decision, supporting controls, and its actions inside the same native fieldset.</p>
     </div>
     <pg-example-code [html]="examples.preferences.html" [typescript]="examples.preferences.typescript">
       <ng-template pgExamplePreview><pg-fieldset-preferences-example /></ng-template>
@@ -26,7 +26,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Framing and collapse controls</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Fieldsets are framed by default. The same API supports collapse state and an optional borderless layout.
       </p>
     </div>
@@ -38,7 +38,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Controlled disclosure</h2>
-      <p class="text-base-content/60">Bind the expanded state when another control also needs to reveal or hide the content.</p>
+      <p class="text-(--sui-color-muted)">Bind the expanded state when another control also needs to reveal or hide the content.</p>
     </div>
     <pg-example-code [html]="examples.controlled.html" [typescript]="examples.controlled.typescript">
       <ng-template pgExamplePreview><pg-fieldset-controlled-example /></ng-template>

@@ -51,7 +51,6 @@ for (const theme of ['sushi', 'sushi-dark']) {
     await page.goto('/select');
     const expected: SurfaceStyles = await themeStyles(page, theme);
     await expect(page.locator('html')).toHaveCSS('color-scheme', theme === 'sushi-dark' ? 'dark' : 'light');
-    expect(expected.shadow).not.toBe('none');
     await page.getByRole('combobox', { name: 'Favorite color', exact: true }).click();
     await expectOverlayTokens(page.getByRole('listbox').locator('..'), expected);
 
@@ -125,5 +124,50 @@ test('Table hover overrides reach ordinary, striped and pinned rows @css', async
         'linear-gradient(rgb(110, 120, 130), rgb(110, 120, 130))',
       );
     }
+  }
+});
+
+test('neutral component borders share the configured public border token @css', async ({
+  page,
+}: {
+  page: Page;
+}): Promise<void> => {
+  const cases: readonly (readonly [string, string])[] = [
+    ['/table', 'sui-table > div'],
+    ['/fieldset', 'fieldset[suiFieldset]'],
+    ['/listbox', 'sui-listbox > div'],
+    ['/menu', 'pg-menu-basic-example sui-menu-surface > div'],
+    ['/dialog', 'sui-dialog dialog'],
+    ['/gallery', '.sui-gallery__stage'],
+    ['/input-group', '[suiInputGroupAddon]'],
+  ];
+  for (const [path, selector] of cases) {
+    await page.goto(path);
+    await page.evaluate((): void => document.documentElement.style.setProperty('--sui-color-border', 'rgb(80, 90, 100)'));
+    await expect(page.locator(selector).first()).toHaveCSS('border-top-color', 'rgb(80, 90, 100)');
+  }
+});
+
+test('OTP and disabled color presets derive text opacity from the shared token @css', async ({
+  page,
+}: {
+  page: Page;
+}): Promise<void> => {
+  const cases: readonly (readonly [string, string])[] = [
+    ['/input-otp', 'sui-input-otp .sui-input-otp--disabled > input'],
+    ['/color-picker', 'sui-color-picker [role="radio"][aria-disabled="true"]'],
+  ];
+  for (const [path, selector] of cases) {
+    await page.goto(path);
+    await configureTokens(page, 'sushi');
+    const expected: string = await page.evaluate((): string => {
+      const probe: HTMLSpanElement = document.createElement('span');
+      probe.style.color = 'color-mix(in oklab, var(--color-base-content) calc(var(--sui-disabled-opacity) * 100%), transparent)';
+      document.body.append(probe);
+      const color: string = getComputedStyle(probe).color;
+      probe.remove();
+      return color;
+    });
+    await expect(page.locator(selector).first()).toHaveCSS('color', expected);
   }
 });

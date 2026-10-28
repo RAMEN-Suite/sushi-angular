@@ -30,7 +30,7 @@
     <strong [id]="labelId">{{ label() }}</strong>
     <span class="text-(--sui-color-muted)" [id]="descriptionId">{{ description() }}</span>
     @if (value().length) {
-      <span>{{ value().length }} {{ value().length === 1 ? 'file selected' : 'files selected' }}</span>
+      <span>{{ selectionMessage()(value().length) }}</span>
     }
   }
 
@@ -61,7 +61,7 @@
 
   @if (itemContexts().length) {
     <div class="mb-2 flex items-center justify-between gap-3">
-      <strong>Selected files</strong>
+      <strong>{{ selectedFilesLabel() }}</strong>
       <button
         suiButton
         type="button"
@@ -75,9 +75,9 @@
       </button>
     </div>
 
-    <ul class="grid gap-2" aria-label="Selected files">
+    <ul class="grid gap-2" [attr.aria-label]="selectedFilesLabel()">
       @for (context of itemContexts(); track context.file; let index = $index) {
-        <li class="flex min-w-0 items-center gap-3 rounded-field border border-base-300 bg-base-100 px-3 py-2">
+        <li class="flex min-w-0 items-center gap-3 rounded-field border border-(--sui-color-border) bg-base-100 px-3 py-2">
           <div class="min-w-0 flex-1">
             @if (itemTemplate(); as item) {
               <ng-container [ngTemplateOutlet]="item" [ngTemplateOutletContext]="context" />
@@ -95,7 +95,7 @@
             variant="text"
             [disabled]="disabled()"
             [tabIndex]="disabled() ? -1 : null"
-            [attr.aria-label]="'Remove ' + context.file.name"
+            [attr.aria-label]="removeLabel()(context.file)"
             (click)="handleRemove(index)"
           >
             <svg lucideX class="size-4" aria-hidden="true"></svg>
@@ -104,6 +104,6 @@
       }
     </ul>
   } @else {
-    <p class="text-(--sui-color-muted)">No files selected</p>
+    <p class="text-(--sui-color-muted)">{{ emptyMessage() }}</p>
   }
 </div>

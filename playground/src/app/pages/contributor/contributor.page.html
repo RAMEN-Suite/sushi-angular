@@ -2,7 +2,7 @@
   <header class="pg-page__header">
     <p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{{ sectionLabel }}</p>
     <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">{{ page.title }}</h1>
-    <p class="text-lg leading-relaxed text-base-content/65">{{ page.description }}</p>
+    <p class="text-lg leading-relaxed text-(--sui-color-muted)">{{ page.description }}</p>
   </header>
 
   <pg-markdown-document class="pg-document-page__content" [source]="page.source" (documentLink)="openDocument($event)" />

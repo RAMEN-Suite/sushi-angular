@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Card</h1>
-      <p class="text-lg text-base-content/70">Group related content, media, and actions in one responsive surface.</p>
+      <p class="text-lg text-(--sui-color-muted)">Group related content, media, and actions in one responsive surface.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Card architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Component</span
@@ -13,7 +13,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Content composition</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Combine semantic headings, media, status, and actions without making the complete surface interactive.
       </p>
     </div>
@@ -24,7 +24,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Sizes and surfaces</h2>
-      <p class="text-base-content/60">Choose content density independently from the border treatment.</p>
+      <p class="text-(--sui-color-muted)">Choose content density independently from the border treatment.</p>
     </div>
     <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript"
       ><ng-template pgExamplePreview><pg-card-appearance-example /></ng-template

@@ -7,7 +7,7 @@
     [suiContextMenuTrigger]="draftMenu">
     <div class="grid place-content-center gap-2 text-center">
       <strong>Quarterly release draft</strong>
-      <span class="text-sm text-base-content/60">
+      <span class="text-sm text-(--sui-color-muted)">
         Right-click this surface or press
         <kbd suiKbd size="sm">Shift + F10</kbd>
         .
@@ -17,5 +17,5 @@
 
   <sui-menu #draftMenu popup [items]="actions" ariaLabel="Draft actions" (itemSelected)="lastAction.set($event)" />
 
-  <p class="text-sm text-base-content/60">Last action: {{ lastAction() ?? 'None' }}</p>
+  <p class="text-sm text-(--sui-color-muted)">Last action: {{ lastAction() ?? 'None' }}</p>
 </div>

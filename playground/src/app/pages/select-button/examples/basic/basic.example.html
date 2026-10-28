@@ -5,13 +5,13 @@
       ariaLabelledby="select-button-alignment-label"
       [options]="options"
       [formField]="alignmentForm.alignment" />
-    <small class="text-base-content/60">Selected: {{ alignmentForm.alignment().value() }}</small>
+    <small class="text-(--sui-color-muted)">Selected: {{ alignmentForm.alignment().value() }}</small>
   </div>
   <sui-card size="sm">
     <div class="flex flex-wrap items-end justify-between gap-4">
       <span suiLabel id="select-button-billing-label" class="block">
         <strong class="block">Billing interval</strong>
-        <small class="text-base-content/60">Save 20% with yearly billing.</small>
+        <small class="text-(--sui-color-muted)">Save 20% with yearly billing.</small>
       </span>
       <sui-select-button
         severity="success"

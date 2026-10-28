@@ -6,5 +6,5 @@
 
   <sui-menu #actionMenu popup [items]="actions" ariaLabel="Document actions" (itemSelected)="lastAction.set($event)" />
 
-  <span class="text-sm text-base-content/60">Last action: {{ lastAction() ?? 'None' }}</span>
+  <span class="text-sm text-(--sui-color-muted)">Last action: {{ lastAction() ?? 'None' }}</span>
 </div>

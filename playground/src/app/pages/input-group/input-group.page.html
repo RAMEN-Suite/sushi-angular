@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Input Group</h1>
-      <p class="text-lg text-base-content/70">Present related inputs, non-interactive add-ons, and actions as one field composition.</p>
+      <p class="text-lg text-(--sui-color-muted)">Present related inputs, non-interactive add-ons, and actions as one field composition.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Input Group architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Directive</span>
@@ -13,7 +13,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Addresses and responsive fields</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Groups are horizontal by default. Responsive groups stack below 48rem (768px at the default font size). Apply direction-specific
         widths and flex sizing at the same breakpoint.
       </p>
@@ -26,7 +26,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Mixed controls</h2>
-      <p class="text-base-content/60">Keep the amount and currency together. Stack the period and action below on narrow screens.</p>
+      <p class="text-(--sui-color-muted)">Keep the amount and currency together. Stack the period and action below on narrow screens.</p>
     </div>
     <pg-example-code [html]="examples.commerce.html" [typescript]="examples.commerce.typescript">
       <ng-template pgExamplePreview><pg-input-group-commerce-example /></ng-template>

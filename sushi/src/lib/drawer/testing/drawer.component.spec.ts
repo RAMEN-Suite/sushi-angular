@@ -1,6 +1,6 @@
 import { Component, signal, type WritableSignal } from '@angular/core';
 import { type ComponentFixture } from '@angular/core/testing';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi, type MockInstance } from 'vitest';
 import { query, render } from '../../../../testing/test-utils';
 import { DrawerClose } from '../drawer-close.directive';
 import { Drawer } from '../drawer.component';
@@ -196,4 +196,24 @@ describe('Drawer variants', (): void => {
     expect(host.querySelector('.sui-drawer__header-region')).toBeNull();
     expect(host.querySelector('.sui-drawer__footer-region')).toBeNull();
   });
+});
+
+it('cancels pending Drawer focus when the component is destroyed', (): void => {
+  const request: MockInstance<(callback: FrameRequestCallback) => number> = vi
+    .spyOn(window, 'requestAnimationFrame')
+    .mockReturnValue(41);
+  const cancel: MockInstance<(handle: number) => void> = vi
+    .spyOn(window, 'cancelAnimationFrame')
+    .mockImplementation((): void => undefined);
+  try {
+    const fixture: ComponentFixture<DrawerHost> = render(DrawerHost);
+    fixture.componentInstance.open.set(true);
+    fixture.detectChanges();
+    expect(request).toHaveBeenCalled();
+    fixture.destroy();
+    expect(cancel).toHaveBeenCalledWith(41);
+  } finally {
+    request.mockRestore();
+    cancel.mockRestore();
+  }
 });

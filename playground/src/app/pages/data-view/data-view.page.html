@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Data View</h1>
-      <p class="text-lg text-base-content/70">
+      <p class="text-lg text-(--sui-color-muted)">
         Present typed collections as lists or grids with controlled paging and incremental loading.
       </p>
     </div>
@@ -16,7 +16,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Basic collection</h2>
-      <p class="text-base-content/60">Render typed items with one reusable template and native list semantics.</p>
+      <p class="text-(--sui-color-muted)">Render typed items with one reusable template and native list semantics.</p>
     </div>
     <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
       ><ng-template pgExamplePreview><pg-data-view-basic-example /></ng-template
@@ -26,7 +26,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Custom layout switcher</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Use suiDataViewHeader for your own controls, bind layout, and set layouts to an empty array to hide the built-in switcher.
       </p>
     </div>
@@ -38,7 +38,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Local and remote paging</h2>
-      <p class="text-base-content/60">Slice local data or let a backend own the active page and total size.</p>
+      <p class="text-(--sui-color-muted)">Slice local data or let a backend own the active page and total size.</p>
     </div>
     <pg-example-code [html]="examples.pagination.html" [typescript]="examples.pagination.typescript"
       ><ng-template pgExamplePreview><pg-data-view-pagination-example /></ng-template
@@ -51,7 +51,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Incremental loading</h2>
-      <p class="text-base-content/60">Observe the collection boundary and retain an explicit keyboard-accessible fallback.</p>
+      <p class="text-(--sui-color-muted)">Observe the collection boundary and retain an explicit keyboard-accessible fallback.</p>
     </div>
     <pg-example-code [html]="examples.infinite.html" [typescript]="examples.infinite.typescript"
       ><ng-template pgExamplePreview><pg-data-view-infinite-example /></ng-template

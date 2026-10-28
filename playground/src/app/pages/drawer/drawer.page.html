@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Drawer</h1>
-      <p class="text-lg text-base-content/70">Present supporting content in a headless panel at either side of the viewport.</p>
+      <p class="text-lg text-(--sui-color-muted)">Present supporting content in a headless panel at either side of the viewport.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Drawer architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Component</span
@@ -14,7 +14,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Cart summary</h2>
-      <p class="text-base-content/60">Use an end Drawer for supporting tasks that should not replace the current page.</p>
+      <p class="text-(--sui-color-muted)">Use an end Drawer for supporting tasks that should not replace the current page.</p>
     </div>
     <pg-example-code [html]="examples.cart.html" [typescript]="examples.cart.typescript"
       ><ng-template pgExamplePreview><pg-drawer-cart-example /></ng-template
@@ -24,15 +24,15 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Use a Drawer</h2>
-      <p class="text-base-content/60">Connect a trigger, project the panel content, and add explicit close actions where needed.</p>
+      <p class="text-(--sui-color-muted)">Connect a trigger, project the panel content, and add explicit close actions where needed.</p>
     </div>
 
-    <ol class="divide-y divide-base-300 border-y border-base-300">
+    <ol class="divide-y divide-base-300 border-y border-(--sui-color-border)">
       <li class="grid gap-4 py-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-8">
         <div>
           <span suiBadge size="sm" variant="soft">1 · Connect</span>
           <h3 class="mt-3 font-semibold">Reference the Drawer</h3>
-          <p class="mt-1 text-sm text-base-content/60">The trigger handles open state, labeling, and focus restoration.</p>
+          <p class="mt-1 text-sm text-(--sui-color-muted)">The trigger handles open state, labeling, and focus restoration.</p>
         </div>
         <sui-code>
           @for (line of triggerLines; track $index) {
@@ -45,7 +45,7 @@
         <div>
           <span suiBadge size="sm" variant="soft">2 · Compose</span>
           <h3 class="mt-3 font-semibold">Project the content</h3>
-          <p class="mt-1 text-sm text-base-content/60">Unmarked content scrolls; header and footer remain fixed.</p>
+          <p class="mt-1 text-sm text-(--sui-color-muted)">Unmarked content scrolls; header and footer remain fixed.</p>
         </div>
         <sui-code>
           @for (line of contentLines; track $index) {
@@ -58,7 +58,7 @@
         <div>
           <span suiBadge size="sm" variant="soft">3 · Control</span>
           <h3 class="mt-3 font-semibold">Close or bind it</h3>
-          <p class="mt-1 text-sm text-base-content/60">Use a close action inside or two-way bind state outside.</p>
+          <p class="mt-1 text-sm text-(--sui-color-muted)">Use a close action inside or two-way bind state outside.</p>
         </div>
         <sui-code>
           @for (line of controlLines; track $index) {

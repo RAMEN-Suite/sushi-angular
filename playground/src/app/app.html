@@ -95,7 +95,7 @@
   </div>
 
   <sui-sidebar
-    class="pg-library-sidebar h-full w-full border-r border-base-300"
+    class="pg-library-sidebar h-full w-full border-r border-(--sui-color-border)"
     size="md"
     [groups]="sidebar"
     [value]="activePath()"
@@ -107,7 +107,9 @@
         <img [src]="theme() === 'sushi' ? 'sushi-logo.svg' : 'sushi-logo-dark.svg'" alt="" class="size-9 shrink-0" />
         <span class="min-w-0 flex-1">
           <strong class="block truncate text-base leading-tight">Sushi Kit</strong>
-          <span class="block truncate text-[0.6875rem] leading-tight tracking-wide text-base-content/50 uppercase">Angular Components</span>
+          <span class="block truncate text-[0.6875rem] leading-tight tracking-wide text-(--sui-color-subtle) uppercase"
+            >Angular Components</span
+          >
         </span>
       </a>
       <button

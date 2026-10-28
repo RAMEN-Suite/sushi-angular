@@ -1,16 +1,16 @@
 <div
-  class="max-w-full overflow-hidden rounded-box border border-base-300 bg-base-100 sui-listbox__surface"
+  class="max-w-full overflow-hidden rounded-box border border-(--sui-color-border) bg-base-100 sui-listbox__surface"
   [class.border-error]="isInvalid()"
   [class.sui-internal-disabled-opacity]="disabled()"
   [class.pointer-events-none]="disabled()"
   (focusout)="handleFocusout($event)"
 >
   @if (headerTemplate(); as template) {
-    <div class="border-b border-base-300 p-3"><ng-container [ngTemplateOutlet]="template" /></div>
+    <div class="border-b border-(--sui-color-border) p-3"><ng-container [ngTemplateOutlet]="template" /></div>
   }
 
   @if (filter() || (multiple() && selectAll())) {
-    <div class="flex flex-wrap items-center gap-2 border-b border-base-300 p-2">
+    <div class="flex flex-wrap items-center gap-2 border-b border-(--sui-color-border) p-2">
       @if (filter()) {
         @if (filterTemplate(); as template) {
           <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="filterContext()" />
@@ -41,7 +41,7 @@
           [disabled]="disabled() || readOnly()"
           (click)="handleSelectAll()"
         >
-          {{ allSelected() ? 'Clear all' : 'Select all' }}
+          {{ allSelected() ? clearAllLabel() : selectAllLabel() }}
         </button>
       }
     </div>
@@ -124,7 +124,7 @@
         } @else if (emptyTemplate(); as template) {
           <ng-container [ngTemplateOutlet]="template" />
         } @else {
-          {{ query() ? 'No matching options' : 'No options available' }}
+          {{ query() ? emptyFilterMessage() : emptyMessage() }}
         }
       </div>
     }
@@ -135,12 +135,12 @@
         role="status"
         aria-live="polite"
       >
-        <span suiSpinner size="sm"></span>Loading more options
+        <span suiSpinner size="sm"></span>{{ loadingMessage() }}
       </div>
     }
   </div>
 
   @if (footerTemplate(); as template) {
-    <div class="border-t border-base-300 p-3"><ng-container [ngTemplateOutlet]="template" /></div>
+    <div class="border-t border-(--sui-color-border) p-3"><ng-container [ngTemplateOutlet]="template" /></div>
   }
 </div>

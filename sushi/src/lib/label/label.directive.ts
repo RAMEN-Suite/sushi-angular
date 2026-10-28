@@ -1,5 +1,6 @@
 import { booleanAttribute, Directive, input, type InputSignalWithTransform } from '@angular/core';
 
+/** Styles a visible control label with wrapping text without prescribing its native or ARIA association. */
 @Directive({
   selector: '[suiLabel]',
   host: {
@@ -8,7 +9,6 @@ import { booleanAttribute, Directive, input, type InputSignalWithTransform } fro
     '[class.floating-label]': 'floating()',
   },
 })
-/** Styles a visible control label with wrapping text without prescribing its native or ARIA association. */
 export class Label {
   /** Floats a native label above its wrapped control on focus or when a value is present. */
   public readonly floating: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });

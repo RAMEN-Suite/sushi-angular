@@ -1,13 +1,13 @@
 <div class="w-full max-w-xl">
   <h3 id="movie-order-label" class="font-medium">Watchlist</h3>
-  <p id="movie-order-hint" class="mt-1 text-sm text-base-content/60">
+  <p id="movie-order-hint" class="mt-1 text-sm text-(--sui-color-muted)">
     Drag a handle, open its move menu, or use Alt / ⌥ Option + ↑ / ↓. Add Shift to move to the start or end.
   </p>
   <sui-order-list class="mt-4" ariaLabelledby="movie-order-label" ariaDescribedby="movie-order-hint" [(value)]="movies">
     <ng-template [suiOrderListItem]="movies()" let-movie let-index="index">
       <div class="flex min-w-0 items-center gap-3">
         <span data-testid="movie-label" class="min-w-0 grow">{{ movie.label }}</span>
-        <span class="shrink-0 text-sm tabular-nums text-base-content/50">#{{ index + 1 }}</span>
+        <span class="shrink-0 text-sm tabular-nums text-(--sui-color-subtle)">#{{ index + 1 }}</span>
       </div>
     </ng-template>
   </sui-order-list>

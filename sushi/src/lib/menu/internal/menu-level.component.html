@@ -1,7 +1,8 @@
 <ul
   #ariaMenu="ngMenu"
   ngMenu
-  class="menu sui-menu-surface w-full gap-0.5 p-0 outline-none"
+  class="menu sui-menu-surface sui-internal-size-text w-full gap-0.5 p-0 outline-none"
+  [attr.data-size]="size()"
   [class.menu-xs]="size() === 'xs'"
   [class.menu-sm]="size() === 'sm'"
   [class.menu-md]="size() === 'md'"

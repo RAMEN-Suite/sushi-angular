@@ -11,7 +11,7 @@ import { BreadcrumbItemTemplate } from '../breadcrumb.templates';
   selector: 'sui-test-breadcrumb-host',
   imports: [Breadcrumb, BreadcrumbItemTemplate],
   template: `<sui-breadcrumb [items]="items"
-    ><ng-template suiBreadcrumbItem let-item>{{ item.label }}</ng-template></sui-breadcrumb
+    ><ng-template [suiBreadcrumbItem]="items" let-item>{{ item.label }}</ng-template></sui-breadcrumb
   >`,
 })
 class BreadcrumbHost {
@@ -26,7 +26,7 @@ class BreadcrumbHost {
   selector: 'sui-test-explicit-current-host',
   imports: [Breadcrumb, BreadcrumbItemTemplate],
   template: `<sui-breadcrumb [items]="items">
-    <ng-template suiBreadcrumbItem let-item let-index="index" let-current="current">
+    <ng-template [suiBreadcrumbItem]="items" let-item let-index="index" let-current="current">
       <span [attr.data-value]="item.value" [attr.data-index]="index" [attr.data-current]="current">{{ item.label }}</span>
     </ng-template>
   </sui-breadcrumb>`,

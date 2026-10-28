@@ -2,7 +2,7 @@
   @for (shape of shapes; track shape) {
     <figure class="grid justify-items-center gap-2">
       <img class="size-28 object-cover" [suiMask]="shape" src="sample-avatar.svg" [alt]="shape + ' mask'" />
-      <figcaption class="text-sm text-base-content/60">{{ shape }}</figcaption>
+      <figcaption class="text-sm text-(--sui-color-muted)">{{ shape }}</figcaption>
     </figure>
   }
 </div>

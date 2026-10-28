@@ -1,7 +1,7 @@
 <div class="grid w-full max-w-sm gap-3">
   <div>
     <span suiLabel id="view-menu-label" class="font-medium">Editor view</span>
-    <p class="mt-1 text-sm text-base-content/60">An active command can expose the current application mode.</p>
+    <p class="mt-1 text-sm text-(--sui-color-muted)">An active command can expose the current application mode.</p>
   </div>
   <sui-menu [items]="views()" ariaLabelledby="view-menu-label" (itemSelected)="view.set($event)">
     <ng-template [suiMenuItem]="views()" let-item>

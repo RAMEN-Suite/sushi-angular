@@ -31,7 +31,7 @@ export class List<T> {
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   /** ID reference that names the native list. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
-  /** Controls the spacing within generated rows. */
+  /** Controls spacing within generated rows without changing their text size. */
   public readonly size: InputSignal<ListSize> = input<ListSize>('md');
   /** Draws subtle separators between adjacent rows. */
   public readonly dividers: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });

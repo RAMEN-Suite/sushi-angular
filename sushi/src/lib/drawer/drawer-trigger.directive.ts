@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { type Drawer } from './drawer.component';
 
+/** Opens and closes a Drawer from a native button. */
 @Directive({
   selector: 'button[suiDrawerTrigger]',
   host: {
@@ -21,7 +22,6 @@ import { type Drawer } from './drawer.component';
     '(click)': 'handleClick($event)',
   },
 })
-/** Opens and closes a Drawer from a native button. */
 export class DrawerTrigger {
   /** Drawer controlled by this trigger. */
   public readonly drawer: InputSignal<Drawer> = input.required<Drawer>({ alias: 'suiDrawerTrigger' });

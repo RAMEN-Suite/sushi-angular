@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">List</h1>
-      <p class="text-lg text-base-content/70">Render typed collections as native list rows without adding selection behavior.</p>
+      <p class="text-lg text-(--sui-color-muted)">Render typed collections as native list rows without adding selection behavior.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="List architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Component</span>
@@ -14,7 +14,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Recent activity</h2>
-      <p class="text-base-content/60">Compose concise rows from existing status and badge primitives.</p>
+      <p class="text-(--sui-color-muted)">Compose concise rows from existing status and badge primitives.</p>
     </div>
     <pg-example-code [html]="examples.activity.html" [typescript]="examples.activity.typescript">
       <ng-template pgExamplePreview><pg-list-activity-example /></ng-template>
@@ -24,7 +24,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Member directory</h2>
-      <p class="text-base-content/60">Use compact hover-highlighted rows when a visual boundary improves scanning.</p>
+      <p class="text-(--sui-color-muted)">Use compact hover-highlighted rows when a visual boundary improves scanning.</p>
     </div>
     <pg-example-code [html]="examples.directory.html" [typescript]="examples.directory.typescript">
       <ng-template pgExamplePreview><pg-list-directory-example /></ng-template>
@@ -34,7 +34,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Controls inside rows</h2>
-      <p class="text-base-content/60">Keep row controls native. Use Listbox instead when each row represents a choice.</p>
+      <p class="text-(--sui-color-muted)">Keep row controls native. Use Listbox instead when each row represents a choice.</p>
     </div>
     <pg-example-code [html]="examples.tasks.html" [typescript]="examples.tasks.typescript">
       <ng-template pgExamplePreview><pg-list-tasks-example /></ng-template>

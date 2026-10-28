@@ -132,6 +132,8 @@ export class Popover {
   /** Moves focus to the Popover surface when it opens. */
   public readonly autoFocus: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
 
+  private readonly surface: Signal<ElementRef<HTMLElement> | undefined> = viewChild<ElementRef<HTMLElement>>('surface');
+
   /** Stable ID referenced by Popover triggers. */
   public readonly popoverId: string = `sui-popover-${++nextPopoverId}`;
 
@@ -140,7 +142,6 @@ export class Popover {
   protected readonly resolvedPlacement: WritableSignal<PopoverPlacement> = signal<PopoverPlacement>('bottom');
   protected readonly arrowX: WritableSignal<string> = signal<string>('50%');
   protected readonly arrowY: WritableSignal<string> = signal<string>('50%');
-  private readonly surface: Signal<ElementRef<HTMLElement> | undefined> = viewChild<ElementRef<HTMLElement>>('surface');
   private readonly focusMonitor: FocusMonitor = inject(FocusMonitor);
   private restoreTarget: HTMLElement | null = null;
 

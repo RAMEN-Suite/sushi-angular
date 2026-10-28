@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Table</h1>
-      <p class="text-lg text-base-content/70">
+      <p class="text-lg text-(--sui-color-muted)">
         Present structured records with native semantics, controlled sorting, overflow, and typed templates.
       </p>
     </div>
@@ -16,7 +16,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Basic table</h2>
-      <p class="text-base-content/60">Define typed columns once and render records with native table semantics.</p>
+      <p class="text-(--sui-color-muted)">Define typed columns once and render records with native table semantics.</p>
     </div>
     <pg-example-code [html]="examples.simple.html" [typescript]="examples.simple.typescript"
       ><ng-template pgExamplePreview><pg-table-simple-example /></ng-template
@@ -26,7 +26,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Search, sort, and paginate</h2>
-      <p class="text-base-content/60">Compose controlled collection state with existing SUSHI controls.</p>
+      <p class="text-(--sui-color-muted)">Compose controlled collection state with existing SUSHI controls.</p>
     </div>
     <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
       ><ng-template pgExamplePreview><pg-table-basic-example /></ng-template
@@ -36,7 +36,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Appearance and overflow</h2>
-      <p class="text-base-content/60">Adjust density and row treatment, or pin headings and the first column while scrolling.</p>
+      <p class="text-(--sui-color-muted)">Adjust density and row treatment, or pin headings and the first column while scrolling.</p>
     </div>
     <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript"
       ><ng-template pgExamplePreview><pg-table-appearance-example /></ng-template
@@ -49,7 +49,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Collection states</h2>
-      <p class="text-base-content/60">Keep headings stable while loading or displaying an empty collection.</p>
+      <p class="text-(--sui-color-muted)">Keep headings stable while loading or displaying an empty collection.</p>
     </div>
     <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript"
       ><ng-template pgExamplePreview><pg-table-states-example /></ng-template
@@ -59,7 +59,9 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Templates</h2>
-      <p class="text-base-content/60">Replace captions, headings, cells, rows, states, and the footer when richer content requires it.</p>
+      <p class="text-(--sui-color-muted)">
+        Replace captions, headings, cells, rows, states, and the footer when richer content requires it.
+      </p>
     </div>
     <pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript"
       ><ng-template pgExamplePreview><pg-table-templates-example /></ng-template

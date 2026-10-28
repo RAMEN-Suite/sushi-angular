@@ -1,6 +1,7 @@
 import { Directive, input, type InputSignal } from '@angular/core';
 import { type DividerOrientation, type DividerPlacement, type DividerSeverity } from './divider.interfaces';
 
+/** Separates related content horizontally or vertically with an optional label. */
 @Directive({
   selector: '[suiDivider]',
   host: {
@@ -21,7 +22,6 @@ import { type DividerOrientation, type DividerPlacement, type DividerSeverity } 
     '[class.divider-end]': 'placement() === "end"',
   },
 })
-/** Separates related content horizontally or vertically with an optional label. */
 export class Divider {
   /** Applies a semantic line and label color. */
   public readonly severity: InputSignal<DividerSeverity | null> = input<DividerSeverity | null>(null);

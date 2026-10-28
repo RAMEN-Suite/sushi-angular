@@ -2,7 +2,7 @@
   <div class="grid gap-1.5">
     <label suiLabel for="profile-name">Display name</label>
     <input suiInput fluid id="profile-name" autocomplete="name" placeholder="Ada Lovelace" />
-    <p class="text-xs leading-5 text-base-content/60">Used on your public profile.</p>
+    <p class="text-xs leading-5 text-(--sui-color-muted)">Used on your public profile.</p>
   </div>
 
   <div class="grid gap-1.5">
@@ -10,7 +10,7 @@
       <span>Email address</span>
       <input suiInput fluid type="email" autocomplete="email" placeholder="name@example.com" />
     </label>
-    <p class="text-xs leading-5 text-base-content/60">Floating labels work best with a useful placeholder.</p>
+    <p class="text-xs leading-5 text-(--sui-color-muted)">Floating labels work best with a useful placeholder.</p>
   </div>
 
   <div class="grid gap-1.5">
@@ -18,12 +18,14 @@
       <span>Short biography</span>
       <textarea suiTextarea fluid rows="3" placeholder="Tell us about yourself"></textarea>
     </label>
-    <p class="text-xs leading-5 text-base-content/60">Keep supporting text outside the floating label.</p>
+    <p class="text-xs leading-5 text-(--sui-color-muted)">Keep supporting text outside the floating label.</p>
   </div>
 
   <div class="grid gap-1.5">
     <span suiLabel id="priority-label">Priority</span>
     <sui-select fluid ariaLabelledby="priority-label" [options]="priorities" />
-    <p class="text-xs leading-5 text-base-content/60">Composite controls reference their visible label through ARIA.</p>
+    <p class="text-xs leading-5 text-(--sui-color-muted)">
+      Composite controls reference their visible label through ARIA.
+    </p>
   </div>
 </div>

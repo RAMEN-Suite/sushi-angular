@@ -33,7 +33,7 @@
     /** Width of the border around the Dialog surface. */
     --sui-dialog-border-width: var(--border);
     /** Color of the border around the Dialog surface. */
-    --sui-dialog-border-color: var(--color-base-300);
+    --sui-dialog-border-color: var(--sui-color-border);
     /** Subtle shadow separating a floating Dialog from surrounding content. */
     --sui-dialog-shadow: var(--sui-shadow-overlay);
     /** Stack level used by non-modal Dialogs. */
