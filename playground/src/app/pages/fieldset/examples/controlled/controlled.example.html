@@ -2,7 +2,7 @@
   <div class="flex flex-wrap items-center justify-between gap-3">
     <div>
       <strong class="block">Checkout details</strong>
-      <span class="text-sm text-base-content/60">The external action controls the fieldset below.</span>
+      <span class="text-sm text-(--sui-color-muted)">The external action controls the fieldset below.</span>
     </div>
     <button suiButton type="button" severity="neutral" variant="soft" (click)="expanded.update((value) => !value)">
       {{ expanded() ? 'Hide address' : 'Edit address' }}

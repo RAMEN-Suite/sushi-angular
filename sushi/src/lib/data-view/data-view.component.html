@@ -35,7 +35,7 @@
 
 <div #scrollViewport class="min-w-0" [class.overflow-y-auto]="scrollHeight()" [class.pe-1]="scrollHeight()" [style.height]="scrollHeight()">
   @if (loading()) {
-    <div class="rounded-box border border-base-300">
+    <div class="rounded-box border border-(--sui-color-border)">
       @if (loadingTemplate(); as template) {
         <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
       } @else {
@@ -62,7 +62,7 @@
           <ng-container [ngTemplateOutlet]="itemTemplate()" [ngTemplateOutletContext]="itemContext(item, $index, count)" />
         </li>
       } @empty {
-        <li class="rounded-box border border-base-300">
+        <li class="rounded-box border border-(--sui-color-border)">
           @if (emptyTemplate(); as template) {
             <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="collectionContext()" />
           } @else {

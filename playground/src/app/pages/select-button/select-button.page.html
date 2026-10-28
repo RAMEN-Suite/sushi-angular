@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Select Button</h1>
-      <p class="text-lg text-base-content/70">Choose one option from a compact visible set with radio semantics and roving focus.</p>
+      <p class="text-lg text-(--sui-color-muted)">Choose one option from a compact visible set with radio semantics and roving focus.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Select Button architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Component</span>
@@ -15,7 +15,9 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Basic usage and keyboard navigation</h2>
-      <p class="text-base-content/60">Arrow keys move and select, Home and End jump to the edges, and the form retains a single value.</p>
+      <p class="text-(--sui-color-muted)">
+        Arrow keys move and select, Home and End jump to the edges, and the form retains a single value.
+      </p>
     </div>
     <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript">
       <ng-template pgExamplePreview><pg-select-button-basic-example /></ng-template>
@@ -24,7 +26,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Orientation and optional selection</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         <code>allowEmpty</code> allows the active value to clear itself; orientation changes both layout and arrow keys.
       </p>
     </div>
@@ -35,7 +37,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Option template and states</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Replace option content while the component retains size, disabled state, selection, and ARIA behavior.
       </p>
     </div>

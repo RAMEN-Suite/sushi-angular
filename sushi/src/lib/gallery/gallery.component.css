@@ -3,7 +3,7 @@
     /** Surface behind the large image. */
     --sui-gallery-background: var(--color-base-200);
     /** Border color around the Gallery. */
-    --sui-gallery-border-color: var(--color-base-300);
+    --sui-gallery-border-color: var(--sui-color-border);
     /** Color used by the selected thumbnail and focus indicators. */
     --sui-gallery-selection-color: var(--color-primary);
     /** Height of the large image stage. */
@@ -99,13 +99,13 @@
   }
   .sui-gallery__meta span {
     flex: none;
-    font-size: 0.875rem;
+    font-size: var(--sui-font-size-md);
   }
 
   .sui-gallery__empty {
     display: grid;
     min-height: var(--sui-gallery-stage-height);
-    color: color-mix(in oklab, var(--color-base-content) 60%, transparent);
+    color: var(--sui-color-muted);
     place-items: center;
   }
 

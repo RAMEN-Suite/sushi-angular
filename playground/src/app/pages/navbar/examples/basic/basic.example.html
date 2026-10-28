@@ -1,6 +1,6 @@
 <div class="grid gap-5">
   <section class="grid gap-2">
-    <span class="text-xs font-semibold tracking-wide text-base-content/50 uppercase">Link navigation</span>
+    <span class="text-xs font-semibold tracking-wide text-(--sui-color-subtle) uppercase">Link navigation</span>
     <sui-navbar [items]="items" [value]="activePage()" inset="comfortable" (itemSelected)="activePage.set($event)">
       <span suiNavbarBrand class="inline-flex items-center gap-2.5 text-lg font-semibold">
         <svg lucideSoup class="size-5 text-primary" aria-hidden="true"></svg>
@@ -10,7 +10,7 @@
   </section>
 
   <section class="grid gap-2">
-    <span class="text-xs font-semibold tracking-wide text-base-content/50 uppercase">Button navigation</span>
+    <span class="text-xs font-semibold tracking-wide text-(--sui-color-subtle) uppercase">Button navigation</span>
     <sui-navbar
       [items]="items"
       [value]="activePage()"

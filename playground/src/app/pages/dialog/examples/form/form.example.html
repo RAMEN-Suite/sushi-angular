@@ -1,6 +1,6 @@
 <div class="flex flex-wrap items-center gap-3">
   <button suiButton type="button" [suiDialogTrigger]="bookingDialog">Reserve a table</button>
-  <span class="text-sm text-base-content/60">{{ result() }}</span>
+  <span class="text-sm text-(--sui-color-muted)">{{ result() }}</span>
 </div>
 
 <sui-dialog
@@ -14,7 +14,7 @@
   </header>
 
   <form suiDialogBody class="grid gap-5">
-    <p class="text-base-content/70">Tell us when you’re coming and how we can prepare.</p>
+    <p class="text-(--sui-color-muted)">Tell us when you’re coming and how we can prepare.</p>
     <fieldset suiFieldset class="grid gap-4">
       <legend suiFieldsetLegend>Contact and visit</legend>
       <div class="grid gap-4 sm:grid-cols-2">

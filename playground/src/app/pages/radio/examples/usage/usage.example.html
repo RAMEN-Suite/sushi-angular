@@ -2,21 +2,23 @@
   <fieldset suiFieldset>
     <legend suiFieldsetLegend>Workspace plan</legend>
     <div suiFieldsetContent class="grid gap-3 sm:grid-cols-3">
-      <label suiLabel class="grid cursor-pointer gap-2 rounded-box border border-base-300 p-4">
+      <label suiLabel class="grid cursor-pointer gap-2 rounded-box border border-(--sui-color-border) p-4">
         <input suiRadio type="radio" value="starter" [formField]="planForm.plan" />
         <span>
           <strong class="block">Starter</strong>
-          <small class="text-base-content/60">For personal projects.</small>
+          <small class="text-(--sui-color-muted)">For personal projects.</small>
         </span>
       </label>
-      <label suiLabel class="grid cursor-pointer gap-2 rounded-box border border-base-300 p-4">
+      <label suiLabel class="grid cursor-pointer gap-2 rounded-box border border-(--sui-color-border) p-4">
         <input suiRadio type="radio" value="team" [formField]="planForm.plan" />
         <span>
           <strong class="block">Team</strong>
-          <small class="text-base-content/60">Shared tools and roles.</small>
+          <small class="text-(--sui-color-muted)">Shared tools and roles.</small>
         </span>
       </label>
-      <label suiLabel class="grid cursor-not-allowed gap-2 rounded-box border border-base-300 p-4 opacity-60">
+      <label
+        suiLabel
+        class="grid cursor-not-allowed gap-2 rounded-box border border-(--sui-color-border) p-4 opacity-60">
         <input suiRadio type="radio" value="enterprise" disabled />
         <span>
           <strong class="block">Enterprise</strong>

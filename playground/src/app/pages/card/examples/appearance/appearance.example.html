@@ -3,7 +3,7 @@
     @for (card of cards; track card.size) {
       <sui-card class="w-full" [size]="card.size">
         <h3 suiCardTitle>{{ card.title }}</h3>
-        <p class="text-base-content/60">Typography and spacing scale together.</p>
+        <p class="text-(--sui-color-muted)">Typography and spacing scale together.</p>
       </sui-card>
     }
   </section>
@@ -12,7 +12,7 @@
     @for (card of variants; track card.variant) {
       <sui-card class="w-full" size="sm" [variant]="card.variant" [class.bg-base-200]="card.variant === 'plain'">
         <h3 suiCardTitle>{{ card.title }}</h3>
-        <p class="text-base-content/60">{{ card.description }}</p>
+        <p class="text-(--sui-color-muted)">{{ card.description }}</p>
       </sui-card>
     }
   </section>

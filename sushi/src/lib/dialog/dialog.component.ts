@@ -26,6 +26,7 @@ import { type DialogCloseEvent, type DialogCloseReason, type DialogMotion, type 
 
 let nextDialogId: number = 0;
 
+/** Adds controlled modal behavior to the native dialog element. */
 @Component({
   selector: 'sui-dialog',
   exportAs: 'suiDialog',
@@ -65,7 +66,6 @@ let nextDialogId: number = 0;
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-/** Adds controlled modal behavior to the native dialog element. */
 export class Dialog {
   /** Requested open state. Setting false starts exit motion; closed emits after the native Dialog closes. */
   public readonly open: ModelSignal<boolean> = model<boolean>(false);
@@ -96,11 +96,13 @@ export class Dialog {
   /** Emits after the native Dialog closes, including any configured exit motion. */
   public readonly closed: OutputEmitterRef<DialogCloseEvent> = output<DialogCloseEvent>();
 
+  private readonly drag: Signal<CdkDrag> = viewChild.required(CdkDrag);
+  private readonly element: Signal<ElementRef<HTMLDialogElement>> =
+    viewChild.required<ElementRef<HTMLDialogElement>>('nativeDialog');
+
   /** Stable ID referenced by Dialog triggers. */
   public readonly dialogId: string = `sui-dialog-${++nextDialogId}`;
 
-  private readonly element: Signal<ElementRef<HTMLDialogElement>> =
-    viewChild.required<ElementRef<HTMLDialogElement>>('nativeDialog');
   protected readonly namedPosition: Signal<string | null> = computed((): string | null => {
     const position: DialogPosition = this.position();
     return typeof position === 'string' ? position : null;
@@ -109,7 +111,6 @@ export class Dialog {
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
   private dragSubscription: Subscription | null = null;
   private closeReason: DialogCloseReason = 'programmatic';
-  private readonly drag: Signal<CdkDrag> = viewChild.required(CdkDrag);
   private readonly focusMonitor: FocusMonitor = inject(FocusMonitor);
   private restoreTarget: HTMLElement | null = null;
   private pendingClose: object | null = null;

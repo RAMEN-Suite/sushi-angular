@@ -34,6 +34,7 @@ const TOAST_ICONS: Readonly<Record<MessageSeverity | 'neutral', LucideIconData>>
   error: LucideCircleX.icon,
 };
 
+/** Renders the queue managed by ToastService at a viewport edge or corner. */
 @Component({
   selector: 'sui-toast',
   imports: [Button, LucideDynamicIcon, LucideX, Message, NgTemplateOutlet],
@@ -42,7 +43,6 @@ const TOAST_ICONS: Readonly<Record<MessageSeverity | 'neutral', LucideIconData>>
   host: { class: 'sui-toast-host' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-/** Renders the queue managed by ToastService at a viewport edge or corner. */
 export class Toast {
   /** Horizontal alignment of the Toast stack. */
   public readonly horizontal: InputSignal<ToastHorizontalPosition> = input<ToastHorizontalPosition>('end');
@@ -60,11 +60,12 @@ export class Toast {
   /** Optional entry and exit motion. CSS tokens configure timing; reduced motion disables it. */
   public readonly motion: InputSignal<ToastMotion> = input<ToastMotion>('none');
 
-  protected readonly service: ToastService = inject(ToastService);
   protected readonly contentTemplates: Signal<readonly ToastContentTemplate[]> = contentChildren(ToastContentTemplate);
   protected readonly visibleToasts: Signal<readonly ToastItem[]> = computed((): readonly ToastItem[] =>
     this.service.toasts().slice(-this.maxVisible()),
   );
+
+  protected readonly service: ToastService = inject(ToastService);
 
   protected accessibleDismissLabel(item: ToastItem): string {
     const label: ToastDismissLabel = this.dismissLabel();

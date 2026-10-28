@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Toast</h1>
-      <p class="text-lg text-base-content/70">Show brief application feedback from a shared notification outlet.</p>
+      <p class="text-lg text-(--sui-color-muted)">Show brief application feedback from a shared notification outlet.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Toast architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Component</span>
@@ -13,7 +13,9 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Application notifications</h2>
-      <p class="text-base-content/60">Place one outlet in the application shell, then inject the service wherever feedback originates.</p>
+      <p class="text-(--sui-color-muted)">
+        Place one outlet in the application shell, then inject the service wherever feedback originates.
+      </p>
     </div>
     <pg-example-code [html]="example.html" [typescript]="example.typescript">
       <ng-template pgExamplePreview><pg-toast-usage-example /></ng-template>
@@ -23,7 +25,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Custom content</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Register templates by name and select one with <code>template</code> when calling <code>show()</code>. The three triggers use the
         standard layout, <code>sync</code>, and <code>order</code> from the same outlet.
       </p>

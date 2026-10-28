@@ -1,5 +1,6 @@
 <label
-  class="otp"
+  class="otp sui-internal-size-text"
+  [attr.data-size]="size()"
   [class.otp-joined]="joined()"
   [class.otp-xs]="size() === 'xs'"
   [class.otp-sm]="size() === 'sm'"

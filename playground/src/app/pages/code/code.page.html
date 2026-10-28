@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Code</h1>
-      <p class="text-lg text-base-content/70">Present terminal-like snippets with prefixes and accessible copy feedback.</p>
+      <p class="text-lg text-(--sui-color-muted)">Present terminal-like snippets with prefixes and accessible copy feedback.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Code architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Component</span
@@ -14,7 +14,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Lines and prefixes</h2>
-      <p class="text-base-content/60">Mark the exact lines that participate in the copied value.</p>
+      <p class="text-(--sui-color-muted)">Mark the exact lines that participate in the copied value.</p>
     </div>
     <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
       ><ng-template pgExamplePreview><pg-code-basic-example /></ng-template
@@ -23,7 +23,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Copy control templates</h2>
-      <p class="text-base-content/60">Replace the control or its feedback states while retaining clipboard behavior.</p>
+      <p class="text-(--sui-color-muted)">Replace the control or its feedback states while retaining clipboard behavior.</p>
     </div>
     <pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript"
       ><ng-template pgExamplePreview><pg-code-templates-example /></ng-template

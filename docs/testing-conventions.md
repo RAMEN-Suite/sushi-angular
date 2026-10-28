@@ -1,4 +1,4 @@
-# Testing standards
+# Testing conventions
 
 Test public contracts, not implementation structure.
 
@@ -37,14 +37,14 @@ Place browser contracts in `e2e/specs/` and organize them by component or shared
 - Request reduced motion by default. Opt into normal motion when the test needs to exercise animation behavior.
 - Use Playwright's retrying assertions for settled user-visible behavior; do not add manual waits or sample animation frames.
 - Assert layout invariants such as contained, aligned, scrollable, or moved. Use exact pixels only when the API promises them.
-- Do not test documentation tabs, copy, utility classes, colors, shadows, or page decoration.
+- Do not test documentation tabs, copy, utility classes, or page decoration. Computed styles may verify propagation of documented public CSS tokens; compare configured values rather than prescribing default colors, shadows, or font sizes. Keep these focused browser contracts tagged `@css`.
 
 Most components need unit tests only. Existing E2E coverage protects modal focus and dismissal, non-modal scrolling, drag and resize, viewport containment, responsive navigation, overlay focus and placement, selection popups, media viewers, and overflow behavior.
 
 ### Browser matrix
 
 - Untagged browser contracts run in Chromium, Firefox, and WebKit. The mobile WebKit project additionally covers the selected responsive, overlay, and modal suites with touch input.
-- Use `@css` only for simple computed-style rules without geometry or interaction differences between engines, such as cursor mappings. These run in Chromium; layout and native modal regressions retain coverage across engines.
+- Use `@css` only for simple computed-style rules without geometry or interaction differences between engines, such as cursor mappings and public CSS-token propagation. These run in Chromium; layout and native modal regressions retain coverage across engines.
 - Use `@desktop` for scenarios that exercise only desktop layout. They run in all three desktop projects and are excluded from mobile WebKit. Tests that switch between desktop and mobile layouts remain in the mobile project when touch or responsive behavior is relevant.
 - Add viewport cases for distinct constraints or breakpoints. Adjacent widths that exercise the same behavior do not each need a separate test.
 

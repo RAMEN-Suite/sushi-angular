@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Pagination</h1>
-      <p class="text-lg text-base-content/70">Navigate a known collection with a controlled page model and accessible labels.</p>
+      <p class="text-lg text-(--sui-color-muted)">Navigate a known collection with a controlled page model and accessible labels.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Pagination architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Component</span
@@ -13,7 +13,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Paginate a collection</h2>
-      <p class="text-base-content/60">Bind the one-based page model and expose the current result range.</p>
+      <p class="text-(--sui-color-muted)">Bind the one-based page model and expose the current result range.</p>
     </div>
     <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
       ><ng-template pgExamplePreview><pg-pagination-basic-example /></ng-template
@@ -22,7 +22,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Compact navigation</h2>
-      <p class="text-base-content/60">Hide page and boundary links when previous and next are enough.</p>
+      <p class="text-(--sui-color-muted)">Hide page and boundary links when previous and next are enough.</p>
     </div>
     <pg-example-code [html]="examples.compact.html" [typescript]="examples.compact.typescript"
       ><ng-template pgExamplePreview><pg-pagination-compact-example /></ng-template
@@ -31,7 +31,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Appearance and state</h2>
-      <p class="text-base-content/60">Choose separate round actions or a connected group with one size and semantic color.</p>
+      <p class="text-(--sui-color-muted)">Choose separate round actions or a connected group with one size and semantic color.</p>
     </div>
     <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript"
       ><ng-template pgExamplePreview><pg-pagination-appearance-example /></ng-template

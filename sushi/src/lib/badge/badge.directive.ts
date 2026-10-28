@@ -5,7 +5,8 @@ import { type BadgeSeverity, type BadgeSize, type BadgeVariant } from './badge.i
 @Directive({
   selector: '[suiBadge]',
   host: {
-    class: 'badge sui-badge',
+    class: 'badge sui-badge sui-internal-size-text',
+    '[attr.data-size]': 'size()',
 
     '[class.badge-primary]': 'severity() === "primary"',
     '[class.badge-secondary]': 'severity() === "secondary"',

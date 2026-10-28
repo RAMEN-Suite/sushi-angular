@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Accordion</h1>
-      <p class="text-lg text-base-content/70">
+      <p class="text-lg text-(--sui-color-muted)">
         Reveal related sections with predictable focus, keyboard navigation, and controlled expansion.
       </p>
     </div>
@@ -17,7 +17,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Basic</h2>
-      <p class="text-base-content/60">Group concise, related disclosures with one section expanded at a time.</p>
+      <p class="text-(--sui-color-muted)">Group concise, related disclosures with one section expanded at a time.</p>
     </div>
     <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
       ><ng-template pgExamplePreview><pg-accordion-basic-example /></ng-template
@@ -26,7 +26,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Multiple and controlled</h2>
-      <p class="text-base-content/60">Bind expansion state and control all enabled sections when the workflow requires it.</p>
+      <p class="text-(--sui-color-muted)">Bind expansion state and control all enabled sections when the workflow requires it.</p>
     </div>
     <pg-example-code [html]="examples.control.html" [typescript]="examples.control.typescript"
       ><ng-template pgExamplePreview><pg-accordion-control-example /></ng-template
@@ -35,7 +35,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Custom headings</h2>
-      <p class="text-base-content/60">Enrich headings and indicators while the Accordion retains accessible trigger behavior.</p>
+      <p class="text-(--sui-color-muted)">Enrich headings and indicators while the Accordion retains accessible trigger behavior.</p>
     </div>
     <pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript"
       ><ng-template pgExamplePreview><pg-accordion-templates-example /></ng-template
@@ -44,7 +44,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Sizes</h2>
-      <p class="text-base-content/60">Match disclosure density to the surrounding content.</p>
+      <p class="text-(--sui-color-muted)">Match disclosure density to the surrounding content.</p>
     </div>
     <pg-example-code [html]="examples.sizes.html" [typescript]="examples.sizes.typescript"
       ><ng-template pgExamplePreview><pg-accordion-sizes-example /></ng-template
@@ -53,7 +53,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Independent category actions</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Place actions beside a trigger with suiAccordionActions. Tab visits each trigger and its actions; arrow keys navigate triggers only.
         Scope --sui-focus-ring-offset to a negative value on the public host to keep focus outlines inside clipped containers.
       </p>

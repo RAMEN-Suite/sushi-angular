@@ -6,7 +6,8 @@ import { type TextareaResize } from './textarea.interfaces';
 @Directive({
   selector: 'textarea[suiTextarea]',
   host: {
-    class: 'textarea sui-textarea sui-form-control',
+    class: 'textarea sui-textarea sui-form-control sui-internal-size-text',
+    '[attr.data-size]': 'size()',
 
     '[class.textarea-primary]': 'severity() === "primary"',
     '[class.textarea-secondary]': 'severity() === "secondary"',

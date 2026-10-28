@@ -24,7 +24,7 @@
    * Border color of the bordered Navbar surface.
    * @example color-mix(in oklab, var(--color-primary) 20%, var(--color-base-300))
    */
-  --sui-navbar-border-color: var(--color-base-300);
+  --sui-navbar-border-color: var(--sui-color-border);
   /**
    * Text and icon color of navigation items at rest.
    * @example color-mix(in oklab, var(--color-base-content) 80%, transparent)
@@ -80,7 +80,7 @@
 }
 
 :where(.sui-navbar__content) {
-  @apply order-last mt-2 hidden w-full basis-full flex-col border-t border-base-300 pt-2;
+  @apply order-last mt-2 hidden w-full basis-full flex-col border-t border-(--sui-color-border) pt-2;
   align-items: stretch;
 }
 
@@ -147,7 +147,7 @@
 
 .sui-navbar--sm .sui-navbar__link,
 .sui-navbar--sm .sui-navbar__dropdown > summary {
-  @apply min-h-9 text-sm;
+  @apply min-h-9;
 }
 
 .sui-navbar__link:hover,

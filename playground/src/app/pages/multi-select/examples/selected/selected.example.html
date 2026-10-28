@@ -12,7 +12,7 @@
         @for (option of options; track option.value) {
           <sui-chip [label]="option.label" size="sm" removable (remove)="remove(option)" />
         } @empty {
-          <span class="truncate text-base-content/50">Select project teams</span>
+          <span class="truncate text-(--sui-color-subtle)">Select project teams</span>
         }
       </span>
     </ng-template>
@@ -23,7 +23,7 @@
       </span>
     </ng-template>
   </sui-multi-select>
-  <span class="text-xs text-base-content/60">
+  <span class="text-xs text-(--sui-color-muted)">
     Selected content can use reusable components without changing selection behavior.
   </span>
 </div>

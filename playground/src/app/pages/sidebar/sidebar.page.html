@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Sidebar</h1>
-      <p class="text-lg text-base-content/70">
+      <p class="text-lg text-(--sui-color-muted)">
         Organize persistent application navigation into labeled groups with fixed header and footer regions.
       </p>
     </div>
@@ -16,7 +16,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Responsive application shell</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Keep navigation visible on wide layouts, reduce it to an icon rail, and reuse it inside a Drawer on compact screens.
       </p>
     </div>
@@ -28,17 +28,17 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Connect separate navigation components</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Keep navigation state at the nearest shared layout or route. Navbar, Sidebar, and Drawer can then stay independent.
       </p>
     </div>
 
-    <ol class="divide-y divide-base-300 border-y border-base-300">
+    <ol class="divide-y divide-base-300 border-y border-(--sui-color-border)">
       <li class="grid gap-4 py-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-8">
         <div>
           <span suiBadge size="sm" variant="soft">1 · Share state</span>
           <h3 class="mt-3 font-semibold">Create an app-level state</h3>
-          <p class="mt-1 text-sm text-base-content/60">Use injection when navigation controls live in separate components.</p>
+          <p class="mt-1 text-sm text-(--sui-color-muted)">Use injection when navigation controls live in separate components.</p>
         </div>
         <sui-code>
           @for (line of stateLines; track $index) {
@@ -51,7 +51,7 @@
         <div>
           <span suiBadge size="sm" variant="soft">2 · Provide and bind</span>
           <h3 class="mt-3 font-semibold">Scope it to the shared layout</h3>
-          <p class="mt-1 text-sm text-base-content/60">
+          <p class="mt-1 text-sm text-(--sui-color-muted)">
             This may be a layout component or route provider; it does not need to be called a shell.
           </p>
         </div>
@@ -66,7 +66,7 @@
         <div>
           <span suiBadge size="sm" variant="soft">3 · Control it</span>
           <h3 class="mt-3 font-semibold">Inject state into the Navbar</h3>
-          <p class="mt-1 text-sm text-base-content/60">Bind the shared Signals; controls in the Navbar update the same state.</p>
+          <p class="mt-1 text-sm text-(--sui-color-muted)">Bind the shared Signals; controls in the Navbar update the same state.</p>
         </div>
         <sui-code>
           @for (line of bindingLines; track $index) {
@@ -76,7 +76,7 @@
       </li>
     </ol>
 
-    <p class="text-sm text-base-content/60">
+    <p class="text-sm text-(--sui-color-muted)">
       Use <code>ViewChild</code> only when one component directly owns a Drawer or Sidebar and needs its imperative methods. For separated
       navigation components, shared injected state keeps the dependency explicit and testable.
     </p>

@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Listbox</h1>
-      <p class="text-lg text-base-content/70">
+      <p class="text-lg text-(--sui-color-muted)">
         Select one or more values from a persistent collection with arrow keys, typeahead, and explicit selection.
       </p>
     </div>
@@ -18,7 +18,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Single selection</h2>
-      <p class="text-base-content/60">A visible listbox keeps its choices available without opening a popup.</p>
+      <p class="text-(--sui-color-muted)">A visible listbox keeps its choices available without opening a popup.</p>
     </div>
     <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript">
       <ng-template pgExamplePreview><pg-listbox-basic-example /></ng-template>
@@ -28,7 +28,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Multiple selection</h2>
-      <p class="text-base-content/60">Multiple mode preserves every selected value in one array-backed form field.</p>
+      <p class="text-(--sui-color-muted)">Multiple mode preserves every selected value in one array-backed form field.</p>
     </div>
     <pg-example-code [html]="examples.multiple.html" [typescript]="examples.multiple.typescript">
       <ng-template pgExamplePreview><pg-listbox-multiple-example /></ng-template>
@@ -38,7 +38,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Rich option content</h2>
-      <p class="text-base-content/60">Filter grouped options and replace row or group content without losing listbox semantics.</p>
+      <p class="text-(--sui-color-muted)">Filter grouped options and replace row or group content without losing listbox semantics.</p>
     </div>
     <pg-example-code [html]="examples.templates.html" [typescript]="examples.templates.typescript">
       <ng-template pgExamplePreview><pg-listbox-templates-example /></ng-template>
@@ -48,7 +48,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Lazy option loading</h2>
-      <p class="text-base-content/60">
+      <p class="text-(--sui-color-muted)">
         Append another data page near the scroll boundary while preserving one complete accessible option collection.
       </p>
     </div>
@@ -60,7 +60,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Interaction and validation states</h2>
-      <p class="text-base-content/60">Constrain long collections, prevent changes, expose validation, or replace the empty state.</p>
+      <p class="text-(--sui-color-muted)">Constrain long collections, prevent changes, expose validation, or replace the empty state.</p>
     </div>
     <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript">
       <ng-template pgExamplePreview><pg-listbox-states-example /></ng-template>

@@ -9,7 +9,8 @@
 >
   <div
     ngTabList
-    class="tabs sui-tabs__list max-w-full"
+    class="tabs sui-tabs__list sui-internal-size-text max-w-full"
+    [attr.data-size]="size()"
     [(selectedTab)]="value"
     [orientation]="orientation()"
     [selectionMode]="selectionMode()"

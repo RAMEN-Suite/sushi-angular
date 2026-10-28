@@ -3,7 +3,7 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Button</h1>
-      <p class="text-lg text-base-content/70">Trigger actions while preserving native button and link behavior.</p>
+      <p class="text-lg text-(--sui-color-muted)">Trigger actions while preserving native button and link behavior.</p>
     </div>
     <div class="flex flex-wrap gap-2" aria-label="Button architecture">
       <span suiBadge severity="neutral" variant="soft" size="sm">Directive</span
@@ -13,7 +13,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Native actions</h2>
-      <p class="text-base-content/60">Use the same directive on buttons, external links, and router links.</p>
+      <p class="text-(--sui-color-muted)">Use the same directive on buttons, external links, and router links.</p>
     </div>
     <pg-example-code [html]="examples.basic.html" [typescript]="examples.basic.typescript"
       ><ng-template pgExamplePreview><pg-button-basic-example /></ng-template
@@ -22,7 +22,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Appearance</h2>
-      <p class="text-base-content/60">Combine severity, variant, size, and shape without changing behavior.</p>
+      <p class="text-(--sui-color-muted)">Combine severity, variant, size, and shape without changing behavior.</p>
     </div>
     <pg-example-code [html]="examples.appearance.html" [typescript]="examples.appearance.typescript"
       ><ng-template pgExamplePreview><pg-button-appearance-example /></ng-template
@@ -31,7 +31,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Disabled and loading</h2>
-      <p class="text-base-content/60">Both states prevent activation; loading also exposes the busy state.</p>
+      <p class="text-(--sui-color-muted)">Both states prevent activation; loading also exposes the busy state.</p>
     </div>
     <pg-example-code [html]="examples.states.html" [typescript]="examples.states.typescript"
       ><ng-template pgExamplePreview><pg-button-states-example /></ng-template

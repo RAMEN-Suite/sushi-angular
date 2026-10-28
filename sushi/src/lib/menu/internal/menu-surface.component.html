@@ -1,6 +1,6 @@
 <div
   class="max-w-full rounded-box border p-1.5"
-  [class.border-base-300]="!popup()"
+  [style.border-color]="!popup() ? 'var(--sui-color-border)' : null"
   [class.bg-base-100]="!popup()"
   [class.sui-internal-overlay-surface]="popup()"
   [class.w-60]="!fluid()"

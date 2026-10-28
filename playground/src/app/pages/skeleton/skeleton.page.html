@@ -3,14 +3,14 @@
     <p class="text-sm font-medium text-primary">Examples</p>
     <div class="space-y-3">
       <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Skeleton</h1>
-      <p class="text-lg text-base-content/70">Reserve stable space while content is loading.</p>
+      <p class="text-lg text-(--sui-color-muted)">Reserve stable space while content is loading.</p>
     </div>
     <div class="flex gap-2"><span suiBadge severity="neutral" variant="soft" size="sm">Directive</span></div>
   </section>
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Shapes and text</h2>
-      <p class="text-base-content/60">Match the approximate shape and line length of the content that will replace it.</p>
+      <p class="text-(--sui-color-muted)">Match the approximate shape and line length of the content that will replace it.</p>
     </div>
     <pg-example-code [html]="examples.usage.html" [typescript]="examples.usage.typescript"
       ><ng-template pgExamplePreview><pg-skeleton-usage-example /></ng-template
@@ -19,7 +19,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">Product card</h2>
-      <p class="text-base-content/60">Reserve the complete card layout to avoid movement when its content arrives.</p>
+      <p class="text-(--sui-color-muted)">Reserve the complete card layout to avoid movement when its content arrives.</p>
     </div>
     <pg-example-code [html]="examples.card.html" [typescript]="examples.card.typescript"
       ><ng-template pgExamplePreview><pg-skeleton-card-example /></ng-template
@@ -28,7 +28,7 @@
   <section class="pg-page__section">
     <div class="space-y-2">
       <h2 class="text-2xl font-bold tracking-tight">List</h2>
-      <p class="text-base-content/60">Repeat the final row structure and mark the loading region once with <code>aria-label</code>.</p>
+      <p class="text-(--sui-color-muted)">Repeat the final row structure and mark the loading region once with <code>aria-label</code>.</p>
     </div>
     <pg-example-code [html]="examples.list.html" [typescript]="examples.list.typescript"
       ><ng-template pgExamplePreview><pg-skeleton-list-example /></ng-template

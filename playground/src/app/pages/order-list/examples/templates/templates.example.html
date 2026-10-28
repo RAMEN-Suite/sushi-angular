@@ -1,14 +1,14 @@
 <section
-  class="w-full max-w-xl overflow-hidden rounded-box border border-base-300 bg-base-100"
+  class="w-full max-w-xl overflow-hidden rounded-box border border-(--sui-color-border) bg-base-100"
   aria-labelledby="property-order-heading">
-  <header class="flex min-h-20 items-center justify-between gap-3 border-b border-base-300 px-4 py-3">
+  <header class="flex min-h-20 items-center justify-between gap-3 border-b border-(--sui-color-border) px-4 py-3">
     <div class="flex min-w-0 items-center gap-3">
-      <span class="grid size-9 shrink-0 place-items-center rounded-field bg-base-200 text-base-content/70">
+      <span class="grid size-9 shrink-0 place-items-center rounded-field bg-base-200 text-(--sui-color-muted)">
         <svg lucideListFilter class="size-4" aria-hidden="true"></svg>
       </span>
       <div>
         <h3 id="property-order-heading" class="font-semibold">Properties</h3>
-        <p class="text-xs text-base-content/60">Choose how fields appear in your workspace.</p>
+        <p class="text-xs text-(--sui-color-muted)">Choose how fields appear in your workspace.</p>
       </div>
     </div>
     @if (!sorting()) {
@@ -27,7 +27,7 @@
       (reordered)="message.set('Unsaved order. Save or cancel your changes.')">
       <ng-template [suiOrderListItem]="draft()" let-property>
         <div class="flex min-w-0 items-center gap-3">
-          <span class="grid size-7 shrink-0 place-items-center rounded-field bg-base-200 text-base-content/60">
+          <span class="grid size-7 shrink-0 place-items-center rounded-field bg-base-200 text-(--sui-color-muted)">
             @if (property.type === 'Date') {
               <svg lucideCalendarDays class="size-3.5" aria-hidden="true"></svg>
             } @else {
@@ -35,9 +35,9 @@
             }
           </span>
           <span class="min-w-0 grow text-sm font-medium">{{ property.label }}</span>
-          <span class="text-xs text-base-content/50">{{ property.type }}</span>
+          <span class="text-xs text-(--sui-color-subtle)">{{ property.type }}</span>
           @if (property.disabled) {
-            <span class="flex items-center gap-1 text-xs text-base-content/50">
+            <span class="flex items-center gap-1 text-xs text-(--sui-color-subtle)">
               <svg lucideLockKeyhole class="size-3" aria-hidden="true"></svg>
               Locked
             </span>
@@ -47,8 +47,8 @@
     </sui-order-list>
   </div>
   <footer
-    class="flex min-h-20 flex-col gap-3 border-t border-base-300 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
-    <p role="status" aria-label="Order changes" class="min-w-0 flex-1 text-xs leading-5 text-base-content/60">
+    class="flex min-h-20 flex-col gap-3 border-t border-(--sui-color-border) px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+    <p role="status" aria-label="Order changes" class="min-w-0 flex-1 text-xs leading-5 text-(--sui-color-muted)">
       {{ message() }}
     </p>
     @if (sorting()) {

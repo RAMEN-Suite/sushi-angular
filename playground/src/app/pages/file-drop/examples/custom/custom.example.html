@@ -6,17 +6,17 @@
   description="PNG or JPEG files"
   [formField]="form.files">
   <ng-template suiFileDropContent let-files let-active="active" let-disabled="disabled">
-    <svg lucideUpload class="size-8 text-base-content/50" aria-hidden="true"></svg>
+    <svg lucideUpload class="size-8 text-(--sui-color-subtle)" aria-hidden="true"></svg>
     <strong>{{ contentLabel(files, active, disabled) }}</strong>
-    <span class="text-base-content/60">PNG or JPEG files.</span>
+    <span class="text-(--sui-color-muted)">PNG or JPEG files.</span>
   </ng-template>
 
   <ng-template suiFileDropItem let-file let-size="size">
     <div class="flex min-w-0 items-center gap-3">
-      <svg lucideFileText class="size-5 shrink-0 text-base-content/50" aria-hidden="true"></svg>
+      <svg lucideFileText class="size-5 shrink-0 text-(--sui-color-subtle)" aria-hidden="true"></svg>
       <div class="min-w-0">
         <p class="truncate font-medium">{{ file.name }}</p>
-        <p class="text-sm text-base-content/60">{{ size }} · Ready</p>
+        <p class="text-sm text-(--sui-color-muted)">{{ size }} · Ready</p>
       </div>
     </div>
   </ng-template>

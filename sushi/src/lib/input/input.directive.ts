@@ -5,7 +5,8 @@ import { FluidControlState } from '../form-control';
 @Directive({
   selector: 'input[suiInput]',
   host: {
-    class: 'input sui-input sui-form-control',
+    class: 'input sui-input sui-form-control sui-internal-size-text',
+    '[attr.data-size]': 'size()',
 
     '[class.input-primary]': 'severity() === "primary"',
     '[class.input-secondary]': 'severity() === "secondary"',

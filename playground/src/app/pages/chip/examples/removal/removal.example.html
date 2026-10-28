@@ -4,7 +4,7 @@
       @for (label of labels(); track label) {
         <sui-chip [label]="label" removable (remove)="remove(label)" />
       } @empty {
-        <span class="text-sm text-base-content/60">No active filters.</span>
+        <span class="text-sm text-(--sui-color-muted)">No active filters.</span>
       }
     </div>
     <button suiButton type="button" severity="neutral" variant="soft" class="w-fit" (click)="reset()">Reset</button>

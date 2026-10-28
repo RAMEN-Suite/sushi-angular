@@ -15,6 +15,7 @@ Interactions build on native HTML semantics, Angular Aria, and the CDK. Componen
 | Sushi Kit | Angular |
 | --------- | ------- |
 | `0.1.x`   | `22.x`  |
+| `0.2.x`   | `22.x`  |
 
 The package peer dependencies are the source of truth for the supported Angular range.
 

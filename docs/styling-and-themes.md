@@ -83,14 +83,27 @@ Sushi derives shared interaction and overlay styles from these semantic tokens. 
 | `--sui-color-muted`      | Secondary text and actions                                 |
 | `--sui-color-subtle`     | Low-emphasis labels                                        |
 | `--sui-color-hover`      | Neutral hover surface                                      |
-| `--sui-color-overlay`    | Dialog and popover surface                                 |
+| `--sui-color-overlay`    | Popup, dialog and popover surface                          |
 | `--sui-focus-ring-color` | Optional global focus color; otherwise follows the control |
-| `--sui-shadow-overlay`   | Dialog and popover elevation                               |
+| `--sui-shadow-overlay`   | Popup, dialog and popover elevation                        |
 | `--sui-disabled-opacity` | Shared disabled-state opacity                              |
 
 Component tokens remain the correct choice for a local exception. For example, `--sui-popover-shadow` defaults to `--sui-shadow-overlay` but can be changed on one popover.
 
 See the [theme token reference](theme-tokens.md) for every built-in light and dark value.
+
+## Typography
+
+Use the `--sui-font-size-*` tokens (`xs`, `sm`, `md`, `lg`, `xl`) for field and action text, and `--sui-font-size-body` for body text. Sized controls and their selection popups share these tokens. Badge and Chip labels retain a compact scale independent of body text; OTP digits use a larger scale. Navbar sizes control height and List sizes control spacing; their built-in text uses the medium text token at every density. Navbar projection and custom item templates retain inherited typography, as do DataView, Listbox and FileDrop templates.
+
+Override the tokens in your theme or on a public component host:
+
+```css
+[data-theme='custom'] {
+  --sui-font-size-md: 1rem;
+  --sui-font-size-body: 1.125rem;
+}
+```
 
 ## Tailwind recommendation
 

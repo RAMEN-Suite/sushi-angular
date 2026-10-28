@@ -1,15 +1,16 @@
-<div class="overflow-visible rounded-box border border-base-300 bg-base-100">
-  <div class="grid min-h-9 grid-cols-[auto_1fr_auto] items-center border-b border-base-300 bg-base-200/50 px-3 text-xs">
+<div class="overflow-visible rounded-box border border-(--sui-color-border) bg-base-100">
+  <div
+    class="grid min-h-9 grid-cols-[auto_1fr_auto] items-center border-b border-(--sui-color-border) bg-base-200/50 px-3 text-xs">
     <span class="flex gap-1.5" aria-hidden="true">
       <span class="size-2.5 rounded-full bg-error"></span>
       <span class="size-2.5 rounded-full bg-warning"></span>
       <span class="size-2.5 rounded-full bg-success"></span>
     </span>
     <span class="inline-flex min-w-0 items-center justify-center gap-2 font-medium">
-      <svg lucidePencilLine class="size-3.5 text-base-content/50" aria-hidden="true"></svg>
+      <svg lucidePencilLine class="size-3.5 text-(--sui-color-subtle)" aria-hidden="true"></svg>
       <span class="truncate">Canvas — {{ title() }}</span>
     </span>
-    <span class="inline-flex items-center gap-1.5 text-base-content/50">
+    <span class="inline-flex items-center gap-1.5 text-(--sui-color-subtle)">
       <svg lucideCloud class="size-3.5" aria-hidden="true"></svg>
       Saved
     </span>

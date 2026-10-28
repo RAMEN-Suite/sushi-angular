@@ -1,6 +1,6 @@
 :host {
   /** Divider color used when grid lines are enabled. */
-  --sui-table-border-color: var(--color-base-300);
+  --sui-table-border-color: var(--sui-color-border);
   /** Background behind sticky headings and pinned cells. */
   --sui-table-pinned-background: var(--color-base-100);
   /** Background used by a hovered body row. */

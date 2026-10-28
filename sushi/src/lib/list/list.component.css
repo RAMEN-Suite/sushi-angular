@@ -3,6 +3,10 @@
   --sui-list-row-hover-background: var(--sui-color-hover);
 }
 
+.list {
+  font-size: var(--sui-font-size-md);
+}
+
 .sui-list--xs .list-row {
   gap: 0.25rem;
   padding: 0.25rem;

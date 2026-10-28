@@ -1,4 +1,4 @@
-<div class="max-w-md overflow-hidden rounded-box border border-base-300">
+<div class="max-w-md overflow-hidden rounded-box border border-(--sui-color-border)">
   <sui-accordion class="block" style="--sui-focus-ring-offset: -3px" [(value)]="open">
     <ng-template suiAccordionActions let-item>
       <button
@@ -22,4 +22,4 @@
     </ng-template>
   </sui-accordion>
 </div>
-<p role="status" class="mt-3 text-sm text-base-content/70">{{ message() }}</p>
+<p role="status" class="mt-3 text-sm text-(--sui-color-muted)">{{ message() }}</p>
