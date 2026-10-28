@@ -1,8 +1,5 @@
 import { Directive, input, type InputSignal } from '@angular/core';
-import { type JoinOrientation } from '../join';
-
-/** Layout directions supported by an input group. */
-export type InputGroupOrientation = JoinOrientation | 'responsive';
+import { type InputGroupOrientation } from './input-group.interfaces';
 
 @Directive({
   selector: '[suiInputGroup]',
@@ -15,6 +12,6 @@ export type InputGroupOrientation = JoinOrientation | 'responsive';
 })
 /** Connects inputs, add-ons, and actions as one visual group without changing their semantics. */
 export class InputGroup {
-  /** Defaults to horizontal. Responsive groups stack below 48rem and become horizontal at 48rem. */
+  /** Layout direction. Responsive groups stack below 48rem and become horizontal at 48rem. */
   public readonly orientation: InputSignal<InputGroupOrientation> = input<InputGroupOrientation>('horizontal');
 }

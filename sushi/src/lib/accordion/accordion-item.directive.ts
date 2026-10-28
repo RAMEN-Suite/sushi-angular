@@ -21,13 +21,9 @@ export class AccordionItem {
   /** Sets the visible heading text. */
   public readonly label: InputSignal<string> = input.required<string>();
   /** Prevents the item from being toggled. */
-  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Keeps the content instantiated after its first expansion. */
-  public readonly preserveContent: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, {
-    transform: booleanAttribute,
-  });
+  public readonly preserveContent: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
 
   public readonly template: TemplateRef<AccordionItemContext> = inject<TemplateRef<AccordionItemContext>>(TemplateRef);
 }

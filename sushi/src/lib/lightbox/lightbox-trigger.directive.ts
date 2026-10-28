@@ -28,9 +28,7 @@ export class LightboxTrigger<I extends GalleryImage = GalleryImage> {
   /** Shows the zoom control and allows zoom interactions. */
   public readonly zoom: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Lets a mouse wheel zoom the active image without requiring a modifier key. */
-  public readonly wheelToZoom: InputSignalWithTransform<boolean, unknown> = input(false, {
-    transform: booleanAttribute,
-  });
+  public readonly wheelToZoom: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Accessible name for the modal viewer. */
   public readonly ariaLabel: InputSignal<string> = input<string>('Image viewer');
   /** Optional visible description. Defaults to the metadata caption. */

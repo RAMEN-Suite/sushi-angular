@@ -59,13 +59,9 @@ export class ToggleButton implements FormCheckboxControl {
   /** Sets a standard, fluid, square, or circular shape. */
   public readonly shape: InputSignal<ToggleButtonShape | null> = input<ToggleButtonShape | null>(null);
   /** Prevents interaction while keeping the button focusable. */
-  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Shows the button loading state and prevents activation. */
-  public readonly loading: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly loading: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Emits when the button loses focus after interaction. */
   public readonly touch: OutputEmitterRef<void> = output();
 

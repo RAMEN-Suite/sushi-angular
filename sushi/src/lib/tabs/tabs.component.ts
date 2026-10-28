@@ -55,17 +55,11 @@ export class Tabs {
   /** References a visible heading that names the tab list. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
   /** Allows arrow-key navigation to wrap between the first and last tab. */
-  public readonly wrap: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, {
-    transform: booleanAttribute,
-  });
+  public readonly wrap: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Keeps disabled tabs in the arrow-key sequence while still preventing activation. */
-  public readonly softDisabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly softDisabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
   /** Disables the complete tab set. */
-  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
+  public readonly disabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
   protected readonly tabs: Signal<readonly Tab[]> = contentChildren(Tab);
 }

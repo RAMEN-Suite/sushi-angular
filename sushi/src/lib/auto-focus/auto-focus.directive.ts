@@ -14,7 +14,7 @@ import {
 /** Moves focus to an enabled element after its first render. */
 export class AutoFocus {
   /** Enables or suppresses the initial focus request. */
-  public readonly enabled: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, {
+  public readonly enabled: InputSignalWithTransform<boolean, unknown> = input(true, {
     alias: 'suiAutoFocus',
     transform: booleanAttribute,
   });

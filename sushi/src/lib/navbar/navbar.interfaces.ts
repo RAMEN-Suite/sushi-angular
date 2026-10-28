@@ -1,4 +1,4 @@
-import { type Orientation } from '../sushi.types';
+import { type ComponentSize, type Orientation } from '../sushi.types';
 
 /** Supported Navbar link arrangements. */
 export type NavbarOrientation = Orientation | 'responsive';
@@ -7,7 +7,7 @@ export type NavbarVariant = 'links' | 'menu';
 /** Visual surface surrounding Navbar content. */
 export type NavbarSurface = 'bordered' | 'plain';
 /** Supported Navbar heights. */
-export type NavbarSize = 'sm' | 'md';
+export type NavbarSize = Extract<ComponentSize, 'sm' | 'md'>;
 /** Supported horizontal Navbar spacing. */
 export type NavbarInset = 'default' | 'comfortable';
 /** Container width at which a collapsible Navbar changes to its expanded layout. */

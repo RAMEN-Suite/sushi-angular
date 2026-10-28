@@ -83,9 +83,9 @@ export class InputNumber implements FormValueControl<number | null> {
   public readonly size: InputSignal<FormControlSize> = input<FormControlSize>('md');
   /** Shows increment and decrement controls. */
   public readonly showButtons: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
-  /** Accessible label for the default increment button. Defaults to Increase; independent of number locale. */
+  /** Accessible label for the default increment button, independent of number locale. */
   public readonly incrementLabel: InputSignal<string> = input<string>('Increase');
-  /** Accessible label for the default decrement button. Defaults to Decrease; independent of number locale. */
+  /** Accessible label for the default decrement button, independent of number locale. */
   public readonly decrementLabel: InputSignal<string> = input<string>('Decrease');
   /** Expands the component to the available width. */
   public readonly fluid: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });

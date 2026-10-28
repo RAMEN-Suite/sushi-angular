@@ -36,9 +36,7 @@ import { CodeButtonOffTemplate, CodeButtonOnTemplate, CodeButtonTemplate } from 
 /** Presents terminal-like code and copies all projected code lines. */
 export class Code {
   /** Shows or hides the copy control. */
-  public readonly copyable: InputSignalWithTransform<boolean, unknown> = input<boolean, unknown>(true, {
-    transform: booleanAttribute,
-  });
+  public readonly copyable: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
   /** Sets how long copied feedback remains visible in milliseconds. */
   public readonly cooldown: InputSignalWithTransform<number, unknown> = input(1200, { transform: nonNegativeInteger });
 
