@@ -1,4 +1,4 @@
-@import "./features/typography.styles.css";
+@import "./features/typography.styles.css" layer(utilities.sushi);
 @import "./features/button.styles.css";
 @import "./features/divider.styles.css";
 @import "./features/dialog.styles.css";

@@ -52,6 +52,8 @@ The global theme reference is generated from `sushi.themes.css`. Document every 
 
 Use the `--sui-font-size-*` tokens (`xs`, `sm`, `md`, `lg`, `xl`) for size-dependent field text and `--sui-font-size-body` for body text. Popup text should follow its control size. Preserve inherited typography in consumer-provided templates.
 
+Shared typography defaults belong in `utilities.sushi`, above DaisyUI defaults and below consumer utilities. Keep text-size utilities effective on public hosts and consumer-owned elements.
+
 ## DaisyUI and Tailwind
 
 Library styles are authored in `sushi/src/styles/sushi.source.css`. It imports Tailwind utilities, the Sushi themes and core styles, and the DaisyUI primitives used by the library.

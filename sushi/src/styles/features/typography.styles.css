@@ -34,6 +34,15 @@
   font-size: inherit;
 }
 
+.sui-table .table,
+.sui-table .table tr {
+  font-size: inherit;
+}
+
+.sui-list .list {
+  font-size: var(--sui-font-size-md);
+}
+
 /* Preserve the compact Badge and enlarged OTP scales when shared tokens change. */
 .sui-badge[data-size="xs"] {
   --_sui-font-size: calc(var(--sui-font-size-xs) * 10 / 11);

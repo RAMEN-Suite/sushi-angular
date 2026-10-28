@@ -168,6 +168,43 @@ test('OTP digit typography responds to the shared token without losing its large
   await expect(digits).not.toHaveCSS('font-size', before);
 });
 
+test('consumer text utilities override shared typography defaults @css', async ({ page }): Promise<void> => {
+  const cases: readonly (readonly [string, string])[] = [
+    ['/button', 'button[suiButton][data-size="md"]'],
+    ['/button', 'a[suiButton]'],
+    ['/input', '#input-name'],
+    ['/textarea', '#textarea-message'],
+    ['/badge', '[suiBadge][data-size="md"]'],
+    ['/input-surface', '[suiInputSurface]'],
+    ['/input-surface', 'input[suiInputSurfaceControl]'],
+    ['/select', 'sui-select'],
+    ['/multi-select', 'sui-multi-select'],
+    ['/autocomplete', 'sui-autocomplete'],
+    ['/table', 'sui-table'],
+    ['/table', 'sui-table tbody tr'],
+    ['/pagination', 'sui-pagination'],
+    ['/color-picker', 'sui-color-picker'],
+  ];
+  for (const [path, selector] of cases) {
+    await page.goto(path);
+    await page.evaluate((): void => document.documentElement.style.setProperty('--sui-font-size-md', '19px'));
+    const control: Locator = page.locator(selector).first();
+    for (const utility of ['text-lg', 'text-xs']) {
+      const expected: string = await control.evaluate((element: HTMLElement, className: string): string => {
+        element.classList.remove('text-lg', 'text-xs');
+        element.classList.add(className);
+        const reference: HTMLSpanElement = document.createElement('span');
+        reference.className = className;
+        document.body.append(reference);
+        const fontSize: string = getComputedStyle(reference).fontSize;
+        reference.remove();
+        return fontSize;
+      }, utility);
+      await expect(control).toHaveCSS('font-size', expected);
+    }
+  }
+});
+
 test('Navbar projection and custom item templates retain surrounding typography @css', async ({ page }): Promise<void> => {
   await page.goto('/navbar');
   const navbar: Locator = page.locator('pg-navbar-custom-example sui-navbar');
