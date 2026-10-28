@@ -180,6 +180,7 @@ export class Menu<I extends MenuItem = MenuItem> {
   }
 
   protected handleOutsideClick(event: MouseEvent): void {
+    if (this.anchor && event.type === 'auxclick' && event.button === 2) return;
     const origin: FlexibleConnectedPositionStrategyOrigin | undefined = this.origin();
     if (origin instanceof HTMLElement && event.target instanceof Node && origin.contains(event.target)) return;
     this.close();
