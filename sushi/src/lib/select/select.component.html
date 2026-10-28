@@ -42,7 +42,7 @@
         <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="context" />
       </span>
     } @else {
-      <span class="min-w-0 grow truncate text-base-content/50">{{ placeholder() }}</span>
+      <span class="min-w-0 grow truncate text-(--sui-color-subtle)">{{ placeholder() }}</span>
     }
   } @else {
     <span class="min-w-0 grow truncate" [class.sui-form-control--placeholder]="!selectedOption()">
@@ -110,17 +110,17 @@
         tabindex="-1"
         [attr.aria-label]="ariaLabel() ?? placeholder()"
         [attr.aria-labelledby]="ariaLabelledby()"
-        class="w-full overflow-hidden rounded-box border border-base-300 bg-base-100"
+        class="sui-internal-overlay-surface w-full overflow-hidden rounded-box border"
         (keydown)="handlePopupKeydown($event)"
       >
         @if (headerTemplate(); as template) {
-          <div class="border-base-300 border-b p-3">
+          <div class="border-(--sui-color-border) border-b p-3">
             <ng-container [ngTemplateOutlet]="template" />
           </div>
         }
 
         @if (filter()) {
-          <div class="border-base-300 border-b p-3">
+          <div class="border-(--sui-color-border) border-b p-3">
             <input
               #filterInput
               class="input w-full"
@@ -144,13 +144,13 @@
                 [ngTemplateOutletContext]="{ $implicit: loadingMessage(), message: loadingMessage() }"
               />
             } @else {
-              <div class="flex items-center justify-center gap-2 p-6 text-sm opacity-60">
+              <div class="flex items-center justify-center gap-2 p-6 text-sm text-(--sui-color-muted)">
                 <span suiSpinner size="sm"></span>{{ loadingMessage() }}
               </div>
             }
           </div>
         } @else if (visibleOptions().length === 0) {
-          <div class="p-4 text-center text-sm opacity-60">
+          <div class="p-4 text-center text-sm text-(--sui-color-muted)">
             @if (emptyTemplate(); as template) {
               <ng-container [ngTemplateOutlet]="template" />
             } @else {
@@ -180,7 +180,7 @@
                       [ngTemplateOutletContext]="{ $implicit: option.group, group: option.group, option: option, index: index }"
                     />
                   } @else {
-                    <span class="text-xs font-semibold uppercase tracking-wider text-base-content/60">{{ option.group }}</span>
+                    <span class="text-xs font-semibold uppercase tracking-wide text-(--sui-color-muted)">{{ option.group }}</span>
                   }
                 </div>
               }
@@ -190,7 +190,7 @@
                 [style.min-height.px]="optionHeight()"
                 [class.cursor-pointer]="!option.disabled"
                 [class.cursor-not-allowed]="option.disabled"
-                [class.opacity-40]="option.disabled"
+                [class.sui-internal-disabled-opacity]="option.disabled"
                 [value]="option.value"
                 [label]="option.label"
                 [disabled]="option.disabled ?? false"
@@ -217,13 +217,13 @@
         }
 
         @if (footerTemplate(); as template) {
-          <div class="border-base-300 border-t p-3">
+          <div class="border-(--sui-color-border) border-t p-3">
             <ng-container [ngTemplateOutlet]="template" />
           </div>
         }
       </div>
     } @else {
-      <div class="w-full overflow-hidden rounded-box border border-base-300 bg-base-100">
+      <div class="sui-internal-overlay-surface w-full overflow-hidden rounded-box border">
         @if (loading()) {
           <div ngComboboxWidget class="w-full" role="status">
             @if (loadingTemplate(); as template) {
@@ -232,13 +232,13 @@
                 [ngTemplateOutletContext]="{ $implicit: loadingMessage(), message: loadingMessage() }"
               />
             } @else {
-              <div class="flex items-center justify-center gap-2 p-6 text-sm opacity-60">
+              <div class="flex items-center justify-center gap-2 p-6 text-sm text-(--sui-color-muted)">
                 <span suiSpinner size="sm"></span>{{ loadingMessage() }}
               </div>
             }
           </div>
         } @else if (options().length === 0) {
-          <div ngComboboxWidget class="p-4 text-center text-sm opacity-60">
+          <div ngComboboxWidget class="p-4 text-center text-sm text-(--sui-color-muted)">
             @if (emptyTemplate(); as template) {
               <ng-container [ngTemplateOutlet]="template" />
             } @else {
@@ -270,7 +270,7 @@
                       [ngTemplateOutletContext]="{ $implicit: option.group, group: option.group, option: option, index: index }"
                     />
                   } @else {
-                    <span class="text-xs font-semibold uppercase tracking-wider text-base-content/60">{{ option.group }}</span>
+                    <span class="text-xs font-semibold uppercase tracking-wide text-(--sui-color-muted)">{{ option.group }}</span>
                   }
                 </div>
               }
@@ -280,7 +280,7 @@
                 [style.min-height.px]="optionHeight()"
                 [class.cursor-pointer]="!option.disabled"
                 [class.cursor-not-allowed]="option.disabled"
-                [class.opacity-40]="option.disabled"
+                [class.sui-internal-disabled-opacity]="option.disabled"
                 [value]="option.value"
                 [label]="option.label"
                 [disabled]="option.disabled ?? false"
