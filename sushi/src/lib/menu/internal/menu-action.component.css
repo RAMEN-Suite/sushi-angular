@@ -14,7 +14,7 @@
 
 .sui-menu-option:not([aria-disabled="true"]):not(.menu-active, :active):is(:hover, :focus-visible) {
   color: var(--color-base-content);
-  background-color: var(--color-base-200);
+  background-color: var(--sui-color-hover);
 }
 
 .sui-menu-option:is([aria-disabled="true"], :disabled) {

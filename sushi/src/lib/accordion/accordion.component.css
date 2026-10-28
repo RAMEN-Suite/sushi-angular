@@ -97,7 +97,7 @@
 
 .sui-accordion__trigger[aria-disabled="true"] {
   cursor: not-allowed;
-  opacity: 0.5;
+  opacity: var(--sui-disabled-opacity);
 }
 
 .sui-accordion__trigger:focus-visible {

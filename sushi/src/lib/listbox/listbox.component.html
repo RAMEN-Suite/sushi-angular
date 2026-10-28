@@ -1,7 +1,7 @@
 <div
   class="max-w-full overflow-hidden rounded-box border border-base-300 bg-base-100 sui-listbox__surface"
   [class.border-error]="isInvalid()"
-  [class.opacity-50]="disabled()"
+  [class.sui-internal-disabled-opacity]="disabled()"
   [class.pointer-events-none]="disabled()"
   (focusout)="handleFocusout($event)"
 >
@@ -16,7 +16,7 @@
           <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="filterContext()" />
         } @else {
           <div suiInputSurface fluid class="min-w-40 grow">
-            <svg lucideSearch class="size-4 shrink-0 text-base-content/50" aria-hidden="true"></svg>
+            <svg lucideSearch class="size-4 shrink-0 text-(--sui-color-subtle)" aria-hidden="true"></svg>
             <input
               suiInputSurfaceControl
               type="search"
@@ -72,7 +72,7 @@
   >
     @for (option of visibleOptions(); track option.value; let index = $index) {
       @if (option.group && option.group !== visibleOptions()[index - 1]?.group) {
-        <div class="px-4 pt-4 pb-2 text-xs font-semibold tracking-wide text-base-content/60 uppercase" role="presentation">
+        <div class="px-4 pt-4 pb-2 text-xs font-semibold tracking-wide text-(--sui-color-muted) uppercase" role="presentation">
           @if (groupTemplate(); as template) {
             <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="groupContext(option)" />
           } @else {
@@ -88,7 +88,7 @@
         [class.cursor-pointer]="!option.disabled && !readOnly()"
         [class.cursor-not-allowed]="option.disabled"
         [class.cursor-default]="readOnly()"
-        [class.opacity-40]="option.disabled"
+        [class.sui-internal-disabled-opacity]="option.disabled"
         [class.pointer-events-none]="readOnly()"
         [value]="option.value"
         [label]="option.label"
@@ -118,7 +118,7 @@
         }
       </div>
     } @empty {
-      <div class="p-6 text-center text-sm text-base-content/60" role="presentation">
+      <div class="p-6 text-center text-sm text-(--sui-color-muted)" role="presentation">
         @if (query() && emptyFilterTemplate(); as template) {
           <ng-container [ngTemplateOutlet]="template" />
         } @else if (emptyTemplate(); as template) {
@@ -130,7 +130,7 @@
     }
 
     @if (loading()) {
-      <div class="flex items-center justify-center gap-2 p-4 text-sm text-base-content/60" role="status" aria-live="polite">
+      <div class="flex items-center justify-center gap-2 p-4 text-sm text-(--sui-color-muted)" role="status" aria-live="polite">
         <span suiSpinner size="sm"></span>Loading more options
       </div>
     }
