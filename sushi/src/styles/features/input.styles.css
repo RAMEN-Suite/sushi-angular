@@ -36,10 +36,23 @@
   -webkit-text-fill-color: currentColor;
 }
 
+.sui-input-otp > .otp {
+  /* Reserve the whole ring instead of DaisyUI's fixed clipping margin. */
+  --_sui-otp-focus-overflow: calc(var(--sui-focus-ring-width) + max(0px, var(--sui-focus-ring-offset)));
+  clip-path: inset(calc(-1 * var(--_sui-otp-focus-overflow)));
+}
+
 .otp:has(input:focus)::after,
-.otp:has(input:valid:focus) > span {
+.otp:not(.otp-joined):has(input:valid:focus) > span,
+.otp.otp-joined:has(input:valid:focus) {
   outline-color: var(--sui-focus-ring-color, var(--input-color));
   outline-width: var(--sui-focus-ring-width);
+  outline-offset: var(--sui-focus-ring-offset);
+  outline-style: solid;
+}
+
+.otp.otp-joined:has(input:valid:focus) > span {
+  outline: none;
 }
 
 .sui-input-otp--disabled::after {
