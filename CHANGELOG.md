@@ -2,6 +2,28 @@
 
 All notable changes to this project are documented here.
 
+## [0.2.1](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.2.0...v0.2.1) (2026-10-29)
+
+### Features
+
+* **sushi:** standardize component typography and compact spacing ([#83](https://github.com/RAMEN-Suite/sushi-angular/issues/83)) ([eb39ba2](https://github.com/RAMEN-Suite/sushi-angular/commit/eb39ba20c5a60ee8c4a0570d306152e1e129b589))
+
+### Bug Fixes
+
+* **sushi:** align shared styling and component contracts ([#87](https://github.com/RAMEN-Suite/sushi-angular/issues/87)) ([b7e8117](https://github.com/RAMEN-Suite/sushi-angular/commit/b7e81174f56154db7664b1025ae26b4195454124))
+* **sushi:** apply shared style tokens consistently ([#82](https://github.com/RAMEN-Suite/sushi-angular/issues/82)) ([23eb5b7](https://github.com/RAMEN-Suite/sushi-angular/commit/23eb5b74950271401d610fa42e96e2774179267c))
+* **sushi:** keep context menus open after pointer release ([#85](https://github.com/RAMEN-Suite/sushi-angular/issues/85)) ([96b2bcb](https://github.com/RAMEN-Suite/sushi-angular/commit/96b2bcbb530f967fb7dd4f7dcff17c88adb7f482))
+* **sushi:** keep otp focus rings consistent and visible ([#88](https://github.com/RAMEN-Suite/sushi-angular/issues/88)) ([fba2576](https://github.com/RAMEN-Suite/sushi-angular/commit/fba2576ef3cbf2f09f9eb5e67bdfcbaa6c251bec))
+* **sushi:** localize autocomplete suggestion announcements ([#79](https://github.com/RAMEN-Suite/sushi-angular/issues/79)) ([e6eb02e](https://github.com/RAMEN-Suite/sushi-angular/commit/e6eb02effdb68c92b2f09b7ae67b282096340cfe))
+
+### Refactoring
+
+* **sushi:** align component input and type conventions ([#84](https://github.com/RAMEN-Suite/sushi-angular/issues/84)) ([5f880b1](https://github.com/RAMEN-Suite/sushi-angular/commit/5f880b1ad1791934d499edb591704d951be2101d))
+
+### Documentation
+
+* **sushi:** correct commit scope example ([900466c](https://github.com/RAMEN-Suite/sushi-angular/commit/900466c31a9a5cf134db17b677b120faec86fa95))
+
 ## [0.2.0](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.1.4...v0.2.0) (2026-10-20)
 
 ### ⚠ BREAKING CHANGES
