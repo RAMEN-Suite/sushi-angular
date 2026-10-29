@@ -54,7 +54,7 @@ Useful focused commands:
 Branch from the latest `main` and write [Conventional Commits](https://www.conventionalcommits.org):
 
 ```
-feat(dialog): restore focus to the trigger on close
+feat(sushi): restore focus to the dialog trigger on close
 ```
 
 | Type                                                | Appears in the changelog |
