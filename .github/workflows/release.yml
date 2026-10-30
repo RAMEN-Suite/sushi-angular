@@ -56,6 +56,8 @@ jobs:
     outputs:
       version: ${{ steps.bump.outputs.version }}
       tarball: ${{ steps.pack.outputs.tarball }}
+      shasum: ${{ steps.pack.outputs.shasum }}
+      integrity: ${{ steps.pack.outputs.integrity }}
     steps:
       - name: Create an app token # github-actions[bot] cannot bypass the main ruleset, an app can
         id: app-token
