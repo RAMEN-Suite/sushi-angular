@@ -2,6 +2,7 @@
   "name": "sushi-angular",
   "version": "0.2.1",
   "scripts": {
+    "build:pages": "npm run build:playground -- --base-href /sushi-angular/ && cp dist/playground/browser/index.html dist/playground/browser/404.html",
     "build:playground": "npm run generate:api && ng build playground",
     "build:styles": "node --import tsx tools/build-library-styles.ts",
     "build:sushi": "npm run build:styles && npm run generate:notices && ng build sushi",
