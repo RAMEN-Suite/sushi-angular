@@ -42,7 +42,7 @@ jobs:
   release:
     name: Release
     needs: [ci]
-    uses: RAMEN-Suite/ramen-workflows/.github/workflows/npm-release.yml@87aa0a65d3291204cd60dae10e8b8773ca12da1b # v0.2.5
+    uses: RAMEN-Suite/ramen-workflows/.github/workflows/npm-release.yml@3fef79e03598b698818270ed2eec99af952971f6 # v0.2.6
     with:
       build-script: package:check
       package-dir: ./dist/sushi
@@ -59,7 +59,7 @@ jobs:
   npm:
     name: npm
     needs: [release]
-    uses: RAMEN-Suite/ramen-workflows/.github/workflows/npm-publish.yml@87aa0a65d3291204cd60dae10e8b8773ca12da1b # v0.2.5
+    uses: RAMEN-Suite/ramen-workflows/.github/workflows/npm-publish.yml@3fef79e03598b698818270ed2eec99af952971f6 # v0.2.6
     with:
       install-check-script: package:install
       dry-run: ${{ inputs.dry_run }}
@@ -70,7 +70,7 @@ jobs:
   pages:
     name: Playground
     needs: [release]
-    uses: RAMEN-Suite/ramen-workflows/.github/workflows/pages.yml@87aa0a65d3291204cd60dae10e8b8773ca12da1b # v0.2.5
+    uses: RAMEN-Suite/ramen-workflows/.github/workflows/pages.yml@3fef79e03598b698818270ed2eec99af952971f6 # v0.2.6
     with:
       build-script: build:pages
       path: dist/playground/browser
