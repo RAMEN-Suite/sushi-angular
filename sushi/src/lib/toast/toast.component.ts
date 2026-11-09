@@ -10,7 +10,14 @@ import {
   type InputSignalWithTransform,
   type Signal,
 } from '@angular/core';
-import { LucideCircleCheck, LucideCircleX, LucideDynamicIcon, LucideInfo, LucideTriangleAlert, LucideX } from '@lucide/angular';
+import {
+  LucideCircleCheck,
+  LucideCircleX,
+  LucideDynamicIcon,
+  LucideInfo,
+  LucideTriangleExclamationPoint,
+  LucideX,
+} from '@lucide/angular';
 import type { LucideIconData } from '@lucide/angular';
 import { Button } from '../button';
 import { Message, type MessageSeverity } from '../message';
@@ -30,7 +37,7 @@ const TOAST_ICONS: Readonly<Record<MessageSeverity | 'neutral', LucideIconData>>
   neutral: LucideInfo.icon,
   info: LucideInfo.icon,
   success: LucideCircleCheck.icon,
-  warning: LucideTriangleAlert.icon,
+  warning: LucideTriangleExclamationPoint.icon,
   error: LucideCircleX.icon,
 };
 
