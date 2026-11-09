@@ -180,15 +180,18 @@ test('OrderList cancels an outside drop without changing order or losing handle 
   await page.goto('/order-list');
   const list: Locator = page.getByRole('list', { name: 'Watchlist', exact: true });
   const handle: Locator = list.getByRole('button', { name: 'Reorder Inception', exact: true });
+  const labels: Locator = list.getByTestId('movie-label');
+  const initial: readonly string[] = ['The Shawshank Redemption', 'Inception', 'Interstellar', 'The Dark Knight', 'Parasite'];
+
+  await expect(labels).toHaveText(initial);
   await handle.scrollIntoViewIfNeeded();
-  const initial: readonly string[] = await list.getByTestId('movie-label').allInnerTexts();
   const bounds: Bounds = await visibleBounds(list, 'the list before cancellation');
   await startDrag(page, handle, false);
   await page.mouse.move(bounds.x + bounds.width / 2, bounds.y - 20, { steps: 8 });
   await page.mouse.up();
 
   await expect(page.locator('.cdk-drag-preview')).toBeHidden();
-  await expect(list.getByTestId('movie-label')).toHaveText(initial);
+  await expect(labels).toHaveText(initial);
   await expect(handle).toBeFocused();
 });
 
@@ -201,8 +204,8 @@ test('OrderList commits the drop without moving rows away from their destination
   await list.scrollIntoViewIfNeeded();
   const rows: Locator = list.getByRole('listitem');
   const handle: Locator = list.getByRole('button', { name: 'Reorder Collect requirements', exact: true });
-  const slots: readonly number[] = await rows.evaluateAll((elements: Element[]): number[] =>
-    elements.map((element: Element): number => element.getBoundingClientRect().y),
+  const slots: readonly number[] = await list.evaluate((element: HTMLElement): number[] =>
+    Array.from(element.children, (row: Element): number => row.getBoundingClientRect().y),
   );
   const firstSlot: Bounds = await visibleBounds(rows.first(), 'the first workflow row');
 
