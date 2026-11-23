@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here.
 
+## [0.2.2](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.2.1...v0.2.2) (2026-11-23)
+
+### Bug Fixes
+
+* **sushi:** fix gallery navigation and update Angular ([a7963fb](https://github.com/RAMEN-Suite/sushi-angular/commit/a7963fbc41272478a8822138ab32c7dd05450c00))
+* **sushi:** preserve range track appearance with DaisyUI 5.8 ([#102](https://github.com/RAMEN-Suite/sushi-angular/issues/102)) ([8da2ff5](https://github.com/RAMEN-Suite/sushi-angular/commit/8da2ff560f705e6f72c81682508fd8b4bf5e3940))
+
 ## [0.2.1](https://github.com/RAMEN-Suite/sushi-angular/compare/v0.2.0...v0.2.1) (2026-10-29)
 
 ### Features
