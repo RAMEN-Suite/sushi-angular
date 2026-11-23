@@ -5,6 +5,7 @@ import {
   type ConnectedPosition,
   type FlexibleConnectedPositionStrategy,
   Overlay,
+  type OverlayConfig,
   OverlayPositionBuilder,
   type OverlayRef,
 } from '@angular/cdk/overlay';
@@ -265,11 +266,12 @@ export class Tooltip {
       this.resolvedPlacement = resolvePlacement(change.connectionPair);
       this.surfaceRef?.setInput('placement', this.resolvedPlacement);
     });
-    this.overlayRef = this.overlay.create({
+    const config: Partial<OverlayConfig> = {
       positionStrategy: strategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
       panelClass: 'sui-tooltip-panel',
-    });
+    };
+    this.overlayRef = this.overlay.create(config);
   }
 
   private restoreDescription(): void {
