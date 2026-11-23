@@ -113,13 +113,13 @@ describe('Tabs panel lifecycle', (): void => {
     const stepsContent: Element = query(fixture, '[data-panel="steps"]');
     const stepsPanel: Element = requireItem(queryAll(fixture, '[role="tabpanel"]'), 2);
 
-    expect(stepsPanel.hasAttribute('hidden') || stepsPanel.hasAttribute('inert')).toBe(false);
+    expect(stepsPanel.hasAttribute('inert')).toBe(false);
 
     requireItem(tabs, 0).click();
     fixture.detectChanges();
 
     expect(host.querySelector('[data-panel="steps"]')).toBe(stepsContent);
-    expect(stepsPanel.hasAttribute('hidden') || stepsPanel.hasAttribute('inert')).toBe(true);
+    expect(stepsPanel.hasAttribute('inert')).toBe(true);
   });
 });
 
