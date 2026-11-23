@@ -1,4 +1,4 @@
-import { Dialog as CdkDialog, DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { Dialog as CdkDialog, DIALOG_DATA, type DialogConfig, DialogRef } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, inject, signal, type WritableSignal } from '@angular/core';
 import { Button } from '@sushi-kit/angular';
 
@@ -34,12 +34,13 @@ export class DialogDynamicExample {
   private readonly dialogs: CdkDialog = inject(CdkDialog);
 
   protected chooseMenu(): void {
-    const dialog: DialogRef<string, MenuDialog> = this.dialogs.open<string, MenuDialogData, MenuDialog>(MenuDialog, {
+    const config: Partial<DialogConfig<MenuDialogData, DialogRef<string, MenuDialog>>> = {
       ariaLabel: 'Choose a menu',
       data: { menus: ['Omakase', 'Vegetarian', 'Lunch set'] },
       panelClass: 'sui-dynamic-dialog',
       backdropClass: 'sui-dialog-backdrop',
-    });
+    };
+    const dialog: DialogRef<string, MenuDialog> = this.dialogs.open<string, MenuDialogData, MenuDialog>(MenuDialog, config);
     dialog.closed.subscribe((selection: string | undefined): void => {
       if (selection) this.selection.set(selection);
     });
