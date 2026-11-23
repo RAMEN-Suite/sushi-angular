@@ -14,10 +14,6 @@ import type { TabsOrientation, TabsSelectionMode, TabsValue } from '../tabs.inte
       [ariaLabel]="ariaLabelledby() ? null : 'Recipe sections'"
       [ariaLabelledby]="ariaLabelledby()"
       [disabled]="disabled()"
-      [orientation]="orientation()"
-      [selectionMode]="selectionMode()"
-      [softDisabled]="softDisabled()"
-      [wrap]="wrap()"
       [(value)]="value"
     >
       <ng-template suiTab value="overview" label="Overview"><p data-panel="overview">Summary</p></ng-template>
@@ -29,10 +25,32 @@ import type { TabsOrientation, TabsSelectionMode, TabsValue } from '../tabs.inte
 class TabsHost {
   public readonly ariaLabelledby: WritableSignal<string | null> = signal<string | null>(null);
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly value: WritableSignal<TabsValue> = signal<TabsValue>('overview');
+}
+
+@Component({
+  imports: [Tab, Tabs],
+  template: `
+    <sui-tabs
+      ariaLabel="Sections"
+      [orientation]="orientation()"
+      [selectionMode]="selectionMode()"
+      [softDisabled]="softDisabled()"
+      [wrap]="wrap()"
+      [(value)]="value"
+    >
+      <ng-template suiTab value="a" label="A">Section A</ng-template>
+      <ng-template suiTab value="b" label="B">Section B</ng-template>
+      <ng-template suiTab value="c" label="C" disabled>Section C</ng-template>
+      <ng-template suiTab value="d" label="D">Section D</ng-template>
+    </sui-tabs>
+  `,
+})
+class NavigationHost {
   public readonly orientation: WritableSignal<TabsOrientation> = signal<TabsOrientation>('horizontal');
   public readonly selectionMode: WritableSignal<TabsSelectionMode> = signal<TabsSelectionMode>('follow');
   public readonly softDisabled: WritableSignal<boolean> = signal<boolean>(false);
-  public readonly value: WritableSignal<TabsValue> = signal<TabsValue>('overview');
+  public readonly value: WritableSignal<TabsValue> = signal<TabsValue>('a');
   public readonly wrap: WritableSignal<boolean> = signal<boolean>(true);
 }
 
@@ -101,18 +119,24 @@ describe('Tabs panel lifecycle', (): void => {
 
 describe('Tabs keyboard behavior', (): void => {
   it('follows horizontal arrow focus in follow mode', (): void => {
-    const fixture: ComponentFixture<TabsHost> = render(TabsHost);
+    const fixture: ComponentFixture<NavigationHost> = render(NavigationHost);
     const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
     requireItem(tabs, 0).focus();
     press(requireItem(tabs, 0), 'ArrowRight');
     fixture.detectChanges();
 
     expect(document.activeElement).toBe(requireItem(tabs, 1));
-    expect(fixture.componentInstance.value()).toBe('steps');
+    expect(fixture.componentInstance.value()).toBe('b');
+
+    press(requireItem(tabs, 1), 'ArrowLeft');
+    fixture.detectChanges();
+
+    expect(document.activeElement).toBe(requireItem(tabs, 0));
+    expect(fixture.componentInstance.value()).toBe('a');
   });
 
   it('uses vertical arrows when orientation changes', (): void => {
-    const fixture: ComponentFixture<TabsHost> = render(TabsHost);
+    const fixture: ComponentFixture<NavigationHost> = render(NavigationHost);
     const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
     fixture.componentInstance.orientation.set('vertical');
     fixture.detectChanges();
@@ -121,11 +145,11 @@ describe('Tabs keyboard behavior', (): void => {
     fixture.detectChanges();
 
     expect(document.activeElement).toBe(requireItem(tabs, 1));
-    expect(fixture.componentInstance.value()).toBe('steps');
+    expect(fixture.componentInstance.value()).toBe('b');
   });
 
   it('waits for explicit activation in explicit mode', (): void => {
-    const fixture: ComponentFixture<TabsHost> = render(TabsHost);
+    const fixture: ComponentFixture<NavigationHost> = render(NavigationHost);
     const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
     fixture.componentInstance.selectionMode.set('explicit');
     fixture.detectChanges();
@@ -133,63 +157,69 @@ describe('Tabs keyboard behavior', (): void => {
     press(requireItem(tabs, 0), 'ArrowRight');
 
     expect(document.activeElement).toBe(requireItem(tabs, 1));
-    expect(fixture.componentInstance.value()).toBe('overview');
+    expect(fixture.componentInstance.value()).toBe('a');
 
     press(requireItem(tabs, 1), 'Enter');
     fixture.detectChanges();
 
-    expect(fixture.componentInstance.value()).toBe('steps');
+    expect(fixture.componentInstance.value()).toBe('b');
   });
 });
 
 describe('Tabs navigation boundaries', (): void => {
-  it('wraps past disabled tabs in both directions', (): void => {
-    const fixture: ComponentFixture<TabsHost> = render(TabsHost);
+  it('wraps from the last to the first tab and back when enabled', (): void => {
+    const fixture: ComponentFixture<NavigationHost> = render(NavigationHost);
     const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
-    requireItem(tabs, 1).focus();
-    press(requireItem(tabs, 1), 'ArrowRight');
+    fixture.componentInstance.value.set('d');
+    fixture.detectChanges();
+    requireItem(tabs, 3).focus();
+    press(requireItem(tabs, 3), 'ArrowRight');
     fixture.detectChanges();
 
     expect(document.activeElement).toBe(requireItem(tabs, 0));
-    expect(fixture.componentInstance.value()).toBe('overview');
+    expect(fixture.componentInstance.value()).toBe('a');
 
     press(requireItem(tabs, 0), 'ArrowLeft');
     fixture.detectChanges();
 
-    expect(document.activeElement).toBe(requireItem(tabs, 1));
-    expect(fixture.componentInstance.value()).toBe('steps');
+    expect(document.activeElement).toBe(requireItem(tabs, 3));
+    expect(fixture.componentInstance.value()).toBe('d');
   });
 
-  it('stops at the enabled boundaries when wrapping is disabled', (): void => {
-    const fixture: ComponentFixture<TabsHost> = render(TabsHost);
+  it('navigates past disabled tabs but stops at the last tab when wrapping is disabled', (): void => {
+    const fixture: ComponentFixture<NavigationHost> = render(NavigationHost);
     fixture.componentInstance.wrap.set(false);
-    fixture.componentInstance.value.set('steps');
+    fixture.componentInstance.value.set('b');
     fixture.detectChanges();
     const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
     requireItem(tabs, 1).focus();
     press(requireItem(tabs, 1), 'ArrowRight');
     fixture.detectChanges();
 
-    expect(document.activeElement).toBe(requireItem(tabs, 1));
-    expect(fixture.componentInstance.value()).toBe('steps');
+    expect(document.activeElement).toBe(requireItem(tabs, 3));
+    expect(fixture.componentInstance.value()).toBe('d');
 
-    requireItem(tabs, 0).click();
-    requireItem(tabs, 0).focus();
-    press(requireItem(tabs, 0), 'ArrowLeft');
+    press(requireItem(tabs, 3), 'ArrowRight');
     fixture.detectChanges();
 
-    expect(document.activeElement).toBe(requireItem(tabs, 0));
-    expect(fixture.componentInstance.value()).toBe('overview');
+    expect(document.activeElement).toBe(requireItem(tabs, 3));
+    expect(fixture.componentInstance.value()).toBe('d');
   });
 });
 
 describe('Tabs disabled behavior', (): void => {
-  it('blocks disabled items and removes them from the tab order when softDisabled is false', (): void => {
+  it('hard-disables items by default', (): void => {
     const fixture: ComponentFixture<TabsHost> = render(TabsHost);
     const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
 
     expect(requireItem(tabs, 2).getAttribute('aria-disabled')).toBe('true');
-    expect(requireItem(tabs, 2).tabIndex).toBe(-1);
+
+    requireItem(tabs, 1).focus();
+    press(requireItem(tabs, 1), 'ArrowRight');
+    fixture.detectChanges();
+
+    expect(document.activeElement).toBe(requireItem(tabs, 0));
+    expect(fixture.componentInstance.value()).toBe('overview');
 
     requireItem(tabs, 2).click();
 
@@ -197,22 +227,22 @@ describe('Tabs disabled behavior', (): void => {
   });
 
   it('supports discoverable soft-disabled tabs as an opt-in', (): void => {
-    const fixture: ComponentFixture<TabsHost> = render(TabsHost);
+    const fixture: ComponentFixture<NavigationHost> = render(NavigationHost);
     const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
     fixture.componentInstance.softDisabled.set(true);
-    fixture.componentInstance.value.set('steps');
+    fixture.componentInstance.value.set('b');
     fixture.detectChanges();
     requireItem(tabs, 1).focus();
     press(requireItem(tabs, 1), 'ArrowRight');
     fixture.detectChanges();
 
     expect(document.activeElement).toBe(requireItem(tabs, 2));
-    expect(fixture.componentInstance.value()).toBe('steps');
+    expect(requireItem(tabs, 2).getAttribute('aria-disabled')).toBe('true');
+    expect(fixture.componentInstance.value()).toBe('b');
 
     requireItem(tabs, 2).click();
 
-    expect(document.activeElement).toBe(requireItem(tabs, 2));
-    expect(fixture.componentInstance.value()).toBe('steps');
+    expect(fixture.componentInstance.value()).toBe('b');
   });
 
   it('blocks activation for a disabled tab set', (): void => {
