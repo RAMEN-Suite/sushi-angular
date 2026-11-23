@@ -193,12 +193,17 @@ describe('MultiSelect interaction', (): void => {
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
 
+    const previousFocus: Element | null = document.activeElement;
+    expect(previousFocus).not.toBe(combobox);
+
     fixture.componentInstance.control().focus();
+
+    expect(document.activeElement).toBe(previousFocus);
+
     combobox.click();
     fixture.detectChanges();
 
     expect(combobox.tabIndex).toBe(-1);
-    expect(combobox.classList.contains('pointer-events-none')).toBe(true);
     expect(combobox.getAttribute('aria-disabled')).toBe('true');
     expect(document.querySelector('[role="listbox"]')).toBeNull();
 

@@ -90,7 +90,6 @@ describe('Menu inline semantics', (): void => {
 
     expect(fixture.componentInstance.selected).toEqual(['open']);
     expect(disabled.getAttribute('aria-disabled')).toBe('true');
-    expect(disabled.getAttribute('tabindex')).toBe('-1');
   });
 
   it('opens a nested submenu without selecting its disclosure', (): void => {

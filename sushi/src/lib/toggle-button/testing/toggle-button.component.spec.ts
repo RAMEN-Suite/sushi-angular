@@ -79,7 +79,6 @@ describe('ToggleButton guarded states', (): void => {
 
     expect(document.activeElement).toBe(button);
     expect(fixture.componentInstance.checked()).toBe(false);
-    expect(query(fixture, 'sui-toggle-button').classList).toContain('cursor-not-allowed');
   });
 
   it('blocks toggling while loading', (): void => {

@@ -61,15 +61,18 @@ describe('SelectButton semantics', (): void => {
     expect(query(fixture, '[data-option="board"]').getAttribute('data-index')).toBe('1');
   });
 
-  it('exposes the disabled cursor on the complete group', (): void => {
+  it('marks the complete group disabled and blocks selection', (): void => {
     const fixture: ComponentFixture<SelectButtonHost> = render(SelectButtonHost);
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
 
     const group: Element = query(fixture, 'sui-select-button');
 
-    expect(group.classList).toContain('cursor-not-allowed');
     expect(group.getAttribute('aria-disabled')).toBe('true');
+
+    requireItem(queryAll(fixture, 'button'), 1).click();
+
+    expect(fixture.componentInstance.value()).toBe('list');
   });
 });
 

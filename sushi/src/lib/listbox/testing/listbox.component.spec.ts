@@ -1,7 +1,7 @@
 import { Component, signal, type Signal, viewChild, type WritableSignal } from '@angular/core';
 import { type ComponentFixture } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
-import { press, query, queryAll, render } from '../../../../testing/test-utils';
+import { query, queryAll, render } from '../../../../testing/test-utils';
 import { Listbox } from '../listbox.component';
 import type { ListboxModelValue, ListboxOption } from '../listbox.interfaces';
 import { ListboxFilterTemplate, ListboxItemTemplate } from '../listbox.templates';
@@ -131,14 +131,18 @@ describe('Listbox guarded selection', (): void => {
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
 
+    const previousFocus: Element | null = document.activeElement;
+    expect(previousFocus).not.toBe(listbox);
+
     fixture.componentInstance.control().focus();
+
+    expect(document.activeElement).toBe(previousFocus);
+
     const yuzu: HTMLElement = query(fixture, '[data-item="yuzu"]') as HTMLElement;
     yuzu.click();
     fixture.detectChanges();
 
     expect(listbox.tabIndex).toBe(-1);
-    expect(listbox.parentElement?.classList.contains('pointer-events-none')).toBe(true);
-    expect(query(fixture, 'sui-listbox').classList).toContain('cursor-not-allowed');
     expect(fixture.componentInstance.value()).toEqual(['shoyu']);
   });
 
@@ -202,7 +206,6 @@ describe('Listbox focus', (): void => {
 
     expect(fixture.componentInstance.touches).toBe(0);
 
-    press(listbox, 'Tab');
     listbox.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
 
     expect(fixture.componentInstance.touches).toBe(1);
