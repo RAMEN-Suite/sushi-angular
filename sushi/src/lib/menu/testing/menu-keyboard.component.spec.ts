@@ -91,9 +91,9 @@ describe('Menu submenu navigation', (): void => {
 
 describe('Menu typeahead', (): void => {
   it.each([
-    { delay: 10, expected: 'Archive' },
-    { delay: 1000, expected: 'Save' },
-  ])('clears the search buffer after its configured $delay ms delay', ({ delay, expected }): void => {
+    { delay: 10, elapsed: 50, expected: 'Archive' },
+    { delay: 1000, elapsed: 600, expected: 'Save' },
+  ])('honors the configured $delay ms typeahead buffer lifetime', ({ delay, elapsed, expected }): void => {
     vi.useFakeTimers();
     const fixture: ComponentFixture<NavigationHost> = render(NavigationHost);
     fixture.componentInstance.typeaheadDelay.set(delay);
@@ -106,7 +106,7 @@ describe('Menu typeahead', (): void => {
 
     expect(document.activeElement).toBe(share);
 
-    vi.advanceTimersByTime(50);
+    vi.advanceTimersByTime(elapsed);
     press(share, 'a');
     fixture.detectChanges();
 

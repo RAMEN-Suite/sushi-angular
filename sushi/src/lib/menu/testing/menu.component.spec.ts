@@ -92,6 +92,20 @@ describe('Menu inline semantics', (): void => {
     expect(disabled.getAttribute('aria-disabled')).toBe('true');
   });
 
+  it('removes a disabled menu from keyboard navigation and blocks all actions', (): void => {
+    const fixture: ComponentFixture<InlineMenuHost> = render(InlineMenuHost);
+    fixture.componentInstance.disabled.set(true);
+    fixture.detectChanges();
+    const open: HTMLElement = closest(query(fixture, '[data-item="open"]'), '[role="menuitem"]');
+    open.click();
+
+    expect(open.getAttribute('tabindex')).toBe('-1');
+    expect(fixture.componentInstance.selected).toEqual([]);
+    expect(query(fixture, '[role="menu"]').getAttribute('aria-disabled')).toBe('true');
+  });
+});
+
+describe('Menu submenu disclosure', (): void => {
   it('opens a nested submenu without selecting its disclosure', (): void => {
     const fixture: ComponentFixture<InlineMenuHost> = render(InlineMenuHost);
     const share: HTMLElement = closest(query(fixture, '[data-item="share"]'), '[role="menuitem"]');
@@ -103,18 +117,7 @@ describe('Menu inline semantics', (): void => {
 
     expect(fixture.componentInstance.selected).toEqual([]);
     expect(share.getAttribute('aria-expanded')).toBe('true');
-  });
-
-  it('removes a disabled menu from keyboard navigation and blocks all actions', (): void => {
-    const fixture: ComponentFixture<InlineMenuHost> = render(InlineMenuHost);
-    fixture.componentInstance.disabled.set(true);
-    fixture.detectChanges();
-    const open: HTMLElement = closest(query(fixture, '[data-item="open"]'), '[role="menuitem"]');
-    open.click();
-
-    expect(open.getAttribute('tabindex')).toBe('-1');
-    expect(fixture.componentInstance.selected).toEqual([]);
-    expect(query(fixture, '[role="menu"]').getAttribute('aria-disabled')).toBe('true');
+    expect(closest(query(fixture, '[data-item="copy"]'), '[role="menu"]').classList.contains('hidden')).toBe(false);
   });
 });
 
