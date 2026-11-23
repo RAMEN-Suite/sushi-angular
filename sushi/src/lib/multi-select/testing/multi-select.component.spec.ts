@@ -171,6 +171,19 @@ describe('MultiSelect validation', (): void => {
   });
 });
 
+describe('MultiSelect focus', (): void => {
+  it('focuses the combobox through its public method', (): void => {
+    const fixture: ComponentFixture<MultiSelectHost> = render(MultiSelectHost);
+    const combobox: Element = query(fixture, '[role="combobox"]');
+
+    expect(document.activeElement).not.toBe(combobox);
+
+    fixture.componentInstance.control().focus();
+
+    expect(document.activeElement).toBe(combobox);
+  });
+});
+
 describe('MultiSelect interaction', (): void => {
   it('selects all enabled options and excludes disabled options', async (): Promise<void> => {
     const fixture: ComponentFixture<MultiSelectHost> = render(MultiSelectHost);

@@ -198,6 +198,17 @@ describe('Listbox lazy loading', (): void => {
 });
 
 describe('Listbox focus', (): void => {
+  it('focuses the listbox through its public method', (): void => {
+    const fixture: ComponentFixture<ListboxHost> = render(ListboxHost);
+    const listbox: Element = query(fixture, '[role="listbox"]');
+
+    expect(document.activeElement).not.toBe(listbox);
+
+    fixture.componentInstance.control().focus();
+
+    expect(document.activeElement).toBe(listbox);
+  });
+
   it('emits touch only after focus leaves the whole control', (): void => {
     const fixture: ComponentFixture<ListboxHost> = render(ListboxHost);
     const listbox: HTMLElement = query(fixture, '[role="listbox"]') as HTMLElement;
