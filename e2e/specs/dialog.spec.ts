@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/dialog');
 });
 
-test('inherits documented surface tokens from the public Dialog host', async ({ page }: { page: Page }): Promise<void> => {
+test('inherits documented surface tokens from the public Dialog host @css', async ({ page }: { page: Page }): Promise<void> => {
   const dialog: Locator = page.getByRole('dialog', { name: 'Today’s menu', includeHidden: true });
   await dialog.locator('..').evaluate((host: HTMLElement): void => {
     host.style.setProperty('--sui-dialog-width', '36rem');
