@@ -81,7 +81,7 @@ describe('Menu inline semantics', (): void => {
     expect(query(fixture, '[data-item="open"]').getAttribute('data-active')).toBe('true');
   });
 
-  it('emits enabled actions without activating structural or disabled entries', (): void => {
+  it('emits enabled actions without activating disabled entries', (): void => {
     const fixture: ComponentFixture<InlineMenuHost> = render(InlineMenuHost);
     const open: HTMLElement = closest(query(fixture, '[data-item="open"]'), '[role="menuitem"]');
     const disabled: HTMLElement = closest(query(fixture, '[data-item="delete"]'), '[role="menuitem"]');
@@ -95,11 +95,14 @@ describe('Menu inline semantics', (): void => {
   it('opens a nested submenu without selecting its disclosure', (): void => {
     const fixture: ComponentFixture<InlineMenuHost> = render(InlineMenuHost);
     const share: HTMLElement = closest(query(fixture, '[data-item="share"]'), '[role="menuitem"]');
+
+    expect(closest(query(fixture, '[data-item="copy"]'), '[role="menu"]').classList.contains('hidden')).toBe(true);
+
     share.click();
     fixture.detectChanges();
 
     expect(fixture.componentInstance.selected).toEqual([]);
-    expect(closest(query(fixture, '[data-item="copy"]'), '[role="menu"]').classList.contains('hidden')).toBe(false);
+    expect(share.getAttribute('aria-expanded')).toBe('true');
   });
 
   it('removes a disabled menu from keyboard navigation and blocks all actions', (): void => {
