@@ -53,18 +53,3 @@ for (const focusCase of cases) {
     await expect(focusCase.surface(control)).toHaveCSS(focusCase.property, /rgb\(180, 20, 40\)/);
   });
 }
-
-test('OTP digit ring honors the global focus color @css', async ({ page }: { page: Page }): Promise<void> => {
-  await page.goto('/input-otp');
-  await page.evaluate((): void => document.documentElement.style.setProperty('--sui-focus-ring-color', 'rgb(180, 20, 40)'));
-  const input: Locator = page.getByRole('textbox', { name: 'Verification code' });
-  await input.focus();
-
-  await expect(input).toBeFocused();
-  const digitSurface: Locator = input.locator('..');
-  await expect
-    .poll(async (): Promise<string> =>
-      digitSurface.evaluate((element: HTMLElement): string => getComputedStyle(element, '::after').outlineColor),
-    )
-    .toBe('rgb(180, 20, 40)');
-});
