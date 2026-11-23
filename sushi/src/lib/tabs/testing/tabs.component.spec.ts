@@ -132,6 +132,7 @@ describe('Tabs keyboard behavior', (): void => {
     requireItem(tabs, 0).focus();
     press(requireItem(tabs, 0), 'ArrowRight');
 
+    expect(document.activeElement).toBe(requireItem(tabs, 1));
     expect(fixture.componentInstance.value()).toBe('overview');
 
     press(requireItem(tabs, 1), 'Enter');
@@ -142,21 +143,48 @@ describe('Tabs keyboard behavior', (): void => {
 });
 
 describe('Tabs navigation boundaries', (): void => {
-  it('skips disabled tabs during arrow navigation', (): void => {
+  it('wraps past disabled tabs in both directions', (): void => {
     const fixture: ComponentFixture<TabsHost> = render(TabsHost);
     const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
     requireItem(tabs, 1).focus();
     press(requireItem(tabs, 1), 'ArrowRight');
     fixture.detectChanges();
 
-    expect(document.activeElement).not.toBe(requireItem(tabs, 2));
+    expect(document.activeElement).toBe(requireItem(tabs, 0));
+    expect(fixture.componentInstance.value()).toBe('overview');
+
+    press(requireItem(tabs, 0), 'ArrowLeft');
+    fixture.detectChanges();
+
     expect(document.activeElement).toBe(requireItem(tabs, 1));
     expect(fixture.componentInstance.value()).toBe('steps');
+  });
+
+  it('stops at the enabled boundaries when wrapping is disabled', (): void => {
+    const fixture: ComponentFixture<TabsHost> = render(TabsHost);
+    fixture.componentInstance.wrap.set(false);
+    fixture.componentInstance.value.set('steps');
+    fixture.detectChanges();
+    const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
+    requireItem(tabs, 1).focus();
+    press(requireItem(tabs, 1), 'ArrowRight');
+    fixture.detectChanges();
+
+    expect(document.activeElement).toBe(requireItem(tabs, 1));
+    expect(fixture.componentInstance.value()).toBe('steps');
+
+    requireItem(tabs, 0).click();
+    requireItem(tabs, 0).focus();
+    press(requireItem(tabs, 0), 'ArrowLeft');
+    fixture.detectChanges();
+
+    expect(document.activeElement).toBe(requireItem(tabs, 0));
+    expect(fixture.componentInstance.value()).toBe('overview');
   });
 });
 
 describe('Tabs disabled behavior', (): void => {
-  it('hard-disables an item by default', (): void => {
+  it('blocks disabled items and removes them from the tab order when softDisabled is false', (): void => {
     const fixture: ComponentFixture<TabsHost> = render(TabsHost);
     const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
 
@@ -172,12 +200,19 @@ describe('Tabs disabled behavior', (): void => {
     const fixture: ComponentFixture<TabsHost> = render(TabsHost);
     const tabs: readonly HTMLButtonElement[] = queryAll(fixture, 'button');
     fixture.componentInstance.softDisabled.set(true);
+    fixture.componentInstance.value.set('steps');
     fixture.detectChanges();
-    requireItem(tabs, 2).focus();
+    requireItem(tabs, 1).focus();
+    press(requireItem(tabs, 1), 'ArrowRight');
+    fixture.detectChanges();
+
+    expect(document.activeElement).toBe(requireItem(tabs, 2));
+    expect(fixture.componentInstance.value()).toBe('steps');
+
     requireItem(tabs, 2).click();
 
     expect(document.activeElement).toBe(requireItem(tabs, 2));
-    expect(fixture.componentInstance.value()).toBe('overview');
+    expect(fixture.componentInstance.value()).toBe('steps');
   });
 
   it('blocks activation for a disabled tab set', (): void => {

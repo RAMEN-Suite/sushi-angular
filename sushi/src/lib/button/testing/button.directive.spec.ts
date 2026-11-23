@@ -51,9 +51,15 @@ class ButtonHost {
   public activations: number = 0;
 }
 
+@Component({
+  imports: [Button],
+  template: '<button suiButton>Save</button>',
+})
+class DefaultButtonHost {}
+
 describe('Button defaults', (): void => {
   it('applies the default appearance', (): void => {
-    const button: HTMLButtonElement = query(render(ButtonHost), 'button');
+    const button: HTMLButtonElement = query(render(DefaultButtonHost), 'button');
 
     expect(button.classList).toContain('sui-button');
     expect(button.classList).toContain('btn-primary');

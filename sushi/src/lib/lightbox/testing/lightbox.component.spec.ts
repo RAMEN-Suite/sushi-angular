@@ -172,6 +172,12 @@ describe('Lightbox focus management', (): void => {
 
     const viewer: PhotoSwipeStub | null = PhotoSwipeStub.latest;
     if (!viewer) throw new Error('Expected the Lightbox viewer to be created.');
+    viewer.element.tabIndex = -1;
+    (fixture.nativeElement as HTMLElement).append(viewer.element);
+    viewer.element.focus();
+
+    expect(document.activeElement).toBe(viewer.element);
+
     viewer.destroy();
 
     expect(trigger).toBe(document.activeElement);
