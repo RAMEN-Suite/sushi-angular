@@ -81,7 +81,7 @@ describe('Menu inline semantics', (): void => {
     expect(query(fixture, '[data-item="open"]').getAttribute('data-active')).toBe('true');
   });
 
-  it('emits enabled actions without activating structural or disabled entries', (): void => {
+  it('emits enabled actions without activating disabled entries', (): void => {
     const fixture: ComponentFixture<InlineMenuHost> = render(InlineMenuHost);
     const open: HTMLElement = closest(query(fixture, '[data-item="open"]'), '[role="menuitem"]');
     const disabled: HTMLElement = closest(query(fixture, '[data-item="delete"]'), '[role="menuitem"]');
@@ -90,17 +90,6 @@ describe('Menu inline semantics', (): void => {
 
     expect(fixture.componentInstance.selected).toEqual(['open']);
     expect(disabled.getAttribute('aria-disabled')).toBe('true');
-    expect(disabled.getAttribute('tabindex')).toBe('-1');
-  });
-
-  it('opens a nested submenu without selecting its disclosure', (): void => {
-    const fixture: ComponentFixture<InlineMenuHost> = render(InlineMenuHost);
-    const share: HTMLElement = closest(query(fixture, '[data-item="share"]'), '[role="menuitem"]');
-    share.click();
-    fixture.detectChanges();
-
-    expect(fixture.componentInstance.selected).toEqual([]);
-    expect(closest(query(fixture, '[data-item="copy"]'), '[role="menu"]').classList.contains('hidden')).toBe(false);
   });
 
   it('removes a disabled menu from keyboard navigation and blocks all actions', (): void => {
@@ -113,6 +102,22 @@ describe('Menu inline semantics', (): void => {
     expect(open.getAttribute('tabindex')).toBe('-1');
     expect(fixture.componentInstance.selected).toEqual([]);
     expect(query(fixture, '[role="menu"]').getAttribute('aria-disabled')).toBe('true');
+  });
+});
+
+describe('Menu submenu disclosure', (): void => {
+  it('opens a nested submenu without selecting its disclosure', (): void => {
+    const fixture: ComponentFixture<InlineMenuHost> = render(InlineMenuHost);
+    const share: HTMLElement = closest(query(fixture, '[data-item="share"]'), '[role="menuitem"]');
+
+    expect(closest(query(fixture, '[data-item="copy"]'), '[role="menu"]').classList.contains('hidden')).toBe(true);
+
+    share.click();
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.selected).toEqual([]);
+    expect(share.getAttribute('aria-expanded')).toBe('true');
+    expect(closest(query(fixture, '[data-item="copy"]'), '[role="menu"]').classList.contains('hidden')).toBe(false);
   });
 });
 

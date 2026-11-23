@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }: { page: Page }): Promise<void> => {
   await page.goto('/dialog');
 });
 
-test('inherits documented surface tokens from the public Dialog host', async ({ page }: { page: Page }): Promise<void> => {
+test('inherits documented surface tokens from the public Dialog host @css', async ({ page }: { page: Page }): Promise<void> => {
   const dialog: Locator = page.getByRole('dialog', { name: 'Today’s menu', includeHidden: true });
   await dialog.locator('..').evaluate((host: HTMLElement): void => {
     host.style.setProperty('--sui-dialog-width', '36rem');
@@ -170,13 +170,6 @@ test('keeps a dragged Dialog visible after viewport changes', async ({ page }: {
   }
 });
 
-test('enables native bidirectional resizing', async ({ page }: { page: Page }): Promise<void> => {
-  await page.getByRole('button', { name: 'Open prep board' }).click();
-  const dialog: Locator = page.getByRole('dialog', { name: 'Prep board' });
-
-  await expect(dialog).toHaveCSS('resize', 'both');
-});
-
 test('custom coordinates are restored when reopening after dragging', async ({ page }: { page: Page }): Promise<void> => {
   const trigger: Locator = page.getByRole('button', { name: 'Open positioned dialog' });
   const dialog: Locator = page.getByRole('dialog', { name: 'Custom position' });
@@ -264,6 +257,7 @@ test('resizes in place without moving the Dialog origin', async ({
     expect(Math.abs(resized.x - initial.x)).toBeLessThan(6);
     expect(Math.abs(resized.y - initial.y)).toBeLessThan(6);
     expect(resized.width).toBeGreaterThan(initial.width);
+    expect(resized.height).toBeGreaterThan(initial.height);
   }).toPass({ timeout: 5_000 });
 });
 

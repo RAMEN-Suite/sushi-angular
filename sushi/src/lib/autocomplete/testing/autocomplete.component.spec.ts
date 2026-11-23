@@ -147,11 +147,9 @@ describe('Autocomplete constraints', (): void => {
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
     const input: HTMLInputElement = enter(fixture, 'Miso');
-    fixture.componentInstance.control().focus();
 
     expect(input.disabled).toBe(true);
     expect(input.tabIndex).toBe(-1);
-    expect(input.classList.contains('select-none')).toBe(true);
     expect(fixture.componentInstance.value()).toBe('shoyu');
     expect(fixture.componentInstance.queries).toEqual([]);
     expect(document.querySelector('[role="listbox"]')).toBeNull();

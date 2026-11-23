@@ -1,24 +1,23 @@
 import { expect, type Locator, type Page, test } from '@playwright/test';
 
-test('Tabs follow arrow focus, activate the focused tab, and skip disabled tabs', async ({
+test('Tabs display only the active panel while preserving inactive content @css', async ({
   page,
 }: {
   page: Page;
 }): Promise<void> => {
   await page.goto('/tabs');
-  const tablist: Locator = page.getByRole('tablist', { name: 'Account sections' });
-  const profile: Locator = tablist.getByRole('tab', { name: 'Profile' });
-  const security: Locator = tablist.getByRole('tab', { name: 'Security' });
+  const tabs: Locator = page.locator('pg-tabs-behavior-example sui-tabs');
+  const advanced: Locator = tabs.getByRole('tabpanel', { name: 'Advanced', includeHidden: true });
 
-  await profile.focus();
-  await profile.press('ArrowRight');
+  await tabs.getByRole('tab', { name: 'Advanced' }).click();
 
-  await expect(security).toBeFocused();
-  await expect(security).toHaveAttribute('aria-selected', 'true');
-  await expect(page.getByRole('tabpanel', { name: 'Security' })).toBeVisible();
+  await expect(advanced).toBeVisible();
+  await expect(tabs.locator('[role="tabpanel"]:visible')).toHaveCount(1);
 
-  await security.press('ArrowRight');
+  await tabs.getByRole('tab', { name: 'General' }).click();
 
-  await expect(profile).toBeFocused();
-  await expect(profile).toHaveAttribute('aria-selected', 'true');
+  await expect(tabs.getByRole('tabpanel', { name: 'General' })).toBeVisible();
+  await expect(advanced.getByRole('heading', { name: 'Advanced settings', includeHidden: true })).toBeAttached();
+  await expect(advanced).toBeHidden();
+  await expect(tabs.locator('[role="tabpanel"]:visible')).toHaveCount(1);
 });

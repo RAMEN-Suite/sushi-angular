@@ -88,7 +88,7 @@ test('Accordion panel buttons retain native keyboard activation without toggling
   await expect(header).toHaveAttribute('aria-expanded', 'true');
 });
 
-test('Accordion density tokens reach triggers, panels, and separated item spacing', async ({
+test('Accordion density tokens reach triggers, panels, and separated item spacing @css', async ({
   page,
 }: {
   page: Page;

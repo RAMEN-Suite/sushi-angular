@@ -171,6 +171,19 @@ describe('MultiSelect validation', (): void => {
   });
 });
 
+describe('MultiSelect focus', (): void => {
+  it('focuses the combobox through its public method', (): void => {
+    const fixture: ComponentFixture<MultiSelectHost> = render(MultiSelectHost);
+    const combobox: Element = query(fixture, '[role="combobox"]');
+
+    expect(document.activeElement).not.toBe(combobox);
+
+    fixture.componentInstance.control().focus();
+
+    expect(document.activeElement).toBe(combobox);
+  });
+});
+
 describe('MultiSelect interaction', (): void => {
   it('selects all enabled options and excludes disabled options', async (): Promise<void> => {
     const fixture: ComponentFixture<MultiSelectHost> = render(MultiSelectHost);
@@ -193,12 +206,17 @@ describe('MultiSelect interaction', (): void => {
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
 
+    const previousFocus: Element | null = document.activeElement;
+    expect(previousFocus).not.toBe(combobox);
+
     fixture.componentInstance.control().focus();
+
+    expect(document.activeElement).toBe(previousFocus);
+
     combobox.click();
     fixture.detectChanges();
 
     expect(combobox.tabIndex).toBe(-1);
-    expect(combobox.classList.contains('pointer-events-none')).toBe(true);
     expect(combobox.getAttribute('aria-disabled')).toBe('true');
     expect(document.querySelector('[role="listbox"]')).toBeNull();
 

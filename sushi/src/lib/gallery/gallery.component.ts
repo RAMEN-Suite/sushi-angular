@@ -105,7 +105,10 @@ import { type GalleryFit, type GalleryImage } from './gallery.interfaces';
 export class Gallery<I extends GalleryImage = GalleryImage> {
   /** Images available in the Gallery. */
   public readonly images: InputSignal<readonly I[]> = input.required<readonly I[]>();
-  /** Controls and reports the selected image index. */
+  /**
+   * Controls and reports the selected image index.
+   * Out-of-range values are clamped for display without rewriting the model; navigation starts from the displayed image.
+   */
   public readonly activeIndex: ModelSignal<number> = model<number>(0);
   /** Shows previous and next actions over the stage. */
   public readonly showNavigation: InputSignalWithTransform<boolean, unknown> = input(true, { transform: booleanAttribute });
@@ -174,7 +177,7 @@ export class Gallery<I extends GalleryImage = GalleryImage> {
   private move(step: number): void {
     const length: number = this.images().length;
     if (length < 2) return;
-    const next: number = this.activeIndex() + step;
+    const next: number = this.selectedIndex() + step;
     this.select(this.wrap() ? (next + length) % length : next);
   }
 
